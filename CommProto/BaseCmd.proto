@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package DDRCommProto;
+
+message CommonHeader
+{
+	string bodyType = 1;
+	int32 bodyLen = 2;
+	repeated string prev_ips = 3;
+	repeated int32 prev_ports = 4;
+}
+
+message bcLSAddr
+{
+	string name = 1;
+	repeated string ips = 2;
+	int32 port = 3;
+}
+
+message reqLogin
+{
+	enum eCltType {
+		client = 0;
+		androidClient = 1;
+		LSM = 2;
+	}
+	eCltType type = 1;
+	string username = 2; // nickname for clients, module name for LSM
+	string robotID = 3;
+	string robotPWD = 4;
+	int32 cltOpLv = 5;
+	int32 UID = 6;
+}
+
+message respLogin
+{
+	enum eLoginRetCode {
+		success = 0;
+		server_busy = 1;
+		server_limit_reached = 2;
+		UID_error = 3;
+		incorrect_password = 4;
+	}
+	eLoginRetCode retcode = 1;	
+	enum eCltType {
+		client = 0;
+		androidClient = 1;
+		LSM = 2;
+	}
+	eCltType yourRole = 2;
+	int32 UID = 3;
+}
+
+message notifyAccessLS2C
+{
+	string abc = 1;
+}
+
+message notifyAVStreamLS2C
+{
+	string abc = 1;
+}
