@@ -5,7 +5,8 @@ package DDRCommProto;
 // Abbreviation: LS - local server; C - client (local); LSM - local service module
 //				 RS - remote server; M - monitor (remote); RR - remote robot (to connect to RS)
 
-// ------------------- Common message structures ------------------- //
+// ------------------- Common message header ------------------- //
+
 message CommonHeader
 {
 	string bodyType = 1;
@@ -13,7 +14,21 @@ message CommonHeader
 	repeated int64 prev_ips = 3;
 	repeated int32 prev_ports = 4;
 	string tarModName = 5; // apply to module-specific service. Usually null.
+	enum eFlowDir {
+		RS2M = 0;
+		RS2RR = 1;
+		RR2RS = 2;
+		LS2C = 3;
+		C2LS = 4;
+		LS2LSM = 5;
+		LSM2LS = 6;
+	}
+	eFlowDir flowDirection = 6;
 }
+
+// +++++++++++++++++++ Common message header +++++++++++++++++++ //
+
+// ------------------- Common message bodies ------------------- //
 
 message heartBeat
 {
@@ -66,477 +81,114 @@ message respLogin
 	eCltType yourRole = 2;
 	int32 UID = 3;
 }
-// +++++++++++++++++++ Common message structures +++++++++++++++++++ //
 
-// ------------------- Local Server -> Client messages ------------------- //
-message notifyAccessLS2C
+message notifyTerminalAccess
 {
-	int32 bConncted2RS = 1; // 0 - not connected; 1 - connected
+	int32 bRRConnected2RS = 1;
 	int32 bOp = 2;
 	int32 nMonitors = 3;
 	int32 nClients = 4;
-	repeated string namesLSM = 5;
+	repeated string nameLSMs = 5;
 }
 
-message notifyAVStreamLS2C
-{
-	string localResAccStr = 1; // string to access local reserved channel
-	message avChLS2C {
-		int32 avType = 1; // 0-N.A; 1-audio; 2-video; 3-A+V
-		string localAccStr = 2;
-		string chName = 3;
-	}
-	repeated avChLS2C localAVChannels = 2;	
-}
-
-message reqRTalkLS2C
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; //  0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respCTalkRespLS2C
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respCmdLS2C
-{
-	int32 cmdID = 1;
-	string respTxt = 2;
-}
-
-message respFileLS2C
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string zippedFileResp = 2;
-}
-
-message notifyStatusLS2C
-{
-	string statusMsg = 1;
-}
-
-message notifyAlarmLS2C
-{
-	string alarmMsg = 1;
-}
-
-message notifyTextChatLS2C
-{
-	string chatText = 1;
-}
-// +++++++++++++++++++ Local Server -> Client messages +++++++++++++++++++ //
-
-// ------------------- Client -> Local Server messages ------------------- //
-message reqCTalkC2LS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respRTalkC2LS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message cmdC2LS
-{
-	int32 cmdID = 1;
-	string cmdTxt = 2;
-}
-
-message reqFileC2LS
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
-}
-
-message notifyTextChatC2LS
-{
-	string chatTxt = 1;
-}
-// +++++++++++++++++++ Client -> Local Server messages +++++++++++++++++++ //
-
-// ------------------- Local Server -> LSM messages ------------------- //
-message notifyAccessLS2LSM
-{
-	int32 bConncted2RS = 1; // 0 - not connected; 1 - connected
-	int32 opMode = 2; // 0 - unknown; 1 - monitor Op.; 2 - client Op.
-	int32 nMonitors = 3;
-	int32 nClients = 4;
-}
-
-message notifyAVStreamLS2LSM
-{
-	int32 remoteResIP = 1;
-	int32 remoteResPort = 2;
-	string remoteResPass = 3; // a specify string that serves as the key to streaming servers
-	message avChLS2LSM {
-		int32 avType = 1; // 0-N.A; 1-audio; 2-video; 3-A+V
-		int32 devType = 2; // 1-IP devices; 2-USB/AUX mic.
-		string localAccStr = 3;
-		int32 bwReq = 4; // bandwidth requirement
-		int32 remoteProxyIP = 5;
-		int32 remoteProxyPort = 6;
-		string remoteProxyPass = 7;
-	}
-	repeated avChLS2LSM streamingChannels = 4;
-}
-
-message reqCTalkLS2LSM
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message reqMTalkLS2LSM
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respRTalkC2LS2LSM
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respRTalkM2LS2LSM
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message reqFileLS2LSM
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
-}
-
-message cmdLS2LSM
-{
-	int32 cmdID = 1;
-	string cmdTxt = 2;
-}
-
-message respCmdLS2LSM
-{
-	int32 cmdID = 1;
-	string respTxt = 2;
-}
-// +++++++++++++++++++ Local Server -> LSM messages +++++++++++++++++++ //
-
-// ------------------- LSM -> Local Server messages ------------------- //
-message reqRTalkLSM2LS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respCTalkLSM2LS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respMTalkLSM2LS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message cmdLSM2LS
-{
-	int32 cmdID = 1;
-	string cmdTxt = 2;
-}
-
-message respCmdLSM2LS
-{
-	int32 cmdID = 1;
-	string respTxt = 2;
-}
-
-message respFileLSM2LS
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
-}
-
-message notifyStatusLSM2LS
-{
-	string statusMsg = 1;
-}
-
-message notifyAlarmLSM2LS
-{
-	string alarmMsg = 1;
-}
-// +++++++++++++++++++ LSM -> Local Server messages +++++++++++++++++++ //
-
-// ------------------- Robot -> Remote Server messages ------------------- //
-message notifyAccessRR2RS
+message notifySerAccess
 {
 	int32 nClients = 1;
 	int32 cTopOpLv = 2; // op. level of the top client
 	int64 cTopOpTime = 3; // connection time of the top client
-	repeated string namesLSM = 4;
+	int32 nMonitors = 4;
+	int32 mTopOpLv = 5; // op. level of the top monitor
+	int32 mTopOpTime = 6; // connection time of the top monitor
+	repeated string namesLSM = 7;
 }
 
-message reqRTalkRR2RS
+message notifyAVStream
 {
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
+	message fullChannelInfo {
+		int32 devType = 1;
+		int32 dataType = 2; // 0-N.A; 1-audio; 2-video; 3-audio+video
+		string localResAccStr = 3; // UTF-8
+		string channelDescription = 4; // UTF-8
+		int32 bwReq = 5; // bandwidth requirement in kbps		
+		int64 remoteIP = 6;
+		int32 remotePort = 7;
+		string remotePass = 8; // a special string that serves as the key to streaming servers
+	}	
+	fullChannelInfo reservedChannel = 1;
+	repeated fullChannelInfo robotMonitorChannels = 2;
 }
 
-message respMTalkRR2RS
+message reqTalk
 {
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
+	enum eCallerType {
+		client = 0;
+		monitor = 1;
+		robot_LSM = 2;
+	}
+	eCallerType callerType = 1;
+	int32 id1 = 2;
+	int32 id2 = 3;
+	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
 }
 
-message cmdRespRR2RS
+message respTalk
 {
-	int32 cmdID = 1;
-	string respTxt = 2;
+	enum eReceiverType {
+		client = 0;
+		monitor = 1;
+		robot_LSM = 2;
+	}
+	eReceiverType receiverType = 1;
+	int32 id1 = 2;
+	int32 id2 = 3;
+	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
 }
 
-message respFileRR2RS
+message cmd
+{
+	int64 cmdID = 1;
+	string cmdMsg = 2;
+}
+
+message respCmd
+{
+	int64 cmdID = 1;
+	string respMsg = 2;
+}
+
+message reqFile
 {
 	enum eZipFormat {
 		noZip = 0;
 		Zip = 1;
 	}
 	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
+	string fileInqText = 2;
 }
 
-message notifyStatusRR2RS
+message respFile
+{
+	enum eZipFormat {
+		noZip = 0;
+		Zip = 1;
+	}
+	eZipFormat zipFormat = 1;
+	string fileResp = 2; // zipped according to zipFormat
+}
+
+message notifyStatus
 {
 	string statusMsg = 1;
 }
 
-message notifyAlarmRR2RS
+message notifyAlarm
 {
 	string alarmMsg = 1;
 }
 
-message notifyTextChatRR2RS
+message notifyTextChat
 {
 	string chatText = 1;
 }
-// +++++++++++++++++++ Robot -> Remote Server messages +++++++++++++++++++ //
 
-// ------------------- Remote Server -> Robot messages ------------------- //
-message notifyAccessRS2RR
-{
-	int32 nMonitors = 1;
-	int32 mTopOpLv = 2; // op. level of the top monitor
-	int64 mTopOpTime = 3; // connection time of the top monitor
-}
-
-message notifyAVStreamRS2RR
-{
-	int32 remoteResIP = 1;
-	int32 remoteResPort = 2;
-	string remoteResPass = 3; // a specify string that serves as the key to streaming servers
-	message avChLS2LSM {
-		int32 avType = 1; // 0-N.A; 1-audio; 2-video; 3-A+V
-		int32 remoteProxyIP = 2;
-		int32 remoteProxyPort = 3;
-		string remoteProxyPass = 4;
-	}
-	repeated avChLS2LSM streamingChannels = 4;
-}
-
-message reqMTalkRS2RR
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respRTalkRS2RR
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message cmdRS2RR
-{
-	int32 cmdID = 1;
-	string cmdTxt = 2;
-}
-
-message reqFileRS2RR
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
-}
-
-message notifyTextChatRS2RR
-{
-	string chatText = 1;
-}
-// +++++++++++++++++++ Remote Server -> Robot messages +++++++++++++++++++ //
-
-// ------------------- Remote Server -> Monitor messages ------------------- //
-message notifyAccessRS2M
-{
-	int32 bConncted2RS = 1; // 0 - not connected; 1 - connected
-	int32 bOp = 2; // 0 - not Op.; 1 - Op.
-	int32 nMonitors = 3;
-	int32 nClients = 4;
-	repeated string namesLSM = 5;
-}
-
-message notifyAVStreamRS2M
-{
-	int32 remoteResBW = 1; // bandwidth allocated for reserved channel (in kbps)
-	int32 remoteResIP = 2;
-	int32 remoteResPort = 3;
-	string remoteResPass = 4; // a specify string that serves as the key to streaming servers
-	message avChRS2M {
-		int32 avType = 1; // 0-N.A; 1-audio; 2-video; 3-A+V
-		int32 remoteProxyIP = 2;
-		int32 remoteProxyPort = 3;
-		string remoteProxyPass = 4;
-		string channelName = 5;
-	}
-	repeated avChRS2M streamingChannels = 5;
-}
-
-message reqRTalkRS2M
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respMTalkRS2M
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respCmdRS2M
-{
-	int32 cmdID = 1;
-	string respTxt = 2;
-}
-
-message respFileRS2M
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string zippedFileResp = 2;
-}
-
-message notifyStatusRS2M
-{
-	string statusMsg = 1;
-}
-
-message notifyAlarmRS2M
-{
-	string alarmMsg = 1;
-}
-
-message notifyTextChatRS2M
-{
-	string chatText = 1;
-}
-// +++++++++++++++++++ Remote Server -> Monitor messages +++++++++++++++++++ //
-
-// ------------------- Monitor -> Remote Server messages ------------------- //
-message reqMTalkM2RS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message respRTalkM2RS
-{
-	int32 id1 = 1;
-	int32 id2 = 2;
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-A+V
-}
-
-message cmdM2RS
-{
-	int32 cmdID = 1;
-	string cmdTxt = 2;
-}
-
-message reqFileM2RS
-{
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqTxt = 2;
-}
-
-message notifyTextChatM2RS
-{
-	string chatTxt = 1;
-}
-// +++++++++++++++++++ Monitor -> Remote Server messages +++++++++++++++++++ //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// +++++++++++++++++++ Common message bodies +++++++++++++++++++ //
