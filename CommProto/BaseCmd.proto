@@ -3,17 +3,13 @@ syntax = "proto3";
 package DDRCommProto;
 
 // Abbreviation: LS - local server; C - client (local); LSM - local service module
-//				 RS - remote server; M - monitor (remote); RR - remote robot (to connect to RS)
+//				 RS - remote server; M - monitor (remote); RR - remote robot (connect to RS)
 
 // ------------------- Common message header ------------------- //
 
 message CommonHeader
 {
 	string bodyType = 1;
-	int32 bodyLen = 2;
-	repeated int64 prev_ips = 3;
-	repeated int32 prev_ports = 4;
-	string tarModName = 5; // apply to module-specific service. Usually null.
 	enum eFlowDir {
 		RS2M = 0;
 		RS2RR = 1;
@@ -23,7 +19,17 @@ message CommonHeader
 		LS2LSM = 5;
 		LSM2LS = 6;
 	}
-	eFlowDir flowDirection = 6;
+	repeated eFlowDir flowDirection = 2;
+	
+	enum eDestType {
+		NoDest = 0; // simple notification, nothing to be forwarded
+		LSMName = 1; // this message will be forwarded to LSM
+		Routing = 2; // this message will be forwarded along the previous routes
+	}
+	repeated eDestType destType = 3;
+	
+	// ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+	repeated string destInfo = 4;
 }
 
 // +++++++++++++++++++ Common message header +++++++++++++++++++ //
