@@ -1,0 +1,200 @@
+syntax = "proto3";
+
+package DDRCommProto;
+
+// Abbreviation: LS - local server; C - client (local); LSM - local service module
+//				 RS - remote server; M - monitor (remote); RR - remote robot (connect to RS)
+
+// ------------------- Common message header ------------------- //
+
+message CommonHeader
+{
+	string bodyType = 1;
+	enum eFlowDir {
+		RS2M = 0;
+		RS2RR = 1;
+		RR2RS = 2;
+		LS2C = 3;
+		C2LS = 4;
+		LS2LSM = 5;
+		LSM2LS = 6;
+	}
+	repeated eFlowDir flowDirection = 2;
+	
+	enum eDestType {
+		NoDest = 0; // simple notification, nothing to be forwarded
+		LSMName = 1; // this message will be forwarded to LSM
+		Routing = 2; // this message will be forwarded along the previous routes
+	}
+	repeated eDestType destType = 3;
+	
+	// ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+	repeated string destInfo = 4;
+}
+
+// +++++++++++++++++++ Common message header +++++++++++++++++++ //
+
+// ------------------- Common message bodies ------------------- //
+
+message heartBeat
+{
+	string whatever = 1;
+}
+
+message bcLSAddr
+{
+	string name = 1;
+	repeated int64 ips = 2;
+	int32 port = 3;
+}
+
+message reqLogin
+{
+	enum eCltType {
+		client = 0;
+		androidClient = 1;
+		LSM = 2;
+	}
+	eCltType type = 1;
+	string username = 2; // nickname for clients/monitors, module name for LSM, ignored for RR
+	string robotID = 3;
+	string robotPWD = 4;
+	int32 cltOpLv = 5;
+	int32 UID = 6;
+	message msgAVStreamReq {
+		int32 avType = 1; // 0-N.A; 1-audio; 2-video; 3-A+V
+		string chName = 2;
+		int32 bandwidthReq = 3; // in kbps
+	}
+	repeated msgAVStreamReq avStreamReq = 7;
+}
+
+message respLogin
+{
+	enum eLoginRetCode {
+		success = 0;
+		server_busy = 1;
+		server_limit_reached = 2;
+		UID_error = 3;
+		incorrect_password = 4;
+	}
+	eLoginRetCode retcode = 1;	
+	enum eCltType {
+		client = 0;
+		androidClient = 1;
+		LSM = 2;
+	}
+	eCltType yourRole = 2;
+	int32 UID = 3;
+}
+
+message notifyTerminalAccess
+{
+	int32 bRRConnected2RS = 1;
+	int32 bOp = 2;
+	int32 nMonitors = 3;
+	int32 nClients = 4;
+	repeated string nameLSMs = 5;
+}
+
+message notifySerAccess
+{
+	int32 nClients = 1;
+	int32 cTopOpLv = 2; // op. level of the top client
+	int64 cTopOpTime = 3; // connection time of the top client
+	int32 nMonitors = 4;
+	int32 mTopOpLv = 5; // op. level of the top monitor
+	int32 mTopOpTime = 6; // connection time of the top monitor
+	repeated string namesLSM = 7;
+}
+
+message notifyAVStream
+{
+	message fullChannelInfo {
+		int32 devType = 1;
+		int32 dataType = 2; // 0-N.A; 1-audio; 2-video; 3-audio+video
+		string localResAccStr = 3; // UTF-8
+		string channelDescription = 4; // UTF-8
+		int32 bwReq = 5; // bandwidth requirement in kbps		
+		int64 remoteIP = 6;
+		int32 remotePort = 7;
+		string remotePass = 8; // a special string that serves as the key to streaming servers
+	}	
+	fullChannelInfo reservedChannel = 1;
+	repeated fullChannelInfo robotMonitorChannels = 2;
+}
+
+message reqTalk
+{
+	enum eCallerType {
+		client = 0;
+		monitor = 1;
+		robot_LSM = 2;
+	}
+	eCallerType callerType = 1;
+	int32 id1 = 2;
+	int32 id2 = 3;
+	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
+}
+
+message respTalk
+{
+	enum eReceiverType {
+		client = 0;
+		monitor = 1;
+		robot_LSM = 2;
+	}
+	eReceiverType receiverType = 1;
+	int32 id1 = 2;
+	int32 id2 = 3;
+	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
+}
+
+message cmd
+{
+	int64 cmdID = 1;
+	string cmdMsg = 2;
+}
+
+message respCmd
+{
+	int64 cmdID = 1;
+	string respMsg = 2;
+}
+
+message reqFile
+{
+	enum eZipFormat {
+		noZip = 0;
+		Zip = 1;
+	}
+	eZipFormat zipFormat = 1;
+	string fileInqText = 2;
+}
+
+message respFile
+{
+	enum eZipFormat {
+		noZip = 0;
+		Zip = 1;
+	}
+	eZipFormat zipFormat = 1;
+	string fileResp = 2; // zipped according to zipFormat
+}
+
+message notifyStatus
+{
+	string statusMsg = 1;
+}
+
+message notifyAlarm
+{
+	string alarmMsg = 1;
+}
+
+message notifyTextChat
+{
+	string chatText = 1;
+}
+
+// +++++++++++++++++++ Common message bodies +++++++++++++++++++ //
