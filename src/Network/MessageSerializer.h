@@ -19,6 +19,7 @@ namespace DDRFramework
 		virtual void Update();
 
 		void Init();
+		void Deinit();
 		bool Pack(google::protobuf::Message& msg);
 		void Receive(asio::streambuf& buf);
 
@@ -46,6 +47,12 @@ namespace DDRFramework
 		}
 		void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
+
+		void BindSendFunction(std::function<void(asio::streambuf&)> f)
+		{
+			m_fSendFunc = f;
+		}
+
 	protected:
 	private:
 		std::shared_ptr<StateMachine<MessageSerializer>> m_spStateMachine;
@@ -58,6 +65,7 @@ namespace DDRFramework
 
 		std::shared_ptr<BaseMessageDispatcher> m_spDispatcher;
 
+		std::function<void(asio::streambuf&)> m_fSendFunc;
 
 		char mTempRecvBuffer[TEMP_BUFFER_SIZE];
 	};

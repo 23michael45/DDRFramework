@@ -36,8 +36,8 @@ namespace DDRFramework
 
 	MessageSerializer::~MessageSerializer()
 	{
-		m_spDispatcher.reset();
-		m_spStateMachine.reset();
+		Deinit();
+		DebugLog("\nSerializer Destroy");
 	}
 
 
@@ -56,11 +56,29 @@ namespace DDRFramework
 		m_spStateMachine->enterState<ParsePBHState>();
 
 	}
+
+	void MessageSerializer::Deinit()
+	{
+		m_spDispatcher.reset();
+		m_spStateMachine.reset();
+	}
 	void MessageSerializer::Update()
 	{
-		if (m_spStateMachine)
+
+		//if (m_spStateMachine)
+		//{
+		//	std::lock_guard<std::mutex> lock(mMutexRec);
+		//	m_spStateMachine->updateWithDeltaTime();
+
+		//}
+
+		if (mDataStreamSend.size() == 0)
 		{
-			m_spStateMachine->updateWithDeltaTime();
+			return;
+		}
+		if (m_fSendFunc)
+		{
+			m_fSendFunc(mDataStreamSend);
 
 		}
 	}
@@ -97,7 +115,7 @@ namespace DDRFramework
 		msg.SerializeToCodedStream(&cos);
 
 
-		DebugLog("\ntotal send:%i", totallen+4)
+		//DebugLog("\ntotal send:%i", totallen+4)
 
 
 		return true;
@@ -129,46 +147,39 @@ namespace DDRFramework
 	{
 		if (m_spDispatcher)
 		{
-			m_spDispatcher->Dispatch( nullptr, spHeader,spMsg);
+			m_spDispatcher->Dispatch(spHeader,spMsg);
 		}
 	}
 
 	void ParsePBHState::updateWithDeltaTime(float delta)
 	{
-		DebugLog("\nParsePBHState");
-
-		std::lock_guard<std::mutex> lock(m_spParentObject->GetRecLock());
+		//DebugLog("\nParsePBHState");
 
 		char readhead[4] = { 0 };
-		asio::streambuf& buf = m_spParentObject->GetRecBuf();
+		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 		
 		if (buf.size() < sizeof(int))
 		{
 			return;
 		}
 
-		std::istream ishold(&buf);
 
-		google::protobuf::io::IstreamInputStream iishead(&ishold, sizeof(int));
-		google::protobuf::io::CodedInputStream cishead(&iishead);
-
-		cishead.ReadRaw(readhead, sizeof(int));
-
-		if (memcmp(HeadSignal, readhead, 4) != 0)//not head
+		if (memcmp(HeadSignal, buf.data().data(), 4) != 0)//not head
 		{
+			buf.consume(1);
 			return;
 		}
+		buf.consume(sizeof(int));
 
 
-		m_spParentStateMachine->enterState<ParseLengthState>();
+		m_spParentStateMachine.lock()->enterState<ParseLengthState>();
 	}
 	void ParseLengthState::updateWithDeltaTime(float delta)
 	{
-		DebugLog("\nParseLengthState");
-		std::lock_guard<std::mutex> lock(m_spParentObject->GetRecLock());
+		//DebugLog("\nParseLengthState");
 
 
-		asio::streambuf& buf = m_spParentObject->GetRecBuf();
+		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
 		if (buf.size() < sizeof(int) * 2)
 		{
@@ -188,38 +199,41 @@ namespace DDRFramework
 
 		if (totalLen < 0 || headLen < 0 || totalLen < headLen)
 		{
-			m_spParentStateMachine->enterState<ParsePBHState>();
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			return;
 		}
 
 
-		std::shared_ptr<ParseHeadState> sp = m_spParentStateMachine->findState< ParseHeadState>();
+		std::shared_ptr<ParseHeadState> sp = m_spParentStateMachine.lock()->findState< ParseHeadState>();
 		sp->SetLen(totalLen,headLen);
-		m_spParentStateMachine->enterState<ParseHeadState>();
+		m_spParentStateMachine.lock()->enterState<ParseHeadState>();
 
 	}
 	void ParseHeadState::updateWithDeltaTime(float delta)
 	{
 
-		DebugLog("\nParseHeadState");
+		//DebugLog("\nParseHeadState");
 
-		std::lock_guard<std::mutex> lock(m_spParentObject->GetRecLock());
 
-		asio::streambuf& buf = m_spParentObject->GetRecBuf();
+		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
 		if (buf.size() < m_HeadLen)
 		{
 			return;
 		}
 
-		std::istream ishold(&buf);
-		google::protobuf::io::IstreamInputStream iis(&ishold, m_HeadLen);
-		google::protobuf::io::CodedInputStream cis(&iis);
+		//std::istream ishold(&buf);
+
+
+		//google::protobuf::io::IstreamInputStream iis(&ishold, m_HeadLen);
+		//google::protobuf::io::CodedInputStream cis(&iis);
 
 		try
 		{
 			std::shared_ptr<DDRCommProto::CommonHeader> spCommonHeader = std::make_shared<DDRCommProto::CommonHeader>();
-			spCommonHeader->ParseFromCodedStream(&cis);
+
+			spCommonHeader->ParseFromArray(buf.data().data(),m_HeadLen);
+			buf.consume(m_HeadLen);
 
 
 			int bodyLen = m_TotalLen - m_HeadLen - sizeof(int) * 2;
@@ -229,33 +243,39 @@ namespace DDRFramework
 
 			//do header logic
 			//if message body ignore , 
-			bool bIgnoreBody = true;
+			bool bIgnoreBody = false;
 
 			//do ignore logic
 
 			if (bIgnoreBody)
 			{
-				google::protobuf::io::IstreamInputStream iis(&ishold, bodyLen);
-				google::protobuf::io::CodedInputStream cis(&iis);
 
-				m_spParentStateMachine->enterState<ParsePBHState>();
+				buf.consume(bodyLen);
+
+				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 				return;
 			}
 			else
 			{
 
-				std::shared_ptr<ParseBodyState> sp = m_spParentStateMachine->findState<ParseBodyState>();
+				std::shared_ptr<ParseBodyState> sp = m_spParentStateMachine.lock()->findState<ParseBodyState>();
 				sp->SetLen(spCommonHeader, bodyLen);
 
-				m_spParentStateMachine->enterState<ParseBodyState>();
+				m_spParentStateMachine.lock()->enterState<ParseBodyState>();
 
 			}
+
+		}
+		catch (std::exception e)
+		{
+			DebugLog("%s---------------------------------------------------------------------------------------Head Deserialize Error", e.what());
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}
 		catch (google::protobuf::FatalException* e)
 		{
 			DebugLog("\nParseHead error %s" , e->message().c_str());
-			m_spParentStateMachine->enterState<ParsePBHState>();
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			
 		}
 
@@ -265,9 +285,10 @@ namespace DDRFramework
 	}
 	void ParseBodyState::updateWithDeltaTime(float delta)
 	{
-		std::lock_guard<std::mutex> lock(m_spParentObject->GetRecLock());
 
-		asio::streambuf& buf = m_spParentObject->GetRecBuf();
+		//DebugLog("\nParseBodyState");
+
+		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
 		if (buf.size() < m_BodyLen)
 		{
@@ -277,11 +298,11 @@ namespace DDRFramework
 
 
 
-		std::istream ishold(&buf);
-		google::protobuf::io::IstreamInputStream iis(&ishold, m_BodyLen);
-		google::protobuf::io::CodedInputStream cis(&iis);
+		//std::istream ishold(&buf);
+		//google::protobuf::io::IstreamInputStream iis(&ishold, m_BodyLen);
+		//google::protobuf::io::CodedInputStream cis(&iis);
 
-		try
+		try  
 		{
 
 
@@ -289,24 +310,38 @@ namespace DDRFramework
 
 			if (spmsg)
 			{
-				spmsg->ParseFromCodedStream(&cis);
+				spmsg->ParseFromArray(buf.data().data(),m_BodyLen);
+				buf.consume(m_BodyLen);
 
 
 				//do body logic
 
-				if (m_spParentObject)
+				if (m_spParentObject.lock())
 				{
-					m_spParentObject->Dispatch(m_spCommonHeader, spmsg);
+										
+					m_spParentObject.lock()->Dispatch(m_spCommonHeader, spmsg);
 				}
 
 
-				m_spParentStateMachine->enterState<ParseBodyState>();
+				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			}
+			else
+			{
+
+				DebugLog("---------------------------------------------------------------------------------------Body Deserialize Error");
+				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+			}
+		}
+		catch (std::exception e)
+		{
+			DebugLog("%s---------------------------------------------------------------------------------------Body Deserialize Error", e.what());
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+
 		}
 		catch (google::protobuf::FatalException* e)
 		{
 			DebugLog("\nParseHead error %s", e->message().c_str());
-			m_spParentStateMachine->enterState<ParsePBHState>();
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}
 

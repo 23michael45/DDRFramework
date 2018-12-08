@@ -7,6 +7,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include "../Utility/DDRMacro.h"
 
 template <class PT>
 class StateMachine;
@@ -25,6 +26,7 @@ public:
 	}
 	~State()
 	{
+		m_spParentObject.reset();
 		m_spParentStateMachine.reset();
 	}
 	/**
@@ -60,8 +62,8 @@ public:
 	}
 
 protected:
-	std::shared_ptr<StateMachine<T>> m_spParentStateMachine;
-	std::shared_ptr<T> m_spParentObject;
+	std::weak_ptr<StateMachine<T>> m_spParentStateMachine;
+	std::weak_ptr<T> m_spParentObject;
 };
 
 template <class PT>
@@ -222,7 +224,14 @@ public:
 
 	~StateMachine()
 	{
-		m_spState = nullptr;
+		DebugLog("\nStateMachine Destroy");
+
+		for (auto iter = m_States.begin(); iter != m_States.end(); ++iter)
+		{
+			std::shared_ptr<State<PT>> sp = iter->second;
+			sp.reset();
+		}
+
 	}
 
 private:

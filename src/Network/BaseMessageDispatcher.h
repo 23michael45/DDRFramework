@@ -18,7 +18,7 @@ namespace DDRFramework
 		~BaseMessageDispatcher();
 
 
-		virtual void Dispatch(std::shared_ptr<TcpSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
+		virtual void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
 	protected:
 

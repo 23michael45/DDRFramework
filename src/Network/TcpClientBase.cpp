@@ -2,93 +2,192 @@
 #include "../Utility/DDRMacro.h"
 namespace DDRFramework
 {
-	TcpClientBase::TcpClientBase(asio::io_context& context) :m_Resolver(context),m_IOContext(context),TcpSocketContainer::TcpSocketContainer(context)
+	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)
 	{
 	}
 
-	TcpClientBase::~TcpClientBase()
+	TcpClientSessionBase::~TcpClientSessionBase()
 	{
+		DebugLog("\nTcpClientBase Destroy");
 	}
 
-	void TcpClientBase::Start(std::string ip, std::string port)
+	void TcpClientSessionBase::Start(std::string ip, std::string port)
 	{
+
 		tcp::resolver::query query(ip, port);
-		m_Resolver.async_resolve(query, bind(&TcpClientBase::ResolveHandler, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
+		m_Resolver.async_resolve(query, bind(&TcpClientSessionBase::ResolveHandler, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		
-
-		std::thread t = std::thread(bind(&TcpClientBase::ThreadEntry, shared_from_this()));
-		t.detach();
 	}
 
-	void TcpClientBase::ThreadEntry()
-	{
-		m_IOContext.run();
-	}
-	void TcpClientBase::ResolveHandler(const asio::error_code& ec, tcp::resolver::iterator i)
+	void TcpClientSessionBase::ResolveHandler(const asio::error_code& ec, tcp::resolver::iterator i)
 	{
 		if (!ec)
 		{
-			asio::async_connect(m_Socket, i, bind(&TcpClientBase::ConnectHandler, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
+			asio::async_connect(m_Socket, i, bind(&TcpClientSessionBase::ConnectHandler, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		}
 		else
 		{
 			DebugLog(ec.message().c_str());
 		}
 	}
-	void TcpClientBase::ConnectHandler(const asio::error_code& ec, tcp::resolver::iterator i)
-	{
-		m_bConnected = true;
-		m_IOContext.post(std::bind(&TcpClientBase::StartRead, shared_from_this()));
-
-	}
-	void TcpClientBase::Send(asio::streambuf& buf)
-	{
-		if (m_bConnected)
-		{
-			m_IOContext.post(std::bind(&TcpClientBase::StartWrite, shared_from_this(), std::ref< asio::streambuf>(buf)));
-		}
-
-	}
-	void TcpClientBase::StartRead()
-	{
-		asio::async_read(m_Socket, m_ReadStreamBuf, asio::transfer_at_least(1), std::bind(&TcpClientBase::HandleRead, shared_from_this(), std::placeholders::_1));
-
-	}
-	void TcpClientBase::HandleRead(const asio::error_code& ec)
+	void TcpClientSessionBase::ConnectHandler(const asio::error_code& ec, tcp::resolver::iterator i)
 	{
 		if (!ec)
 		{
-			DebugLog("Receive:%i", m_ReadStreamBuf.size());
-
-			GetSerializer()->Receive(m_ReadStreamBuf);
-			if (m_bConnected)
+			m_bConnected = true;
+			TcpSocketContainer::Start();
+			m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+		}
+		else
+		{
+			DebugLog("\nConnect Failed No Server");
+			m_bConnected = false;
+			if (m_fOnSessionDisconnect)
 			{
-				m_IOContext.post(std::bind(&TcpClientBase::StartRead, shared_from_this()));
+				m_fOnSessionDisconnect("");
 			}
 		}
-		else
-		{
-			m_bConnected = false;
 
-			DebugLog("\nError on receive: :%s", ec.message().c_str());
+	}
+
+	void TcpClientSessionBase::StartRead()
+	{
+		asio::async_read(m_Socket, m_ReadStreamBuf, asio::transfer_at_least(1), std::bind(&TcpClientSessionBase::HandleRead, shared_from_base(), std::placeholders::_1));
+
+	}
+	void TcpClientSessionBase::HandleRead(const asio::error_code& ec)
+	{
+		try
+		{
+			if (!ec)
+			{
+				//DebugLog("\nReceive:%i", m_ReadStreamBuf.size());
+
+				GetSerializer()->Receive(m_ReadStreamBuf);
+				if (m_bConnected)
+				{
+					m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+				}
+			}
+			else
+			{
+				DebugLog("\nError on receive: :%s", ec.message().c_str());
+				m_bConnected = false;
+				if (m_fOnSessionDisconnect)
+				{
+					m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
+				}
+
+			}
+		}
+		catch (std::exception* e)
+		{
+			DebugLog("\nError  :%s", e->what());
+			
+		}
+		catch (asio::system_error* e)
+		{
+			DebugLog("\nError  :%s", e->what());
+
 		}
 
 	}
-	void TcpClientBase::StartWrite(asio::streambuf& buf)
+	void TcpClientSessionBase::StartWrite(asio::streambuf& buf)
 	{
-
-		asio::async_write(m_Socket, buf, std::bind(&TcpClientBase::HandleWrite, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
+		std::lock_guard<std::mutex> lock(GetSerializer()->GetSendLock());
+	
+		asio::async_write(m_Socket, buf, std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 	}
-	void TcpClientBase::HandleWrite(const asio::error_code& ec, size_t size)
+	void TcpClientSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
 	{
 		if (!ec)
 		{
-			DebugLog("\nSend :%i", size);
+			//DebugLog("\nSend :%i", size);
 		}
 		else
 		{
-			DebugLog("\nError on send: %s", ec.message().c_str());
+			DebugLog("\nError on send: %s", ec.message().c_str()); 
+			
+			m_bConnected = false;
+			if (m_fOnSessionDisconnect)
+			{
+				m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
+			}
 		}
 
 	}
+	void TcpClientSessionBase::OnDisconnect(std::string remoteAddress)
+	{
+		UnloadSerializer();
+	}
+
+
+
+
+	TcpClientBase::TcpClientBase()
+	{
+
+	}
+	TcpClientBase::~TcpClientBase()
+	{
+		m_spClient.reset();
+	}
+	void TcpClientBase::Start(std::string address, std::string port)
+	{
+		m_Address = address;
+		m_Port = port;
+		std::thread t = std::thread(bind(&TcpClientBase::ThreadEntry, shared_from_this()));
+		t.detach();
+	}
+	void TcpClientBase::ThreadEntry()
+	{
+		try
+		{
+			m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
+			m_IOContext.run();
+		}
+		catch (asio::system_error* e)
+		{
+			DebugLog("\nError: %s", e->what());
+
+		}
+	}
+	std::shared_ptr<TcpClientSessionBase> TcpClientBase::BindSerializerDispatcher()
+	{
+		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, TcpClientSessionBase, MessageSerializer, BaseMessageDispatcher)
+		return spTcpClientSessionBase;
+	}
+	void TcpClientBase::Update()
+	{
+		if (m_spClient)
+		{
+		}
+		else
+		{
+			auto spTcpClientBase = BindSerializerDispatcher();
+
+				m_spClient = spTcpClientBase;
+			spTcpClientBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));
+			spTcpClientBase->Start(m_Address, m_Port);
+		}
+
+		m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
+	}
+
+
+	void TcpClientBase::Send(google::protobuf::Message& msg)
+	{
+		if (m_spClient)
+		{
+			m_spClient->Send(msg);
+
+		}
+	}
+	void TcpClientBase::OnDisconnect(std::string addr)
+	{
+		m_spClient->UnloadSerializer();
+		m_spClient.reset();
+		DebugLog("\nUse Count%i", m_spClient.use_count());
+	}
+
 }
