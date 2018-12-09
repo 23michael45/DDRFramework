@@ -15,7 +15,7 @@ namespace DDRFramework
 		TcpSessionBase(asio::io_context& context);
 		~TcpSessionBase();
 		virtual void Start();
-		virtual void Send(asio::streambuf& buf);
+		//virtual void Send(asio::streambuf& buf);
 
 
 	protected:
@@ -27,6 +27,7 @@ namespace DDRFramework
 
 
 	private:
+		int m_TotalRev;
 		asio::streambuf m_ReadStreamBuf;
 
 		auto shared_from_base() {

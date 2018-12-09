@@ -31,6 +31,7 @@ namespace DDRFramework
 	private:
 		tcp::resolver m_Resolver;
 		asio::streambuf m_ReadStreamBuf;
+		int m_TotalSend; int m_TotalSendWill;
 
 		auto shared_from_base() {
 			return std::static_pointer_cast<TcpClientSessionBase>(shared_from_this());
@@ -45,6 +46,7 @@ namespace DDRFramework
 		TcpClientBase();
 		~TcpClientBase();
 		void Start(std::string address, std::string port);
+		void Stop();
 		void ThreadEntry();
 		void Update();
 

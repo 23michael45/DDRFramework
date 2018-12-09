@@ -7,6 +7,7 @@ namespace DDRFramework
 
 	TcpSessionBase::TcpSessionBase(asio::io_context& context):TcpSocketContainer::TcpSocketContainer(context)
 	{
+		m_TotalRev = 0;
 		m_bConnected = true;
 	}
 	TcpSessionBase::~TcpSessionBase()
@@ -22,14 +23,14 @@ namespace DDRFramework
 
 		m_IOContext.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 	}
-	void TcpSessionBase::Send(asio::streambuf& buf)
+	/*void TcpSessionBase::Send(asio::streambuf& buf)
 	{
 		if (m_bConnected)
 		{
 			m_IOContext.post(std::bind(&TcpSessionBase::StartWrite, shared_from_base(), std::ref< asio::streambuf>(buf)));
 		}
 
-	}
+	}*/
 	void TcpSessionBase::StartRead()
 	{
 		asio::async_read(m_Socket, m_ReadStreamBuf,asio::transfer_at_least(1),std::bind(&TcpSessionBase::HandleRead, shared_from_base(),std::placeholders::_1));
@@ -39,7 +40,8 @@ namespace DDRFramework
 	{
 		if (!ec)
 		{
-			//DebugLog("\nReceive:%i", m_ReadStreamBuf.size());
+			m_TotalRev += m_ReadStreamBuf.size();
+			DebugLog("\nReceive:%i TotalRev:%i", m_ReadStreamBuf.size(), m_TotalRev);
 
 			GetSerializer()->Receive(m_ReadStreamBuf);
 
@@ -62,6 +64,7 @@ namespace DDRFramework
 	void TcpSessionBase::StartWrite(asio::streambuf& buf)
 	{
 		std::lock_guard<std::mutex> lock(GetSerializer()->GetSendLock());
+
 
 		asio::async_write(m_Socket, buf, std::bind(&TcpSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 	}

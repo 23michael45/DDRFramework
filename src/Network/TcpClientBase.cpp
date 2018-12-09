@@ -4,6 +4,7 @@ namespace DDRFramework
 {
 	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)
 	{
+		m_TotalSend = 0; m_TotalSendWill = 0;
 	}
 
 	TcpClientSessionBase::~TcpClientSessionBase()
@@ -36,7 +37,7 @@ namespace DDRFramework
 		{
 			m_bConnected = true;
 			TcpSocketContainer::Start();
-			m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+			//m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 		}
 		else
 		{
@@ -95,14 +96,19 @@ namespace DDRFramework
 	void TcpClientSessionBase::StartWrite(asio::streambuf& buf)
 	{
 		std::lock_guard<std::mutex> lock(GetSerializer()->GetSendLock());
-	
+
+		m_TotalSendWill += buf.size();
+		DebugLog("\nSendWill:%i TotalSendWill:%i", buf.size(), m_TotalSendWill);
 		asio::async_write(m_Socket, buf, std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 	}
 	void TcpClientSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
 	{
 		if (!ec)
 		{
-			//DebugLog("\nSend :%i", size);
+
+			m_TotalSend += size;
+			DebugLog("\nSend:%i TotalSend:%i", size, m_TotalSend);
+		
 		}
 		else
 		{
@@ -114,6 +120,7 @@ namespace DDRFramework
 				m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
 			}
 		}
+
 
 	}
 	void TcpClientSessionBase::OnDisconnect(std::string remoteAddress)
@@ -130,6 +137,7 @@ namespace DDRFramework
 	}
 	TcpClientBase::~TcpClientBase()
 	{
+		DebugLog("\n TcpClientBase Destroy");
 		m_spClient.reset();
 	}
 	void TcpClientBase::Start(std::string address, std::string port)
@@ -138,6 +146,11 @@ namespace DDRFramework
 		m_Port = port;
 		std::thread t = std::thread(bind(&TcpClientBase::ThreadEntry, shared_from_this()));
 		t.detach();
+	}
+	void TcpClientBase::Stop()
+	{
+		m_spClient.reset();
+		m_IOContext.stop();
 	}
 	void TcpClientBase::ThreadEntry()
 	{
@@ -151,6 +164,7 @@ namespace DDRFramework
 			DebugLog("\nError: %s", e->what());
 
 		}
+		DebugLog("\nThreadEntry Finish");
 	}
 	std::shared_ptr<TcpClientSessionBase> TcpClientBase::BindSerializerDispatcher()
 	{
@@ -171,7 +185,11 @@ namespace DDRFramework
 			spTcpClientBase->Start(m_Address, m_Port);
 		}
 
-		m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
+		if (IsConnected())
+		{
+			m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
+
+		}
 	}
 
 

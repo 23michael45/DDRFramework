@@ -65,12 +65,12 @@ namespace DDRFramework
 	void MessageSerializer::Update()
 	{
 
-		//if (m_spStateMachine)
-		//{
-		//	std::lock_guard<std::mutex> lock(mMutexRec);
-		//	m_spStateMachine->updateWithDeltaTime();
+		if (m_spStateMachine)
+		{
+			std::lock_guard<std::mutex> lock(mMutexRec);
+			m_spStateMachine->updateWithDeltaTime();
 
-		//}
+		}
 
 		if (mDataStreamSend.size() == 0)
 		{
