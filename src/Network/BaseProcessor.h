@@ -9,6 +9,17 @@
 
 namespace DDRFramework
 {
+	class BaseHeadRuleRouter
+	{
+	public:
+		BaseHeadRuleRouter() {}
+
+		virtual bool IgnoreBody(std::shared_ptr<TcpSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader) {
+			return false;
+		};
+
+	};
+
 
 	class BaseProcessor
 	{

@@ -54,13 +54,15 @@ namespace DDRFramework
 			mDataStreamSendQueue.pop();
 		}
 
-		void BindDispatcher(std::shared_ptr<BaseMessageDispatcher> sp)
+		void BindDispatcher(std::shared_ptr<BaseMessageDispatcher> spDispatcher, std::shared_ptr<BaseHeadRuleRouter> spHeadRuleRouter = nullptr)
 		{
-			m_spDispatcher = sp;
+			m_spDispatcher = spDispatcher;
+			m_spHeadRuleRouter = spHeadRuleRouter;
 
 		}
 		void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
+		bool IgnoreBody(std::shared_ptr<DDRCommProto::CommonHeader> spHeader);
 
 		void BindTcpSocketContainer(std::weak_ptr<TcpSocketContainer> sp)
 		{
@@ -78,6 +80,7 @@ namespace DDRFramework
 		std::mutex mMutexSend;
 		std::mutex mMutexUpdate;
 
+		std::shared_ptr<BaseHeadRuleRouter> m_spHeadRuleRouter;
 		std::shared_ptr<BaseMessageDispatcher> m_spDispatcher;
 		std::weak_ptr<TcpSocketContainer> m_spTcpSocketContainer;
 

@@ -136,7 +136,14 @@ namespace DDRFramework
 		//DebugLog("\nEnd Pack");
 		return true;
 	}
-
+	bool MessageSerializer::IgnoreBody(std::shared_ptr<CommonHeader> spHeader)
+	{
+		if (m_spHeadRuleRouter)
+		{
+			return m_spHeadRuleRouter->IgnoreBody(m_spTcpSocketContainer.lock(), spHeader);
+		}
+		return false;
+	}
 
 	void MessageSerializer::Dispatch(std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
@@ -248,7 +255,13 @@ namespace DDRFramework
 
 			//do header logic
 			//if message body ignore , 
+
 			bool bIgnoreBody = false;
+			if (m_spParentObject.lock())
+			{
+				bIgnoreBody = m_spParentObject.lock()->IgnoreBody(spCommonHeader);
+			}
+
 
 			//do ignore logic
 

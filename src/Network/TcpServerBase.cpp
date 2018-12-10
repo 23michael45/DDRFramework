@@ -115,7 +115,7 @@ namespace DDRFramework
 
 	std::shared_ptr<TcpSessionBase> TcpServerBase::BindSerializerDispatcher()
 	{
-		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, TcpSessionBase, MessageSerializer, BaseMessageDispatcher)
+		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, TcpSessionBase, MessageSerializer, BaseMessageDispatcher,BaseHeadRuleRouter)
 			return spTcpSessionBase;
 	}
 	void TcpServerBase::StartAccept()

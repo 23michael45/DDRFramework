@@ -14,12 +14,15 @@ using asio::ip::tcp;
 //spMessageSerializer->Init();
 //spMessageSerializer->BindDispatcher(spBaseMessageDispatcher);
 
-#define  BIND_IOCONTEXT_SERIALIZER_DISPATCHER(context,tcpinstace,serializer,dispatcher)    std::shared_ptr<tcpinstace> sp##tcpinstace = std::make_shared<tcpinstace>(context);\
+
+
+#define  BIND_IOCONTEXT_SERIALIZER_DISPATCHER(context,tcpinstace,serializer,dispatcher,headrulerouter)    std::shared_ptr<tcpinstace> sp##tcpinstace = std::make_shared<tcpinstace>(context);\
 std::shared_ptr<serializer> sp##serializer = std::make_shared<serializer>();\
 sp##tcpinstace->LoadSerializer(sp##serializer);\
 auto sp##dispatcher = std::make_shared<dispatcher>();\
+auto sp##headrulerouter = std::make_shared<headrulerouter>();\
 sp##serializer->Init();\
-sp##serializer->BindDispatcher(sp##dispatcher);
+sp##serializer->BindDispatcher(sp##dispatcher,sp##headrulerouter);
 
 
 namespace DDRFramework
