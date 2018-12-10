@@ -9,7 +9,8 @@ namespace DDRFramework
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		DebugLog("\nTcpClientBase Destroy");
+		CloseSocket();
+		DebugLog("\nTcpClientSessionBase Destroy");
 	}
 
 	void TcpClientSessionBase::Start(std::string ip, std::string port)
@@ -37,7 +38,7 @@ namespace DDRFramework
 		{
 			m_bConnected = true;
 			TcpSocketContainer::Start();
-			//m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+			m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 		}
 		else
 		{
@@ -45,7 +46,7 @@ namespace DDRFramework
 			m_bConnected = false;
 			if (m_fOnSessionDisconnect)
 			{
-				m_fOnSessionDisconnect("");
+				m_fOnSessionDisconnect(*this);
 			}
 		}
 
@@ -64,7 +65,7 @@ namespace DDRFramework
 			{
 				//DebugLog("\nReceive:%i", m_ReadStreamBuf.size());
 
-				GetSerializer()->Receive(m_ReadStreamBuf);
+				PushData(m_ReadStreamBuf);
 				if (m_bConnected)
 				{
 					m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
@@ -76,7 +77,7 @@ namespace DDRFramework
 				m_bConnected = false;
 				if (m_fOnSessionDisconnect)
 				{
-					m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
+					m_fOnSessionDisconnect(*this);
 				}
 
 			}
@@ -93,34 +94,42 @@ namespace DDRFramework
 		}
 
 	}
-	void TcpClientSessionBase::StartWrite(asio::streambuf& buf)
+	void TcpClientSessionBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
-		std::lock_guard<std::mutex> lock(GetSerializer()->GetSendLock());
+		DebugLog("\nStart Write");
+		if (m_Socket.is_open())
+		{
+			m_TotalSendWill += spbuf->size();
+			asio::async_write(m_Socket, *spbuf.get(),asio::transfer_all(), std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
+		}
 
-		m_TotalSendWill += buf.size();
-		DebugLog("\nSendWill:%i TotalSendWill:%i", buf.size(), m_TotalSendWill);
-		asio::async_write(m_Socket, buf, std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
+		DebugLog("\nEnd Write");
 	}
 	void TcpClientSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
 	{
-		if (!ec)
+		if (m_spSerializer)
 		{
-
-			m_TotalSend += size;
-			DebugLog("\nSend:%i TotalSend:%i", size, m_TotalSend);
-		
-		}
-		else
-		{
-			DebugLog("\nError on send: %s", ec.message().c_str()); 
-			
-			m_bConnected = false;
-			if (m_fOnSessionDisconnect)
+			std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
+			if (!ec)
 			{
-				m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
-			}
-		}
+				m_spSerializer->PopSendBuf();
+				m_TotalSend += size;
+				DebugLog("\nSend:%i TotalSend:%i TotalSendWill:%i", size, m_TotalSend, m_TotalSendWill);
 
+			}
+			else
+			{
+				DebugLog("\nError on send: %s", ec.message().c_str());
+
+				m_bConnected = false;
+				/*if (m_fOnSessionDisconnect)
+				{
+					m_fOnSessionDisconnect(*this);
+				}*/
+			}
+
+			m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+		}
 
 	}
 	void TcpClientSessionBase::OnDisconnect(std::string remoteAddress)
@@ -133,30 +142,47 @@ namespace DDRFramework
 
 	TcpClientBase::TcpClientBase()
 	{
-
 	}
 	TcpClientBase::~TcpClientBase()
 	{
-		DebugLog("\n TcpClientBase Destroy");
+		DebugLog("\nTcpClientBase Destroy");
 		m_spClient.reset();
 	}
-	void TcpClientBase::Start(std::string address, std::string port)
+	void TcpClientBase::Start(int threadNum)
+	{
+		m_spWork = std::make_shared< asio::io_context::work>(m_IOContext);
+		m_WorkerThreads.create_threads(std::bind(&TcpClientBase::ThreadEntry, shared_from_this()), threadNum);
+	}
+	void TcpClientBase::Connect(std::string address, std::string port)
 	{
 		m_Address = address;
 		m_Port = port;
-		std::thread t = std::thread(bind(&TcpClientBase::ThreadEntry, shared_from_this()));
-		t.detach();
+
+
+		auto spTcpClientSessionBase = BindSerializerDispatcher();
+		m_spClient = spTcpClientSessionBase;
+		
+		spTcpClientSessionBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));
+		spTcpClientSessionBase->Start(m_Address, m_Port);
+
 	}
+	void TcpClientBase::Disconnect()
+	{
+		if (m_spClient && m_spClient->IsConnected())
+		{
+			m_spClient->CloseSocket();
+
+		}
+	}
+
 	void TcpClientBase::Stop()
 	{
-		m_spClient.reset();
-		m_IOContext.stop();
+		m_spWork.reset();
 	}
 	void TcpClientBase::ThreadEntry()
 	{
 		try
 		{
-			m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
 			m_IOContext.run();
 		}
 		catch (asio::system_error* e)
@@ -171,37 +197,20 @@ namespace DDRFramework
 		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, TcpClientSessionBase, MessageSerializer, BaseMessageDispatcher)
 		return spTcpClientSessionBase;
 	}
-	void TcpClientBase::Update()
+
+	void TcpClientBase::Send(std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		if (m_spClient)
 		{
-		}
-		else
-		{
-			auto spTcpClientBase = BindSerializerDispatcher();
-
-				m_spClient = spTcpClientBase;
-			spTcpClientBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));
-			spTcpClientBase->Start(m_Address, m_Port);
-		}
-
-		if (IsConnected())
-		{
-			m_IOContext.post(std::bind(&TcpClientBase::Update, shared_from_this()));
+			m_spClient->Send(spmsg);
 
 		}
 	}
-
-
-	void TcpClientBase::Send(google::protobuf::Message& msg)
+	void TcpClientBase::CheckWrite()
 	{
-		if (m_spClient)
-		{
-			m_spClient->Send(msg);
-
-		}
+		m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, m_spClient));
 	}
-	void TcpClientBase::OnDisconnect(std::string addr)
+	void TcpClientBase::OnDisconnect(TcpSocketContainer& container)
 	{
 		m_spClient->UnloadSerializer();
 		m_spClient.reset();

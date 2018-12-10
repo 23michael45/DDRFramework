@@ -32,12 +32,13 @@ namespace DDRFramework
 
 	MessageSerializer::MessageSerializer()
 	{
+		m_TotalPackLen = 0;
 	}
 
 	MessageSerializer::~MessageSerializer()
 	{
-		Deinit();
 		DebugLog("\nSerializer Destroy");
+		Deinit();
 	}
 
 
@@ -51,6 +52,7 @@ namespace DDRFramework
 		ADD_STATE(m_spStateMachine, ParseLengthState)
 		ADD_STATE(m_spStateMachine, ParseHeadState)
 		ADD_STATE(m_spStateMachine, ParseBodyState)
+		ADD_STATE(m_spStateMachine, WaitNextBuffState)
 
 
 		m_spStateMachine->enterState<ParsePBHState>();
@@ -59,38 +61,46 @@ namespace DDRFramework
 
 	void MessageSerializer::Deinit()
 	{
+		while (!mDataStreamSendQueue.empty()) mDataStreamSendQueue.pop();
 		m_spDispatcher.reset();
 		m_spStateMachine.reset();
 	}
 	void MessageSerializer::Update()
 	{
+		std::lock_guard<std::mutex> lock(mMutexUpdate);
 
-		if (m_spStateMachine)
+		if (m_spStateMachine && this)
 		{
 			std::lock_guard<std::mutex> lock(mMutexRec);
-			m_spStateMachine->updateWithDeltaTime();
+
+			auto pCurState = m_spStateMachine->getState();
+			auto spWaitState = m_spStateMachine->findStateByName(typeid(WaitNextBuffState).name());
+			do
+			{
+				if (m_spStateMachine)
+				{
+					pCurState = m_spStateMachine->getState();
+					m_spStateMachine->updateWithDeltaTime();
+
+				}
+
+			} while (pCurState != spWaitState.get());
 
 		}
 
-		if (mDataStreamSend.size() == 0)
-		{
-			return;
-		}
-		if (m_fSendFunc)
-		{
-			m_fSendFunc(mDataStreamSend);
-
-		}
 	}
 
-	bool MessageSerializer::Pack(google::protobuf::Message& msg)
+	bool MessageSerializer::Pack(std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 
 		std::lock_guard<std::mutex> lock(mMutexSend);
 
-		string stype = msg.GetTypeName();
 
-		int bodylen = msg.ByteSize();
+
+		//DebugLog("\nStart Pack");
+		string stype = spmsg->GetTypeName();
+
+		int bodylen = spmsg->ByteSize();
 
 
 		CommonHeader commonHeader;
@@ -101,8 +111,8 @@ namespace DDRFramework
 
 		int totallen = 8 + headlen + bodylen;//+10 means Encrypt head and body 
 
-
-		std::ostream oshold(&mDataStreamSend);
+		auto spbuf = std::make_shared<asio::streambuf>();
+		std::ostream oshold(spbuf.get());
 		google::protobuf::io::OstreamOutputStream oos(&oshold);
 		google::protobuf::io::CodedOutputStream cos(&oos);
 
@@ -112,42 +122,26 @@ namespace DDRFramework
 		cos.WriteLittleEndian32(headlen);
 
 		commonHeader.SerializeToCodedStream(&cos);
-		msg.SerializeToCodedStream(&cos);
+		spmsg->SerializeToCodedStream(&cos);
+
+		oshold.flush();
+
+		mDataStreamSendQueue.push(spbuf);
 
 
-		//DebugLog("\ntotal send:%i", totallen+4)
+		m_TotalPackLen += totallen + 4;
 
-
+		DebugLog("\ntotal Pack Len:%i Add :%i Queue Len: %i ", m_TotalPackLen,totallen + 4 , mDataStreamSendQueue.size())
+		//DebugLog("\nEnd Pack");
 		return true;
 	}
 
-	void MessageSerializer::Receive(asio::streambuf& buf)
-	{
-		std::lock_guard<std::mutex> lock(mMutexRec);
-		std::istream is(&buf);
-
-		std::ostream oshold(&mDataStreamReceive);
-		google::protobuf::io::OstreamOutputStream oos(&oshold);
-		google::protobuf::io::CodedOutputStream cos(&oos);
-
-
-		while (buf.size() > 0)
-		{
-			int readSize = std::min((int)(buf.size()), (int)TEMP_BUFFER_SIZE);
-			is.read(mTempRecvBuffer, readSize);
-
-			cos.WriteRaw(mTempRecvBuffer, readSize);
-			oshold.flush();
-		}
-
-
-	}
 
 	void MessageSerializer::Dispatch(std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
 		if (m_spDispatcher)
 		{
-			m_spDispatcher->Dispatch(spHeader,spMsg);
+			m_spDispatcher->Dispatch(m_spTcpSocketContainer.lock(),spHeader,spMsg);
 		}
 	}
 
@@ -155,11 +149,15 @@ namespace DDRFramework
 	{
 		//DebugLog("\nParsePBHState");
 
-		char readhead[4] = { 0 };
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
-		
+
+		char readhead[4] = { 0 };
 		if (buf.size() < sizeof(int))
 		{
+
+			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
+			sp->SetPreStateAndNextLen(typeid(ParsePBHState).name(), sizeof(int));
+			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
 			return;
 		}
 
@@ -183,6 +181,9 @@ namespace DDRFramework
 
 		if (buf.size() < sizeof(int) * 2)
 		{
+			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
+			sp->SetPreStateAndNextLen(typeid(ParseLengthState).name(), sizeof(int)*2);
+			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
 			return;
 		}
 
@@ -219,6 +220,9 @@ namespace DDRFramework
 
 		if (buf.size() < m_HeadLen)
 		{
+			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
+			sp->SetPreStateAndNextLen(typeid(ParseHeadState).name(), m_HeadLen);
+			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
 			return;
 		}
 
@@ -292,6 +296,9 @@ namespace DDRFramework
 
 		if (buf.size() < m_BodyLen)
 		{
+			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
+			sp->SetPreStateAndNextLen(typeid(ParseBodyState).name(), m_BodyLen);
+			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
 			return;
 		}
 
@@ -349,4 +356,23 @@ namespace DDRFramework
 	}
 
 
+	void WaitNextBuffState::updateWithDeltaTime(float delta)
+	{
+
+		//DebugLog("\nParseBodyState");
+
+		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
+
+		if (buf.size() < m_NextLen)
+		{
+			return;
+		}
+		else
+		{
+			m_spParentStateMachine.lock()->enterState(m_PreStateName);
+
+		}
+
+
+	}
 }

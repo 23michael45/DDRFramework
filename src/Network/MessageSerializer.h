@@ -5,6 +5,7 @@
 #include "asio.hpp"
 #include "../../proto/BaseCmd.pb.h"
 #include "BaseMessageDispatcher.h"
+#include <queue>
 
 #define HeadSignal "pbh\0"
 #define TEMP_BUFFER_SIZE 4096
@@ -20,8 +21,7 @@ namespace DDRFramework
 
 		void Init();
 		void Deinit();
-		bool Pack(google::protobuf::Message& msg);
-		void Receive(asio::streambuf& buf);
+		bool Pack(std::shared_ptr<google::protobuf::Message> spmsg);
 
 		std::mutex& GetRecLock()
 		{
@@ -30,14 +30,28 @@ namespace DDRFramework
 		std::mutex& GetSendLock()
 		{
 			return mMutexSend;
+		}	
+		std::mutex& GetUpdateLock()
+		{
+			return mMutexUpdate;
 		}
 		asio::streambuf& GetRecBuf()
 		{
 			return mDataStreamReceive;
 		}
-		asio::streambuf& GetSendBuf()
+		std::shared_ptr<asio::streambuf> GetSendBuf()
 		{
-			return mDataStreamSend;
+			if (mDataStreamSendQueue.size() > 0)
+			{
+				auto sp = mDataStreamSendQueue.front();
+			   //mDataStreamSendQueue.pop();
+			   return sp;
+			}
+			return nullptr;
+		}
+		void PopSendBuf()
+		{
+			mDataStreamSendQueue.pop();
 		}
 
 		void BindDispatcher(std::shared_ptr<BaseMessageDispatcher> sp)
@@ -48,26 +62,28 @@ namespace DDRFramework
 		void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
 
-		void BindSendFunction(std::function<void(asio::streambuf&)> f)
+		void BindTcpSocketContainer(std::weak_ptr<TcpSocketContainer> sp)
 		{
-			m_fSendFunc = f;
+			m_spTcpSocketContainer = sp;
 		}
 
 	protected:
-	private:
+	
 		std::shared_ptr<StateMachine<MessageSerializer>> m_spStateMachine;
 
 		asio::streambuf mDataStreamReceive;
-		asio::streambuf mDataStreamSend;
+		std::queue<std::shared_ptr<asio::streambuf>> mDataStreamSendQueue;
 
 		std::mutex mMutexRec;
 		std::mutex mMutexSend;
+		std::mutex mMutexUpdate;
 
 		std::shared_ptr<BaseMessageDispatcher> m_spDispatcher;
+		std::weak_ptr<TcpSocketContainer> m_spTcpSocketContainer;
 
-		std::function<void(asio::streambuf&)> m_fSendFunc;
 
-		char mTempRecvBuffer[TEMP_BUFFER_SIZE];
+		char m_TempRecvBuffer[TEMP_BUFFER_SIZE];
+		int m_TotalPackLen;
 	};
 
 	class MessageSerializerState : public State<MessageSerializer>
@@ -142,6 +158,25 @@ namespace DDRFramework
 
 		size_t m_BodyLen;
 		std::shared_ptr<DDRCommProto::CommonHeader> m_spCommonHeader;
+	};
+
+
+	class WaitNextBuffState : public MessageSerializerState
+	{
+	public:
+		WaitNextBuffState(std::shared_ptr<MessageSerializer> sp) : MessageSerializerState::MessageSerializerState(sp)
+		{
+
+		};
+		virtual void updateWithDeltaTime(float delta);
+		void SetPreStateAndNextLen(std::string prestate,int len)
+		{
+			m_NextLen = len;
+			m_PreStateName = prestate;
+		}
+	private:
+		int m_NextLen;
+		std::string m_PreStateName;
 	};
 
 }

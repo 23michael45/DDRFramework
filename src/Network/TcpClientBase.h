@@ -23,7 +23,7 @@ namespace DDRFramework
 		void ResolveHandler(const asio::error_code& ec, tcp::resolver::iterator i);
 		void ConnectHandler(const asio::error_code& ec, tcp::resolver::iterator i);
 		void StartRead();
-		void StartWrite(asio::streambuf& buf);
+		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) override;
 		void HandleRead(const asio::error_code& ec);
 		void HandleWrite(const asio::error_code&, size_t);
 
@@ -45,12 +45,14 @@ namespace DDRFramework
 	public:
 		TcpClientBase();
 		~TcpClientBase();
-		void Start(std::string address, std::string port);
+		void Start(int threadNum = 2);
+		void Connect(std::string address, std::string port);
+		void Disconnect();
 		void Stop();
 		void ThreadEntry();
-		void Update();
+		void CheckWrite();
 
-		void Send(google::protobuf::Message& msg);
+		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 
 		bool IsConnected()
 		{
@@ -62,14 +64,17 @@ namespace DDRFramework
 		}
 	protected:
 
-		virtual void OnDisconnect(std::string addr);
+		virtual void OnDisconnect(TcpSocketContainer& container);
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
 		std::shared_ptr<TcpClientSessionBase> m_spClient;
-
+		std::shared_ptr< asio::io_service::work > m_spWork;
 		std::string m_Address;
 		std::string m_Port;
+
+
+		asio::detail::thread_group m_WorkerThreads;
 	};
 }
 #endif // TcpClientBase_h__

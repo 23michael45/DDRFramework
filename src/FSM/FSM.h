@@ -90,6 +90,14 @@ public:
 		}
 		return nullptr;
 	}
+	std::shared_ptr<State<PT>> findStateByName(std::string name)
+	{
+		if (m_States.count(name) != 0)
+		{
+			return  m_States[name];
+		}
+		return nullptr;
+	}
 
 	/**
 	 *  Add new state to state machine
@@ -165,6 +173,34 @@ public:
 		}
 		return false;
 	}
+	bool enterState(std::string name)
+	{
+		if (m_States.count(name) != 0)
+		{
+			auto state =  m_States[name];
+			if (state)
+			{
+				if (m_spState == nullptr)
+				{
+					m_spState = state;
+					m_spState->didEnterWithPreviousState(nullptr);
+					return true;
+				}
+				else
+				{
+					if (m_spState->isValidNextState(state))
+					{
+						m_spState->willExitWithNextState(state);
+						state->didEnterWithPreviousState(m_spState);
+						m_spState = state;
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+	}
 
 	/**
 	 *  Enters new state without any check if next state is valid
@@ -219,7 +255,7 @@ public:
 	 */
 	State<PT>* getState()
 	{
-		return m_spState;
+		return m_spState.get();
 	}
 
 	~StateMachine()

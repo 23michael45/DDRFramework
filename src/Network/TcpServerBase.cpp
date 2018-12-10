@@ -23,14 +23,7 @@ namespace DDRFramework
 
 		m_IOContext.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 	}
-	/*void TcpSessionBase::Send(asio::streambuf& buf)
-	{
-		if (m_bConnected)
-		{
-			m_IOContext.post(std::bind(&TcpSessionBase::StartWrite, shared_from_base(), std::ref< asio::streambuf>(buf)));
-		}
 
-	}*/
 	void TcpSessionBase::StartRead()
 	{
 		asio::async_read(m_Socket, m_ReadStreamBuf,asio::transfer_at_least(1),std::bind(&TcpSessionBase::HandleRead, shared_from_base(),std::placeholders::_1));
@@ -43,7 +36,7 @@ namespace DDRFramework
 			m_TotalRev += m_ReadStreamBuf.size();
 			DebugLog("\nReceive:%i TotalRev:%i", m_ReadStreamBuf.size(), m_TotalRev);
 
-			GetSerializer()->Receive(m_ReadStreamBuf);
+			PushData(m_ReadStreamBuf);
 
 			if (m_bConnected)
 			{
@@ -55,23 +48,29 @@ namespace DDRFramework
 			m_bConnected = false;
 			if (m_fOnSessionDisconnect)
 			{
-				m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
+				m_fOnSessionDisconnect(*this);
 			}
 			DebugLog("\nError on receive: :%s", ec.message().c_str());
 		}
 
 	}
-	void TcpSessionBase::StartWrite(asio::streambuf& buf)
+	void TcpSessionBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
-		std::lock_guard<std::mutex> lock(GetSerializer()->GetSendLock());
 
+		if (m_Socket.is_open())
+		{
 
-		asio::async_write(m_Socket, buf, std::bind(&TcpSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
+			asio::async_write(m_Socket, *spbuf.get(), std::bind(&TcpSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
+
+		}
+
 	}
 	void TcpSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
 	{
+		std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
 		if (!ec)
 		{
+			m_spSerializer->PopSendBuf();
 			//DebugLog("\nSend :%i", size);
 		}
 		else
@@ -79,12 +78,13 @@ namespace DDRFramework
 			DebugLog("\nError on send: %s", ec.message().c_str());
 
 			m_bConnected = false;
-			if (m_fOnSessionDisconnect)
+			/*if (m_fOnSessionDisconnect)
 			{
-				m_fOnSessionDisconnect(m_Socket.remote_endpoint().address().to_string().c_str());
-			}
+				m_fOnSessionDisconnect(*this);
+			}*/
 		}
 
+		m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 	}
 
 
@@ -97,10 +97,9 @@ namespace DDRFramework
 	}
 
 
-	void TcpServerBase::Start()
+	void TcpServerBase::Start(int threadNum)
 	{
-		std::thread t = std::thread(bind(&TcpServerBase::ThreadEntry,shared_from_this()));
-		t.detach();
+		m_WorkerThreads.create_threads(std::bind(&TcpServerBase::ThreadEntry, shared_from_this()), threadNum);
 	}
 
 	void TcpServerBase::ThreadEntry()
@@ -133,8 +132,9 @@ namespace DDRFramework
 
 		StartAccept();
 	}
-	void TcpServerBase::OnSessionDisconnect(std::string remoteAddress)
+	void TcpServerBase::OnSessionDisconnect(TcpSocketContainer& container)
 	{
+		std::string remoteAddress = container.GetSocket().remote_endpoint().address().to_string();
 		if (m_SessionMap.find(remoteAddress) != m_SessionMap.end())
 		{
 			auto sp = m_SessionMap[remoteAddress];

@@ -11,19 +11,19 @@
 
 namespace DDRFramework
 {
+	class TcpSocketContainer;
 	class  BaseMessageDispatcher
 	{
 	public:
-		BaseMessageDispatcher(std::shared_ptr<TcpSocketContainer> sp);
+		BaseMessageDispatcher();
 		~BaseMessageDispatcher();
 
 
-		virtual void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
+		virtual void Dispatch(std::shared_ptr<TcpSocketContainer> spParentSocketContainer,std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
 	protected:
 
 		std::map<std::string, std::shared_ptr<BaseProcessor>> m_ProcessorMap;
-		std::shared_ptr<TcpSocketContainer> m_spParentSocketContainer;
 
 	};
 

@@ -6,10 +6,18 @@
 #include <map>
 using asio::ip::tcp;
 
+//Code Like This 
+//std::shared_ptr<TcpClientSessionBase> spTcpClientSessionBase = std::make_shared<TcpClientSessionBase>(m_IOContext);
+//std::shared_ptr<MessageSerializer> spMessageSerializer = std::make_shared<MessageSerializer>();
+//auto spBaseMessageDispatcher = std::make_shared<BaseMessageDispatcher>();
+//spTcpClientSessionBase->LoadSerializer(spMessageSerializer);
+//spMessageSerializer->Init();
+//spMessageSerializer->BindDispatcher(spBaseMessageDispatcher);
+
 #define  BIND_IOCONTEXT_SERIALIZER_DISPATCHER(context,tcpinstace,serializer,dispatcher)    std::shared_ptr<tcpinstace> sp##tcpinstace = std::make_shared<tcpinstace>(context);\
 std::shared_ptr<serializer> sp##serializer = std::make_shared<serializer>();\
 sp##tcpinstace->LoadSerializer(sp##serializer);\
-auto sp##dispatcher = std::make_shared<dispatcher>(sp##tcpinstace);\
+auto sp##dispatcher = std::make_shared<dispatcher>();\
 sp##serializer->Init();\
 sp##serializer->BindDispatcher(sp##dispatcher);
 
@@ -27,9 +35,10 @@ namespace DDRFramework
 
 		virtual void Start();
 
-		virtual void Update();
+		virtual void CheckRead();
+		virtual void CheckWrite();
 
-		void Send(google::protobuf::Message& msg);
+		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 
 
 		tcp::socket& GetSocket();
@@ -39,7 +48,7 @@ namespace DDRFramework
 
 		void UnloadSerializer();
 
-		void BindOnDisconnect(std::function<void(std::string)> f)
+		void BindOnDisconnect(std::function<void(TcpSocketContainer&)> f)
 		{
 			m_fOnSessionDisconnect = f;
 		}
@@ -47,9 +56,11 @@ namespace DDRFramework
 		{
 			return m_bConnected;
 		}
+		void CloseSocket();
 
 	protected:
-		virtual void StartWrite(asio::streambuf& buf) {};
+		void PushData(asio::streambuf& buf);
+		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) {};
 
 		asio::io_context& m_IOContext;
 		std::shared_ptr<MessageSerializer> m_spSerializer;
@@ -57,7 +68,7 @@ namespace DDRFramework
 		tcp::socket m_Socket;
 
 
-		std::function<void(std::string)> m_fOnSessionDisconnect;
+		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
 
 	private:
 	};
