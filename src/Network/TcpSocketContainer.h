@@ -52,6 +52,10 @@ namespace DDRFramework
 		{
 			m_fOnSessionDisconnect = f;
 		}
+		void BindOnConnected(std::function<void(TcpSocketContainer&)> f)
+		{
+			m_fOnSessionConnected = f;
+		}
 		bool IsConnected()
 		{
 			return m_bConnected;
@@ -75,6 +79,7 @@ namespace DDRFramework
 
 
 		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
+		std::function<void(TcpSocketContainer&)> m_fOnSessionConnected;
 
 	private:
 	};

@@ -39,6 +39,11 @@ namespace DDRFramework
 			m_bConnected = true;
 			TcpSocketContainer::Start();
 			m_ReadStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+
+			if (m_fOnSessionConnected)
+			{
+				m_fOnSessionConnected(*this);
+			}
 		}
 		else
 		{
@@ -155,8 +160,10 @@ namespace DDRFramework
 
 
 		auto spTcpClientSessionBase = BindSerializerDispatcher();
+
 		m_spClient = spTcpClientSessionBase;
-		
+
+		spTcpClientSessionBase->BindOnConnected(std::bind(&TcpClientBase::OnConnected, shared_from_this(), std::placeholders::_1));
 		spTcpClientSessionBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));
 		spTcpClientSessionBase->Start(m_Address, m_Port);
 
@@ -203,9 +210,17 @@ namespace DDRFramework
 	}
 	void TcpClientBase::OnDisconnect(TcpSocketContainer& container)
 	{
-		m_spClient->UnloadSerializer();
-		m_spClient.reset();
-		DebugLog("\nUse Count%i", m_spClient.use_count());
+		if (m_spClient)
+		{
+			m_spClient->UnloadSerializer();
+			m_spClient.reset();
+
+		}
+	}
+	void TcpClientBase::OnConnected(TcpSocketContainer& container)
+	{
+		DebugLog("\nOnConnected TcpClientBase");
+
 	}
 
 }

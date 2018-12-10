@@ -64,6 +64,7 @@ namespace DDRFramework
 	protected:
 
 		virtual void OnDisconnect(TcpSocketContainer& container);
+		virtual void OnConnected(TcpSocketContainer& container);
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
