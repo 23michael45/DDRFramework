@@ -50,7 +50,6 @@ namespace DDRFramework
 		void Disconnect();
 		void Stop();
 		void ThreadEntry();
-		void CheckWrite();
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 

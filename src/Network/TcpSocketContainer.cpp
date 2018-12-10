@@ -8,7 +8,7 @@ using asio::ip::tcp;
 
 namespace DDRFramework
 {
-	TcpSocketContainer::TcpSocketContainer(asio::io_context &context) : m_IOContext(context), m_Socket(context), m_bConnected(false)
+	TcpSocketContainer::TcpSocketContainer(asio::io_context &context) : m_IOContext(context), m_Socket(context), m_bConnected(false), m_WriteStrand(m_IOContext),m_ReadStrand(m_IOContext)
 	{
 
 	}
@@ -19,8 +19,8 @@ namespace DDRFramework
 	}
 	void  TcpSocketContainer::Start()
 	{
-		m_IOContext.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
-		m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+		m_ReadStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
+		m_WriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 	}
 
 	void TcpSocketContainer::CheckRead()
@@ -31,7 +31,7 @@ namespace DDRFramework
 			{
 				m_spSerializer->Update();
 			}
-			m_IOContext.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
+			m_WriteStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
 		}
 		else
 		{
@@ -53,7 +53,7 @@ namespace DDRFramework
 				else
 				{
 
-					m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+					m_WriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 				}
 
 			}
@@ -120,6 +120,13 @@ namespace DDRFramework
 		if (m_spSerializer)
 		{
 			m_spSerializer.reset();
+		}
+	}
+	void TcpSocketContainer::CallOnDisconnect()
+	{
+		if (m_fOnSessionDisconnect)
+		{
+			m_fOnSessionDisconnect(*this);
 		}
 	}
 

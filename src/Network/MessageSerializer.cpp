@@ -61,6 +61,7 @@ namespace DDRFramework
 
 	void MessageSerializer::Deinit()
 	{
+
 		while (!mDataStreamSendQueue.empty()) mDataStreamSendQueue.pop();
 		m_spDispatcher.reset();
 		m_spStateMachine.reset();

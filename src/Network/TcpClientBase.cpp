@@ -38,16 +38,13 @@ namespace DDRFramework
 		{
 			m_bConnected = true;
 			TcpSocketContainer::Start();
-			m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+			m_ReadStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 		}
 		else
 		{
 			DebugLog("\nConnect Failed No Server");
 			m_bConnected = false;
-			if (m_fOnSessionDisconnect)
-			{
-				m_fOnSessionDisconnect(*this);
-			}
+			m_IOContext.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
 		}
 
 	}
@@ -68,18 +65,15 @@ namespace DDRFramework
 				PushData(m_ReadStreamBuf);
 				if (m_bConnected)
 				{
-					m_IOContext.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+					m_ReadStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 				}
 			}
 			else
 			{
 				DebugLog("\nError on receive: :%s", ec.message().c_str());
 				m_bConnected = false;
-				if (m_fOnSessionDisconnect)
-				{
-					m_fOnSessionDisconnect(*this);
-				}
 
+				m_ReadStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
 			}
 		}
 		catch (std::exception* e)
@@ -122,13 +116,14 @@ namespace DDRFramework
 				DebugLog("\nError on send: %s", ec.message().c_str());
 
 				m_bConnected = false;
-				/*if (m_fOnSessionDisconnect)
-				{
-					m_fOnSessionDisconnect(*this);
-				}*/
+				m_WriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+				
 			}
+			if (m_bConnected)
+			{
+				m_WriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 
-			m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+			}
 		}
 
 	}
@@ -205,10 +200,6 @@ namespace DDRFramework
 			m_spClient->Send(spmsg);
 
 		}
-	}
-	void TcpClientBase::CheckWrite()
-	{
-		m_IOContext.post(std::bind(&TcpSocketContainer::CheckWrite, m_spClient));
 	}
 	void TcpClientBase::OnDisconnect(TcpSocketContainer& container)
 	{

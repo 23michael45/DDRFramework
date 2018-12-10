@@ -57,15 +57,21 @@ namespace DDRFramework
 			return m_bConnected;
 		}
 		void CloseSocket();
-
+		void CallOnDisconnect();
 	protected:
 		void PushData(asio::streambuf& buf);
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) {};
+	
+
 
 		asio::io_context& m_IOContext;
 		std::shared_ptr<MessageSerializer> m_spSerializer;
 		bool m_bConnected;
 		tcp::socket m_Socket;
+
+
+		asio::io_context::strand m_ReadStrand;
+		asio::io_context::strand m_WriteStrand;
 
 
 		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
