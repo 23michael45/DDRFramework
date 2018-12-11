@@ -129,7 +129,8 @@ namespace DDRFramework
 
 	void UdpSocketBase::StartRead()
 	{
-		m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf) ,std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1));
+
+		m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1 , std::placeholders::_2));
 
 
 		/*asio::ip::udp::endpoint sender_endpoint(asio::ip::udp::v4(), 7000);
@@ -144,7 +145,7 @@ namespace DDRFramework
 
 
 	}
-	void UdpSocketBase::HandleRead(const asio::error_code& ec)
+	void UdpSocketBase::HandleRead(const asio::error_code& ec,int len)
 	{
 		if (!ec)
 		{
@@ -154,7 +155,7 @@ namespace DDRFramework
 				{
 					std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-					oshold.write(m_ReadStreamBuf.data(), m_ReadStreamBuf.size());
+					oshold.write(m_ReadStreamBuf.data(), len);
 					oshold.flush();
 
 				}

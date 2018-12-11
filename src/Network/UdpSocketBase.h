@@ -49,7 +49,7 @@ namespace DDRFramework
 		
 		
 		void StartRead();
-		void HandleRead(const asio::error_code& ec);
+		void HandleRead(const asio::error_code& ec, int len);
 		void FreeRead();
 
 
@@ -69,6 +69,7 @@ namespace DDRFramework
 
 		//asio::streambuf m_ReadStreamBuf; 
 		asio::detail::array<char,1024> m_ReadStreamBuf;
+
 
 		
 		
