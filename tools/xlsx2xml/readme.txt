@@ -1,0 +1,9 @@
+此工具应用前要先安装 AccessDatabaseEngine2007.exe 用来支持EXCEL表功能 
+
+把要生成的xlsx文件copy到xlsx目录下
+
+然后运行Xlsx2Xml.bat
+
+到xml目录下取出相应的文件
+
+在程序里用XmlLoader来操作文件内容
