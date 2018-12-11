@@ -5,6 +5,7 @@
 #include "asio.hpp"
 #include "../../proto/BaseCmd.pb.h"
 #include "BaseMessageDispatcher.h"
+#include "BaseSocketContainer.h"
 #include <queue>
 
 #define HeadSignal "pbh\0"
@@ -70,9 +71,9 @@ namespace DDRFramework
 
 		bool IgnoreBody(std::shared_ptr<DDRCommProto::CommonHeader> spHeader);
 
-		void BindTcpSocketContainer(std::weak_ptr<TcpSocketContainer> sp)
+		void BindBaseSocketContainer(std::shared_ptr<BaseSocketContainer> sp)
 		{
-			m_spTcpSocketContainer = sp;
+			m_spBaseSocketContainer = sp;
 		}
 
 	protected:
@@ -88,7 +89,7 @@ namespace DDRFramework
 
 		std::shared_ptr<BaseHeadRuleRouter> m_spHeadRuleRouter;
 		std::shared_ptr<BaseMessageDispatcher> m_spDispatcher;
-		std::weak_ptr<TcpSocketContainer> m_spTcpSocketContainer;
+		std::shared_ptr<BaseSocketContainer> m_spBaseSocketContainer;
 
 
 		char m_TempRecvBuffer[TEMP_BUFFER_SIZE];

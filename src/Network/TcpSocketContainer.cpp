@@ -110,7 +110,7 @@ namespace DDRFramework
 	void TcpSocketContainer::LoadSerializer(std::shared_ptr<MessageSerializer> sp)
 	{
 		m_spSerializer = sp;
-		m_spSerializer->BindTcpSocketContainer(shared_from_this());
+		m_spSerializer->BindBaseSocketContainer(std::make_shared<BaseSocketContainer>(shared_from_this()));
 	}
 	void TcpSocketContainer::UnloadSerializer()
 	{

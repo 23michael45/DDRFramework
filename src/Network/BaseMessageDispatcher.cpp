@@ -29,8 +29,10 @@ namespace DDRFramework
 			{
 				sp->Process(spParentSocketContainer, spHeader, spMsg);
 
-				spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
+				//spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
 
+				std::thread t(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
+				t.detach();
 			}
 			else
 			{

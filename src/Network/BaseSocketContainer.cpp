@@ -23,7 +23,7 @@ namespace DDRFramework
 		{
 			m_spUdpSocketBase.reset();
 		}
-		DebugLog("\nBaseSocketContainer");
+		DebugLog("\nBaseSocketContainer Destroy");
 	}
 
 	void BaseSocketContainer::SetTcp(std::shared_ptr<TcpSocketContainer> sp)

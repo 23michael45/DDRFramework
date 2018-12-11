@@ -67,8 +67,8 @@ namespace DDRFramework
 		bool m_Broadcasting;
 		bool m_Receiving;
 
-		asio::streambuf m_ReadStreamBuf; 
-		//asio::detail::array<char,1> m_ReadStreamBuf;
+		//asio::streambuf m_ReadStreamBuf; 
+		asio::detail::array<char,1024> m_ReadStreamBuf;
 
 		
 		

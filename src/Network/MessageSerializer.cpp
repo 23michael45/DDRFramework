@@ -80,9 +80,9 @@ namespace DDRFramework
 			{
 				if (m_spStateMachine)
 				{
-					pCurState = m_spStateMachine->getState();
 					m_spStateMachine->updateWithDeltaTime();
 
+					pCurState = m_spStateMachine->getState();//must put after updateWithDeltaTime,cause state may change in that function
 				}
 
 			} while (pCurState != spWaitState.get());
@@ -144,7 +144,7 @@ namespace DDRFramework
 	{
 		if (m_spHeadRuleRouter)
 		{
-			return m_spHeadRuleRouter->IgnoreBody(std::make_shared<BaseSocketContainer>(m_spTcpSocketContainer.lock()), spHeader);
+			return m_spHeadRuleRouter->IgnoreBody(m_spBaseSocketContainer, spHeader);
 		}
 		return false;
 	}
@@ -153,7 +153,7 @@ namespace DDRFramework
 	{
 		if (m_spDispatcher)
 		{
-			m_spDispatcher->Dispatch(std::make_shared<BaseSocketContainer>(m_spTcpSocketContainer.lock()),spHeader,spMsg);
+			m_spDispatcher->Dispatch(m_spBaseSocketContainer,spHeader,spMsg);
 		}
 	}
 

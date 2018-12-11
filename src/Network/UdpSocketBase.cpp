@@ -19,6 +19,7 @@ namespace DDRFramework
 	void UdpSocketBase::Start()
 	{
 		m_spSerializer = std::make_shared<MessageSerializer>();
+		m_spSerializer->BindBaseSocketContainer(std::make_shared<BaseSocketContainer>(shared_from_this()));
 		m_spSerializer->Init();
 
 		m_spWork = std::make_shared< asio::io_context::work>(m_IOContext);
@@ -99,24 +100,25 @@ namespace DDRFramework
 	}
 	void UdpSocketBase::FreeRead()
 	{
-		m_ReadStreamBuf.consume(m_ReadStreamBuf.size());
 	}
 
 	void UdpSocketBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
 		m_spSocket->async_send_to(spbuf->data(),*(m_spBroadcastEnderEndpoint.get()), std::bind(&UdpSocketBase::HandleWrite, shared_from_this(), std::placeholders::_1,spbuf));
-
+		
+		
 
 	}
 	void UdpSocketBase::HandleWrite(const asio::error_code& ec,std::shared_ptr<asio::streambuf> spbuf) {
 		
-		std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
 
 		if (!ec)
 		{
 			if (m_Broadcasting)
 			{
 				m_WriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
+				std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
+				
 			}
 		}
 		else
@@ -127,7 +129,7 @@ namespace DDRFramework
 
 	void UdpSocketBase::StartRead()
 	{
-		m_spSocket->async_receive_from(asio::buffer(m_ReadStreamBuf.prepare(1024)), *(m_spRecvEnderEndpoint.get()) ,std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1));
+		m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf) ,std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1));
 
 
 		/*asio::ip::udp::endpoint sender_endpoint(asio::ip::udp::v4(), 7000);
@@ -148,16 +150,14 @@ namespace DDRFramework
 		{
 			if (m_spSerializer)
 			{
-				std::lock_guard<std::mutex> lock(m_spSerializer->GetRecLock());
 				if (m_spSerializer)
 				{
 					std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-					oshold.write((const char*)m_ReadStreamBuf.data().data(), m_ReadStreamBuf.size());
+					oshold.write(m_ReadStreamBuf.data(), m_ReadStreamBuf.size());
 					oshold.flush();
 
 				}
-				m_ReadStreamBuf.consume(m_ReadStreamBuf.size());
 
 				m_spSerializer->Update();
 			}
