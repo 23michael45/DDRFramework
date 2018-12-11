@@ -11,6 +11,9 @@
 #define TEMP_BUFFER_SIZE 4096
 namespace DDRFramework
 {
+	class BaseMessageDispatcher;
+	class BaseHeadRuleRouter;
+
 
 	class MessageSerializer : public std::enable_shared_from_this<MessageSerializer>
 	{
@@ -21,6 +24,9 @@ namespace DDRFramework
 
 		void Init();
 		void Deinit();
+
+		std::shared_ptr<asio::streambuf> SerlializeMsg(std::shared_ptr<google::protobuf::Message> spmsg);
+
 		bool Pack(std::shared_ptr<google::protobuf::Message> spmsg);
 
 		std::mutex& GetRecLock()

@@ -2,6 +2,14 @@ syntax = "proto3";
 
 package DDRCommProto;
 
+message broadcastServerInformation
+{
+	repeated string ips = 1;
+	string port = 2;
+	string serverName = 3;
+}
+
+
 // Abbreviation: LS - local server; C - client (local); LSM - local service module
 //				 RS - remote server; M - monitor (remote); RR - remote robot (connect to RS)
 

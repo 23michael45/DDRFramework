@@ -24,6 +24,11 @@ extern PROTOBUF_INTERNAL_EXPORT_protobuf_BaseCmd_2eproto ::google::protobuf::int
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_BaseCmd_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_reqLogin_msgAVStreamReq;
 }  // namespace protobuf_BaseCmd_2eproto
 namespace DDRCommProto {
+class broadcastServerInformationDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<broadcastServerInformation>
+      _instance;
+} _broadcastServerInformation_default_instance_;
 class CommonHeaderDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<CommonHeader>
@@ -121,6 +126,20 @@ class notifyTextChatDefaultTypeInternal {
 } _notifyTextChat_default_instance_;
 }  // namespace DDRCommProto
 namespace protobuf_BaseCmd_2eproto {
+static void InitDefaultsbroadcastServerInformation() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::DDRCommProto::_broadcastServerInformation_default_instance_;
+    new (ptr) ::DDRCommProto::broadcastServerInformation();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::DDRCommProto::broadcastServerInformation::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_broadcastServerInformation =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsbroadcastServerInformation}, {}};
+
 static void InitDefaultsCommonHeader() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -390,6 +409,7 @@ static void InitDefaultsnotifyTextChat() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsnotifyTextChat}, {}};
 
 void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_broadcastServerInformation.base);
   ::google::protobuf::internal::InitSCC(&scc_info_CommonHeader.base);
   ::google::protobuf::internal::InitSCC(&scc_info_heartBeat.base);
   ::google::protobuf::internal::InitSCC(&scc_info_bcLSAddr.base);
@@ -411,10 +431,18 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_notifyTextChat.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[19];
+::google::protobuf::Metadata file_level_metadata[20];
 const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::broadcastServerInformation, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::broadcastServerInformation, ips_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::broadcastServerInformation, port_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::broadcastServerInformation, servername_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -574,28 +602,30 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyTextChat, chattext_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::DDRCommProto::CommonHeader)},
-  { 9, -1, sizeof(::DDRCommProto::heartBeat)},
-  { 15, -1, sizeof(::DDRCommProto::bcLSAddr)},
-  { 23, -1, sizeof(::DDRCommProto::reqLogin_msgAVStreamReq)},
-  { 31, -1, sizeof(::DDRCommProto::reqLogin)},
-  { 43, -1, sizeof(::DDRCommProto::respLogin)},
-  { 51, -1, sizeof(::DDRCommProto::notifyTerminalAccess)},
-  { 61, -1, sizeof(::DDRCommProto::notifySerAccess)},
-  { 73, -1, sizeof(::DDRCommProto::notifyAVStream_fullChannelInfo)},
-  { 86, -1, sizeof(::DDRCommProto::notifyAVStream)},
-  { 93, -1, sizeof(::DDRCommProto::reqTalk)},
-  { 102, -1, sizeof(::DDRCommProto::respTalk)},
-  { 111, -1, sizeof(::DDRCommProto::cmd)},
-  { 118, -1, sizeof(::DDRCommProto::respCmd)},
-  { 125, -1, sizeof(::DDRCommProto::reqFile)},
-  { 132, -1, sizeof(::DDRCommProto::respFile)},
-  { 139, -1, sizeof(::DDRCommProto::notifyStatus)},
-  { 145, -1, sizeof(::DDRCommProto::notifyAlarm)},
-  { 151, -1, sizeof(::DDRCommProto::notifyTextChat)},
+  { 0, -1, sizeof(::DDRCommProto::broadcastServerInformation)},
+  { 8, -1, sizeof(::DDRCommProto::CommonHeader)},
+  { 17, -1, sizeof(::DDRCommProto::heartBeat)},
+  { 23, -1, sizeof(::DDRCommProto::bcLSAddr)},
+  { 31, -1, sizeof(::DDRCommProto::reqLogin_msgAVStreamReq)},
+  { 39, -1, sizeof(::DDRCommProto::reqLogin)},
+  { 51, -1, sizeof(::DDRCommProto::respLogin)},
+  { 59, -1, sizeof(::DDRCommProto::notifyTerminalAccess)},
+  { 69, -1, sizeof(::DDRCommProto::notifySerAccess)},
+  { 81, -1, sizeof(::DDRCommProto::notifyAVStream_fullChannelInfo)},
+  { 94, -1, sizeof(::DDRCommProto::notifyAVStream)},
+  { 101, -1, sizeof(::DDRCommProto::reqTalk)},
+  { 110, -1, sizeof(::DDRCommProto::respTalk)},
+  { 119, -1, sizeof(::DDRCommProto::cmd)},
+  { 126, -1, sizeof(::DDRCommProto::respCmd)},
+  { 133, -1, sizeof(::DDRCommProto::reqFile)},
+  { 140, -1, sizeof(::DDRCommProto::respFile)},
+  { 147, -1, sizeof(::DDRCommProto::notifyStatus)},
+  { 153, -1, sizeof(::DDRCommProto::notifyAlarm)},
+  { 159, -1, sizeof(::DDRCommProto::notifyTextChat)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_broadcastServerInformation_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_CommonHeader_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_heartBeat_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_bcLSAddr_default_instance_),
@@ -632,76 +662,78 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 19);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 20);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rBaseCmd.proto\022\014DDRCommProto\"\261\002\n\014Common"
-      "Header\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirectio"
-      "n\030\002 \003(\0162#.DDRCommProto.CommonHeader.eFlo"
-      "wDir\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Co"
-      "mmonHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V"
-      "\n\010eFlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS"
-      "\020\002\022\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LS"
-      "M2LS\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMNa"
-      "me\020\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatev"
-      "er\030\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ip"
-      "s\030\002 \003(\003\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004ty"
-      "pe\030\001 \001(\0162\037.DDRCommProto.reqLogin.eCltTyp"
-      "e\022\020\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010"
-      "robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006"
-      " \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto"
-      ".reqLogin.msgAVStreamReq\032F\n\016msgAVStreamR"
-      "eq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014ba"
-      "ndwidthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000"
-      "\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLog"
-      "in\0226\n\007retcode\030\001 \001(\0162%.DDRCommProto.respL"
-      "ogin.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .D"
-      "DRCommProto.respLogin.eCltType\022\013\n\003UID\030\003 "
-      "\001(\005\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013ser"
-      "ver_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\t"
-      "UID_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010e"
-      "CltType\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007"
-      "\n\003LSM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRCo"
-      "nnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonito"
-      "rs\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005"
-      " \003(\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001"
-      "(\005\022\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003"
-      "\022\021\n\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n"
-      "\nmTopOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016"
-      "notifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132"
-      ",.DDRCommProto.notifyAVStream.fullChanne"
-      "lInfo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DD"
-      "RCommProto.notifyAVStream.fullChannelInf"
-      "o\032\261\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020"
-      "\n\010dataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t"
-      "\022\032\n\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 "
-      "\001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001("
-      "\005\022\022\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncal"
-      "lerType\030\001 \001(\0162!.DDRCommProto.reqTalk.eCa"
-      "llerType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006av"
-      "Type\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n"
-      "\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:"
-      "\n\014receiverType\030\001 \001(\0162$.DDRCommProto.resp"
-      "Talk.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003"
-      " \001(\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n"
-      "\006client\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"$\n"
-      "\003cmd\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007r"
-      "espCmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"u"
-      "\n\007reqFile\0223\n\tzipFormat\030\001 \001(\0162 .DDRCommPr"
-      "oto.reqFile.eZipFormat\022\023\n\013fileInqText\030\002 "
-      "\001(\t\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"t\n"
-      "\010respFile\0224\n\tzipFormat\030\001 \001(\0162!.DDRCommPr"
-      "oto.respFile.eZipFormat\022\020\n\010fileResp\030\002 \001("
-      "\t\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"!\n\014n"
-      "otifyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013notify"
-      "Alarm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyTextCha"
-      "t\022\020\n\010chatText\030\001 \001(\tb\006proto3"
+      "\n\rBaseCmd.proto\022\014DDRCommProto\"K\n\032broadca"
+      "stServerInformation\022\013\n\003ips\030\001 \003(\t\022\014\n\004port"
+      "\030\002 \001(\t\022\022\n\nserverName\030\003 \001(\t\"\261\002\n\014CommonHea"
+      "der\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirection\030\002"
+      " \003(\0162#.DDRCommProto.CommonHeader.eFlowDi"
+      "r\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Commo"
+      "nHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V\n\010e"
+      "FlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS\020\002\022"
+      "\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LSM2L"
+      "S\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMName\020"
+      "\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatever\030"
+      "\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ips\030\002"
+      " \003(\003\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004type\030"
+      "\001 \001(\0162\037.DDRCommProto.reqLogin.eCltType\022\020"
+      "\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010rob"
+      "otPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006 \001("
+      "\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto.re"
+      "qLogin.msgAVStreamReq\032F\n\016msgAVStreamReq\022"
+      "\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014bandw"
+      "idthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000\022\021\n"
+      "\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLogin\022"
+      "6\n\007retcode\030\001 \001(\0162%.DDRCommProto.respLogi"
+      "n.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .DDRC"
+      "ommProto.respLogin.eCltType\022\013\n\003UID\030\003 \001(\005"
+      "\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013server"
+      "_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\tUID"
+      "_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010eClt"
+      "Type\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007\n\003L"
+      "SM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRConne"
+      "cted2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonitors\030"
+      "\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005 \003("
+      "\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001(\005\022"
+      "\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003\022\021\n"
+      "\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n\nmT"
+      "opOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016not"
+      "ifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132,.D"
+      "DRCommProto.notifyAVStream.fullChannelIn"
+      "fo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DDRCo"
+      "mmProto.notifyAVStream.fullChannelInfo\032\261"
+      "\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020\n\010d"
+      "ataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t\022\032\n"
+      "\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 \001(\005"
+      "\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001(\005\022\022"
+      "\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncaller"
+      "Type\030\001 \001(\0162!.DDRCommProto.reqTalk.eCalle"
+      "rType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006avTyp"
+      "e\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n\007mo"
+      "nitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:\n\014r"
+      "eceiverType\030\001 \001(\0162$.DDRCommProto.respTal"
+      "k.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001("
+      "\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n\006cl"
+      "ient\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"$\n\003cm"
+      "d\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007resp"
+      "Cmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"u\n\007r"
+      "eqFile\0223\n\tzipFormat\030\001 \001(\0162 .DDRCommProto"
+      ".reqFile.eZipFormat\022\023\n\013fileInqText\030\002 \001(\t"
+      "\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"t\n\010re"
+      "spFile\0224\n\tzipFormat\030\001 \001(\0162!.DDRCommProto"
+      ".respFile.eZipFormat\022\020\n\010fileResp\030\002 \001(\t\" "
+      "\n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"!\n\014noti"
+      "fyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013notifyAla"
+      "rm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyTextChat\022\020"
+      "\n\010chatText\030\001 \001(\tb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2427);
+      descriptor, 2504);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BaseCmd.proto", &protobuf_RegisterTypes);
 }
@@ -933,6 +965,356 @@ const respFile_eZipFormat respFile::eZipFormat_MIN;
 const respFile_eZipFormat respFile::eZipFormat_MAX;
 const int respFile::eZipFormat_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+// ===================================================================
+
+void broadcastServerInformation::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int broadcastServerInformation::kIpsFieldNumber;
+const int broadcastServerInformation::kPortFieldNumber;
+const int broadcastServerInformation::kServerNameFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+broadcastServerInformation::broadcastServerInformation()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_BaseCmd_2eproto::scc_info_broadcastServerInformation.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:DDRCommProto.broadcastServerInformation)
+}
+broadcastServerInformation::broadcastServerInformation(const broadcastServerInformation& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      ips_(from.ips_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  port_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.port().size() > 0) {
+    port_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.port_);
+  }
+  servername_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.servername().size() > 0) {
+    servername_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.servername_);
+  }
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.broadcastServerInformation)
+}
+
+void broadcastServerInformation::SharedCtor() {
+  port_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  servername_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+broadcastServerInformation::~broadcastServerInformation() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.broadcastServerInformation)
+  SharedDtor();
+}
+
+void broadcastServerInformation::SharedDtor() {
+  port_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  servername_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void broadcastServerInformation::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* broadcastServerInformation::descriptor() {
+  ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const broadcastServerInformation& broadcastServerInformation::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_broadcastServerInformation.base);
+  return *internal_default_instance();
+}
+
+
+void broadcastServerInformation::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.broadcastServerInformation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ips_.Clear();
+  port_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  servername_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool broadcastServerInformation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:DDRCommProto.broadcastServerInformation)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated string ips = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_ips()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->ips(this->ips_size() - 1).data(),
+            static_cast<int>(this->ips(this->ips_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.broadcastServerInformation.ips"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string port = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_port()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->port().data(), static_cast<int>(this->port().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.broadcastServerInformation.port"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string serverName = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_servername()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->servername().data(), static_cast<int>(this->servername().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.broadcastServerInformation.serverName"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:DDRCommProto.broadcastServerInformation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.broadcastServerInformation)
+  return false;
+#undef DO_
+}
+
+void broadcastServerInformation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.broadcastServerInformation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated string ips = 1;
+  for (int i = 0, n = this->ips_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->ips(i).data(), static_cast<int>(this->ips(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.ips");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->ips(i), output);
+  }
+
+  // string port = 2;
+  if (this->port().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->port().data(), static_cast<int>(this->port().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.port");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->port(), output);
+  }
+
+  // string serverName = 3;
+  if (this->servername().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->servername().data(), static_cast<int>(this->servername().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.serverName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->servername(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.broadcastServerInformation)
+}
+
+::google::protobuf::uint8* broadcastServerInformation::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.broadcastServerInformation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated string ips = 1;
+  for (int i = 0, n = this->ips_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->ips(i).data(), static_cast<int>(this->ips(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.ips");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(1, this->ips(i), target);
+  }
+
+  // string port = 2;
+  if (this->port().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->port().data(), static_cast<int>(this->port().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.port");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->port(), target);
+  }
+
+  // string serverName = 3;
+  if (this->servername().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->servername().data(), static_cast<int>(this->servername().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.broadcastServerInformation.serverName");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->servername(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.broadcastServerInformation)
+  return target;
+}
+
+size_t broadcastServerInformation::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.broadcastServerInformation)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string ips = 1;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->ips_size());
+  for (int i = 0, n = this->ips_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->ips(i));
+  }
+
+  // string port = 2;
+  if (this->port().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->port());
+  }
+
+  // string serverName = 3;
+  if (this->servername().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->servername());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void broadcastServerInformation::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.broadcastServerInformation)
+  GOOGLE_DCHECK_NE(&from, this);
+  const broadcastServerInformation* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const broadcastServerInformation>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.broadcastServerInformation)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.broadcastServerInformation)
+    MergeFrom(*source);
+  }
+}
+
+void broadcastServerInformation::MergeFrom(const broadcastServerInformation& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.broadcastServerInformation)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  ips_.MergeFrom(from.ips_);
+  if (from.port().size() > 0) {
+
+    port_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.port_);
+  }
+  if (from.servername().size() > 0) {
+
+    servername_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.servername_);
+  }
+}
+
+void broadcastServerInformation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.broadcastServerInformation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void broadcastServerInformation::CopyFrom(const broadcastServerInformation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.broadcastServerInformation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool broadcastServerInformation::IsInitialized() const {
+  return true;
+}
+
+void broadcastServerInformation::Swap(broadcastServerInformation* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void broadcastServerInformation::InternalSwap(broadcastServerInformation* other) {
+  using std::swap;
+  ips_.InternalSwap(CastToBase(&other->ips_));
+  port_.Swap(&other->port_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  servername_.Swap(&other->servername_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata broadcastServerInformation::GetMetadata() const {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
 
 // ===================================================================
 
@@ -7329,6 +7711,9 @@ void notifyTextChat::InternalSwap(notifyTextChat* other) {
 }  // namespace DDRCommProto
 namespace google {
 namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::broadcastServerInformation* Arena::CreateMaybeMessage< ::DDRCommProto::broadcastServerInformation >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::broadcastServerInformation >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::CommonHeader* Arena::CreateMaybeMessage< ::DDRCommProto::CommonHeader >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::CommonHeader >(arena);
 }

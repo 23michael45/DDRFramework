@@ -65,8 +65,6 @@ namespace DDRFramework
 		std::lock_guard<std::mutex> lock(m_spSerializer->GetRecLock());
 		if (m_spSerializer)
 		{
-			std::istream is(&buf);
-
 			std::ostream oshold(&m_spSerializer->GetRecBuf());
 
 			oshold.write((const char*)buf.data().data(), buf.size());
@@ -116,7 +114,6 @@ namespace DDRFramework
 	}
 	void TcpSocketContainer::UnloadSerializer()
 	{
-
 		if (m_spSerializer)
 		{
 			m_spSerializer.reset();

@@ -91,12 +91,9 @@ namespace DDRFramework
 
 	}
 
-	bool MessageSerializer::Pack(std::shared_ptr<google::protobuf::Message> spmsg)
+	std::shared_ptr<asio::streambuf> MessageSerializer::SerlializeMsg(std::shared_ptr<google::protobuf::Message> spmsg)
 	{
-
-		std::lock_guard<std::mutex> lock(mMutexSend);
-
-
+		auto spbuf = std::make_shared<asio::streambuf>();
 
 		//DebugLog("\nStart Pack");
 		string stype = spmsg->GetTypeName();
@@ -112,7 +109,6 @@ namespace DDRFramework
 
 		int totallen = 8 + headlen + bodylen;//+10 means Encrypt head and body 
 
-		auto spbuf = std::make_shared<asio::streambuf>();
 		std::ostream oshold(spbuf.get());
 		google::protobuf::io::OstreamOutputStream oos(&oshold);
 		google::protobuf::io::CodedOutputStream cos(&oos);
@@ -127,12 +123,20 @@ namespace DDRFramework
 
 		oshold.flush();
 
+		return spbuf;
+
+	}
+	bool MessageSerializer::Pack(std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+
+		std::lock_guard<std::mutex> lock(mMutexSend);
+
+		auto spbuf = SerlializeMsg(spmsg);
 		mDataStreamSendQueue.push(spbuf);
 
 
-		m_TotalPackLen += totallen + 4;
-
-		DebugLog("\ntotal Pack Len:%i Add :%i Queue Len: %i ", m_TotalPackLen,totallen + 4 , mDataStreamSendQueue.size())
+		m_TotalPackLen += spbuf->size();
+		DebugLog("\ntotal Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
 		//DebugLog("\nEnd Pack");
 		return true;
 	}
@@ -140,7 +144,7 @@ namespace DDRFramework
 	{
 		if (m_spHeadRuleRouter)
 		{
-			return m_spHeadRuleRouter->IgnoreBody(m_spTcpSocketContainer.lock(), spHeader);
+			return m_spHeadRuleRouter->IgnoreBody(std::make_shared<BaseSocketContainer>(m_spTcpSocketContainer.lock()), spHeader);
 		}
 		return false;
 	}
@@ -149,7 +153,7 @@ namespace DDRFramework
 	{
 		if (m_spDispatcher)
 		{
-			m_spDispatcher->Dispatch(m_spTcpSocketContainer.lock(),spHeader,spMsg);
+			m_spDispatcher->Dispatch(std::make_shared<BaseSocketContainer>(m_spTcpSocketContainer.lock()),spHeader,spMsg);
 		}
 	}
 

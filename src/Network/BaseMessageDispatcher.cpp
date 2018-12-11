@@ -20,7 +20,7 @@ namespace DDRFramework
 		DebugLog("\nBaseMessageDispatcher Destroy");
 	}
 
-	void BaseMessageDispatcher::Dispatch(std::shared_ptr<TcpSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
+	void BaseMessageDispatcher::Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
 		if (m_ProcessorMap.find(spHeader->bodytype()) != m_ProcessorMap.end())
 		{
@@ -28,6 +28,8 @@ namespace DDRFramework
 			if (sp)
 			{
 				sp->Process(spParentSocketContainer, spHeader, spMsg);
+
+				spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
 
 			}
 			else

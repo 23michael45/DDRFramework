@@ -14,6 +14,887 @@ public final class BaseCmd {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface broadcastServerInformationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.broadcastServerInformation)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    java.util.List<java.lang.String>
+        getIpsList();
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    int getIpsCount();
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    java.lang.String getIps(int index);
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpsBytes(int index);
+
+    /**
+     * <code>string port = 2;</code>
+     */
+    java.lang.String getPort();
+    /**
+     * <code>string port = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getPortBytes();
+
+    /**
+     * <code>string serverName = 3;</code>
+     */
+    java.lang.String getServerName();
+    /**
+     * <code>string serverName = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getServerNameBytes();
+  }
+  /**
+   * Protobuf type {@code DDRCommProto.broadcastServerInformation}
+   */
+  public  static final class broadcastServerInformation extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DDRCommProto.broadcastServerInformation)
+      broadcastServerInformationOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use broadcastServerInformation.newBuilder() to construct.
+    private broadcastServerInformation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private broadcastServerInformation() {
+      ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      port_ = "";
+      serverName_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private broadcastServerInformation(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                ips_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              ips_.add(s);
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              port_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              serverName_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          ips_ = ips_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_broadcastServerInformation_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_broadcastServerInformation_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              DDRCommProto.BaseCmd.broadcastServerInformation.class, DDRCommProto.BaseCmd.broadcastServerInformation.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int IPS_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList ips_;
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getIpsList() {
+      return ips_;
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public int getIpsCount() {
+      return ips_.size();
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public java.lang.String getIps(int index) {
+      return ips_.get(index);
+    }
+    /**
+     * <code>repeated string ips = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpsBytes(int index) {
+      return ips_.getByteString(index);
+    }
+
+    public static final int PORT_FIELD_NUMBER = 2;
+    private volatile java.lang.Object port_;
+    /**
+     * <code>string port = 2;</code>
+     */
+    public java.lang.String getPort() {
+      java.lang.Object ref = port_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        port_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string port = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPortBytes() {
+      java.lang.Object ref = port_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        port_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SERVERNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object serverName_;
+    /**
+     * <code>string serverName = 3;</code>
+     */
+    public java.lang.String getServerName() {
+      java.lang.Object ref = serverName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        serverName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string serverName = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getServerNameBytes() {
+      java.lang.Object ref = serverName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        serverName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < ips_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ips_.getRaw(i));
+      }
+      if (!getPortBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, port_);
+      }
+      if (!getServerNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, serverName_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ips_.size(); i++) {
+          dataSize += computeStringSizeNoTag(ips_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getIpsList().size();
+      }
+      if (!getPortBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, port_);
+      }
+      if (!getServerNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, serverName_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof DDRCommProto.BaseCmd.broadcastServerInformation)) {
+        return super.equals(obj);
+      }
+      DDRCommProto.BaseCmd.broadcastServerInformation other = (DDRCommProto.BaseCmd.broadcastServerInformation) obj;
+
+      boolean result = true;
+      result = result && getIpsList()
+          .equals(other.getIpsList());
+      result = result && getPort()
+          .equals(other.getPort());
+      result = result && getServerName()
+          .equals(other.getServerName());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getIpsCount() > 0) {
+        hash = (37 * hash) + IPS_FIELD_NUMBER;
+        hash = (53 * hash) + getIpsList().hashCode();
+      }
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getPort().hashCode();
+      hash = (37 * hash) + SERVERNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getServerName().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.broadcastServerInformation parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(DDRCommProto.BaseCmd.broadcastServerInformation prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DDRCommProto.broadcastServerInformation}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.broadcastServerInformation)
+        DDRCommProto.BaseCmd.broadcastServerInformationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_broadcastServerInformation_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_broadcastServerInformation_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DDRCommProto.BaseCmd.broadcastServerInformation.class, DDRCommProto.BaseCmd.broadcastServerInformation.Builder.class);
+      }
+
+      // Construct using DDRCommProto.BaseCmd.broadcastServerInformation.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        port_ = "";
+
+        serverName_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_broadcastServerInformation_descriptor;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.broadcastServerInformation getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.broadcastServerInformation.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.broadcastServerInformation build() {
+        DDRCommProto.BaseCmd.broadcastServerInformation result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.broadcastServerInformation buildPartial() {
+        DDRCommProto.BaseCmd.broadcastServerInformation result = new DDRCommProto.BaseCmd.broadcastServerInformation(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          ips_ = ips_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.ips_ = ips_;
+        result.port_ = port_;
+        result.serverName_ = serverName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof DDRCommProto.BaseCmd.broadcastServerInformation) {
+          return mergeFrom((DDRCommProto.BaseCmd.broadcastServerInformation)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(DDRCommProto.BaseCmd.broadcastServerInformation other) {
+        if (other == DDRCommProto.BaseCmd.broadcastServerInformation.getDefaultInstance()) return this;
+        if (!other.ips_.isEmpty()) {
+          if (ips_.isEmpty()) {
+            ips_ = other.ips_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIpsIsMutable();
+            ips_.addAll(other.ips_);
+          }
+          onChanged();
+        }
+        if (!other.getPort().isEmpty()) {
+          port_ = other.port_;
+          onChanged();
+        }
+        if (!other.getServerName().isEmpty()) {
+          serverName_ = other.serverName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        DDRCommProto.BaseCmd.broadcastServerInformation parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (DDRCommProto.BaseCmd.broadcastServerInformation) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureIpsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          ips_ = new com.google.protobuf.LazyStringArrayList(ips_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getIpsList() {
+        return ips_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public int getIpsCount() {
+        return ips_.size();
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public java.lang.String getIps(int index) {
+        return ips_.get(index);
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpsBytes(int index) {
+        return ips_.getByteString(index);
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder setIps(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+        ips_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addIps(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+        ips_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addAllIps(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureIpsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ips_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder clearIps() {
+        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ips = 1;</code>
+       */
+      public Builder addIpsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureIpsIsMutable();
+        ips_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object port_ = "";
+      /**
+       * <code>string port = 2;</code>
+       */
+      public java.lang.String getPort() {
+        java.lang.Object ref = port_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          port_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string port = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPortBytes() {
+        java.lang.Object ref = port_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          port_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string port = 2;</code>
+       */
+      public Builder setPort(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string port = 2;</code>
+       */
+      public Builder clearPort() {
+        
+        port_ = getDefaultInstance().getPort();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string port = 2;</code>
+       */
+      public Builder setPortBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        port_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object serverName_ = "";
+      /**
+       * <code>string serverName = 3;</code>
+       */
+      public java.lang.String getServerName() {
+        java.lang.Object ref = serverName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          serverName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string serverName = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getServerNameBytes() {
+        java.lang.Object ref = serverName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          serverName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string serverName = 3;</code>
+       */
+      public Builder setServerName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        serverName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverName = 3;</code>
+       */
+      public Builder clearServerName() {
+        
+        serverName_ = getDefaultInstance().getServerName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string serverName = 3;</code>
+       */
+      public Builder setServerNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        serverName_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.broadcastServerInformation)
+    }
+
+    // @@protoc_insertion_point(class_scope:DDRCommProto.broadcastServerInformation)
+    private static final DDRCommProto.BaseCmd.broadcastServerInformation DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.broadcastServerInformation();
+    }
+
+    public static DDRCommProto.BaseCmd.broadcastServerInformation getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<broadcastServerInformation>
+        PARSER = new com.google.protobuf.AbstractParser<broadcastServerInformation>() {
+      @java.lang.Override
+      public broadcastServerInformation parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new broadcastServerInformation(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<broadcastServerInformation> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<broadcastServerInformation> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public DDRCommProto.BaseCmd.broadcastServerInformation getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface CommonHeaderOrBuilder extends
       // @@protoc_insertion_point(interface_extends:DDRCommProto.CommonHeader)
       com.google.protobuf.MessageOrBuilder {
@@ -16357,6 +17238,11 @@ public final class BaseCmd {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DDRCommProto_broadcastServerInformation_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DDRCommProto_broadcastServerInformation_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_DDRCommProto_CommonHeader_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -16460,67 +17346,69 @@ public final class BaseCmd {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rBaseCmd.proto\022\014DDRCommProto\"\261\002\n\014Common" +
-      "Header\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirectio" +
-      "n\030\002 \003(\0162#.DDRCommProto.CommonHeader.eFlo" +
-      "wDir\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Co" +
-      "mmonHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V" +
-      "\n\010eFlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS" +
-      "\020\002\022\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LS" +
-      "M2LS\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMNa" +
-      "me\020\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatev" +
-      "er\030\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ip" +
-      "s\030\002 \003(\003\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004ty" +
-      "pe\030\001 \001(\0162\037.DDRCommProto.reqLogin.eCltTyp" +
-      "e\022\020\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010" +
-      "robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006" +
-      " \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto" +
-      ".reqLogin.msgAVStreamReq\032F\n\016msgAVStreamR" +
-      "eq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014ba" +
-      "ndwidthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000" +
-      "\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLog" +
-      "in\0226\n\007retcode\030\001 \001(\0162%.DDRCommProto.respL" +
-      "ogin.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .D" +
-      "DRCommProto.respLogin.eCltType\022\013\n\003UID\030\003 " +
-      "\001(\005\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013ser" +
-      "ver_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\t" +
-      "UID_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010e" +
-      "CltType\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007" +
-      "\n\003LSM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRCo" +
-      "nnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonito" +
-      "rs\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005" +
-      " \003(\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001" +
-      "(\005\022\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003" +
-      "\022\021\n\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n" +
-      "\nmTopOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016" +
-      "notifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132" +
-      ",.DDRCommProto.notifyAVStream.fullChanne" +
-      "lInfo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DD" +
-      "RCommProto.notifyAVStream.fullChannelInf" +
-      "o\032\261\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020" +
-      "\n\010dataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t" +
-      "\022\032\n\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 " +
-      "\001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001(" +
-      "\005\022\022\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncal" +
-      "lerType\030\001 \001(\0162!.DDRCommProto.reqTalk.eCa" +
-      "llerType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006av" +
-      "Type\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n" +
-      "\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:" +
-      "\n\014receiverType\030\001 \001(\0162$.DDRCommProto.resp" +
-      "Talk.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003" +
-      " \001(\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n" +
-      "\006client\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"$\n" +
-      "\003cmd\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007r" +
-      "espCmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"u" +
-      "\n\007reqFile\0223\n\tzipFormat\030\001 \001(\0162 .DDRCommPr" +
-      "oto.reqFile.eZipFormat\022\023\n\013fileInqText\030\002 " +
-      "\001(\t\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"t\n" +
-      "\010respFile\0224\n\tzipFormat\030\001 \001(\0162!.DDRCommPr" +
-      "oto.respFile.eZipFormat\022\020\n\010fileResp\030\002 \001(" +
-      "\t\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"!\n\014n" +
-      "otifyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013notify" +
-      "Alarm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyTextCha" +
-      "t\022\020\n\010chatText\030\001 \001(\tb\006proto3"
+      "\n\rBaseCmd.proto\022\014DDRCommProto\"K\n\032broadca" +
+      "stServerInformation\022\013\n\003ips\030\001 \003(\t\022\014\n\004port" +
+      "\030\002 \001(\t\022\022\n\nserverName\030\003 \001(\t\"\261\002\n\014CommonHea" +
+      "der\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirection\030\002" +
+      " \003(\0162#.DDRCommProto.CommonHeader.eFlowDi" +
+      "r\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Commo" +
+      "nHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V\n\010e" +
+      "FlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS\020\002\022" +
+      "\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LSM2L" +
+      "S\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMName\020" +
+      "\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatever\030" +
+      "\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ips\030\002" +
+      " \003(\003\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004type\030" +
+      "\001 \001(\0162\037.DDRCommProto.reqLogin.eCltType\022\020" +
+      "\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010rob" +
+      "otPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006 \001(" +
+      "\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto.re" +
+      "qLogin.msgAVStreamReq\032F\n\016msgAVStreamReq\022" +
+      "\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014bandw" +
+      "idthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000\022\021\n" +
+      "\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLogin\022" +
+      "6\n\007retcode\030\001 \001(\0162%.DDRCommProto.respLogi" +
+      "n.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .DDRC" +
+      "ommProto.respLogin.eCltType\022\013\n\003UID\030\003 \001(\005" +
+      "\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013server" +
+      "_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\tUID" +
+      "_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010eClt" +
+      "Type\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007\n\003L" +
+      "SM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRConne" +
+      "cted2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonitors\030" +
+      "\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005 \003(" +
+      "\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001(\005\022" +
+      "\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003\022\021\n" +
+      "\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n\nmT" +
+      "opOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016not" +
+      "ifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132,.D" +
+      "DRCommProto.notifyAVStream.fullChannelIn" +
+      "fo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DDRCo" +
+      "mmProto.notifyAVStream.fullChannelInfo\032\261" +
+      "\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020\n\010d" +
+      "ataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t\022\032\n" +
+      "\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 \001(\005" +
+      "\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001(\005\022\022" +
+      "\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncaller" +
+      "Type\030\001 \001(\0162!.DDRCommProto.reqTalk.eCalle" +
+      "rType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006avTyp" +
+      "e\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n\007mo" +
+      "nitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:\n\014r" +
+      "eceiverType\030\001 \001(\0162$.DDRCommProto.respTal" +
+      "k.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(" +
+      "\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n\006cl" +
+      "ient\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"$\n\003cm" +
+      "d\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007resp" +
+      "Cmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"u\n\007r" +
+      "eqFile\0223\n\tzipFormat\030\001 \001(\0162 .DDRCommProto" +
+      ".reqFile.eZipFormat\022\023\n\013fileInqText\030\002 \001(\t" +
+      "\" \n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"t\n\010re" +
+      "spFile\0224\n\tzipFormat\030\001 \001(\0162!.DDRCommProto" +
+      ".respFile.eZipFormat\022\020\n\010fileResp\030\002 \001(\t\" " +
+      "\n\neZipFormat\022\t\n\005noZip\020\000\022\007\n\003Zip\020\001\"!\n\014noti" +
+      "fyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013notifyAla" +
+      "rm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyTextChat\022\020" +
+      "\n\010chatText\030\001 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16534,26 +17422,32 @@ public final class BaseCmd {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_DDRCommProto_CommonHeader_descriptor =
+    internal_static_DDRCommProto_broadcastServerInformation_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_DDRCommProto_broadcastServerInformation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_broadcastServerInformation_descriptor,
+        new java.lang.String[] { "Ips", "Port", "ServerName", });
+    internal_static_DDRCommProto_CommonHeader_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_DDRCommProto_CommonHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_CommonHeader_descriptor,
         new java.lang.String[] { "BodyType", "FlowDirection", "DestType", "DestInfo", });
     internal_static_DDRCommProto_heartBeat_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_DDRCommProto_heartBeat_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_heartBeat_descriptor,
         new java.lang.String[] { "Whatever", });
     internal_static_DDRCommProto_bcLSAddr_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_DDRCommProto_bcLSAddr_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_bcLSAddr_descriptor,
         new java.lang.String[] { "Name", "Ips", "Port", });
     internal_static_DDRCommProto_reqLogin_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_DDRCommProto_reqLogin_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqLogin_descriptor,
@@ -16565,25 +17459,25 @@ public final class BaseCmd {
         internal_static_DDRCommProto_reqLogin_msgAVStreamReq_descriptor,
         new java.lang.String[] { "AvType", "ChName", "BandwidthReq", });
     internal_static_DDRCommProto_respLogin_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_DDRCommProto_respLogin_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respLogin_descriptor,
         new java.lang.String[] { "Retcode", "YourRole", "UID", });
     internal_static_DDRCommProto_notifyTerminalAccess_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_DDRCommProto_notifyTerminalAccess_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifyTerminalAccess_descriptor,
         new java.lang.String[] { "BRRConnected2RS", "BOp", "NMonitors", "NClients", "NameLSMs", });
     internal_static_DDRCommProto_notifySerAccess_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_DDRCommProto_notifySerAccess_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifySerAccess_descriptor,
         new java.lang.String[] { "NClients", "CTopOpLv", "CTopOpTime", "NMonitors", "MTopOpLv", "MTopOpTime", "NamesLSM", });
     internal_static_DDRCommProto_notifyAVStream_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_DDRCommProto_notifyAVStream_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifyAVStream_descriptor,
@@ -16595,55 +17489,55 @@ public final class BaseCmd {
         internal_static_DDRCommProto_notifyAVStream_fullChannelInfo_descriptor,
         new java.lang.String[] { "DevType", "DataType", "LocalResAccStr", "ChannelDescription", "BwReq", "RemoteIP", "RemotePort", "RemotePass", });
     internal_static_DDRCommProto_reqTalk_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_DDRCommProto_reqTalk_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqTalk_descriptor,
         new java.lang.String[] { "CallerType", "Id1", "Id2", "AvType", });
     internal_static_DDRCommProto_respTalk_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_DDRCommProto_respTalk_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respTalk_descriptor,
         new java.lang.String[] { "ReceiverType", "Id1", "Id2", "AvType", });
     internal_static_DDRCommProto_cmd_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_DDRCommProto_cmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_cmd_descriptor,
         new java.lang.String[] { "CmdID", "CmdMsg", });
     internal_static_DDRCommProto_respCmd_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_DDRCommProto_respCmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respCmd_descriptor,
         new java.lang.String[] { "CmdID", "RespMsg", });
     internal_static_DDRCommProto_reqFile_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_DDRCommProto_reqFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqFile_descriptor,
         new java.lang.String[] { "ZipFormat", "FileInqText", });
     internal_static_DDRCommProto_respFile_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_DDRCommProto_respFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respFile_descriptor,
         new java.lang.String[] { "ZipFormat", "FileResp", });
     internal_static_DDRCommProto_notifyStatus_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_DDRCommProto_notifyStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifyStatus_descriptor,
         new java.lang.String[] { "StatusMsg", });
     internal_static_DDRCommProto_notifyAlarm_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_DDRCommProto_notifyAlarm_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifyAlarm_descriptor,
         new java.lang.String[] { "AlarmMsg", });
     internal_static_DDRCommProto_notifyTextChat_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_DDRCommProto_notifyTextChat_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifyTextChat_descriptor,

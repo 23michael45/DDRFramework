@@ -65,6 +65,11 @@ namespace DDRFramework
 		}
 		void CloseSocket();
 		void CallOnDisconnect();
+
+		asio::io_context& GetIOContext()
+		{
+			return m_IOContext;
+		}
 	protected:
 		void PushData(asio::streambuf& buf);
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) {};
