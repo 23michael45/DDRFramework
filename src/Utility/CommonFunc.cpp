@@ -55,7 +55,6 @@ bool Txt_Encrypt(const void *pSrc, int lenSrc,
 	//ms = st.wMilliseconds;
 	ms = (int)(std::chrono::duration_cast<std::chrono::milliseconds>
 		(std::chrono::system_clock::now().time_since_epoch()).count() % 1000);
-	ms = 209;
 	aa = 0;
 	bb = nPrimes - 1;
 	while (bb > aa + 1) {
