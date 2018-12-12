@@ -59,8 +59,8 @@ void HttpServer::SaveJsonFile(Json::Value& value, std::string& name)
 		writer->write(value, &f);
 		f.close();
 	}
-	catch (std::exception* e)
+	catch (std::exception& e)
 	{
-		std::cout << e->what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 }

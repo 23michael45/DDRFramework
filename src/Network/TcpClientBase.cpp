@@ -9,7 +9,7 @@ namespace DDRFramework
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		CloseSocket();
+		Stop();
 		DebugLog("\nTcpClientSessionBase Destroy");
 	}
 
@@ -38,7 +38,7 @@ namespace DDRFramework
 		{
 			m_bConnected = true;
 			TcpSocketContainer::Start();
-			m_ReadStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+			m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 
 			if (m_fOnSessionConnected)
 			{
@@ -70,7 +70,7 @@ namespace DDRFramework
 				PushData(m_ReadStreamBuf);
 				if (m_bConnected)
 				{
-					m_ReadStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
+					m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 				}
 			}
 			else
@@ -78,17 +78,17 @@ namespace DDRFramework
 				DebugLog("\nError on receive: :%s", ec.message().c_str());
 				m_bConnected = false;
 
-				m_ReadStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
 			}
 		}
-		catch (std::exception* e)
+		catch (std::exception& e)
 		{
-			DebugLog("\nError  :%s", e->what());
+			DebugLog("\nError  :%s", e.what());
 			
 		}
-		catch (asio::system_error* e)
+		catch (asio::system_error& e)
 		{
-			DebugLog("\nError  :%s", e->what());
+			DebugLog("\nError  :%s", e.what());
 
 		}
 
@@ -121,12 +121,12 @@ namespace DDRFramework
 				DebugLog("\nError on send: %s", ec.message().c_str());
 
 				m_bConnected = false;
-				m_WriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
 				
 			}
 			if (m_bConnected)
 			{
-				m_WriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 
 			}
 		}
@@ -134,7 +134,7 @@ namespace DDRFramework
 	}
 	void TcpClientSessionBase::OnDisconnect(std::string remoteAddress)
 	{
-		UnloadSerializer();
+		Release();
 	}
 
 
@@ -172,7 +172,7 @@ namespace DDRFramework
 	{
 		if (m_spClient && m_spClient->IsConnected())
 		{
-			m_spClient->CloseSocket();
+			m_spClient->Stop();
 
 		}
 	}
@@ -187,9 +187,9 @@ namespace DDRFramework
 		{
 			m_IOContext.run();
 		}
-		catch (asio::system_error* e)
+		catch (asio::system_error& e)
 		{
-			DebugLog("\nError: %s", e->what());
+			DebugLog("\nError: %s", e.what());
 
 		}
 		DebugLog("\nThreadEntry Finish");
@@ -212,7 +212,7 @@ namespace DDRFramework
 	{
 		if (m_spClient)
 		{
-			m_spClient->UnloadSerializer();
+			m_spClient->Release();
 			m_spClient.reset();
 
 		}

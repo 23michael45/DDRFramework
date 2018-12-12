@@ -12,6 +12,7 @@
 namespace DDRFramework
 {
 	class BaseSocketContainer;
+	class BaseMessageDispatcher;
 	class BaseHeadRuleRouter
 	{
 	public:
@@ -26,8 +27,10 @@ namespace DDRFramework
 	class BaseProcessor
 	{
 	public:
-		BaseProcessor() {}
+		BaseProcessor(BaseMessageDispatcher& dispatcher):m_ParentDispatch(dispatcher) {}
 		virtual void Process(std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg) {};
 		virtual void AsyncProcess(std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg) {};
+
+		BaseMessageDispatcher& m_ParentDispatch;
 	};
 }

@@ -4,6 +4,8 @@
 #include <google/protobuf/message.h>
 #include "asio.hpp"
 #include <map>
+#include "../Logic/BaseBehavior.h"
+
 using asio::ip::tcp;
 
 //Code Like This 
@@ -40,6 +42,7 @@ namespace DDRFramework
 
 		virtual void CheckRead();
 		virtual void CheckWrite();
+		virtual void CheckBehavior();
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 
@@ -49,7 +52,7 @@ namespace DDRFramework
 		std::shared_ptr<MessageSerializer> GetSerializer();
 		void LoadSerializer(std::shared_ptr<MessageSerializer> sp);
 
-		void UnloadSerializer();
+		void Release();
 
 		void BindOnDisconnect(std::function<void(TcpSocketContainer&)> f)
 		{
@@ -63,13 +66,20 @@ namespace DDRFramework
 		{
 			return m_bConnected;
 		}
-		void CloseSocket();
+		void Stop();
 		void CallOnDisconnect();
 
 		asio::io_context& GetIOContext()
 		{
 			return m_IOContext;
 		}
+
+		void BindBehavior(std::shared_ptr<BaseBehavior> behavior);
+		std::shared_ptr<BaseBehavior> GetBehavior()
+		{
+			return m_spBehavior;
+		}
+
 	protected:
 		void PushData(asio::streambuf& buf);
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) {};
@@ -82,13 +92,13 @@ namespace DDRFramework
 		tcp::socket m_Socket;
 
 
-		asio::io_context::strand m_ReadStrand;
-		asio::io_context::strand m_WriteStrand;
+		asio::io_context::strand m_ReadWriteStrand;
 
 
 		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
 		std::function<void(TcpSocketContainer&)> m_fOnSessionConnected;
 
+		std::shared_ptr<BaseBehavior> m_spBehavior;
 	private:
 	};
 

@@ -288,15 +288,15 @@ namespace DDRFramework
 			}
 
 		}
-		catch (std::exception e)
+		catch (std::exception& e)
 		{
 			DebugLog("%s---------------------------------------------------------------------------------------Head Deserialize Error", e.what());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}
-		catch (google::protobuf::FatalException* e)
+		catch (google::protobuf::FatalException& e)
 		{
-			DebugLog("\nParseHead error %s" , e->message().c_str());
+			DebugLog("\nParseHead error %s" , e.message().c_str());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			
 		}
@@ -357,15 +357,15 @@ namespace DDRFramework
 				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			}
 		}
-		catch (std::exception e)
+		catch (std::exception& e)
 		{
 			DebugLog("%s---------------------------------------------------------------------------------------Body Deserialize Error", e.what());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}
-		catch (google::protobuf::FatalException* e)
+		catch (google::protobuf::FatalException& e)
 		{
-			DebugLog("\nParseHead error %s", e->message().c_str());
+			DebugLog("\nParseHead error %s", e.message().c_str());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}

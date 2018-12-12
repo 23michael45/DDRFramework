@@ -31,13 +31,33 @@ namespace DDRFramework
 
 				//spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
 
-				std::thread t(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
-				t.detach();
+				auto spThread = std::make_shared<std::thread>(std::bind(&BaseMessageDispatcher::AsyncThreadEntry, shared_from_this(), sp, spParentSocketContainer, spHeader, spMsg));
+				spThread->detach();
+				//m_AsyncThreadSet.insert(spThread);
+			
 			}
 			else
 			{
 				DebugLog("\nDispatch Error Processor Empty");
 			}
 		}
+	}
+	void BaseMessageDispatcher::AsyncThreadEntry(std::shared_ptr<BaseProcessor> spProcessor ,std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
+	{
+		if (spProcessor)
+		{
+			spProcessor->AsyncProcess(spSockContainer, spHeader, spMsg);
+		}
+	}
+
+	void BaseMessageDispatcher::EraseThread(std::shared_ptr<std::thread> spThread)
+	{
+		//if (m_AsyncThreadSet.find(spThread) != m_AsyncThreadSet.end())
+		//{
+		//	
+		//	//spThread->~thread();
+		//	//m_AsyncThreadSet.erase(spThread);
+
+		//}
 	}
 }
