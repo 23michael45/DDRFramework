@@ -7,9 +7,10 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 
 #include "../../proto/BaseCmd.pb.h"
+#include "../Utility/CommonFunc.h"
 
+#define PROTOBUF_ENCRYPT_LEN 5
 
-#define CPPFSM_TEST_ENABLE
 using namespace google::protobuf;
 using namespace DDRCommProto;
 namespace DDRFramework
@@ -115,14 +116,52 @@ namespace DDRFramework
 
 
 		cos.WriteRaw(HeadSignal, sizeof(int));
+
+#ifdef PROTOBUF_ENCRYPT
+
+		cos.WriteLittleEndian32(totallen + 2 * PROTOBUF_ENCRYPT_LEN);
+		cos.WriteLittleEndian32(headlen + PROTOBUF_ENCRYPT_LEN);
+
+		asio::streambuf temp_headbuf;
+		std::ostream temp_heados(&temp_headbuf);
+		commonHeader.SerializeToOstream(&temp_heados);
+		temp_heados.flush();
+		
+		asio::streambuf temp_headbufencrypt;
+		temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
+
+		auto temp_headrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN));
+	
+		DDRCommLib::Txt_Encrypt(temp_headbuf.data().data(), temp_headbuf.size(), temp_headrawbuf.data(), temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
+
+		cos.WriteRaw(temp_headrawbuf.data(), temp_headrawbuf.size());
+
+
+
+		asio::streambuf temp_bodybuf;
+		std::ostream temp_bodyos(&temp_bodybuf);
+		spmsg->SerializeToOstream(&temp_bodyos);
+		temp_bodyos.flush();
+
+
+
+
+		asio::streambuf temp_bodybufencrypt;
+		temp_bodybufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
+		auto temp_bodyrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN));
+
+
+		DDRCommLib::Txt_Encrypt(temp_bodybuf.data().data(), temp_bodybuf.size(), temp_bodyrawbuf.data(), temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
+
+		cos.WriteRaw(temp_bodyrawbuf.data(), temp_bodyrawbuf.size());
+
+#else
 		cos.WriteLittleEndian32(totallen);
 		cos.WriteLittleEndian32(headlen);
 
 		commonHeader.SerializeToCodedStream(&cos);
 		spmsg->SerializeToCodedStream(&cos);
-
-		oshold.flush();
-
+#endif
 		return spbuf;
 
 	}
@@ -225,9 +264,6 @@ namespace DDRFramework
 	void ParseHeadState::updateWithDeltaTime(float delta)
 	{
 
-		//DebugLog("\nParseHeadState");
-
-
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
 		if (buf.size() < m_HeadLen)
@@ -238,17 +274,30 @@ namespace DDRFramework
 			return;
 		}
 
-		//std::istream ishold(&buf);
-
-
-		//google::protobuf::io::IstreamInputStream iis(&ishold, m_HeadLen);
-		//google::protobuf::io::CodedInputStream cis(&iis);
 
 		try
 		{
 			std::shared_ptr<DDRCommProto::CommonHeader> spCommonHeader = std::make_shared<DDRCommProto::CommonHeader>();
 
-			spCommonHeader->ParseFromArray(buf.data().data(),m_HeadLen);
+#ifdef PROTOBUF_ENCRYPT
+
+			asio::streambuf temp_headbufdecrypt;
+			temp_headbufdecrypt.prepare(m_HeadLen - PROTOBUF_ENCRYPT_LEN);
+
+
+			auto temp_headrawbuf = asio::buffer(temp_headbufdecrypt.prepare(m_HeadLen - PROTOBUF_ENCRYPT_LEN));
+
+			
+			DDRCommLib::Txt_Decrypt(buf.data().data(), m_HeadLen, temp_headrawbuf.data(), m_HeadLen - PROTOBUF_ENCRYPT_LEN);
+
+
+
+			spCommonHeader->ParseFromArray(temp_headrawbuf.data(), m_HeadLen - PROTOBUF_ENCRYPT_LEN);
+
+#else
+
+			spCommonHeader->ParseFromArray(buf.data().data(), m_HeadLen);
+#endif
 			buf.consume(m_HeadLen);
 
 
@@ -335,7 +384,24 @@ namespace DDRFramework
 
 			if (spmsg)
 			{
-				spmsg->ParseFromArray(buf.data().data(),m_BodyLen);
+
+#ifdef PROTOBUF_ENCRYPT
+
+				asio::streambuf temp_bodybufdecrypt;
+				temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+
+
+				auto temp_bodyrawbuf = asio::buffer(temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN));
+
+
+				DDRCommLib::Txt_Decrypt(buf.data().data(), m_BodyLen, temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+
+				spmsg->ParseFromArray(temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+
+#else
+
+				spmsg->ParseFromArray(buf.data().data(), m_BodyLen);
+#endif
 				buf.consume(m_BodyLen);
 
 
