@@ -79,6 +79,12 @@ namespace DDRFramework
 		{
 			return m_spBehavior;
 		}
+		bool HasBehavior()
+		{
+			return m_spBehavior != nullptr;
+		}
+
+		std::string GetIPAddress();
 
 	protected:
 		void PushData(asio::streambuf& buf);

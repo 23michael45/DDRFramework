@@ -103,6 +103,22 @@ namespace DDRFramework
 	{
 		m_WorkerThreads.create_threads(std::bind(&TcpServerBase::ThreadEntry, shared_from_this()), threadNum);
 	}
+	void TcpServerBase::Stop()
+	{
+
+		std::vector<std::string> keyvec;
+
+		for (auto spSessionPair : m_SessionMap)
+		{
+			spSessionPair.second->Stop();
+			keyvec.push_back(spSessionPair.first);
+		}
+
+		for (auto iter = keyvec.begin(); iter != keyvec.end(); ++iter)
+		{
+			m_SessionMap.erase(*iter);
+		}
+	}
 
 	void TcpServerBase::ThreadEntry()
 	{

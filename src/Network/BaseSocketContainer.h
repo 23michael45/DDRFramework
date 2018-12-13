@@ -26,6 +26,10 @@ namespace DDRFramework
 
 		void SetTcp(std::shared_ptr<TcpSocketContainer> sp);
 		void SetUdp(std::shared_ptr<UdpSocketBase> sp);
+
+		std::shared_ptr<TcpSocketContainer>  GetTcp();
+		std::shared_ptr<UdpSocketBase> GetUdp();
+
 		ESOCKETTYPE m_SocketType;
 		std::shared_ptr<TcpSocketContainer> m_spTcpSocketContainer;
 		std::shared_ptr<UdpSocketBase> m_spUdpSocketBase;

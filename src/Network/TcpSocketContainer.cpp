@@ -153,4 +153,12 @@ namespace DDRFramework
 			m_IOContext.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
 		}
 	}
+
+	std::string TcpSocketContainer::GetIPAddress()
+	{
+		if (m_Socket.is_open())
+		{
+			return m_Socket.remote_endpoint().address().to_string();
+		}
+	}
 }

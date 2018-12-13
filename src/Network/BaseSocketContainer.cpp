@@ -60,4 +60,14 @@ namespace DDRFramework
 		}
 
 	}
+
+
+	std::shared_ptr<TcpSocketContainer>  BaseSocketContainer::GetTcp()
+	{
+		return m_spTcpSocketContainer;
+	}
+	std::shared_ptr<UdpSocketBase> BaseSocketContainer::GetUdp()
+	{
+		return m_spUdpSocketBase;
+	}
 }
