@@ -39,7 +39,7 @@ namespace protobuf_BaseCmd_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[20];
+  static const ::google::protobuf::internal::ParseTable schema[19];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -53,9 +53,6 @@ extern CommonHeaderDefaultTypeInternal _CommonHeader_default_instance_;
 class bcLSAddr;
 class bcLSAddrDefaultTypeInternal;
 extern bcLSAddrDefaultTypeInternal _bcLSAddr_default_instance_;
-class broadcastServerInformation;
-class broadcastServerInformationDefaultTypeInternal;
-extern broadcastServerInformationDefaultTypeInternal _broadcastServerInformation_default_instance_;
 class cmd;
 class cmdDefaultTypeInternal;
 extern cmdDefaultTypeInternal _cmd_default_instance_;
@@ -112,7 +109,6 @@ namespace google {
 namespace protobuf {
 template<> ::DDRCommProto::CommonHeader* Arena::CreateMaybeMessage<::DDRCommProto::CommonHeader>(Arena*);
 template<> ::DDRCommProto::bcLSAddr* Arena::CreateMaybeMessage<::DDRCommProto::bcLSAddr>(Arena*);
-template<> ::DDRCommProto::broadcastServerInformation* Arena::CreateMaybeMessage<::DDRCommProto::broadcastServerInformation>(Arena*);
 template<> ::DDRCommProto::cmd* Arena::CreateMaybeMessage<::DDRCommProto::cmd>(Arena*);
 template<> ::DDRCommProto::heartBeat* Arena::CreateMaybeMessage<::DDRCommProto::heartBeat>(Arena*);
 template<> ::DDRCommProto::notifyAVStream* Arena::CreateMaybeMessage<::DDRCommProto::notifyAVStream>(Arena*);
@@ -338,155 +334,6 @@ inline bool respFile_eZipFormat_Parse(
 }
 // ===================================================================
 
-class broadcastServerInformation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.broadcastServerInformation) */ {
- public:
-  broadcastServerInformation();
-  virtual ~broadcastServerInformation();
-
-  broadcastServerInformation(const broadcastServerInformation& from);
-
-  inline broadcastServerInformation& operator=(const broadcastServerInformation& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  broadcastServerInformation(broadcastServerInformation&& from) noexcept
-    : broadcastServerInformation() {
-    *this = ::std::move(from);
-  }
-
-  inline broadcastServerInformation& operator=(broadcastServerInformation&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const broadcastServerInformation& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const broadcastServerInformation* internal_default_instance() {
-    return reinterpret_cast<const broadcastServerInformation*>(
-               &_broadcastServerInformation_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
-
-  void Swap(broadcastServerInformation* other);
-  friend void swap(broadcastServerInformation& a, broadcastServerInformation& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline broadcastServerInformation* New() const final {
-    return CreateMaybeMessage<broadcastServerInformation>(NULL);
-  }
-
-  broadcastServerInformation* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<broadcastServerInformation>(arena);
-  }
-  void CopyFrom(const ::google::protobuf::Message& from) final;
-  void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const broadcastServerInformation& from);
-  void MergeFrom(const broadcastServerInformation& from);
-  void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) final;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const final;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(broadcastServerInformation* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated string ips = 1;
-  int ips_size() const;
-  void clear_ips();
-  static const int kIpsFieldNumber = 1;
-  const ::std::string& ips(int index) const;
-  ::std::string* mutable_ips(int index);
-  void set_ips(int index, const ::std::string& value);
-  #if LANG_CXX11
-  void set_ips(int index, ::std::string&& value);
-  #endif
-  void set_ips(int index, const char* value);
-  void set_ips(int index, const char* value, size_t size);
-  ::std::string* add_ips();
-  void add_ips(const ::std::string& value);
-  #if LANG_CXX11
-  void add_ips(::std::string&& value);
-  #endif
-  void add_ips(const char* value);
-  void add_ips(const char* value, size_t size);
-  const ::google::protobuf::RepeatedPtrField< ::std::string>& ips() const;
-  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_ips();
-
-  // string port = 2;
-  void clear_port();
-  static const int kPortFieldNumber = 2;
-  const ::std::string& port() const;
-  void set_port(const ::std::string& value);
-  #if LANG_CXX11
-  void set_port(::std::string&& value);
-  #endif
-  void set_port(const char* value);
-  void set_port(const char* value, size_t size);
-  ::std::string* mutable_port();
-  ::std::string* release_port();
-  void set_allocated_port(::std::string* port);
-
-  // string serverName = 3;
-  void clear_servername();
-  static const int kServerNameFieldNumber = 3;
-  const ::std::string& servername() const;
-  void set_servername(const ::std::string& value);
-  #if LANG_CXX11
-  void set_servername(::std::string&& value);
-  #endif
-  void set_servername(const char* value);
-  void set_servername(const char* value, size_t size);
-  ::std::string* mutable_servername();
-  ::std::string* release_servername();
-  void set_allocated_servername(::std::string* servername);
-
-  // @@protoc_insertion_point(class_scope:DDRCommProto.broadcastServerInformation)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> ips_;
-  ::google::protobuf::internal::ArenaStringPtr port_;
-  ::google::protobuf::internal::ArenaStringPtr servername_;
-  mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.CommonHeader) */ {
  public:
   CommonHeader();
@@ -522,7 +369,7 @@ class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_CommonHeader_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    0;
 
   void Swap(CommonHeader* other);
   friend void swap(CommonHeader& a, CommonHeader& b) {
@@ -744,7 +591,7 @@ class heartBeat : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_heartBeat_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    1;
 
   void Swap(heartBeat* other);
   friend void swap(heartBeat& a, heartBeat& b) {
@@ -855,7 +702,7 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_bcLSAddr_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    2;
 
   void Swap(bcLSAddr* other);
   friend void swap(bcLSAddr& a, bcLSAddr& b) {
@@ -907,17 +754,27 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // repeated int64 ips = 2;
+  // repeated string ips = 2;
   int ips_size() const;
   void clear_ips();
   static const int kIpsFieldNumber = 2;
-  ::google::protobuf::int64 ips(int index) const;
-  void set_ips(int index, ::google::protobuf::int64 value);
-  void add_ips(::google::protobuf::int64 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      ips() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_ips();
+  const ::std::string& ips(int index) const;
+  ::std::string* mutable_ips(int index);
+  void set_ips(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_ips(int index, ::std::string&& value);
+  #endif
+  void set_ips(int index, const char* value);
+  void set_ips(int index, const char* value, size_t size);
+  ::std::string* add_ips();
+  void add_ips(const ::std::string& value);
+  #if LANG_CXX11
+  void add_ips(::std::string&& value);
+  #endif
+  void add_ips(const char* value);
+  void add_ips(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& ips() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_ips();
 
   // string name = 1;
   void clear_name();
@@ -943,8 +800,7 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > ips_;
-  mutable int _ips_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> ips_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 port_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
@@ -987,7 +843,7 @@ class reqLogin_msgAVStreamReq : public ::google::protobuf::Message /* @@protoc_i
                &_reqLogin_msgAVStreamReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    3;
 
   void Swap(reqLogin_msgAVStreamReq* other);
   friend void swap(reqLogin_msgAVStreamReq& a, reqLogin_msgAVStreamReq& b) {
@@ -1112,7 +968,7 @@ class reqLogin : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_reqLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    4;
 
   void Swap(reqLogin* other);
   friend void swap(reqLogin& a, reqLogin& b) {
@@ -1317,7 +1173,7 @@ class respLogin : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_respLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    5;
 
   void Swap(respLogin* other);
   friend void swap(respLogin& a, respLogin& b) {
@@ -1494,7 +1350,7 @@ class notifyTerminalAccess : public ::google::protobuf::Message /* @@protoc_inse
                &_notifyTerminalAccess_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    6;
 
   void Swap(notifyTerminalAccess* other);
   friend void swap(notifyTerminalAccess& a, notifyTerminalAccess& b) {
@@ -1641,7 +1497,7 @@ class notifySerAccess : public ::google::protobuf::Message /* @@protoc_insertion
                &_notifySerAccess_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    7;
 
   void Swap(notifySerAccess* other);
   friend void swap(notifySerAccess& a, notifySerAccess& b) {
@@ -1802,7 +1658,7 @@ class notifyAVStream_fullChannelInfo : public ::google::protobuf::Message /* @@p
                &_notifyAVStream_fullChannelInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    8;
 
   void Swap(notifyAVStream_fullChannelInfo* other);
   friend void swap(notifyAVStream_fullChannelInfo& a, notifyAVStream_fullChannelInfo& b) {
@@ -1978,7 +1834,7 @@ class notifyAVStream : public ::google::protobuf::Message /* @@protoc_insertion_
                &_notifyAVStream_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    9;
 
   void Swap(notifyAVStream* other);
   friend void swap(notifyAVStream& a, notifyAVStream& b) {
@@ -2102,7 +1958,7 @@ class reqTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_reqTalk_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    10;
 
   void Swap(reqTalk* other);
   friend void swap(reqTalk& a, reqTalk& b) {
@@ -2254,7 +2110,7 @@ class respTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_respTalk_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    11;
 
   void Swap(respTalk* other);
   friend void swap(respTalk& a, respTalk& b) {
@@ -2406,7 +2262,7 @@ class cmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class
                &_cmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    12;
 
   void Swap(cmd* other);
   friend void swap(cmd& a, cmd& b) {
@@ -2524,7 +2380,7 @@ class respCmd : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_respCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    13;
 
   void Swap(respCmd* other);
   friend void swap(respCmd& a, respCmd& b) {
@@ -2642,7 +2498,7 @@ class reqFile : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_reqFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    14;
 
   void Swap(reqFile* other);
   friend void swap(reqFile& a, reqFile& b) {
@@ -2786,7 +2642,7 @@ class respFile : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_respFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    15;
 
   void Swap(respFile* other);
   friend void swap(respFile& a, respFile& b) {
@@ -2930,7 +2786,7 @@ class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_notifyStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    16;
 
   void Swap(notifyStatus* other);
   friend void swap(notifyStatus& a, notifyStatus& b) {
@@ -3041,7 +2897,7 @@ class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_poi
                &_notifyAlarm_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    17;
 
   void Swap(notifyAlarm* other);
   friend void swap(notifyAlarm& a, notifyAlarm& b) {
@@ -3152,7 +3008,7 @@ class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_
                &_notifyTextChat_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    18;
 
   void Swap(notifyTextChat* other);
   friend void swap(notifyTextChat& a, notifyTextChat& b) {
@@ -3235,185 +3091,6 @@ class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// broadcastServerInformation
-
-// repeated string ips = 1;
-inline int broadcastServerInformation::ips_size() const {
-  return ips_.size();
-}
-inline void broadcastServerInformation::clear_ips() {
-  ips_.Clear();
-}
-inline const ::std::string& broadcastServerInformation::ips(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.broadcastServerInformation.ips)
-  return ips_.Get(index);
-}
-inline ::std::string* broadcastServerInformation::mutable_ips(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.broadcastServerInformation.ips)
-  return ips_.Mutable(index);
-}
-inline void broadcastServerInformation::set_ips(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.broadcastServerInformation.ips)
-  ips_.Mutable(index)->assign(value);
-}
-#if LANG_CXX11
-inline void broadcastServerInformation::set_ips(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.broadcastServerInformation.ips)
-  ips_.Mutable(index)->assign(std::move(value));
-}
-#endif
-inline void broadcastServerInformation::set_ips(int index, const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  ips_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.broadcastServerInformation.ips)
-}
-inline void broadcastServerInformation::set_ips(int index, const char* value, size_t size) {
-  ips_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.broadcastServerInformation.ips)
-}
-inline ::std::string* broadcastServerInformation::add_ips() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.broadcastServerInformation.ips)
-  return ips_.Add();
-}
-inline void broadcastServerInformation::add_ips(const ::std::string& value) {
-  ips_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.broadcastServerInformation.ips)
-}
-#if LANG_CXX11
-inline void broadcastServerInformation::add_ips(::std::string&& value) {
-  ips_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.broadcastServerInformation.ips)
-}
-#endif
-inline void broadcastServerInformation::add_ips(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  ips_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.broadcastServerInformation.ips)
-}
-inline void broadcastServerInformation::add_ips(const char* value, size_t size) {
-  ips_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.broadcastServerInformation.ips)
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-broadcastServerInformation::ips() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.broadcastServerInformation.ips)
-  return ips_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-broadcastServerInformation::mutable_ips() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.broadcastServerInformation.ips)
-  return &ips_;
-}
-
-// string port = 2;
-inline void broadcastServerInformation::clear_port() {
-  port_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& broadcastServerInformation::port() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.broadcastServerInformation.port)
-  return port_.GetNoArena();
-}
-inline void broadcastServerInformation::set_port(const ::std::string& value) {
-  
-  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.broadcastServerInformation.port)
-}
-#if LANG_CXX11
-inline void broadcastServerInformation::set_port(::std::string&& value) {
-  
-  port_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.broadcastServerInformation.port)
-}
-#endif
-inline void broadcastServerInformation::set_port(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.broadcastServerInformation.port)
-}
-inline void broadcastServerInformation::set_port(const char* value, size_t size) {
-  
-  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.broadcastServerInformation.port)
-}
-inline ::std::string* broadcastServerInformation::mutable_port() {
-  
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.broadcastServerInformation.port)
-  return port_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* broadcastServerInformation::release_port() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.broadcastServerInformation.port)
-  
-  return port_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void broadcastServerInformation::set_allocated_port(::std::string* port) {
-  if (port != NULL) {
-    
-  } else {
-    
-  }
-  port_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), port);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.broadcastServerInformation.port)
-}
-
-// string serverName = 3;
-inline void broadcastServerInformation::clear_servername() {
-  servername_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& broadcastServerInformation::servername() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.broadcastServerInformation.serverName)
-  return servername_.GetNoArena();
-}
-inline void broadcastServerInformation::set_servername(const ::std::string& value) {
-  
-  servername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.broadcastServerInformation.serverName)
-}
-#if LANG_CXX11
-inline void broadcastServerInformation::set_servername(::std::string&& value) {
-  
-  servername_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.broadcastServerInformation.serverName)
-}
-#endif
-inline void broadcastServerInformation::set_servername(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  servername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.broadcastServerInformation.serverName)
-}
-inline void broadcastServerInformation::set_servername(const char* value, size_t size) {
-  
-  servername_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.broadcastServerInformation.serverName)
-}
-inline ::std::string* broadcastServerInformation::mutable_servername() {
-  
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.broadcastServerInformation.serverName)
-  return servername_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* broadcastServerInformation::release_servername() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.broadcastServerInformation.serverName)
-  
-  return servername_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void broadcastServerInformation::set_allocated_servername(::std::string* servername) {
-  if (servername != NULL) {
-    
-  } else {
-    
-  }
-  servername_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), servername);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.broadcastServerInformation.serverName)
-}
-
-// -------------------------------------------------------------------
-
 // CommonHeader
 
 // string bodyType = 1;
@@ -3712,31 +3389,70 @@ inline void bcLSAddr::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:DDRCommProto.bcLSAddr.name)
 }
 
-// repeated int64 ips = 2;
+// repeated string ips = 2;
 inline int bcLSAddr::ips_size() const {
   return ips_.size();
 }
 inline void bcLSAddr::clear_ips() {
   ips_.Clear();
 }
-inline ::google::protobuf::int64 bcLSAddr::ips(int index) const {
+inline const ::std::string& bcLSAddr::ips(int index) const {
   // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.ips)
   return ips_.Get(index);
 }
-inline void bcLSAddr::set_ips(int index, ::google::protobuf::int64 value) {
-  ips_.Set(index, value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ips)
+inline ::std::string* bcLSAddr::mutable_ips(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.ips)
+  return ips_.Mutable(index);
 }
-inline void bcLSAddr::add_ips(::google::protobuf::int64 value) {
-  ips_.Add(value);
+inline void bcLSAddr::set_ips(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ips)
+  ips_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void bcLSAddr::set_ips(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ips)
+  ips_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void bcLSAddr::set_ips(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  ips_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.bcLSAddr.ips)
+}
+inline void bcLSAddr::set_ips(int index, const char* value, size_t size) {
+  ips_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.bcLSAddr.ips)
+}
+inline ::std::string* bcLSAddr::add_ips() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.bcLSAddr.ips)
+  return ips_.Add();
+}
+inline void bcLSAddr::add_ips(const ::std::string& value) {
+  ips_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ips)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
+#if LANG_CXX11
+inline void bcLSAddr::add_ips(::std::string&& value) {
+  ips_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ips)
+}
+#endif
+inline void bcLSAddr::add_ips(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  ips_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.bcLSAddr.ips)
+}
+inline void bcLSAddr::add_ips(const char* value, size_t size) {
+  ips_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.bcLSAddr.ips)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
 bcLSAddr::ips() const {
   // @@protoc_insertion_point(field_list:DDRCommProto.bcLSAddr.ips)
   return ips_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 bcLSAddr::mutable_ips() {
   // @@protoc_insertion_point(field_mutable_list:DDRCommProto.bcLSAddr.ips)
   return &ips_;
@@ -5307,8 +5023,6 @@ inline void notifyTextChat::set_allocated_chattext(::std::string* chattext) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

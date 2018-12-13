@@ -5,7 +5,7 @@
 
 namespace DDRFramework
 {
-	UdpSocketBase::UdpSocketBase() : m_WriteStrand(m_IOContext), m_ReadStrand(m_IOContext)
+	UdpSocketBase::UdpSocketBase() : m_ReadWriteStrand(m_IOContext)
 	{
 		m_Broadcasting = false;
 		m_Receiving = false;
@@ -37,7 +37,14 @@ namespace DDRFramework
 
 	void UdpSocketBase::Stop()
 	{
-		m_spRecvEnderEndpoint.reset(); 
+		m_Broadcasting = false;
+		m_Receiving = false;
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStop, shared_from_this()));
+		
+	}
+	void UdpSocketBase::DelayStop()
+	{
+		m_spRecvEnderEndpoint.reset();
 		m_spBroadcastEnderEndpoint.reset();
 
 		m_Broadcasting = false;
@@ -46,6 +53,10 @@ namespace DDRFramework
 		m_spSerializer.reset();
 		m_spSocket->close();
 		m_spSocket.reset();
+		if (m_fOnDisconnect)
+		{
+			m_fOnDisconnect(*this);
+		}
 	}
 
 	void UdpSocketBase::StartBroadcast(int port, std::shared_ptr<google::protobuf::Message> spMsg, int intervalintervalMillisecond)
@@ -68,12 +79,12 @@ namespace DDRFramework
 
 
 		auto spbuf = m_spSerializer->SerlializeMsg(spMsg);
-		m_WriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
 	}
 	void UdpSocketBase::StopBroadcast()
 	{
 		m_Broadcasting = false;
-		m_WriteStrand.post(std::bind(&UdpSocketBase::FreeWrite, shared_from_this()));
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::FreeWrite, shared_from_this()));
 	}
 	void UdpSocketBase::FreeWrite()
 	{
@@ -91,11 +102,11 @@ namespace DDRFramework
 		//m_spSocket->open(m_spRecvEnderEndpoint->protocol());
 
 
-		m_ReadStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
 	}
 	void UdpSocketBase::StopReceive()
 	{
-		m_ReadStrand.post(std::bind(&UdpSocketBase::FreeRead, shared_from_this()));
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::FreeRead, shared_from_this()));
 		m_Receiving = false;
 	}
 	void UdpSocketBase::FreeRead()
@@ -116,7 +127,7 @@ namespace DDRFramework
 		{
 			if (m_Broadcasting)
 			{
-				m_WriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
+				m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
 				std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
 				
 			}
@@ -165,7 +176,7 @@ namespace DDRFramework
 
 			if (m_Receiving)
 			{
-				m_ReadStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+				m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
 			}
 		}
 		else

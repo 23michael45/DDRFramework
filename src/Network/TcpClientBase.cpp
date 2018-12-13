@@ -9,7 +9,6 @@ namespace DDRFramework
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		Stop();
 		DebugLog("\nTcpClientSessionBase Destroy");
 	}
 
@@ -48,8 +47,7 @@ namespace DDRFramework
 		else
 		{
 			DebugLog("\nConnect Failed No Server");
-			m_bConnected = false;
-			m_IOContext.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+			Stop();
 		}
 
 	}
@@ -211,6 +209,8 @@ namespace DDRFramework
 	}
 	void TcpClientBase::OnConnected(TcpSocketContainer& container)
 	{
+
+
 		DebugLog("\nOnConnected TcpClientBase");
 
 	}

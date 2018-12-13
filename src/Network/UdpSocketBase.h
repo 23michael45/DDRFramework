@@ -22,6 +22,7 @@ namespace DDRFramework
 
 		void Start();
 		void Stop();
+		void DelayStop();
 		void ThreadEntry();
 
 
@@ -31,7 +32,10 @@ namespace DDRFramework
 
 		void StartReceive(int port);
 		void StopReceive();
-
+		void BindOnDisconnect(std::function<void(UdpSocketBase&)> f)
+		{
+			m_fOnDisconnect = f;
+		}
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 
@@ -42,6 +46,8 @@ namespace DDRFramework
 		asio::io_context& GetIOContext();
 
 	private:
+
+		std::function<void(UdpSocketBase&)> m_fOnDisconnect;
 
 		void StartWrite(std::shared_ptr<asio::streambuf> spbuf);
 		void HandleWrite(const asio::error_code& ec, std::shared_ptr<asio::streambuf> spbuf);
@@ -73,8 +79,7 @@ namespace DDRFramework
 
 		
 		
-		asio::io_context::strand m_ReadStrand;
-		asio::io_context::strand m_WriteStrand;
+		asio::io_context::strand m_ReadWriteStrand;
 	};
 
 }
