@@ -137,16 +137,28 @@ namespace DDRFramework
 			else
 			{
 				m_SessionMap[ip]->Stop();
-				m_SessionMap[ip].reset();
+				std::thread t(bind(&TcpServerBase::WaitUntilPreSessionDestroy, shared_from_this(), ip, spSession));
+				t.detach();
+				//m_SessionMap[ip].reset();
 
-				m_SessionMap[ip] = spSession;
-				spSession->Start();
 
 			}
 		}
 
 		StartAccept();
 	}
+	void TcpServerBase::WaitUntilPreSessionDestroy(std::string ip ,std::shared_ptr<TcpSessionBase> spSession)
+	{
+		while (m_SessionMap.find(ip) != m_SessionMap.end())
+		{
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+		}
+
+		m_SessionMap[ip] = spSession;
+		spSession->Start();
+	}
+
+
 	void TcpServerBase::OnSessionDisconnect(TcpSocketContainer& container)
 	{
 		try

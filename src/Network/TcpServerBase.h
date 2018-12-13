@@ -60,6 +60,7 @@ namespace DDRFramework
 
 		asio::detail::thread_group m_WorkerThreads;
 	private:
+		void WaitUntilPreSessionDestroy(std::string ip, std::shared_ptr<TcpSessionBase> spSession);
 	};
 }
 
