@@ -26,7 +26,7 @@ namespace DDRFramework
 	{
 		if (m_spBehavior)
 		{
-			m_spBehavior->Update(*this);
+			m_spBehavior->Update(shared_from_this());
 			m_IOContext.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
 		}
 
@@ -108,7 +108,7 @@ namespace DDRFramework
 	void TcpSocketContainer::Stop()
 	{
 		m_bConnected = false;
-		m_Socket.close();
+		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_this()));
 	}
 
 	std::shared_ptr<MessageSerializer> TcpSocketContainer::GetSerializer()
@@ -129,10 +129,11 @@ namespace DDRFramework
 		}
 		if (m_spBehavior)
 		{
-			m_spBehavior->OnStop(*this);
+			m_spBehavior->OnStop(shared_from_this());
 			m_spBehavior.reset();
 
 		}
+		m_Socket.close();
 	}
 	void TcpSocketContainer::CallOnDisconnect()
 	{
@@ -148,7 +149,7 @@ namespace DDRFramework
 
 		if (m_spBehavior)
 		{
-			m_spBehavior->OnStart(*this);
+			m_spBehavior->OnStart(shared_from_this());
 			m_IOContext.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
 		}
 	}

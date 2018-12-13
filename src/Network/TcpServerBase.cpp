@@ -13,7 +13,7 @@ namespace DDRFramework
 	TcpSessionBase::~TcpSessionBase()
 	{
 
-		DebugLog("\nTcpSessionBase Destroy %s", m_Socket.remote_endpoint().address().to_string().c_str());
+		DebugLog("\nTcpSessionBase Destroy");
 	}
 
 	void TcpSessionBase::Start()
@@ -49,8 +49,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			m_bConnected = false;
-			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+			Stop();
 
 			DebugLog("\nError on receive: :%s", ec.message().c_str());
 		}
@@ -79,8 +78,7 @@ namespace DDRFramework
 		{
 			DebugLog("\nError on send: %s", ec.message().c_str());
 
-			m_bConnected = false;
-			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+			Stop();
 			
 		}
 

@@ -76,9 +76,7 @@ namespace DDRFramework
 			else
 			{
 				DebugLog("\nError on receive: :%s", ec.message().c_str());
-				m_bConnected = false;
-
-				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+				Stop();
 			}
 		}
 		catch (std::exception& e)
@@ -120,8 +118,7 @@ namespace DDRFramework
 			{
 				DebugLog("\nError on send: %s", ec.message().c_str());
 
-				m_bConnected = false;
-				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+				Stop();
 				
 			}
 			if (m_bConnected)
@@ -132,11 +129,6 @@ namespace DDRFramework
 		}
 
 	}
-	void TcpClientSessionBase::OnDisconnect(std::string remoteAddress)
-	{
-		Release();
-	}
-
 
 
 

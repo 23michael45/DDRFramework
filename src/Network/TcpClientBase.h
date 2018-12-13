@@ -17,7 +17,6 @@ namespace DDRFramework
 		~TcpClientSessionBase();
 
 		virtual void Start(std::string ip, std::string port);
-		void OnDisconnect(std::string remoteAddress);
 	protected:
 		
 		void ResolveHandler(const asio::error_code& ec, tcp::resolver::iterator i);

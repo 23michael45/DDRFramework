@@ -1,6 +1,6 @@
 #ifndef BaseBehavior_h__
 #define BaseBehavior_h__
-
+#include <memory>
 
 namespace DDRFramework
 {
@@ -19,13 +19,13 @@ namespace DDRFramework
 	public:
 
 
-		virtual void OnStart(DDRFramework::TcpSocketContainer& container)
+		virtual void OnStart(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
 		{
 		};
-		virtual void Update(DDRFramework::TcpSocketContainer& container)
+		virtual void Update(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
 		{
 		};
-		virtual void OnStop(DDRFramework::TcpSocketContainer& container)
+		virtual void OnStop(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
 		{
 		};
 
