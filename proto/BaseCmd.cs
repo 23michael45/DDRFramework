@@ -68,16 +68,13 @@ namespace DDRCommProto {
             "ZWl2ZXJUeXBlGAEgASgOMiQuRERSQ29tbVByb3RvLnJlc3BUYWxrLmVSZWNl",
             "aXZlclR5cGUSCwoDaWQxGAIgASgFEgsKA2lkMhgDIAEoBRIOCgZhdlR5cGUY",
             "BCABKAUiNwoNZVJlY2VpdmVyVHlwZRIKCgZjbGllbnQQABILCgdtb25pdG9y",
-            "EAESDQoJcm9ib3RfTFNNEAIiJAoDY21kEg0KBWNtZElEGAEgASgDEg4KBmNt",
-            "ZE1zZxgCIAEoCSIpCgdyZXNwQ21kEg0KBWNtZElEGAEgASgDEg8KB3Jlc3BN",
-            "c2cYAiABKAkidQoHcmVxRmlsZRIzCgl6aXBGb3JtYXQYASABKA4yIC5ERFJD",
-            "b21tUHJvdG8ucmVxRmlsZS5lWmlwRm9ybWF0EhMKC2ZpbGVJbnFUZXh0GAIg",
-            "ASgJIiAKCmVaaXBGb3JtYXQSCQoFbm9aaXAQABIHCgNaaXAQASJ0CghyZXNw",
-            "RmlsZRI0Cgl6aXBGb3JtYXQYASABKA4yIS5ERFJDb21tUHJvdG8ucmVzcEZp",
-            "bGUuZVppcEZvcm1hdBIQCghmaWxlUmVzcBgCIAEoCSIgCgplWmlwRm9ybWF0",
-            "EgkKBW5vWmlwEAASBwoDWmlwEAEiIQoMbm90aWZ5U3RhdHVzEhEKCXN0YXR1",
-            "c01zZxgBIAEoCSIfCgtub3RpZnlBbGFybRIQCghhbGFybU1zZxgBIAEoCSIi",
-            "Cg5ub3RpZnlUZXh0Q2hhdBIQCghjaGF0VGV4dBgBIAEoCWIGcHJvdG8z"));
+            "EAESDQoJcm9ib3RfTFNNEAIiJwoGcmVxQ21kEg0KBWNtZElEGAEgASgDEg4K",
+            "BmNtZE1zZxgCIAEoCSIpCgdyZXNwQ21kEg0KBWNtZElEGAEgASgDEg8KB3Jl",
+            "c3BNc2cYAiABKAkiGwoHcmVxRmlsZRIQCghmaWxlTmFtZRgBIAMoCSIuCghy",
+            "ZXNwRmlsZRIQCghmaWxlTmFtZRgBIAMoCRIQCghmaWxlQWRkchgCIAMoCSIh",
+            "Cgxub3RpZnlTdGF0dXMSEQoJc3RhdHVzTXNnGAEgASgJIh8KC25vdGlmeUFs",
+            "YXJtEhAKCGFsYXJtTXNnGAEgASgJIiIKDm5vdGlmeVRleHRDaGF0EhAKCGNo",
+            "YXRUZXh0GAEgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -91,10 +88,10 @@ namespace DDRCommProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAVStream), global::DDRCommProto.notifyAVStream.Parser, new[]{ "ReservedChannel", "RobotMonitorChannels" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAVStream.Types.fullChannelInfo), global::DDRCommProto.notifyAVStream.Types.fullChannelInfo.Parser, new[]{ "DevType", "DataType", "LocalResAccStr", "ChannelDescription", "BwReq", "RemoteIP", "RemotePort", "RemotePass" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqTalk), global::DDRCommProto.reqTalk.Parser, new[]{ "CallerType", "Id1", "Id2", "AvType" }, null, new[]{ typeof(global::DDRCommProto.reqTalk.Types.eCallerType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respTalk), global::DDRCommProto.respTalk.Parser, new[]{ "ReceiverType", "Id1", "Id2", "AvType" }, null, new[]{ typeof(global::DDRCommProto.respTalk.Types.eReceiverType) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.cmd), global::DDRCommProto.cmd.Parser, new[]{ "CmdID", "CmdMsg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqCmd), global::DDRCommProto.reqCmd.Parser, new[]{ "CmdID", "CmdMsg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respCmd), global::DDRCommProto.respCmd.Parser, new[]{ "CmdID", "RespMsg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqFile), global::DDRCommProto.reqFile.Parser, new[]{ "ZipFormat", "FileInqText" }, null, new[]{ typeof(global::DDRCommProto.reqFile.Types.eZipFormat) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respFile), global::DDRCommProto.respFile.Parser, new[]{ "ZipFormat", "FileResp" }, null, new[]{ typeof(global::DDRCommProto.respFile.Types.eZipFormat) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqFile), global::DDRCommProto.reqFile.Parser, new[]{ "FileName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respFile), global::DDRCommProto.respFile.Parser, new[]{ "FileName", "FileAddr" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyStatus), global::DDRCommProto.notifyStatus.Parser, new[]{ "StatusMsg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAlarm), global::DDRCommProto.notifyAlarm.Parser, new[]{ "AlarmMsg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyTextChat), global::DDRCommProto.notifyTextChat.Parser, new[]{ "ChatText" }, null, null, null)
@@ -2832,11 +2829,11 @@ namespace DDRCommProto {
 
   }
 
-  public sealed partial class cmd : pb::IMessage<cmd> {
-    private static readonly pb::MessageParser<cmd> _parser = new pb::MessageParser<cmd>(() => new cmd());
+  public sealed partial class reqCmd : pb::IMessage<reqCmd> {
+    private static readonly pb::MessageParser<reqCmd> _parser = new pb::MessageParser<reqCmd>(() => new reqCmd());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<cmd> Parser { get { return _parser; } }
+    public static pb::MessageParser<reqCmd> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2849,22 +2846,22 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public cmd() {
+    public reqCmd() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public cmd(cmd other) : this() {
+    public reqCmd(reqCmd other) : this() {
       cmdID_ = other.cmdID_;
       cmdMsg_ = other.cmdMsg_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public cmd Clone() {
-      return new cmd(this);
+    public reqCmd Clone() {
+      return new reqCmd(this);
     }
 
     /// <summary>Field number for the "cmdID" field.</summary>
@@ -2891,11 +2888,11 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as cmd);
+      return Equals(other as reqCmd);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(cmd other) {
+    public bool Equals(reqCmd other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2954,7 +2951,7 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(cmd other) {
+    public void MergeFrom(reqCmd other) {
       if (other == null) {
         return;
       }
@@ -3171,8 +3168,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public reqFile(reqFile other) : this() {
-      zipFormat_ = other.zipFormat_;
-      fileInqText_ = other.fileInqText_;
+      fileName_ = other.fileName_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3181,26 +3177,17 @@ namespace DDRCommProto {
       return new reqFile(this);
     }
 
-    /// <summary>Field number for the "zipFormat" field.</summary>
-    public const int ZipFormatFieldNumber = 1;
-    private global::DDRCommProto.reqFile.Types.eZipFormat zipFormat_ = 0;
+    /// <summary>Field number for the "fileName" field.</summary>
+    public const int FileNameFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _repeated_fileName_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> fileName_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// allow wildcards (*,?, etc)
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::DDRCommProto.reqFile.Types.eZipFormat ZipFormat {
-      get { return zipFormat_; }
-      set {
-        zipFormat_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "fileInqText" field.</summary>
-    public const int FileInqTextFieldNumber = 2;
-    private string fileInqText_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string FileInqText {
-      get { return fileInqText_; }
-      set {
-        fileInqText_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<string> FileName {
+      get { return fileName_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3216,16 +3203,14 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ZipFormat != other.ZipFormat) return false;
-      if (FileInqText != other.FileInqText) return false;
+      if(!fileName_.Equals(other.fileName_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ZipFormat != 0) hash ^= ZipFormat.GetHashCode();
-      if (FileInqText.Length != 0) hash ^= FileInqText.GetHashCode();
+      hash ^= fileName_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3239,14 +3224,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ZipFormat != 0) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) ZipFormat);
-      }
-      if (FileInqText.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(FileInqText);
-      }
+      fileName_.WriteTo(output, _repeated_fileName_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3255,12 +3233,7 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ZipFormat != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ZipFormat);
-      }
-      if (FileInqText.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(FileInqText);
-      }
+      size += fileName_.CalculateSize(_repeated_fileName_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3272,12 +3245,7 @@ namespace DDRCommProto {
       if (other == null) {
         return;
       }
-      if (other.ZipFormat != 0) {
-        ZipFormat = other.ZipFormat;
-      }
-      if (other.FileInqText.Length != 0) {
-        FileInqText = other.FileInqText;
-      }
+      fileName_.Add(other.fileName_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3289,29 +3257,13 @@ namespace DDRCommProto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            zipFormat_ = (global::DDRCommProto.reqFile.Types.eZipFormat) input.ReadEnum();
-            break;
-          }
-          case 18: {
-            FileInqText = input.ReadString();
+          case 10: {
+            fileName_.AddEntriesFrom(input, _repeated_fileName_codec);
             break;
           }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the reqFile message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum eZipFormat {
-        [pbr::OriginalName("noZip")] NoZip = 0,
-        [pbr::OriginalName("Zip")] Zip = 1,
-      }
-
-    }
-    #endregion
 
   }
 
@@ -3340,8 +3292,8 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public respFile(respFile other) : this() {
-      zipFormat_ = other.zipFormat_;
-      fileResp_ = other.fileResp_;
+      fileName_ = other.fileName_.Clone();
+      fileAddr_ = other.fileAddr_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3350,29 +3302,30 @@ namespace DDRCommProto {
       return new respFile(this);
     }
 
-    /// <summary>Field number for the "zipFormat" field.</summary>
-    public const int ZipFormatFieldNumber = 1;
-    private global::DDRCommProto.respFile.Types.eZipFormat zipFormat_ = 0;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::DDRCommProto.respFile.Types.eZipFormat ZipFormat {
-      get { return zipFormat_; }
-      set {
-        zipFormat_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "fileResp" field.</summary>
-    public const int FileRespFieldNumber = 2;
-    private string fileResp_ = "";
+    /// <summary>Field number for the "fileName" field.</summary>
+    public const int FileNameFieldNumber = 1;
+    private static readonly pb::FieldCodec<string> _repeated_fileName_codec
+        = pb::FieldCodec.ForString(10);
+    private readonly pbc::RepeatedField<string> fileName_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// zipped according to zipFormat
+    /// no wildcards
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string FileResp {
-      get { return fileResp_; }
-      set {
-        fileResp_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
+    public pbc::RepeatedField<string> FileName {
+      get { return fileName_; }
+    }
+
+    /// <summary>Field number for the "fileAddr" field.</summary>
+    public const int FileAddrFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_fileAddr_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> fileAddr_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// probably http address
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> FileAddr {
+      get { return fileAddr_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3388,16 +3341,16 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (ZipFormat != other.ZipFormat) return false;
-      if (FileResp != other.FileResp) return false;
+      if(!fileName_.Equals(other.fileName_)) return false;
+      if(!fileAddr_.Equals(other.fileAddr_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (ZipFormat != 0) hash ^= ZipFormat.GetHashCode();
-      if (FileResp.Length != 0) hash ^= FileResp.GetHashCode();
+      hash ^= fileName_.GetHashCode();
+      hash ^= fileAddr_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3411,14 +3364,8 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (ZipFormat != 0) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) ZipFormat);
-      }
-      if (FileResp.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(FileResp);
-      }
+      fileName_.WriteTo(output, _repeated_fileName_codec);
+      fileAddr_.WriteTo(output, _repeated_fileAddr_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3427,12 +3374,8 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (ZipFormat != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ZipFormat);
-      }
-      if (FileResp.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(FileResp);
-      }
+      size += fileName_.CalculateSize(_repeated_fileName_codec);
+      size += fileAddr_.CalculateSize(_repeated_fileAddr_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3444,12 +3387,8 @@ namespace DDRCommProto {
       if (other == null) {
         return;
       }
-      if (other.ZipFormat != 0) {
-        ZipFormat = other.ZipFormat;
-      }
-      if (other.FileResp.Length != 0) {
-        FileResp = other.FileResp;
-      }
+      fileName_.Add(other.fileName_);
+      fileAddr_.Add(other.fileAddr_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3461,29 +3400,17 @@ namespace DDRCommProto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            zipFormat_ = (global::DDRCommProto.respFile.Types.eZipFormat) input.ReadEnum();
+          case 10: {
+            fileName_.AddEntriesFrom(input, _repeated_fileName_codec);
             break;
           }
           case 18: {
-            FileResp = input.ReadString();
+            fileAddr_.AddEntriesFrom(input, _repeated_fileAddr_codec);
             break;
           }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the respFile message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum eZipFormat {
-        [pbr::OriginalName("noZip")] NoZip = 0,
-        [pbr::OriginalName("Zip")] Zip = 1,
-      }
-
-    }
-    #endregion
 
   }
 

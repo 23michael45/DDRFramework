@@ -151,7 +151,7 @@ message respTalk
 	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
 }
 
-message cmd
+message reqCmd
 {
 	int64 cmdID = 1;
 	string cmdMsg = 2;
@@ -165,35 +165,26 @@ message respCmd
 
 message reqFile
 {
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileInqText = 2;
+	repeated string fileName = 1; // allow wildcards (*,?, etc)
 }
 
 message respFile
 {
-	enum eZipFormat {
-		noZip = 0;
-		Zip = 1;
-	}
-	eZipFormat zipFormat = 1;
-	string fileResp = 2; // zipped according to zipFormat
+	repeated string fileName = 1; // no wildcards
+	repeated string fileAddr = 2; // probably http address
 }
 
-message notifyStatus
+message notifyStatus //LSM->LS 1. LS->C 2. LS-RR->RS->M
 {
 	string statusMsg = 1;
 }
 
-message notifyAlarm
+message notifyAlarm //LSM->LS 1. LS->C 2. LS-RR->RS->M
 {
 	string alarmMsg = 1;
 }
 
-message notifyTextChat
+message notifyTextChat //LSM->LS 1. LS->C 2. LS-RR->RS->M
 {
 	string chatText = 1;
 }

@@ -53,9 +53,6 @@ extern CommonHeaderDefaultTypeInternal _CommonHeader_default_instance_;
 class bcLSAddr;
 class bcLSAddrDefaultTypeInternal;
 extern bcLSAddrDefaultTypeInternal _bcLSAddr_default_instance_;
-class cmd;
-class cmdDefaultTypeInternal;
-extern cmdDefaultTypeInternal _cmd_default_instance_;
 class heartBeat;
 class heartBeatDefaultTypeInternal;
 extern heartBeatDefaultTypeInternal _heartBeat_default_instance_;
@@ -80,6 +77,9 @@ extern notifyTerminalAccessDefaultTypeInternal _notifyTerminalAccess_default_ins
 class notifyTextChat;
 class notifyTextChatDefaultTypeInternal;
 extern notifyTextChatDefaultTypeInternal _notifyTextChat_default_instance_;
+class reqCmd;
+class reqCmdDefaultTypeInternal;
+extern reqCmdDefaultTypeInternal _reqCmd_default_instance_;
 class reqFile;
 class reqFileDefaultTypeInternal;
 extern reqFileDefaultTypeInternal _reqFile_default_instance_;
@@ -109,7 +109,6 @@ namespace google {
 namespace protobuf {
 template<> ::DDRCommProto::CommonHeader* Arena::CreateMaybeMessage<::DDRCommProto::CommonHeader>(Arena*);
 template<> ::DDRCommProto::bcLSAddr* Arena::CreateMaybeMessage<::DDRCommProto::bcLSAddr>(Arena*);
-template<> ::DDRCommProto::cmd* Arena::CreateMaybeMessage<::DDRCommProto::cmd>(Arena*);
 template<> ::DDRCommProto::heartBeat* Arena::CreateMaybeMessage<::DDRCommProto::heartBeat>(Arena*);
 template<> ::DDRCommProto::notifyAVStream* Arena::CreateMaybeMessage<::DDRCommProto::notifyAVStream>(Arena*);
 template<> ::DDRCommProto::notifyAVStream_fullChannelInfo* Arena::CreateMaybeMessage<::DDRCommProto::notifyAVStream_fullChannelInfo>(Arena*);
@@ -118,6 +117,7 @@ template<> ::DDRCommProto::notifySerAccess* Arena::CreateMaybeMessage<::DDRCommP
 template<> ::DDRCommProto::notifyStatus* Arena::CreateMaybeMessage<::DDRCommProto::notifyStatus>(Arena*);
 template<> ::DDRCommProto::notifyTerminalAccess* Arena::CreateMaybeMessage<::DDRCommProto::notifyTerminalAccess>(Arena*);
 template<> ::DDRCommProto::notifyTextChat* Arena::CreateMaybeMessage<::DDRCommProto::notifyTextChat>(Arena*);
+template<> ::DDRCommProto::reqCmd* Arena::CreateMaybeMessage<::DDRCommProto::reqCmd>(Arena*);
 template<> ::DDRCommProto::reqFile* Arena::CreateMaybeMessage<::DDRCommProto::reqFile>(Arena*);
 template<> ::DDRCommProto::reqLogin* Arena::CreateMaybeMessage<::DDRCommProto::reqLogin>(Arena*);
 template<> ::DDRCommProto::reqLogin_msgAVStreamReq* Arena::CreateMaybeMessage<::DDRCommProto::reqLogin_msgAVStreamReq>(Arena*);
@@ -289,48 +289,6 @@ inline bool respTalk_eReceiverType_Parse(
     const ::std::string& name, respTalk_eReceiverType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<respTalk_eReceiverType>(
     respTalk_eReceiverType_descriptor(), name, value);
-}
-enum reqFile_eZipFormat {
-  reqFile_eZipFormat_noZip = 0,
-  reqFile_eZipFormat_Zip = 1,
-  reqFile_eZipFormat_reqFile_eZipFormat_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  reqFile_eZipFormat_reqFile_eZipFormat_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool reqFile_eZipFormat_IsValid(int value);
-const reqFile_eZipFormat reqFile_eZipFormat_eZipFormat_MIN = reqFile_eZipFormat_noZip;
-const reqFile_eZipFormat reqFile_eZipFormat_eZipFormat_MAX = reqFile_eZipFormat_Zip;
-const int reqFile_eZipFormat_eZipFormat_ARRAYSIZE = reqFile_eZipFormat_eZipFormat_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* reqFile_eZipFormat_descriptor();
-inline const ::std::string& reqFile_eZipFormat_Name(reqFile_eZipFormat value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    reqFile_eZipFormat_descriptor(), value);
-}
-inline bool reqFile_eZipFormat_Parse(
-    const ::std::string& name, reqFile_eZipFormat* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<reqFile_eZipFormat>(
-    reqFile_eZipFormat_descriptor(), name, value);
-}
-enum respFile_eZipFormat {
-  respFile_eZipFormat_noZip = 0,
-  respFile_eZipFormat_Zip = 1,
-  respFile_eZipFormat_respFile_eZipFormat_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  respFile_eZipFormat_respFile_eZipFormat_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool respFile_eZipFormat_IsValid(int value);
-const respFile_eZipFormat respFile_eZipFormat_eZipFormat_MIN = respFile_eZipFormat_noZip;
-const respFile_eZipFormat respFile_eZipFormat_eZipFormat_MAX = respFile_eZipFormat_Zip;
-const int respFile_eZipFormat_eZipFormat_ARRAYSIZE = respFile_eZipFormat_eZipFormat_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* respFile_eZipFormat_descriptor();
-inline const ::std::string& respFile_eZipFormat_Name(respFile_eZipFormat value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    respFile_eZipFormat_descriptor(), value);
-}
-inline bool respFile_eZipFormat_Parse(
-    const ::std::string& name, respFile_eZipFormat* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<respFile_eZipFormat>(
-    respFile_eZipFormat_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2227,24 +2185,24 @@ class respTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(
 };
 // -------------------------------------------------------------------
 
-class cmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.cmd) */ {
+class reqCmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqCmd) */ {
  public:
-  cmd();
-  virtual ~cmd();
+  reqCmd();
+  virtual ~reqCmd();
 
-  cmd(const cmd& from);
+  reqCmd(const reqCmd& from);
 
-  inline cmd& operator=(const cmd& from) {
+  inline reqCmd& operator=(const reqCmd& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  cmd(cmd&& from) noexcept
-    : cmd() {
+  reqCmd(reqCmd&& from) noexcept
+    : reqCmd() {
     *this = ::std::move(from);
   }
 
-  inline cmd& operator=(cmd&& from) noexcept {
+  inline reqCmd& operator=(reqCmd&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -2254,34 +2212,34 @@ class cmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const cmd& default_instance();
+  static const reqCmd& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const cmd* internal_default_instance() {
-    return reinterpret_cast<const cmd*>(
-               &_cmd_default_instance_);
+  static inline const reqCmd* internal_default_instance() {
+    return reinterpret_cast<const reqCmd*>(
+               &_reqCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     12;
 
-  void Swap(cmd* other);
-  friend void swap(cmd& a, cmd& b) {
+  void Swap(reqCmd* other);
+  friend void swap(reqCmd& a, reqCmd& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline cmd* New() const final {
-    return CreateMaybeMessage<cmd>(NULL);
+  inline reqCmd* New() const final {
+    return CreateMaybeMessage<reqCmd>(NULL);
   }
 
-  cmd* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<cmd>(arena);
+  reqCmd* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqCmd>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const cmd& from);
-  void MergeFrom(const cmd& from);
+  void CopyFrom(const reqCmd& from);
+  void MergeFrom(const reqCmd& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -2298,7 +2256,7 @@ class cmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(cmd* other);
+  void InternalSwap(reqCmd* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -2334,7 +2292,7 @@ class cmd : public ::google::protobuf::Message /* @@protoc_insertion_point(class
   ::google::protobuf::int64 cmdid() const;
   void set_cmdid(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.cmd)
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqCmd)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -2548,60 +2506,35 @@ class reqFile : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // nested types ----------------------------------------------------
 
-  typedef reqFile_eZipFormat eZipFormat;
-  static const eZipFormat noZip =
-    reqFile_eZipFormat_noZip;
-  static const eZipFormat Zip =
-    reqFile_eZipFormat_Zip;
-  static inline bool eZipFormat_IsValid(int value) {
-    return reqFile_eZipFormat_IsValid(value);
-  }
-  static const eZipFormat eZipFormat_MIN =
-    reqFile_eZipFormat_eZipFormat_MIN;
-  static const eZipFormat eZipFormat_MAX =
-    reqFile_eZipFormat_eZipFormat_MAX;
-  static const int eZipFormat_ARRAYSIZE =
-    reqFile_eZipFormat_eZipFormat_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  eZipFormat_descriptor() {
-    return reqFile_eZipFormat_descriptor();
-  }
-  static inline const ::std::string& eZipFormat_Name(eZipFormat value) {
-    return reqFile_eZipFormat_Name(value);
-  }
-  static inline bool eZipFormat_Parse(const ::std::string& name,
-      eZipFormat* value) {
-    return reqFile_eZipFormat_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
 
-  // string fileInqText = 2;
-  void clear_fileinqtext();
-  static const int kFileInqTextFieldNumber = 2;
-  const ::std::string& fileinqtext() const;
-  void set_fileinqtext(const ::std::string& value);
+  // repeated string fileName = 1;
+  int filename_size() const;
+  void clear_filename();
+  static const int kFileNameFieldNumber = 1;
+  const ::std::string& filename(int index) const;
+  ::std::string* mutable_filename(int index);
+  void set_filename(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_fileinqtext(::std::string&& value);
+  void set_filename(int index, ::std::string&& value);
   #endif
-  void set_fileinqtext(const char* value);
-  void set_fileinqtext(const char* value, size_t size);
-  ::std::string* mutable_fileinqtext();
-  ::std::string* release_fileinqtext();
-  void set_allocated_fileinqtext(::std::string* fileinqtext);
-
-  // .DDRCommProto.reqFile.eZipFormat zipFormat = 1;
-  void clear_zipformat();
-  static const int kZipFormatFieldNumber = 1;
-  ::DDRCommProto::reqFile_eZipFormat zipformat() const;
-  void set_zipformat(::DDRCommProto::reqFile_eZipFormat value);
+  void set_filename(int index, const char* value);
+  void set_filename(int index, const char* value, size_t size);
+  ::std::string* add_filename();
+  void add_filename(const ::std::string& value);
+  #if LANG_CXX11
+  void add_filename(::std::string&& value);
+  #endif
+  void add_filename(const char* value);
+  void add_filename(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filename() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filename();
 
   // @@protoc_insertion_point(class_scope:DDRCommProto.reqFile)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr fileinqtext_;
-  int zipformat_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filename_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -2692,60 +2625,58 @@ class respFile : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // nested types ----------------------------------------------------
 
-  typedef respFile_eZipFormat eZipFormat;
-  static const eZipFormat noZip =
-    respFile_eZipFormat_noZip;
-  static const eZipFormat Zip =
-    respFile_eZipFormat_Zip;
-  static inline bool eZipFormat_IsValid(int value) {
-    return respFile_eZipFormat_IsValid(value);
-  }
-  static const eZipFormat eZipFormat_MIN =
-    respFile_eZipFormat_eZipFormat_MIN;
-  static const eZipFormat eZipFormat_MAX =
-    respFile_eZipFormat_eZipFormat_MAX;
-  static const int eZipFormat_ARRAYSIZE =
-    respFile_eZipFormat_eZipFormat_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  eZipFormat_descriptor() {
-    return respFile_eZipFormat_descriptor();
-  }
-  static inline const ::std::string& eZipFormat_Name(eZipFormat value) {
-    return respFile_eZipFormat_Name(value);
-  }
-  static inline bool eZipFormat_Parse(const ::std::string& name,
-      eZipFormat* value) {
-    return respFile_eZipFormat_Parse(name, value);
-  }
-
   // accessors -------------------------------------------------------
 
-  // string fileResp = 2;
-  void clear_fileresp();
-  static const int kFileRespFieldNumber = 2;
-  const ::std::string& fileresp() const;
-  void set_fileresp(const ::std::string& value);
+  // repeated string fileName = 1;
+  int filename_size() const;
+  void clear_filename();
+  static const int kFileNameFieldNumber = 1;
+  const ::std::string& filename(int index) const;
+  ::std::string* mutable_filename(int index);
+  void set_filename(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_fileresp(::std::string&& value);
+  void set_filename(int index, ::std::string&& value);
   #endif
-  void set_fileresp(const char* value);
-  void set_fileresp(const char* value, size_t size);
-  ::std::string* mutable_fileresp();
-  ::std::string* release_fileresp();
-  void set_allocated_fileresp(::std::string* fileresp);
+  void set_filename(int index, const char* value);
+  void set_filename(int index, const char* value, size_t size);
+  ::std::string* add_filename();
+  void add_filename(const ::std::string& value);
+  #if LANG_CXX11
+  void add_filename(::std::string&& value);
+  #endif
+  void add_filename(const char* value);
+  void add_filename(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filename() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filename();
 
-  // .DDRCommProto.respFile.eZipFormat zipFormat = 1;
-  void clear_zipformat();
-  static const int kZipFormatFieldNumber = 1;
-  ::DDRCommProto::respFile_eZipFormat zipformat() const;
-  void set_zipformat(::DDRCommProto::respFile_eZipFormat value);
+  // repeated string fileAddr = 2;
+  int fileaddr_size() const;
+  void clear_fileaddr();
+  static const int kFileAddrFieldNumber = 2;
+  const ::std::string& fileaddr(int index) const;
+  ::std::string* mutable_fileaddr(int index);
+  void set_fileaddr(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_fileaddr(int index, ::std::string&& value);
+  #endif
+  void set_fileaddr(int index, const char* value);
+  void set_fileaddr(int index, const char* value, size_t size);
+  ::std::string* add_fileaddr();
+  void add_fileaddr(const ::std::string& value);
+  #if LANG_CXX11
+  void add_fileaddr(::std::string&& value);
+  #endif
+  void add_fileaddr(const char* value);
+  void add_fileaddr(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& fileaddr() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_fileaddr();
 
   // @@protoc_insertion_point(class_scope:DDRCommProto.respFile)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr fileresp_;
-  int zipformat_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filename_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> fileaddr_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -4567,73 +4498,73 @@ inline void respTalk::set_avtype(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// cmd
+// reqCmd
 
 // int64 cmdID = 1;
-inline void cmd::clear_cmdid() {
+inline void reqCmd::clear_cmdid() {
   cmdid_ = GOOGLE_LONGLONG(0);
 }
-inline ::google::protobuf::int64 cmd::cmdid() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.cmd.cmdID)
+inline ::google::protobuf::int64 reqCmd::cmdid() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqCmd.cmdID)
   return cmdid_;
 }
-inline void cmd::set_cmdid(::google::protobuf::int64 value) {
+inline void reqCmd::set_cmdid(::google::protobuf::int64 value) {
   
   cmdid_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.cmd.cmdID)
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqCmd.cmdID)
 }
 
 // string cmdMsg = 2;
-inline void cmd::clear_cmdmsg() {
+inline void reqCmd::clear_cmdmsg() {
   cmdmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& cmd::cmdmsg() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.cmd.cmdMsg)
+inline const ::std::string& reqCmd::cmdmsg() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqCmd.cmdMsg)
   return cmdmsg_.GetNoArena();
 }
-inline void cmd::set_cmdmsg(const ::std::string& value) {
+inline void reqCmd::set_cmdmsg(const ::std::string& value) {
   
   cmdmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqCmd.cmdMsg)
 }
 #if LANG_CXX11
-inline void cmd::set_cmdmsg(::std::string&& value) {
+inline void reqCmd::set_cmdmsg(::std::string&& value) {
   
   cmdmsg_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqCmd.cmdMsg)
 }
 #endif
-inline void cmd::set_cmdmsg(const char* value) {
+inline void reqCmd::set_cmdmsg(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   cmdmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqCmd.cmdMsg)
 }
-inline void cmd::set_cmdmsg(const char* value, size_t size) {
+inline void reqCmd::set_cmdmsg(const char* value, size_t size) {
   
   cmdmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqCmd.cmdMsg)
 }
-inline ::std::string* cmd::mutable_cmdmsg() {
+inline ::std::string* reqCmd::mutable_cmdmsg() {
   
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqCmd.cmdMsg)
   return cmdmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* cmd::release_cmdmsg() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.cmd.cmdMsg)
+inline ::std::string* reqCmd::release_cmdmsg() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqCmd.cmdMsg)
   
   return cmdmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void cmd::set_allocated_cmdmsg(::std::string* cmdmsg) {
+inline void reqCmd::set_allocated_cmdmsg(::std::string* cmdmsg) {
   if (cmdmsg != NULL) {
     
   } else {
     
   }
   cmdmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cmdmsg);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.cmd.cmdMsg)
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqCmd.cmdMsg)
 }
 
 // -------------------------------------------------------------------
@@ -4711,142 +4642,215 @@ inline void respCmd::set_allocated_respmsg(::std::string* respmsg) {
 
 // reqFile
 
-// .DDRCommProto.reqFile.eZipFormat zipFormat = 1;
-inline void reqFile::clear_zipformat() {
-  zipformat_ = 0;
+// repeated string fileName = 1;
+inline int reqFile::filename_size() const {
+  return filename_.size();
 }
-inline ::DDRCommProto::reqFile_eZipFormat reqFile::zipformat() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.zipFormat)
-  return static_cast< ::DDRCommProto::reqFile_eZipFormat >(zipformat_);
+inline void reqFile::clear_filename() {
+  filename_.Clear();
 }
-inline void reqFile::set_zipformat(::DDRCommProto::reqFile_eZipFormat value) {
-  
-  zipformat_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.zipFormat)
+inline const ::std::string& reqFile::filename(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.fileName)
+  return filename_.Get(index);
 }
-
-// string fileInqText = 2;
-inline void reqFile::clear_fileinqtext() {
-  fileinqtext_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* reqFile::mutable_filename(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFile.fileName)
+  return filename_.Mutable(index);
 }
-inline const ::std::string& reqFile::fileinqtext() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.fileInqText)
-  return fileinqtext_.GetNoArena();
-}
-inline void reqFile::set_fileinqtext(const ::std::string& value) {
-  
-  fileinqtext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileInqText)
+inline void reqFile::set_filename(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileName)
+  filename_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void reqFile::set_fileinqtext(::std::string&& value) {
-  
-  fileinqtext_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqFile.fileInqText)
+inline void reqFile::set_filename(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileName)
+  filename_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void reqFile::set_fileinqtext(const char* value) {
+inline void reqFile::set_filename(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  
-  fileinqtext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFile.fileInqText)
+  filename_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFile.fileName)
 }
-inline void reqFile::set_fileinqtext(const char* value, size_t size) {
-  
-  fileinqtext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFile.fileInqText)
+inline void reqFile::set_filename(int index, const char* value, size_t size) {
+  filename_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFile.fileName)
 }
-inline ::std::string* reqFile::mutable_fileinqtext() {
-  
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFile.fileInqText)
-  return fileinqtext_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* reqFile::add_filename() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.reqFile.fileName)
+  return filename_.Add();
 }
-inline ::std::string* reqFile::release_fileinqtext() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.reqFile.fileInqText)
-  
-  return fileinqtext_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void reqFile::add_filename(const ::std::string& value) {
+  filename_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileName)
 }
-inline void reqFile::set_allocated_fileinqtext(::std::string* fileinqtext) {
-  if (fileinqtext != NULL) {
-    
-  } else {
-    
-  }
-  fileinqtext_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), fileinqtext);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqFile.fileInqText)
+#if LANG_CXX11
+inline void reqFile::add_filename(::std::string&& value) {
+  filename_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileName)
+}
+#endif
+inline void reqFile::add_filename(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filename_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.reqFile.fileName)
+}
+inline void reqFile::add_filename(const char* value, size_t size) {
+  filename_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.reqFile.fileName)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+reqFile::filename() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.reqFile.fileName)
+  return filename_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+reqFile::mutable_filename() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.reqFile.fileName)
+  return &filename_;
 }
 
 // -------------------------------------------------------------------
 
 // respFile
 
-// .DDRCommProto.respFile.eZipFormat zipFormat = 1;
-inline void respFile::clear_zipformat() {
-  zipformat_ = 0;
+// repeated string fileName = 1;
+inline int respFile::filename_size() const {
+  return filename_.size();
 }
-inline ::DDRCommProto::respFile_eZipFormat respFile::zipformat() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.zipFormat)
-  return static_cast< ::DDRCommProto::respFile_eZipFormat >(zipformat_);
+inline void respFile::clear_filename() {
+  filename_.Clear();
 }
-inline void respFile::set_zipformat(::DDRCommProto::respFile_eZipFormat value) {
-  
-  zipformat_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.zipFormat)
+inline const ::std::string& respFile::filename(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileName)
+  return filename_.Get(index);
 }
-
-// string fileResp = 2;
-inline void respFile::clear_fileresp() {
-  fileresp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* respFile::mutable_filename(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileName)
+  return filename_.Mutable(index);
 }
-inline const ::std::string& respFile::fileresp() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileResp)
-  return fileresp_.GetNoArena();
-}
-inline void respFile::set_fileresp(const ::std::string& value) {
-  
-  fileresp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileResp)
+inline void respFile::set_filename(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileName)
+  filename_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void respFile::set_fileresp(::std::string&& value) {
-  
-  fileresp_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.respFile.fileResp)
+inline void respFile::set_filename(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileName)
+  filename_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void respFile::set_fileresp(const char* value) {
+inline void respFile::set_filename(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  
-  fileresp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileResp)
+  filename_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileName)
 }
-inline void respFile::set_fileresp(const char* value, size_t size) {
-  
-  fileresp_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileResp)
+inline void respFile::set_filename(int index, const char* value, size_t size) {
+  filename_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileName)
 }
-inline ::std::string* respFile::mutable_fileresp() {
-  
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileResp)
-  return fileresp_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* respFile::add_filename() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileName)
+  return filename_.Add();
 }
-inline ::std::string* respFile::release_fileresp() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.respFile.fileResp)
-  
-  return fileresp_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void respFile::add_filename(const ::std::string& value) {
+  filename_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileName)
 }
-inline void respFile::set_allocated_fileresp(::std::string* fileresp) {
-  if (fileresp != NULL) {
-    
-  } else {
-    
-  }
-  fileresp_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), fileresp);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.respFile.fileResp)
+#if LANG_CXX11
+inline void respFile::add_filename(::std::string&& value) {
+  filename_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileName)
+}
+#endif
+inline void respFile::add_filename(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filename_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileName)
+}
+inline void respFile::add_filename(const char* value, size_t size) {
+  filename_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileName)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+respFile::filename() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileName)
+  return filename_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+respFile::mutable_filename() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileName)
+  return &filename_;
+}
+
+// repeated string fileAddr = 2;
+inline int respFile::fileaddr_size() const {
+  return fileaddr_.size();
+}
+inline void respFile::clear_fileaddr() {
+  fileaddr_.Clear();
+}
+inline const ::std::string& respFile::fileaddr(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileAddr)
+  return fileaddr_.Get(index);
+}
+inline ::std::string* respFile::mutable_fileaddr(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileAddr)
+  return fileaddr_.Mutable(index);
+}
+inline void respFile::set_fileaddr(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileAddr)
+  fileaddr_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void respFile::set_fileaddr(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileAddr)
+  fileaddr_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void respFile::set_fileaddr(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  fileaddr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileAddr)
+}
+inline void respFile::set_fileaddr(int index, const char* value, size_t size) {
+  fileaddr_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileAddr)
+}
+inline ::std::string* respFile::add_fileaddr() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileAddr)
+  return fileaddr_.Add();
+}
+inline void respFile::add_fileaddr(const ::std::string& value) {
+  fileaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileAddr)
+}
+#if LANG_CXX11
+inline void respFile::add_fileaddr(::std::string&& value) {
+  fileaddr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileAddr)
+}
+#endif
+inline void respFile::add_fileaddr(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  fileaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileAddr)
+}
+inline void respFile::add_fileaddr(const char* value, size_t size) {
+  fileaddr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileAddr)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+respFile::fileaddr() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileAddr)
+  return fileaddr_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+respFile::mutable_fileaddr() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileAddr)
+  return &fileaddr_;
 }
 
 // -------------------------------------------------------------------
@@ -5101,16 +5105,6 @@ template <> struct is_proto_enum< ::DDRCommProto::respTalk_eReceiverType> : ::st
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::respTalk_eReceiverType>() {
   return ::DDRCommProto::respTalk_eReceiverType_descriptor();
-}
-template <> struct is_proto_enum< ::DDRCommProto::reqFile_eZipFormat> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::reqFile_eZipFormat>() {
-  return ::DDRCommProto::reqFile_eZipFormat_descriptor();
-}
-template <> struct is_proto_enum< ::DDRCommProto::respFile_eZipFormat> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::respFile_eZipFormat>() {
-  return ::DDRCommProto::respFile_eZipFormat_descriptor();
 }
 
 }  // namespace protobuf
