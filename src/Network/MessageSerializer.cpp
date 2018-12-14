@@ -100,7 +100,11 @@ namespace DDRFramework
 
 	}
 
-	std::shared_ptr<asio::streambuf> MessageSerializer::SerlializeMsg(std::shared_ptr<google::protobuf::Message> spmsg)
+	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+		return SerializeMsg(nullptr,spmsg);
+	}
+	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		auto spbuf = std::make_shared<asio::streambuf>();
 
@@ -111,6 +115,11 @@ namespace DDRFramework
 
 
 		CommonHeader commonHeader;
+		if (spheader)
+		{
+			commonHeader.CopyFrom(*(spheader.get()));
+		}
+
 		commonHeader.set_bodytype(stype);
 
 
@@ -173,12 +182,13 @@ namespace DDRFramework
 		return spbuf;
 
 	}
-	bool MessageSerializer::Pack(std::shared_ptr<google::protobuf::Message> spmsg)
+
+	bool MessageSerializer::Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 
 		std::lock_guard<std::mutex> lock(mMutexSend);
 
-		auto spbuf = SerlializeMsg(spmsg);
+		auto spbuf = SerializeMsg(spheader,spmsg);
 		mDataStreamSendQueue.push(spbuf);
 
 

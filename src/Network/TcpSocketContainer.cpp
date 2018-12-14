@@ -82,7 +82,8 @@ namespace DDRFramework
 		}
 		buf.consume(buf.size());
 	}
-	void TcpSocketContainer::Send(std::shared_ptr<google::protobuf::Message> spmsg)
+
+	void TcpSocketContainer::Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		if (m_bConnected)
 		{
@@ -91,7 +92,7 @@ namespace DDRFramework
 			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
 			if (m_spSerializer)
 			{
-				m_spSerializer->Pack(spmsg);
+				m_spSerializer->Pack(spheader, spmsg);
 
 			}
 		}
@@ -100,6 +101,11 @@ namespace DDRFramework
 			DebugLog("\nDisconnected Send Failed");
 
 		}
+
+	}
+	void TcpSocketContainer::Send(std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+		Send(nullptr, spmsg);
 	};
 	tcp::socket& TcpSocketContainer::GetSocket()
 	{

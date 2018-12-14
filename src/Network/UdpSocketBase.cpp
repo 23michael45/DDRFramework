@@ -78,7 +78,7 @@ namespace DDRFramework
 
 
 
-		auto spbuf = m_spSerializer->SerlializeMsg(spMsg);
+		auto spbuf = m_spSerializer->SerializeMsg(spMsg);
 		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
 	}
 	void UdpSocketBase::StopBroadcast()
