@@ -26,9 +26,9 @@ namespace DDRFramework
 		void Init();
 		void Deinit();
 
-		std::shared_ptr<asio::streambuf> SerlializeMsg(std::shared_ptr<google::protobuf::Message> spmsg);
-
-		bool Pack(std::shared_ptr<google::protobuf::Message> spmsg);
+		std::shared_ptr<asio::streambuf> SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
+		std::shared_ptr<asio::streambuf> SerializeMsg(std::shared_ptr<google::protobuf::Message> spmsg);
+		bool Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
 
 		std::mutex& GetRecLock()
 		{

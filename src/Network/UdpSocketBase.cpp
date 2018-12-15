@@ -78,7 +78,7 @@ namespace DDRFramework
 
 
 
-		auto spbuf = m_spSerializer->SerlializeMsg(spMsg);
+		auto spbuf = m_spSerializer->SerializeMsg(spMsg);
 		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
 	}
 	void UdpSocketBase::StopBroadcast()
@@ -99,6 +99,7 @@ namespace DDRFramework
 		m_spRecvEnderEndpoint = std::make_shared<asio::ip::udp::endpoint>(asio::ip::address_v4::any(), port);
 		//m_spSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext), *(m_spRecvEnderEndpoint.get());
 		m_spSocket = std::make_shared<asio::ip::udp::socket>(m_IOContext, *(m_spRecvEnderEndpoint.get()));
+		m_spSocket->set_option(asio::ip::udp::socket::reuse_address(true));
 		//m_spSocket->open(m_spRecvEnderEndpoint->protocol());
 
 

@@ -13,15 +13,25 @@ namespace DDRFramework
 
 		std::string GetValue(std::string sheet, int count, std::string key);
 		std::string GetValue(int count, std::string key);
+	
+
+		std::string GetValue(std::string sheet, std::string key);
 		std::string GetValue(std::string key);
+
 
 
 		int GetElementCount(std::string sheet);
 		int GetElementCount();
-		int GetKeyCount();
-		std::string GetKey(int count);
-		int GetKeyCount(std::string sheet);
-		std::string GetKey(std::string sheet, int count);
+		int ColumnGetKeyCount();
+		std::string GetColumnKey(int count);
+		int ColumnGetKeyCount(std::string sheet);
+		std::string GetColumnKey(std::string sheet, int count);
+
+
+		int RowGetKeyCount();
+		std::string GetRowKey(int count);
+		int RowGetKeyCount(std::string sheet);
+		std::string GetRowKey(std::string sheet, int count);
 
 
 		void SetValue(std::string sheet, int count, std::string key, std::string value);
@@ -36,11 +46,18 @@ namespace DDRFramework
 		typedef std::map<std::string, std::shared_ptr<KVMapVector>> SheetMap;
 		typedef std::vector<std::string> KeyVector;
 
-
+		typedef std::map<std::string, int> KeyIndexMap;
+		typedef std::map<int, std::string> IndexKeyMap;
 	protected:
 		std::string m_DefaultSheetName;
 
-		std::map<std::string, std::shared_ptr<KeyVector>> m_KeyMap;
+		std::map<std::string, std::shared_ptr<KeyVector>> m_ColumnKeyMap;
+
+
+		std::map<std::string, std::shared_ptr<KeyIndexMap>> m_RowKeyIndexMap;
+		std::map<std::string, std::shared_ptr<IndexKeyMap>> m_RowIndexKeyMap;
+		
+
 		SheetMap m_SheetMap;
 		std::string m_FileName;
 	private:

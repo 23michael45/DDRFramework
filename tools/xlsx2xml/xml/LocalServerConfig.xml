@@ -1,5 +1,8 @@
 <Root>
   <LocalServerConfig>
-    <Element ID="1" ServerName="LocalServerV1" Port="88" ThreadCount="4" />
+    <Element Key="ServerName" Value="LocalServerV1" Description="Server's Name" />
+    <Element Key="TcpPort" Value="88" Description="Tcp Port" />
+    <Element Key="UdpPort" Value="28888" Description="Upd Broadcast Port" />
+    <Element Key="ServerThreadCount" Value="4" Description="Thread Count" />
   </LocalServerConfig>
 </Root>

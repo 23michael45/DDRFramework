@@ -43,6 +43,7 @@ namespace DDRFramework
 
 
 		void Start(int threadNum = 2);
+		void Stop();
 
 	protected:
 

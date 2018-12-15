@@ -2,6 +2,7 @@
 #define TcpSocketContainer_h__
 
 #include <google/protobuf/message.h>
+#include "../../proto/BaseCmd.pb.h"
 #include "asio.hpp"
 #include <map>
 #include "../Logic/BaseBehavior.h"
@@ -45,6 +46,7 @@ namespace DDRFramework
 		virtual void CheckBehavior();
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
+		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
 
 
 		tcp::socket& GetSocket();
@@ -79,6 +81,12 @@ namespace DDRFramework
 		{
 			return m_spBehavior;
 		}
+		bool HasBehavior()
+		{
+			return m_spBehavior != nullptr;
+		}
+
+		std::string GetIPAddress();
 
 	protected:
 		void PushData(asio::streambuf& buf);
