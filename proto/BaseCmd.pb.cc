@@ -20,6 +20,7 @@
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_BaseCmd_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_BaseCmd_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_bcLSAddr_ServerInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_BaseCmd_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_notifyAVStream_fullChannelInfo;
 extern PROTOBUF_INTERNAL_EXPORT_protobuf_BaseCmd_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_reqLogin_msgAVStreamReq;
 }  // namespace protobuf_BaseCmd_2eproto
@@ -34,6 +35,11 @@ class heartBeatDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<heartBeat>
       _instance;
 } _heartBeat_default_instance_;
+class bcLSAddr_ServerInfoDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<bcLSAddr_ServerInfo>
+      _instance;
+} _bcLSAddr_ServerInfo_default_instance_;
 class bcLSAddrDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<bcLSAddr>
@@ -84,6 +90,11 @@ class respTalkDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<respTalk>
       _instance;
 } _respTalk_default_instance_;
+class reqTalkHBDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<reqTalkHB>
+      _instance;
+} _reqTalkHB_default_instance_;
 class reqCmdDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<reqCmd>
@@ -104,21 +115,31 @@ class respFileDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<respFile>
       _instance;
 } _respFile_default_instance_;
-class notifyStatusDefaultTypeInternal {
+class reqFileAddrDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<notifyStatus>
+  ::google::protobuf::internal::ExplicitlyConstructed<reqFileAddr>
       _instance;
-} _notifyStatus_default_instance_;
-class notifyAlarmDefaultTypeInternal {
+} _reqFileAddr_default_instance_;
+class respFileAddrDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<notifyAlarm>
+  ::google::protobuf::internal::ExplicitlyConstructed<respFileAddr>
       _instance;
-} _notifyAlarm_default_instance_;
-class notifyTextChatDefaultTypeInternal {
+} _respFileAddr_default_instance_;
+class reqStatusDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<notifyTextChat>
+  ::google::protobuf::internal::ExplicitlyConstructed<reqStatus>
       _instance;
-} _notifyTextChat_default_instance_;
+} _reqStatus_default_instance_;
+class reqAlarmDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<reqAlarm>
+      _instance;
+} _reqAlarm_default_instance_;
+class reqTextChatDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<reqTextChat>
+      _instance;
+} _reqTextChat_default_instance_;
 }  // namespace DDRCommProto
 namespace protobuf_BaseCmd_2eproto {
 static void InitDefaultsCommonHeader() {
@@ -149,6 +170,20 @@ static void InitDefaultsheartBeat() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_heartBeat =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsheartBeat}, {}};
 
+static void InitDefaultsbcLSAddr_ServerInfo() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::DDRCommProto::_bcLSAddr_ServerInfo_default_instance_;
+    new (ptr) ::DDRCommProto::bcLSAddr_ServerInfo();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::DDRCommProto::bcLSAddr_ServerInfo::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_bcLSAddr_ServerInfo =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsbcLSAddr_ServerInfo}, {}};
+
 static void InitDefaultsbcLSAddr() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -160,8 +195,9 @@ static void InitDefaultsbcLSAddr() {
   ::DDRCommProto::bcLSAddr::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_bcLSAddr =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsbcLSAddr}, {}};
+::google::protobuf::internal::SCCInfo<1> scc_info_bcLSAddr =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsbcLSAddr}, {
+      &protobuf_BaseCmd_2eproto::scc_info_bcLSAddr_ServerInfo.base,}};
 
 static void InitDefaultsreqLogin_msgAVStreamReq() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -291,6 +327,20 @@ static void InitDefaultsrespTalk() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_respTalk =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsrespTalk}, {}};
 
+static void InitDefaultsreqTalkHB() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::DDRCommProto::_reqTalkHB_default_instance_;
+    new (ptr) ::DDRCommProto::reqTalkHB();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::DDRCommProto::reqTalkHB::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_reqTalkHB =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsreqTalkHB}, {}};
+
 static void InitDefaultsreqCmd() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -347,51 +397,80 @@ static void InitDefaultsrespFile() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_respFile =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsrespFile}, {}};
 
-static void InitDefaultsnotifyStatus() {
+static void InitDefaultsreqFileAddr() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::DDRCommProto::_notifyStatus_default_instance_;
-    new (ptr) ::DDRCommProto::notifyStatus();
+    void* ptr = &::DDRCommProto::_reqFileAddr_default_instance_;
+    new (ptr) ::DDRCommProto::reqFileAddr();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::DDRCommProto::notifyStatus::InitAsDefaultInstance();
+  ::DDRCommProto::reqFileAddr::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_notifyStatus =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsnotifyStatus}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_reqFileAddr =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsreqFileAddr}, {}};
 
-static void InitDefaultsnotifyAlarm() {
+static void InitDefaultsrespFileAddr() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::DDRCommProto::_notifyAlarm_default_instance_;
-    new (ptr) ::DDRCommProto::notifyAlarm();
+    void* ptr = &::DDRCommProto::_respFileAddr_default_instance_;
+    new (ptr) ::DDRCommProto::respFileAddr();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::DDRCommProto::notifyAlarm::InitAsDefaultInstance();
+  ::DDRCommProto::respFileAddr::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_notifyAlarm =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsnotifyAlarm}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_respFileAddr =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsrespFileAddr}, {}};
 
-static void InitDefaultsnotifyTextChat() {
+static void InitDefaultsreqStatus() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
-    void* ptr = &::DDRCommProto::_notifyTextChat_default_instance_;
-    new (ptr) ::DDRCommProto::notifyTextChat();
+    void* ptr = &::DDRCommProto::_reqStatus_default_instance_;
+    new (ptr) ::DDRCommProto::reqStatus();
     ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::DDRCommProto::notifyTextChat::InitAsDefaultInstance();
+  ::DDRCommProto::reqStatus::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_notifyTextChat =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsnotifyTextChat}, {}};
+::google::protobuf::internal::SCCInfo<0> scc_info_reqStatus =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsreqStatus}, {}};
+
+static void InitDefaultsreqAlarm() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::DDRCommProto::_reqAlarm_default_instance_;
+    new (ptr) ::DDRCommProto::reqAlarm();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::DDRCommProto::reqAlarm::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_reqAlarm =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsreqAlarm}, {}};
+
+static void InitDefaultsreqTextChat() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::DDRCommProto::_reqTextChat_default_instance_;
+    new (ptr) ::DDRCommProto::reqTextChat();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::DDRCommProto::reqTextChat::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_reqTextChat =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsreqTextChat}, {}};
 
 void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_CommonHeader.base);
   ::google::protobuf::internal::InitSCC(&scc_info_heartBeat.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_bcLSAddr_ServerInfo.base);
   ::google::protobuf::internal::InitSCC(&scc_info_bcLSAddr.base);
   ::google::protobuf::internal::InitSCC(&scc_info_reqLogin_msgAVStreamReq.base);
   ::google::protobuf::internal::InitSCC(&scc_info_reqLogin.base);
@@ -402,17 +481,20 @@ void InitDefaults() {
   ::google::protobuf::internal::InitSCC(&scc_info_notifyAVStream.base);
   ::google::protobuf::internal::InitSCC(&scc_info_reqTalk.base);
   ::google::protobuf::internal::InitSCC(&scc_info_respTalk.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_reqTalkHB.base);
   ::google::protobuf::internal::InitSCC(&scc_info_reqCmd.base);
   ::google::protobuf::internal::InitSCC(&scc_info_respCmd.base);
   ::google::protobuf::internal::InitSCC(&scc_info_reqFile.base);
   ::google::protobuf::internal::InitSCC(&scc_info_respFile.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_notifyStatus.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_notifyAlarm.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_notifyTextChat.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_reqFileAddr.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_respFileAddr.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_reqStatus.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_reqAlarm.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_reqTextChat.base);
 }
 
-::google::protobuf::Metadata file_level_metadata[19];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
+::google::protobuf::Metadata file_level_metadata[23];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[13];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -422,8 +504,11 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, bodytype_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, flowdirection_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, desttype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, destinfo_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, boriginal_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, srccond_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, forwardtype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, rectype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::CommonHeader, prevrouteaddr_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::heartBeat, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -431,13 +516,19 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::heartBeat, whatever_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr_ServerInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr_ServerInfo, name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr_ServerInfo, ips_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr_ServerInfo, port_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr, ips_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr, port_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::bcLSAddr, lsinfo_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqLogin_msgAVStreamReq, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -481,12 +572,12 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, nclients_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, ctopoplv_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, ctopoptime_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, nmonitors_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, mtopoplv_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, mtopoptime_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, nclients_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, ctopoplv_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, ctopoptime_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifySerAccess, nameslsm_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyAVStream_fullChannelInfo, _internal_metadata_),
@@ -514,18 +605,24 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, callertype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, id1_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, id2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, talkid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, avtype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalk, localtalkaddr_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, receivertype_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, id1_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, id2_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, talkid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respTalk, avtype_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalkHB, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalkHB, callertalkid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTalkHB, receivertalkid_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqCmd, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -545,58 +642,84 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFile, filename_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFile, tarlsmname_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFile, filetype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFile, filenames_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, filename_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, fileaddr_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, tarlsmname_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, filetype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, filenames_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFile, filecontents_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyStatus, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFileAddr, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyStatus, statusmsg_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFileAddr, tarlsmname_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFileAddr, filetype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqFileAddr, filenames_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyAlarm, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFileAddr, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyAlarm, alarmmsg_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFileAddr, tarlsmname_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFileAddr, filetype_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFileAddr, filenames_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::respFileAddr, fileaddr_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyTextChat, _internal_metadata_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqStatus, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::notifyTextChat, chattext_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqStatus, statusmsg_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqAlarm, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqAlarm, alarmmsg_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTextChat, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DDRCommProto::reqTextChat, chattext_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::DDRCommProto::CommonHeader)},
-  { 9, -1, sizeof(::DDRCommProto::heartBeat)},
-  { 15, -1, sizeof(::DDRCommProto::bcLSAddr)},
-  { 23, -1, sizeof(::DDRCommProto::reqLogin_msgAVStreamReq)},
-  { 31, -1, sizeof(::DDRCommProto::reqLogin)},
-  { 43, -1, sizeof(::DDRCommProto::respLogin)},
-  { 51, -1, sizeof(::DDRCommProto::notifyTerminalAccess)},
-  { 61, -1, sizeof(::DDRCommProto::notifySerAccess)},
-  { 73, -1, sizeof(::DDRCommProto::notifyAVStream_fullChannelInfo)},
-  { 86, -1, sizeof(::DDRCommProto::notifyAVStream)},
-  { 93, -1, sizeof(::DDRCommProto::reqTalk)},
-  { 102, -1, sizeof(::DDRCommProto::respTalk)},
-  { 111, -1, sizeof(::DDRCommProto::reqCmd)},
-  { 118, -1, sizeof(::DDRCommProto::respCmd)},
-  { 125, -1, sizeof(::DDRCommProto::reqFile)},
-  { 131, -1, sizeof(::DDRCommProto::respFile)},
-  { 138, -1, sizeof(::DDRCommProto::notifyStatus)},
-  { 144, -1, sizeof(::DDRCommProto::notifyAlarm)},
-  { 150, -1, sizeof(::DDRCommProto::notifyTextChat)},
+  { 12, -1, sizeof(::DDRCommProto::heartBeat)},
+  { 18, -1, sizeof(::DDRCommProto::bcLSAddr_ServerInfo)},
+  { 26, -1, sizeof(::DDRCommProto::bcLSAddr)},
+  { 32, -1, sizeof(::DDRCommProto::reqLogin_msgAVStreamReq)},
+  { 40, -1, sizeof(::DDRCommProto::reqLogin)},
+  { 52, -1, sizeof(::DDRCommProto::respLogin)},
+  { 60, -1, sizeof(::DDRCommProto::notifyTerminalAccess)},
+  { 70, -1, sizeof(::DDRCommProto::notifySerAccess)},
+  { 82, -1, sizeof(::DDRCommProto::notifyAVStream_fullChannelInfo)},
+  { 95, -1, sizeof(::DDRCommProto::notifyAVStream)},
+  { 102, -1, sizeof(::DDRCommProto::reqTalk)},
+  { 111, -1, sizeof(::DDRCommProto::respTalk)},
+  { 119, -1, sizeof(::DDRCommProto::reqTalkHB)},
+  { 126, -1, sizeof(::DDRCommProto::reqCmd)},
+  { 133, -1, sizeof(::DDRCommProto::respCmd)},
+  { 140, -1, sizeof(::DDRCommProto::reqFile)},
+  { 148, -1, sizeof(::DDRCommProto::respFile)},
+  { 157, -1, sizeof(::DDRCommProto::reqFileAddr)},
+  { 165, -1, sizeof(::DDRCommProto::respFileAddr)},
+  { 174, -1, sizeof(::DDRCommProto::reqStatus)},
+  { 180, -1, sizeof(::DDRCommProto::reqAlarm)},
+  { 186, -1, sizeof(::DDRCommProto::reqTextChat)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_CommonHeader_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_heartBeat_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_bcLSAddr_ServerInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_bcLSAddr_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqLogin_msgAVStreamReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqLogin_default_instance_),
@@ -607,13 +730,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_notifyAVStream_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqTalk_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_respTalk_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqTalkHB_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqCmd_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_respCmd_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqFile_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_respFile_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_notifyStatus_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_notifyAlarm_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_notifyTextChat_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqFileAddr_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_respFileAddr_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqStatus_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqAlarm_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::DDRCommProto::_reqTextChat_default_instance_),
 };
 
 void protobuf_AssignDescriptors() {
@@ -631,72 +757,99 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 19);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 23);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rBaseCmd.proto\022\014DDRCommProto\"\261\002\n\014Common"
+      "\n\rBaseCmd.proto\022\014DDRCommProto\"\344\004\n\014Common"
       "Header\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirectio"
       "n\030\002 \003(\0162#.DDRCommProto.CommonHeader.eFlo"
-      "wDir\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Co"
-      "mmonHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V"
-      "\n\010eFlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS"
-      "\020\002\022\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LS"
-      "M2LS\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMNa"
-      "me\020\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatev"
-      "er\030\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ip"
-      "s\030\002 \003(\t\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004ty"
-      "pe\030\001 \001(\0162\037.DDRCommProto.reqLogin.eCltTyp"
-      "e\022\020\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010"
-      "robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006"
-      " \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto"
-      ".reqLogin.msgAVStreamReq\032F\n\016msgAVStreamR"
-      "eq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014ba"
-      "ndwidthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000"
-      "\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLog"
-      "in\0226\n\007retcode\030\001 \001(\0162%.DDRCommProto.respL"
-      "ogin.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .D"
-      "DRCommProto.respLogin.eCltType\022\013\n\003UID\030\003 "
-      "\001(\005\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013ser"
-      "ver_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\t"
-      "UID_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010e"
-      "CltType\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007"
-      "\n\003LSM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRCo"
-      "nnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonito"
-      "rs\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005"
-      " \003(\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001"
-      "(\005\022\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003"
-      "\022\021\n\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n"
-      "\nmTopOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016"
-      "notifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132"
-      ",.DDRCommProto.notifyAVStream.fullChanne"
-      "lInfo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DD"
-      "RCommProto.notifyAVStream.fullChannelInf"
-      "o\032\261\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020"
-      "\n\010dataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t"
-      "\022\032\n\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 "
-      "\001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001("
-      "\005\022\022\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncal"
-      "lerType\030\001 \001(\0162!.DDRCommProto.reqTalk.eCa"
-      "llerType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006av"
-      "Type\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n"
-      "\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:"
-      "\n\014receiverType\030\001 \001(\0162$.DDRCommProto.resp"
-      "Talk.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003"
-      " \001(\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n"
-      "\006client\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\'\n"
-      "\006reqCmd\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")"
-      "\n\007respCmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001("
-      "\t\"\033\n\007reqFile\022\020\n\010fileName\030\001 \003(\t\".\n\010respFi"
-      "le\022\020\n\010fileName\030\001 \003(\t\022\020\n\010fileAddr\030\002 \003(\t\"!"
-      "\n\014notifyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013not"
-      "ifyAlarm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyText"
-      "Chat\022\020\n\010chatText\030\001 \001(\tb\006proto3"
+      "wDir\022\021\n\tbOriginal\030\003 \001(\005\0229\n\007srcCond\030\004 \001(\016"
+      "2(.DDRCommProto.CommonHeader.eSrcConditi"
+      "on\022\?\n\013forwardType\030\005 \001(\0162*.DDRCommProto.C"
+      "ommonHeader.eForwardingType\0227\n\007recType\030\006"
+      " \001(\0162&.DDRCommProto.CommonHeader.eSrcRec"
+      "Type\022\025\n\rprevRouteAddr\030\007 \003(\t\"\200\001\n\010eFlowDir"
+      "\022\016\n\nUNKNOWN2RS\020\000\022\010\n\004RS2M\020\001\022\010\n\004M2RS\020\002\022\t\n\005"
+      "RS2RR\020\003\022\t\n\005RR2RS\020\004\022\016\n\nUNKNOWN2LS\020\005\022\010\n\004LS"
+      "2C\020\006\022\010\n\004C2LS\020\007\022\n\n\006LS2LSM\020\010\022\n\n\006LSM2LS\020\t\"#"
+      "\n\reSrcCondition\022\n\n\006NoCond\020\000\022\006\n\002Op\020\001\"Y\n\017e"
+      "ForwardingType\022\020\n\014NoForwarding\020\000\022\n\n\006LSMA"
+      "ll\020\001\022\r\n\tCltMonAll\020\002\022\010\n\004ToOp\020\003\022\017\n\013Routing"
+      "Back\020\004\"$\n\013eSrcRecType\022\t\n\005NoRec\020\000\022\n\n\006RecS"
+      "rc\020\001\"\035\n\theartBeat\022\020\n\010whatever\030\001 \001(\t\"t\n\010b"
+      "cLSAddr\0221\n\006LSInfo\030\001 \001(\0132!.DDRCommProto.b"
+      "cLSAddr.ServerInfo\0325\n\nServerInfo\022\014\n\004name"
+      "\030\001 \001(\t\022\013\n\003ips\030\002 \003(\t\022\014\n\004port\030\003 \001(\005\"\304\002\n\010re"
+      "qLogin\022-\n\004type\030\001 \001(\0162\037.DDRCommProto.reqL"
+      "ogin.eCltType\022\020\n\010username\030\002 \001(\t\022\017\n\007robot"
+      "ID\030\003 \001(\t\022\020\n\010robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 "
+      "\001(\005\022\013\n\003UID\030\006 \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%."
+      "DDRCommProto.reqLogin.msgAVStreamReq\032F\n\016"
+      "msgAVStreamReq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName"
+      "\030\002 \001(\t\022\024\n\014bandwidthReq\030\003 \001(\005\"2\n\010eCltType"
+      "\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002"
+      "\"\250\002\n\trespLogin\0226\n\007retcode\030\001 \001(\0162%.DDRCom"
+      "mProto.respLogin.eLoginRetCode\0222\n\010yourRo"
+      "le\030\002 \001(\0162 .DDRCommProto.respLogin.eCltTy"
+      "pe\022\013\n\003UID\030\003 \001(\005\"n\n\reLoginRetCode\022\013\n\007succ"
+      "ess\020\000\022\017\n\013server_busy\020\001\022\030\n\024server_limit_r"
+      "eached\020\002\022\r\n\tUID_error\020\003\022\026\n\022incorrect_pas"
+      "sword\020\004\"2\n\010eCltType\022\n\n\006client\020\000\022\021\n\randro"
+      "idClient\020\001\022\007\n\003LSM\020\002\"s\n\024notifyTerminalAcc"
+      "ess\022\027\n\017bRRConnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001("
+      "\005\022\021\n\tnMonitors\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020"
+      "\n\010nameLSMs\030\005 \003(\t\"\224\001\n\017notifySerAccess\022\021\n\t"
+      "nMonitors\030\001 \001(\005\022\020\n\010mTopOpLv\030\002 \001(\005\022\022\n\nmTo"
+      "pOpTime\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010cTopO"
+      "pLv\030\005 \001(\005\022\022\n\ncTopOpTime\030\006 \001(\003\022\020\n\010namesLS"
+      "M\030\007 \003(\t\"\327\002\n\016notifyAVStream\022E\n\017reservedCh"
+      "annel\030\001 \001(\0132,.DDRCommProto.notifyAVStrea"
+      "m.fullChannelInfo\022J\n\024robotMonitorChannel"
+      "s\030\002 \003(\0132,.DDRCommProto.notifyAVStream.fu"
+      "llChannelInfo\032\261\001\n\017fullChannelInfo\022\017\n\007dev"
+      "Type\030\001 \001(\005\022\020\n\010dataType\030\002 \001(\005\022\026\n\016localRes"
+      "AccStr\030\003 \001(\t\022\032\n\022channelDescription\030\004 \001(\t"
+      "\022\r\n\005bwReq\030\005 \001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nrem"
+      "otePort\030\007 \001(\005\022\022\n\nremotePass\030\010 \001(\t\"\256\001\n\007re"
+      "qTalk\0225\n\ncallerType\030\001 \001(\0162!.DDRCommProto"
+      ".reqTalk.eCallerType\022\016\n\006talkID\030\002 \001(\005\022\016\n\006"
+      "avType\030\003 \001(\005\022\025\n\rlocalTalkAddr\030\004 \003(\t\"5\n\013e"
+      "CallerType\022\n\n\006client\020\000\022\013\n\007monitor\020\001\022\r\n\tr"
+      "obot_LSM\020\002\"\237\001\n\010respTalk\022:\n\014receiverType\030"
+      "\001 \001(\0162$.DDRCommProto.respTalk.eReceiverT"
+      "ype\022\016\n\006talkID\030\002 \001(\005\022\016\n\006avType\030\003 \001(\005\"7\n\re"
+      "ReceiverType\022\n\n\006client\020\000\022\013\n\007monitor\020\001\022\r\n"
+      "\trobot_LSM\020\002\"9\n\treqTalkHB\022\024\n\014callerTalkI"
+      "D\030\001 \001(\005\022\026\n\016receiverTalkID\030\002 \001(\005\"\'\n\006reqCm"
+      "d\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007resp"
+      "Cmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"\243\001\n\007"
+      "reqFile\022\022\n\ntarLSMName\030\001 \001(\t\0222\n\010fileType\030"
+      "\002 \001(\0162 .DDRCommProto.reqFile.eFileTypes\022"
+      "\021\n\tfileNames\030\003 \003(\t\"=\n\neFileTypes\022\020\n\014File"
+      "Contents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020"
+      "\002\"\273\001\n\010respFile\022\022\n\ntarLSMName\030\001 \001(\t\0223\n\010fi"
+      "leType\030\002 \001(\0162!.DDRCommProto.respFile.eFi"
+      "leTypes\022\021\n\tfileNames\030\003 \003(\t\022\024\n\014fileConten"
+      "ts\030\004 \003(\t\"=\n\neFileTypes\022\020\n\014FileContents\020\000"
+      "\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020\002\"\253\001\n\013reqF"
+      "ileAddr\022\022\n\ntarLSMName\030\001 \001(\t\0226\n\010fileType\030"
+      "\002 \001(\0162$.DDRCommProto.reqFileAddr.eFileTy"
+      "pes\022\021\n\tfileNames\030\003 \003(\t\"=\n\neFileTypes\022\020\n\014"
+      "FileContents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFl"
+      "ist\020\002\"\277\001\n\014respFileAddr\022\022\n\ntarLSMName\030\001 \001"
+      "(\t\0227\n\010fileType\030\002 \001(\0162%.DDRCommProto.resp"
+      "FileAddr.eFileTypes\022\021\n\tfileNames\030\003 \003(\t\022\020"
+      "\n\010fileAddr\030\004 \003(\t\"=\n\neFileTypes\022\020\n\014FileCo"
+      "ntents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020\002\""
+      "\036\n\treqStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\034\n\010reqAl"
+      "arm\022\020\n\010alarmMsg\030\001 \001(\t\"\037\n\013reqTextChat\022\020\n\010"
+      "chatText\030\001 \001(\tb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2270);
+      descriptor, 3342);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BaseCmd.proto", &protobuf_RegisterTypes);
 }
@@ -726,6 +879,9 @@ bool CommonHeader_eFlowDir_IsValid(int value) {
     case 4:
     case 5:
     case 6:
+    case 7:
+    case 8:
+    case 9:
       return true;
     default:
       return false;
@@ -733,9 +889,12 @@ bool CommonHeader_eFlowDir_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const CommonHeader_eFlowDir CommonHeader::UNKNOWN2RS;
 const CommonHeader_eFlowDir CommonHeader::RS2M;
+const CommonHeader_eFlowDir CommonHeader::M2RS;
 const CommonHeader_eFlowDir CommonHeader::RS2RR;
 const CommonHeader_eFlowDir CommonHeader::RR2RS;
+const CommonHeader_eFlowDir CommonHeader::UNKNOWN2LS;
 const CommonHeader_eFlowDir CommonHeader::LS2C;
 const CommonHeader_eFlowDir CommonHeader::C2LS;
 const CommonHeader_eFlowDir CommonHeader::LS2LSM;
@@ -744,15 +903,14 @@ const CommonHeader_eFlowDir CommonHeader::eFlowDir_MIN;
 const CommonHeader_eFlowDir CommonHeader::eFlowDir_MAX;
 const int CommonHeader::eFlowDir_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-const ::google::protobuf::EnumDescriptor* CommonHeader_eDestType_descriptor() {
+const ::google::protobuf::EnumDescriptor* CommonHeader_eSrcCondition_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[1];
 }
-bool CommonHeader_eDestType_IsValid(int value) {
+bool CommonHeader_eSrcCondition_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
-    case 2:
       return true;
     default:
       return false;
@@ -760,16 +918,63 @@ bool CommonHeader_eDestType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const CommonHeader_eDestType CommonHeader::NoDest;
-const CommonHeader_eDestType CommonHeader::LSMName;
-const CommonHeader_eDestType CommonHeader::Routing;
-const CommonHeader_eDestType CommonHeader::eDestType_MIN;
-const CommonHeader_eDestType CommonHeader::eDestType_MAX;
-const int CommonHeader::eDestType_ARRAYSIZE;
+const CommonHeader_eSrcCondition CommonHeader::NoCond;
+const CommonHeader_eSrcCondition CommonHeader::Op;
+const CommonHeader_eSrcCondition CommonHeader::eSrcCondition_MIN;
+const CommonHeader_eSrcCondition CommonHeader::eSrcCondition_MAX;
+const int CommonHeader::eSrcCondition_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* CommonHeader_eForwardingType_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[2];
+}
+bool CommonHeader_eForwardingType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const CommonHeader_eForwardingType CommonHeader::NoForwarding;
+const CommonHeader_eForwardingType CommonHeader::LSMAll;
+const CommonHeader_eForwardingType CommonHeader::CltMonAll;
+const CommonHeader_eForwardingType CommonHeader::ToOp;
+const CommonHeader_eForwardingType CommonHeader::RoutingBack;
+const CommonHeader_eForwardingType CommonHeader::eForwardingType_MIN;
+const CommonHeader_eForwardingType CommonHeader::eForwardingType_MAX;
+const int CommonHeader::eForwardingType_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* CommonHeader_eSrcRecType_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[3];
+}
+bool CommonHeader_eSrcRecType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const CommonHeader_eSrcRecType CommonHeader::NoRec;
+const CommonHeader_eSrcRecType CommonHeader::RecSrc;
+const CommonHeader_eSrcRecType CommonHeader::eSrcRecType_MIN;
+const CommonHeader_eSrcRecType CommonHeader::eSrcRecType_MAX;
+const int CommonHeader::eSrcRecType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* reqLogin_eCltType_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[2];
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[4];
 }
 bool reqLogin_eCltType_IsValid(int value) {
   switch (value) {
@@ -792,7 +997,7 @@ const int reqLogin::eCltType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* respLogin_eLoginRetCode_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[3];
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[5];
 }
 bool respLogin_eLoginRetCode_IsValid(int value) {
   switch (value) {
@@ -819,7 +1024,7 @@ const int respLogin::eLoginRetCode_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* respLogin_eCltType_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[4];
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[6];
 }
 bool respLogin_eCltType_IsValid(int value) {
   switch (value) {
@@ -842,7 +1047,7 @@ const int respLogin::eCltType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* reqTalk_eCallerType_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[5];
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[7];
 }
 bool reqTalk_eCallerType_IsValid(int value) {
   switch (value) {
@@ -865,7 +1070,7 @@ const int reqTalk::eCallerType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 const ::google::protobuf::EnumDescriptor* respTalk_eReceiverType_descriptor() {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[6];
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[8];
 }
 bool respTalk_eReceiverType_IsValid(int value) {
   switch (value) {
@@ -886,6 +1091,98 @@ const respTalk_eReceiverType respTalk::eReceiverType_MIN;
 const respTalk_eReceiverType respTalk::eReceiverType_MAX;
 const int respTalk::eReceiverType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* reqFile_eFileTypes_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[9];
+}
+bool reqFile_eFileTypes_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const reqFile_eFileTypes reqFile::FileContents;
+const reqFile_eFileTypes reqFile::FileList;
+const reqFile_eFileTypes reqFile::FolderFlist;
+const reqFile_eFileTypes reqFile::eFileTypes_MIN;
+const reqFile_eFileTypes reqFile::eFileTypes_MAX;
+const int reqFile::eFileTypes_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* respFile_eFileTypes_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[10];
+}
+bool respFile_eFileTypes_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const respFile_eFileTypes respFile::FileContents;
+const respFile_eFileTypes respFile::FileList;
+const respFile_eFileTypes respFile::FolderFlist;
+const respFile_eFileTypes respFile::eFileTypes_MIN;
+const respFile_eFileTypes respFile::eFileTypes_MAX;
+const int respFile::eFileTypes_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* reqFileAddr_eFileTypes_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[11];
+}
+bool reqFileAddr_eFileTypes_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const reqFileAddr_eFileTypes reqFileAddr::FileContents;
+const reqFileAddr_eFileTypes reqFileAddr::FileList;
+const reqFileAddr_eFileTypes reqFileAddr::FolderFlist;
+const reqFileAddr_eFileTypes reqFileAddr::eFileTypes_MIN;
+const reqFileAddr_eFileTypes reqFileAddr::eFileTypes_MAX;
+const int reqFileAddr::eFileTypes_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+const ::google::protobuf::EnumDescriptor* respFileAddr_eFileTypes_descriptor() {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BaseCmd_2eproto::file_level_enum_descriptors[12];
+}
+bool respFileAddr_eFileTypes_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const respFileAddr_eFileTypes respFileAddr::FileContents;
+const respFileAddr_eFileTypes respFileAddr::FileList;
+const respFileAddr_eFileTypes respFileAddr::FolderFlist;
+const respFileAddr_eFileTypes respFileAddr::eFileTypes_MIN;
+const respFileAddr_eFileTypes respFileAddr::eFileTypes_MAX;
+const int respFileAddr::eFileTypes_ARRAYSIZE;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 // ===================================================================
 
@@ -894,8 +1191,11 @@ void CommonHeader::InitAsDefaultInstance() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int CommonHeader::kBodyTypeFieldNumber;
 const int CommonHeader::kFlowDirectionFieldNumber;
-const int CommonHeader::kDestTypeFieldNumber;
-const int CommonHeader::kDestInfoFieldNumber;
+const int CommonHeader::kBOriginalFieldNumber;
+const int CommonHeader::kSrcCondFieldNumber;
+const int CommonHeader::kForwardTypeFieldNumber;
+const int CommonHeader::kRecTypeFieldNumber;
+const int CommonHeader::kPrevRouteAddrFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CommonHeader::CommonHeader()
@@ -909,18 +1209,23 @@ CommonHeader::CommonHeader(const CommonHeader& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       flowdirection_(from.flowdirection_),
-      desttype_(from.desttype_),
-      destinfo_(from.destinfo_) {
+      prevrouteaddr_(from.prevrouteaddr_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   bodytype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.bodytype().size() > 0) {
     bodytype_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bodytype_);
   }
+  ::memcpy(&boriginal_, &from.boriginal_,
+    static_cast<size_t>(reinterpret_cast<char*>(&rectype_) -
+    reinterpret_cast<char*>(&boriginal_)) + sizeof(rectype_));
   // @@protoc_insertion_point(copy_constructor:DDRCommProto.CommonHeader)
 }
 
 void CommonHeader::SharedCtor() {
   bodytype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&boriginal_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&rectype_) -
+      reinterpret_cast<char*>(&boriginal_)) + sizeof(rectype_));
 }
 
 CommonHeader::~CommonHeader() {
@@ -953,9 +1258,11 @@ void CommonHeader::Clear() {
   (void) cached_has_bits;
 
   flowdirection_.Clear();
-  desttype_.Clear();
-  destinfo_.Clear();
+  prevrouteaddr_.Clear();
   bodytype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&boriginal_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&rectype_) -
+      reinterpret_cast<char*>(&boriginal_)) + sizeof(rectype_));
   _internal_metadata_.Clear();
 }
 
@@ -1014,46 +1321,76 @@ bool CommonHeader::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
+      // int32 bOriginal = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          ::google::protobuf::uint32 length;
-          DO_(input->ReadVarint32(&length));
-          ::google::protobuf::io::CodedInputStream::Limit limit = input->PushLimit(static_cast<int>(length));
-          while (input->BytesUntilLimit() > 0) {
-            int value;
-            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-            add_desttype(static_cast< ::DDRCommProto::CommonHeader_eDestType >(value));
-          }
-          input->PopLimit(limit);
-        } else if (
-            static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-          int value;
+
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          add_desttype(static_cast< ::DDRCommProto::CommonHeader_eDestType >(value));
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &boriginal_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // repeated string destInfo = 4;
+      // .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_srccond(static_cast< ::DDRCommProto::CommonHeader_eSrcCondition >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_forwardtype(static_cast< ::DDRCommProto::CommonHeader_eForwardingType >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_rectype(static_cast< ::DDRCommProto::CommonHeader_eSrcRecType >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string prevRouteAddr = 7;
+      case 7: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_destinfo()));
+                input, this->add_prevrouteaddr()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->destinfo(this->destinfo_size() - 1).data(),
-            static_cast<int>(this->destinfo(this->destinfo_size() - 1).length()),
+            this->prevrouteaddr(this->prevrouteaddr_size() - 1).data(),
+            static_cast<int>(this->prevrouteaddr(this->prevrouteaddr_size() - 1).length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.CommonHeader.destInfo"));
+            "DDRCommProto.CommonHeader.prevRouteAddr"));
         } else {
           goto handle_unusual;
         }
@@ -1110,28 +1447,37 @@ void CommonHeader::SerializeWithCachedSizes(
       this->flowdirection(i), output);
   }
 
-  // repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
-  if (this->desttype_size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteTag(
-      3,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      output);
-    output->WriteVarint32(
-        static_cast< ::google::protobuf::uint32>(_desttype_cached_byte_size_));
-  }
-  for (int i = 0, n = this->desttype_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnumNoTag(
-      this->desttype(i), output);
+  // int32 bOriginal = 3;
+  if (this->boriginal() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->boriginal(), output);
   }
 
-  // repeated string destInfo = 4;
-  for (int i = 0, n = this->destinfo_size(); i < n; i++) {
+  // .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
+  if (this->srccond() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      4, this->srccond(), output);
+  }
+
+  // .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+  if (this->forwardtype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      5, this->forwardtype(), output);
+  }
+
+  // .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+  if (this->rectype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      6, this->rectype(), output);
+  }
+
+  // repeated string prevRouteAddr = 7;
+  for (int i = 0, n = this->prevrouteaddr_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->destinfo(i).data(), static_cast<int>(this->destinfo(i).length()),
+      this->prevrouteaddr(i).data(), static_cast<int>(this->prevrouteaddr(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.CommonHeader.destInfo");
+      "DDRCommProto.CommonHeader.prevRouteAddr");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->destinfo(i), output);
+      7, this->prevrouteaddr(i), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1171,26 +1517,37 @@ void CommonHeader::SerializeWithCachedSizes(
       this->flowdirection_, target);
   }
 
-  // repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
-  if (this->desttype_size() > 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
-      3,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(      static_cast< ::google::protobuf::uint32>(
-            _desttype_cached_byte_size_), target);
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumNoTagToArray(
-      this->desttype_, target);
+  // int32 bOriginal = 3;
+  if (this->boriginal() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->boriginal(), target);
   }
 
-  // repeated string destInfo = 4;
-  for (int i = 0, n = this->destinfo_size(); i < n; i++) {
+  // .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
+  if (this->srccond() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      4, this->srccond(), target);
+  }
+
+  // .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+  if (this->forwardtype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      5, this->forwardtype(), target);
+  }
+
+  // .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+  if (this->rectype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      6, this->rectype(), target);
+  }
+
+  // repeated string prevRouteAddr = 7;
+  for (int i = 0, n = this->prevrouteaddr_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->destinfo(i).data(), static_cast<int>(this->destinfo(i).length()),
+      this->prevrouteaddr(i).data(), static_cast<int>(this->prevrouteaddr(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.CommonHeader.destInfo");
+      "DDRCommProto.CommonHeader.prevRouteAddr");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(4, this->destinfo(i), target);
+      WriteStringToArray(7, this->prevrouteaddr(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1229,31 +1586,12 @@ size_t CommonHeader::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
-  {
-    size_t data_size = 0;
-    unsigned int count = static_cast<unsigned int>(this->desttype_size());for (unsigned int i = 0; i < count; i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
-        this->desttype(static_cast<int>(i)));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-            static_cast< ::google::protobuf::int32>(data_size));
-    }
-    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _desttype_cached_byte_size_ = cached_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
-    total_size += data_size;
-  }
-
-  // repeated string destInfo = 4;
+  // repeated string prevRouteAddr = 7;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->destinfo_size());
-  for (int i = 0, n = this->destinfo_size(); i < n; i++) {
+      ::google::protobuf::internal::FromIntSize(this->prevrouteaddr_size());
+  for (int i = 0, n = this->prevrouteaddr_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->destinfo(i));
+      this->prevrouteaddr(i));
   }
 
   // string bodyType = 1;
@@ -1261,6 +1599,31 @@ size_t CommonHeader::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->bodytype());
+  }
+
+  // int32 bOriginal = 3;
+  if (this->boriginal() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->boriginal());
+  }
+
+  // .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
+  if (this->srccond() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->srccond());
+  }
+
+  // .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+  if (this->forwardtype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->forwardtype());
+  }
+
+  // .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+  if (this->rectype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->rectype());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1291,11 +1654,22 @@ void CommonHeader::MergeFrom(const CommonHeader& from) {
   (void) cached_has_bits;
 
   flowdirection_.MergeFrom(from.flowdirection_);
-  desttype_.MergeFrom(from.desttype_);
-  destinfo_.MergeFrom(from.destinfo_);
+  prevrouteaddr_.MergeFrom(from.prevrouteaddr_);
   if (from.bodytype().size() > 0) {
 
     bodytype_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bodytype_);
+  }
+  if (from.boriginal() != 0) {
+    set_boriginal(from.boriginal());
+  }
+  if (from.srccond() != 0) {
+    set_srccond(from.srccond());
+  }
+  if (from.forwardtype() != 0) {
+    set_forwardtype(from.forwardtype());
+  }
+  if (from.rectype() != 0) {
+    set_rectype(from.rectype());
   }
 }
 
@@ -1324,10 +1698,13 @@ void CommonHeader::Swap(CommonHeader* other) {
 void CommonHeader::InternalSwap(CommonHeader* other) {
   using std::swap;
   flowdirection_.InternalSwap(&other->flowdirection_);
-  desttype_.InternalSwap(&other->desttype_);
-  destinfo_.InternalSwap(CastToBase(&other->destinfo_));
+  prevrouteaddr_.InternalSwap(CastToBase(&other->prevrouteaddr_));
   bodytype_.Swap(&other->bodytype_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(boriginal_, other->boriginal_);
+  swap(srccond_, other->srccond_);
+  swap(forwardtype_, other->forwardtype_);
+  swap(rectype_, other->rectype_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -1581,22 +1958,22 @@ void heartBeat::InternalSwap(heartBeat* other) {
 
 // ===================================================================
 
-void bcLSAddr::InitAsDefaultInstance() {
+void bcLSAddr_ServerInfo::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int bcLSAddr::kNameFieldNumber;
-const int bcLSAddr::kIpsFieldNumber;
-const int bcLSAddr::kPortFieldNumber;
+const int bcLSAddr_ServerInfo::kNameFieldNumber;
+const int bcLSAddr_ServerInfo::kIpsFieldNumber;
+const int bcLSAddr_ServerInfo::kPortFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-bcLSAddr::bcLSAddr()
+bcLSAddr_ServerInfo::bcLSAddr_ServerInfo()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_BaseCmd_2eproto::scc_info_bcLSAddr.base);
+      &protobuf_BaseCmd_2eproto::scc_info_bcLSAddr_ServerInfo.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(constructor:DDRCommProto.bcLSAddr.ServerInfo)
 }
-bcLSAddr::bcLSAddr(const bcLSAddr& from)
+bcLSAddr_ServerInfo::bcLSAddr_ServerInfo(const bcLSAddr_ServerInfo& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       ips_(from.ips_) {
@@ -1606,39 +1983,39 @@ bcLSAddr::bcLSAddr(const bcLSAddr& from)
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   port_ = from.port_;
-  // @@protoc_insertion_point(copy_constructor:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.bcLSAddr.ServerInfo)
 }
 
-void bcLSAddr::SharedCtor() {
+void bcLSAddr_ServerInfo::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   port_ = 0;
 }
 
-bcLSAddr::~bcLSAddr() {
-  // @@protoc_insertion_point(destructor:DDRCommProto.bcLSAddr)
+bcLSAddr_ServerInfo::~bcLSAddr_ServerInfo() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.bcLSAddr.ServerInfo)
   SharedDtor();
 }
 
-void bcLSAddr::SharedDtor() {
+void bcLSAddr_ServerInfo::SharedDtor() {
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void bcLSAddr::SetCachedSize(int size) const {
+void bcLSAddr_ServerInfo::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* bcLSAddr::descriptor() {
+const ::google::protobuf::Descriptor* bcLSAddr_ServerInfo::descriptor() {
   ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const bcLSAddr& bcLSAddr::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_bcLSAddr.base);
+const bcLSAddr_ServerInfo& bcLSAddr_ServerInfo::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_bcLSAddr_ServerInfo.base);
   return *internal_default_instance();
 }
 
 
-void bcLSAddr::Clear() {
-// @@protoc_insertion_point(message_clear_start:DDRCommProto.bcLSAddr)
+void bcLSAddr_ServerInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.bcLSAddr.ServerInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1649,11 +2026,11 @@ void bcLSAddr::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool bcLSAddr::MergePartialFromCodedStream(
+bool bcLSAddr_ServerInfo::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(parse_start:DDRCommProto.bcLSAddr.ServerInfo)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -1668,7 +2045,7 @@ bool bcLSAddr::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->name().data(), static_cast<int>(this->name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.bcLSAddr.name"));
+            "DDRCommProto.bcLSAddr.ServerInfo.name"));
         } else {
           goto handle_unusual;
         }
@@ -1685,7 +2062,7 @@ bool bcLSAddr::MergePartialFromCodedStream(
             this->ips(this->ips_size() - 1).data(),
             static_cast<int>(this->ips(this->ips_size() - 1).length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.bcLSAddr.ips"));
+            "DDRCommProto.bcLSAddr.ServerInfo.ips"));
         } else {
           goto handle_unusual;
         }
@@ -1718,17 +2095,17 @@ bool bcLSAddr::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(parse_success:DDRCommProto.bcLSAddr.ServerInfo)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.bcLSAddr.ServerInfo)
   return false;
 #undef DO_
 }
 
-void bcLSAddr::SerializeWithCachedSizes(
+void bcLSAddr_ServerInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.bcLSAddr.ServerInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1737,7 +2114,7 @@ void bcLSAddr::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.bcLSAddr.name");
+      "DDRCommProto.bcLSAddr.ServerInfo.name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->name(), output);
   }
@@ -1747,7 +2124,7 @@ void bcLSAddr::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->ips(i).data(), static_cast<int>(this->ips(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.bcLSAddr.ips");
+      "DDRCommProto.bcLSAddr.ServerInfo.ips");
     ::google::protobuf::internal::WireFormatLite::WriteString(
       2, this->ips(i), output);
   }
@@ -1761,13 +2138,13 @@ void bcLSAddr::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.bcLSAddr.ServerInfo)
 }
 
-::google::protobuf::uint8* bcLSAddr::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* bcLSAddr_ServerInfo::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.bcLSAddr.ServerInfo)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1776,7 +2153,7 @@ void bcLSAddr::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->name().data(), static_cast<int>(this->name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.bcLSAddr.name");
+      "DDRCommProto.bcLSAddr.ServerInfo.name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->name(), target);
@@ -1787,7 +2164,7 @@ void bcLSAddr::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->ips(i).data(), static_cast<int>(this->ips(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.bcLSAddr.ips");
+      "DDRCommProto.bcLSAddr.ServerInfo.ips");
     target = ::google::protobuf::internal::WireFormatLite::
       WriteStringToArray(2, this->ips(i), target);
   }
@@ -1801,12 +2178,12 @@ void bcLSAddr::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.bcLSAddr.ServerInfo)
   return target;
 }
 
-size_t bcLSAddr::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.bcLSAddr)
+size_t bcLSAddr_ServerInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.bcLSAddr.ServerInfo)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1841,6 +2218,248 @@ size_t bcLSAddr::ByteSizeLong() const {
   return total_size;
 }
 
+void bcLSAddr_ServerInfo::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.bcLSAddr.ServerInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  const bcLSAddr_ServerInfo* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const bcLSAddr_ServerInfo>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.bcLSAddr.ServerInfo)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.bcLSAddr.ServerInfo)
+    MergeFrom(*source);
+  }
+}
+
+void bcLSAddr_ServerInfo::MergeFrom(const bcLSAddr_ServerInfo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.bcLSAddr.ServerInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  ips_.MergeFrom(from.ips_);
+  if (from.name().size() > 0) {
+
+    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  }
+  if (from.port() != 0) {
+    set_port(from.port());
+  }
+}
+
+void bcLSAddr_ServerInfo::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.bcLSAddr.ServerInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void bcLSAddr_ServerInfo::CopyFrom(const bcLSAddr_ServerInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.bcLSAddr.ServerInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool bcLSAddr_ServerInfo::IsInitialized() const {
+  return true;
+}
+
+void bcLSAddr_ServerInfo::Swap(bcLSAddr_ServerInfo* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void bcLSAddr_ServerInfo::InternalSwap(bcLSAddr_ServerInfo* other) {
+  using std::swap;
+  ips_.InternalSwap(CastToBase(&other->ips_));
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(port_, other->port_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata bcLSAddr_ServerInfo::GetMetadata() const {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void bcLSAddr::InitAsDefaultInstance() {
+  ::DDRCommProto::_bcLSAddr_default_instance_._instance.get_mutable()->lsinfo_ = const_cast< ::DDRCommProto::bcLSAddr_ServerInfo*>(
+      ::DDRCommProto::bcLSAddr_ServerInfo::internal_default_instance());
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int bcLSAddr::kLSInfoFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+bcLSAddr::bcLSAddr()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_BaseCmd_2eproto::scc_info_bcLSAddr.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:DDRCommProto.bcLSAddr)
+}
+bcLSAddr::bcLSAddr(const bcLSAddr& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_lsinfo()) {
+    lsinfo_ = new ::DDRCommProto::bcLSAddr_ServerInfo(*from.lsinfo_);
+  } else {
+    lsinfo_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.bcLSAddr)
+}
+
+void bcLSAddr::SharedCtor() {
+  lsinfo_ = NULL;
+}
+
+bcLSAddr::~bcLSAddr() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.bcLSAddr)
+  SharedDtor();
+}
+
+void bcLSAddr::SharedDtor() {
+  if (this != internal_default_instance()) delete lsinfo_;
+}
+
+void bcLSAddr::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* bcLSAddr::descriptor() {
+  ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const bcLSAddr& bcLSAddr::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_bcLSAddr.base);
+  return *internal_default_instance();
+}
+
+
+void bcLSAddr::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.bcLSAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && lsinfo_ != NULL) {
+    delete lsinfo_;
+  }
+  lsinfo_ = NULL;
+  _internal_metadata_.Clear();
+}
+
+bool bcLSAddr::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:DDRCommProto.bcLSAddr)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_lsinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:DDRCommProto.bcLSAddr)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.bcLSAddr)
+  return false;
+#undef DO_
+}
+
+void bcLSAddr::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.bcLSAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+  if (this->has_lsinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->_internal_lsinfo(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.bcLSAddr)
+}
+
+::google::protobuf::uint8* bcLSAddr::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.bcLSAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+  if (this->has_lsinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        1, this->_internal_lsinfo(), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.bcLSAddr)
+  return target;
+}
+
+size_t bcLSAddr::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.bcLSAddr)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+  if (this->has_lsinfo()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *lsinfo_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
 void bcLSAddr::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.bcLSAddr)
   GOOGLE_DCHECK_NE(&from, this);
@@ -1863,13 +2482,8 @@ void bcLSAddr::MergeFrom(const bcLSAddr& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  ips_.MergeFrom(from.ips_);
-  if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  if (from.port() != 0) {
-    set_port(from.port());
+  if (from.has_lsinfo()) {
+    mutable_lsinfo()->::DDRCommProto::bcLSAddr_ServerInfo::MergeFrom(from.lsinfo());
   }
 }
 
@@ -1897,10 +2511,7 @@ void bcLSAddr::Swap(bcLSAddr* other) {
 }
 void bcLSAddr::InternalSwap(bcLSAddr* other) {
   using std::swap;
-  ips_.InternalSwap(CastToBase(&other->ips_));
-  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(port_, other->port_);
+  swap(lsinfo_, other->lsinfo_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -3452,12 +4063,12 @@ void notifyTerminalAccess::InternalSwap(notifyTerminalAccess* other) {
 void notifySerAccess::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int notifySerAccess::kNClientsFieldNumber;
-const int notifySerAccess::kCTopOpLvFieldNumber;
-const int notifySerAccess::kCTopOpTimeFieldNumber;
 const int notifySerAccess::kNMonitorsFieldNumber;
 const int notifySerAccess::kMTopOpLvFieldNumber;
 const int notifySerAccess::kMTopOpTimeFieldNumber;
+const int notifySerAccess::kNClientsFieldNumber;
+const int notifySerAccess::kCTopOpLvFieldNumber;
+const int notifySerAccess::kCTopOpTimeFieldNumber;
 const int notifySerAccess::kNamesLSMFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -3473,16 +4084,16 @@ notifySerAccess::notifySerAccess(const notifySerAccess& from)
       _internal_metadata_(NULL),
       nameslsm_(from.nameslsm_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&nclients_, &from.nclients_,
-    static_cast<size_t>(reinterpret_cast<char*>(&mtopoptime_) -
-    reinterpret_cast<char*>(&nclients_)) + sizeof(mtopoptime_));
+  ::memcpy(&nmonitors_, &from.nmonitors_,
+    static_cast<size_t>(reinterpret_cast<char*>(&ctopoplv_) -
+    reinterpret_cast<char*>(&nmonitors_)) + sizeof(ctopoplv_));
   // @@protoc_insertion_point(copy_constructor:DDRCommProto.notifySerAccess)
 }
 
 void notifySerAccess::SharedCtor() {
-  ::memset(&nclients_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&mtopoptime_) -
-      reinterpret_cast<char*>(&nclients_)) + sizeof(mtopoptime_));
+  ::memset(&nmonitors_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&ctopoplv_) -
+      reinterpret_cast<char*>(&nmonitors_)) + sizeof(ctopoplv_));
 }
 
 notifySerAccess::~notifySerAccess() {
@@ -3514,9 +4125,9 @@ void notifySerAccess::Clear() {
   (void) cached_has_bits;
 
   nameslsm_.Clear();
-  ::memset(&nclients_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&mtopoptime_) -
-      reinterpret_cast<char*>(&nclients_)) + sizeof(mtopoptime_));
+  ::memset(&nmonitors_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&ctopoplv_) -
+      reinterpret_cast<char*>(&nmonitors_)) + sizeof(ctopoplv_));
   _internal_metadata_.Clear();
 }
 
@@ -3530,52 +4141,10 @@ bool notifySerAccess::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 nClients = 1;
+      // int32 nMonitors = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &nclients_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 cTopOpLv = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &ctopoplv_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 cTopOpTime = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &ctopoptime_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 nMonitors = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -3586,10 +4155,10 @@ bool notifySerAccess::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 mTopOpLv = 5;
-      case 5: {
+      // int32 mTopOpLv = 2;
+      case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -3600,14 +4169,56 @@ bool notifySerAccess::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 mTopOpTime = 6;
+      // int32 mTopOpTime = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &mtopoptime_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 nClients = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &nclients_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 cTopOpLv = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &ctopoplv_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 cTopOpTime = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &mtopoptime_)));
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &ctopoptime_)));
         } else {
           goto handle_unusual;
         }
@@ -3657,34 +4268,34 @@ void notifySerAccess::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 nClients = 1;
-  if (this->nclients() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->nclients(), output);
-  }
-
-  // int32 cTopOpLv = 2;
-  if (this->ctopoplv() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->ctopoplv(), output);
-  }
-
-  // int64 cTopOpTime = 3;
-  if (this->ctopoptime() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->ctopoptime(), output);
-  }
-
-  // int32 nMonitors = 4;
+  // int32 nMonitors = 1;
   if (this->nmonitors() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->nmonitors(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->nmonitors(), output);
   }
 
-  // int32 mTopOpLv = 5;
+  // int32 mTopOpLv = 2;
   if (this->mtopoplv() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->mtopoplv(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->mtopoplv(), output);
   }
 
-  // int32 mTopOpTime = 6;
+  // int32 mTopOpTime = 3;
   if (this->mtopoptime() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->mtopoptime(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->mtopoptime(), output);
+  }
+
+  // int32 nClients = 4;
+  if (this->nclients() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->nclients(), output);
+  }
+
+  // int32 cTopOpLv = 5;
+  if (this->ctopoplv() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->ctopoplv(), output);
+  }
+
+  // int64 cTopOpTime = 6;
+  if (this->ctopoptime() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->ctopoptime(), output);
   }
 
   // repeated string namesLSM = 7;
@@ -3711,34 +4322,34 @@ void notifySerAccess::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 nClients = 1;
-  if (this->nclients() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->nclients(), target);
-  }
-
-  // int32 cTopOpLv = 2;
-  if (this->ctopoplv() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->ctopoplv(), target);
-  }
-
-  // int64 cTopOpTime = 3;
-  if (this->ctopoptime() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->ctopoptime(), target);
-  }
-
-  // int32 nMonitors = 4;
+  // int32 nMonitors = 1;
   if (this->nmonitors() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->nmonitors(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->nmonitors(), target);
   }
 
-  // int32 mTopOpLv = 5;
+  // int32 mTopOpLv = 2;
   if (this->mtopoplv() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->mtopoplv(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->mtopoplv(), target);
   }
 
-  // int32 mTopOpTime = 6;
+  // int32 mTopOpTime = 3;
   if (this->mtopoptime() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->mtopoptime(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->mtopoptime(), target);
+  }
+
+  // int32 nClients = 4;
+  if (this->nclients() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->nclients(), target);
+  }
+
+  // int32 cTopOpLv = 5;
+  if (this->ctopoplv() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->ctopoplv(), target);
+  }
+
+  // int64 cTopOpTime = 6;
+  if (this->ctopoptime() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->ctopoptime(), target);
   }
 
   // repeated string namesLSM = 7;
@@ -3776,46 +4387,46 @@ size_t notifySerAccess::ByteSizeLong() const {
       this->nameslsm(i));
   }
 
-  // int32 nClients = 1;
-  if (this->nclients() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->nclients());
-  }
-
-  // int32 cTopOpLv = 2;
-  if (this->ctopoplv() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->ctopoplv());
-  }
-
-  // int64 cTopOpTime = 3;
-  if (this->ctopoptime() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->ctopoptime());
-  }
-
-  // int32 nMonitors = 4;
+  // int32 nMonitors = 1;
   if (this->nmonitors() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->nmonitors());
   }
 
-  // int32 mTopOpLv = 5;
+  // int32 mTopOpLv = 2;
   if (this->mtopoplv() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->mtopoplv());
   }
 
-  // int32 mTopOpTime = 6;
+  // int32 mTopOpTime = 3;
   if (this->mtopoptime() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->mtopoptime());
+  }
+
+  // int32 nClients = 4;
+  if (this->nclients() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->nclients());
+  }
+
+  // int64 cTopOpTime = 6;
+  if (this->ctopoptime() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->ctopoptime());
+  }
+
+  // int32 cTopOpLv = 5;
+  if (this->ctopoplv() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->ctopoplv());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3846,15 +4457,6 @@ void notifySerAccess::MergeFrom(const notifySerAccess& from) {
   (void) cached_has_bits;
 
   nameslsm_.MergeFrom(from.nameslsm_);
-  if (from.nclients() != 0) {
-    set_nclients(from.nclients());
-  }
-  if (from.ctopoplv() != 0) {
-    set_ctopoplv(from.ctopoplv());
-  }
-  if (from.ctopoptime() != 0) {
-    set_ctopoptime(from.ctopoptime());
-  }
   if (from.nmonitors() != 0) {
     set_nmonitors(from.nmonitors());
   }
@@ -3863,6 +4465,15 @@ void notifySerAccess::MergeFrom(const notifySerAccess& from) {
   }
   if (from.mtopoptime() != 0) {
     set_mtopoptime(from.mtopoptime());
+  }
+  if (from.nclients() != 0) {
+    set_nclients(from.nclients());
+  }
+  if (from.ctopoptime() != 0) {
+    set_ctopoptime(from.ctopoptime());
+  }
+  if (from.ctopoplv() != 0) {
+    set_ctopoplv(from.ctopoplv());
   }
 }
 
@@ -3891,12 +4502,12 @@ void notifySerAccess::Swap(notifySerAccess* other) {
 void notifySerAccess::InternalSwap(notifySerAccess* other) {
   using std::swap;
   nameslsm_.InternalSwap(CastToBase(&other->nameslsm_));
-  swap(nclients_, other->nclients_);
-  swap(ctopoplv_, other->ctopoplv_);
-  swap(ctopoptime_, other->ctopoptime_);
   swap(nmonitors_, other->nmonitors_);
   swap(mtopoplv_, other->mtopoplv_);
   swap(mtopoptime_, other->mtopoptime_);
+  swap(nclients_, other->nclients_);
+  swap(ctopoptime_, other->ctopoptime_);
+  swap(ctopoplv_, other->ctopoplv_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -4738,9 +5349,9 @@ void reqTalk::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int reqTalk::kCallerTypeFieldNumber;
-const int reqTalk::kId1FieldNumber;
-const int reqTalk::kId2FieldNumber;
+const int reqTalk::kTalkIDFieldNumber;
 const int reqTalk::kAvTypeFieldNumber;
+const int reqTalk::kLocalTalkAddrFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 reqTalk::reqTalk()
@@ -4752,7 +5363,8 @@ reqTalk::reqTalk()
 }
 reqTalk::reqTalk(const reqTalk& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      localtalkaddr_(from.localtalkaddr_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&callertype_, &from.callertype_,
     static_cast<size_t>(reinterpret_cast<char*>(&avtype_) -
@@ -4794,6 +5406,7 @@ void reqTalk::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  localtalkaddr_.Clear();
   ::memset(&callertype_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&avtype_) -
       reinterpret_cast<char*>(&callertype_)) + sizeof(avtype_));
@@ -4825,42 +5438,45 @@ bool reqTalk::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 id1 = 2;
+      // int32 talkID = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id1_)));
+                 input, &talkid_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 id2 = 3;
+      // int32 avType = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id2_)));
+                 input, &avtype_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 avType = 4;
+      // repeated string localTalkAddr = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &avtype_)));
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_localtalkaddr()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->localtalkaddr(this->localtalkaddr_size() - 1).data(),
+            static_cast<int>(this->localtalkaddr(this->localtalkaddr_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.reqTalk.localTalkAddr"));
         } else {
           goto handle_unusual;
         }
@@ -4899,19 +5515,24 @@ void reqTalk::SerializeWithCachedSizes(
       1, this->callertype(), output);
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->id1(), output);
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->talkid(), output);
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->id2(), output);
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->avtype(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->avtype(), output);
+  }
+
+  // repeated string localTalkAddr = 4;
+  for (int i = 0, n = this->localtalkaddr_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->localtalkaddr(i).data(), static_cast<int>(this->localtalkaddr(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqTalk.localTalkAddr");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->localtalkaddr(i), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -4934,19 +5555,24 @@ void reqTalk::SerializeWithCachedSizes(
       1, this->callertype(), target);
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->id1(), target);
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->talkid(), target);
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->id2(), target);
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->avtype(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->avtype(), target);
+  }
+
+  // repeated string localTalkAddr = 4;
+  for (int i = 0, n = this->localtalkaddr_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->localtalkaddr(i).data(), static_cast<int>(this->localtalkaddr(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqTalk.localTalkAddr");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(4, this->localtalkaddr(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -4966,27 +5592,28 @@ size_t reqTalk::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
+  // repeated string localTalkAddr = 4;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->localtalkaddr_size());
+  for (int i = 0, n = this->localtalkaddr_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->localtalkaddr(i));
+  }
+
   // .DDRCommProto.reqTalk.eCallerType callerType = 1;
   if (this->callertype() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->callertype());
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id1());
+        this->talkid());
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id2());
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -5020,14 +5647,12 @@ void reqTalk::MergeFrom(const reqTalk& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  localtalkaddr_.MergeFrom(from.localtalkaddr_);
   if (from.callertype() != 0) {
     set_callertype(from.callertype());
   }
-  if (from.id1() != 0) {
-    set_id1(from.id1());
-  }
-  if (from.id2() != 0) {
-    set_id2(from.id2());
+  if (from.talkid() != 0) {
+    set_talkid(from.talkid());
   }
   if (from.avtype() != 0) {
     set_avtype(from.avtype());
@@ -5058,9 +5683,9 @@ void reqTalk::Swap(reqTalk* other) {
 }
 void reqTalk::InternalSwap(reqTalk* other) {
   using std::swap;
+  localtalkaddr_.InternalSwap(CastToBase(&other->localtalkaddr_));
   swap(callertype_, other->callertype_);
-  swap(id1_, other->id1_);
-  swap(id2_, other->id2_);
+  swap(talkid_, other->talkid_);
   swap(avtype_, other->avtype_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -5077,8 +5702,7 @@ void respTalk::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int respTalk::kReceiverTypeFieldNumber;
-const int respTalk::kId1FieldNumber;
-const int respTalk::kId2FieldNumber;
+const int respTalk::kTalkIDFieldNumber;
 const int respTalk::kAvTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -5164,38 +5788,24 @@ bool respTalk::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 id1 = 2;
+      // int32 talkID = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id1_)));
+                 input, &talkid_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // int32 id2 = 3;
+      // int32 avType = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &id2_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 avType = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5238,19 +5848,14 @@ void respTalk::SerializeWithCachedSizes(
       1, this->receivertype(), output);
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->id1(), output);
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->talkid(), output);
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->id2(), output);
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->avtype(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->avtype(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -5273,19 +5878,14 @@ void respTalk::SerializeWithCachedSizes(
       1, this->receivertype(), target);
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->id1(), target);
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->talkid(), target);
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->id2(), target);
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->avtype(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->avtype(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -5311,21 +5911,14 @@ size_t respTalk::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->receivertype());
   }
 
-  // int32 id1 = 2;
-  if (this->id1() != 0) {
+  // int32 talkID = 2;
+  if (this->talkid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id1());
+        this->talkid());
   }
 
-  // int32 id2 = 3;
-  if (this->id2() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->id2());
-  }
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   if (this->avtype() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -5362,11 +5955,8 @@ void respTalk::MergeFrom(const respTalk& from) {
   if (from.receivertype() != 0) {
     set_receivertype(from.receivertype());
   }
-  if (from.id1() != 0) {
-    set_id1(from.id1());
-  }
-  if (from.id2() != 0) {
-    set_id2(from.id2());
+  if (from.talkid() != 0) {
+    set_talkid(from.talkid());
   }
   if (from.avtype() != 0) {
     set_avtype(from.avtype());
@@ -5398,13 +5988,277 @@ void respTalk::Swap(respTalk* other) {
 void respTalk::InternalSwap(respTalk* other) {
   using std::swap;
   swap(receivertype_, other->receivertype_);
-  swap(id1_, other->id1_);
-  swap(id2_, other->id2_);
+  swap(talkid_, other->talkid_);
   swap(avtype_, other->avtype_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
 ::google::protobuf::Metadata respTalk::GetMetadata() const {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void reqTalkHB::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int reqTalkHB::kCallerTalkIDFieldNumber;
+const int reqTalkHB::kReceiverTalkIDFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+reqTalkHB::reqTalkHB()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_BaseCmd_2eproto::scc_info_reqTalkHB.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:DDRCommProto.reqTalkHB)
+}
+reqTalkHB::reqTalkHB(const reqTalkHB& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&callertalkid_, &from.callertalkid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&receivertalkid_) -
+    reinterpret_cast<char*>(&callertalkid_)) + sizeof(receivertalkid_));
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqTalkHB)
+}
+
+void reqTalkHB::SharedCtor() {
+  ::memset(&callertalkid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&receivertalkid_) -
+      reinterpret_cast<char*>(&callertalkid_)) + sizeof(receivertalkid_));
+}
+
+reqTalkHB::~reqTalkHB() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.reqTalkHB)
+  SharedDtor();
+}
+
+void reqTalkHB::SharedDtor() {
+}
+
+void reqTalkHB::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* reqTalkHB::descriptor() {
+  ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const reqTalkHB& reqTalkHB::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_reqTalkHB.base);
+  return *internal_default_instance();
+}
+
+
+void reqTalkHB::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.reqTalkHB)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&callertalkid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&receivertalkid_) -
+      reinterpret_cast<char*>(&callertalkid_)) + sizeof(receivertalkid_));
+  _internal_metadata_.Clear();
+}
+
+bool reqTalkHB::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:DDRCommProto.reqTalkHB)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 callerTalkID = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &callertalkid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 receiverTalkID = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &receivertalkid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:DDRCommProto.reqTalkHB)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.reqTalkHB)
+  return false;
+#undef DO_
+}
+
+void reqTalkHB::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.reqTalkHB)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 callerTalkID = 1;
+  if (this->callertalkid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->callertalkid(), output);
+  }
+
+  // int32 receiverTalkID = 2;
+  if (this->receivertalkid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->receivertalkid(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.reqTalkHB)
+}
+
+::google::protobuf::uint8* reqTalkHB::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.reqTalkHB)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 callerTalkID = 1;
+  if (this->callertalkid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->callertalkid(), target);
+  }
+
+  // int32 receiverTalkID = 2;
+  if (this->receivertalkid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->receivertalkid(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.reqTalkHB)
+  return target;
+}
+
+size_t reqTalkHB::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.reqTalkHB)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // int32 callerTalkID = 1;
+  if (this->callertalkid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->callertalkid());
+  }
+
+  // int32 receiverTalkID = 2;
+  if (this->receivertalkid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->receivertalkid());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void reqTalkHB::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.reqTalkHB)
+  GOOGLE_DCHECK_NE(&from, this);
+  const reqTalkHB* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const reqTalkHB>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.reqTalkHB)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.reqTalkHB)
+    MergeFrom(*source);
+  }
+}
+
+void reqTalkHB::MergeFrom(const reqTalkHB& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.reqTalkHB)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.callertalkid() != 0) {
+    set_callertalkid(from.callertalkid());
+  }
+  if (from.receivertalkid() != 0) {
+    set_receivertalkid(from.receivertalkid());
+  }
+}
+
+void reqTalkHB::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.reqTalkHB)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void reqTalkHB::CopyFrom(const reqTalkHB& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.reqTalkHB)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool reqTalkHB::IsInitialized() const {
+  return true;
+}
+
+void reqTalkHB::Swap(reqTalkHB* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void reqTalkHB::InternalSwap(reqTalkHB* other) {
+  using std::swap;
+  swap(callertalkid_, other->callertalkid_);
+  swap(receivertalkid_, other->receivertalkid_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata reqTalkHB::GetMetadata() const {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -5977,7 +6831,9 @@ void respCmd::InternalSwap(respCmd* other) {
 void reqFile::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int reqFile::kFileNameFieldNumber;
+const int reqFile::kTarLSMNameFieldNumber;
+const int reqFile::kFileTypeFieldNumber;
+const int reqFile::kFileNamesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 reqFile::reqFile()
@@ -5990,12 +6846,19 @@ reqFile::reqFile()
 reqFile::reqFile(const reqFile& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      filename_(from.filename_) {
+      filenames_(from.filenames_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.tarlsmname().size() > 0) {
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  filetype_ = from.filetype_;
   // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqFile)
 }
 
 void reqFile::SharedCtor() {
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
 }
 
 reqFile::~reqFile() {
@@ -6004,6 +6867,7 @@ reqFile::~reqFile() {
 }
 
 void reqFile::SharedDtor() {
+  tarlsmname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void reqFile::SetCachedSize(int size) const {
@@ -6026,7 +6890,9 @@ void reqFile::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  filename_.Clear();
+  filenames_.Clear();
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -6040,17 +6906,48 @@ bool reqFile::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated string fileName = 1;
+      // string tarLSMName = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_filename()));
+                input, this->mutable_tarlsmname()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filename(this->filename_size() - 1).data(),
-            static_cast<int>(this->filename(this->filename_size() - 1).length()),
+            this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.reqFile.fileName"));
+            "DDRCommProto.reqFile.tarLSMName"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .DDRCommProto.reqFile.eFileTypes fileType = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_filetype(static_cast< ::DDRCommProto::reqFile_eFileTypes >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileNames = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_filenames()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filenames(this->filenames_size() - 1).data(),
+            static_cast<int>(this->filenames(this->filenames_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.reqFile.fileNames"));
         } else {
           goto handle_unusual;
         }
@@ -6083,14 +6980,30 @@ void reqFile::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string fileName = 1;
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename(i).data(), static_cast<int>(this->filename(i).length()),
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.reqFile.fileName");
+      "DDRCommProto.reqFile.tarLSMName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->tarlsmname(), output);
+  }
+
+  // .DDRCommProto.reqFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->filetype(), output);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFile.fileNames");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->filename(i), output);
+      3, this->filenames(i), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6107,14 +7020,31 @@ void reqFile::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string fileName = 1;
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename(i).data(), static_cast<int>(this->filename(i).length()),
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.reqFile.fileName");
+      "DDRCommProto.reqFile.tarLSMName");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->tarlsmname(), target);
+  }
+
+  // .DDRCommProto.reqFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->filetype(), target);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFile.fileNames");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(1, this->filename(i), target);
+      WriteStringToArray(3, this->filenames(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6134,12 +7064,25 @@ size_t reqFile::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated string fileName = 1;
+  // repeated string fileNames = 3;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->filename_size());
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+      ::google::protobuf::internal::FromIntSize(this->filenames_size());
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->filename(i));
+      this->filenames(i));
+  }
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->tarlsmname());
+  }
+
+  // .DDRCommProto.reqFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->filetype());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -6169,7 +7112,14 @@ void reqFile::MergeFrom(const reqFile& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  filename_.MergeFrom(from.filename_);
+  filenames_.MergeFrom(from.filenames_);
+  if (from.tarlsmname().size() > 0) {
+
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  if (from.filetype() != 0) {
+    set_filetype(from.filetype());
+  }
 }
 
 void reqFile::CopyFrom(const ::google::protobuf::Message& from) {
@@ -6196,7 +7146,10 @@ void reqFile::Swap(reqFile* other) {
 }
 void reqFile::InternalSwap(reqFile* other) {
   using std::swap;
-  filename_.InternalSwap(CastToBase(&other->filename_));
+  filenames_.InternalSwap(CastToBase(&other->filenames_));
+  tarlsmname_.Swap(&other->tarlsmname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(filetype_, other->filetype_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -6211,8 +7164,10 @@ void reqFile::InternalSwap(reqFile* other) {
 void respFile::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int respFile::kFileNameFieldNumber;
-const int respFile::kFileAddrFieldNumber;
+const int respFile::kTarLSMNameFieldNumber;
+const int respFile::kFileTypeFieldNumber;
+const int respFile::kFileNamesFieldNumber;
+const int respFile::kFileContentsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 respFile::respFile()
@@ -6225,13 +7180,20 @@ respFile::respFile()
 respFile::respFile(const respFile& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      filename_(from.filename_),
-      fileaddr_(from.fileaddr_) {
+      filenames_(from.filenames_),
+      filecontents_(from.filecontents_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.tarlsmname().size() > 0) {
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  filetype_ = from.filetype_;
   // @@protoc_insertion_point(copy_constructor:DDRCommProto.respFile)
 }
 
 void respFile::SharedCtor() {
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
 }
 
 respFile::~respFile() {
@@ -6240,6 +7202,7 @@ respFile::~respFile() {
 }
 
 void respFile::SharedDtor() {
+  tarlsmname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void respFile::SetCachedSize(int size) const {
@@ -6262,8 +7225,10 @@ void respFile::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  filename_.Clear();
-  fileaddr_.Clear();
+  filenames_.Clear();
+  filecontents_.Clear();
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -6277,34 +7242,65 @@ bool respFile::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated string fileName = 1;
+      // string tarLSMName = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_filename()));
+                input, this->mutable_tarlsmname()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filename(this->filename_size() - 1).data(),
-            static_cast<int>(this->filename(this->filename_size() - 1).length()),
+            this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.respFile.fileName"));
+            "DDRCommProto.respFile.tarLSMName"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // repeated string fileAddr = 2;
+      // .DDRCommProto.respFile.eFileTypes fileType = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_filetype(static_cast< ::DDRCommProto::respFile_eFileTypes >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileNames = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_fileaddr()));
+                input, this->add_filenames()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->fileaddr(this->fileaddr_size() - 1).data(),
-            static_cast<int>(this->fileaddr(this->fileaddr_size() - 1).length()),
+            this->filenames(this->filenames_size() - 1).data(),
+            static_cast<int>(this->filenames(this->filenames_size() - 1).length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.respFile.fileAddr"));
+            "DDRCommProto.respFile.fileNames"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileContents = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_filecontents()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filecontents(this->filecontents_size() - 1).data(),
+            static_cast<int>(this->filecontents(this->filecontents_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.respFile.fileContents"));
         } else {
           goto handle_unusual;
         }
@@ -6337,24 +7333,40 @@ void respFile::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string fileName = 1;
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename(i).data(), static_cast<int>(this->filename(i).length()),
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.respFile.fileName");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->filename(i), output);
+      "DDRCommProto.respFile.tarLSMName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->tarlsmname(), output);
   }
 
-  // repeated string fileAddr = 2;
-  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+  // .DDRCommProto.respFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->filetype(), output);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fileaddr(i).data(), static_cast<int>(this->fileaddr(i).length()),
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.respFile.fileAddr");
+      "DDRCommProto.respFile.fileNames");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->fileaddr(i), output);
+      3, this->filenames(i), output);
+  }
+
+  // repeated string fileContents = 4;
+  for (int i = 0, n = this->filecontents_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filecontents(i).data(), static_cast<int>(this->filecontents(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFile.fileContents");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->filecontents(i), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6371,24 +7383,41 @@ void respFile::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string fileName = 1;
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename(i).data(), static_cast<int>(this->filename(i).length()),
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.respFile.fileName");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(1, this->filename(i), target);
+      "DDRCommProto.respFile.tarLSMName");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->tarlsmname(), target);
   }
 
-  // repeated string fileAddr = 2;
-  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+  // .DDRCommProto.respFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->filetype(), target);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fileaddr(i).data(), static_cast<int>(this->fileaddr(i).length()),
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.respFile.fileAddr");
+      "DDRCommProto.respFile.fileNames");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->fileaddr(i), target);
+      WriteStringToArray(3, this->filenames(i), target);
+  }
+
+  // repeated string fileContents = 4;
+  for (int i = 0, n = this->filecontents_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filecontents(i).data(), static_cast<int>(this->filecontents(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFile.fileContents");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(4, this->filecontents(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6408,20 +7437,33 @@ size_t respFile::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated string fileName = 1;
+  // repeated string fileNames = 3;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->filename_size());
-  for (int i = 0, n = this->filename_size(); i < n; i++) {
+      ::google::protobuf::internal::FromIntSize(this->filenames_size());
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->filename(i));
+      this->filenames(i));
   }
 
-  // repeated string fileAddr = 2;
+  // repeated string fileContents = 4;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->fileaddr_size());
-  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+      ::google::protobuf::internal::FromIntSize(this->filecontents_size());
+  for (int i = 0, n = this->filecontents_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->fileaddr(i));
+      this->filecontents(i));
+  }
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->tarlsmname());
+  }
+
+  // .DDRCommProto.respFile.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->filetype());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -6451,8 +7493,15 @@ void respFile::MergeFrom(const respFile& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  filename_.MergeFrom(from.filename_);
-  fileaddr_.MergeFrom(from.fileaddr_);
+  filenames_.MergeFrom(from.filenames_);
+  filecontents_.MergeFrom(from.filecontents_);
+  if (from.tarlsmname().size() > 0) {
+
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  if (from.filetype() != 0) {
+    set_filetype(from.filetype());
+  }
 }
 
 void respFile::CopyFrom(const ::google::protobuf::Message& from) {
@@ -6479,8 +7528,11 @@ void respFile::Swap(respFile* other) {
 }
 void respFile::InternalSwap(respFile* other) {
   using std::swap;
-  filename_.InternalSwap(CastToBase(&other->filename_));
-  fileaddr_.InternalSwap(CastToBase(&other->fileaddr_));
+  filenames_.InternalSwap(CastToBase(&other->filenames_));
+  filecontents_.InternalSwap(CastToBase(&other->filecontents_));
+  tarlsmname_.Swap(&other->tarlsmname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(filetype_, other->filetype_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
@@ -6492,87 +7544,126 @@ void respFile::InternalSwap(respFile* other) {
 
 // ===================================================================
 
-void notifyStatus::InitAsDefaultInstance() {
+void reqFileAddr::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int notifyStatus::kStatusMsgFieldNumber;
+const int reqFileAddr::kTarLSMNameFieldNumber;
+const int reqFileAddr::kFileTypeFieldNumber;
+const int reqFileAddr::kFileNamesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-notifyStatus::notifyStatus()
+reqFileAddr::reqFileAddr()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_BaseCmd_2eproto::scc_info_notifyStatus.base);
+      &protobuf_BaseCmd_2eproto::scc_info_reqFileAddr.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(constructor:DDRCommProto.reqFileAddr)
 }
-notifyStatus::notifyStatus(const notifyStatus& from)
+reqFileAddr::reqFileAddr(const reqFileAddr& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+      _internal_metadata_(NULL),
+      filenames_(from.filenames_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  statusmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.statusmsg().size() > 0) {
-    statusmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.statusmsg_);
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.tarlsmname().size() > 0) {
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
   }
-  // @@protoc_insertion_point(copy_constructor:DDRCommProto.notifyStatus)
+  filetype_ = from.filetype_;
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqFileAddr)
 }
 
-void notifyStatus::SharedCtor() {
-  statusmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void reqFileAddr::SharedCtor() {
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
 }
 
-notifyStatus::~notifyStatus() {
-  // @@protoc_insertion_point(destructor:DDRCommProto.notifyStatus)
+reqFileAddr::~reqFileAddr() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.reqFileAddr)
   SharedDtor();
 }
 
-void notifyStatus::SharedDtor() {
-  statusmsg_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void reqFileAddr::SharedDtor() {
+  tarlsmname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void notifyStatus::SetCachedSize(int size) const {
+void reqFileAddr::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* notifyStatus::descriptor() {
+const ::google::protobuf::Descriptor* reqFileAddr::descriptor() {
   ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const notifyStatus& notifyStatus::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_notifyStatus.base);
+const reqFileAddr& reqFileAddr::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_reqFileAddr.base);
   return *internal_default_instance();
 }
 
 
-void notifyStatus::Clear() {
-// @@protoc_insertion_point(message_clear_start:DDRCommProto.notifyStatus)
+void reqFileAddr::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.reqFileAddr)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  statusmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filenames_.Clear();
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
   _internal_metadata_.Clear();
 }
 
-bool notifyStatus::MergePartialFromCodedStream(
+bool reqFileAddr::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(parse_start:DDRCommProto.reqFileAddr)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string statusMsg = 1;
+      // string tarLSMName = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_statusmsg()));
+                input, this->mutable_tarlsmname()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->statusmsg().data(), static_cast<int>(this->statusmsg().length()),
+            this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.notifyStatus.statusMsg"));
+            "DDRCommProto.reqFileAddr.tarLSMName"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_filetype(static_cast< ::DDRCommProto::reqFileAddr_eFileTypes >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileNames = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_filenames()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filenames(this->filenames_size() - 1).data(),
+            static_cast<int>(this->filenames(this->filenames_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.reqFileAddr.fileNames"));
         } else {
           goto handle_unusual;
         }
@@ -6591,17 +7682,694 @@ bool notifyStatus::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(parse_success:DDRCommProto.reqFileAddr)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.reqFileAddr)
   return false;
 #undef DO_
 }
 
-void notifyStatus::SerializeWithCachedSizes(
+void reqFileAddr::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.reqFileAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFileAddr.tarLSMName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->tarlsmname(), output);
+  }
+
+  // .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->filetype(), output);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFileAddr.fileNames");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->filenames(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.reqFileAddr)
+}
+
+::google::protobuf::uint8* reqFileAddr::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.reqFileAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFileAddr.tarLSMName");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->tarlsmname(), target);
+  }
+
+  // .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->filetype(), target);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.reqFileAddr.fileNames");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->filenames(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.reqFileAddr)
+  return target;
+}
+
+size_t reqFileAddr::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.reqFileAddr)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string fileNames = 3;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->filenames_size());
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->filenames(i));
+  }
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->tarlsmname());
+  }
+
+  // .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->filetype());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void reqFileAddr::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.reqFileAddr)
+  GOOGLE_DCHECK_NE(&from, this);
+  const reqFileAddr* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const reqFileAddr>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.reqFileAddr)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.reqFileAddr)
+    MergeFrom(*source);
+  }
+}
+
+void reqFileAddr::MergeFrom(const reqFileAddr& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.reqFileAddr)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  filenames_.MergeFrom(from.filenames_);
+  if (from.tarlsmname().size() > 0) {
+
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  if (from.filetype() != 0) {
+    set_filetype(from.filetype());
+  }
+}
+
+void reqFileAddr::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.reqFileAddr)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void reqFileAddr::CopyFrom(const reqFileAddr& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.reqFileAddr)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool reqFileAddr::IsInitialized() const {
+  return true;
+}
+
+void reqFileAddr::Swap(reqFileAddr* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void reqFileAddr::InternalSwap(reqFileAddr* other) {
+  using std::swap;
+  filenames_.InternalSwap(CastToBase(&other->filenames_));
+  tarlsmname_.Swap(&other->tarlsmname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(filetype_, other->filetype_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata reqFileAddr::GetMetadata() const {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void respFileAddr::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int respFileAddr::kTarLSMNameFieldNumber;
+const int respFileAddr::kFileTypeFieldNumber;
+const int respFileAddr::kFileNamesFieldNumber;
+const int respFileAddr::kFileAddrFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+respFileAddr::respFileAddr()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_BaseCmd_2eproto::scc_info_respFileAddr.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:DDRCommProto.respFileAddr)
+}
+respFileAddr::respFileAddr(const respFileAddr& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      filenames_(from.filenames_),
+      fileaddr_(from.fileaddr_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.tarlsmname().size() > 0) {
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  filetype_ = from.filetype_;
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.respFileAddr)
+}
+
+void respFileAddr::SharedCtor() {
+  tarlsmname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
+}
+
+respFileAddr::~respFileAddr() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.respFileAddr)
+  SharedDtor();
+}
+
+void respFileAddr::SharedDtor() {
+  tarlsmname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void respFileAddr::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* respFileAddr::descriptor() {
+  ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const respFileAddr& respFileAddr::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_respFileAddr.base);
+  return *internal_default_instance();
+}
+
+
+void respFileAddr::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.respFileAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  filenames_.Clear();
+  fileaddr_.Clear();
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filetype_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool respFileAddr::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:DDRCommProto.respFileAddr)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string tarLSMName = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_tarlsmname()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.respFileAddr.tarLSMName"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_filetype(static_cast< ::DDRCommProto::respFileAddr_eFileTypes >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileNames = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_filenames()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filenames(this->filenames_size() - 1).data(),
+            static_cast<int>(this->filenames(this->filenames_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.respFileAddr.fileNames"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated string fileAddr = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_fileaddr()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->fileaddr(this->fileaddr_size() - 1).data(),
+            static_cast<int>(this->fileaddr(this->fileaddr_size() - 1).length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.respFileAddr.fileAddr"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:DDRCommProto.respFileAddr)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.respFileAddr)
+  return false;
+#undef DO_
+}
+
+void respFileAddr::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.respFileAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.tarLSMName");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->tarlsmname(), output);
+  }
+
+  // .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->filetype(), output);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.fileNames");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->filenames(i), output);
+  }
+
+  // repeated string fileAddr = 4;
+  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->fileaddr(i).data(), static_cast<int>(this->fileaddr(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.fileAddr");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->fileaddr(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.respFileAddr)
+}
+
+::google::protobuf::uint8* respFileAddr::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.respFileAddr)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tarlsmname().data(), static_cast<int>(this->tarlsmname().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.tarLSMName");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->tarlsmname(), target);
+  }
+
+  // .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->filetype(), target);
+  }
+
+  // repeated string fileNames = 3;
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filenames(i).data(), static_cast<int>(this->filenames(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.fileNames");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->filenames(i), target);
+  }
+
+  // repeated string fileAddr = 4;
+  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->fileaddr(i).data(), static_cast<int>(this->fileaddr(i).length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DDRCommProto.respFileAddr.fileAddr");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(4, this->fileaddr(i), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.respFileAddr)
+  return target;
+}
+
+size_t respFileAddr::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.respFileAddr)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated string fileNames = 3;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->filenames_size());
+  for (int i = 0, n = this->filenames_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->filenames(i));
+  }
+
+  // repeated string fileAddr = 4;
+  total_size += 1 *
+      ::google::protobuf::internal::FromIntSize(this->fileaddr_size());
+  for (int i = 0, n = this->fileaddr_size(); i < n; i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->fileaddr(i));
+  }
+
+  // string tarLSMName = 1;
+  if (this->tarlsmname().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->tarlsmname());
+  }
+
+  // .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+  if (this->filetype() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->filetype());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void respFileAddr::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.respFileAddr)
+  GOOGLE_DCHECK_NE(&from, this);
+  const respFileAddr* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const respFileAddr>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.respFileAddr)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.respFileAddr)
+    MergeFrom(*source);
+  }
+}
+
+void respFileAddr::MergeFrom(const respFileAddr& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.respFileAddr)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  filenames_.MergeFrom(from.filenames_);
+  fileaddr_.MergeFrom(from.fileaddr_);
+  if (from.tarlsmname().size() > 0) {
+
+    tarlsmname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tarlsmname_);
+  }
+  if (from.filetype() != 0) {
+    set_filetype(from.filetype());
+  }
+}
+
+void respFileAddr::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.respFileAddr)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void respFileAddr::CopyFrom(const respFileAddr& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.respFileAddr)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool respFileAddr::IsInitialized() const {
+  return true;
+}
+
+void respFileAddr::Swap(respFileAddr* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void respFileAddr::InternalSwap(respFileAddr* other) {
+  using std::swap;
+  filenames_.InternalSwap(CastToBase(&other->filenames_));
+  fileaddr_.InternalSwap(CastToBase(&other->fileaddr_));
+  tarlsmname_.Swap(&other->tarlsmname_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(filetype_, other->filetype_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata respFileAddr::GetMetadata() const {
+  protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void reqStatus::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int reqStatus::kStatusMsgFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+reqStatus::reqStatus()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_BaseCmd_2eproto::scc_info_reqStatus.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:DDRCommProto.reqStatus)
+}
+reqStatus::reqStatus(const reqStatus& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  statusmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.statusmsg().size() > 0) {
+    statusmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.statusmsg_);
+  }
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqStatus)
+}
+
+void reqStatus::SharedCtor() {
+  statusmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+reqStatus::~reqStatus() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.reqStatus)
+  SharedDtor();
+}
+
+void reqStatus::SharedDtor() {
+  statusmsg_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void reqStatus::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* reqStatus::descriptor() {
+  ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const reqStatus& reqStatus::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_reqStatus.base);
+  return *internal_default_instance();
+}
+
+
+void reqStatus::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.reqStatus)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  statusmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool reqStatus::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:DDRCommProto.reqStatus)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string statusMsg = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_statusmsg()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->statusmsg().data(), static_cast<int>(this->statusmsg().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DDRCommProto.reqStatus.statusMsg"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:DDRCommProto.reqStatus)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.reqStatus)
+  return false;
+#undef DO_
+}
+
+void reqStatus::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.reqStatus)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -6610,7 +8378,7 @@ void notifyStatus::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->statusmsg().data(), static_cast<int>(this->statusmsg().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyStatus.statusMsg");
+      "DDRCommProto.reqStatus.statusMsg");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->statusmsg(), output);
   }
@@ -6619,13 +8387,13 @@ void notifyStatus::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.reqStatus)
 }
 
-::google::protobuf::uint8* notifyStatus::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* reqStatus::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.reqStatus)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -6634,7 +8402,7 @@ void notifyStatus::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->statusmsg().data(), static_cast<int>(this->statusmsg().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyStatus.statusMsg");
+      "DDRCommProto.reqStatus.statusMsg");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->statusmsg(), target);
@@ -6644,12 +8412,12 @@ void notifyStatus::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.reqStatus)
   return target;
 }
 
-size_t notifyStatus::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.notifyStatus)
+size_t reqStatus::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.reqStatus)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6669,23 +8437,23 @@ size_t notifyStatus::ByteSizeLong() const {
   return total_size;
 }
 
-void notifyStatus::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.notifyStatus)
+void reqStatus::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.reqStatus)
   GOOGLE_DCHECK_NE(&from, this);
-  const notifyStatus* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const notifyStatus>(
+  const reqStatus* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const reqStatus>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.reqStatus)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.reqStatus)
     MergeFrom(*source);
   }
 }
 
-void notifyStatus::MergeFrom(const notifyStatus& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.notifyStatus)
+void reqStatus::MergeFrom(const reqStatus& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.reqStatus)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -6697,36 +8465,36 @@ void notifyStatus::MergeFrom(const notifyStatus& from) {
   }
 }
 
-void notifyStatus::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.notifyStatus)
+void reqStatus::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.reqStatus)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void notifyStatus::CopyFrom(const notifyStatus& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.notifyStatus)
+void reqStatus::CopyFrom(const reqStatus& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.reqStatus)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool notifyStatus::IsInitialized() const {
+bool reqStatus::IsInitialized() const {
   return true;
 }
 
-void notifyStatus::Swap(notifyStatus* other) {
+void reqStatus::Swap(reqStatus* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void notifyStatus::InternalSwap(notifyStatus* other) {
+void reqStatus::InternalSwap(reqStatus* other) {
   using std::swap;
   statusmsg_.Swap(&other->statusmsg_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata notifyStatus::GetMetadata() const {
+::google::protobuf::Metadata reqStatus::GetMetadata() const {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -6734,20 +8502,20 @@ void notifyStatus::InternalSwap(notifyStatus* other) {
 
 // ===================================================================
 
-void notifyAlarm::InitAsDefaultInstance() {
+void reqAlarm::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int notifyAlarm::kAlarmMsgFieldNumber;
+const int reqAlarm::kAlarmMsgFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-notifyAlarm::notifyAlarm()
+reqAlarm::reqAlarm()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_BaseCmd_2eproto::scc_info_notifyAlarm.base);
+      &protobuf_BaseCmd_2eproto::scc_info_reqAlarm.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(constructor:DDRCommProto.reqAlarm)
 }
-notifyAlarm::notifyAlarm(const notifyAlarm& from)
+reqAlarm::reqAlarm(const reqAlarm& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -6755,38 +8523,38 @@ notifyAlarm::notifyAlarm(const notifyAlarm& from)
   if (from.alarmmsg().size() > 0) {
     alarmmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.alarmmsg_);
   }
-  // @@protoc_insertion_point(copy_constructor:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqAlarm)
 }
 
-void notifyAlarm::SharedCtor() {
+void reqAlarm::SharedCtor() {
   alarmmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-notifyAlarm::~notifyAlarm() {
-  // @@protoc_insertion_point(destructor:DDRCommProto.notifyAlarm)
+reqAlarm::~reqAlarm() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.reqAlarm)
   SharedDtor();
 }
 
-void notifyAlarm::SharedDtor() {
+void reqAlarm::SharedDtor() {
   alarmmsg_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void notifyAlarm::SetCachedSize(int size) const {
+void reqAlarm::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* notifyAlarm::descriptor() {
+const ::google::protobuf::Descriptor* reqAlarm::descriptor() {
   ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const notifyAlarm& notifyAlarm::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_notifyAlarm.base);
+const reqAlarm& reqAlarm::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_reqAlarm.base);
   return *internal_default_instance();
 }
 
 
-void notifyAlarm::Clear() {
-// @@protoc_insertion_point(message_clear_start:DDRCommProto.notifyAlarm)
+void reqAlarm::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.reqAlarm)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -6795,11 +8563,11 @@ void notifyAlarm::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool notifyAlarm::MergePartialFromCodedStream(
+bool reqAlarm::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(parse_start:DDRCommProto.reqAlarm)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -6814,7 +8582,7 @@ bool notifyAlarm::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->alarmmsg().data(), static_cast<int>(this->alarmmsg().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.notifyAlarm.alarmMsg"));
+            "DDRCommProto.reqAlarm.alarmMsg"));
         } else {
           goto handle_unusual;
         }
@@ -6833,17 +8601,17 @@ bool notifyAlarm::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(parse_success:DDRCommProto.reqAlarm)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.reqAlarm)
   return false;
 #undef DO_
 }
 
-void notifyAlarm::SerializeWithCachedSizes(
+void reqAlarm::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.reqAlarm)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -6852,7 +8620,7 @@ void notifyAlarm::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->alarmmsg().data(), static_cast<int>(this->alarmmsg().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyAlarm.alarmMsg");
+      "DDRCommProto.reqAlarm.alarmMsg");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->alarmmsg(), output);
   }
@@ -6861,13 +8629,13 @@ void notifyAlarm::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.reqAlarm)
 }
 
-::google::protobuf::uint8* notifyAlarm::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* reqAlarm::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.reqAlarm)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -6876,7 +8644,7 @@ void notifyAlarm::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->alarmmsg().data(), static_cast<int>(this->alarmmsg().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyAlarm.alarmMsg");
+      "DDRCommProto.reqAlarm.alarmMsg");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->alarmmsg(), target);
@@ -6886,12 +8654,12 @@ void notifyAlarm::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.reqAlarm)
   return target;
 }
 
-size_t notifyAlarm::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.notifyAlarm)
+size_t reqAlarm::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.reqAlarm)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -6911,23 +8679,23 @@ size_t notifyAlarm::ByteSizeLong() const {
   return total_size;
 }
 
-void notifyAlarm::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.notifyAlarm)
+void reqAlarm::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.reqAlarm)
   GOOGLE_DCHECK_NE(&from, this);
-  const notifyAlarm* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const notifyAlarm>(
+  const reqAlarm* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const reqAlarm>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.reqAlarm)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.reqAlarm)
     MergeFrom(*source);
   }
 }
 
-void notifyAlarm::MergeFrom(const notifyAlarm& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.notifyAlarm)
+void reqAlarm::MergeFrom(const reqAlarm& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.reqAlarm)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -6939,36 +8707,36 @@ void notifyAlarm::MergeFrom(const notifyAlarm& from) {
   }
 }
 
-void notifyAlarm::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.notifyAlarm)
+void reqAlarm::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.reqAlarm)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void notifyAlarm::CopyFrom(const notifyAlarm& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.notifyAlarm)
+void reqAlarm::CopyFrom(const reqAlarm& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.reqAlarm)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool notifyAlarm::IsInitialized() const {
+bool reqAlarm::IsInitialized() const {
   return true;
 }
 
-void notifyAlarm::Swap(notifyAlarm* other) {
+void reqAlarm::Swap(reqAlarm* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void notifyAlarm::InternalSwap(notifyAlarm* other) {
+void reqAlarm::InternalSwap(reqAlarm* other) {
   using std::swap;
   alarmmsg_.Swap(&other->alarmmsg_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata notifyAlarm::GetMetadata() const {
+::google::protobuf::Metadata reqAlarm::GetMetadata() const {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -6976,20 +8744,20 @@ void notifyAlarm::InternalSwap(notifyAlarm* other) {
 
 // ===================================================================
 
-void notifyTextChat::InitAsDefaultInstance() {
+void reqTextChat::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int notifyTextChat::kChatTextFieldNumber;
+const int reqTextChat::kChatTextFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-notifyTextChat::notifyTextChat()
+reqTextChat::reqTextChat()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   ::google::protobuf::internal::InitSCC(
-      &protobuf_BaseCmd_2eproto::scc_info_notifyTextChat.base);
+      &protobuf_BaseCmd_2eproto::scc_info_reqTextChat.base);
   SharedCtor();
-  // @@protoc_insertion_point(constructor:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(constructor:DDRCommProto.reqTextChat)
 }
-notifyTextChat::notifyTextChat(const notifyTextChat& from)
+reqTextChat::reqTextChat(const reqTextChat& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -6997,38 +8765,38 @@ notifyTextChat::notifyTextChat(const notifyTextChat& from)
   if (from.chattext().size() > 0) {
     chattext_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chattext_);
   }
-  // @@protoc_insertion_point(copy_constructor:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(copy_constructor:DDRCommProto.reqTextChat)
 }
 
-void notifyTextChat::SharedCtor() {
+void reqTextChat::SharedCtor() {
   chattext_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-notifyTextChat::~notifyTextChat() {
-  // @@protoc_insertion_point(destructor:DDRCommProto.notifyTextChat)
+reqTextChat::~reqTextChat() {
+  // @@protoc_insertion_point(destructor:DDRCommProto.reqTextChat)
   SharedDtor();
 }
 
-void notifyTextChat::SharedDtor() {
+void reqTextChat::SharedDtor() {
   chattext_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-void notifyTextChat::SetCachedSize(int size) const {
+void reqTextChat::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* notifyTextChat::descriptor() {
+const ::google::protobuf::Descriptor* reqTextChat::descriptor() {
   ::protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
-const notifyTextChat& notifyTextChat::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_notifyTextChat.base);
+const reqTextChat& reqTextChat::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_BaseCmd_2eproto::scc_info_reqTextChat.base);
   return *internal_default_instance();
 }
 
 
-void notifyTextChat::Clear() {
-// @@protoc_insertion_point(message_clear_start:DDRCommProto.notifyTextChat)
+void reqTextChat::Clear() {
+// @@protoc_insertion_point(message_clear_start:DDRCommProto.reqTextChat)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -7037,11 +8805,11 @@ void notifyTextChat::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool notifyTextChat::MergePartialFromCodedStream(
+bool reqTextChat::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(parse_start:DDRCommProto.reqTextChat)
   for (;;) {
     ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -7056,7 +8824,7 @@ bool notifyTextChat::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->chattext().data(), static_cast<int>(this->chattext().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "DDRCommProto.notifyTextChat.chatText"));
+            "DDRCommProto.reqTextChat.chatText"));
         } else {
           goto handle_unusual;
         }
@@ -7075,17 +8843,17 @@ bool notifyTextChat::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(parse_success:DDRCommProto.reqTextChat)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(parse_failure:DDRCommProto.reqTextChat)
   return false;
 #undef DO_
 }
 
-void notifyTextChat::SerializeWithCachedSizes(
+void reqTextChat::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(serialize_start:DDRCommProto.reqTextChat)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -7094,7 +8862,7 @@ void notifyTextChat::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->chattext().data(), static_cast<int>(this->chattext().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyTextChat.chatText");
+      "DDRCommProto.reqTextChat.chatText");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->chattext(), output);
   }
@@ -7103,13 +8871,13 @@ void notifyTextChat::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(serialize_end:DDRCommProto.reqTextChat)
 }
 
-::google::protobuf::uint8* notifyTextChat::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* reqTextChat::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(serialize_to_array_start:DDRCommProto.reqTextChat)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -7118,7 +8886,7 @@ void notifyTextChat::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->chattext().data(), static_cast<int>(this->chattext().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "DDRCommProto.notifyTextChat.chatText");
+      "DDRCommProto.reqTextChat.chatText");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->chattext(), target);
@@ -7128,12 +8896,12 @@ void notifyTextChat::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(serialize_to_array_end:DDRCommProto.reqTextChat)
   return target;
 }
 
-size_t notifyTextChat::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.notifyTextChat)
+size_t reqTextChat::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DDRCommProto.reqTextChat)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -7153,23 +8921,23 @@ size_t notifyTextChat::ByteSizeLong() const {
   return total_size;
 }
 
-void notifyTextChat::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.notifyTextChat)
+void reqTextChat::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:DDRCommProto.reqTextChat)
   GOOGLE_DCHECK_NE(&from, this);
-  const notifyTextChat* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const notifyTextChat>(
+  const reqTextChat* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const reqTextChat>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:DDRCommProto.reqTextChat)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:DDRCommProto.reqTextChat)
     MergeFrom(*source);
   }
 }
 
-void notifyTextChat::MergeFrom(const notifyTextChat& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.notifyTextChat)
+void reqTextChat::MergeFrom(const reqTextChat& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:DDRCommProto.reqTextChat)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -7181,36 +8949,36 @@ void notifyTextChat::MergeFrom(const notifyTextChat& from) {
   }
 }
 
-void notifyTextChat::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.notifyTextChat)
+void reqTextChat::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:DDRCommProto.reqTextChat)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void notifyTextChat::CopyFrom(const notifyTextChat& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.notifyTextChat)
+void reqTextChat::CopyFrom(const reqTextChat& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DDRCommProto.reqTextChat)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool notifyTextChat::IsInitialized() const {
+bool reqTextChat::IsInitialized() const {
   return true;
 }
 
-void notifyTextChat::Swap(notifyTextChat* other) {
+void reqTextChat::Swap(reqTextChat* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void notifyTextChat::InternalSwap(notifyTextChat* other) {
+void reqTextChat::InternalSwap(reqTextChat* other) {
   using std::swap;
   chattext_.Swap(&other->chattext_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata notifyTextChat::GetMetadata() const {
+::google::protobuf::Metadata reqTextChat::GetMetadata() const {
   protobuf_BaseCmd_2eproto::protobuf_AssignDescriptorsOnce();
   return ::protobuf_BaseCmd_2eproto::file_level_metadata[kIndexInFileMessages];
 }
@@ -7225,6 +8993,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::CommonHeader* Aren
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::heartBeat* Arena::CreateMaybeMessage< ::DDRCommProto::heartBeat >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::heartBeat >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::bcLSAddr_ServerInfo* Arena::CreateMaybeMessage< ::DDRCommProto::bcLSAddr_ServerInfo >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::bcLSAddr_ServerInfo >(arena);
 }
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::bcLSAddr* Arena::CreateMaybeMessage< ::DDRCommProto::bcLSAddr >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::bcLSAddr >(arena);
@@ -7256,6 +9027,9 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqTalk* Arena::Cr
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::respTalk* Arena::CreateMaybeMessage< ::DDRCommProto::respTalk >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::respTalk >(arena);
 }
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqTalkHB* Arena::CreateMaybeMessage< ::DDRCommProto::reqTalkHB >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::reqTalkHB >(arena);
+}
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqCmd* Arena::CreateMaybeMessage< ::DDRCommProto::reqCmd >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::reqCmd >(arena);
 }
@@ -7268,14 +9042,20 @@ template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqFile* Arena::Cr
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::respFile* Arena::CreateMaybeMessage< ::DDRCommProto::respFile >(Arena* arena) {
   return Arena::CreateInternal< ::DDRCommProto::respFile >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::notifyStatus* Arena::CreateMaybeMessage< ::DDRCommProto::notifyStatus >(Arena* arena) {
-  return Arena::CreateInternal< ::DDRCommProto::notifyStatus >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqFileAddr* Arena::CreateMaybeMessage< ::DDRCommProto::reqFileAddr >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::reqFileAddr >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::notifyAlarm* Arena::CreateMaybeMessage< ::DDRCommProto::notifyAlarm >(Arena* arena) {
-  return Arena::CreateInternal< ::DDRCommProto::notifyAlarm >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::respFileAddr* Arena::CreateMaybeMessage< ::DDRCommProto::respFileAddr >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::respFileAddr >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::notifyTextChat* Arena::CreateMaybeMessage< ::DDRCommProto::notifyTextChat >(Arena* arena) {
-  return Arena::CreateInternal< ::DDRCommProto::notifyTextChat >(arena);
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqStatus* Arena::CreateMaybeMessage< ::DDRCommProto::reqStatus >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::reqStatus >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqAlarm* Arena::CreateMaybeMessage< ::DDRCommProto::reqAlarm >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::reqAlarm >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::DDRCommProto::reqTextChat* Arena::CreateMaybeMessage< ::DDRCommProto::reqTextChat >(Arena* arena) {
+  return Arena::CreateInternal< ::DDRCommProto::reqTextChat >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

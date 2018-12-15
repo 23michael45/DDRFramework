@@ -24,77 +24,104 @@ namespace DDRCommProto {
     static BaseCmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1CYXNlQ21kLnByb3RvEgxERFJDb21tUHJvdG8isQIKDENvbW1vbkhlYWRl",
+            "Cg1CYXNlQ21kLnByb3RvEgxERFJDb21tUHJvdG8i5AQKDENvbW1vbkhlYWRl",
             "chIQCghib2R5VHlwZRgBIAEoCRI6Cg1mbG93RGlyZWN0aW9uGAIgAygOMiMu",
-            "RERSQ29tbVByb3RvLkNvbW1vbkhlYWRlci5lRmxvd0RpchI2CghkZXN0VHlw",
-            "ZRgDIAMoDjIkLkREUkNvbW1Qcm90by5Db21tb25IZWFkZXIuZURlc3RUeXBl",
-            "EhAKCGRlc3RJbmZvGAQgAygJIlYKCGVGbG93RGlyEggKBFJTMk0QABIJCgVS",
-            "UzJSUhABEgkKBVJSMlJTEAISCAoETFMyQxADEggKBEMyTFMQBBIKCgZMUzJM",
-            "U00QBRIKCgZMU00yTFMQBiIxCgllRGVzdFR5cGUSCgoGTm9EZXN0EAASCwoH",
-            "TFNNTmFtZRABEgsKB1JvdXRpbmcQAiIdCgloZWFydEJlYXQSEAoId2hhdGV2",
-            "ZXIYASABKAkiMwoIYmNMU0FkZHISDAoEbmFtZRgBIAEoCRILCgNpcHMYAiAD",
-            "KAkSDAoEcG9ydBgDIAEoBSLEAgoIcmVxTG9naW4SLQoEdHlwZRgBIAEoDjIf",
-            "LkREUkNvbW1Qcm90by5yZXFMb2dpbi5lQ2x0VHlwZRIQCgh1c2VybmFtZRgC",
-            "IAEoCRIPCgdyb2JvdElEGAMgASgJEhAKCHJvYm90UFdEGAQgASgJEg8KB2Ns",
-            "dE9wTHYYBSABKAUSCwoDVUlEGAYgASgFEjoKC2F2U3RyZWFtUmVxGAcgAygL",
-            "MiUuRERSQ29tbVByb3RvLnJlcUxvZ2luLm1zZ0FWU3RyZWFtUmVxGkYKDm1z",
-            "Z0FWU3RyZWFtUmVxEg4KBmF2VHlwZRgBIAEoBRIOCgZjaE5hbWUYAiABKAkS",
-            "FAoMYmFuZHdpZHRoUmVxGAMgASgFIjIKCGVDbHRUeXBlEgoKBmNsaWVudBAA",
-            "EhEKDWFuZHJvaWRDbGllbnQQARIHCgNMU00QAiKoAgoJcmVzcExvZ2luEjYK",
-            "B3JldGNvZGUYASABKA4yJS5ERFJDb21tUHJvdG8ucmVzcExvZ2luLmVMb2dp",
-            "blJldENvZGUSMgoIeW91clJvbGUYAiABKA4yIC5ERFJDb21tUHJvdG8ucmVz",
-            "cExvZ2luLmVDbHRUeXBlEgsKA1VJRBgDIAEoBSJuCg1lTG9naW5SZXRDb2Rl",
-            "EgsKB3N1Y2Nlc3MQABIPCgtzZXJ2ZXJfYnVzeRABEhgKFHNlcnZlcl9saW1p",
-            "dF9yZWFjaGVkEAISDQoJVUlEX2Vycm9yEAMSFgoSaW5jb3JyZWN0X3Bhc3N3",
-            "b3JkEAQiMgoIZUNsdFR5cGUSCgoGY2xpZW50EAASEQoNYW5kcm9pZENsaWVu",
-            "dBABEgcKA0xTTRACInMKFG5vdGlmeVRlcm1pbmFsQWNjZXNzEhcKD2JSUkNv",
-            "bm5lY3RlZDJSUxgBIAEoBRILCgNiT3AYAiABKAUSEQoJbk1vbml0b3JzGAMg",
-            "ASgFEhAKCG5DbGllbnRzGAQgASgFEhAKCG5hbWVMU01zGAUgAygJIpQBCg9u",
-            "b3RpZnlTZXJBY2Nlc3MSEAoIbkNsaWVudHMYASABKAUSEAoIY1RvcE9wTHYY",
-            "AiABKAUSEgoKY1RvcE9wVGltZRgDIAEoAxIRCgluTW9uaXRvcnMYBCABKAUS",
-            "EAoIbVRvcE9wTHYYBSABKAUSEgoKbVRvcE9wVGltZRgGIAEoBRIQCghuYW1l",
-            "c0xTTRgHIAMoCSLXAgoObm90aWZ5QVZTdHJlYW0SRQoPcmVzZXJ2ZWRDaGFu",
-            "bmVsGAEgASgLMiwuRERSQ29tbVByb3RvLm5vdGlmeUFWU3RyZWFtLmZ1bGxD",
-            "aGFubmVsSW5mbxJKChRyb2JvdE1vbml0b3JDaGFubmVscxgCIAMoCzIsLkRE",
-            "UkNvbW1Qcm90by5ub3RpZnlBVlN0cmVhbS5mdWxsQ2hhbm5lbEluZm8asQEK",
-            "D2Z1bGxDaGFubmVsSW5mbxIPCgdkZXZUeXBlGAEgASgFEhAKCGRhdGFUeXBl",
-            "GAIgASgFEhYKDmxvY2FsUmVzQWNjU3RyGAMgASgJEhoKEmNoYW5uZWxEZXNj",
-            "cmlwdGlvbhgEIAEoCRINCgVid1JlcRgFIAEoBRIQCghyZW1vdGVJUBgGIAEo",
-            "AxISCgpyZW1vdGVQb3J0GAcgASgFEhIKCnJlbW90ZVBhc3MYCCABKAkioQEK",
-            "B3JlcVRhbGsSNQoKY2FsbGVyVHlwZRgBIAEoDjIhLkREUkNvbW1Qcm90by5y",
-            "ZXFUYWxrLmVDYWxsZXJUeXBlEgsKA2lkMRgCIAEoBRILCgNpZDIYAyABKAUS",
-            "DgoGYXZUeXBlGAQgASgFIjUKC2VDYWxsZXJUeXBlEgoKBmNsaWVudBAAEgsK",
-            "B21vbml0b3IQARINCglyb2JvdF9MU00QAiKpAQoIcmVzcFRhbGsSOgoMcmVj",
-            "ZWl2ZXJUeXBlGAEgASgOMiQuRERSQ29tbVByb3RvLnJlc3BUYWxrLmVSZWNl",
-            "aXZlclR5cGUSCwoDaWQxGAIgASgFEgsKA2lkMhgDIAEoBRIOCgZhdlR5cGUY",
-            "BCABKAUiNwoNZVJlY2VpdmVyVHlwZRIKCgZjbGllbnQQABILCgdtb25pdG9y",
-            "EAESDQoJcm9ib3RfTFNNEAIiJwoGcmVxQ21kEg0KBWNtZElEGAEgASgDEg4K",
-            "BmNtZE1zZxgCIAEoCSIpCgdyZXNwQ21kEg0KBWNtZElEGAEgASgDEg8KB3Jl",
-            "c3BNc2cYAiABKAkiGwoHcmVxRmlsZRIQCghmaWxlTmFtZRgBIAMoCSIuCghy",
-            "ZXNwRmlsZRIQCghmaWxlTmFtZRgBIAMoCRIQCghmaWxlQWRkchgCIAMoCSIh",
-            "Cgxub3RpZnlTdGF0dXMSEQoJc3RhdHVzTXNnGAEgASgJIh8KC25vdGlmeUFs",
-            "YXJtEhAKCGFsYXJtTXNnGAEgASgJIiIKDm5vdGlmeVRleHRDaGF0EhAKCGNo",
-            "YXRUZXh0GAEgASgJYgZwcm90bzM="));
+            "RERSQ29tbVByb3RvLkNvbW1vbkhlYWRlci5lRmxvd0RpchIRCgliT3JpZ2lu",
+            "YWwYAyABKAUSOQoHc3JjQ29uZBgEIAEoDjIoLkREUkNvbW1Qcm90by5Db21t",
+            "b25IZWFkZXIuZVNyY0NvbmRpdGlvbhI/Cgtmb3J3YXJkVHlwZRgFIAEoDjIq",
+            "LkREUkNvbW1Qcm90by5Db21tb25IZWFkZXIuZUZvcndhcmRpbmdUeXBlEjcK",
+            "B3JlY1R5cGUYBiABKA4yJi5ERFJDb21tUHJvdG8uQ29tbW9uSGVhZGVyLmVT",
+            "cmNSZWNUeXBlEhUKDXByZXZSb3V0ZUFkZHIYByADKAkigAEKCGVGbG93RGly",
+            "Eg4KClVOS05PV04yUlMQABIICgRSUzJNEAESCAoETTJSUxACEgkKBVJTMlJS",
+            "EAMSCQoFUlIyUlMQBBIOCgpVTktOT1dOMkxTEAUSCAoETFMyQxAGEggKBEMy",
+            "TFMQBxIKCgZMUzJMU00QCBIKCgZMU00yTFMQCSIjCg1lU3JjQ29uZGl0aW9u",
+            "EgoKBk5vQ29uZBAAEgYKAk9wEAEiWQoPZUZvcndhcmRpbmdUeXBlEhAKDE5v",
+            "Rm9yd2FyZGluZxAAEgoKBkxTTUFsbBABEg0KCUNsdE1vbkFsbBACEggKBFRv",
+            "T3AQAxIPCgtSb3V0aW5nQmFjaxAEIiQKC2VTcmNSZWNUeXBlEgkKBU5vUmVj",
+            "EAASCgoGUmVjU3JjEAEiHQoJaGVhcnRCZWF0EhAKCHdoYXRldmVyGAEgASgJ",
+            "InQKCGJjTFNBZGRyEjEKBkxTSW5mbxgBIAEoCzIhLkREUkNvbW1Qcm90by5i",
+            "Y0xTQWRkci5TZXJ2ZXJJbmZvGjUKClNlcnZlckluZm8SDAoEbmFtZRgBIAEo",
+            "CRILCgNpcHMYAiADKAkSDAoEcG9ydBgDIAEoBSLEAgoIcmVxTG9naW4SLQoE",
+            "dHlwZRgBIAEoDjIfLkREUkNvbW1Qcm90by5yZXFMb2dpbi5lQ2x0VHlwZRIQ",
+            "Cgh1c2VybmFtZRgCIAEoCRIPCgdyb2JvdElEGAMgASgJEhAKCHJvYm90UFdE",
+            "GAQgASgJEg8KB2NsdE9wTHYYBSABKAUSCwoDVUlEGAYgASgFEjoKC2F2U3Ry",
+            "ZWFtUmVxGAcgAygLMiUuRERSQ29tbVByb3RvLnJlcUxvZ2luLm1zZ0FWU3Ry",
+            "ZWFtUmVxGkYKDm1zZ0FWU3RyZWFtUmVxEg4KBmF2VHlwZRgBIAEoBRIOCgZj",
+            "aE5hbWUYAiABKAkSFAoMYmFuZHdpZHRoUmVxGAMgASgFIjIKCGVDbHRUeXBl",
+            "EgoKBmNsaWVudBAAEhEKDWFuZHJvaWRDbGllbnQQARIHCgNMU00QAiKoAgoJ",
+            "cmVzcExvZ2luEjYKB3JldGNvZGUYASABKA4yJS5ERFJDb21tUHJvdG8ucmVz",
+            "cExvZ2luLmVMb2dpblJldENvZGUSMgoIeW91clJvbGUYAiABKA4yIC5ERFJD",
+            "b21tUHJvdG8ucmVzcExvZ2luLmVDbHRUeXBlEgsKA1VJRBgDIAEoBSJuCg1l",
+            "TG9naW5SZXRDb2RlEgsKB3N1Y2Nlc3MQABIPCgtzZXJ2ZXJfYnVzeRABEhgK",
+            "FHNlcnZlcl9saW1pdF9yZWFjaGVkEAISDQoJVUlEX2Vycm9yEAMSFgoSaW5j",
+            "b3JyZWN0X3Bhc3N3b3JkEAQiMgoIZUNsdFR5cGUSCgoGY2xpZW50EAASEQoN",
+            "YW5kcm9pZENsaWVudBABEgcKA0xTTRACInMKFG5vdGlmeVRlcm1pbmFsQWNj",
+            "ZXNzEhcKD2JSUkNvbm5lY3RlZDJSUxgBIAEoBRILCgNiT3AYAiABKAUSEQoJ",
+            "bk1vbml0b3JzGAMgASgFEhAKCG5DbGllbnRzGAQgASgFEhAKCG5hbWVMU01z",
+            "GAUgAygJIpQBCg9ub3RpZnlTZXJBY2Nlc3MSEQoJbk1vbml0b3JzGAEgASgF",
+            "EhAKCG1Ub3BPcEx2GAIgASgFEhIKCm1Ub3BPcFRpbWUYAyABKAUSEAoIbkNs",
+            "aWVudHMYBCABKAUSEAoIY1RvcE9wTHYYBSABKAUSEgoKY1RvcE9wVGltZRgG",
+            "IAEoAxIQCghuYW1lc0xTTRgHIAMoCSLXAgoObm90aWZ5QVZTdHJlYW0SRQoP",
+            "cmVzZXJ2ZWRDaGFubmVsGAEgASgLMiwuRERSQ29tbVByb3RvLm5vdGlmeUFW",
+            "U3RyZWFtLmZ1bGxDaGFubmVsSW5mbxJKChRyb2JvdE1vbml0b3JDaGFubmVs",
+            "cxgCIAMoCzIsLkREUkNvbW1Qcm90by5ub3RpZnlBVlN0cmVhbS5mdWxsQ2hh",
+            "bm5lbEluZm8asQEKD2Z1bGxDaGFubmVsSW5mbxIPCgdkZXZUeXBlGAEgASgF",
+            "EhAKCGRhdGFUeXBlGAIgASgFEhYKDmxvY2FsUmVzQWNjU3RyGAMgASgJEhoK",
+            "EmNoYW5uZWxEZXNjcmlwdGlvbhgEIAEoCRINCgVid1JlcRgFIAEoBRIQCghy",
+            "ZW1vdGVJUBgGIAEoAxISCgpyZW1vdGVQb3J0GAcgASgFEhIKCnJlbW90ZVBh",
+            "c3MYCCABKAkirgEKB3JlcVRhbGsSNQoKY2FsbGVyVHlwZRgBIAEoDjIhLkRE",
+            "UkNvbW1Qcm90by5yZXFUYWxrLmVDYWxsZXJUeXBlEg4KBnRhbGtJRBgCIAEo",
+            "BRIOCgZhdlR5cGUYAyABKAUSFQoNbG9jYWxUYWxrQWRkchgEIAMoCSI1Cgtl",
+            "Q2FsbGVyVHlwZRIKCgZjbGllbnQQABILCgdtb25pdG9yEAESDQoJcm9ib3Rf",
+            "TFNNEAIinwEKCHJlc3BUYWxrEjoKDHJlY2VpdmVyVHlwZRgBIAEoDjIkLkRE",
+            "UkNvbW1Qcm90by5yZXNwVGFsay5lUmVjZWl2ZXJUeXBlEg4KBnRhbGtJRBgC",
+            "IAEoBRIOCgZhdlR5cGUYAyABKAUiNwoNZVJlY2VpdmVyVHlwZRIKCgZjbGll",
+            "bnQQABILCgdtb25pdG9yEAESDQoJcm9ib3RfTFNNEAIiOQoJcmVxVGFsa0hC",
+            "EhQKDGNhbGxlclRhbGtJRBgBIAEoBRIWCg5yZWNlaXZlclRhbGtJRBgCIAEo",
+            "BSInCgZyZXFDbWQSDQoFY21kSUQYASABKAMSDgoGY21kTXNnGAIgASgJIikK",
+            "B3Jlc3BDbWQSDQoFY21kSUQYASABKAMSDwoHcmVzcE1zZxgCIAEoCSKjAQoH",
+            "cmVxRmlsZRISCgp0YXJMU01OYW1lGAEgASgJEjIKCGZpbGVUeXBlGAIgASgO",
+            "MiAuRERSQ29tbVByb3RvLnJlcUZpbGUuZUZpbGVUeXBlcxIRCglmaWxlTmFt",
+            "ZXMYAyADKAkiPQoKZUZpbGVUeXBlcxIQCgxGaWxlQ29udGVudHMQABIMCghG",
+            "aWxlTGlzdBABEg8KC0ZvbGRlckZsaXN0EAIiuwEKCHJlc3BGaWxlEhIKCnRh",
+            "ckxTTU5hbWUYASABKAkSMwoIZmlsZVR5cGUYAiABKA4yIS5ERFJDb21tUHJv",
+            "dG8ucmVzcEZpbGUuZUZpbGVUeXBlcxIRCglmaWxlTmFtZXMYAyADKAkSFAoM",
+            "ZmlsZUNvbnRlbnRzGAQgAygJIj0KCmVGaWxlVHlwZXMSEAoMRmlsZUNvbnRl",
+            "bnRzEAASDAoIRmlsZUxpc3QQARIPCgtGb2xkZXJGbGlzdBACIqsBCgtyZXFG",
+            "aWxlQWRkchISCgp0YXJMU01OYW1lGAEgASgJEjYKCGZpbGVUeXBlGAIgASgO",
+            "MiQuRERSQ29tbVByb3RvLnJlcUZpbGVBZGRyLmVGaWxlVHlwZXMSEQoJZmls",
+            "ZU5hbWVzGAMgAygJIj0KCmVGaWxlVHlwZXMSEAoMRmlsZUNvbnRlbnRzEAAS",
+            "DAoIRmlsZUxpc3QQARIPCgtGb2xkZXJGbGlzdBACIr8BCgxyZXNwRmlsZUFk",
+            "ZHISEgoKdGFyTFNNTmFtZRgBIAEoCRI3CghmaWxlVHlwZRgCIAEoDjIlLkRE",
+            "UkNvbW1Qcm90by5yZXNwRmlsZUFkZHIuZUZpbGVUeXBlcxIRCglmaWxlTmFt",
+            "ZXMYAyADKAkSEAoIZmlsZUFkZHIYBCADKAkiPQoKZUZpbGVUeXBlcxIQCgxG",
+            "aWxlQ29udGVudHMQABIMCghGaWxlTGlzdBABEg8KC0ZvbGRlckZsaXN0EAIi",
+            "HgoJcmVxU3RhdHVzEhEKCXN0YXR1c01zZxgBIAEoCSIcCghyZXFBbGFybRIQ",
+            "CghhbGFybU1zZxgBIAEoCSIfCgtyZXFUZXh0Q2hhdBIQCghjaGF0VGV4dBgB",
+            "IAEoCWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.CommonHeader), global::DDRCommProto.CommonHeader.Parser, new[]{ "BodyType", "FlowDirection", "DestType", "DestInfo" }, null, new[]{ typeof(global::DDRCommProto.CommonHeader.Types.eFlowDir), typeof(global::DDRCommProto.CommonHeader.Types.eDestType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.CommonHeader), global::DDRCommProto.CommonHeader.Parser, new[]{ "BodyType", "FlowDirection", "BOriginal", "SrcCond", "ForwardType", "RecType", "PrevRouteAddr" }, null, new[]{ typeof(global::DDRCommProto.CommonHeader.Types.eFlowDir), typeof(global::DDRCommProto.CommonHeader.Types.eSrcCondition), typeof(global::DDRCommProto.CommonHeader.Types.eForwardingType), typeof(global::DDRCommProto.CommonHeader.Types.eSrcRecType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.heartBeat), global::DDRCommProto.heartBeat.Parser, new[]{ "Whatever" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.bcLSAddr), global::DDRCommProto.bcLSAddr.Parser, new[]{ "Name", "Ips", "Port" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.bcLSAddr), global::DDRCommProto.bcLSAddr.Parser, new[]{ "LSInfo" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.bcLSAddr.Types.ServerInfo), global::DDRCommProto.bcLSAddr.Types.ServerInfo.Parser, new[]{ "Name", "Ips", "Port" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqLogin), global::DDRCommProto.reqLogin.Parser, new[]{ "Type", "Username", "RobotID", "RobotPWD", "CltOpLv", "UID", "AvStreamReq" }, null, new[]{ typeof(global::DDRCommProto.reqLogin.Types.eCltType) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqLogin.Types.msgAVStreamReq), global::DDRCommProto.reqLogin.Types.msgAVStreamReq.Parser, new[]{ "AvType", "ChName", "BandwidthReq" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respLogin), global::DDRCommProto.respLogin.Parser, new[]{ "Retcode", "YourRole", "UID" }, null, new[]{ typeof(global::DDRCommProto.respLogin.Types.eLoginRetCode), typeof(global::DDRCommProto.respLogin.Types.eCltType) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyTerminalAccess), global::DDRCommProto.notifyTerminalAccess.Parser, new[]{ "BRRConnected2RS", "BOp", "NMonitors", "NClients", "NameLSMs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifySerAccess), global::DDRCommProto.notifySerAccess.Parser, new[]{ "NClients", "CTopOpLv", "CTopOpTime", "NMonitors", "MTopOpLv", "MTopOpTime", "NamesLSM" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifySerAccess), global::DDRCommProto.notifySerAccess.Parser, new[]{ "NMonitors", "MTopOpLv", "MTopOpTime", "NClients", "CTopOpLv", "CTopOpTime", "NamesLSM" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAVStream), global::DDRCommProto.notifyAVStream.Parser, new[]{ "ReservedChannel", "RobotMonitorChannels" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAVStream.Types.fullChannelInfo), global::DDRCommProto.notifyAVStream.Types.fullChannelInfo.Parser, new[]{ "DevType", "DataType", "LocalResAccStr", "ChannelDescription", "BwReq", "RemoteIP", "RemotePort", "RemotePass" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqTalk), global::DDRCommProto.reqTalk.Parser, new[]{ "CallerType", "Id1", "Id2", "AvType" }, null, new[]{ typeof(global::DDRCommProto.reqTalk.Types.eCallerType) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respTalk), global::DDRCommProto.respTalk.Parser, new[]{ "ReceiverType", "Id1", "Id2", "AvType" }, null, new[]{ typeof(global::DDRCommProto.respTalk.Types.eReceiverType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqTalk), global::DDRCommProto.reqTalk.Parser, new[]{ "CallerType", "TalkID", "AvType", "LocalTalkAddr" }, null, new[]{ typeof(global::DDRCommProto.reqTalk.Types.eCallerType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respTalk), global::DDRCommProto.respTalk.Parser, new[]{ "ReceiverType", "TalkID", "AvType" }, null, new[]{ typeof(global::DDRCommProto.respTalk.Types.eReceiverType) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqTalkHB), global::DDRCommProto.reqTalkHB.Parser, new[]{ "CallerTalkID", "ReceiverTalkID" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqCmd), global::DDRCommProto.reqCmd.Parser, new[]{ "CmdID", "CmdMsg" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respCmd), global::DDRCommProto.respCmd.Parser, new[]{ "CmdID", "RespMsg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqFile), global::DDRCommProto.reqFile.Parser, new[]{ "FileName" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respFile), global::DDRCommProto.respFile.Parser, new[]{ "FileName", "FileAddr" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyStatus), global::DDRCommProto.notifyStatus.Parser, new[]{ "StatusMsg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyAlarm), global::DDRCommProto.notifyAlarm.Parser, new[]{ "AlarmMsg" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.notifyTextChat), global::DDRCommProto.notifyTextChat.Parser, new[]{ "ChatText" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqFile), global::DDRCommProto.reqFile.Parser, new[]{ "TarLSMName", "FileType", "FileNames" }, null, new[]{ typeof(global::DDRCommProto.reqFile.Types.eFileTypes) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respFile), global::DDRCommProto.respFile.Parser, new[]{ "TarLSMName", "FileType", "FileNames", "FileContents" }, null, new[]{ typeof(global::DDRCommProto.respFile.Types.eFileTypes) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqFileAddr), global::DDRCommProto.reqFileAddr.Parser, new[]{ "TarLSMName", "FileType", "FileNames" }, null, new[]{ typeof(global::DDRCommProto.reqFileAddr.Types.eFileTypes) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.respFileAddr), global::DDRCommProto.respFileAddr.Parser, new[]{ "TarLSMName", "FileType", "FileNames", "FileAddr" }, null, new[]{ typeof(global::DDRCommProto.respFileAddr.Types.eFileTypes) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqStatus), global::DDRCommProto.reqStatus.Parser, new[]{ "StatusMsg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqAlarm), global::DDRCommProto.reqAlarm.Parser, new[]{ "AlarmMsg" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DDRCommProto.reqTextChat), global::DDRCommProto.reqTextChat.Parser, new[]{ "ChatText" }, null, null, null)
           }));
     }
     #endregion
@@ -128,8 +155,11 @@ namespace DDRCommProto {
     public CommonHeader(CommonHeader other) : this() {
       bodyType_ = other.bodyType_;
       flowDirection_ = other.flowDirection_.Clone();
-      destType_ = other.destType_.Clone();
-      destInfo_ = other.destInfo_.Clone();
+      bOriginal_ = other.bOriginal_;
+      srcCond_ = other.srcCond_;
+      forwardType_ = other.forwardType_;
+      recType_ = other.recType_;
+      prevRouteAddr_ = other.prevRouteAddr_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -141,6 +171,9 @@ namespace DDRCommProto {
     /// <summary>Field number for the "bodyType" field.</summary>
     public const int BodyTypeFieldNumber = 1;
     private string bodyType_ = "";
+    /// <summary>
+    /// type of message body, e.g., "reqLogin"
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string BodyType {
       get { return bodyType_; }
@@ -154,32 +187,76 @@ namespace DDRCommProto {
     private static readonly pb::FieldCodec<global::DDRCommProto.CommonHeader.Types.eFlowDir> _repeated_flowDirection_codec
         = pb::FieldCodec.ForEnum(18, x => (int) x, x => (global::DDRCommProto.CommonHeader.Types.eFlowDir) x);
     private readonly pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eFlowDir> flowDirection_ = new pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eFlowDir>();
+    /// <summary>
+    /// repeated here is to indicate its validity (one and only one flowDirection)
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eFlowDir> FlowDirection {
       get { return flowDirection_; }
     }
 
-    /// <summary>Field number for the "destType" field.</summary>
-    public const int DestTypeFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::DDRCommProto.CommonHeader.Types.eDestType> _repeated_destType_codec
-        = pb::FieldCodec.ForEnum(26, x => (int) x, x => (global::DDRCommProto.CommonHeader.Types.eDestType) x);
-    private readonly pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eDestType> destType_ = new pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eDestType>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::DDRCommProto.CommonHeader.Types.eDestType> DestType {
-      get { return destType_; }
-    }
-
-    /// <summary>Field number for the "destInfo" field.</summary>
-    public const int DestInfoFieldNumber = 4;
-    private static readonly pb::FieldCodec<string> _repeated_destInfo_codec
-        = pb::FieldCodec.ForString(34);
-    private readonly pbc::RepeatedField<string> destInfo_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "bOriginal" field.</summary>
+    public const int BOriginalFieldNumber = 3;
+    private int bOriginal_;
     /// <summary>
-    /// ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+    /// If bOriginal==1, it is a message from its source (not forwarded).
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> DestInfo {
-      get { return destInfo_; }
+    public int BOriginal {
+      get { return bOriginal_; }
+      set {
+        bOriginal_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "srcCond" field.</summary>
+    public const int SrcCondFieldNumber = 4;
+    private global::DDRCommProto.CommonHeader.Types.eSrcCondition srcCond_ = 0;
+    /// <summary>
+    /// if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+    /// monitor), discard this whole frame. Otherwise okay to process.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.CommonHeader.Types.eSrcCondition SrcCond {
+      get { return srcCond_; }
+      set {
+        srcCond_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "forwardType" field.</summary>
+    public const int ForwardTypeFieldNumber = 5;
+    private global::DDRCommProto.CommonHeader.Types.eForwardingType forwardType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.CommonHeader.Types.eForwardingType ForwardType {
+      get { return forwardType_; }
+      set {
+        forwardType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "recType" field.</summary>
+    public const int RecTypeFieldNumber = 6;
+    private global::DDRCommProto.CommonHeader.Types.eSrcRecType recType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.CommonHeader.Types.eSrcRecType RecType {
+      get { return recType_; }
+      set {
+        recType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "prevRouteAddr" field.</summary>
+    public const int PrevRouteAddrFieldNumber = 7;
+    private static readonly pb::FieldCodec<string> _repeated_prevRouteAddr_codec
+        = pb::FieldCodec.ForString(58);
+    private readonly pbc::RepeatedField<string> prevRouteAddr_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// array of previous routes
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> PrevRouteAddr {
+      get { return prevRouteAddr_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -197,8 +274,11 @@ namespace DDRCommProto {
       }
       if (BodyType != other.BodyType) return false;
       if(!flowDirection_.Equals(other.flowDirection_)) return false;
-      if(!destType_.Equals(other.destType_)) return false;
-      if(!destInfo_.Equals(other.destInfo_)) return false;
+      if (BOriginal != other.BOriginal) return false;
+      if (SrcCond != other.SrcCond) return false;
+      if (ForwardType != other.ForwardType) return false;
+      if (RecType != other.RecType) return false;
+      if(!prevRouteAddr_.Equals(other.prevRouteAddr_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -207,8 +287,11 @@ namespace DDRCommProto {
       int hash = 1;
       if (BodyType.Length != 0) hash ^= BodyType.GetHashCode();
       hash ^= flowDirection_.GetHashCode();
-      hash ^= destType_.GetHashCode();
-      hash ^= destInfo_.GetHashCode();
+      if (BOriginal != 0) hash ^= BOriginal.GetHashCode();
+      if (SrcCond != 0) hash ^= SrcCond.GetHashCode();
+      if (ForwardType != 0) hash ^= ForwardType.GetHashCode();
+      if (RecType != 0) hash ^= RecType.GetHashCode();
+      hash ^= prevRouteAddr_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -227,8 +310,23 @@ namespace DDRCommProto {
         output.WriteString(BodyType);
       }
       flowDirection_.WriteTo(output, _repeated_flowDirection_codec);
-      destType_.WriteTo(output, _repeated_destType_codec);
-      destInfo_.WriteTo(output, _repeated_destInfo_codec);
+      if (BOriginal != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(BOriginal);
+      }
+      if (SrcCond != 0) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) SrcCond);
+      }
+      if (ForwardType != 0) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) ForwardType);
+      }
+      if (RecType != 0) {
+        output.WriteRawTag(48);
+        output.WriteEnum((int) RecType);
+      }
+      prevRouteAddr_.WriteTo(output, _repeated_prevRouteAddr_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -241,8 +339,19 @@ namespace DDRCommProto {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(BodyType);
       }
       size += flowDirection_.CalculateSize(_repeated_flowDirection_codec);
-      size += destType_.CalculateSize(_repeated_destType_codec);
-      size += destInfo_.CalculateSize(_repeated_destInfo_codec);
+      if (BOriginal != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(BOriginal);
+      }
+      if (SrcCond != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SrcCond);
+      }
+      if (ForwardType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ForwardType);
+      }
+      if (RecType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) RecType);
+      }
+      size += prevRouteAddr_.CalculateSize(_repeated_prevRouteAddr_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -258,8 +367,19 @@ namespace DDRCommProto {
         BodyType = other.BodyType;
       }
       flowDirection_.Add(other.flowDirection_);
-      destType_.Add(other.destType_);
-      destInfo_.Add(other.destInfo_);
+      if (other.BOriginal != 0) {
+        BOriginal = other.BOriginal;
+      }
+      if (other.SrcCond != 0) {
+        SrcCond = other.SrcCond;
+      }
+      if (other.ForwardType != 0) {
+        ForwardType = other.ForwardType;
+      }
+      if (other.RecType != 0) {
+        RecType = other.RecType;
+      }
+      prevRouteAddr_.Add(other.prevRouteAddr_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -280,13 +400,24 @@ namespace DDRCommProto {
             flowDirection_.AddEntriesFrom(input, _repeated_flowDirection_codec);
             break;
           }
-          case 26:
           case 24: {
-            destType_.AddEntriesFrom(input, _repeated_destType_codec);
+            BOriginal = input.ReadInt32();
             break;
           }
-          case 34: {
-            destInfo_.AddEntriesFrom(input, _repeated_destInfo_codec);
+          case 32: {
+            srcCond_ = (global::DDRCommProto.CommonHeader.Types.eSrcCondition) input.ReadEnum();
+            break;
+          }
+          case 40: {
+            forwardType_ = (global::DDRCommProto.CommonHeader.Types.eForwardingType) input.ReadEnum();
+            break;
+          }
+          case 48: {
+            recType_ = (global::DDRCommProto.CommonHeader.Types.eSrcRecType) input.ReadEnum();
+            break;
+          }
+          case 58: {
+            prevRouteAddr_.AddEntriesFrom(input, _repeated_prevRouteAddr_codec);
             break;
           }
         }
@@ -297,29 +428,77 @@ namespace DDRCommProto {
     /// <summary>Container for nested types declared in the CommonHeader message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
+      /// <summary>
+      /// flow direction of the immediate transfer
+      /// </summary>
       public enum eFlowDir {
-        [pbr::OriginalName("RS2M")] Rs2M = 0,
-        [pbr::OriginalName("RS2RR")] Rs2Rr = 1,
-        [pbr::OriginalName("RR2RS")] Rr2Rs = 2,
-        [pbr::OriginalName("LS2C")] Ls2C = 3,
-        [pbr::OriginalName("C2LS")] C2Ls = 4,
-        [pbr::OriginalName("LS2LSM")] Ls2Lsm = 5,
-        [pbr::OriginalName("LSM2LS")] Lsm2Ls = 6,
+        [pbr::OriginalName("UNKNOWN2RS")] Unknown2Rs = 0,
+        [pbr::OriginalName("RS2M")] Rs2M = 1,
+        [pbr::OriginalName("M2RS")] M2Rs = 2,
+        [pbr::OriginalName("RS2RR")] Rs2Rr = 3,
+        [pbr::OriginalName("RR2RS")] Rr2Rs = 4,
+        [pbr::OriginalName("UNKNOWN2LS")] Unknown2Ls = 5,
+        [pbr::OriginalName("LS2C")] Ls2C = 6,
+        [pbr::OriginalName("C2LS")] C2Ls = 7,
+        [pbr::OriginalName("LS2LSM")] Ls2Lsm = 8,
+        [pbr::OriginalName("LSM2LS")] Lsm2Ls = 9,
       }
 
-      public enum eDestType {
+      public enum eSrcCondition {
+        [pbr::OriginalName("NoCond")] NoCond = 0,
+        [pbr::OriginalName("Op")] Op = 1,
+      }
+
+      /// <summary>
+      /// NoForwarding: No direct forwarding. Need to decrypt and parse the message bodies. Typical
+      ///               use is in "notify*".
+      /// LSMAll:       For RS, forward the message body to RR; for LS, forward the message body
+      ///               to all connected LSMs. For an LSM, respond if the message body asks for
+      ///               response of its functionality (assuming no conflicts among different LSMs).
+      ///               Typical use is in "reqCmd".
+      /// CltMonAll:    For RS, forward the message body to all connected monitors; for LS, forward
+      ///               the message body to all connected clients, and RS (if connected). Typical
+      ///               use is in "reqStatus", "reqAlarm", and "reqTextChat".
+      /// ToOp:         For RS, forward the message body to the Op. monitor (if so); for LS, forward
+      ///               the message body to the Op. client if one connected client is Op., otherwise
+      ///               to the RS. Typical use is in "reqTalk" from robot_LSM.
+      /// RoutingBack:  In this case, field "prevRouteAddr" should NOT be empty. The last element in
+      ///               that field will be the target address (IP:port string) to forward messages,
+      ///               and that last element will be removed in the new CommonHeader sent along the 
+      ///               the message body. Typical use is in "respCmd" and "respTalk".
+      /// </summary>
+      public enum eForwardingType {
         /// <summary>
         /// simple notification, nothing to be forwarded
         /// </summary>
-        [pbr::OriginalName("NoDest")] NoDest = 0,
+        [pbr::OriginalName("NoForwarding")] NoForwarding = 0,
         /// <summary>
-        /// this message will be forwarded to LSM
+        /// message body will finally be forwarded to all LSMs
         /// </summary>
-        [pbr::OriginalName("LSMName")] Lsmname = 1,
+        [pbr::OriginalName("LSMAll")] Lsmall = 1,
+        /// <summary>
+        /// message body will finally be forwarded to all clients/monitors
+        /// </summary>
+        [pbr::OriginalName("CltMonAll")] CltMonAll = 2,
+        /// <summary>
+        /// message body will finally be forwarded to Op. (client/monitor)
+        /// </summary>
+        [pbr::OriginalName("ToOp")] ToOp = 3,
         /// <summary>
         /// this message will be forwarded along the previous routes
         /// </summary>
-        [pbr::OriginalName("Routing")] Routing = 2,
+        [pbr::OriginalName("RoutingBack")] RoutingBack = 4,
+      }
+
+      public enum eSrcRecType {
+        /// <summary>
+        /// routing info not recorded
+        /// </summary>
+        [pbr::OriginalName("NoRec")] NoRec = 0,
+        /// <summary>
+        /// IMMEDIATE source will be appended to the previous routes in form like “192.168.1.1:234”
+        /// </summary>
+        [pbr::OriginalName("RecSrc")] RecSrc = 1,
       }
 
     }
@@ -327,6 +506,9 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class heartBeat : pb::IMessage<heartBeat> {
     private static readonly pb::MessageParser<heartBeat> _parser = new pb::MessageParser<heartBeat>(() => new heartBeat());
     private pb::UnknownFieldSet _unknownFields;
@@ -456,6 +638,9 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class bcLSAddr : pb::IMessage<bcLSAddr> {
     private static readonly pb::MessageParser<bcLSAddr> _parser = new pb::MessageParser<bcLSAddr>(() => new bcLSAddr());
     private pb::UnknownFieldSet _unknownFields;
@@ -481,9 +666,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bcLSAddr(bcLSAddr other) : this() {
-      name_ = other.name_;
-      ips_ = other.ips_.Clone();
-      port_ = other.port_;
+      lSInfo_ = other.lSInfo_ != null ? other.lSInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -492,35 +675,14 @@ namespace DDRCommProto {
       return new bcLSAddr(this);
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
+    /// <summary>Field number for the "LSInfo" field.</summary>
+    public const int LSInfoFieldNumber = 1;
+    private global::DDRCommProto.bcLSAddr.Types.ServerInfo lSInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
+    public global::DDRCommProto.bcLSAddr.Types.ServerInfo LSInfo {
+      get { return lSInfo_; }
       set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "ips" field.</summary>
-    public const int IpsFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_ips_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> ips_ = new pbc::RepeatedField<string>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> Ips {
-      get { return ips_; }
-    }
-
-    /// <summary>Field number for the "port" field.</summary>
-    public const int PortFieldNumber = 3;
-    private int port_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Port {
-      get { return port_; }
-      set {
-        port_ = value;
+        lSInfo_ = value;
       }
     }
 
@@ -537,18 +699,14 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Name != other.Name) return false;
-      if(!ips_.Equals(other.ips_)) return false;
-      if (Port != other.Port) return false;
+      if (!object.Equals(LSInfo, other.LSInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      hash ^= ips_.GetHashCode();
-      if (Port != 0) hash ^= Port.GetHashCode();
+      if (lSInfo_ != null) hash ^= LSInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -562,14 +720,9 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Name.Length != 0) {
+      if (lSInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      ips_.WriteTo(output, _repeated_ips_codec);
-      if (Port != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Port);
+        output.WriteMessage(LSInfo);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -579,12 +732,8 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      size += ips_.CalculateSize(_repeated_ips_codec);
-      if (Port != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Port);
+      if (lSInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LSInfo);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -597,12 +746,11 @@ namespace DDRCommProto {
       if (other == null) {
         return;
       }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      ips_.Add(other.ips_);
-      if (other.Port != 0) {
-        Port = other.Port;
+      if (other.lSInfo_ != null) {
+        if (lSInfo_ == null) {
+          lSInfo_ = new global::DDRCommProto.bcLSAddr.Types.ServerInfo();
+        }
+        LSInfo.MergeFrom(other.LSInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -616,23 +764,206 @@ namespace DDRCommProto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 18: {
-            ips_.AddEntriesFrom(input, _repeated_ips_codec);
-            break;
-          }
-          case 24: {
-            Port = input.ReadInt32();
+            if (lSInfo_ == null) {
+              lSInfo_ = new global::DDRCommProto.bcLSAddr.Types.ServerInfo();
+            }
+            input.ReadMessage(lSInfo_);
             break;
           }
         }
       }
     }
 
+    #region Nested types
+    /// <summary>Container for nested types declared in the bcLSAddr message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class ServerInfo : pb::IMessage<ServerInfo> {
+        private static readonly pb::MessageParser<ServerInfo> _parser = new pb::MessageParser<ServerInfo>(() => new ServerInfo());
+        private pb::UnknownFieldSet _unknownFields;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<ServerInfo> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::DDRCommProto.bcLSAddr.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ServerInfo() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ServerInfo(ServerInfo other) : this() {
+          name_ = other.name_;
+          ips_ = other.ips_.Clone();
+          port_ = other.port_;
+          _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public ServerInfo Clone() {
+          return new ServerInfo(this);
+        }
+
+        /// <summary>Field number for the "name" field.</summary>
+        public const int NameFieldNumber = 1;
+        private string name_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Name {
+          get { return name_; }
+          set {
+            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "ips" field.</summary>
+        public const int IpsFieldNumber = 2;
+        private static readonly pb::FieldCodec<string> _repeated_ips_codec
+            = pb::FieldCodec.ForString(18);
+        private readonly pbc::RepeatedField<string> ips_ = new pbc::RepeatedField<string>();
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<string> Ips {
+          get { return ips_; }
+        }
+
+        /// <summary>Field number for the "port" field.</summary>
+        public const int PortFieldNumber = 3;
+        private int port_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int Port {
+          get { return port_; }
+          set {
+            port_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as ServerInfo);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(ServerInfo other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Name != other.Name) return false;
+          if(!ips_.Equals(other.ips_)) return false;
+          if (Port != other.Port) return false;
+          return Equals(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Name.Length != 0) hash ^= Name.GetHashCode();
+          hash ^= ips_.GetHashCode();
+          if (Port != 0) hash ^= Port.GetHashCode();
+          if (_unknownFields != null) {
+            hash ^= _unknownFields.GetHashCode();
+          }
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Name.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Name);
+          }
+          ips_.WriteTo(output, _repeated_ips_codec);
+          if (Port != 0) {
+            output.WriteRawTag(24);
+            output.WriteInt32(Port);
+          }
+          if (_unknownFields != null) {
+            _unknownFields.WriteTo(output);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Name.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+          }
+          size += ips_.CalculateSize(_repeated_ips_codec);
+          if (Port != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Port);
+          }
+          if (_unknownFields != null) {
+            size += _unknownFields.CalculateSize();
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(ServerInfo other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Name.Length != 0) {
+            Name = other.Name;
+          }
+          ips_.Add(other.ips_);
+          if (other.Port != 0) {
+            Port = other.Port;
+          }
+          _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+                break;
+              case 10: {
+                Name = input.ReadString();
+                break;
+              }
+              case 18: {
+                ips_.AddEntriesFrom(input, _repeated_ips_codec);
+                break;
+              }
+              case 24: {
+                Port = input.ReadInt32();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
+
   }
 
+  /// <summary>
+  /// flowDirection = UNKNOWN2RS or UNKNOWN2LS
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class reqLogin : pb::IMessage<reqLogin> {
     private static readonly pb::MessageParser<reqLogin> _parser = new pb::MessageParser<reqLogin>(() => new reqLogin());
     private pb::UnknownFieldSet _unknownFields;
@@ -1129,6 +1460,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class respLogin : pb::IMessage<respLogin> {
     private static readonly pb::MessageParser<respLogin> _parser = new pb::MessageParser<respLogin>(() => new respLogin());
     private pb::UnknownFieldSet _unknownFields;
@@ -1335,6 +1670,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = RS2M or LS2C
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class notifyTerminalAccess : pb::IMessage<notifyTerminalAccess> {
     private static readonly pb::MessageParser<notifyTerminalAccess> _parser = new pb::MessageParser<notifyTerminalAccess>(() => new notifyTerminalAccess());
     private pb::UnknownFieldSet _unknownFields;
@@ -1568,6 +1907,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = RS2RR or RR2RS
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class notifySerAccess : pb::IMessage<notifySerAccess> {
     private static readonly pb::MessageParser<notifySerAccess> _parser = new pb::MessageParser<notifySerAccess>(() => new notifySerAccess());
     private pb::UnknownFieldSet _unknownFields;
@@ -1593,12 +1936,12 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public notifySerAccess(notifySerAccess other) : this() {
-      nClients_ = other.nClients_;
-      cTopOpLv_ = other.cTopOpLv_;
-      cTopOpTime_ = other.cTopOpTime_;
       nMonitors_ = other.nMonitors_;
       mTopOpLv_ = other.mTopOpLv_;
       mTopOpTime_ = other.mTopOpTime_;
+      nClients_ = other.nClients_;
+      cTopOpLv_ = other.cTopOpLv_;
+      cTopOpTime_ = other.cTopOpTime_;
       namesLSM_ = other.namesLSM_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1608,48 +1951,12 @@ namespace DDRCommProto {
       return new notifySerAccess(this);
     }
 
-    /// <summary>Field number for the "nClients" field.</summary>
-    public const int NClientsFieldNumber = 1;
-    private int nClients_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int NClients {
-      get { return nClients_; }
-      set {
-        nClients_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "cTopOpLv" field.</summary>
-    public const int CTopOpLvFieldNumber = 2;
-    private int cTopOpLv_;
-    /// <summary>
-    /// op. level of the top client
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CTopOpLv {
-      get { return cTopOpLv_; }
-      set {
-        cTopOpLv_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "cTopOpTime" field.</summary>
-    public const int CTopOpTimeFieldNumber = 3;
-    private long cTopOpTime_;
-    /// <summary>
-    /// connection time of the top client
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long CTopOpTime {
-      get { return cTopOpTime_; }
-      set {
-        cTopOpTime_ = value;
-      }
-    }
-
     /// <summary>Field number for the "nMonitors" field.</summary>
-    public const int NMonitorsFieldNumber = 4;
+    public const int NMonitorsFieldNumber = 1;
     private int nMonitors_;
+    /// <summary>
+    /// field 1~3 for RS2RR
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int NMonitors {
       get { return nMonitors_; }
@@ -1659,7 +1966,7 @@ namespace DDRCommProto {
     }
 
     /// <summary>Field number for the "mTopOpLv" field.</summary>
-    public const int MTopOpLvFieldNumber = 5;
+    public const int MTopOpLvFieldNumber = 2;
     private int mTopOpLv_;
     /// <summary>
     /// op. level of the top monitor
@@ -1673,7 +1980,7 @@ namespace DDRCommProto {
     }
 
     /// <summary>Field number for the "mTopOpTime" field.</summary>
-    public const int MTopOpTimeFieldNumber = 6;
+    public const int MTopOpTimeFieldNumber = 3;
     private int mTopOpTime_;
     /// <summary>
     /// connection time of the top monitor
@@ -1683,6 +1990,48 @@ namespace DDRCommProto {
       get { return mTopOpTime_; }
       set {
         mTopOpTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "nClients" field.</summary>
+    public const int NClientsFieldNumber = 4;
+    private int nClients_;
+    /// <summary>
+    /// field 4~7 for RR2RS
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int NClients {
+      get { return nClients_; }
+      set {
+        nClients_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cTopOpLv" field.</summary>
+    public const int CTopOpLvFieldNumber = 5;
+    private int cTopOpLv_;
+    /// <summary>
+    /// op. level of the top client
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CTopOpLv {
+      get { return cTopOpLv_; }
+      set {
+        cTopOpLv_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cTopOpTime" field.</summary>
+    public const int CTopOpTimeFieldNumber = 6;
+    private long cTopOpTime_;
+    /// <summary>
+    /// connection time of the top client
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long CTopOpTime {
+      get { return cTopOpTime_; }
+      set {
+        cTopOpTime_ = value;
       }
     }
 
@@ -1709,12 +2058,12 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (NClients != other.NClients) return false;
-      if (CTopOpLv != other.CTopOpLv) return false;
-      if (CTopOpTime != other.CTopOpTime) return false;
       if (NMonitors != other.NMonitors) return false;
       if (MTopOpLv != other.MTopOpLv) return false;
       if (MTopOpTime != other.MTopOpTime) return false;
+      if (NClients != other.NClients) return false;
+      if (CTopOpLv != other.CTopOpLv) return false;
+      if (CTopOpTime != other.CTopOpTime) return false;
       if(!namesLSM_.Equals(other.namesLSM_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1722,12 +2071,12 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (NClients != 0) hash ^= NClients.GetHashCode();
-      if (CTopOpLv != 0) hash ^= CTopOpLv.GetHashCode();
-      if (CTopOpTime != 0L) hash ^= CTopOpTime.GetHashCode();
       if (NMonitors != 0) hash ^= NMonitors.GetHashCode();
       if (MTopOpLv != 0) hash ^= MTopOpLv.GetHashCode();
       if (MTopOpTime != 0) hash ^= MTopOpTime.GetHashCode();
+      if (NClients != 0) hash ^= NClients.GetHashCode();
+      if (CTopOpLv != 0) hash ^= CTopOpLv.GetHashCode();
+      if (CTopOpTime != 0L) hash ^= CTopOpTime.GetHashCode();
       hash ^= namesLSM_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1742,29 +2091,29 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (NClients != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(NClients);
-      }
-      if (CTopOpLv != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(CTopOpLv);
-      }
-      if (CTopOpTime != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(CTopOpTime);
-      }
       if (NMonitors != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(8);
         output.WriteInt32(NMonitors);
       }
       if (MTopOpLv != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(16);
         output.WriteInt32(MTopOpLv);
       }
       if (MTopOpTime != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(24);
         output.WriteInt32(MTopOpTime);
+      }
+      if (NClients != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(NClients);
+      }
+      if (CTopOpLv != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(CTopOpLv);
+      }
+      if (CTopOpTime != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(CTopOpTime);
       }
       namesLSM_.WriteTo(output, _repeated_namesLSM_codec);
       if (_unknownFields != null) {
@@ -1775,15 +2124,6 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (NClients != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(NClients);
-      }
-      if (CTopOpLv != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CTopOpLv);
-      }
-      if (CTopOpTime != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CTopOpTime);
-      }
       if (NMonitors != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(NMonitors);
       }
@@ -1792,6 +2132,15 @@ namespace DDRCommProto {
       }
       if (MTopOpTime != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(MTopOpTime);
+      }
+      if (NClients != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(NClients);
+      }
+      if (CTopOpLv != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CTopOpLv);
+      }
+      if (CTopOpTime != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CTopOpTime);
       }
       size += namesLSM_.CalculateSize(_repeated_namesLSM_codec);
       if (_unknownFields != null) {
@@ -1805,15 +2154,6 @@ namespace DDRCommProto {
       if (other == null) {
         return;
       }
-      if (other.NClients != 0) {
-        NClients = other.NClients;
-      }
-      if (other.CTopOpLv != 0) {
-        CTopOpLv = other.CTopOpLv;
-      }
-      if (other.CTopOpTime != 0L) {
-        CTopOpTime = other.CTopOpTime;
-      }
       if (other.NMonitors != 0) {
         NMonitors = other.NMonitors;
       }
@@ -1822,6 +2162,15 @@ namespace DDRCommProto {
       }
       if (other.MTopOpTime != 0) {
         MTopOpTime = other.MTopOpTime;
+      }
+      if (other.NClients != 0) {
+        NClients = other.NClients;
+      }
+      if (other.CTopOpLv != 0) {
+        CTopOpLv = other.CTopOpLv;
+      }
+      if (other.CTopOpTime != 0L) {
+        CTopOpTime = other.CTopOpTime;
       }
       namesLSM_.Add(other.namesLSM_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1836,27 +2185,27 @@ namespace DDRCommProto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            NClients = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            CTopOpLv = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            CTopOpTime = input.ReadInt64();
-            break;
-          }
-          case 32: {
             NMonitors = input.ReadInt32();
             break;
           }
-          case 40: {
+          case 16: {
             MTopOpLv = input.ReadInt32();
             break;
           }
-          case 48: {
+          case 24: {
             MTopOpTime = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            NClients = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            CTopOpLv = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            CTopOpTime = input.ReadInt64();
             break;
           }
           case 58: {
@@ -1869,6 +2218,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class notifyAVStream : pb::IMessage<notifyAVStream> {
     private static readonly pb::MessageParser<notifyAVStream> _parser = new pb::MessageParser<notifyAVStream>(() => new notifyAVStream());
     private pb::UnknownFieldSet _unknownFields;
@@ -2371,6 +2724,17 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// if callerType == client,
+  ///		flowDirection = C2LS or LS2LSM
+  ///      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+  /// if callerType == monitor,
+  ///		flowDirection = M2RS or RS2RR or LS2LSM
+  ///      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+  /// if callerType == robot_LSM,
+  ///		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+  ///      eSrcCondition = NoCond; forwardType = ToOp; eSrcRecType = RecSrc;
+  /// </summary>
   public sealed partial class reqTalk : pb::IMessage<reqTalk> {
     private static readonly pb::MessageParser<reqTalk> _parser = new pb::MessageParser<reqTalk>(() => new reqTalk());
     private pb::UnknownFieldSet _unknownFields;
@@ -2397,9 +2761,9 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public reqTalk(reqTalk other) : this() {
       callerType_ = other.callerType_;
-      id1_ = other.id1_;
-      id2_ = other.id2_;
+      talkID_ = other.talkID_;
       avType_ = other.avType_;
+      localTalkAddr_ = other.localTalkAddr_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2419,30 +2783,22 @@ namespace DDRCommProto {
       }
     }
 
-    /// <summary>Field number for the "id1" field.</summary>
-    public const int Id1FieldNumber = 2;
-    private int id1_;
+    /// <summary>Field number for the "talkID" field.</summary>
+    public const int TalkIDFieldNumber = 2;
+    private int talkID_;
+    /// <summary>
+    /// a randomly generated ID for this session of talk
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id1 {
-      get { return id1_; }
+    public int TalkID {
+      get { return talkID_; }
       set {
-        id1_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "id2" field.</summary>
-    public const int Id2FieldNumber = 3;
-    private int id2_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id2 {
-      get { return id2_; }
-      set {
-        id2_ = value;
+        talkID_ = value;
       }
     }
 
     /// <summary>Field number for the "avType" field.</summary>
-    public const int AvTypeFieldNumber = 4;
+    public const int AvTypeFieldNumber = 3;
     private int avType_;
     /// <summary>
     /// 0-N.A; 1-audio; 2-video; 3-audio+video
@@ -2453,6 +2809,23 @@ namespace DDRCommProto {
       set {
         avType_ = value;
       }
+    }
+
+    /// <summary>Field number for the "localTalkAddr" field.</summary>
+    public const int LocalTalkAddrFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _repeated_localTalkAddr_codec
+        = pb::FieldCodec.ForString(34);
+    private readonly pbc::RepeatedField<string> localTalkAddr_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// when the call is only between two local devices (client->LSM or LSM->client)
+    /// these strings indicate caller's TCP server of talk. For client calling LSM,
+    /// this address is on the client side and the LSM will try to receive data there;
+    /// for LSM calling client, this address is on the LSM side and the client will try
+    /// to send data there.
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> LocalTalkAddr {
+      get { return localTalkAddr_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2469,9 +2842,9 @@ namespace DDRCommProto {
         return true;
       }
       if (CallerType != other.CallerType) return false;
-      if (Id1 != other.Id1) return false;
-      if (Id2 != other.Id2) return false;
+      if (TalkID != other.TalkID) return false;
       if (AvType != other.AvType) return false;
+      if(!localTalkAddr_.Equals(other.localTalkAddr_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2479,9 +2852,9 @@ namespace DDRCommProto {
     public override int GetHashCode() {
       int hash = 1;
       if (CallerType != 0) hash ^= CallerType.GetHashCode();
-      if (Id1 != 0) hash ^= Id1.GetHashCode();
-      if (Id2 != 0) hash ^= Id2.GetHashCode();
+      if (TalkID != 0) hash ^= TalkID.GetHashCode();
       if (AvType != 0) hash ^= AvType.GetHashCode();
+      hash ^= localTalkAddr_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2499,18 +2872,15 @@ namespace DDRCommProto {
         output.WriteRawTag(8);
         output.WriteEnum((int) CallerType);
       }
-      if (Id1 != 0) {
+      if (TalkID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Id1);
-      }
-      if (Id2 != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Id2);
+        output.WriteInt32(TalkID);
       }
       if (AvType != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(AvType);
       }
+      localTalkAddr_.WriteTo(output, _repeated_localTalkAddr_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2522,15 +2892,13 @@ namespace DDRCommProto {
       if (CallerType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) CallerType);
       }
-      if (Id1 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id1);
-      }
-      if (Id2 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id2);
+      if (TalkID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TalkID);
       }
       if (AvType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(AvType);
       }
+      size += localTalkAddr_.CalculateSize(_repeated_localTalkAddr_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2545,15 +2913,13 @@ namespace DDRCommProto {
       if (other.CallerType != 0) {
         CallerType = other.CallerType;
       }
-      if (other.Id1 != 0) {
-        Id1 = other.Id1;
-      }
-      if (other.Id2 != 0) {
-        Id2 = other.Id2;
+      if (other.TalkID != 0) {
+        TalkID = other.TalkID;
       }
       if (other.AvType != 0) {
         AvType = other.AvType;
       }
+      localTalkAddr_.Add(other.localTalkAddr_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2570,15 +2936,15 @@ namespace DDRCommProto {
             break;
           }
           case 16: {
-            Id1 = input.ReadInt32();
+            TalkID = input.ReadInt32();
             break;
           }
           case 24: {
-            Id2 = input.ReadInt32();
+            AvType = input.ReadInt32();
             break;
           }
-          case 32: {
-            AvType = input.ReadInt32();
+          case 34: {
+            localTalkAddr_.AddEntriesFrom(input, _repeated_localTalkAddr_codec);
             break;
           }
         }
@@ -2600,6 +2966,19 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// if receiverType == client,
+  ///		flowDirection = C2LS or LS2LSM
+  ///      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+  /// if callerType == monitor,
+  ///		flowDirection = M2RS or RS2RR or LS2LSM
+  ///      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+  /// if receiverType == robot_LSM,
+  ///		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+  ///      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+  /// Note that this message body is sent along with field "prevRouteAddr" of the previously
+  /// received message header (CommonHeader).
+  /// </summary>
   public sealed partial class respTalk : pb::IMessage<respTalk> {
     private static readonly pb::MessageParser<respTalk> _parser = new pb::MessageParser<respTalk>(() => new respTalk());
     private pb::UnknownFieldSet _unknownFields;
@@ -2626,8 +3005,7 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public respTalk(respTalk other) : this() {
       receiverType_ = other.receiverType_;
-      id1_ = other.id1_;
-      id2_ = other.id2_;
+      talkID_ = other.talkID_;
       avType_ = other.avType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -2648,30 +3026,22 @@ namespace DDRCommProto {
       }
     }
 
-    /// <summary>Field number for the "id1" field.</summary>
-    public const int Id1FieldNumber = 2;
-    private int id1_;
+    /// <summary>Field number for the "talkID" field.</summary>
+    public const int TalkIDFieldNumber = 2;
+    private int talkID_;
+    /// <summary>
+    /// a randomly generated ID for this session of talk
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id1 {
-      get { return id1_; }
+    public int TalkID {
+      get { return talkID_; }
       set {
-        id1_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "id2" field.</summary>
-    public const int Id2FieldNumber = 3;
-    private int id2_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id2 {
-      get { return id2_; }
-      set {
-        id2_ = value;
+        talkID_ = value;
       }
     }
 
     /// <summary>Field number for the "avType" field.</summary>
-    public const int AvTypeFieldNumber = 4;
+    public const int AvTypeFieldNumber = 3;
     private int avType_;
     /// <summary>
     /// 0-N.A; 1-audio; 2-video; 3-audio+video
@@ -2698,8 +3068,7 @@ namespace DDRCommProto {
         return true;
       }
       if (ReceiverType != other.ReceiverType) return false;
-      if (Id1 != other.Id1) return false;
-      if (Id2 != other.Id2) return false;
+      if (TalkID != other.TalkID) return false;
       if (AvType != other.AvType) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -2708,8 +3077,7 @@ namespace DDRCommProto {
     public override int GetHashCode() {
       int hash = 1;
       if (ReceiverType != 0) hash ^= ReceiverType.GetHashCode();
-      if (Id1 != 0) hash ^= Id1.GetHashCode();
-      if (Id2 != 0) hash ^= Id2.GetHashCode();
+      if (TalkID != 0) hash ^= TalkID.GetHashCode();
       if (AvType != 0) hash ^= AvType.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2728,16 +3096,12 @@ namespace DDRCommProto {
         output.WriteRawTag(8);
         output.WriteEnum((int) ReceiverType);
       }
-      if (Id1 != 0) {
+      if (TalkID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Id1);
-      }
-      if (Id2 != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Id2);
+        output.WriteInt32(TalkID);
       }
       if (AvType != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(24);
         output.WriteInt32(AvType);
       }
       if (_unknownFields != null) {
@@ -2751,11 +3115,8 @@ namespace DDRCommProto {
       if (ReceiverType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ReceiverType);
       }
-      if (Id1 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id1);
-      }
-      if (Id2 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id2);
+      if (TalkID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TalkID);
       }
       if (AvType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(AvType);
@@ -2774,11 +3135,8 @@ namespace DDRCommProto {
       if (other.ReceiverType != 0) {
         ReceiverType = other.ReceiverType;
       }
-      if (other.Id1 != 0) {
-        Id1 = other.Id1;
-      }
-      if (other.Id2 != 0) {
-        Id2 = other.Id2;
+      if (other.TalkID != 0) {
+        TalkID = other.TalkID;
       }
       if (other.AvType != 0) {
         AvType = other.AvType;
@@ -2799,14 +3157,10 @@ namespace DDRCommProto {
             break;
           }
           case 16: {
-            Id1 = input.ReadInt32();
+            TalkID = input.ReadInt32();
             break;
           }
           case 24: {
-            Id2 = input.ReadInt32();
-            break;
-          }
-          case 32: {
             AvType = input.ReadInt32();
             break;
           }
@@ -2829,6 +3183,178 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// this is to maintain (dual) talk by sending heart beats
+  /// flowDirection = any possibility
+  /// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class reqTalkHB : pb::IMessage<reqTalkHB> {
+    private static readonly pb::MessageParser<reqTalkHB> _parser = new pb::MessageParser<reqTalkHB>(() => new reqTalkHB());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<reqTalkHB> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqTalkHB() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqTalkHB(reqTalkHB other) : this() {
+      callerTalkID_ = other.callerTalkID_;
+      receiverTalkID_ = other.receiverTalkID_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqTalkHB Clone() {
+      return new reqTalkHB(this);
+    }
+
+    /// <summary>Field number for the "callerTalkID" field.</summary>
+    public const int CallerTalkIDFieldNumber = 1;
+    private int callerTalkID_;
+    /// <summary>
+    /// caller's talkID
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CallerTalkID {
+      get { return callerTalkID_; }
+      set {
+        callerTalkID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "receiverTalkID" field.</summary>
+    public const int ReceiverTalkIDFieldNumber = 2;
+    private int receiverTalkID_;
+    /// <summary>
+    /// receiver's talkID
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ReceiverTalkID {
+      get { return receiverTalkID_; }
+      set {
+        receiverTalkID_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as reqTalkHB);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(reqTalkHB other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (CallerTalkID != other.CallerTalkID) return false;
+      if (ReceiverTalkID != other.ReceiverTalkID) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (CallerTalkID != 0) hash ^= CallerTalkID.GetHashCode();
+      if (ReceiverTalkID != 0) hash ^= ReceiverTalkID.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (CallerTalkID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(CallerTalkID);
+      }
+      if (ReceiverTalkID != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ReceiverTalkID);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (CallerTalkID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CallerTalkID);
+      }
+      if (ReceiverTalkID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ReceiverTalkID);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(reqTalkHB other) {
+      if (other == null) {
+        return;
+      }
+      if (other.CallerTalkID != 0) {
+        CallerTalkID = other.CallerTalkID;
+      }
+      if (other.ReceiverTalkID != 0) {
+        ReceiverTalkID = other.ReceiverTalkID;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            CallerTalkID = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            ReceiverTalkID = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// flowDirection = M2RS or RS2RR or C2LS or LS2LSM or LSM2LS
+  /// eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+  /// </summary>
   public sealed partial class reqCmd : pb::IMessage<reqCmd> {
     private static readonly pb::MessageParser<reqCmd> _parser = new pb::MessageParser<reqCmd>(() => new reqCmd());
     private pb::UnknownFieldSet _unknownFields;
@@ -2837,7 +3363,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[10]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2986,6 +3512,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = LSM2LS or RR2RS or RS2M or LS2C or LS2LSM
+  /// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class respCmd : pb::IMessage<respCmd> {
     private static readonly pb::MessageParser<respCmd> _parser = new pb::MessageParser<respCmd>(() => new respCmd());
     private pb::UnknownFieldSet _unknownFields;
@@ -2994,7 +3524,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[11]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3143,6 +3673,10 @@ namespace DDRCommProto {
 
   }
 
+  /// <summary>
+  /// flowDirection = LS2LSM
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class reqFile : pb::IMessage<reqFile> {
     private static readonly pb::MessageParser<reqFile> _parser = new pb::MessageParser<reqFile>(() => new reqFile());
     private pb::UnknownFieldSet _unknownFields;
@@ -3151,7 +3685,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[12]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3168,7 +3702,9 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public reqFile(reqFile other) : this() {
-      fileName_ = other.fileName_.Clone();
+      tarLSMName_ = other.tarLSMName_;
+      fileType_ = other.fileType_;
+      fileNames_ = other.fileNames_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3177,17 +3713,39 @@ namespace DDRCommProto {
       return new reqFile(this);
     }
 
-    /// <summary>Field number for the "fileName" field.</summary>
-    public const int FileNameFieldNumber = 1;
-    private static readonly pb::FieldCodec<string> _repeated_fileName_codec
-        = pb::FieldCodec.ForString(10);
-    private readonly pbc::RepeatedField<string> fileName_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "tarLSMName" field.</summary>
+    public const int TarLSMNameFieldNumber = 1;
+    private string tarLSMName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TarLSMName {
+      get { return tarLSMName_; }
+      set {
+        tarLSMName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "fileType" field.</summary>
+    public const int FileTypeFieldNumber = 2;
+    private global::DDRCommProto.reqFile.Types.eFileTypes fileType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.reqFile.Types.eFileTypes FileType {
+      get { return fileType_; }
+      set {
+        fileType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fileNames" field.</summary>
+    public const int FileNamesFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_fileNames_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> fileNames_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// allow wildcards (*,?, etc)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> FileName {
-      get { return fileName_; }
+    public pbc::RepeatedField<string> FileNames {
+      get { return fileNames_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3203,14 +3761,18 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!fileName_.Equals(other.fileName_)) return false;
+      if (TarLSMName != other.TarLSMName) return false;
+      if (FileType != other.FileType) return false;
+      if(!fileNames_.Equals(other.fileNames_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= fileName_.GetHashCode();
+      if (TarLSMName.Length != 0) hash ^= TarLSMName.GetHashCode();
+      if (FileType != 0) hash ^= FileType.GetHashCode();
+      hash ^= fileNames_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3224,7 +3786,15 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      fileName_.WriteTo(output, _repeated_fileName_codec);
+      if (TarLSMName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TarLSMName);
+      }
+      if (FileType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FileType);
+      }
+      fileNames_.WriteTo(output, _repeated_fileNames_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3233,7 +3803,13 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += fileName_.CalculateSize(_repeated_fileName_codec);
+      if (TarLSMName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TarLSMName);
+      }
+      if (FileType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FileType);
+      }
+      size += fileNames_.CalculateSize(_repeated_fileNames_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3245,7 +3821,13 @@ namespace DDRCommProto {
       if (other == null) {
         return;
       }
-      fileName_.Add(other.fileName_);
+      if (other.TarLSMName.Length != 0) {
+        TarLSMName = other.TarLSMName;
+      }
+      if (other.FileType != 0) {
+        FileType = other.FileType;
+      }
+      fileNames_.Add(other.fileNames_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3258,15 +3840,40 @@ namespace DDRCommProto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            fileName_.AddEntriesFrom(input, _repeated_fileName_codec);
+            TarLSMName = input.ReadString();
+            break;
+          }
+          case 16: {
+            fileType_ = (global::DDRCommProto.reqFile.Types.eFileTypes) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            fileNames_.AddEntriesFrom(input, _repeated_fileNames_codec);
             break;
           }
         }
       }
     }
 
+    #region Nested types
+    /// <summary>Container for nested types declared in the reqFile message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum eFileTypes {
+        [pbr::OriginalName("FileContents")] FileContents = 0,
+        [pbr::OriginalName("FileList")] FileList = 1,
+        [pbr::OriginalName("FolderFlist")] FolderFlist = 2,
+      }
+
+    }
+    #endregion
+
   }
 
+  /// <summary>
+  /// flowDirection = LSM2LS
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
   public sealed partial class respFile : pb::IMessage<respFile> {
     private static readonly pb::MessageParser<respFile> _parser = new pb::MessageParser<respFile>(() => new respFile());
     private pb::UnknownFieldSet _unknownFields;
@@ -3275,7 +3882,7 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[13]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3292,8 +3899,10 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public respFile(respFile other) : this() {
-      fileName_ = other.fileName_.Clone();
-      fileAddr_ = other.fileAddr_.Clone();
+      tarLSMName_ = other.tarLSMName_;
+      fileType_ = other.fileType_;
+      fileNames_ = other.fileNames_.Clone();
+      fileContents_ = other.fileContents_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3302,30 +3911,52 @@ namespace DDRCommProto {
       return new respFile(this);
     }
 
-    /// <summary>Field number for the "fileName" field.</summary>
-    public const int FileNameFieldNumber = 1;
-    private static readonly pb::FieldCodec<string> _repeated_fileName_codec
-        = pb::FieldCodec.ForString(10);
-    private readonly pbc::RepeatedField<string> fileName_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "tarLSMName" field.</summary>
+    public const int TarLSMNameFieldNumber = 1;
+    private string tarLSMName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TarLSMName {
+      get { return tarLSMName_; }
+      set {
+        tarLSMName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "fileType" field.</summary>
+    public const int FileTypeFieldNumber = 2;
+    private global::DDRCommProto.respFile.Types.eFileTypes fileType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.respFile.Types.eFileTypes FileType {
+      get { return fileType_; }
+      set {
+        fileType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fileNames" field.</summary>
+    public const int FileNamesFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_fileNames_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> fileNames_ = new pbc::RepeatedField<string>();
     /// <summary>
     /// no wildcards
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> FileName {
-      get { return fileName_; }
+    public pbc::RepeatedField<string> FileNames {
+      get { return fileNames_; }
     }
 
-    /// <summary>Field number for the "fileAddr" field.</summary>
-    public const int FileAddrFieldNumber = 2;
-    private static readonly pb::FieldCodec<string> _repeated_fileAddr_codec
-        = pb::FieldCodec.ForString(18);
-    private readonly pbc::RepeatedField<string> fileAddr_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "fileContents" field.</summary>
+    public const int FileContentsFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _repeated_fileContents_codec
+        = pb::FieldCodec.ForString(34);
+    private readonly pbc::RepeatedField<string> fileContents_ = new pbc::RepeatedField<string>();
     /// <summary>
-    /// probably http address
+    /// ignored if fileType!=FileContents
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<string> FileAddr {
-      get { return fileAddr_; }
+    public pbc::RepeatedField<string> FileContents {
+      get { return fileContents_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3341,7 +3972,426 @@ namespace DDRCommProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!fileName_.Equals(other.fileName_)) return false;
+      if (TarLSMName != other.TarLSMName) return false;
+      if (FileType != other.FileType) return false;
+      if(!fileNames_.Equals(other.fileNames_)) return false;
+      if(!fileContents_.Equals(other.fileContents_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TarLSMName.Length != 0) hash ^= TarLSMName.GetHashCode();
+      if (FileType != 0) hash ^= FileType.GetHashCode();
+      hash ^= fileNames_.GetHashCode();
+      hash ^= fileContents_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TarLSMName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TarLSMName);
+      }
+      if (FileType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FileType);
+      }
+      fileNames_.WriteTo(output, _repeated_fileNames_codec);
+      fileContents_.WriteTo(output, _repeated_fileContents_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TarLSMName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TarLSMName);
+      }
+      if (FileType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FileType);
+      }
+      size += fileNames_.CalculateSize(_repeated_fileNames_codec);
+      size += fileContents_.CalculateSize(_repeated_fileContents_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(respFile other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TarLSMName.Length != 0) {
+        TarLSMName = other.TarLSMName;
+      }
+      if (other.FileType != 0) {
+        FileType = other.FileType;
+      }
+      fileNames_.Add(other.fileNames_);
+      fileContents_.Add(other.fileContents_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            TarLSMName = input.ReadString();
+            break;
+          }
+          case 16: {
+            fileType_ = (global::DDRCommProto.respFile.Types.eFileTypes) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            fileNames_.AddEntriesFrom(input, _repeated_fileNames_codec);
+            break;
+          }
+          case 34: {
+            fileContents_.AddEntriesFrom(input, _repeated_fileContents_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the respFile message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum eFileTypes {
+        [pbr::OriginalName("FileContents")] FileContents = 0,
+        [pbr::OriginalName("FileList")] FileList = 1,
+        [pbr::OriginalName("FolderFlist")] FolderFlist = 2,
+      }
+
+    }
+    #endregion
+
+  }
+
+  /// <summary>
+  /// flowDirection = M2RS or RS2RR or C2LS
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class reqFileAddr : pb::IMessage<reqFileAddr> {
+    private static readonly pb::MessageParser<reqFileAddr> _parser = new pb::MessageParser<reqFileAddr>(() => new reqFileAddr());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<reqFileAddr> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqFileAddr() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqFileAddr(reqFileAddr other) : this() {
+      tarLSMName_ = other.tarLSMName_;
+      fileType_ = other.fileType_;
+      fileNames_ = other.fileNames_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public reqFileAddr Clone() {
+      return new reqFileAddr(this);
+    }
+
+    /// <summary>Field number for the "tarLSMName" field.</summary>
+    public const int TarLSMNameFieldNumber = 1;
+    private string tarLSMName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TarLSMName {
+      get { return tarLSMName_; }
+      set {
+        tarLSMName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "fileType" field.</summary>
+    public const int FileTypeFieldNumber = 2;
+    private global::DDRCommProto.reqFileAddr.Types.eFileTypes fileType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.reqFileAddr.Types.eFileTypes FileType {
+      get { return fileType_; }
+      set {
+        fileType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fileNames" field.</summary>
+    public const int FileNamesFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_fileNames_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> fileNames_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// allow wildcards (*,?, etc)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> FileNames {
+      get { return fileNames_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as reqFileAddr);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(reqFileAddr other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TarLSMName != other.TarLSMName) return false;
+      if (FileType != other.FileType) return false;
+      if(!fileNames_.Equals(other.fileNames_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (TarLSMName.Length != 0) hash ^= TarLSMName.GetHashCode();
+      if (FileType != 0) hash ^= FileType.GetHashCode();
+      hash ^= fileNames_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (TarLSMName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TarLSMName);
+      }
+      if (FileType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FileType);
+      }
+      fileNames_.WriteTo(output, _repeated_fileNames_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (TarLSMName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TarLSMName);
+      }
+      if (FileType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FileType);
+      }
+      size += fileNames_.CalculateSize(_repeated_fileNames_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(reqFileAddr other) {
+      if (other == null) {
+        return;
+      }
+      if (other.TarLSMName.Length != 0) {
+        TarLSMName = other.TarLSMName;
+      }
+      if (other.FileType != 0) {
+        FileType = other.FileType;
+      }
+      fileNames_.Add(other.fileNames_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            TarLSMName = input.ReadString();
+            break;
+          }
+          case 16: {
+            fileType_ = (global::DDRCommProto.reqFileAddr.Types.eFileTypes) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            fileNames_.AddEntriesFrom(input, _repeated_fileNames_codec);
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the reqFileAddr message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum eFileTypes {
+        [pbr::OriginalName("FileContents")] FileContents = 0,
+        [pbr::OriginalName("FileList")] FileList = 1,
+        [pbr::OriginalName("FolderFlist")] FolderFlist = 2,
+      }
+
+    }
+    #endregion
+
+  }
+
+  /// <summary>
+  /// flowDirection = RR2RS or RS2M or LS2C
+  /// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class respFileAddr : pb::IMessage<respFileAddr> {
+    private static readonly pb::MessageParser<respFileAddr> _parser = new pb::MessageParser<respFileAddr>(() => new respFileAddr());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<respFileAddr> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public respFileAddr() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public respFileAddr(respFileAddr other) : this() {
+      tarLSMName_ = other.tarLSMName_;
+      fileType_ = other.fileType_;
+      fileNames_ = other.fileNames_.Clone();
+      fileAddr_ = other.fileAddr_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public respFileAddr Clone() {
+      return new respFileAddr(this);
+    }
+
+    /// <summary>Field number for the "tarLSMName" field.</summary>
+    public const int TarLSMNameFieldNumber = 1;
+    private string tarLSMName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string TarLSMName {
+      get { return tarLSMName_; }
+      set {
+        tarLSMName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "fileType" field.</summary>
+    public const int FileTypeFieldNumber = 2;
+    private global::DDRCommProto.respFileAddr.Types.eFileTypes fileType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::DDRCommProto.respFileAddr.Types.eFileTypes FileType {
+      get { return fileType_; }
+      set {
+        fileType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "fileNames" field.</summary>
+    public const int FileNamesFieldNumber = 3;
+    private static readonly pb::FieldCodec<string> _repeated_fileNames_codec
+        = pb::FieldCodec.ForString(26);
+    private readonly pbc::RepeatedField<string> fileNames_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// no wildcards
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> FileNames {
+      get { return fileNames_; }
+    }
+
+    /// <summary>Field number for the "fileAddr" field.</summary>
+    public const int FileAddrFieldNumber = 4;
+    private static readonly pb::FieldCodec<string> _repeated_fileAddr_codec
+        = pb::FieldCodec.ForString(34);
+    private readonly pbc::RepeatedField<string> fileAddr_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// ignored if fileType!=FileContents
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> FileAddr {
+      get { return fileAddr_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as respFileAddr);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(respFileAddr other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (TarLSMName != other.TarLSMName) return false;
+      if (FileType != other.FileType) return false;
+      if(!fileNames_.Equals(other.fileNames_)) return false;
       if(!fileAddr_.Equals(other.fileAddr_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -3349,7 +4399,9 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= fileName_.GetHashCode();
+      if (TarLSMName.Length != 0) hash ^= TarLSMName.GetHashCode();
+      if (FileType != 0) hash ^= FileType.GetHashCode();
+      hash ^= fileNames_.GetHashCode();
       hash ^= fileAddr_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -3364,7 +4416,15 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      fileName_.WriteTo(output, _repeated_fileName_codec);
+      if (TarLSMName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(TarLSMName);
+      }
+      if (FileType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) FileType);
+      }
+      fileNames_.WriteTo(output, _repeated_fileNames_codec);
       fileAddr_.WriteTo(output, _repeated_fileAddr_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3374,7 +4434,13 @@ namespace DDRCommProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += fileName_.CalculateSize(_repeated_fileName_codec);
+      if (TarLSMName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TarLSMName);
+      }
+      if (FileType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FileType);
+      }
+      size += fileNames_.CalculateSize(_repeated_fileNames_codec);
       size += fileAddr_.CalculateSize(_repeated_fileAddr_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3383,11 +4449,17 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(respFile other) {
+    public void MergeFrom(respFileAddr other) {
       if (other == null) {
         return;
       }
-      fileName_.Add(other.fileName_);
+      if (other.TarLSMName.Length != 0) {
+        TarLSMName = other.TarLSMName;
+      }
+      if (other.FileType != 0) {
+        FileType = other.FileType;
+      }
+      fileNames_.Add(other.fileNames_);
       fileAddr_.Add(other.fileAddr_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3401,10 +4473,18 @@ namespace DDRCommProto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            fileName_.AddEntriesFrom(input, _repeated_fileName_codec);
+            TarLSMName = input.ReadString();
             break;
           }
-          case 18: {
+          case 16: {
+            fileType_ = (global::DDRCommProto.respFileAddr.Types.eFileTypes) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            fileNames_.AddEntriesFrom(input, _repeated_fileNames_codec);
+            break;
+          }
+          case 34: {
             fileAddr_.AddEntriesFrom(input, _repeated_fileAddr_codec);
             break;
           }
@@ -3412,17 +4492,34 @@ namespace DDRCommProto {
       }
     }
 
+    #region Nested types
+    /// <summary>Container for nested types declared in the respFileAddr message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public enum eFileTypes {
+        [pbr::OriginalName("FileContents")] FileContents = 0,
+        [pbr::OriginalName("FileList")] FileList = 1,
+        [pbr::OriginalName("FolderFlist")] FolderFlist = 2,
+      }
+
+    }
+    #endregion
+
   }
 
-  public sealed partial class notifyStatus : pb::IMessage<notifyStatus> {
-    private static readonly pb::MessageParser<notifyStatus> _parser = new pb::MessageParser<notifyStatus>(() => new notifyStatus());
+  /// <summary>
+  /// flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+  /// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class reqStatus : pb::IMessage<reqStatus> {
+    private static readonly pb::MessageParser<reqStatus> _parser = new pb::MessageParser<reqStatus>(() => new reqStatus());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<notifyStatus> Parser { get { return _parser; } }
+    public static pb::MessageParser<reqStatus> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[14]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3431,21 +4528,21 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyStatus() {
+    public reqStatus() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyStatus(notifyStatus other) : this() {
+    public reqStatus(reqStatus other) : this() {
       statusMsg_ = other.statusMsg_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyStatus Clone() {
-      return new notifyStatus(this);
+    public reqStatus Clone() {
+      return new reqStatus(this);
     }
 
     /// <summary>Field number for the "statusMsg" field.</summary>
@@ -3461,11 +4558,11 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as notifyStatus);
+      return Equals(other as reqStatus);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(notifyStatus other) {
+    public bool Equals(reqStatus other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3515,7 +4612,7 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(notifyStatus other) {
+    public void MergeFrom(reqStatus other) {
       if (other == null) {
         return;
       }
@@ -3543,15 +4640,19 @@ namespace DDRCommProto {
 
   }
 
-  public sealed partial class notifyAlarm : pb::IMessage<notifyAlarm> {
-    private static readonly pb::MessageParser<notifyAlarm> _parser = new pb::MessageParser<notifyAlarm>(() => new notifyAlarm());
+  /// <summary>
+  /// flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+  /// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class reqAlarm : pb::IMessage<reqAlarm> {
+    private static readonly pb::MessageParser<reqAlarm> _parser = new pb::MessageParser<reqAlarm>(() => new reqAlarm());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<notifyAlarm> Parser { get { return _parser; } }
+    public static pb::MessageParser<reqAlarm> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[15]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3560,21 +4661,21 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyAlarm() {
+    public reqAlarm() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyAlarm(notifyAlarm other) : this() {
+    public reqAlarm(reqAlarm other) : this() {
       alarmMsg_ = other.alarmMsg_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyAlarm Clone() {
-      return new notifyAlarm(this);
+    public reqAlarm Clone() {
+      return new reqAlarm(this);
     }
 
     /// <summary>Field number for the "alarmMsg" field.</summary>
@@ -3590,11 +4691,11 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as notifyAlarm);
+      return Equals(other as reqAlarm);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(notifyAlarm other) {
+    public bool Equals(reqAlarm other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3644,7 +4745,7 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(notifyAlarm other) {
+    public void MergeFrom(reqAlarm other) {
       if (other == null) {
         return;
       }
@@ -3672,15 +4773,19 @@ namespace DDRCommProto {
 
   }
 
-  public sealed partial class notifyTextChat : pb::IMessage<notifyTextChat> {
-    private static readonly pb::MessageParser<notifyTextChat> _parser = new pb::MessageParser<notifyTextChat>(() => new notifyTextChat());
+  /// <summary>
+  /// flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M
+  /// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+  /// </summary>
+  public sealed partial class reqTextChat : pb::IMessage<reqTextChat> {
+    private static readonly pb::MessageParser<reqTextChat> _parser = new pb::MessageParser<reqTextChat>(() => new reqTextChat());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<notifyTextChat> Parser { get { return _parser; } }
+    public static pb::MessageParser<reqTextChat> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[16]; }
+      get { return global::DDRCommProto.BaseCmdReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3689,21 +4794,21 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyTextChat() {
+    public reqTextChat() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyTextChat(notifyTextChat other) : this() {
+    public reqTextChat(reqTextChat other) : this() {
       chatText_ = other.chatText_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public notifyTextChat Clone() {
-      return new notifyTextChat(this);
+    public reqTextChat Clone() {
+      return new reqTextChat(this);
     }
 
     /// <summary>Field number for the "chatText" field.</summary>
@@ -3719,11 +4824,11 @@ namespace DDRCommProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as notifyTextChat);
+      return Equals(other as reqTextChat);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(notifyTextChat other) {
+    public bool Equals(reqTextChat other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3773,7 +4878,7 @@ namespace DDRCommProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(notifyTextChat other) {
+    public void MergeFrom(reqTextChat other) {
       if (other == null) {
         return;
       }

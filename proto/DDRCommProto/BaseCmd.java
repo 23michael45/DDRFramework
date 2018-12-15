@@ -19,93 +19,145 @@ public final class BaseCmd {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * type of message body, e.g., "reqLogin"
+     * </pre>
+     *
      * <code>string bodyType = 1;</code>
      */
     java.lang.String getBodyType();
     /**
+     * <pre>
+     * type of message body, e.g., "reqLogin"
+     * </pre>
+     *
      * <code>string bodyType = 1;</code>
      */
     com.google.protobuf.ByteString
         getBodyTypeBytes();
 
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     java.util.List<DDRCommProto.BaseCmd.CommonHeader.eFlowDir> getFlowDirectionList();
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     int getFlowDirectionCount();
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     DDRCommProto.BaseCmd.CommonHeader.eFlowDir getFlowDirection(int index);
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     java.util.List<java.lang.Integer>
     getFlowDirectionValueList();
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     int getFlowDirectionValue(int index);
 
     /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
+     * <pre>
+     * If bOriginal==1, it is a message from its source (not forwarded).
+     * </pre>
+     *
+     * <code>int32 bOriginal = 3;</code>
      */
-    java.util.List<DDRCommProto.BaseCmd.CommonHeader.eDestType> getDestTypeList();
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    int getDestTypeCount();
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    DDRCommProto.BaseCmd.CommonHeader.eDestType getDestType(int index);
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    java.util.List<java.lang.Integer>
-    getDestTypeValueList();
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    int getDestTypeValue(int index);
+    int getBOriginal();
 
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+     * monitor), discard this whole frame. Otherwise okay to process.
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+     */
+    int getSrcCondValue();
+    /**
+     * <pre>
+     * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+     * monitor), discard this whole frame. Otherwise okay to process.
+     * </pre>
+     *
+     * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+     */
+    DDRCommProto.BaseCmd.CommonHeader.eSrcCondition getSrcCond();
+
+    /**
+     * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+     */
+    int getForwardTypeValue();
+    /**
+     * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+     */
+    DDRCommProto.BaseCmd.CommonHeader.eForwardingType getForwardType();
+
+    /**
+     * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+     */
+    int getRecTypeValue();
+    /**
+     * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+     */
+    DDRCommProto.BaseCmd.CommonHeader.eSrcRecType getRecType();
+
+    /**
+     * <pre>
+     * array of previous routes
+     * </pre>
+     *
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
     java.util.List<java.lang.String>
-        getDestInfoList();
+        getPrevRouteAddrList();
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
-    int getDestInfoCount();
+    int getPrevRouteAddrCount();
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
-    java.lang.String getDestInfo(int index);
+    java.lang.String getPrevRouteAddr(int index);
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
     com.google.protobuf.ByteString
-        getDestInfoBytes(int index);
+        getPrevRouteAddrBytes(int index);
   }
   /**
    * Protobuf type {@code DDRCommProto.CommonHeader}
@@ -122,8 +174,11 @@ public final class BaseCmd {
     private CommonHeader() {
       bodyType_ = "";
       flowDirection_ = java.util.Collections.emptyList();
-      destType_ = java.util.Collections.emptyList();
-      destInfo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bOriginal_ = 0;
+      srcCond_ = 0;
+      forwardType_ = 0;
+      recType_ = 0;
+      prevRouteAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -180,35 +235,35 @@ public final class BaseCmd {
               break;
             }
             case 24: {
+
+              bOriginal_ = input.readInt32();
+              break;
+            }
+            case 32: {
               int rawValue = input.readEnum();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                destType_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              destType_.add(rawValue);
+
+              srcCond_ = rawValue;
               break;
             }
-            case 26: {
-              int length = input.readRawVarint32();
-              int oldLimit = input.pushLimit(length);
-              while(input.getBytesUntilLimit() > 0) {
-                int rawValue = input.readEnum();
-                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                  destType_ = new java.util.ArrayList<java.lang.Integer>();
-                  mutable_bitField0_ |= 0x00000004;
-                }
-                destType_.add(rawValue);
-              }
-              input.popLimit(oldLimit);
+            case 40: {
+              int rawValue = input.readEnum();
+
+              forwardType_ = rawValue;
               break;
             }
-            case 34: {
+            case 48: {
+              int rawValue = input.readEnum();
+
+              recType_ = rawValue;
+              break;
+            }
+            case 58: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                destInfo_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                prevRouteAddr_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000040;
               }
-              destInfo_.add(s);
+              prevRouteAddr_.add(s);
               break;
             }
             default: {
@@ -229,11 +284,8 @@ public final class BaseCmd {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           flowDirection_ = java.util.Collections.unmodifiableList(flowDirection_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          destType_ = java.util.Collections.unmodifiableList(destType_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          destInfo_ = destInfo_.getUnmodifiableView();
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          prevRouteAddr_ = prevRouteAddr_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -253,69 +305,97 @@ public final class BaseCmd {
     }
 
     /**
+     * <pre>
+     * flow direction of the immediate transfer
+     * </pre>
+     *
      * Protobuf enum {@code DDRCommProto.CommonHeader.eFlowDir}
      */
     public enum eFlowDir
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>RS2M = 0;</code>
+       * <code>UNKNOWN2RS = 0;</code>
        */
-      RS2M(0),
+      UNKNOWN2RS(0),
       /**
-       * <code>RS2RR = 1;</code>
+       * <code>RS2M = 1;</code>
        */
-      RS2RR(1),
+      RS2M(1),
       /**
-       * <code>RR2RS = 2;</code>
+       * <code>M2RS = 2;</code>
        */
-      RR2RS(2),
+      M2RS(2),
       /**
-       * <code>LS2C = 3;</code>
+       * <code>RS2RR = 3;</code>
        */
-      LS2C(3),
+      RS2RR(3),
       /**
-       * <code>C2LS = 4;</code>
+       * <code>RR2RS = 4;</code>
        */
-      C2LS(4),
+      RR2RS(4),
       /**
-       * <code>LS2LSM = 5;</code>
+       * <code>UNKNOWN2LS = 5;</code>
        */
-      LS2LSM(5),
+      UNKNOWN2LS(5),
       /**
-       * <code>LSM2LS = 6;</code>
+       * <code>LS2C = 6;</code>
        */
-      LSM2LS(6),
+      LS2C(6),
+      /**
+       * <code>C2LS = 7;</code>
+       */
+      C2LS(7),
+      /**
+       * <code>LS2LSM = 8;</code>
+       */
+      LS2LSM(8),
+      /**
+       * <code>LSM2LS = 9;</code>
+       */
+      LSM2LS(9),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <code>RS2M = 0;</code>
+       * <code>UNKNOWN2RS = 0;</code>
        */
-      public static final int RS2M_VALUE = 0;
+      public static final int UNKNOWN2RS_VALUE = 0;
       /**
-       * <code>RS2RR = 1;</code>
+       * <code>RS2M = 1;</code>
        */
-      public static final int RS2RR_VALUE = 1;
+      public static final int RS2M_VALUE = 1;
       /**
-       * <code>RR2RS = 2;</code>
+       * <code>M2RS = 2;</code>
        */
-      public static final int RR2RS_VALUE = 2;
+      public static final int M2RS_VALUE = 2;
       /**
-       * <code>LS2C = 3;</code>
+       * <code>RS2RR = 3;</code>
        */
-      public static final int LS2C_VALUE = 3;
+      public static final int RS2RR_VALUE = 3;
       /**
-       * <code>C2LS = 4;</code>
+       * <code>RR2RS = 4;</code>
        */
-      public static final int C2LS_VALUE = 4;
+      public static final int RR2RS_VALUE = 4;
       /**
-       * <code>LS2LSM = 5;</code>
+       * <code>UNKNOWN2LS = 5;</code>
        */
-      public static final int LS2LSM_VALUE = 5;
+      public static final int UNKNOWN2LS_VALUE = 5;
       /**
-       * <code>LSM2LS = 6;</code>
+       * <code>LS2C = 6;</code>
        */
-      public static final int LSM2LS_VALUE = 6;
+      public static final int LS2C_VALUE = 6;
+      /**
+       * <code>C2LS = 7;</code>
+       */
+      public static final int C2LS_VALUE = 7;
+      /**
+       * <code>LS2LSM = 8;</code>
+       */
+      public static final int LS2LSM_VALUE = 8;
+      /**
+       * <code>LSM2LS = 9;</code>
+       */
+      public static final int LSM2LS_VALUE = 9;
 
 
       public final int getNumber() {
@@ -336,13 +416,16 @@ public final class BaseCmd {
 
       public static eFlowDir forNumber(int value) {
         switch (value) {
-          case 0: return RS2M;
-          case 1: return RS2RR;
-          case 2: return RR2RS;
-          case 3: return LS2C;
-          case 4: return C2LS;
-          case 5: return LS2LSM;
-          case 6: return LSM2LS;
+          case 0: return UNKNOWN2RS;
+          case 1: return RS2M;
+          case 2: return M2RS;
+          case 3: return RS2RR;
+          case 4: return RR2RS;
+          case 5: return UNKNOWN2LS;
+          case 6: return LS2C;
+          case 7: return C2LS;
+          case 8: return LS2LSM;
+          case 9: return LSM2LS;
           default: return null;
         }
       }
@@ -396,61 +479,29 @@ public final class BaseCmd {
     }
 
     /**
-     * Protobuf enum {@code DDRCommProto.CommonHeader.eDestType}
+     * Protobuf enum {@code DDRCommProto.CommonHeader.eSrcCondition}
      */
-    public enum eDestType
+    public enum eSrcCondition
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <pre>
-       * simple notification, nothing to be forwarded
-       * </pre>
-       *
-       * <code>NoDest = 0;</code>
+       * <code>NoCond = 0;</code>
        */
-      NoDest(0),
+      NoCond(0),
       /**
-       * <pre>
-       * this message will be forwarded to LSM
-       * </pre>
-       *
-       * <code>LSMName = 1;</code>
+       * <code>Op = 1;</code>
        */
-      LSMName(1),
-      /**
-       * <pre>
-       * this message will be forwarded along the previous routes
-       * </pre>
-       *
-       * <code>Routing = 2;</code>
-       */
-      Routing(2),
+      Op(1),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <pre>
-       * simple notification, nothing to be forwarded
-       * </pre>
-       *
-       * <code>NoDest = 0;</code>
+       * <code>NoCond = 0;</code>
        */
-      public static final int NoDest_VALUE = 0;
+      public static final int NoCond_VALUE = 0;
       /**
-       * <pre>
-       * this message will be forwarded to LSM
-       * </pre>
-       *
-       * <code>LSMName = 1;</code>
+       * <code>Op = 1;</code>
        */
-      public static final int LSMName_VALUE = 1;
-      /**
-       * <pre>
-       * this message will be forwarded along the previous routes
-       * </pre>
-       *
-       * <code>Routing = 2;</code>
-       */
-      public static final int Routing_VALUE = 2;
+      public static final int Op_VALUE = 1;
 
 
       public final int getNumber() {
@@ -465,28 +516,27 @@ public final class BaseCmd {
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
-      public static eDestType valueOf(int value) {
+      public static eSrcCondition valueOf(int value) {
         return forNumber(value);
       }
 
-      public static eDestType forNumber(int value) {
+      public static eSrcCondition forNumber(int value) {
         switch (value) {
-          case 0: return NoDest;
-          case 1: return LSMName;
-          case 2: return Routing;
+          case 0: return NoCond;
+          case 1: return Op;
           default: return null;
         }
       }
 
-      public static com.google.protobuf.Internal.EnumLiteMap<eDestType>
+      public static com.google.protobuf.Internal.EnumLiteMap<eSrcCondition>
           internalGetValueMap() {
         return internalValueMap;
       }
       private static final com.google.protobuf.Internal.EnumLiteMap<
-          eDestType> internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<eDestType>() {
-              public eDestType findValueByNumber(int number) {
-                return eDestType.forNumber(number);
+          eSrcCondition> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eSrcCondition>() {
+              public eSrcCondition findValueByNumber(int number) {
+                return eSrcCondition.forNumber(number);
               }
             };
 
@@ -503,9 +553,9 @@ public final class BaseCmd {
         return DDRCommProto.BaseCmd.CommonHeader.getDescriptor().getEnumTypes().get(1);
       }
 
-      private static final eDestType[] VALUES = values();
+      private static final eSrcCondition[] VALUES = values();
 
-      public static eDestType valueOf(
+      public static eSrcCondition valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -519,17 +569,319 @@ public final class BaseCmd {
 
       private final int value;
 
-      private eDestType(int value) {
+      private eSrcCondition(int value) {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:DDRCommProto.CommonHeader.eDestType)
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.CommonHeader.eSrcCondition)
+    }
+
+    /**
+     * <pre>
+     * NoForwarding: No direct forwarding. Need to decrypt and parse the message bodies. Typical
+     *               use is in "notify*".
+     * LSMAll:       For RS, forward the message body to RR; for LS, forward the message body
+     *               to all connected LSMs. For an LSM, respond if the message body asks for
+     *               response of its functionality (assuming no conflicts among different LSMs).
+     *               Typical use is in "reqCmd".
+     * CltMonAll:    For RS, forward the message body to all connected monitors; for LS, forward
+     *               the message body to all connected clients, and RS (if connected). Typical
+     *               use is in "reqStatus", "reqAlarm", and "reqTextChat".
+     * ToOp:         For RS, forward the message body to the Op. monitor (if so); for LS, forward
+     *               the message body to the Op. client if one connected client is Op., otherwise
+     *               to the RS. Typical use is in "reqTalk" from robot_LSM.
+     * RoutingBack:  In this case, field "prevRouteAddr" should NOT be empty. The last element in
+     *               that field will be the target address (IP:port string) to forward messages,
+     *               and that last element will be removed in the new CommonHeader sent along the 
+     *               the message body. Typical use is in "respCmd" and "respTalk".
+     * </pre>
+     *
+     * Protobuf enum {@code DDRCommProto.CommonHeader.eForwardingType}
+     */
+    public enum eForwardingType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <pre>
+       * simple notification, nothing to be forwarded
+       * </pre>
+       *
+       * <code>NoForwarding = 0;</code>
+       */
+      NoForwarding(0),
+      /**
+       * <pre>
+       * message body will finally be forwarded to all LSMs
+       * </pre>
+       *
+       * <code>LSMAll = 1;</code>
+       */
+      LSMAll(1),
+      /**
+       * <pre>
+       * message body will finally be forwarded to all clients/monitors
+       * </pre>
+       *
+       * <code>CltMonAll = 2;</code>
+       */
+      CltMonAll(2),
+      /**
+       * <pre>
+       * message body will finally be forwarded to Op. (client/monitor)
+       * </pre>
+       *
+       * <code>ToOp = 3;</code>
+       */
+      ToOp(3),
+      /**
+       * <pre>
+       * this message will be forwarded along the previous routes
+       * </pre>
+       *
+       * <code>RoutingBack = 4;</code>
+       */
+      RoutingBack(4),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <pre>
+       * simple notification, nothing to be forwarded
+       * </pre>
+       *
+       * <code>NoForwarding = 0;</code>
+       */
+      public static final int NoForwarding_VALUE = 0;
+      /**
+       * <pre>
+       * message body will finally be forwarded to all LSMs
+       * </pre>
+       *
+       * <code>LSMAll = 1;</code>
+       */
+      public static final int LSMAll_VALUE = 1;
+      /**
+       * <pre>
+       * message body will finally be forwarded to all clients/monitors
+       * </pre>
+       *
+       * <code>CltMonAll = 2;</code>
+       */
+      public static final int CltMonAll_VALUE = 2;
+      /**
+       * <pre>
+       * message body will finally be forwarded to Op. (client/monitor)
+       * </pre>
+       *
+       * <code>ToOp = 3;</code>
+       */
+      public static final int ToOp_VALUE = 3;
+      /**
+       * <pre>
+       * this message will be forwarded along the previous routes
+       * </pre>
+       *
+       * <code>RoutingBack = 4;</code>
+       */
+      public static final int RoutingBack_VALUE = 4;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eForwardingType valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eForwardingType forNumber(int value) {
+        switch (value) {
+          case 0: return NoForwarding;
+          case 1: return LSMAll;
+          case 2: return CltMonAll;
+          case 3: return ToOp;
+          case 4: return RoutingBack;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eForwardingType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eForwardingType> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eForwardingType>() {
+              public eForwardingType findValueByNumber(int number) {
+                return eForwardingType.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.CommonHeader.getDescriptor().getEnumTypes().get(2);
+      }
+
+      private static final eForwardingType[] VALUES = values();
+
+      public static eForwardingType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eForwardingType(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.CommonHeader.eForwardingType)
+    }
+
+    /**
+     * Protobuf enum {@code DDRCommProto.CommonHeader.eSrcRecType}
+     */
+    public enum eSrcRecType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <pre>
+       * routing info not recorded
+       * </pre>
+       *
+       * <code>NoRec = 0;</code>
+       */
+      NoRec(0),
+      /**
+       * <pre>
+       * IMMEDIATE source will be appended to the previous routes in form like “192.168.1.1:234”
+       * </pre>
+       *
+       * <code>RecSrc = 1;</code>
+       */
+      RecSrc(1),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <pre>
+       * routing info not recorded
+       * </pre>
+       *
+       * <code>NoRec = 0;</code>
+       */
+      public static final int NoRec_VALUE = 0;
+      /**
+       * <pre>
+       * IMMEDIATE source will be appended to the previous routes in form like “192.168.1.1:234”
+       * </pre>
+       *
+       * <code>RecSrc = 1;</code>
+       */
+      public static final int RecSrc_VALUE = 1;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eSrcRecType valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eSrcRecType forNumber(int value) {
+        switch (value) {
+          case 0: return NoRec;
+          case 1: return RecSrc;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eSrcRecType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eSrcRecType> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eSrcRecType>() {
+              public eSrcRecType findValueByNumber(int number) {
+                return eSrcRecType.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.CommonHeader.getDescriptor().getEnumTypes().get(3);
+      }
+
+      private static final eSrcRecType[] VALUES = values();
+
+      public static eSrcRecType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eSrcRecType(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.CommonHeader.eSrcRecType)
     }
 
     private int bitField0_;
     public static final int BODYTYPE_FIELD_NUMBER = 1;
     private volatile java.lang.Object bodyType_;
     /**
+     * <pre>
+     * type of message body, e.g., "reqLogin"
+     * </pre>
+     *
      * <code>string bodyType = 1;</code>
      */
     public java.lang.String getBodyType() {
@@ -545,6 +897,10 @@ public final class BaseCmd {
       }
     }
     /**
+     * <pre>
+     * type of message body, e.g., "reqLogin"
+     * </pre>
+     *
      * <code>string bodyType = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -574,6 +930,10 @@ public final class BaseCmd {
               }
             };
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     public java.util.List<DDRCommProto.BaseCmd.CommonHeader.eFlowDir> getFlowDirectionList() {
@@ -581,18 +941,30 @@ public final class BaseCmd {
           java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eFlowDir>(flowDirection_, flowDirection_converter_);
     }
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     public int getFlowDirectionCount() {
       return flowDirection_.size();
     }
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     public DDRCommProto.BaseCmd.CommonHeader.eFlowDir getFlowDirection(int index) {
       return flowDirection_converter_.convert(flowDirection_.get(index));
     }
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     public java.util.List<java.lang.Integer>
@@ -600,6 +972,10 @@ public final class BaseCmd {
       return flowDirection_;
     }
     /**
+     * <pre>
+     * repeated here is to indicate its validity (one and only one flowDirection)
+     * </pre>
+     *
      * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
      */
     public int getFlowDirectionValue(int index) {
@@ -607,95 +983,123 @@ public final class BaseCmd {
     }
     private int flowDirectionMemoizedSerializedSize;
 
-    public static final int DESTTYPE_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> destType_;
-    private static final com.google.protobuf.Internal.ListAdapter.Converter<
-        java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eDestType> destType_converter_ =
-            new com.google.protobuf.Internal.ListAdapter.Converter<
-                java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eDestType>() {
-              public DDRCommProto.BaseCmd.CommonHeader.eDestType convert(java.lang.Integer from) {
-                @SuppressWarnings("deprecation")
-                DDRCommProto.BaseCmd.CommonHeader.eDestType result = DDRCommProto.BaseCmd.CommonHeader.eDestType.valueOf(from);
-                return result == null ? DDRCommProto.BaseCmd.CommonHeader.eDestType.UNRECOGNIZED : result;
-              }
-            };
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    public java.util.List<DDRCommProto.BaseCmd.CommonHeader.eDestType> getDestTypeList() {
-      return new com.google.protobuf.Internal.ListAdapter<
-          java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eDestType>(destType_, destType_converter_);
-    }
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    public int getDestTypeCount() {
-      return destType_.size();
-    }
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    public DDRCommProto.BaseCmd.CommonHeader.eDestType getDestType(int index) {
-      return destType_converter_.convert(destType_.get(index));
-    }
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    public java.util.List<java.lang.Integer>
-    getDestTypeValueList() {
-      return destType_;
-    }
-    /**
-     * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-     */
-    public int getDestTypeValue(int index) {
-      return destType_.get(index);
-    }
-    private int destTypeMemoizedSerializedSize;
-
-    public static final int DESTINFO_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList destInfo_;
+    public static final int BORIGINAL_FIELD_NUMBER = 3;
+    private int bOriginal_;
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * If bOriginal==1, it is a message from its source (not forwarded).
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>int32 bOriginal = 3;</code>
+     */
+    public int getBOriginal() {
+      return bOriginal_;
+    }
+
+    public static final int SRCCOND_FIELD_NUMBER = 4;
+    private int srcCond_;
+    /**
+     * <pre>
+     * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+     * monitor), discard this whole frame. Otherwise okay to process.
+     * </pre>
+     *
+     * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+     */
+    public int getSrcCondValue() {
+      return srcCond_;
+    }
+    /**
+     * <pre>
+     * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+     * monitor), discard this whole frame. Otherwise okay to process.
+     * </pre>
+     *
+     * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+     */
+    public DDRCommProto.BaseCmd.CommonHeader.eSrcCondition getSrcCond() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.CommonHeader.eSrcCondition result = DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.valueOf(srcCond_);
+      return result == null ? DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.UNRECOGNIZED : result;
+    }
+
+    public static final int FORWARDTYPE_FIELD_NUMBER = 5;
+    private int forwardType_;
+    /**
+     * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+     */
+    public int getForwardTypeValue() {
+      return forwardType_;
+    }
+    /**
+     * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+     */
+    public DDRCommProto.BaseCmd.CommonHeader.eForwardingType getForwardType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.CommonHeader.eForwardingType result = DDRCommProto.BaseCmd.CommonHeader.eForwardingType.valueOf(forwardType_);
+      return result == null ? DDRCommProto.BaseCmd.CommonHeader.eForwardingType.UNRECOGNIZED : result;
+    }
+
+    public static final int RECTYPE_FIELD_NUMBER = 6;
+    private int recType_;
+    /**
+     * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+     */
+    public int getRecTypeValue() {
+      return recType_;
+    }
+    /**
+     * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+     */
+    public DDRCommProto.BaseCmd.CommonHeader.eSrcRecType getRecType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.CommonHeader.eSrcRecType result = DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.valueOf(recType_);
+      return result == null ? DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.UNRECOGNIZED : result;
+    }
+
+    public static final int PREVROUTEADDR_FIELD_NUMBER = 7;
+    private com.google.protobuf.LazyStringList prevRouteAddr_;
+    /**
+     * <pre>
+     * array of previous routes
+     * </pre>
+     *
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
     public com.google.protobuf.ProtocolStringList
-        getDestInfoList() {
-      return destInfo_;
+        getPrevRouteAddrList() {
+      return prevRouteAddr_;
     }
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
-    public int getDestInfoCount() {
-      return destInfo_.size();
+    public int getPrevRouteAddrCount() {
+      return prevRouteAddr_.size();
     }
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
-    public java.lang.String getDestInfo(int index) {
-      return destInfo_.get(index);
+    public java.lang.String getPrevRouteAddr(int index) {
+      return prevRouteAddr_.get(index);
     }
     /**
      * <pre>
-     * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+     * array of previous routes
      * </pre>
      *
-     * <code>repeated string destInfo = 4;</code>
+     * <code>repeated string prevRouteAddr = 7;</code>
      */
     public com.google.protobuf.ByteString
-        getDestInfoBytes(int index) {
-      return destInfo_.getByteString(index);
+        getPrevRouteAddrBytes(int index) {
+      return prevRouteAddr_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -723,15 +1127,20 @@ public final class BaseCmd {
       for (int i = 0; i < flowDirection_.size(); i++) {
         output.writeEnumNoTag(flowDirection_.get(i));
       }
-      if (getDestTypeList().size() > 0) {
-        output.writeUInt32NoTag(26);
-        output.writeUInt32NoTag(destTypeMemoizedSerializedSize);
+      if (bOriginal_ != 0) {
+        output.writeInt32(3, bOriginal_);
       }
-      for (int i = 0; i < destType_.size(); i++) {
-        output.writeEnumNoTag(destType_.get(i));
+      if (srcCond_ != DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.NoCond.getNumber()) {
+        output.writeEnum(4, srcCond_);
       }
-      for (int i = 0; i < destInfo_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, destInfo_.getRaw(i));
+      if (forwardType_ != DDRCommProto.BaseCmd.CommonHeader.eForwardingType.NoForwarding.getNumber()) {
+        output.writeEnum(5, forwardType_);
+      }
+      if (recType_ != DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.NoRec.getNumber()) {
+        output.writeEnum(6, recType_);
+      }
+      for (int i = 0; i < prevRouteAddr_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, prevRouteAddr_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -757,25 +1166,29 @@ public final class BaseCmd {
             .computeUInt32SizeNoTag(dataSize);
         }flowDirectionMemoizedSerializedSize = dataSize;
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < destType_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeEnumSizeNoTag(destType_.get(i));
-        }
-        size += dataSize;
-        if (!getDestTypeList().isEmpty()) {  size += 1;
-          size += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(dataSize);
-        }destTypeMemoizedSerializedSize = dataSize;
+      if (bOriginal_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, bOriginal_);
+      }
+      if (srcCond_ != DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.NoCond.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, srcCond_);
+      }
+      if (forwardType_ != DDRCommProto.BaseCmd.CommonHeader.eForwardingType.NoForwarding.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, forwardType_);
+      }
+      if (recType_ != DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.NoRec.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, recType_);
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < destInfo_.size(); i++) {
-          dataSize += computeStringSizeNoTag(destInfo_.getRaw(i));
+        for (int i = 0; i < prevRouteAddr_.size(); i++) {
+          dataSize += computeStringSizeNoTag(prevRouteAddr_.getRaw(i));
         }
         size += dataSize;
-        size += 1 * getDestInfoList().size();
+        size += 1 * getPrevRouteAddrList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -796,9 +1209,13 @@ public final class BaseCmd {
       result = result && getBodyType()
           .equals(other.getBodyType());
       result = result && flowDirection_.equals(other.flowDirection_);
-      result = result && destType_.equals(other.destType_);
-      result = result && getDestInfoList()
-          .equals(other.getDestInfoList());
+      result = result && (getBOriginal()
+          == other.getBOriginal());
+      result = result && srcCond_ == other.srcCond_;
+      result = result && forwardType_ == other.forwardType_;
+      result = result && recType_ == other.recType_;
+      result = result && getPrevRouteAddrList()
+          .equals(other.getPrevRouteAddrList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -816,13 +1233,17 @@ public final class BaseCmd {
         hash = (37 * hash) + FLOWDIRECTION_FIELD_NUMBER;
         hash = (53 * hash) + flowDirection_.hashCode();
       }
-      if (getDestTypeCount() > 0) {
-        hash = (37 * hash) + DESTTYPE_FIELD_NUMBER;
-        hash = (53 * hash) + destType_.hashCode();
-      }
-      if (getDestInfoCount() > 0) {
-        hash = (37 * hash) + DESTINFO_FIELD_NUMBER;
-        hash = (53 * hash) + getDestInfoList().hashCode();
+      hash = (37 * hash) + BORIGINAL_FIELD_NUMBER;
+      hash = (53 * hash) + getBOriginal();
+      hash = (37 * hash) + SRCCOND_FIELD_NUMBER;
+      hash = (53 * hash) + srcCond_;
+      hash = (37 * hash) + FORWARDTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + forwardType_;
+      hash = (37 * hash) + RECTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + recType_;
+      if (getPrevRouteAddrCount() > 0) {
+        hash = (37 * hash) + PREVROUTEADDR_FIELD_NUMBER;
+        hash = (53 * hash) + getPrevRouteAddrList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -961,10 +1382,16 @@ public final class BaseCmd {
 
         flowDirection_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
-        destType_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        destInfo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bOriginal_ = 0;
+
+        srcCond_ = 0;
+
+        forwardType_ = 0;
+
+        recType_ = 0;
+
+        prevRouteAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -999,16 +1426,15 @@ public final class BaseCmd {
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.flowDirection_ = flowDirection_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          destType_ = java.util.Collections.unmodifiableList(destType_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+        result.bOriginal_ = bOriginal_;
+        result.srcCond_ = srcCond_;
+        result.forwardType_ = forwardType_;
+        result.recType_ = recType_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          prevRouteAddr_ = prevRouteAddr_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
-        result.destType_ = destType_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          destInfo_ = destInfo_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.destInfo_ = destInfo_;
+        result.prevRouteAddr_ = prevRouteAddr_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1072,23 +1498,25 @@ public final class BaseCmd {
           }
           onChanged();
         }
-        if (!other.destType_.isEmpty()) {
-          if (destType_.isEmpty()) {
-            destType_ = other.destType_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureDestTypeIsMutable();
-            destType_.addAll(other.destType_);
-          }
-          onChanged();
+        if (other.getBOriginal() != 0) {
+          setBOriginal(other.getBOriginal());
         }
-        if (!other.destInfo_.isEmpty()) {
-          if (destInfo_.isEmpty()) {
-            destInfo_ = other.destInfo_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+        if (other.srcCond_ != 0) {
+          setSrcCondValue(other.getSrcCondValue());
+        }
+        if (other.forwardType_ != 0) {
+          setForwardTypeValue(other.getForwardTypeValue());
+        }
+        if (other.recType_ != 0) {
+          setRecTypeValue(other.getRecTypeValue());
+        }
+        if (!other.prevRouteAddr_.isEmpty()) {
+          if (prevRouteAddr_.isEmpty()) {
+            prevRouteAddr_ = other.prevRouteAddr_;
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
-            ensureDestInfoIsMutable();
-            destInfo_.addAll(other.destInfo_);
+            ensurePrevRouteAddrIsMutable();
+            prevRouteAddr_.addAll(other.prevRouteAddr_);
           }
           onChanged();
         }
@@ -1124,6 +1552,10 @@ public final class BaseCmd {
 
       private java.lang.Object bodyType_ = "";
       /**
+       * <pre>
+       * type of message body, e.g., "reqLogin"
+       * </pre>
+       *
        * <code>string bodyType = 1;</code>
        */
       public java.lang.String getBodyType() {
@@ -1139,6 +1571,10 @@ public final class BaseCmd {
         }
       }
       /**
+       * <pre>
+       * type of message body, e.g., "reqLogin"
+       * </pre>
+       *
        * <code>string bodyType = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -1155,6 +1591,10 @@ public final class BaseCmd {
         }
       }
       /**
+       * <pre>
+       * type of message body, e.g., "reqLogin"
+       * </pre>
+       *
        * <code>string bodyType = 1;</code>
        */
       public Builder setBodyType(
@@ -1168,6 +1608,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * type of message body, e.g., "reqLogin"
+       * </pre>
+       *
        * <code>string bodyType = 1;</code>
        */
       public Builder clearBodyType() {
@@ -1177,6 +1621,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * type of message body, e.g., "reqLogin"
+       * </pre>
+       *
        * <code>string bodyType = 1;</code>
        */
       public Builder setBodyTypeBytes(
@@ -1200,6 +1648,10 @@ public final class BaseCmd {
         }
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public java.util.List<DDRCommProto.BaseCmd.CommonHeader.eFlowDir> getFlowDirectionList() {
@@ -1207,18 +1659,30 @@ public final class BaseCmd {
             java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eFlowDir>(flowDirection_, flowDirection_converter_);
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public int getFlowDirectionCount() {
         return flowDirection_.size();
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public DDRCommProto.BaseCmd.CommonHeader.eFlowDir getFlowDirection(int index) {
         return flowDirection_converter_.convert(flowDirection_.get(index));
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder setFlowDirection(
@@ -1232,6 +1696,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder addFlowDirection(DDRCommProto.BaseCmd.CommonHeader.eFlowDir value) {
@@ -1244,6 +1712,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder addAllFlowDirection(
@@ -1256,6 +1728,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder clearFlowDirection() {
@@ -1265,6 +1741,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public java.util.List<java.lang.Integer>
@@ -1272,12 +1752,20 @@ public final class BaseCmd {
         return java.util.Collections.unmodifiableList(flowDirection_);
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public int getFlowDirectionValue(int index) {
         return flowDirection_.get(index);
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder setFlowDirectionValue(
@@ -1288,6 +1776,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder addFlowDirectionValue(int value) {
@@ -1297,6 +1789,10 @@ public final class BaseCmd {
         return this;
       }
       /**
+       * <pre>
+       * repeated here is to indicate its validity (one and only one flowDirection)
+       * </pre>
+       *
        * <code>repeated .DDRCommProto.CommonHeader.eFlowDir flowDirection = 2;</code>
        */
       public Builder addAllFlowDirectionValue(
@@ -1309,250 +1805,330 @@ public final class BaseCmd {
         return this;
       }
 
-      private java.util.List<java.lang.Integer> destType_ =
-        java.util.Collections.emptyList();
-      private void ensureDestTypeIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          destType_ = new java.util.ArrayList<java.lang.Integer>(destType_);
-          bitField0_ |= 0x00000004;
-        }
+      private int bOriginal_ ;
+      /**
+       * <pre>
+       * If bOriginal==1, it is a message from its source (not forwarded).
+       * </pre>
+       *
+       * <code>int32 bOriginal = 3;</code>
+       */
+      public int getBOriginal() {
+        return bOriginal_;
       }
       /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
+       * <pre>
+       * If bOriginal==1, it is a message from its source (not forwarded).
+       * </pre>
+       *
+       * <code>int32 bOriginal = 3;</code>
        */
-      public java.util.List<DDRCommProto.BaseCmd.CommonHeader.eDestType> getDestTypeList() {
-        return new com.google.protobuf.Internal.ListAdapter<
-            java.lang.Integer, DDRCommProto.BaseCmd.CommonHeader.eDestType>(destType_, destType_converter_);
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public int getDestTypeCount() {
-        return destType_.size();
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public DDRCommProto.BaseCmd.CommonHeader.eDestType getDestType(int index) {
-        return destType_converter_.convert(destType_.get(index));
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder setDestType(
-          int index, DDRCommProto.BaseCmd.CommonHeader.eDestType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureDestTypeIsMutable();
-        destType_.set(index, value.getNumber());
+      public Builder setBOriginal(int value) {
+        
+        bOriginal_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
+       * <pre>
+       * If bOriginal==1, it is a message from its source (not forwarded).
+       * </pre>
+       *
+       * <code>int32 bOriginal = 3;</code>
        */
-      public Builder addDestType(DDRCommProto.BaseCmd.CommonHeader.eDestType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureDestTypeIsMutable();
-        destType_.add(value.getNumber());
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder addAllDestType(
-          java.lang.Iterable<? extends DDRCommProto.BaseCmd.CommonHeader.eDestType> values) {
-        ensureDestTypeIsMutable();
-        for (DDRCommProto.BaseCmd.CommonHeader.eDestType value : values) {
-          destType_.add(value.getNumber());
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder clearDestType() {
-        destType_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public java.util.List<java.lang.Integer>
-      getDestTypeValueList() {
-        return java.util.Collections.unmodifiableList(destType_);
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public int getDestTypeValue(int index) {
-        return destType_.get(index);
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder setDestTypeValue(
-          int index, int value) {
-        ensureDestTypeIsMutable();
-        destType_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder addDestTypeValue(int value) {
-        ensureDestTypeIsMutable();
-        destType_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated .DDRCommProto.CommonHeader.eDestType destType = 3;</code>
-       */
-      public Builder addAllDestTypeValue(
-          java.lang.Iterable<java.lang.Integer> values) {
-        ensureDestTypeIsMutable();
-        for (int value : values) {
-          destType_.add(value);
-        }
+      public Builder clearBOriginal() {
+        
+        bOriginal_ = 0;
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.LazyStringList destInfo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureDestInfoIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          destInfo_ = new com.google.protobuf.LazyStringArrayList(destInfo_);
-          bitField0_ |= 0x00000008;
+      private int srcCond_ = 0;
+      /**
+       * <pre>
+       * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+       * monitor), discard this whole frame. Otherwise okay to process.
+       * </pre>
+       *
+       * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+       */
+      public int getSrcCondValue() {
+        return srcCond_;
+      }
+      /**
+       * <pre>
+       * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+       * monitor), discard this whole frame. Otherwise okay to process.
+       * </pre>
+       *
+       * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+       */
+      public Builder setSrcCondValue(int value) {
+        srcCond_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+       * monitor), discard this whole frame. Otherwise okay to process.
+       * </pre>
+       *
+       * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+       */
+      public DDRCommProto.BaseCmd.CommonHeader.eSrcCondition getSrcCond() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.CommonHeader.eSrcCondition result = DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.valueOf(srcCond_);
+        return result == null ? DDRCommProto.BaseCmd.CommonHeader.eSrcCondition.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+       * monitor), discard this whole frame. Otherwise okay to process.
+       * </pre>
+       *
+       * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+       */
+      public Builder setSrcCond(DDRCommProto.BaseCmd.CommonHeader.eSrcCondition value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        srcCond_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * if (srcCond==Op) &amp;&amp; (bOriginal==1) &amp;&amp; (immediate source is not an Op. client or Op.
+       * monitor), discard this whole frame. Otherwise okay to process.
+       * </pre>
+       *
+       * <code>.DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;</code>
+       */
+      public Builder clearSrcCond() {
+        
+        srcCond_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int forwardType_ = 0;
+      /**
+       * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+       */
+      public int getForwardTypeValue() {
+        return forwardType_;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+       */
+      public Builder setForwardTypeValue(int value) {
+        forwardType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+       */
+      public DDRCommProto.BaseCmd.CommonHeader.eForwardingType getForwardType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.CommonHeader.eForwardingType result = DDRCommProto.BaseCmd.CommonHeader.eForwardingType.valueOf(forwardType_);
+        return result == null ? DDRCommProto.BaseCmd.CommonHeader.eForwardingType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+       */
+      public Builder setForwardType(DDRCommProto.BaseCmd.CommonHeader.eForwardingType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        forwardType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eForwardingType forwardType = 5;</code>
+       */
+      public Builder clearForwardType() {
+        
+        forwardType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int recType_ = 0;
+      /**
+       * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+       */
+      public int getRecTypeValue() {
+        return recType_;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+       */
+      public Builder setRecTypeValue(int value) {
+        recType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+       */
+      public DDRCommProto.BaseCmd.CommonHeader.eSrcRecType getRecType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.CommonHeader.eSrcRecType result = DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.valueOf(recType_);
+        return result == null ? DDRCommProto.BaseCmd.CommonHeader.eSrcRecType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+       */
+      public Builder setRecType(DDRCommProto.BaseCmd.CommonHeader.eSrcRecType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        recType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.CommonHeader.eSrcRecType recType = 6;</code>
+       */
+      public Builder clearRecType() {
+        
+        recType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList prevRouteAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensurePrevRouteAddrIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          prevRouteAddr_ = new com.google.protobuf.LazyStringArrayList(prevRouteAddr_);
+          bitField0_ |= 0x00000040;
          }
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
       public com.google.protobuf.ProtocolStringList
-          getDestInfoList() {
-        return destInfo_.getUnmodifiableView();
+          getPrevRouteAddrList() {
+        return prevRouteAddr_.getUnmodifiableView();
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public int getDestInfoCount() {
-        return destInfo_.size();
+      public int getPrevRouteAddrCount() {
+        return prevRouteAddr_.size();
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public java.lang.String getDestInfo(int index) {
-        return destInfo_.get(index);
+      public java.lang.String getPrevRouteAddr(int index) {
+        return prevRouteAddr_.get(index);
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
       public com.google.protobuf.ByteString
-          getDestInfoBytes(int index) {
-        return destInfo_.getByteString(index);
+          getPrevRouteAddrBytes(int index) {
+        return prevRouteAddr_.getByteString(index);
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public Builder setDestInfo(
+      public Builder setPrevRouteAddr(
           int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureDestInfoIsMutable();
-        destInfo_.set(index, value);
+  ensurePrevRouteAddrIsMutable();
+        prevRouteAddr_.set(index, value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public Builder addDestInfo(
+      public Builder addPrevRouteAddr(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureDestInfoIsMutable();
-        destInfo_.add(value);
+  ensurePrevRouteAddrIsMutable();
+        prevRouteAddr_.add(value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public Builder addAllDestInfo(
+      public Builder addAllPrevRouteAddr(
           java.lang.Iterable<java.lang.String> values) {
-        ensureDestInfoIsMutable();
+        ensurePrevRouteAddrIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, destInfo_);
+            values, prevRouteAddr_);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public Builder clearDestInfo() {
-        destInfo_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+      public Builder clearPrevRouteAddr() {
+        prevRouteAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
+       * array of previous routes
        * </pre>
        *
-       * <code>repeated string destInfo = 4;</code>
+       * <code>repeated string prevRouteAddr = 7;</code>
        */
-      public Builder addDestInfoBytes(
+      public Builder addPrevRouteAddrBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        ensureDestInfoIsMutable();
-        destInfo_.add(value);
+        ensurePrevRouteAddrIsMutable();
+        prevRouteAddr_.add(value);
         onChanged();
         return this;
       }
@@ -1624,6 +2200,10 @@ public final class BaseCmd {
         getWhateverBytes();
   }
   /**
+   * <pre>
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.heartBeat}
    */
   public  static final class heartBeat extends
@@ -1891,6 +2471,10 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.heartBeat}
      */
     public static final class Builder extends
@@ -2164,40 +2748,23 @@ public final class BaseCmd {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string name = 1;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    java.lang.String getName();
+    boolean hasLSInfo();
     /**
-     * <code>string name = 1;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
+    DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getLSInfo();
     /**
-     * <code>repeated string ips = 2;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    java.util.List<java.lang.String>
-        getIpsList();
-    /**
-     * <code>repeated string ips = 2;</code>
-     */
-    int getIpsCount();
-    /**
-     * <code>repeated string ips = 2;</code>
-     */
-    java.lang.String getIps(int index);
-    /**
-     * <code>repeated string ips = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getIpsBytes(int index);
-
-    /**
-     * <code>int32 port = 3;</code>
-     */
-    int getPort();
+    DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder getLSInfoOrBuilder();
   }
   /**
+   * <pre>
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.bcLSAddr}
    */
   public  static final class bcLSAddr extends
@@ -2210,9 +2777,6 @@ public final class BaseCmd {
       super(builder);
     }
     private bcLSAddr() {
-      name_ = "";
-      ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      port_ = 0;
     }
 
     @java.lang.Override
@@ -2240,23 +2804,16 @@ public final class BaseCmd {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              name_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                ips_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+              DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder subBuilder = null;
+              if (lSInfo_ != null) {
+                subBuilder = lSInfo_.toBuilder();
               }
-              ips_.add(s);
-              break;
-            }
-            case 24: {
+              lSInfo_ = input.readMessage(DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(lSInfo_);
+                lSInfo_ = subBuilder.buildPartial();
+              }
 
-              port_ = input.readInt32();
               break;
             }
             default: {
@@ -2274,9 +2831,6 @@ public final class BaseCmd {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          ips_ = ips_.getUnmodifiableView();
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2294,77 +2848,832 @@ public final class BaseCmd {
               DDRCommProto.BaseCmd.bcLSAddr.class, DDRCommProto.BaseCmd.bcLSAddr.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object name_;
-    /**
-     * <code>string name = 1;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
+    public interface ServerInfoOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:DDRCommProto.bcLSAddr.ServerInfo)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>string name = 1;</code>
+       */
+      java.lang.String getName();
+      /**
+       * <code>string name = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameBytes();
+
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      java.util.List<java.lang.String>
+          getIpsList();
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      int getIpsCount();
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      java.lang.String getIps(int index);
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getIpsBytes(int index);
+
+      /**
+       * <code>int32 port = 3;</code>
+       */
+      int getPort();
     }
     /**
-     * <code>string name = 1;</code>
+     * Protobuf type {@code DDRCommProto.bcLSAddr.ServerInfo}
      */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
+    public  static final class ServerInfo extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:DDRCommProto.bcLSAddr.ServerInfo)
+        ServerInfoOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use ServerInfo.newBuilder() to construct.
+      private ServerInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
       }
+      private ServerInfo() {
+        name_ = "";
+        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        port_ = 0;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private ServerInfo(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                name_ = s;
+                break;
+              }
+              case 18: {
+                java.lang.String s = input.readStringRequireUtf8();
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  ips_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                ips_.add(s);
+                break;
+              }
+              case 24: {
+
+                port_ = input.readInt32();
+                break;
+              }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            ips_ = ips_.getUnmodifiableView();
+          }
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_bcLSAddr_ServerInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.class, DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int NAME_FIELD_NUMBER = 1;
+      private volatile java.lang.Object name_;
+      /**
+       * <code>string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int IPS_FIELD_NUMBER = 2;
+      private com.google.protobuf.LazyStringList ips_;
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getIpsList() {
+        return ips_;
+      }
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      public int getIpsCount() {
+        return ips_.size();
+      }
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      public java.lang.String getIps(int index) {
+        return ips_.get(index);
+      }
+      /**
+       * <code>repeated string ips = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpsBytes(int index) {
+        return ips_.getByteString(index);
+      }
+
+      public static final int PORT_FIELD_NUMBER = 3;
+      private int port_;
+      /**
+       * <code>int32 port = 3;</code>
+       */
+      public int getPort() {
+        return port_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+        }
+        for (int i = 0; i < ips_.size(); i++) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ips_.getRaw(i));
+        }
+        if (port_ != 0) {
+          output.writeInt32(3, port_);
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < ips_.size(); i++) {
+            dataSize += computeStringSizeNoTag(ips_.getRaw(i));
+          }
+          size += dataSize;
+          size += 1 * getIpsList().size();
+        }
+        if (port_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, port_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof DDRCommProto.BaseCmd.bcLSAddr.ServerInfo)) {
+          return super.equals(obj);
+        }
+        DDRCommProto.BaseCmd.bcLSAddr.ServerInfo other = (DDRCommProto.BaseCmd.bcLSAddr.ServerInfo) obj;
+
+        boolean result = true;
+        result = result && getName()
+            .equals(other.getName());
+        result = result && getIpsList()
+            .equals(other.getIpsList());
+        result = result && (getPort()
+            == other.getPort());
+        result = result && unknownFields.equals(other.unknownFields);
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+        if (getIpsCount() > 0) {
+          hash = (37 * hash) + IPS_FIELD_NUMBER;
+          hash = (53 * hash) + getIpsList().hashCode();
+        }
+        hash = (37 * hash) + PORT_FIELD_NUMBER;
+        hash = (53 * hash) + getPort();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(DDRCommProto.BaseCmd.bcLSAddr.ServerInfo prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code DDRCommProto.bcLSAddr.ServerInfo}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:DDRCommProto.bcLSAddr.ServerInfo)
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return DDRCommProto.BaseCmd.internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return DDRCommProto.BaseCmd.internal_static_DDRCommProto_bcLSAddr_ServerInfo_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.class, DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder.class);
+        }
+
+        // Construct using DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          name_ = "";
+
+          ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          port_ = 0;
+
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return DDRCommProto.BaseCmd.internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor;
+        }
+
+        @java.lang.Override
+        public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getDefaultInstanceForType() {
+          return DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo build() {
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo buildPartial() {
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo result = new DDRCommProto.BaseCmd.bcLSAddr.ServerInfo(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          result.name_ = name_;
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            ips_ = ips_.getUnmodifiableView();
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.ips_ = ips_;
+          result.port_ = port_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof DDRCommProto.BaseCmd.bcLSAddr.ServerInfo) {
+            return mergeFrom((DDRCommProto.BaseCmd.bcLSAddr.ServerInfo)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(DDRCommProto.BaseCmd.bcLSAddr.ServerInfo other) {
+          if (other == DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.getDefaultInstance()) return this;
+          if (!other.getName().isEmpty()) {
+            name_ = other.name_;
+            onChanged();
+          }
+          if (!other.ips_.isEmpty()) {
+            if (ips_.isEmpty()) {
+              ips_ = other.ips_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureIpsIsMutable();
+              ips_.addAll(other.ips_);
+            }
+            onChanged();
+          }
+          if (other.getPort() != 0) {
+            setPort(other.getPort());
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (DDRCommProto.BaseCmd.bcLSAddr.ServerInfo) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object name_ = "";
+        /**
+         * <code>string name = 1;</code>
+         */
+        public java.lang.String getName() {
+          java.lang.Object ref = name_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            name_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>string name = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameBytes() {
+          java.lang.Object ref = name_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            name_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>string name = 1;</code>
+         */
+        public Builder setName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          name_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string name = 1;</code>
+         */
+        public Builder clearName() {
+          
+          name_ = getDefaultInstance().getName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>string name = 1;</code>
+         */
+        public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          name_ = value;
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.LazyStringList ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureIpsIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            ips_ = new com.google.protobuf.LazyStringArrayList(ips_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public com.google.protobuf.ProtocolStringList
+            getIpsList() {
+          return ips_.getUnmodifiableView();
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public int getIpsCount() {
+          return ips_.size();
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public java.lang.String getIps(int index) {
+          return ips_.get(index);
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getIpsBytes(int index) {
+          return ips_.getByteString(index);
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public Builder setIps(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+          ips_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public Builder addIps(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureIpsIsMutable();
+          ips_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public Builder addAllIps(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureIpsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ips_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public Builder clearIps() {
+          ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string ips = 2;</code>
+         */
+        public Builder addIpsBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          ensureIpsIsMutable();
+          ips_.add(value);
+          onChanged();
+          return this;
+        }
+
+        private int port_ ;
+        /**
+         * <code>int32 port = 3;</code>
+         */
+        public int getPort() {
+          return port_;
+        }
+        /**
+         * <code>int32 port = 3;</code>
+         */
+        public Builder setPort(int value) {
+          
+          port_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>int32 port = 3;</code>
+         */
+        public Builder clearPort() {
+          
+          port_ = 0;
+          onChanged();
+          return this;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFieldsProto3(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:DDRCommProto.bcLSAddr.ServerInfo)
+      }
+
+      // @@protoc_insertion_point(class_scope:DDRCommProto.bcLSAddr.ServerInfo)
+      private static final DDRCommProto.BaseCmd.bcLSAddr.ServerInfo DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.bcLSAddr.ServerInfo();
+      }
+
+      public static DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<ServerInfo>
+          PARSER = new com.google.protobuf.AbstractParser<ServerInfo>() {
+        @java.lang.Override
+        public ServerInfo parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ServerInfo(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<ServerInfo> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<ServerInfo> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
-    public static final int IPS_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList ips_;
+    public static final int LSINFO_FIELD_NUMBER = 1;
+    private DDRCommProto.BaseCmd.bcLSAddr.ServerInfo lSInfo_;
     /**
-     * <code>repeated string ips = 2;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getIpsList() {
-      return ips_;
+    public boolean hasLSInfo() {
+      return lSInfo_ != null;
     }
     /**
-     * <code>repeated string ips = 2;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    public int getIpsCount() {
-      return ips_.size();
+    public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getLSInfo() {
+      return lSInfo_ == null ? DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.getDefaultInstance() : lSInfo_;
     }
     /**
-     * <code>repeated string ips = 2;</code>
+     * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
      */
-    public java.lang.String getIps(int index) {
-      return ips_.get(index);
-    }
-    /**
-     * <code>repeated string ips = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIpsBytes(int index) {
-      return ips_.getByteString(index);
-    }
-
-    public static final int PORT_FIELD_NUMBER = 3;
-    private int port_;
-    /**
-     * <code>int32 port = 3;</code>
-     */
-    public int getPort() {
-      return port_;
+    public DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder getLSInfoOrBuilder() {
+      return getLSInfo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2381,14 +3690,8 @@ public final class BaseCmd {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
-      }
-      for (int i = 0; i < ips_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ips_.getRaw(i));
-      }
-      if (port_ != 0) {
-        output.writeInt32(3, port_);
+      if (lSInfo_ != null) {
+        output.writeMessage(1, getLSInfo());
       }
       unknownFields.writeTo(output);
     }
@@ -2399,20 +3702,9 @@ public final class BaseCmd {
       if (size != -1) return size;
 
       size = 0;
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < ips_.size(); i++) {
-          dataSize += computeStringSizeNoTag(ips_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getIpsList().size();
-      }
-      if (port_ != 0) {
+      if (lSInfo_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, port_);
+          .computeMessageSize(1, getLSInfo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2430,12 +3722,11 @@ public final class BaseCmd {
       DDRCommProto.BaseCmd.bcLSAddr other = (DDRCommProto.BaseCmd.bcLSAddr) obj;
 
       boolean result = true;
-      result = result && getName()
-          .equals(other.getName());
-      result = result && getIpsList()
-          .equals(other.getIpsList());
-      result = result && (getPort()
-          == other.getPort());
+      result = result && (hasLSInfo() == other.hasLSInfo());
+      if (hasLSInfo()) {
+        result = result && getLSInfo()
+            .equals(other.getLSInfo());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2447,14 +3738,10 @@ public final class BaseCmd {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      if (getIpsCount() > 0) {
-        hash = (37 * hash) + IPS_FIELD_NUMBER;
-        hash = (53 * hash) + getIpsList().hashCode();
+      if (hasLSInfo()) {
+        hash = (37 * hash) + LSINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getLSInfo().hashCode();
       }
-      hash = (37 * hash) + PORT_FIELD_NUMBER;
-      hash = (53 * hash) + getPort();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2551,6 +3838,10 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.bcLSAddr}
      */
     public static final class Builder extends
@@ -2588,12 +3879,12 @@ public final class BaseCmd {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        name_ = "";
-
-        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        port_ = 0;
-
+        if (lSInfoBuilder_ == null) {
+          lSInfo_ = null;
+        } else {
+          lSInfo_ = null;
+          lSInfoBuilder_ = null;
+        }
         return this;
       }
 
@@ -2620,16 +3911,11 @@ public final class BaseCmd {
       @java.lang.Override
       public DDRCommProto.BaseCmd.bcLSAddr buildPartial() {
         DDRCommProto.BaseCmd.bcLSAddr result = new DDRCommProto.BaseCmd.bcLSAddr(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.name_ = name_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          ips_ = ips_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (lSInfoBuilder_ == null) {
+          result.lSInfo_ = lSInfo_;
+        } else {
+          result.lSInfo_ = lSInfoBuilder_.build();
         }
-        result.ips_ = ips_;
-        result.port_ = port_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -2678,22 +3964,8 @@ public final class BaseCmd {
 
       public Builder mergeFrom(DDRCommProto.BaseCmd.bcLSAddr other) {
         if (other == DDRCommProto.BaseCmd.bcLSAddr.getDefaultInstance()) return this;
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (!other.ips_.isEmpty()) {
-          if (ips_.isEmpty()) {
-            ips_ = other.ips_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureIpsIsMutable();
-            ips_.addAll(other.ips_);
-          }
-          onChanged();
-        }
-        if (other.getPort() != 0) {
-          setPort(other.getPort());
+        if (other.hasLSInfo()) {
+          mergeLSInfo(other.getLSInfo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2723,195 +3995,122 @@ public final class BaseCmd {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object name_ = "";
+      private DDRCommProto.BaseCmd.bcLSAddr.ServerInfo lSInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo, DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder, DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder> lSInfoBuilder_;
       /**
-       * <code>string name = 1;</code>
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
+      public boolean hasLSInfo() {
+        return lSInfoBuilder_ != null || lSInfo_ != null;
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo getLSInfo() {
+        if (lSInfoBuilder_ == null) {
+          return lSInfo_ == null ? DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.getDefaultInstance() : lSInfo_;
         } else {
-          return (java.lang.String) ref;
+          return lSInfoBuilder_.getMessage();
         }
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
+      public Builder setLSInfo(DDRCommProto.BaseCmd.bcLSAddr.ServerInfo value) {
+        if (lSInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          lSInfo_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          lSInfoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public Builder setLSInfo(
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder builderForValue) {
+        if (lSInfoBuilder_ == null) {
+          lSInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          lSInfoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public Builder mergeLSInfo(DDRCommProto.BaseCmd.bcLSAddr.ServerInfo value) {
+        if (lSInfoBuilder_ == null) {
+          if (lSInfo_ != null) {
+            lSInfo_ =
+              DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.newBuilder(lSInfo_).mergeFrom(value).buildPartial();
+          } else {
+            lSInfo_ = value;
+          }
+          onChanged();
+        } else {
+          lSInfoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public Builder clearLSInfo() {
+        if (lSInfoBuilder_ == null) {
+          lSInfo_ = null;
+          onChanged();
+        } else {
+          lSInfo_ = null;
+          lSInfoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder getLSInfoBuilder() {
+        
+        onChanged();
+        return getLSInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
+       */
+      public DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder getLSInfoOrBuilder() {
+        if (lSInfoBuilder_ != null) {
+          return lSInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return lSInfo_ == null ?
+              DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.getDefaultInstance() : lSInfo_;
         }
       }
       /**
-       * <code>string name = 1;</code>
+       * <code>.DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;</code>
        */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureIpsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          ips_ = new com.google.protobuf.LazyStringArrayList(ips_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getIpsList() {
-        return ips_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public int getIpsCount() {
-        return ips_.size();
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public java.lang.String getIps(int index) {
-        return ips_.get(index);
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getIpsBytes(int index) {
-        return ips_.getByteString(index);
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public Builder setIps(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureIpsIsMutable();
-        ips_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public Builder addIps(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureIpsIsMutable();
-        ips_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public Builder addAllIps(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureIpsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, ips_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public Builder clearIps() {
-        ips_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string ips = 2;</code>
-       */
-      public Builder addIpsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureIpsIsMutable();
-        ips_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private int port_ ;
-      /**
-       * <code>int32 port = 3;</code>
-       */
-      public int getPort() {
-        return port_;
-      }
-      /**
-       * <code>int32 port = 3;</code>
-       */
-      public Builder setPort(int value) {
-        
-        port_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 port = 3;</code>
-       */
-      public Builder clearPort() {
-        
-        port_ = 0;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          DDRCommProto.BaseCmd.bcLSAddr.ServerInfo, DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder, DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder> 
+          getLSInfoFieldBuilder() {
+        if (lSInfoBuilder_ == null) {
+          lSInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              DDRCommProto.BaseCmd.bcLSAddr.ServerInfo, DDRCommProto.BaseCmd.bcLSAddr.ServerInfo.Builder, DDRCommProto.BaseCmd.bcLSAddr.ServerInfoOrBuilder>(
+                  getLSInfo(),
+                  getParentForChildren(),
+                  isClean());
+          lSInfo_ = null;
+        }
+        return lSInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3052,6 +4251,11 @@ public final class BaseCmd {
         int index);
   }
   /**
+   * <pre>
+   * flowDirection = UNKNOWN2RS or UNKNOWN2LS
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.reqLogin}
    */
   public  static final class reqLogin extends
@@ -4400,6 +5604,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = UNKNOWN2RS or UNKNOWN2LS
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.reqLogin}
      */
     public static final class Builder extends
@@ -5269,6 +6478,11 @@ public final class BaseCmd {
     int getUID();
   }
   /**
+   * <pre>
+   * flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.respLogin}
    */
   public  static final class respLogin extends
@@ -5811,6 +7025,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.respLogin}
      */
     public static final class Builder extends
@@ -6181,6 +7400,11 @@ public final class BaseCmd {
         getNameLSMsBytes(int index);
   }
   /**
+   * <pre>
+   * flowDirection = RS2M or LS2C
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.notifyTerminalAccess}
    */
   public  static final class notifyTerminalAccess extends
@@ -6561,6 +7785,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = RS2M or LS2C
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.notifyTerminalAccess}
      */
     public static final class Builder extends
@@ -7001,30 +8230,11 @@ public final class BaseCmd {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 nClients = 1;</code>
-     */
-    int getNClients();
-
-    /**
      * <pre>
-     * op. level of the top client
+     * field 1~3 for RS2RR
      * </pre>
      *
-     * <code>int32 cTopOpLv = 2;</code>
-     */
-    int getCTopOpLv();
-
-    /**
-     * <pre>
-     * connection time of the top client
-     * </pre>
-     *
-     * <code>int64 cTopOpTime = 3;</code>
-     */
-    long getCTopOpTime();
-
-    /**
-     * <code>int32 nMonitors = 4;</code>
+     * <code>int32 nMonitors = 1;</code>
      */
     int getNMonitors();
 
@@ -7033,7 +8243,7 @@ public final class BaseCmd {
      * op. level of the top monitor
      * </pre>
      *
-     * <code>int32 mTopOpLv = 5;</code>
+     * <code>int32 mTopOpLv = 2;</code>
      */
     int getMTopOpLv();
 
@@ -7042,9 +8252,36 @@ public final class BaseCmd {
      * connection time of the top monitor
      * </pre>
      *
-     * <code>int32 mTopOpTime = 6;</code>
+     * <code>int32 mTopOpTime = 3;</code>
      */
     int getMTopOpTime();
+
+    /**
+     * <pre>
+     * field 4~7 for RR2RS
+     * </pre>
+     *
+     * <code>int32 nClients = 4;</code>
+     */
+    int getNClients();
+
+    /**
+     * <pre>
+     * op. level of the top client
+     * </pre>
+     *
+     * <code>int32 cTopOpLv = 5;</code>
+     */
+    int getCTopOpLv();
+
+    /**
+     * <pre>
+     * connection time of the top client
+     * </pre>
+     *
+     * <code>int64 cTopOpTime = 6;</code>
+     */
+    long getCTopOpTime();
 
     /**
      * <code>repeated string namesLSM = 7;</code>
@@ -7066,6 +8303,11 @@ public final class BaseCmd {
         getNamesLSMBytes(int index);
   }
   /**
+   * <pre>
+   * flowDirection = RS2RR or RR2RS
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.notifySerAccess}
    */
   public  static final class notifySerAccess extends
@@ -7078,12 +8320,12 @@ public final class BaseCmd {
       super(builder);
     }
     private notifySerAccess() {
-      nClients_ = 0;
-      cTopOpLv_ = 0;
-      cTopOpTime_ = 0L;
       nMonitors_ = 0;
       mTopOpLv_ = 0;
       mTopOpTime_ = 0;
+      nClients_ = 0;
+      cTopOpLv_ = 0;
+      cTopOpTime_ = 0L;
       namesLSM_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
@@ -7113,32 +8355,32 @@ public final class BaseCmd {
               break;
             case 8: {
 
-              nClients_ = input.readInt32();
+              nMonitors_ = input.readInt32();
               break;
             }
             case 16: {
 
-              cTopOpLv_ = input.readInt32();
+              mTopOpLv_ = input.readInt32();
               break;
             }
             case 24: {
 
-              cTopOpTime_ = input.readInt64();
+              mTopOpTime_ = input.readInt32();
               break;
             }
             case 32: {
 
-              nMonitors_ = input.readInt32();
+              nClients_ = input.readInt32();
               break;
             }
             case 40: {
 
-              mTopOpLv_ = input.readInt32();
+              cTopOpLv_ = input.readInt32();
               break;
             }
             case 48: {
 
-              mTopOpTime_ = input.readInt32();
+              cTopOpTime_ = input.readInt64();
               break;
             }
             case 58: {
@@ -7186,74 +8428,82 @@ public final class BaseCmd {
     }
 
     private int bitField0_;
-    public static final int NCLIENTS_FIELD_NUMBER = 1;
-    private int nClients_;
-    /**
-     * <code>int32 nClients = 1;</code>
-     */
-    public int getNClients() {
-      return nClients_;
-    }
-
-    public static final int CTOPOPLV_FIELD_NUMBER = 2;
-    private int cTopOpLv_;
-    /**
-     * <pre>
-     * op. level of the top client
-     * </pre>
-     *
-     * <code>int32 cTopOpLv = 2;</code>
-     */
-    public int getCTopOpLv() {
-      return cTopOpLv_;
-    }
-
-    public static final int CTOPOPTIME_FIELD_NUMBER = 3;
-    private long cTopOpTime_;
-    /**
-     * <pre>
-     * connection time of the top client
-     * </pre>
-     *
-     * <code>int64 cTopOpTime = 3;</code>
-     */
-    public long getCTopOpTime() {
-      return cTopOpTime_;
-    }
-
-    public static final int NMONITORS_FIELD_NUMBER = 4;
+    public static final int NMONITORS_FIELD_NUMBER = 1;
     private int nMonitors_;
     /**
-     * <code>int32 nMonitors = 4;</code>
+     * <pre>
+     * field 1~3 for RS2RR
+     * </pre>
+     *
+     * <code>int32 nMonitors = 1;</code>
      */
     public int getNMonitors() {
       return nMonitors_;
     }
 
-    public static final int MTOPOPLV_FIELD_NUMBER = 5;
+    public static final int MTOPOPLV_FIELD_NUMBER = 2;
     private int mTopOpLv_;
     /**
      * <pre>
      * op. level of the top monitor
      * </pre>
      *
-     * <code>int32 mTopOpLv = 5;</code>
+     * <code>int32 mTopOpLv = 2;</code>
      */
     public int getMTopOpLv() {
       return mTopOpLv_;
     }
 
-    public static final int MTOPOPTIME_FIELD_NUMBER = 6;
+    public static final int MTOPOPTIME_FIELD_NUMBER = 3;
     private int mTopOpTime_;
     /**
      * <pre>
      * connection time of the top monitor
      * </pre>
      *
-     * <code>int32 mTopOpTime = 6;</code>
+     * <code>int32 mTopOpTime = 3;</code>
      */
     public int getMTopOpTime() {
       return mTopOpTime_;
+    }
+
+    public static final int NCLIENTS_FIELD_NUMBER = 4;
+    private int nClients_;
+    /**
+     * <pre>
+     * field 4~7 for RR2RS
+     * </pre>
+     *
+     * <code>int32 nClients = 4;</code>
+     */
+    public int getNClients() {
+      return nClients_;
+    }
+
+    public static final int CTOPOPLV_FIELD_NUMBER = 5;
+    private int cTopOpLv_;
+    /**
+     * <pre>
+     * op. level of the top client
+     * </pre>
+     *
+     * <code>int32 cTopOpLv = 5;</code>
+     */
+    public int getCTopOpLv() {
+      return cTopOpLv_;
+    }
+
+    public static final int CTOPOPTIME_FIELD_NUMBER = 6;
+    private long cTopOpTime_;
+    /**
+     * <pre>
+     * connection time of the top client
+     * </pre>
+     *
+     * <code>int64 cTopOpTime = 6;</code>
+     */
+    public long getCTopOpTime() {
+      return cTopOpTime_;
     }
 
     public static final int NAMESLSM_FIELD_NUMBER = 7;
@@ -7299,23 +8549,23 @@ public final class BaseCmd {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (nClients_ != 0) {
-        output.writeInt32(1, nClients_);
-      }
-      if (cTopOpLv_ != 0) {
-        output.writeInt32(2, cTopOpLv_);
-      }
-      if (cTopOpTime_ != 0L) {
-        output.writeInt64(3, cTopOpTime_);
-      }
       if (nMonitors_ != 0) {
-        output.writeInt32(4, nMonitors_);
+        output.writeInt32(1, nMonitors_);
       }
       if (mTopOpLv_ != 0) {
-        output.writeInt32(5, mTopOpLv_);
+        output.writeInt32(2, mTopOpLv_);
       }
       if (mTopOpTime_ != 0) {
-        output.writeInt32(6, mTopOpTime_);
+        output.writeInt32(3, mTopOpTime_);
+      }
+      if (nClients_ != 0) {
+        output.writeInt32(4, nClients_);
+      }
+      if (cTopOpLv_ != 0) {
+        output.writeInt32(5, cTopOpLv_);
+      }
+      if (cTopOpTime_ != 0L) {
+        output.writeInt64(6, cTopOpTime_);
       }
       for (int i = 0; i < namesLSM_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 7, namesLSM_.getRaw(i));
@@ -7329,29 +8579,29 @@ public final class BaseCmd {
       if (size != -1) return size;
 
       size = 0;
-      if (nClients_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, nClients_);
-      }
-      if (cTopOpLv_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, cTopOpLv_);
-      }
-      if (cTopOpTime_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, cTopOpTime_);
-      }
       if (nMonitors_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, nMonitors_);
+          .computeInt32Size(1, nMonitors_);
       }
       if (mTopOpLv_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, mTopOpLv_);
+          .computeInt32Size(2, mTopOpLv_);
       }
       if (mTopOpTime_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, mTopOpTime_);
+          .computeInt32Size(3, mTopOpTime_);
+      }
+      if (nClients_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, nClients_);
+      }
+      if (cTopOpLv_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, cTopOpLv_);
+      }
+      if (cTopOpTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, cTopOpTime_);
       }
       {
         int dataSize = 0;
@@ -7377,18 +8627,18 @@ public final class BaseCmd {
       DDRCommProto.BaseCmd.notifySerAccess other = (DDRCommProto.BaseCmd.notifySerAccess) obj;
 
       boolean result = true;
-      result = result && (getNClients()
-          == other.getNClients());
-      result = result && (getCTopOpLv()
-          == other.getCTopOpLv());
-      result = result && (getCTopOpTime()
-          == other.getCTopOpTime());
       result = result && (getNMonitors()
           == other.getNMonitors());
       result = result && (getMTopOpLv()
           == other.getMTopOpLv());
       result = result && (getMTopOpTime()
           == other.getMTopOpTime());
+      result = result && (getNClients()
+          == other.getNClients());
+      result = result && (getCTopOpLv()
+          == other.getCTopOpLv());
+      result = result && (getCTopOpTime()
+          == other.getCTopOpTime());
       result = result && getNamesLSMList()
           .equals(other.getNamesLSMList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -7402,6 +8652,12 @@ public final class BaseCmd {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + NMONITORS_FIELD_NUMBER;
+      hash = (53 * hash) + getNMonitors();
+      hash = (37 * hash) + MTOPOPLV_FIELD_NUMBER;
+      hash = (53 * hash) + getMTopOpLv();
+      hash = (37 * hash) + MTOPOPTIME_FIELD_NUMBER;
+      hash = (53 * hash) + getMTopOpTime();
       hash = (37 * hash) + NCLIENTS_FIELD_NUMBER;
       hash = (53 * hash) + getNClients();
       hash = (37 * hash) + CTOPOPLV_FIELD_NUMBER;
@@ -7409,12 +8665,6 @@ public final class BaseCmd {
       hash = (37 * hash) + CTOPOPTIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getCTopOpTime());
-      hash = (37 * hash) + NMONITORS_FIELD_NUMBER;
-      hash = (53 * hash) + getNMonitors();
-      hash = (37 * hash) + MTOPOPLV_FIELD_NUMBER;
-      hash = (53 * hash) + getMTopOpLv();
-      hash = (37 * hash) + MTOPOPTIME_FIELD_NUMBER;
-      hash = (53 * hash) + getMTopOpTime();
       if (getNamesLSMCount() > 0) {
         hash = (37 * hash) + NAMESLSM_FIELD_NUMBER;
         hash = (53 * hash) + getNamesLSMList().hashCode();
@@ -7515,6 +8765,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = RS2RR or RR2RS
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.notifySerAccess}
      */
     public static final class Builder extends
@@ -7552,17 +8807,17 @@ public final class BaseCmd {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        nClients_ = 0;
-
-        cTopOpLv_ = 0;
-
-        cTopOpTime_ = 0L;
-
         nMonitors_ = 0;
 
         mTopOpLv_ = 0;
 
         mTopOpTime_ = 0;
+
+        nClients_ = 0;
+
+        cTopOpLv_ = 0;
+
+        cTopOpTime_ = 0L;
 
         namesLSM_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -7594,12 +8849,12 @@ public final class BaseCmd {
         DDRCommProto.BaseCmd.notifySerAccess result = new DDRCommProto.BaseCmd.notifySerAccess(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.nClients_ = nClients_;
-        result.cTopOpLv_ = cTopOpLv_;
-        result.cTopOpTime_ = cTopOpTime_;
         result.nMonitors_ = nMonitors_;
         result.mTopOpLv_ = mTopOpLv_;
         result.mTopOpTime_ = mTopOpTime_;
+        result.nClients_ = nClients_;
+        result.cTopOpLv_ = cTopOpLv_;
+        result.cTopOpTime_ = cTopOpTime_;
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
           namesLSM_ = namesLSM_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000040);
@@ -7654,15 +8909,6 @@ public final class BaseCmd {
 
       public Builder mergeFrom(DDRCommProto.BaseCmd.notifySerAccess other) {
         if (other == DDRCommProto.BaseCmd.notifySerAccess.getDefaultInstance()) return this;
-        if (other.getNClients() != 0) {
-          setNClients(other.getNClients());
-        }
-        if (other.getCTopOpLv() != 0) {
-          setCTopOpLv(other.getCTopOpLv());
-        }
-        if (other.getCTopOpTime() != 0L) {
-          setCTopOpTime(other.getCTopOpTime());
-        }
         if (other.getNMonitors() != 0) {
           setNMonitors(other.getNMonitors());
         }
@@ -7671,6 +8917,15 @@ public final class BaseCmd {
         }
         if (other.getMTopOpTime() != 0) {
           setMTopOpTime(other.getMTopOpTime());
+        }
+        if (other.getNClients() != 0) {
+          setNClients(other.getNClients());
+        }
+        if (other.getCTopOpLv() != 0) {
+          setCTopOpLv(other.getCTopOpLv());
+        }
+        if (other.getCTopOpTime() != 0L) {
+          setCTopOpTime(other.getCTopOpTime());
         }
         if (!other.namesLSM_.isEmpty()) {
           if (namesLSM_.isEmpty()) {
@@ -7712,117 +8967,23 @@ public final class BaseCmd {
       }
       private int bitField0_;
 
-      private int nClients_ ;
-      /**
-       * <code>int32 nClients = 1;</code>
-       */
-      public int getNClients() {
-        return nClients_;
-      }
-      /**
-       * <code>int32 nClients = 1;</code>
-       */
-      public Builder setNClients(int value) {
-        
-        nClients_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 nClients = 1;</code>
-       */
-      public Builder clearNClients() {
-        
-        nClients_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int cTopOpLv_ ;
-      /**
-       * <pre>
-       * op. level of the top client
-       * </pre>
-       *
-       * <code>int32 cTopOpLv = 2;</code>
-       */
-      public int getCTopOpLv() {
-        return cTopOpLv_;
-      }
-      /**
-       * <pre>
-       * op. level of the top client
-       * </pre>
-       *
-       * <code>int32 cTopOpLv = 2;</code>
-       */
-      public Builder setCTopOpLv(int value) {
-        
-        cTopOpLv_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * op. level of the top client
-       * </pre>
-       *
-       * <code>int32 cTopOpLv = 2;</code>
-       */
-      public Builder clearCTopOpLv() {
-        
-        cTopOpLv_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long cTopOpTime_ ;
-      /**
-       * <pre>
-       * connection time of the top client
-       * </pre>
-       *
-       * <code>int64 cTopOpTime = 3;</code>
-       */
-      public long getCTopOpTime() {
-        return cTopOpTime_;
-      }
-      /**
-       * <pre>
-       * connection time of the top client
-       * </pre>
-       *
-       * <code>int64 cTopOpTime = 3;</code>
-       */
-      public Builder setCTopOpTime(long value) {
-        
-        cTopOpTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * connection time of the top client
-       * </pre>
-       *
-       * <code>int64 cTopOpTime = 3;</code>
-       */
-      public Builder clearCTopOpTime() {
-        
-        cTopOpTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
       private int nMonitors_ ;
       /**
-       * <code>int32 nMonitors = 4;</code>
+       * <pre>
+       * field 1~3 for RS2RR
+       * </pre>
+       *
+       * <code>int32 nMonitors = 1;</code>
        */
       public int getNMonitors() {
         return nMonitors_;
       }
       /**
-       * <code>int32 nMonitors = 4;</code>
+       * <pre>
+       * field 1~3 for RS2RR
+       * </pre>
+       *
+       * <code>int32 nMonitors = 1;</code>
        */
       public Builder setNMonitors(int value) {
         
@@ -7831,7 +8992,11 @@ public final class BaseCmd {
         return this;
       }
       /**
-       * <code>int32 nMonitors = 4;</code>
+       * <pre>
+       * field 1~3 for RS2RR
+       * </pre>
+       *
+       * <code>int32 nMonitors = 1;</code>
        */
       public Builder clearNMonitors() {
         
@@ -7846,7 +9011,7 @@ public final class BaseCmd {
        * op. level of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpLv = 5;</code>
+       * <code>int32 mTopOpLv = 2;</code>
        */
       public int getMTopOpLv() {
         return mTopOpLv_;
@@ -7856,7 +9021,7 @@ public final class BaseCmd {
        * op. level of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpLv = 5;</code>
+       * <code>int32 mTopOpLv = 2;</code>
        */
       public Builder setMTopOpLv(int value) {
         
@@ -7869,7 +9034,7 @@ public final class BaseCmd {
        * op. level of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpLv = 5;</code>
+       * <code>int32 mTopOpLv = 2;</code>
        */
       public Builder clearMTopOpLv() {
         
@@ -7884,7 +9049,7 @@ public final class BaseCmd {
        * connection time of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpTime = 6;</code>
+       * <code>int32 mTopOpTime = 3;</code>
        */
       public int getMTopOpTime() {
         return mTopOpTime_;
@@ -7894,7 +9059,7 @@ public final class BaseCmd {
        * connection time of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpTime = 6;</code>
+       * <code>int32 mTopOpTime = 3;</code>
        */
       public Builder setMTopOpTime(int value) {
         
@@ -7907,11 +9072,125 @@ public final class BaseCmd {
        * connection time of the top monitor
        * </pre>
        *
-       * <code>int32 mTopOpTime = 6;</code>
+       * <code>int32 mTopOpTime = 3;</code>
        */
       public Builder clearMTopOpTime() {
         
         mTopOpTime_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int nClients_ ;
+      /**
+       * <pre>
+       * field 4~7 for RR2RS
+       * </pre>
+       *
+       * <code>int32 nClients = 4;</code>
+       */
+      public int getNClients() {
+        return nClients_;
+      }
+      /**
+       * <pre>
+       * field 4~7 for RR2RS
+       * </pre>
+       *
+       * <code>int32 nClients = 4;</code>
+       */
+      public Builder setNClients(int value) {
+        
+        nClients_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * field 4~7 for RR2RS
+       * </pre>
+       *
+       * <code>int32 nClients = 4;</code>
+       */
+      public Builder clearNClients() {
+        
+        nClients_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int cTopOpLv_ ;
+      /**
+       * <pre>
+       * op. level of the top client
+       * </pre>
+       *
+       * <code>int32 cTopOpLv = 5;</code>
+       */
+      public int getCTopOpLv() {
+        return cTopOpLv_;
+      }
+      /**
+       * <pre>
+       * op. level of the top client
+       * </pre>
+       *
+       * <code>int32 cTopOpLv = 5;</code>
+       */
+      public Builder setCTopOpLv(int value) {
+        
+        cTopOpLv_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * op. level of the top client
+       * </pre>
+       *
+       * <code>int32 cTopOpLv = 5;</code>
+       */
+      public Builder clearCTopOpLv() {
+        
+        cTopOpLv_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long cTopOpTime_ ;
+      /**
+       * <pre>
+       * connection time of the top client
+       * </pre>
+       *
+       * <code>int64 cTopOpTime = 6;</code>
+       */
+      public long getCTopOpTime() {
+        return cTopOpTime_;
+      }
+      /**
+       * <pre>
+       * connection time of the top client
+       * </pre>
+       *
+       * <code>int64 cTopOpTime = 6;</code>
+       */
+      public Builder setCTopOpTime(long value) {
+        
+        cTopOpTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * connection time of the top client
+       * </pre>
+       *
+       * <code>int64 cTopOpTime = 6;</code>
+       */
+      public Builder clearCTopOpTime() {
+        
+        cTopOpTime_ = 0L;
         onChanged();
         return this;
       }
@@ -8104,6 +9383,11 @@ public final class BaseCmd {
         int index);
   }
   /**
+   * <pre>
+   * flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.notifyAVStream}
    */
   public  static final class notifyAVStream extends
@@ -9720,6 +11004,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.notifyAVStream}
      */
     public static final class Builder extends
@@ -10343,25 +11632,87 @@ public final class BaseCmd {
     DDRCommProto.BaseCmd.reqTalk.eCallerType getCallerType();
 
     /**
-     * <code>int32 id1 = 2;</code>
+     * <pre>
+     * a randomly generated ID for this session of talk
+     * </pre>
+     *
+     * <code>int32 talkID = 2;</code>
      */
-    int getId1();
-
-    /**
-     * <code>int32 id2 = 3;</code>
-     */
-    int getId2();
+    int getTalkID();
 
     /**
      * <pre>
      * 0-N.A; 1-audio; 2-video; 3-audio+video
      * </pre>
      *
-     * <code>int32 avType = 4;</code>
+     * <code>int32 avType = 3;</code>
      */
     int getAvType();
+
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getLocalTalkAddrList();
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    int getLocalTalkAddrCount();
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    java.lang.String getLocalTalkAddr(int index);
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getLocalTalkAddrBytes(int index);
   }
   /**
+   * <pre>
+   * if callerType == client,
+   *		flowDirection = C2LS or LS2LSM
+   *      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+   * if callerType == monitor,
+   *		flowDirection = M2RS or RS2RR or LS2LSM
+   *      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+   * if callerType == robot_LSM,
+   *		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+   *      eSrcCondition = NoCond; forwardType = ToOp; eSrcRecType = RecSrc;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.reqTalk}
    */
   public  static final class reqTalk extends
@@ -10375,9 +11726,9 @@ public final class BaseCmd {
     }
     private reqTalk() {
       callerType_ = 0;
-      id1_ = 0;
-      id2_ = 0;
+      talkID_ = 0;
       avType_ = 0;
+      localTalkAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -10412,17 +11763,21 @@ public final class BaseCmd {
             }
             case 16: {
 
-              id1_ = input.readInt32();
+              talkID_ = input.readInt32();
               break;
             }
             case 24: {
 
-              id2_ = input.readInt32();
+              avType_ = input.readInt32();
               break;
             }
-            case 32: {
-
-              avType_ = input.readInt32();
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                localTalkAddr_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              localTalkAddr_.add(s);
               break;
             }
             default: {
@@ -10440,6 +11795,9 @@ public final class BaseCmd {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          localTalkAddr_ = localTalkAddr_.getUnmodifiableView();
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -10564,6 +11922,7 @@ public final class BaseCmd {
       // @@protoc_insertion_point(enum_scope:DDRCommProto.reqTalk.eCallerType)
     }
 
+    private int bitField0_;
     public static final int CALLERTYPE_FIELD_NUMBER = 1;
     private int callerType_;
     /**
@@ -10581,35 +11940,91 @@ public final class BaseCmd {
       return result == null ? DDRCommProto.BaseCmd.reqTalk.eCallerType.UNRECOGNIZED : result;
     }
 
-    public static final int ID1_FIELD_NUMBER = 2;
-    private int id1_;
+    public static final int TALKID_FIELD_NUMBER = 2;
+    private int talkID_;
     /**
-     * <code>int32 id1 = 2;</code>
+     * <pre>
+     * a randomly generated ID for this session of talk
+     * </pre>
+     *
+     * <code>int32 talkID = 2;</code>
      */
-    public int getId1() {
-      return id1_;
+    public int getTalkID() {
+      return talkID_;
     }
 
-    public static final int ID2_FIELD_NUMBER = 3;
-    private int id2_;
-    /**
-     * <code>int32 id2 = 3;</code>
-     */
-    public int getId2() {
-      return id2_;
-    }
-
-    public static final int AVTYPE_FIELD_NUMBER = 4;
+    public static final int AVTYPE_FIELD_NUMBER = 3;
     private int avType_;
     /**
      * <pre>
      * 0-N.A; 1-audio; 2-video; 3-audio+video
      * </pre>
      *
-     * <code>int32 avType = 4;</code>
+     * <code>int32 avType = 3;</code>
      */
     public int getAvType() {
       return avType_;
+    }
+
+    public static final int LOCALTALKADDR_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList localTalkAddr_;
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getLocalTalkAddrList() {
+      return localTalkAddr_;
+    }
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    public int getLocalTalkAddrCount() {
+      return localTalkAddr_.size();
+    }
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    public java.lang.String getLocalTalkAddr(int index) {
+      return localTalkAddr_.get(index);
+    }
+    /**
+     * <pre>
+     * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+     * these strings indicate caller's TCP server of talk. For client calling LSM,
+     * this address is on the client side and the LSM will try to receive data there;
+     * for LSM calling client, this address is on the LSM side and the client will try
+     * to send data there.
+     * </pre>
+     *
+     * <code>repeated string localTalkAddr = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLocalTalkAddrBytes(int index) {
+      return localTalkAddr_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10629,14 +12044,14 @@ public final class BaseCmd {
       if (callerType_ != DDRCommProto.BaseCmd.reqTalk.eCallerType.client.getNumber()) {
         output.writeEnum(1, callerType_);
       }
-      if (id1_ != 0) {
-        output.writeInt32(2, id1_);
-      }
-      if (id2_ != 0) {
-        output.writeInt32(3, id2_);
+      if (talkID_ != 0) {
+        output.writeInt32(2, talkID_);
       }
       if (avType_ != 0) {
-        output.writeInt32(4, avType_);
+        output.writeInt32(3, avType_);
+      }
+      for (int i = 0; i < localTalkAddr_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, localTalkAddr_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -10651,17 +12066,21 @@ public final class BaseCmd {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, callerType_);
       }
-      if (id1_ != 0) {
+      if (talkID_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, id1_);
-      }
-      if (id2_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, id2_);
+          .computeInt32Size(2, talkID_);
       }
       if (avType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, avType_);
+          .computeInt32Size(3, avType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < localTalkAddr_.size(); i++) {
+          dataSize += computeStringSizeNoTag(localTalkAddr_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getLocalTalkAddrList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -10680,12 +12099,12 @@ public final class BaseCmd {
 
       boolean result = true;
       result = result && callerType_ == other.callerType_;
-      result = result && (getId1()
-          == other.getId1());
-      result = result && (getId2()
-          == other.getId2());
+      result = result && (getTalkID()
+          == other.getTalkID());
       result = result && (getAvType()
           == other.getAvType());
+      result = result && getLocalTalkAddrList()
+          .equals(other.getLocalTalkAddrList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -10699,12 +12118,14 @@ public final class BaseCmd {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CALLERTYPE_FIELD_NUMBER;
       hash = (53 * hash) + callerType_;
-      hash = (37 * hash) + ID1_FIELD_NUMBER;
-      hash = (53 * hash) + getId1();
-      hash = (37 * hash) + ID2_FIELD_NUMBER;
-      hash = (53 * hash) + getId2();
+      hash = (37 * hash) + TALKID_FIELD_NUMBER;
+      hash = (53 * hash) + getTalkID();
       hash = (37 * hash) + AVTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getAvType();
+      if (getLocalTalkAddrCount() > 0) {
+        hash = (37 * hash) + LOCALTALKADDR_FIELD_NUMBER;
+        hash = (53 * hash) + getLocalTalkAddrList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -10801,6 +12222,18 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * if callerType == client,
+     *		flowDirection = C2LS or LS2LSM
+     *      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+     * if callerType == monitor,
+     *		flowDirection = M2RS or RS2RR or LS2LSM
+     *      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+     * if callerType == robot_LSM,
+     *		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+     *      eSrcCondition = NoCond; forwardType = ToOp; eSrcRecType = RecSrc;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.reqTalk}
      */
     public static final class Builder extends
@@ -10840,12 +12273,12 @@ public final class BaseCmd {
         super.clear();
         callerType_ = 0;
 
-        id1_ = 0;
-
-        id2_ = 0;
+        talkID_ = 0;
 
         avType_ = 0;
 
+        localTalkAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -10872,10 +12305,17 @@ public final class BaseCmd {
       @java.lang.Override
       public DDRCommProto.BaseCmd.reqTalk buildPartial() {
         DDRCommProto.BaseCmd.reqTalk result = new DDRCommProto.BaseCmd.reqTalk(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         result.callerType_ = callerType_;
-        result.id1_ = id1_;
-        result.id2_ = id2_;
+        result.talkID_ = talkID_;
         result.avType_ = avType_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          localTalkAddr_ = localTalkAddr_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.localTalkAddr_ = localTalkAddr_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -10927,14 +12367,21 @@ public final class BaseCmd {
         if (other.callerType_ != 0) {
           setCallerTypeValue(other.getCallerTypeValue());
         }
-        if (other.getId1() != 0) {
-          setId1(other.getId1());
-        }
-        if (other.getId2() != 0) {
-          setId2(other.getId2());
+        if (other.getTalkID() != 0) {
+          setTalkID(other.getTalkID());
         }
         if (other.getAvType() != 0) {
           setAvType(other.getAvType());
+        }
+        if (!other.localTalkAddr_.isEmpty()) {
+          if (localTalkAddr_.isEmpty()) {
+            localTalkAddr_ = other.localTalkAddr_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureLocalTalkAddrIsMutable();
+            localTalkAddr_.addAll(other.localTalkAddr_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -10964,6 +12411,7 @@ public final class BaseCmd {
         }
         return this;
       }
+      private int bitField0_;
 
       private int callerType_ = 0;
       /**
@@ -11010,54 +12458,40 @@ public final class BaseCmd {
         return this;
       }
 
-      private int id1_ ;
+      private int talkID_ ;
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public int getId1() {
-        return id1_;
+      public int getTalkID() {
+        return talkID_;
       }
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public Builder setId1(int value) {
+      public Builder setTalkID(int value) {
         
-        id1_ = value;
+        talkID_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public Builder clearId1() {
+      public Builder clearTalkID() {
         
-        id1_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int id2_ ;
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public int getId2() {
-        return id2_;
-      }
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public Builder setId2(int value) {
-        
-        id2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public Builder clearId2() {
-        
-        id2_ = 0;
+        talkID_ = 0;
         onChanged();
         return this;
       }
@@ -11068,7 +12502,7 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public int getAvType() {
         return avType_;
@@ -11078,7 +12512,7 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public Builder setAvType(int value) {
         
@@ -11091,11 +12525,177 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public Builder clearAvType() {
         
         avType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList localTalkAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureLocalTalkAddrIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          localTalkAddr_ = new com.google.protobuf.LazyStringArrayList(localTalkAddr_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getLocalTalkAddrList() {
+        return localTalkAddr_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public int getLocalTalkAddrCount() {
+        return localTalkAddr_.size();
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public java.lang.String getLocalTalkAddr(int index) {
+        return localTalkAddr_.get(index);
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getLocalTalkAddrBytes(int index) {
+        return localTalkAddr_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public Builder setLocalTalkAddr(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLocalTalkAddrIsMutable();
+        localTalkAddr_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public Builder addLocalTalkAddr(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLocalTalkAddrIsMutable();
+        localTalkAddr_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public Builder addAllLocalTalkAddr(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureLocalTalkAddrIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, localTalkAddr_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public Builder clearLocalTalkAddr() {
+        localTalkAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * when the call is only between two local devices (client-&gt;LSM or LSM-&gt;client)
+       * these strings indicate caller's TCP server of talk. For client calling LSM,
+       * this address is on the client side and the LSM will try to receive data there;
+       * for LSM calling client, this address is on the LSM side and the client will try
+       * to send data there.
+       * </pre>
+       *
+       * <code>repeated string localTalkAddr = 4;</code>
+       */
+      public Builder addLocalTalkAddrBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureLocalTalkAddrIsMutable();
+        localTalkAddr_.add(value);
         onChanged();
         return this;
       }
@@ -11166,25 +12766,38 @@ public final class BaseCmd {
     DDRCommProto.BaseCmd.respTalk.eReceiverType getReceiverType();
 
     /**
-     * <code>int32 id1 = 2;</code>
+     * <pre>
+     * a randomly generated ID for this session of talk
+     * </pre>
+     *
+     * <code>int32 talkID = 2;</code>
      */
-    int getId1();
-
-    /**
-     * <code>int32 id2 = 3;</code>
-     */
-    int getId2();
+    int getTalkID();
 
     /**
      * <pre>
      * 0-N.A; 1-audio; 2-video; 3-audio+video
      * </pre>
      *
-     * <code>int32 avType = 4;</code>
+     * <code>int32 avType = 3;</code>
      */
     int getAvType();
   }
   /**
+   * <pre>
+   * if receiverType == client,
+   *		flowDirection = C2LS or LS2LSM
+   *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+   * if callerType == monitor,
+   *		flowDirection = M2RS or RS2RR or LS2LSM
+   *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+   * if receiverType == robot_LSM,
+   *		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+   *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+   * Note that this message body is sent along with field "prevRouteAddr" of the previously
+   * received message header (CommonHeader).
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.respTalk}
    */
   public  static final class respTalk extends
@@ -11198,8 +12811,7 @@ public final class BaseCmd {
     }
     private respTalk() {
       receiverType_ = 0;
-      id1_ = 0;
-      id2_ = 0;
+      talkID_ = 0;
       avType_ = 0;
     }
 
@@ -11235,15 +12847,10 @@ public final class BaseCmd {
             }
             case 16: {
 
-              id1_ = input.readInt32();
+              talkID_ = input.readInt32();
               break;
             }
             case 24: {
-
-              id2_ = input.readInt32();
-              break;
-            }
-            case 32: {
 
               avType_ = input.readInt32();
               break;
@@ -11404,32 +13011,27 @@ public final class BaseCmd {
       return result == null ? DDRCommProto.BaseCmd.respTalk.eReceiverType.UNRECOGNIZED : result;
     }
 
-    public static final int ID1_FIELD_NUMBER = 2;
-    private int id1_;
+    public static final int TALKID_FIELD_NUMBER = 2;
+    private int talkID_;
     /**
-     * <code>int32 id1 = 2;</code>
+     * <pre>
+     * a randomly generated ID for this session of talk
+     * </pre>
+     *
+     * <code>int32 talkID = 2;</code>
      */
-    public int getId1() {
-      return id1_;
+    public int getTalkID() {
+      return talkID_;
     }
 
-    public static final int ID2_FIELD_NUMBER = 3;
-    private int id2_;
-    /**
-     * <code>int32 id2 = 3;</code>
-     */
-    public int getId2() {
-      return id2_;
-    }
-
-    public static final int AVTYPE_FIELD_NUMBER = 4;
+    public static final int AVTYPE_FIELD_NUMBER = 3;
     private int avType_;
     /**
      * <pre>
      * 0-N.A; 1-audio; 2-video; 3-audio+video
      * </pre>
      *
-     * <code>int32 avType = 4;</code>
+     * <code>int32 avType = 3;</code>
      */
     public int getAvType() {
       return avType_;
@@ -11452,14 +13054,11 @@ public final class BaseCmd {
       if (receiverType_ != DDRCommProto.BaseCmd.respTalk.eReceiverType.client.getNumber()) {
         output.writeEnum(1, receiverType_);
       }
-      if (id1_ != 0) {
-        output.writeInt32(2, id1_);
-      }
-      if (id2_ != 0) {
-        output.writeInt32(3, id2_);
+      if (talkID_ != 0) {
+        output.writeInt32(2, talkID_);
       }
       if (avType_ != 0) {
-        output.writeInt32(4, avType_);
+        output.writeInt32(3, avType_);
       }
       unknownFields.writeTo(output);
     }
@@ -11474,17 +13073,13 @@ public final class BaseCmd {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, receiverType_);
       }
-      if (id1_ != 0) {
+      if (talkID_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, id1_);
-      }
-      if (id2_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, id2_);
+          .computeInt32Size(2, talkID_);
       }
       if (avType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, avType_);
+          .computeInt32Size(3, avType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -11503,10 +13098,8 @@ public final class BaseCmd {
 
       boolean result = true;
       result = result && receiverType_ == other.receiverType_;
-      result = result && (getId1()
-          == other.getId1());
-      result = result && (getId2()
-          == other.getId2());
+      result = result && (getTalkID()
+          == other.getTalkID());
       result = result && (getAvType()
           == other.getAvType());
       result = result && unknownFields.equals(other.unknownFields);
@@ -11522,10 +13115,8 @@ public final class BaseCmd {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + RECEIVERTYPE_FIELD_NUMBER;
       hash = (53 * hash) + receiverType_;
-      hash = (37 * hash) + ID1_FIELD_NUMBER;
-      hash = (53 * hash) + getId1();
-      hash = (37 * hash) + ID2_FIELD_NUMBER;
-      hash = (53 * hash) + getId2();
+      hash = (37 * hash) + TALKID_FIELD_NUMBER;
+      hash = (53 * hash) + getTalkID();
       hash = (37 * hash) + AVTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getAvType();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -11624,6 +13215,20 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * if receiverType == client,
+     *		flowDirection = C2LS or LS2LSM
+     *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+     * if callerType == monitor,
+     *		flowDirection = M2RS or RS2RR or LS2LSM
+     *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+     * if receiverType == robot_LSM,
+     *		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+     *      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+     * Note that this message body is sent along with field "prevRouteAddr" of the previously
+     * received message header (CommonHeader).
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.respTalk}
      */
     public static final class Builder extends
@@ -11663,9 +13268,7 @@ public final class BaseCmd {
         super.clear();
         receiverType_ = 0;
 
-        id1_ = 0;
-
-        id2_ = 0;
+        talkID_ = 0;
 
         avType_ = 0;
 
@@ -11696,8 +13299,7 @@ public final class BaseCmd {
       public DDRCommProto.BaseCmd.respTalk buildPartial() {
         DDRCommProto.BaseCmd.respTalk result = new DDRCommProto.BaseCmd.respTalk(this);
         result.receiverType_ = receiverType_;
-        result.id1_ = id1_;
-        result.id2_ = id2_;
+        result.talkID_ = talkID_;
         result.avType_ = avType_;
         onBuilt();
         return result;
@@ -11750,11 +13352,8 @@ public final class BaseCmd {
         if (other.receiverType_ != 0) {
           setReceiverTypeValue(other.getReceiverTypeValue());
         }
-        if (other.getId1() != 0) {
-          setId1(other.getId1());
-        }
-        if (other.getId2() != 0) {
-          setId2(other.getId2());
+        if (other.getTalkID() != 0) {
+          setTalkID(other.getTalkID());
         }
         if (other.getAvType() != 0) {
           setAvType(other.getAvType());
@@ -11833,54 +13432,40 @@ public final class BaseCmd {
         return this;
       }
 
-      private int id1_ ;
+      private int talkID_ ;
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public int getId1() {
-        return id1_;
+      public int getTalkID() {
+        return talkID_;
       }
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public Builder setId1(int value) {
+      public Builder setTalkID(int value) {
         
-        id1_ = value;
+        talkID_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 id1 = 2;</code>
+       * <pre>
+       * a randomly generated ID for this session of talk
+       * </pre>
+       *
+       * <code>int32 talkID = 2;</code>
        */
-      public Builder clearId1() {
+      public Builder clearTalkID() {
         
-        id1_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int id2_ ;
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public int getId2() {
-        return id2_;
-      }
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public Builder setId2(int value) {
-        
-        id2_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 id2 = 3;</code>
-       */
-      public Builder clearId2() {
-        
-        id2_ = 0;
+        talkID_ = 0;
         onChanged();
         return this;
       }
@@ -11891,7 +13476,7 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public int getAvType() {
         return avType_;
@@ -11901,7 +13486,7 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public Builder setAvType(int value) {
         
@@ -11914,7 +13499,7 @@ public final class BaseCmd {
        * 0-N.A; 1-audio; 2-video; 3-audio+video
        * </pre>
        *
-       * <code>int32 avType = 4;</code>
+       * <code>int32 avType = 3;</code>
        */
       public Builder clearAvType() {
         
@@ -11975,6 +13560,597 @@ public final class BaseCmd {
 
   }
 
+  public interface reqTalkHBOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.reqTalkHB)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * caller's talkID
+     * </pre>
+     *
+     * <code>int32 callerTalkID = 1;</code>
+     */
+    int getCallerTalkID();
+
+    /**
+     * <pre>
+     * receiver's talkID
+     * </pre>
+     *
+     * <code>int32 receiverTalkID = 2;</code>
+     */
+    int getReceiverTalkID();
+  }
+  /**
+   * <pre>
+   * this is to maintain (dual) talk by sending heart beats
+   * flowDirection = any possibility
+   * eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.reqTalkHB}
+   */
+  public  static final class reqTalkHB extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DDRCommProto.reqTalkHB)
+      reqTalkHBOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use reqTalkHB.newBuilder() to construct.
+    private reqTalkHB(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private reqTalkHB() {
+      callerTalkID_ = 0;
+      receiverTalkID_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private reqTalkHB(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              callerTalkID_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              receiverTalkID_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTalkHB_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTalkHB_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              DDRCommProto.BaseCmd.reqTalkHB.class, DDRCommProto.BaseCmd.reqTalkHB.Builder.class);
+    }
+
+    public static final int CALLERTALKID_FIELD_NUMBER = 1;
+    private int callerTalkID_;
+    /**
+     * <pre>
+     * caller's talkID
+     * </pre>
+     *
+     * <code>int32 callerTalkID = 1;</code>
+     */
+    public int getCallerTalkID() {
+      return callerTalkID_;
+    }
+
+    public static final int RECEIVERTALKID_FIELD_NUMBER = 2;
+    private int receiverTalkID_;
+    /**
+     * <pre>
+     * receiver's talkID
+     * </pre>
+     *
+     * <code>int32 receiverTalkID = 2;</code>
+     */
+    public int getReceiverTalkID() {
+      return receiverTalkID_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (callerTalkID_ != 0) {
+        output.writeInt32(1, callerTalkID_);
+      }
+      if (receiverTalkID_ != 0) {
+        output.writeInt32(2, receiverTalkID_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (callerTalkID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, callerTalkID_);
+      }
+      if (receiverTalkID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, receiverTalkID_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof DDRCommProto.BaseCmd.reqTalkHB)) {
+        return super.equals(obj);
+      }
+      DDRCommProto.BaseCmd.reqTalkHB other = (DDRCommProto.BaseCmd.reqTalkHB) obj;
+
+      boolean result = true;
+      result = result && (getCallerTalkID()
+          == other.getCallerTalkID());
+      result = result && (getReceiverTalkID()
+          == other.getReceiverTalkID());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CALLERTALKID_FIELD_NUMBER;
+      hash = (53 * hash) + getCallerTalkID();
+      hash = (37 * hash) + RECEIVERTALKID_FIELD_NUMBER;
+      hash = (53 * hash) + getReceiverTalkID();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqTalkHB parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(DDRCommProto.BaseCmd.reqTalkHB prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * this is to maintain (dual) talk by sending heart beats
+     * flowDirection = any possibility
+     * eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.reqTalkHB}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.reqTalkHB)
+        DDRCommProto.BaseCmd.reqTalkHBOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTalkHB_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTalkHB_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DDRCommProto.BaseCmd.reqTalkHB.class, DDRCommProto.BaseCmd.reqTalkHB.Builder.class);
+      }
+
+      // Construct using DDRCommProto.BaseCmd.reqTalkHB.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        callerTalkID_ = 0;
+
+        receiverTalkID_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTalkHB_descriptor;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqTalkHB getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.reqTalkHB.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqTalkHB build() {
+        DDRCommProto.BaseCmd.reqTalkHB result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqTalkHB buildPartial() {
+        DDRCommProto.BaseCmd.reqTalkHB result = new DDRCommProto.BaseCmd.reqTalkHB(this);
+        result.callerTalkID_ = callerTalkID_;
+        result.receiverTalkID_ = receiverTalkID_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof DDRCommProto.BaseCmd.reqTalkHB) {
+          return mergeFrom((DDRCommProto.BaseCmd.reqTalkHB)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(DDRCommProto.BaseCmd.reqTalkHB other) {
+        if (other == DDRCommProto.BaseCmd.reqTalkHB.getDefaultInstance()) return this;
+        if (other.getCallerTalkID() != 0) {
+          setCallerTalkID(other.getCallerTalkID());
+        }
+        if (other.getReceiverTalkID() != 0) {
+          setReceiverTalkID(other.getReceiverTalkID());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        DDRCommProto.BaseCmd.reqTalkHB parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (DDRCommProto.BaseCmd.reqTalkHB) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int callerTalkID_ ;
+      /**
+       * <pre>
+       * caller's talkID
+       * </pre>
+       *
+       * <code>int32 callerTalkID = 1;</code>
+       */
+      public int getCallerTalkID() {
+        return callerTalkID_;
+      }
+      /**
+       * <pre>
+       * caller's talkID
+       * </pre>
+       *
+       * <code>int32 callerTalkID = 1;</code>
+       */
+      public Builder setCallerTalkID(int value) {
+        
+        callerTalkID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * caller's talkID
+       * </pre>
+       *
+       * <code>int32 callerTalkID = 1;</code>
+       */
+      public Builder clearCallerTalkID() {
+        
+        callerTalkID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int receiverTalkID_ ;
+      /**
+       * <pre>
+       * receiver's talkID
+       * </pre>
+       *
+       * <code>int32 receiverTalkID = 2;</code>
+       */
+      public int getReceiverTalkID() {
+        return receiverTalkID_;
+      }
+      /**
+       * <pre>
+       * receiver's talkID
+       * </pre>
+       *
+       * <code>int32 receiverTalkID = 2;</code>
+       */
+      public Builder setReceiverTalkID(int value) {
+        
+        receiverTalkID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * receiver's talkID
+       * </pre>
+       *
+       * <code>int32 receiverTalkID = 2;</code>
+       */
+      public Builder clearReceiverTalkID() {
+        
+        receiverTalkID_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.reqTalkHB)
+    }
+
+    // @@protoc_insertion_point(class_scope:DDRCommProto.reqTalkHB)
+    private static final DDRCommProto.BaseCmd.reqTalkHB DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.reqTalkHB();
+    }
+
+    public static DDRCommProto.BaseCmd.reqTalkHB getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<reqTalkHB>
+        PARSER = new com.google.protobuf.AbstractParser<reqTalkHB>() {
+      @java.lang.Override
+      public reqTalkHB parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new reqTalkHB(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<reqTalkHB> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<reqTalkHB> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public DDRCommProto.BaseCmd.reqTalkHB getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface reqCmdOrBuilder extends
       // @@protoc_insertion_point(interface_extends:DDRCommProto.reqCmd)
       com.google.protobuf.MessageOrBuilder {
@@ -11995,6 +14171,11 @@ public final class BaseCmd {
         getCmdMsgBytes();
   }
   /**
+   * <pre>
+   * flowDirection = M2RS or RS2RR or C2LS or LS2LSM or LSM2LS
+   * eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.reqCmd}
    */
   public  static final class reqCmd extends
@@ -12289,6 +14470,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = M2RS or RS2RR or C2LS or LS2LSM or LSM2LS
+     * eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.reqCmd}
      */
     public static final class Builder extends
@@ -12609,6 +14795,11 @@ public final class BaseCmd {
         getRespMsgBytes();
   }
   /**
+   * <pre>
+   * flowDirection = LSM2LS or RR2RS or RS2M or LS2C or LS2LSM
+   * eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.respCmd}
    */
   public  static final class respCmd extends
@@ -12903,6 +15094,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = LSM2LS or RR2RS or RS2M or LS2C or LS2LSM
+     * eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.respCmd}
      */
     public static final class Builder extends
@@ -13208,41 +15404,65 @@ public final class BaseCmd {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * <code>string tarLSMName = 1;</code>
      */
-    java.util.List<java.lang.String>
-        getFileNameList();
+    java.lang.String getTarLSMName();
     /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    int getFileNameCount();
-    /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    java.lang.String getFileName(int index);
-    /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * <code>string tarLSMName = 1;</code>
      */
     com.google.protobuf.ByteString
-        getFileNameBytes(int index);
+        getTarLSMNameBytes();
+
+    /**
+     * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+     */
+    int getFileTypeValue();
+    /**
+     * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+     */
+    DDRCommProto.BaseCmd.reqFile.eFileTypes getFileType();
+
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.util.List<java.lang.String>
+        getFileNamesList();
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    int getFileNamesCount();
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.lang.String getFileNames(int index);
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNamesBytes(int index);
   }
   /**
+   * <pre>
+   * flowDirection = LS2LSM
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.reqFile}
    */
   public  static final class reqFile extends
@@ -13255,7 +15475,9 @@ public final class BaseCmd {
       super(builder);
     }
     private reqFile() {
-      fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      tarLSMName_ = "";
+      fileType_ = 0;
+      fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -13284,11 +15506,23 @@ public final class BaseCmd {
               break;
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                fileName_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
+
+              tarLSMName_ = s;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              fileType_ = rawValue;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                fileNames_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
               }
-              fileName_.add(s);
+              fileNames_.add(s);
               break;
             }
             default: {
@@ -13306,8 +15540,8 @@ public final class BaseCmd {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = fileName_.getUnmodifiableView();
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -13326,49 +15560,208 @@ public final class BaseCmd {
               DDRCommProto.BaseCmd.reqFile.class, DDRCommProto.BaseCmd.reqFile.Builder.class);
     }
 
-    public static final int FILENAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList fileName_;
     /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * Protobuf enum {@code DDRCommProto.reqFile.eFileTypes}
      */
-    public com.google.protobuf.ProtocolStringList
-        getFileNameList() {
-      return fileName_;
+    public enum eFileTypes
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      FileContents(0),
+      /**
+       * <code>FileList = 1;</code>
+       */
+      FileList(1),
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      FolderFlist(2),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      public static final int FileContents_VALUE = 0;
+      /**
+       * <code>FileList = 1;</code>
+       */
+      public static final int FileList_VALUE = 1;
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      public static final int FolderFlist_VALUE = 2;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eFileTypes valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eFileTypes forNumber(int value) {
+        switch (value) {
+          case 0: return FileContents;
+          case 1: return FileList;
+          case 2: return FolderFlist;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eFileTypes>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eFileTypes> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eFileTypes>() {
+              public eFileTypes findValueByNumber(int number) {
+                return eFileTypes.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.reqFile.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final eFileTypes[] VALUES = values();
+
+      public static eFileTypes valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eFileTypes(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.reqFile.eFileTypes)
+    }
+
+    private int bitField0_;
+    public static final int TARLSMNAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tarLSMName_;
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    public java.lang.String getTarLSMName() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tarLSMName_ = s;
+        return s;
+      }
     }
     /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    public int getFileNameCount() {
-      return fileName_.size();
-    }
-    /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    public java.lang.String getFileName(int index) {
-      return fileName_.get(index);
-    }
-    /**
-     * <pre>
-     * allow wildcards (*,?, etc)
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * <code>string tarLSMName = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getFileNameBytes(int index) {
-      return fileName_.getByteString(index);
+        getTarLSMNameBytes() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tarLSMName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILETYPE_FIELD_NUMBER = 2;
+    private int fileType_;
+    /**
+     * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+     */
+    public int getFileTypeValue() {
+      return fileType_;
+    }
+    /**
+     * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+     */
+    public DDRCommProto.BaseCmd.reqFile.eFileTypes getFileType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.reqFile.eFileTypes result = DDRCommProto.BaseCmd.reqFile.eFileTypes.valueOf(fileType_);
+      return result == null ? DDRCommProto.BaseCmd.reqFile.eFileTypes.UNRECOGNIZED : result;
+    }
+
+    public static final int FILENAMES_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList fileNames_;
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileNamesList() {
+      return fileNames_;
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public int getFileNamesCount() {
+      return fileNames_.size();
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public java.lang.String getFileNames(int index) {
+      return fileNames_.get(index);
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNamesBytes(int index) {
+      return fileNames_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -13385,8 +15778,14 @@ public final class BaseCmd {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < fileName_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, fileName_.getRaw(i));
+      if (!getTarLSMNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.reqFile.eFileTypes.FileContents.getNumber()) {
+        output.writeEnum(2, fileType_);
+      }
+      for (int i = 0; i < fileNames_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileNames_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -13397,13 +15796,20 @@ public final class BaseCmd {
       if (size != -1) return size;
 
       size = 0;
+      if (!getTarLSMNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.reqFile.eFileTypes.FileContents.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, fileType_);
+      }
       {
         int dataSize = 0;
-        for (int i = 0; i < fileName_.size(); i++) {
-          dataSize += computeStringSizeNoTag(fileName_.getRaw(i));
+        for (int i = 0; i < fileNames_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileNames_.getRaw(i));
         }
         size += dataSize;
-        size += 1 * getFileNameList().size();
+        size += 1 * getFileNamesList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13421,8 +15827,11 @@ public final class BaseCmd {
       DDRCommProto.BaseCmd.reqFile other = (DDRCommProto.BaseCmd.reqFile) obj;
 
       boolean result = true;
-      result = result && getFileNameList()
-          .equals(other.getFileNameList());
+      result = result && getTarLSMName()
+          .equals(other.getTarLSMName());
+      result = result && fileType_ == other.fileType_;
+      result = result && getFileNamesList()
+          .equals(other.getFileNamesList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -13434,9 +15843,13 @@ public final class BaseCmd {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getFileNameCount() > 0) {
-        hash = (37 * hash) + FILENAME_FIELD_NUMBER;
-        hash = (53 * hash) + getFileNameList().hashCode();
+      hash = (37 * hash) + TARLSMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getTarLSMName().hashCode();
+      hash = (37 * hash) + FILETYPE_FIELD_NUMBER;
+      hash = (53 * hash) + fileType_;
+      if (getFileNamesCount() > 0) {
+        hash = (37 * hash) + FILENAMES_FIELD_NUMBER;
+        hash = (53 * hash) + getFileNamesList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -13534,6 +15947,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = LS2LSM
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.reqFile}
      */
     public static final class Builder extends
@@ -13571,8 +15989,12 @@ public final class BaseCmd {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+        tarLSMName_ = "";
+
+        fileType_ = 0;
+
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -13600,11 +16022,15 @@ public final class BaseCmd {
       public DDRCommProto.BaseCmd.reqFile buildPartial() {
         DDRCommProto.BaseCmd.reqFile result = new DDRCommProto.BaseCmd.reqFile(this);
         int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = fileName_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
+        int to_bitField0_ = 0;
+        result.tarLSMName_ = tarLSMName_;
+        result.fileType_ = fileType_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.fileName_ = fileName_;
+        result.fileNames_ = fileNames_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -13653,13 +16079,20 @@ public final class BaseCmd {
 
       public Builder mergeFrom(DDRCommProto.BaseCmd.reqFile other) {
         if (other == DDRCommProto.BaseCmd.reqFile.getDefaultInstance()) return this;
-        if (!other.fileName_.isEmpty()) {
-          if (fileName_.isEmpty()) {
-            fileName_ = other.fileName_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+        if (!other.getTarLSMName().isEmpty()) {
+          tarLSMName_ = other.tarLSMName_;
+          onChanged();
+        }
+        if (other.fileType_ != 0) {
+          setFileTypeValue(other.getFileTypeValue());
+        }
+        if (!other.fileNames_.isEmpty()) {
+          if (fileNames_.isEmpty()) {
+            fileNames_ = other.fileNames_;
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureFileNameIsMutable();
-            fileName_.addAll(other.fileName_);
+            ensureFileNamesIsMutable();
+            fileNames_.addAll(other.fileNames_);
           }
           onChanged();
         }
@@ -13693,11 +16126,125 @@ public final class BaseCmd {
       }
       private int bitField0_;
 
-      private com.google.protobuf.LazyStringList fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureFileNameIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = new com.google.protobuf.LazyStringArrayList(fileName_);
-          bitField0_ |= 0x00000001;
+      private java.lang.Object tarLSMName_ = "";
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public java.lang.String getTarLSMName() {
+        java.lang.Object ref = tarLSMName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tarLSMName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTarLSMNameBytes() {
+        java.lang.Object ref = tarLSMName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tarLSMName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder clearTarLSMName() {
+        
+        tarLSMName_ = getDefaultInstance().getTarLSMName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int fileType_ = 0;
+      /**
+       * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+       */
+      public int getFileTypeValue() {
+        return fileType_;
+      }
+      /**
+       * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileTypeValue(int value) {
+        fileType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+       */
+      public DDRCommProto.BaseCmd.reqFile.eFileTypes getFileType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.reqFile.eFileTypes result = DDRCommProto.BaseCmd.reqFile.eFileTypes.valueOf(fileType_);
+        return result == null ? DDRCommProto.BaseCmd.reqFile.eFileTypes.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileType(DDRCommProto.BaseCmd.reqFile.eFileTypes value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        fileType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.reqFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder clearFileType() {
+        
+        fileType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileNamesIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = new com.google.protobuf.LazyStringArrayList(fileNames_);
+          bitField0_ |= 0x00000004;
          }
       }
       /**
@@ -13705,57 +16252,57 @@ public final class BaseCmd {
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
       public com.google.protobuf.ProtocolStringList
-          getFileNameList() {
-        return fileName_.getUnmodifiableView();
+          getFileNamesList() {
+        return fileNames_.getUnmodifiableView();
       }
       /**
        * <pre>
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public int getFileNameCount() {
-        return fileName_.size();
+      public int getFileNamesCount() {
+        return fileNames_.size();
       }
       /**
        * <pre>
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public java.lang.String getFileName(int index) {
-        return fileName_.get(index);
+      public java.lang.String getFileNames(int index) {
+        return fileNames_.get(index);
       }
       /**
        * <pre>
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getFileNameBytes(int index) {
-        return fileName_.getByteString(index);
+          getFileNamesBytes(int index) {
+        return fileNames_.getByteString(index);
       }
       /**
        * <pre>
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder setFileName(
+      public Builder setFileNames(
           int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureFileNameIsMutable();
-        fileName_.set(index, value);
+  ensureFileNamesIsMutable();
+        fileNames_.set(index, value);
         onChanged();
         return this;
       }
@@ -13764,15 +16311,15 @@ public final class BaseCmd {
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addFileName(
+      public Builder addFileNames(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureFileNameIsMutable();
-        fileName_.add(value);
+  ensureFileNamesIsMutable();
+        fileNames_.add(value);
         onChanged();
         return this;
       }
@@ -13781,13 +16328,13 @@ public final class BaseCmd {
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addAllFileName(
+      public Builder addAllFileNames(
           java.lang.Iterable<java.lang.String> values) {
-        ensureFileNameIsMutable();
+        ensureFileNamesIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, fileName_);
+            values, fileNames_);
         onChanged();
         return this;
       }
@@ -13796,11 +16343,11 @@ public final class BaseCmd {
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder clearFileName() {
-        fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
+      public Builder clearFileNames() {
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -13809,16 +16356,16 @@ public final class BaseCmd {
        * allow wildcards (*,?, etc)
        * </pre>
        *
-       * <code>repeated string fileName = 1;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addFileNameBytes(
+      public Builder addFileNamesBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        ensureFileNameIsMutable();
-        fileName_.add(value);
+        ensureFileNamesIsMutable();
+        fileNames_.add(value);
         onChanged();
         return this;
       }
@@ -13880,76 +16427,100 @@ public final class BaseCmd {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * <code>string tarLSMName = 1;</code>
      */
-    java.util.List<java.lang.String>
-        getFileNameList();
+    java.lang.String getTarLSMName();
     /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    int getFileNameCount();
-    /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    java.lang.String getFileName(int index);
-    /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * <code>string tarLSMName = 1;</code>
      */
     com.google.protobuf.ByteString
-        getFileNameBytes(int index);
+        getTarLSMNameBytes();
+
+    /**
+     * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+     */
+    int getFileTypeValue();
+    /**
+     * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+     */
+    DDRCommProto.BaseCmd.respFile.eFileTypes getFileType();
 
     /**
      * <pre>
-     * probably http address
+     * no wildcards
      * </pre>
      *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>repeated string fileNames = 3;</code>
      */
     java.util.List<java.lang.String>
-        getFileAddrList();
+        getFileNamesList();
     /**
      * <pre>
-     * probably http address
+     * no wildcards
      * </pre>
      *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>repeated string fileNames = 3;</code>
      */
-    int getFileAddrCount();
+    int getFileNamesCount();
     /**
      * <pre>
-     * probably http address
+     * no wildcards
      * </pre>
      *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>repeated string fileNames = 3;</code>
      */
-    java.lang.String getFileAddr(int index);
+    java.lang.String getFileNames(int index);
     /**
      * <pre>
-     * probably http address
+     * no wildcards
      * </pre>
      *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>repeated string fileNames = 3;</code>
      */
     com.google.protobuf.ByteString
-        getFileAddrBytes(int index);
+        getFileNamesBytes(int index);
+
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getFileContentsList();
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    int getFileContentsCount();
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    java.lang.String getFileContents(int index);
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileContentsBytes(int index);
   }
   /**
+   * <pre>
+   * flowDirection = LSM2LS
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
    * Protobuf type {@code DDRCommProto.respFile}
    */
   public  static final class respFile extends
@@ -13962,8 +16533,10 @@ public final class BaseCmd {
       super(builder);
     }
     private respFile() {
-      fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      tarLSMName_ = "";
+      fileType_ = 0;
+      fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      fileContents_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -13992,20 +16565,32 @@ public final class BaseCmd {
               break;
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                fileName_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              fileName_.add(s);
+
+              tarLSMName_ = s;
               break;
             }
-            case 18: {
+            case 16: {
+              int rawValue = input.readEnum();
+
+              fileType_ = rawValue;
+              break;
+            }
+            case 26: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                fileAddr_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                fileNames_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
               }
-              fileAddr_.add(s);
+              fileNames_.add(s);
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                fileContents_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              fileContents_.add(s);
               break;
             }
             default: {
@@ -14023,11 +16608,11 @@ public final class BaseCmd {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = fileName_.getUnmodifiableView();
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          fileAddr_ = fileAddr_.getUnmodifiableView();
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          fileContents_ = fileContents_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -14046,94 +16631,253 @@ public final class BaseCmd {
               DDRCommProto.BaseCmd.respFile.class, DDRCommProto.BaseCmd.respFile.Builder.class);
     }
 
-    public static final int FILENAME_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList fileName_;
     /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
+     * Protobuf enum {@code DDRCommProto.respFile.eFileTypes}
      */
-    public com.google.protobuf.ProtocolStringList
-        getFileNameList() {
-      return fileName_;
-    }
-    /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    public int getFileNameCount() {
-      return fileName_.size();
-    }
-    /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    public java.lang.String getFileName(int index) {
-      return fileName_.get(index);
-    }
-    /**
-     * <pre>
-     * no wildcards
-     * </pre>
-     *
-     * <code>repeated string fileName = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getFileNameBytes(int index) {
-      return fileName_.getByteString(index);
+    public enum eFileTypes
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      FileContents(0),
+      /**
+       * <code>FileList = 1;</code>
+       */
+      FileList(1),
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      FolderFlist(2),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      public static final int FileContents_VALUE = 0;
+      /**
+       * <code>FileList = 1;</code>
+       */
+      public static final int FileList_VALUE = 1;
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      public static final int FolderFlist_VALUE = 2;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eFileTypes valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eFileTypes forNumber(int value) {
+        switch (value) {
+          case 0: return FileContents;
+          case 1: return FileList;
+          case 2: return FolderFlist;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eFileTypes>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eFileTypes> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eFileTypes>() {
+              public eFileTypes findValueByNumber(int number) {
+                return eFileTypes.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.respFile.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final eFileTypes[] VALUES = values();
+
+      public static eFileTypes valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eFileTypes(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.respFile.eFileTypes)
     }
 
-    public static final int FILEADDR_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList fileAddr_;
+    private int bitField0_;
+    public static final int TARLSMNAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tarLSMName_;
     /**
-     * <pre>
-     * probably http address
-     * </pre>
-     *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>string tarLSMName = 1;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getFileAddrList() {
-      return fileAddr_;
+    public java.lang.String getTarLSMName() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tarLSMName_ = s;
+        return s;
+      }
     }
     /**
-     * <pre>
-     * probably http address
-     * </pre>
-     *
-     * <code>repeated string fileAddr = 2;</code>
-     */
-    public int getFileAddrCount() {
-      return fileAddr_.size();
-    }
-    /**
-     * <pre>
-     * probably http address
-     * </pre>
-     *
-     * <code>repeated string fileAddr = 2;</code>
-     */
-    public java.lang.String getFileAddr(int index) {
-      return fileAddr_.get(index);
-    }
-    /**
-     * <pre>
-     * probably http address
-     * </pre>
-     *
-     * <code>repeated string fileAddr = 2;</code>
+     * <code>string tarLSMName = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getFileAddrBytes(int index) {
-      return fileAddr_.getByteString(index);
+        getTarLSMNameBytes() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tarLSMName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILETYPE_FIELD_NUMBER = 2;
+    private int fileType_;
+    /**
+     * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+     */
+    public int getFileTypeValue() {
+      return fileType_;
+    }
+    /**
+     * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+     */
+    public DDRCommProto.BaseCmd.respFile.eFileTypes getFileType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.respFile.eFileTypes result = DDRCommProto.BaseCmd.respFile.eFileTypes.valueOf(fileType_);
+      return result == null ? DDRCommProto.BaseCmd.respFile.eFileTypes.UNRECOGNIZED : result;
+    }
+
+    public static final int FILENAMES_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList fileNames_;
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileNamesList() {
+      return fileNames_;
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public int getFileNamesCount() {
+      return fileNames_.size();
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public java.lang.String getFileNames(int index) {
+      return fileNames_.get(index);
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNamesBytes(int index) {
+      return fileNames_.getByteString(index);
+    }
+
+    public static final int FILECONTENTS_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList fileContents_;
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileContentsList() {
+      return fileContents_;
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    public int getFileContentsCount() {
+      return fileContents_.size();
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    public java.lang.String getFileContents(int index) {
+      return fileContents_.get(index);
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileContents = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileContentsBytes(int index) {
+      return fileContents_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -14150,11 +16894,17 @@ public final class BaseCmd {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < fileName_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, fileName_.getRaw(i));
+      if (!getTarLSMNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tarLSMName_);
       }
-      for (int i = 0; i < fileAddr_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, fileAddr_.getRaw(i));
+      if (fileType_ != DDRCommProto.BaseCmd.respFile.eFileTypes.FileContents.getNumber()) {
+        output.writeEnum(2, fileType_);
+      }
+      for (int i = 0; i < fileNames_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileNames_.getRaw(i));
+      }
+      for (int i = 0; i < fileContents_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, fileContents_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -14165,21 +16915,28 @@ public final class BaseCmd {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < fileName_.size(); i++) {
-          dataSize += computeStringSizeNoTag(fileName_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getFileNameList().size();
+      if (!getTarLSMNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.respFile.eFileTypes.FileContents.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, fileType_);
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < fileAddr_.size(); i++) {
-          dataSize += computeStringSizeNoTag(fileAddr_.getRaw(i));
+        for (int i = 0; i < fileNames_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileNames_.getRaw(i));
         }
         size += dataSize;
-        size += 1 * getFileAddrList().size();
+        size += 1 * getFileNamesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < fileContents_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileContents_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getFileContentsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -14197,10 +16954,13 @@ public final class BaseCmd {
       DDRCommProto.BaseCmd.respFile other = (DDRCommProto.BaseCmd.respFile) obj;
 
       boolean result = true;
-      result = result && getFileNameList()
-          .equals(other.getFileNameList());
-      result = result && getFileAddrList()
-          .equals(other.getFileAddrList());
+      result = result && getTarLSMName()
+          .equals(other.getTarLSMName());
+      result = result && fileType_ == other.fileType_;
+      result = result && getFileNamesList()
+          .equals(other.getFileNamesList());
+      result = result && getFileContentsList()
+          .equals(other.getFileContentsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -14212,13 +16972,17 @@ public final class BaseCmd {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getFileNameCount() > 0) {
-        hash = (37 * hash) + FILENAME_FIELD_NUMBER;
-        hash = (53 * hash) + getFileNameList().hashCode();
+      hash = (37 * hash) + TARLSMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getTarLSMName().hashCode();
+      hash = (37 * hash) + FILETYPE_FIELD_NUMBER;
+      hash = (53 * hash) + fileType_;
+      if (getFileNamesCount() > 0) {
+        hash = (37 * hash) + FILENAMES_FIELD_NUMBER;
+        hash = (53 * hash) + getFileNamesList().hashCode();
       }
-      if (getFileAddrCount() > 0) {
-        hash = (37 * hash) + FILEADDR_FIELD_NUMBER;
-        hash = (53 * hash) + getFileAddrList().hashCode();
+      if (getFileContentsCount() > 0) {
+        hash = (37 * hash) + FILECONTENTS_FIELD_NUMBER;
+        hash = (53 * hash) + getFileContentsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -14316,6 +17080,11 @@ public final class BaseCmd {
       return builder;
     }
     /**
+     * <pre>
+     * flowDirection = LSM2LS
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
      * Protobuf type {@code DDRCommProto.respFile}
      */
     public static final class Builder extends
@@ -14353,10 +17122,14 @@ public final class BaseCmd {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        tarLSMName_ = "";
+
+        fileType_ = 0;
+
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileContents_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -14384,16 +17157,20 @@ public final class BaseCmd {
       public DDRCommProto.BaseCmd.respFile buildPartial() {
         DDRCommProto.BaseCmd.respFile result = new DDRCommProto.BaseCmd.respFile(this);
         int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = fileName_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
+        int to_bitField0_ = 0;
+        result.tarLSMName_ = tarLSMName_;
+        result.fileType_ = fileType_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.fileName_ = fileName_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          fileAddr_ = fileAddr_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        result.fileNames_ = fileNames_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          fileContents_ = fileContents_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
-        result.fileAddr_ = fileAddr_;
+        result.fileContents_ = fileContents_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -14442,23 +17219,30 @@ public final class BaseCmd {
 
       public Builder mergeFrom(DDRCommProto.BaseCmd.respFile other) {
         if (other == DDRCommProto.BaseCmd.respFile.getDefaultInstance()) return this;
-        if (!other.fileName_.isEmpty()) {
-          if (fileName_.isEmpty()) {
-            fileName_ = other.fileName_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+        if (!other.getTarLSMName().isEmpty()) {
+          tarLSMName_ = other.tarLSMName_;
+          onChanged();
+        }
+        if (other.fileType_ != 0) {
+          setFileTypeValue(other.getFileTypeValue());
+        }
+        if (!other.fileNames_.isEmpty()) {
+          if (fileNames_.isEmpty()) {
+            fileNames_ = other.fileNames_;
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureFileNameIsMutable();
-            fileName_.addAll(other.fileName_);
+            ensureFileNamesIsMutable();
+            fileNames_.addAll(other.fileNames_);
           }
           onChanged();
         }
-        if (!other.fileAddr_.isEmpty()) {
-          if (fileAddr_.isEmpty()) {
-            fileAddr_ = other.fileAddr_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+        if (!other.fileContents_.isEmpty()) {
+          if (fileContents_.isEmpty()) {
+            fileContents_ = other.fileContents_;
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
-            ensureFileAddrIsMutable();
-            fileAddr_.addAll(other.fileAddr_);
+            ensureFileContentsIsMutable();
+            fileContents_.addAll(other.fileContents_);
           }
           onChanged();
         }
@@ -14492,262 +17276,376 @@ public final class BaseCmd {
       }
       private int bitField0_;
 
-      private com.google.protobuf.LazyStringList fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureFileNameIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          fileName_ = new com.google.protobuf.LazyStringArrayList(fileName_);
-          bitField0_ |= 0x00000001;
-         }
-      }
+      private java.lang.Object tarLSMName_ = "";
       /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
+       * <code>string tarLSMName = 1;</code>
        */
-      public com.google.protobuf.ProtocolStringList
-          getFileNameList() {
-        return fileName_.getUnmodifiableView();
+      public java.lang.String getTarLSMName() {
+        java.lang.Object ref = tarLSMName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tarLSMName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
-       */
-      public int getFileNameCount() {
-        return fileName_.size();
-      }
-      /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
-       */
-      public java.lang.String getFileName(int index) {
-        return fileName_.get(index);
-      }
-      /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
+       * <code>string tarLSMName = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getFileNameBytes(int index) {
-        return fileName_.getByteString(index);
+          getTarLSMNameBytes() {
+        java.lang.Object ref = tarLSMName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tarLSMName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
       /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
+       * <code>string tarLSMName = 1;</code>
        */
-      public Builder setFileName(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureFileNameIsMutable();
-        fileName_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
-       */
-      public Builder addFileName(
+      public Builder setTarLSMName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureFileNameIsMutable();
-        fileName_.add(value);
+  
+        tarLSMName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
+       * <code>string tarLSMName = 1;</code>
        */
-      public Builder addAllFileName(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureFileNameIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, fileName_);
+      public Builder clearTarLSMName() {
+        
+        tarLSMName_ = getDefaultInstance().getTarLSMName();
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
+       * <code>string tarLSMName = 1;</code>
        */
-      public Builder clearFileName() {
-        fileName_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * no wildcards
-       * </pre>
-       *
-       * <code>repeated string fileName = 1;</code>
-       */
-      public Builder addFileNameBytes(
+      public Builder setTarLSMNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        ensureFileNameIsMutable();
-        fileName_.add(value);
+        
+        tarLSMName_ = value;
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.LazyStringList fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureFileAddrIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          fileAddr_ = new com.google.protobuf.LazyStringArrayList(fileAddr_);
-          bitField0_ |= 0x00000002;
+      private int fileType_ = 0;
+      /**
+       * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+       */
+      public int getFileTypeValue() {
+        return fileType_;
+      }
+      /**
+       * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileTypeValue(int value) {
+        fileType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+       */
+      public DDRCommProto.BaseCmd.respFile.eFileTypes getFileType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.respFile.eFileTypes result = DDRCommProto.BaseCmd.respFile.eFileTypes.valueOf(fileType_);
+        return result == null ? DDRCommProto.BaseCmd.respFile.eFileTypes.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileType(DDRCommProto.BaseCmd.respFile.eFileTypes value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        fileType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.respFile.eFileTypes fileType = 2;</code>
+       */
+      public Builder clearFileType() {
+        
+        fileType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileNamesIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = new com.google.protobuf.LazyStringArrayList(fileNames_);
+          bitField0_ |= 0x00000004;
          }
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
       public com.google.protobuf.ProtocolStringList
-          getFileAddrList() {
-        return fileAddr_.getUnmodifiableView();
+          getFileNamesList() {
+        return fileNames_.getUnmodifiableView();
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public int getFileAddrCount() {
-        return fileAddr_.size();
+      public int getFileNamesCount() {
+        return fileNames_.size();
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public java.lang.String getFileAddr(int index) {
-        return fileAddr_.get(index);
+      public java.lang.String getFileNames(int index) {
+        return fileNames_.get(index);
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getFileAddrBytes(int index) {
-        return fileAddr_.getByteString(index);
+          getFileNamesBytes(int index) {
+        return fileNames_.getByteString(index);
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder setFileAddr(
+      public Builder setFileNames(
           int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureFileAddrIsMutable();
-        fileAddr_.set(index, value);
+  ensureFileNamesIsMutable();
+        fileNames_.set(index, value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addFileAddr(
+      public Builder addFileNames(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureFileAddrIsMutable();
-        fileAddr_.add(value);
+  ensureFileNamesIsMutable();
+        fileNames_.add(value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addAllFileAddr(
+      public Builder addAllFileNames(
           java.lang.Iterable<java.lang.String> values) {
-        ensureFileAddrIsMutable();
+        ensureFileNamesIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, fileAddr_);
+            values, fileNames_);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder clearFileAddr() {
-        fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearFileNames() {
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * probably http address
+       * no wildcards
        * </pre>
        *
-       * <code>repeated string fileAddr = 2;</code>
+       * <code>repeated string fileNames = 3;</code>
        */
-      public Builder addFileAddrBytes(
+      public Builder addFileNamesBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        ensureFileAddrIsMutable();
-        fileAddr_.add(value);
+        ensureFileNamesIsMutable();
+        fileNames_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileContents_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileContentsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          fileContents_ = new com.google.protobuf.LazyStringArrayList(fileContents_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getFileContentsList() {
+        return fileContents_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public int getFileContentsCount() {
+        return fileContents_.size();
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public java.lang.String getFileContents(int index) {
+        return fileContents_.get(index);
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileContentsBytes(int index) {
+        return fileContents_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public Builder setFileContents(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileContentsIsMutable();
+        fileContents_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public Builder addFileContents(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileContentsIsMutable();
+        fileContents_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public Builder addAllFileContents(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureFileContentsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, fileContents_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public Builder clearFileContents() {
+        fileContents_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileContents = 4;</code>
+       */
+      public Builder addFileContentsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureFileContentsIsMutable();
+        fileContents_.add(value);
         onChanged();
         return this;
       }
@@ -14804,8 +17702,2311 @@ public final class BaseCmd {
 
   }
 
-  public interface notifyStatusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:DDRCommProto.notifyStatus)
+  public interface reqFileAddrOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.reqFileAddr)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    java.lang.String getTarLSMName();
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTarLSMNameBytes();
+
+    /**
+     * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+     */
+    int getFileTypeValue();
+    /**
+     * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+     */
+    DDRCommProto.BaseCmd.reqFileAddr.eFileTypes getFileType();
+
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.util.List<java.lang.String>
+        getFileNamesList();
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    int getFileNamesCount();
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.lang.String getFileNames(int index);
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNamesBytes(int index);
+  }
+  /**
+   * <pre>
+   * flowDirection = M2RS or RS2RR or C2LS
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.reqFileAddr}
+   */
+  public  static final class reqFileAddr extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DDRCommProto.reqFileAddr)
+      reqFileAddrOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use reqFileAddr.newBuilder() to construct.
+    private reqFileAddr(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private reqFileAddr() {
+      tarLSMName_ = "";
+      fileType_ = 0;
+      fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private reqFileAddr(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tarLSMName_ = s;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              fileType_ = rawValue;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                fileNames_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              fileNames_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqFileAddr_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqFileAddr_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              DDRCommProto.BaseCmd.reqFileAddr.class, DDRCommProto.BaseCmd.reqFileAddr.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code DDRCommProto.reqFileAddr.eFileTypes}
+     */
+    public enum eFileTypes
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      FileContents(0),
+      /**
+       * <code>FileList = 1;</code>
+       */
+      FileList(1),
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      FolderFlist(2),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      public static final int FileContents_VALUE = 0;
+      /**
+       * <code>FileList = 1;</code>
+       */
+      public static final int FileList_VALUE = 1;
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      public static final int FolderFlist_VALUE = 2;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eFileTypes valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eFileTypes forNumber(int value) {
+        switch (value) {
+          case 0: return FileContents;
+          case 1: return FileList;
+          case 2: return FolderFlist;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eFileTypes>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eFileTypes> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eFileTypes>() {
+              public eFileTypes findValueByNumber(int number) {
+                return eFileTypes.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.reqFileAddr.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final eFileTypes[] VALUES = values();
+
+      public static eFileTypes valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eFileTypes(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.reqFileAddr.eFileTypes)
+    }
+
+    private int bitField0_;
+    public static final int TARLSMNAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tarLSMName_;
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    public java.lang.String getTarLSMName() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tarLSMName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTarLSMNameBytes() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tarLSMName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILETYPE_FIELD_NUMBER = 2;
+    private int fileType_;
+    /**
+     * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+     */
+    public int getFileTypeValue() {
+      return fileType_;
+    }
+    /**
+     * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+     */
+    public DDRCommProto.BaseCmd.reqFileAddr.eFileTypes getFileType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.reqFileAddr.eFileTypes result = DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.valueOf(fileType_);
+      return result == null ? DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.UNRECOGNIZED : result;
+    }
+
+    public static final int FILENAMES_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList fileNames_;
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileNamesList() {
+      return fileNames_;
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public int getFileNamesCount() {
+      return fileNames_.size();
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public java.lang.String getFileNames(int index) {
+      return fileNames_.get(index);
+    }
+    /**
+     * <pre>
+     * allow wildcards (*,?, etc)
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNamesBytes(int index) {
+      return fileNames_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getTarLSMNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.FileContents.getNumber()) {
+        output.writeEnum(2, fileType_);
+      }
+      for (int i = 0; i < fileNames_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileNames_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getTarLSMNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.FileContents.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, fileType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < fileNames_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileNames_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getFileNamesList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof DDRCommProto.BaseCmd.reqFileAddr)) {
+        return super.equals(obj);
+      }
+      DDRCommProto.BaseCmd.reqFileAddr other = (DDRCommProto.BaseCmd.reqFileAddr) obj;
+
+      boolean result = true;
+      result = result && getTarLSMName()
+          .equals(other.getTarLSMName());
+      result = result && fileType_ == other.fileType_;
+      result = result && getFileNamesList()
+          .equals(other.getFileNamesList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TARLSMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getTarLSMName().hashCode();
+      hash = (37 * hash) + FILETYPE_FIELD_NUMBER;
+      hash = (53 * hash) + fileType_;
+      if (getFileNamesCount() > 0) {
+        hash = (37 * hash) + FILENAMES_FIELD_NUMBER;
+        hash = (53 * hash) + getFileNamesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.reqFileAddr parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(DDRCommProto.BaseCmd.reqFileAddr prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * flowDirection = M2RS or RS2RR or C2LS
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.reqFileAddr}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.reqFileAddr)
+        DDRCommProto.BaseCmd.reqFileAddrOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqFileAddr_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqFileAddr_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DDRCommProto.BaseCmd.reqFileAddr.class, DDRCommProto.BaseCmd.reqFileAddr.Builder.class);
+      }
+
+      // Construct using DDRCommProto.BaseCmd.reqFileAddr.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        tarLSMName_ = "";
+
+        fileType_ = 0;
+
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqFileAddr_descriptor;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqFileAddr getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.reqFileAddr.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqFileAddr build() {
+        DDRCommProto.BaseCmd.reqFileAddr result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.reqFileAddr buildPartial() {
+        DDRCommProto.BaseCmd.reqFileAddr result = new DDRCommProto.BaseCmd.reqFileAddr(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.tarLSMName_ = tarLSMName_;
+        result.fileType_ = fileType_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.fileNames_ = fileNames_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof DDRCommProto.BaseCmd.reqFileAddr) {
+          return mergeFrom((DDRCommProto.BaseCmd.reqFileAddr)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(DDRCommProto.BaseCmd.reqFileAddr other) {
+        if (other == DDRCommProto.BaseCmd.reqFileAddr.getDefaultInstance()) return this;
+        if (!other.getTarLSMName().isEmpty()) {
+          tarLSMName_ = other.tarLSMName_;
+          onChanged();
+        }
+        if (other.fileType_ != 0) {
+          setFileTypeValue(other.getFileTypeValue());
+        }
+        if (!other.fileNames_.isEmpty()) {
+          if (fileNames_.isEmpty()) {
+            fileNames_ = other.fileNames_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureFileNamesIsMutable();
+            fileNames_.addAll(other.fileNames_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        DDRCommProto.BaseCmd.reqFileAddr parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (DDRCommProto.BaseCmd.reqFileAddr) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object tarLSMName_ = "";
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public java.lang.String getTarLSMName() {
+        java.lang.Object ref = tarLSMName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tarLSMName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTarLSMNameBytes() {
+        java.lang.Object ref = tarLSMName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tarLSMName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder clearTarLSMName() {
+        
+        tarLSMName_ = getDefaultInstance().getTarLSMName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int fileType_ = 0;
+      /**
+       * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public int getFileTypeValue() {
+        return fileType_;
+      }
+      /**
+       * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileTypeValue(int value) {
+        fileType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public DDRCommProto.BaseCmd.reqFileAddr.eFileTypes getFileType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.reqFileAddr.eFileTypes result = DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.valueOf(fileType_);
+        return result == null ? DDRCommProto.BaseCmd.reqFileAddr.eFileTypes.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileType(DDRCommProto.BaseCmd.reqFileAddr.eFileTypes value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        fileType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.reqFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder clearFileType() {
+        
+        fileType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileNamesIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = new com.google.protobuf.LazyStringArrayList(fileNames_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getFileNamesList() {
+        return fileNames_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public int getFileNamesCount() {
+        return fileNames_.size();
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public java.lang.String getFileNames(int index) {
+        return fileNames_.get(index);
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNamesBytes(int index) {
+        return fileNames_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder setFileNames(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileNamesIsMutable();
+        fileNames_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addFileNames(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileNamesIsMutable();
+        fileNames_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addAllFileNames(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureFileNamesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, fileNames_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder clearFileNames() {
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * allow wildcards (*,?, etc)
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addFileNamesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureFileNamesIsMutable();
+        fileNames_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.reqFileAddr)
+    }
+
+    // @@protoc_insertion_point(class_scope:DDRCommProto.reqFileAddr)
+    private static final DDRCommProto.BaseCmd.reqFileAddr DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.reqFileAddr();
+    }
+
+    public static DDRCommProto.BaseCmd.reqFileAddr getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<reqFileAddr>
+        PARSER = new com.google.protobuf.AbstractParser<reqFileAddr>() {
+      @java.lang.Override
+      public reqFileAddr parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new reqFileAddr(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<reqFileAddr> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<reqFileAddr> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public DDRCommProto.BaseCmd.reqFileAddr getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface respFileAddrOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.respFileAddr)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    java.lang.String getTarLSMName();
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTarLSMNameBytes();
+
+    /**
+     * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+     */
+    int getFileTypeValue();
+    /**
+     * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+     */
+    DDRCommProto.BaseCmd.respFileAddr.eFileTypes getFileType();
+
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.util.List<java.lang.String>
+        getFileNamesList();
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    int getFileNamesCount();
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    java.lang.String getFileNames(int index);
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileNamesBytes(int index);
+
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    java.util.List<java.lang.String>
+        getFileAddrList();
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    int getFileAddrCount();
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    java.lang.String getFileAddr(int index);
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getFileAddrBytes(int index);
+  }
+  /**
+   * <pre>
+   * flowDirection = RR2RS or RS2M or LS2C
+   * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.respFileAddr}
+   */
+  public  static final class respFileAddr extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DDRCommProto.respFileAddr)
+      respFileAddrOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use respFileAddr.newBuilder() to construct.
+    private respFileAddr(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private respFileAddr() {
+      tarLSMName_ = "";
+      fileType_ = 0;
+      fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private respFileAddr(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tarLSMName_ = s;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+
+              fileType_ = rawValue;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                fileNames_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              fileNames_.add(s);
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                fileAddr_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              fileAddr_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          fileAddr_ = fileAddr_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_respFileAddr_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_respFileAddr_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              DDRCommProto.BaseCmd.respFileAddr.class, DDRCommProto.BaseCmd.respFileAddr.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code DDRCommProto.respFileAddr.eFileTypes}
+     */
+    public enum eFileTypes
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      FileContents(0),
+      /**
+       * <code>FileList = 1;</code>
+       */
+      FileList(1),
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      FolderFlist(2),
+      UNRECOGNIZED(-1),
+      ;
+
+      /**
+       * <code>FileContents = 0;</code>
+       */
+      public static final int FileContents_VALUE = 0;
+      /**
+       * <code>FileList = 1;</code>
+       */
+      public static final int FileList_VALUE = 1;
+      /**
+       * <code>FolderFlist = 2;</code>
+       */
+      public static final int FolderFlist_VALUE = 2;
+
+
+      public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static eFileTypes valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static eFileTypes forNumber(int value) {
+        switch (value) {
+          case 0: return FileContents;
+          case 1: return FileList;
+          case 2: return FolderFlist;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<eFileTypes>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          eFileTypes> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<eFileTypes>() {
+              public eFileTypes findValueByNumber(int number) {
+                return eFileTypes.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.respFileAddr.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final eFileTypes[] VALUES = values();
+
+      public static eFileTypes valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private eFileTypes(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:DDRCommProto.respFileAddr.eFileTypes)
+    }
+
+    private int bitField0_;
+    public static final int TARLSMNAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tarLSMName_;
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    public java.lang.String getTarLSMName() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tarLSMName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tarLSMName = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTarLSMNameBytes() {
+      java.lang.Object ref = tarLSMName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tarLSMName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILETYPE_FIELD_NUMBER = 2;
+    private int fileType_;
+    /**
+     * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+     */
+    public int getFileTypeValue() {
+      return fileType_;
+    }
+    /**
+     * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+     */
+    public DDRCommProto.BaseCmd.respFileAddr.eFileTypes getFileType() {
+      @SuppressWarnings("deprecation")
+      DDRCommProto.BaseCmd.respFileAddr.eFileTypes result = DDRCommProto.BaseCmd.respFileAddr.eFileTypes.valueOf(fileType_);
+      return result == null ? DDRCommProto.BaseCmd.respFileAddr.eFileTypes.UNRECOGNIZED : result;
+    }
+
+    public static final int FILENAMES_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList fileNames_;
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileNamesList() {
+      return fileNames_;
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public int getFileNamesCount() {
+      return fileNames_.size();
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public java.lang.String getFileNames(int index) {
+      return fileNames_.get(index);
+    }
+    /**
+     * <pre>
+     * no wildcards
+     * </pre>
+     *
+     * <code>repeated string fileNames = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileNamesBytes(int index) {
+      return fileNames_.getByteString(index);
+    }
+
+    public static final int FILEADDR_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList fileAddr_;
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getFileAddrList() {
+      return fileAddr_;
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    public int getFileAddrCount() {
+      return fileAddr_.size();
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    public java.lang.String getFileAddr(int index) {
+      return fileAddr_.get(index);
+    }
+    /**
+     * <pre>
+     * ignored if fileType!=FileContents
+     * </pre>
+     *
+     * <code>repeated string fileAddr = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFileAddrBytes(int index) {
+      return fileAddr_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getTarLSMNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.respFileAddr.eFileTypes.FileContents.getNumber()) {
+        output.writeEnum(2, fileType_);
+      }
+      for (int i = 0; i < fileNames_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, fileNames_.getRaw(i));
+      }
+      for (int i = 0; i < fileAddr_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, fileAddr_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getTarLSMNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tarLSMName_);
+      }
+      if (fileType_ != DDRCommProto.BaseCmd.respFileAddr.eFileTypes.FileContents.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, fileType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < fileNames_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileNames_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getFileNamesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < fileAddr_.size(); i++) {
+          dataSize += computeStringSizeNoTag(fileAddr_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getFileAddrList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof DDRCommProto.BaseCmd.respFileAddr)) {
+        return super.equals(obj);
+      }
+      DDRCommProto.BaseCmd.respFileAddr other = (DDRCommProto.BaseCmd.respFileAddr) obj;
+
+      boolean result = true;
+      result = result && getTarLSMName()
+          .equals(other.getTarLSMName());
+      result = result && fileType_ == other.fileType_;
+      result = result && getFileNamesList()
+          .equals(other.getFileNamesList());
+      result = result && getFileAddrList()
+          .equals(other.getFileAddrList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TARLSMNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getTarLSMName().hashCode();
+      hash = (37 * hash) + FILETYPE_FIELD_NUMBER;
+      hash = (53 * hash) + fileType_;
+      if (getFileNamesCount() > 0) {
+        hash = (37 * hash) + FILENAMES_FIELD_NUMBER;
+        hash = (53 * hash) + getFileNamesList().hashCode();
+      }
+      if (getFileAddrCount() > 0) {
+        hash = (37 * hash) + FILEADDR_FIELD_NUMBER;
+        hash = (53 * hash) + getFileAddrList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static DDRCommProto.BaseCmd.respFileAddr parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(DDRCommProto.BaseCmd.respFileAddr prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * flowDirection = RR2RS or RS2M or LS2C
+     * eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.respFileAddr}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.respFileAddr)
+        DDRCommProto.BaseCmd.respFileAddrOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_respFileAddr_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_respFileAddr_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                DDRCommProto.BaseCmd.respFileAddr.class, DDRCommProto.BaseCmd.respFileAddr.Builder.class);
+      }
+
+      // Construct using DDRCommProto.BaseCmd.respFileAddr.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        tarLSMName_ = "";
+
+        fileType_ = 0;
+
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_respFileAddr_descriptor;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.respFileAddr getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.respFileAddr.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.respFileAddr build() {
+        DDRCommProto.BaseCmd.respFileAddr result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public DDRCommProto.BaseCmd.respFileAddr buildPartial() {
+        DDRCommProto.BaseCmd.respFileAddr result = new DDRCommProto.BaseCmd.respFileAddr(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.tarLSMName_ = tarLSMName_;
+        result.fileType_ = fileType_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = fileNames_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.fileNames_ = fileNames_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          fileAddr_ = fileAddr_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.fileAddr_ = fileAddr_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof DDRCommProto.BaseCmd.respFileAddr) {
+          return mergeFrom((DDRCommProto.BaseCmd.respFileAddr)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(DDRCommProto.BaseCmd.respFileAddr other) {
+        if (other == DDRCommProto.BaseCmd.respFileAddr.getDefaultInstance()) return this;
+        if (!other.getTarLSMName().isEmpty()) {
+          tarLSMName_ = other.tarLSMName_;
+          onChanged();
+        }
+        if (other.fileType_ != 0) {
+          setFileTypeValue(other.getFileTypeValue());
+        }
+        if (!other.fileNames_.isEmpty()) {
+          if (fileNames_.isEmpty()) {
+            fileNames_ = other.fileNames_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureFileNamesIsMutable();
+            fileNames_.addAll(other.fileNames_);
+          }
+          onChanged();
+        }
+        if (!other.fileAddr_.isEmpty()) {
+          if (fileAddr_.isEmpty()) {
+            fileAddr_ = other.fileAddr_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureFileAddrIsMutable();
+            fileAddr_.addAll(other.fileAddr_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        DDRCommProto.BaseCmd.respFileAddr parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (DDRCommProto.BaseCmd.respFileAddr) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object tarLSMName_ = "";
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public java.lang.String getTarLSMName() {
+        java.lang.Object ref = tarLSMName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tarLSMName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTarLSMNameBytes() {
+        java.lang.Object ref = tarLSMName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tarLSMName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder clearTarLSMName() {
+        
+        tarLSMName_ = getDefaultInstance().getTarLSMName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tarLSMName = 1;</code>
+       */
+      public Builder setTarLSMNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tarLSMName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int fileType_ = 0;
+      /**
+       * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public int getFileTypeValue() {
+        return fileType_;
+      }
+      /**
+       * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileTypeValue(int value) {
+        fileType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public DDRCommProto.BaseCmd.respFileAddr.eFileTypes getFileType() {
+        @SuppressWarnings("deprecation")
+        DDRCommProto.BaseCmd.respFileAddr.eFileTypes result = DDRCommProto.BaseCmd.respFileAddr.eFileTypes.valueOf(fileType_);
+        return result == null ? DDRCommProto.BaseCmd.respFileAddr.eFileTypes.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder setFileType(DDRCommProto.BaseCmd.respFileAddr.eFileTypes value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        fileType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.DDRCommProto.respFileAddr.eFileTypes fileType = 2;</code>
+       */
+      public Builder clearFileType() {
+        
+        fileType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileNamesIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          fileNames_ = new com.google.protobuf.LazyStringArrayList(fileNames_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getFileNamesList() {
+        return fileNames_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public int getFileNamesCount() {
+        return fileNames_.size();
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public java.lang.String getFileNames(int index) {
+        return fileNames_.get(index);
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileNamesBytes(int index) {
+        return fileNames_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder setFileNames(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileNamesIsMutable();
+        fileNames_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addFileNames(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileNamesIsMutable();
+        fileNames_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addAllFileNames(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureFileNamesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, fileNames_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder clearFileNames() {
+        fileNames_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * no wildcards
+       * </pre>
+       *
+       * <code>repeated string fileNames = 3;</code>
+       */
+      public Builder addFileNamesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureFileNamesIsMutable();
+        fileNames_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureFileAddrIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          fileAddr_ = new com.google.protobuf.LazyStringArrayList(fileAddr_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getFileAddrList() {
+        return fileAddr_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public int getFileAddrCount() {
+        return fileAddr_.size();
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public java.lang.String getFileAddr(int index) {
+        return fileAddr_.get(index);
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFileAddrBytes(int index) {
+        return fileAddr_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public Builder setFileAddr(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileAddrIsMutable();
+        fileAddr_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public Builder addFileAddr(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureFileAddrIsMutable();
+        fileAddr_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public Builder addAllFileAddr(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureFileAddrIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, fileAddr_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public Builder clearFileAddr() {
+        fileAddr_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ignored if fileType!=FileContents
+       * </pre>
+       *
+       * <code>repeated string fileAddr = 4;</code>
+       */
+      public Builder addFileAddrBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureFileAddrIsMutable();
+        fileAddr_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.respFileAddr)
+    }
+
+    // @@protoc_insertion_point(class_scope:DDRCommProto.respFileAddr)
+    private static final DDRCommProto.BaseCmd.respFileAddr DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.respFileAddr();
+    }
+
+    public static DDRCommProto.BaseCmd.respFileAddr getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<respFileAddr>
+        PARSER = new com.google.protobuf.AbstractParser<respFileAddr>() {
+      @java.lang.Override
+      public respFileAddr parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new respFileAddr(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<respFileAddr> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<respFileAddr> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public DDRCommProto.BaseCmd.respFileAddr getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface reqStatusOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.reqStatus)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -14819,18 +20020,23 @@ public final class BaseCmd {
         getStatusMsgBytes();
   }
   /**
-   * Protobuf type {@code DDRCommProto.notifyStatus}
+   * <pre>
+   * flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+   * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.reqStatus}
    */
-  public  static final class notifyStatus extends
+  public  static final class reqStatus extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:DDRCommProto.notifyStatus)
-      notifyStatusOrBuilder {
+      // @@protoc_insertion_point(message_implements:DDRCommProto.reqStatus)
+      reqStatusOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use notifyStatus.newBuilder() to construct.
-    private notifyStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use reqStatus.newBuilder() to construct.
+    private reqStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private notifyStatus() {
+    private reqStatus() {
       statusMsg_ = "";
     }
 
@@ -14839,7 +20045,7 @@ public final class BaseCmd {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private notifyStatus(
+    private reqStatus(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -14885,15 +20091,15 @@ public final class BaseCmd {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyStatus_descriptor;
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqStatus_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyStatus_fieldAccessorTable
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqStatus_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              DDRCommProto.BaseCmd.notifyStatus.class, DDRCommProto.BaseCmd.notifyStatus.Builder.class);
+              DDRCommProto.BaseCmd.reqStatus.class, DDRCommProto.BaseCmd.reqStatus.Builder.class);
     }
 
     public static final int STATUSMSG_FIELD_NUMBER = 1;
@@ -14969,10 +20175,10 @@ public final class BaseCmd {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof DDRCommProto.BaseCmd.notifyStatus)) {
+      if (!(obj instanceof DDRCommProto.BaseCmd.reqStatus)) {
         return super.equals(obj);
       }
-      DDRCommProto.BaseCmd.notifyStatus other = (DDRCommProto.BaseCmd.notifyStatus) obj;
+      DDRCommProto.BaseCmd.reqStatus other = (DDRCommProto.BaseCmd.reqStatus) obj;
 
       boolean result = true;
       result = result && getStatusMsg()
@@ -14995,69 +20201,69 @@ public final class BaseCmd {
       return hash;
     }
 
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(byte[] data)
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseDelimitedFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqStatus parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseDelimitedFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyStatus parseFrom(
+    public static DDRCommProto.BaseCmd.reqStatus parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15070,7 +20276,7 @@ public final class BaseCmd {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(DDRCommProto.BaseCmd.notifyStatus prototype) {
+    public static Builder newBuilder(DDRCommProto.BaseCmd.reqStatus prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -15086,26 +20292,31 @@ public final class BaseCmd {
       return builder;
     }
     /**
-     * Protobuf type {@code DDRCommProto.notifyStatus}
+     * <pre>
+     * flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+     * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.reqStatus}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:DDRCommProto.notifyStatus)
-        DDRCommProto.BaseCmd.notifyStatusOrBuilder {
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.reqStatus)
+        DDRCommProto.BaseCmd.reqStatusOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyStatus_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqStatus_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyStatus_fieldAccessorTable
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqStatus_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                DDRCommProto.BaseCmd.notifyStatus.class, DDRCommProto.BaseCmd.notifyStatus.Builder.class);
+                DDRCommProto.BaseCmd.reqStatus.class, DDRCommProto.BaseCmd.reqStatus.Builder.class);
       }
 
-      // Construct using DDRCommProto.BaseCmd.notifyStatus.newBuilder()
+      // Construct using DDRCommProto.BaseCmd.reqStatus.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -15131,17 +20342,17 @@ public final class BaseCmd {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyStatus_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqStatus_descriptor;
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyStatus getDefaultInstanceForType() {
-        return DDRCommProto.BaseCmd.notifyStatus.getDefaultInstance();
+      public DDRCommProto.BaseCmd.reqStatus getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.reqStatus.getDefaultInstance();
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyStatus build() {
-        DDRCommProto.BaseCmd.notifyStatus result = buildPartial();
+      public DDRCommProto.BaseCmd.reqStatus build() {
+        DDRCommProto.BaseCmd.reqStatus result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15149,8 +20360,8 @@ public final class BaseCmd {
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyStatus buildPartial() {
-        DDRCommProto.BaseCmd.notifyStatus result = new DDRCommProto.BaseCmd.notifyStatus(this);
+      public DDRCommProto.BaseCmd.reqStatus buildPartial() {
+        DDRCommProto.BaseCmd.reqStatus result = new DDRCommProto.BaseCmd.reqStatus(this);
         result.statusMsg_ = statusMsg_;
         onBuilt();
         return result;
@@ -15190,16 +20401,16 @@ public final class BaseCmd {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof DDRCommProto.BaseCmd.notifyStatus) {
-          return mergeFrom((DDRCommProto.BaseCmd.notifyStatus)other);
+        if (other instanceof DDRCommProto.BaseCmd.reqStatus) {
+          return mergeFrom((DDRCommProto.BaseCmd.reqStatus)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(DDRCommProto.BaseCmd.notifyStatus other) {
-        if (other == DDRCommProto.BaseCmd.notifyStatus.getDefaultInstance()) return this;
+      public Builder mergeFrom(DDRCommProto.BaseCmd.reqStatus other) {
+        if (other == DDRCommProto.BaseCmd.reqStatus.getDefaultInstance()) return this;
         if (!other.getStatusMsg().isEmpty()) {
           statusMsg_ = other.statusMsg_;
           onChanged();
@@ -15219,11 +20430,11 @@ public final class BaseCmd {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        DDRCommProto.BaseCmd.notifyStatus parsedMessage = null;
+        DDRCommProto.BaseCmd.reqStatus parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (DDRCommProto.BaseCmd.notifyStatus) e.getUnfinishedMessage();
+          parsedMessage = (DDRCommProto.BaseCmd.reqStatus) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -15314,48 +20525,48 @@ public final class BaseCmd {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:DDRCommProto.notifyStatus)
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.reqStatus)
     }
 
-    // @@protoc_insertion_point(class_scope:DDRCommProto.notifyStatus)
-    private static final DDRCommProto.BaseCmd.notifyStatus DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:DDRCommProto.reqStatus)
+    private static final DDRCommProto.BaseCmd.reqStatus DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.notifyStatus();
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.reqStatus();
     }
 
-    public static DDRCommProto.BaseCmd.notifyStatus getDefaultInstance() {
+    public static DDRCommProto.BaseCmd.reqStatus getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<notifyStatus>
-        PARSER = new com.google.protobuf.AbstractParser<notifyStatus>() {
+    private static final com.google.protobuf.Parser<reqStatus>
+        PARSER = new com.google.protobuf.AbstractParser<reqStatus>() {
       @java.lang.Override
-      public notifyStatus parsePartialFrom(
+      public reqStatus parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new notifyStatus(input, extensionRegistry);
+        return new reqStatus(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<notifyStatus> parser() {
+    public static com.google.protobuf.Parser<reqStatus> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<notifyStatus> getParserForType() {
+    public com.google.protobuf.Parser<reqStatus> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public DDRCommProto.BaseCmd.notifyStatus getDefaultInstanceForType() {
+    public DDRCommProto.BaseCmd.reqStatus getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface notifyAlarmOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:DDRCommProto.notifyAlarm)
+  public interface reqAlarmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.reqAlarm)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -15369,18 +20580,23 @@ public final class BaseCmd {
         getAlarmMsgBytes();
   }
   /**
-   * Protobuf type {@code DDRCommProto.notifyAlarm}
+   * <pre>
+   * flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+   * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.reqAlarm}
    */
-  public  static final class notifyAlarm extends
+  public  static final class reqAlarm extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:DDRCommProto.notifyAlarm)
-      notifyAlarmOrBuilder {
+      // @@protoc_insertion_point(message_implements:DDRCommProto.reqAlarm)
+      reqAlarmOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use notifyAlarm.newBuilder() to construct.
-    private notifyAlarm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use reqAlarm.newBuilder() to construct.
+    private reqAlarm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private notifyAlarm() {
+    private reqAlarm() {
       alarmMsg_ = "";
     }
 
@@ -15389,7 +20605,7 @@ public final class BaseCmd {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private notifyAlarm(
+    private reqAlarm(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15435,15 +20651,15 @@ public final class BaseCmd {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyAlarm_descriptor;
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqAlarm_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyAlarm_fieldAccessorTable
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqAlarm_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              DDRCommProto.BaseCmd.notifyAlarm.class, DDRCommProto.BaseCmd.notifyAlarm.Builder.class);
+              DDRCommProto.BaseCmd.reqAlarm.class, DDRCommProto.BaseCmd.reqAlarm.Builder.class);
     }
 
     public static final int ALARMMSG_FIELD_NUMBER = 1;
@@ -15519,10 +20735,10 @@ public final class BaseCmd {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof DDRCommProto.BaseCmd.notifyAlarm)) {
+      if (!(obj instanceof DDRCommProto.BaseCmd.reqAlarm)) {
         return super.equals(obj);
       }
-      DDRCommProto.BaseCmd.notifyAlarm other = (DDRCommProto.BaseCmd.notifyAlarm) obj;
+      DDRCommProto.BaseCmd.reqAlarm other = (DDRCommProto.BaseCmd.reqAlarm) obj;
 
       boolean result = true;
       result = result && getAlarmMsg()
@@ -15545,69 +20761,69 @@ public final class BaseCmd {
       return hash;
     }
 
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(byte[] data)
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseDelimitedFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqAlarm parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseDelimitedFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyAlarm parseFrom(
+    public static DDRCommProto.BaseCmd.reqAlarm parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15620,7 +20836,7 @@ public final class BaseCmd {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(DDRCommProto.BaseCmd.notifyAlarm prototype) {
+    public static Builder newBuilder(DDRCommProto.BaseCmd.reqAlarm prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -15636,26 +20852,31 @@ public final class BaseCmd {
       return builder;
     }
     /**
-     * Protobuf type {@code DDRCommProto.notifyAlarm}
+     * <pre>
+     * flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+     * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.reqAlarm}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:DDRCommProto.notifyAlarm)
-        DDRCommProto.BaseCmd.notifyAlarmOrBuilder {
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.reqAlarm)
+        DDRCommProto.BaseCmd.reqAlarmOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyAlarm_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqAlarm_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyAlarm_fieldAccessorTable
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqAlarm_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                DDRCommProto.BaseCmd.notifyAlarm.class, DDRCommProto.BaseCmd.notifyAlarm.Builder.class);
+                DDRCommProto.BaseCmd.reqAlarm.class, DDRCommProto.BaseCmd.reqAlarm.Builder.class);
       }
 
-      // Construct using DDRCommProto.BaseCmd.notifyAlarm.newBuilder()
+      // Construct using DDRCommProto.BaseCmd.reqAlarm.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -15681,17 +20902,17 @@ public final class BaseCmd {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyAlarm_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqAlarm_descriptor;
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyAlarm getDefaultInstanceForType() {
-        return DDRCommProto.BaseCmd.notifyAlarm.getDefaultInstance();
+      public DDRCommProto.BaseCmd.reqAlarm getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.reqAlarm.getDefaultInstance();
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyAlarm build() {
-        DDRCommProto.BaseCmd.notifyAlarm result = buildPartial();
+      public DDRCommProto.BaseCmd.reqAlarm build() {
+        DDRCommProto.BaseCmd.reqAlarm result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15699,8 +20920,8 @@ public final class BaseCmd {
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyAlarm buildPartial() {
-        DDRCommProto.BaseCmd.notifyAlarm result = new DDRCommProto.BaseCmd.notifyAlarm(this);
+      public DDRCommProto.BaseCmd.reqAlarm buildPartial() {
+        DDRCommProto.BaseCmd.reqAlarm result = new DDRCommProto.BaseCmd.reqAlarm(this);
         result.alarmMsg_ = alarmMsg_;
         onBuilt();
         return result;
@@ -15740,16 +20961,16 @@ public final class BaseCmd {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof DDRCommProto.BaseCmd.notifyAlarm) {
-          return mergeFrom((DDRCommProto.BaseCmd.notifyAlarm)other);
+        if (other instanceof DDRCommProto.BaseCmd.reqAlarm) {
+          return mergeFrom((DDRCommProto.BaseCmd.reqAlarm)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(DDRCommProto.BaseCmd.notifyAlarm other) {
-        if (other == DDRCommProto.BaseCmd.notifyAlarm.getDefaultInstance()) return this;
+      public Builder mergeFrom(DDRCommProto.BaseCmd.reqAlarm other) {
+        if (other == DDRCommProto.BaseCmd.reqAlarm.getDefaultInstance()) return this;
         if (!other.getAlarmMsg().isEmpty()) {
           alarmMsg_ = other.alarmMsg_;
           onChanged();
@@ -15769,11 +20990,11 @@ public final class BaseCmd {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        DDRCommProto.BaseCmd.notifyAlarm parsedMessage = null;
+        DDRCommProto.BaseCmd.reqAlarm parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (DDRCommProto.BaseCmd.notifyAlarm) e.getUnfinishedMessage();
+          parsedMessage = (DDRCommProto.BaseCmd.reqAlarm) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -15864,48 +21085,48 @@ public final class BaseCmd {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:DDRCommProto.notifyAlarm)
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.reqAlarm)
     }
 
-    // @@protoc_insertion_point(class_scope:DDRCommProto.notifyAlarm)
-    private static final DDRCommProto.BaseCmd.notifyAlarm DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:DDRCommProto.reqAlarm)
+    private static final DDRCommProto.BaseCmd.reqAlarm DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.notifyAlarm();
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.reqAlarm();
     }
 
-    public static DDRCommProto.BaseCmd.notifyAlarm getDefaultInstance() {
+    public static DDRCommProto.BaseCmd.reqAlarm getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<notifyAlarm>
-        PARSER = new com.google.protobuf.AbstractParser<notifyAlarm>() {
+    private static final com.google.protobuf.Parser<reqAlarm>
+        PARSER = new com.google.protobuf.AbstractParser<reqAlarm>() {
       @java.lang.Override
-      public notifyAlarm parsePartialFrom(
+      public reqAlarm parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new notifyAlarm(input, extensionRegistry);
+        return new reqAlarm(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<notifyAlarm> parser() {
+    public static com.google.protobuf.Parser<reqAlarm> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<notifyAlarm> getParserForType() {
+    public com.google.protobuf.Parser<reqAlarm> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public DDRCommProto.BaseCmd.notifyAlarm getDefaultInstanceForType() {
+    public DDRCommProto.BaseCmd.reqAlarm getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface notifyTextChatOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:DDRCommProto.notifyTextChat)
+  public interface reqTextChatOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DDRCommProto.reqTextChat)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -15919,18 +21140,23 @@ public final class BaseCmd {
         getChatTextBytes();
   }
   /**
-   * Protobuf type {@code DDRCommProto.notifyTextChat}
+   * <pre>
+   * flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M
+   * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+   * </pre>
+   *
+   * Protobuf type {@code DDRCommProto.reqTextChat}
    */
-  public  static final class notifyTextChat extends
+  public  static final class reqTextChat extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:DDRCommProto.notifyTextChat)
-      notifyTextChatOrBuilder {
+      // @@protoc_insertion_point(message_implements:DDRCommProto.reqTextChat)
+      reqTextChatOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use notifyTextChat.newBuilder() to construct.
-    private notifyTextChat(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use reqTextChat.newBuilder() to construct.
+    private reqTextChat(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private notifyTextChat() {
+    private reqTextChat() {
       chatText_ = "";
     }
 
@@ -15939,7 +21165,7 @@ public final class BaseCmd {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private notifyTextChat(
+    private reqTextChat(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15985,15 +21211,15 @@ public final class BaseCmd {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyTextChat_descriptor;
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTextChat_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyTextChat_fieldAccessorTable
+      return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTextChat_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              DDRCommProto.BaseCmd.notifyTextChat.class, DDRCommProto.BaseCmd.notifyTextChat.Builder.class);
+              DDRCommProto.BaseCmd.reqTextChat.class, DDRCommProto.BaseCmd.reqTextChat.Builder.class);
     }
 
     public static final int CHATTEXT_FIELD_NUMBER = 1;
@@ -16069,10 +21295,10 @@ public final class BaseCmd {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof DDRCommProto.BaseCmd.notifyTextChat)) {
+      if (!(obj instanceof DDRCommProto.BaseCmd.reqTextChat)) {
         return super.equals(obj);
       }
-      DDRCommProto.BaseCmd.notifyTextChat other = (DDRCommProto.BaseCmd.notifyTextChat) obj;
+      DDRCommProto.BaseCmd.reqTextChat other = (DDRCommProto.BaseCmd.reqTextChat) obj;
 
       boolean result = true;
       result = result && getChatText()
@@ -16095,69 +21321,69 @@ public final class BaseCmd {
       return hash;
     }
 
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(byte[] data)
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseDelimitedFrom(java.io.InputStream input)
+    public static DDRCommProto.BaseCmd.reqTextChat parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseDelimitedFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static DDRCommProto.BaseCmd.notifyTextChat parseFrom(
+    public static DDRCommProto.BaseCmd.reqTextChat parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -16170,7 +21396,7 @@ public final class BaseCmd {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(DDRCommProto.BaseCmd.notifyTextChat prototype) {
+    public static Builder newBuilder(DDRCommProto.BaseCmd.reqTextChat prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -16186,26 +21412,31 @@ public final class BaseCmd {
       return builder;
     }
     /**
-     * Protobuf type {@code DDRCommProto.notifyTextChat}
+     * <pre>
+     * flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M
+     * eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+     * </pre>
+     *
+     * Protobuf type {@code DDRCommProto.reqTextChat}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:DDRCommProto.notifyTextChat)
-        DDRCommProto.BaseCmd.notifyTextChatOrBuilder {
+        // @@protoc_insertion_point(builder_implements:DDRCommProto.reqTextChat)
+        DDRCommProto.BaseCmd.reqTextChatOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyTextChat_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTextChat_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyTextChat_fieldAccessorTable
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTextChat_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                DDRCommProto.BaseCmd.notifyTextChat.class, DDRCommProto.BaseCmd.notifyTextChat.Builder.class);
+                DDRCommProto.BaseCmd.reqTextChat.class, DDRCommProto.BaseCmd.reqTextChat.Builder.class);
       }
 
-      // Construct using DDRCommProto.BaseCmd.notifyTextChat.newBuilder()
+      // Construct using DDRCommProto.BaseCmd.reqTextChat.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -16231,17 +21462,17 @@ public final class BaseCmd {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_notifyTextChat_descriptor;
+        return DDRCommProto.BaseCmd.internal_static_DDRCommProto_reqTextChat_descriptor;
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyTextChat getDefaultInstanceForType() {
-        return DDRCommProto.BaseCmd.notifyTextChat.getDefaultInstance();
+      public DDRCommProto.BaseCmd.reqTextChat getDefaultInstanceForType() {
+        return DDRCommProto.BaseCmd.reqTextChat.getDefaultInstance();
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyTextChat build() {
-        DDRCommProto.BaseCmd.notifyTextChat result = buildPartial();
+      public DDRCommProto.BaseCmd.reqTextChat build() {
+        DDRCommProto.BaseCmd.reqTextChat result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -16249,8 +21480,8 @@ public final class BaseCmd {
       }
 
       @java.lang.Override
-      public DDRCommProto.BaseCmd.notifyTextChat buildPartial() {
-        DDRCommProto.BaseCmd.notifyTextChat result = new DDRCommProto.BaseCmd.notifyTextChat(this);
+      public DDRCommProto.BaseCmd.reqTextChat buildPartial() {
+        DDRCommProto.BaseCmd.reqTextChat result = new DDRCommProto.BaseCmd.reqTextChat(this);
         result.chatText_ = chatText_;
         onBuilt();
         return result;
@@ -16290,16 +21521,16 @@ public final class BaseCmd {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof DDRCommProto.BaseCmd.notifyTextChat) {
-          return mergeFrom((DDRCommProto.BaseCmd.notifyTextChat)other);
+        if (other instanceof DDRCommProto.BaseCmd.reqTextChat) {
+          return mergeFrom((DDRCommProto.BaseCmd.reqTextChat)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(DDRCommProto.BaseCmd.notifyTextChat other) {
-        if (other == DDRCommProto.BaseCmd.notifyTextChat.getDefaultInstance()) return this;
+      public Builder mergeFrom(DDRCommProto.BaseCmd.reqTextChat other) {
+        if (other == DDRCommProto.BaseCmd.reqTextChat.getDefaultInstance()) return this;
         if (!other.getChatText().isEmpty()) {
           chatText_ = other.chatText_;
           onChanged();
@@ -16319,11 +21550,11 @@ public final class BaseCmd {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        DDRCommProto.BaseCmd.notifyTextChat parsedMessage = null;
+        DDRCommProto.BaseCmd.reqTextChat parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (DDRCommProto.BaseCmd.notifyTextChat) e.getUnfinishedMessage();
+          parsedMessage = (DDRCommProto.BaseCmd.reqTextChat) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -16414,41 +21645,41 @@ public final class BaseCmd {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:DDRCommProto.notifyTextChat)
+      // @@protoc_insertion_point(builder_scope:DDRCommProto.reqTextChat)
     }
 
-    // @@protoc_insertion_point(class_scope:DDRCommProto.notifyTextChat)
-    private static final DDRCommProto.BaseCmd.notifyTextChat DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:DDRCommProto.reqTextChat)
+    private static final DDRCommProto.BaseCmd.reqTextChat DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.notifyTextChat();
+      DEFAULT_INSTANCE = new DDRCommProto.BaseCmd.reqTextChat();
     }
 
-    public static DDRCommProto.BaseCmd.notifyTextChat getDefaultInstance() {
+    public static DDRCommProto.BaseCmd.reqTextChat getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<notifyTextChat>
-        PARSER = new com.google.protobuf.AbstractParser<notifyTextChat>() {
+    private static final com.google.protobuf.Parser<reqTextChat>
+        PARSER = new com.google.protobuf.AbstractParser<reqTextChat>() {
       @java.lang.Override
-      public notifyTextChat parsePartialFrom(
+      public reqTextChat parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new notifyTextChat(input, extensionRegistry);
+        return new reqTextChat(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<notifyTextChat> parser() {
+    public static com.google.protobuf.Parser<reqTextChat> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<notifyTextChat> getParserForType() {
+    public com.google.protobuf.Parser<reqTextChat> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public DDRCommProto.BaseCmd.notifyTextChat getDefaultInstanceForType() {
+    public DDRCommProto.BaseCmd.reqTextChat getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -16469,6 +21700,11 @@ public final class BaseCmd {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_DDRCommProto_bcLSAddr_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DDRCommProto_bcLSAddr_ServerInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_DDRCommProto_reqLogin_descriptor;
   private static final 
@@ -16515,6 +21751,11 @@ public final class BaseCmd {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_DDRCommProto_respTalk_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DDRCommProto_reqTalkHB_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DDRCommProto_reqTalkHB_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_DDRCommProto_reqCmd_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -16535,20 +21776,30 @@ public final class BaseCmd {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_DDRCommProto_respFile_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DDRCommProto_notifyStatus_descriptor;
+    internal_static_DDRCommProto_reqFileAddr_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_DDRCommProto_notifyStatus_fieldAccessorTable;
+      internal_static_DDRCommProto_reqFileAddr_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DDRCommProto_notifyAlarm_descriptor;
+    internal_static_DDRCommProto_respFileAddr_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_DDRCommProto_notifyAlarm_fieldAccessorTable;
+      internal_static_DDRCommProto_respFileAddr_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_DDRCommProto_notifyTextChat_descriptor;
+    internal_static_DDRCommProto_reqStatus_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_DDRCommProto_notifyTextChat_fieldAccessorTable;
+      internal_static_DDRCommProto_reqStatus_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DDRCommProto_reqAlarm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DDRCommProto_reqAlarm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DDRCommProto_reqTextChat_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DDRCommProto_reqTextChat_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -16558,63 +21809,90 @@ public final class BaseCmd {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rBaseCmd.proto\022\014DDRCommProto\"\261\002\n\014Common" +
+      "\n\rBaseCmd.proto\022\014DDRCommProto\"\344\004\n\014Common" +
       "Header\022\020\n\010bodyType\030\001 \001(\t\022:\n\rflowDirectio" +
       "n\030\002 \003(\0162#.DDRCommProto.CommonHeader.eFlo" +
-      "wDir\0226\n\010destType\030\003 \003(\0162$.DDRCommProto.Co" +
-      "mmonHeader.eDestType\022\020\n\010destInfo\030\004 \003(\t\"V" +
-      "\n\010eFlowDir\022\010\n\004RS2M\020\000\022\t\n\005RS2RR\020\001\022\t\n\005RR2RS" +
-      "\020\002\022\010\n\004LS2C\020\003\022\010\n\004C2LS\020\004\022\n\n\006LS2LSM\020\005\022\n\n\006LS" +
-      "M2LS\020\006\"1\n\teDestType\022\n\n\006NoDest\020\000\022\013\n\007LSMNa" +
-      "me\020\001\022\013\n\007Routing\020\002\"\035\n\theartBeat\022\020\n\010whatev" +
-      "er\030\001 \001(\t\"3\n\010bcLSAddr\022\014\n\004name\030\001 \001(\t\022\013\n\003ip" +
-      "s\030\002 \003(\t\022\014\n\004port\030\003 \001(\005\"\304\002\n\010reqLogin\022-\n\004ty" +
-      "pe\030\001 \001(\0162\037.DDRCommProto.reqLogin.eCltTyp" +
-      "e\022\020\n\010username\030\002 \001(\t\022\017\n\007robotID\030\003 \001(\t\022\020\n\010" +
-      "robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 \001(\005\022\013\n\003UID\030\006" +
-      " \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%.DDRCommProto" +
-      ".reqLogin.msgAVStreamReq\032F\n\016msgAVStreamR" +
-      "eq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName\030\002 \001(\t\022\024\n\014ba" +
-      "ndwidthReq\030\003 \001(\005\"2\n\010eCltType\022\n\n\006client\020\000" +
-      "\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002\"\250\002\n\trespLog" +
-      "in\0226\n\007retcode\030\001 \001(\0162%.DDRCommProto.respL" +
-      "ogin.eLoginRetCode\0222\n\010yourRole\030\002 \001(\0162 .D" +
-      "DRCommProto.respLogin.eCltType\022\013\n\003UID\030\003 " +
-      "\001(\005\"n\n\reLoginRetCode\022\013\n\007success\020\000\022\017\n\013ser" +
-      "ver_busy\020\001\022\030\n\024server_limit_reached\020\002\022\r\n\t" +
-      "UID_error\020\003\022\026\n\022incorrect_password\020\004\"2\n\010e" +
-      "CltType\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007" +
-      "\n\003LSM\020\002\"s\n\024notifyTerminalAccess\022\027\n\017bRRCo" +
-      "nnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(\005\022\021\n\tnMonito" +
-      "rs\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010nameLSMs\030\005" +
-      " \003(\t\"\224\001\n\017notifySerAccess\022\020\n\010nClients\030\001 \001" +
-      "(\005\022\020\n\010cTopOpLv\030\002 \001(\005\022\022\n\ncTopOpTime\030\003 \001(\003" +
-      "\022\021\n\tnMonitors\030\004 \001(\005\022\020\n\010mTopOpLv\030\005 \001(\005\022\022\n" +
-      "\nmTopOpTime\030\006 \001(\005\022\020\n\010namesLSM\030\007 \003(\t\"\327\002\n\016" +
-      "notifyAVStream\022E\n\017reservedChannel\030\001 \001(\0132" +
-      ",.DDRCommProto.notifyAVStream.fullChanne" +
-      "lInfo\022J\n\024robotMonitorChannels\030\002 \003(\0132,.DD" +
-      "RCommProto.notifyAVStream.fullChannelInf" +
-      "o\032\261\001\n\017fullChannelInfo\022\017\n\007devType\030\001 \001(\005\022\020" +
-      "\n\010dataType\030\002 \001(\005\022\026\n\016localResAccStr\030\003 \001(\t" +
-      "\022\032\n\022channelDescription\030\004 \001(\t\022\r\n\005bwReq\030\005 " +
-      "\001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nremotePort\030\007 \001(" +
-      "\005\022\022\n\nremotePass\030\010 \001(\t\"\241\001\n\007reqTalk\0225\n\ncal" +
-      "lerType\030\001 \001(\0162!.DDRCommProto.reqTalk.eCa" +
-      "llerType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003 \001(\005\022\016\n\006av" +
-      "Type\030\004 \001(\005\"5\n\013eCallerType\022\n\n\006client\020\000\022\013\n" +
-      "\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\251\001\n\010respTalk\022:" +
-      "\n\014receiverType\030\001 \001(\0162$.DDRCommProto.resp" +
-      "Talk.eReceiverType\022\013\n\003id1\030\002 \001(\005\022\013\n\003id2\030\003" +
-      " \001(\005\022\016\n\006avType\030\004 \001(\005\"7\n\reReceiverType\022\n\n" +
-      "\006client\020\000\022\013\n\007monitor\020\001\022\r\n\trobot_LSM\020\002\"\'\n" +
-      "\006reqCmd\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")" +
-      "\n\007respCmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(" +
-      "\t\"\033\n\007reqFile\022\020\n\010fileName\030\001 \003(\t\".\n\010respFi" +
-      "le\022\020\n\010fileName\030\001 \003(\t\022\020\n\010fileAddr\030\002 \003(\t\"!" +
-      "\n\014notifyStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\037\n\013not" +
-      "ifyAlarm\022\020\n\010alarmMsg\030\001 \001(\t\"\"\n\016notifyText" +
-      "Chat\022\020\n\010chatText\030\001 \001(\tb\006proto3"
+      "wDir\022\021\n\tbOriginal\030\003 \001(\005\0229\n\007srcCond\030\004 \001(\016" +
+      "2(.DDRCommProto.CommonHeader.eSrcConditi" +
+      "on\022?\n\013forwardType\030\005 \001(\0162*.DDRCommProto.C" +
+      "ommonHeader.eForwardingType\0227\n\007recType\030\006" +
+      " \001(\0162&.DDRCommProto.CommonHeader.eSrcRec" +
+      "Type\022\025\n\rprevRouteAddr\030\007 \003(\t\"\200\001\n\010eFlowDir" +
+      "\022\016\n\nUNKNOWN2RS\020\000\022\010\n\004RS2M\020\001\022\010\n\004M2RS\020\002\022\t\n\005" +
+      "RS2RR\020\003\022\t\n\005RR2RS\020\004\022\016\n\nUNKNOWN2LS\020\005\022\010\n\004LS" +
+      "2C\020\006\022\010\n\004C2LS\020\007\022\n\n\006LS2LSM\020\010\022\n\n\006LSM2LS\020\t\"#" +
+      "\n\reSrcCondition\022\n\n\006NoCond\020\000\022\006\n\002Op\020\001\"Y\n\017e" +
+      "ForwardingType\022\020\n\014NoForwarding\020\000\022\n\n\006LSMA" +
+      "ll\020\001\022\r\n\tCltMonAll\020\002\022\010\n\004ToOp\020\003\022\017\n\013Routing" +
+      "Back\020\004\"$\n\013eSrcRecType\022\t\n\005NoRec\020\000\022\n\n\006RecS" +
+      "rc\020\001\"\035\n\theartBeat\022\020\n\010whatever\030\001 \001(\t\"t\n\010b" +
+      "cLSAddr\0221\n\006LSInfo\030\001 \001(\0132!.DDRCommProto.b" +
+      "cLSAddr.ServerInfo\0325\n\nServerInfo\022\014\n\004name" +
+      "\030\001 \001(\t\022\013\n\003ips\030\002 \003(\t\022\014\n\004port\030\003 \001(\005\"\304\002\n\010re" +
+      "qLogin\022-\n\004type\030\001 \001(\0162\037.DDRCommProto.reqL" +
+      "ogin.eCltType\022\020\n\010username\030\002 \001(\t\022\017\n\007robot" +
+      "ID\030\003 \001(\t\022\020\n\010robotPWD\030\004 \001(\t\022\017\n\007cltOpLv\030\005 " +
+      "\001(\005\022\013\n\003UID\030\006 \001(\005\022:\n\013avStreamReq\030\007 \003(\0132%." +
+      "DDRCommProto.reqLogin.msgAVStreamReq\032F\n\016" +
+      "msgAVStreamReq\022\016\n\006avType\030\001 \001(\005\022\016\n\006chName" +
+      "\030\002 \001(\t\022\024\n\014bandwidthReq\030\003 \001(\005\"2\n\010eCltType" +
+      "\022\n\n\006client\020\000\022\021\n\randroidClient\020\001\022\007\n\003LSM\020\002" +
+      "\"\250\002\n\trespLogin\0226\n\007retcode\030\001 \001(\0162%.DDRCom" +
+      "mProto.respLogin.eLoginRetCode\0222\n\010yourRo" +
+      "le\030\002 \001(\0162 .DDRCommProto.respLogin.eCltTy" +
+      "pe\022\013\n\003UID\030\003 \001(\005\"n\n\reLoginRetCode\022\013\n\007succ" +
+      "ess\020\000\022\017\n\013server_busy\020\001\022\030\n\024server_limit_r" +
+      "eached\020\002\022\r\n\tUID_error\020\003\022\026\n\022incorrect_pas" +
+      "sword\020\004\"2\n\010eCltType\022\n\n\006client\020\000\022\021\n\randro" +
+      "idClient\020\001\022\007\n\003LSM\020\002\"s\n\024notifyTerminalAcc" +
+      "ess\022\027\n\017bRRConnected2RS\030\001 \001(\005\022\013\n\003bOp\030\002 \001(" +
+      "\005\022\021\n\tnMonitors\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020" +
+      "\n\010nameLSMs\030\005 \003(\t\"\224\001\n\017notifySerAccess\022\021\n\t" +
+      "nMonitors\030\001 \001(\005\022\020\n\010mTopOpLv\030\002 \001(\005\022\022\n\nmTo" +
+      "pOpTime\030\003 \001(\005\022\020\n\010nClients\030\004 \001(\005\022\020\n\010cTopO" +
+      "pLv\030\005 \001(\005\022\022\n\ncTopOpTime\030\006 \001(\003\022\020\n\010namesLS" +
+      "M\030\007 \003(\t\"\327\002\n\016notifyAVStream\022E\n\017reservedCh" +
+      "annel\030\001 \001(\0132,.DDRCommProto.notifyAVStrea" +
+      "m.fullChannelInfo\022J\n\024robotMonitorChannel" +
+      "s\030\002 \003(\0132,.DDRCommProto.notifyAVStream.fu" +
+      "llChannelInfo\032\261\001\n\017fullChannelInfo\022\017\n\007dev" +
+      "Type\030\001 \001(\005\022\020\n\010dataType\030\002 \001(\005\022\026\n\016localRes" +
+      "AccStr\030\003 \001(\t\022\032\n\022channelDescription\030\004 \001(\t" +
+      "\022\r\n\005bwReq\030\005 \001(\005\022\020\n\010remoteIP\030\006 \001(\003\022\022\n\nrem" +
+      "otePort\030\007 \001(\005\022\022\n\nremotePass\030\010 \001(\t\"\256\001\n\007re" +
+      "qTalk\0225\n\ncallerType\030\001 \001(\0162!.DDRCommProto" +
+      ".reqTalk.eCallerType\022\016\n\006talkID\030\002 \001(\005\022\016\n\006" +
+      "avType\030\003 \001(\005\022\025\n\rlocalTalkAddr\030\004 \003(\t\"5\n\013e" +
+      "CallerType\022\n\n\006client\020\000\022\013\n\007monitor\020\001\022\r\n\tr" +
+      "obot_LSM\020\002\"\237\001\n\010respTalk\022:\n\014receiverType\030" +
+      "\001 \001(\0162$.DDRCommProto.respTalk.eReceiverT" +
+      "ype\022\016\n\006talkID\030\002 \001(\005\022\016\n\006avType\030\003 \001(\005\"7\n\re" +
+      "ReceiverType\022\n\n\006client\020\000\022\013\n\007monitor\020\001\022\r\n" +
+      "\trobot_LSM\020\002\"9\n\treqTalkHB\022\024\n\014callerTalkI" +
+      "D\030\001 \001(\005\022\026\n\016receiverTalkID\030\002 \001(\005\"\'\n\006reqCm" +
+      "d\022\r\n\005cmdID\030\001 \001(\003\022\016\n\006cmdMsg\030\002 \001(\t\")\n\007resp" +
+      "Cmd\022\r\n\005cmdID\030\001 \001(\003\022\017\n\007respMsg\030\002 \001(\t\"\243\001\n\007" +
+      "reqFile\022\022\n\ntarLSMName\030\001 \001(\t\0222\n\010fileType\030" +
+      "\002 \001(\0162 .DDRCommProto.reqFile.eFileTypes\022" +
+      "\021\n\tfileNames\030\003 \003(\t\"=\n\neFileTypes\022\020\n\014File" +
+      "Contents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020" +
+      "\002\"\273\001\n\010respFile\022\022\n\ntarLSMName\030\001 \001(\t\0223\n\010fi" +
+      "leType\030\002 \001(\0162!.DDRCommProto.respFile.eFi" +
+      "leTypes\022\021\n\tfileNames\030\003 \003(\t\022\024\n\014fileConten" +
+      "ts\030\004 \003(\t\"=\n\neFileTypes\022\020\n\014FileContents\020\000" +
+      "\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020\002\"\253\001\n\013reqF" +
+      "ileAddr\022\022\n\ntarLSMName\030\001 \001(\t\0226\n\010fileType\030" +
+      "\002 \001(\0162$.DDRCommProto.reqFileAddr.eFileTy" +
+      "pes\022\021\n\tfileNames\030\003 \003(\t\"=\n\neFileTypes\022\020\n\014" +
+      "FileContents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFl" +
+      "ist\020\002\"\277\001\n\014respFileAddr\022\022\n\ntarLSMName\030\001 \001" +
+      "(\t\0227\n\010fileType\030\002 \001(\0162%.DDRCommProto.resp" +
+      "FileAddr.eFileTypes\022\021\n\tfileNames\030\003 \003(\t\022\020" +
+      "\n\010fileAddr\030\004 \003(\t\"=\n\neFileTypes\022\020\n\014FileCo" +
+      "ntents\020\000\022\014\n\010FileList\020\001\022\017\n\013FolderFlist\020\002\"" +
+      "\036\n\treqStatus\022\021\n\tstatusMsg\030\001 \001(\t\"\034\n\010reqAl" +
+      "arm\022\020\n\010alarmMsg\030\001 \001(\t\"\037\n\013reqTextChat\022\020\n\010" +
+      "chatText\030\001 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16633,7 +21911,7 @@ public final class BaseCmd {
     internal_static_DDRCommProto_CommonHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_CommonHeader_descriptor,
-        new java.lang.String[] { "BodyType", "FlowDirection", "DestType", "DestInfo", });
+        new java.lang.String[] { "BodyType", "FlowDirection", "BOriginal", "SrcCond", "ForwardType", "RecType", "PrevRouteAddr", });
     internal_static_DDRCommProto_heartBeat_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_DDRCommProto_heartBeat_fieldAccessorTable = new
@@ -16645,6 +21923,12 @@ public final class BaseCmd {
     internal_static_DDRCommProto_bcLSAddr_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_bcLSAddr_descriptor,
+        new java.lang.String[] { "LSInfo", });
+    internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor =
+      internal_static_DDRCommProto_bcLSAddr_descriptor.getNestedTypes().get(0);
+    internal_static_DDRCommProto_bcLSAddr_ServerInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_bcLSAddr_ServerInfo_descriptor,
         new java.lang.String[] { "Name", "Ips", "Port", });
     internal_static_DDRCommProto_reqLogin_descriptor =
       getDescriptor().getMessageTypes().get(3);
@@ -16675,7 +21959,7 @@ public final class BaseCmd {
     internal_static_DDRCommProto_notifySerAccess_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_notifySerAccess_descriptor,
-        new java.lang.String[] { "NClients", "CTopOpLv", "CTopOpTime", "NMonitors", "MTopOpLv", "MTopOpTime", "NamesLSM", });
+        new java.lang.String[] { "NMonitors", "MTopOpLv", "MTopOpTime", "NClients", "CTopOpLv", "CTopOpTime", "NamesLSM", });
     internal_static_DDRCommProto_notifyAVStream_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_DDRCommProto_notifyAVStream_fieldAccessorTable = new
@@ -16693,54 +21977,72 @@ public final class BaseCmd {
     internal_static_DDRCommProto_reqTalk_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqTalk_descriptor,
-        new java.lang.String[] { "CallerType", "Id1", "Id2", "AvType", });
+        new java.lang.String[] { "CallerType", "TalkID", "AvType", "LocalTalkAddr", });
     internal_static_DDRCommProto_respTalk_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_DDRCommProto_respTalk_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respTalk_descriptor,
-        new java.lang.String[] { "ReceiverType", "Id1", "Id2", "AvType", });
-    internal_static_DDRCommProto_reqCmd_descriptor =
+        new java.lang.String[] { "ReceiverType", "TalkID", "AvType", });
+    internal_static_DDRCommProto_reqTalkHB_descriptor =
       getDescriptor().getMessageTypes().get(10);
+    internal_static_DDRCommProto_reqTalkHB_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_reqTalkHB_descriptor,
+        new java.lang.String[] { "CallerTalkID", "ReceiverTalkID", });
+    internal_static_DDRCommProto_reqCmd_descriptor =
+      getDescriptor().getMessageTypes().get(11);
     internal_static_DDRCommProto_reqCmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqCmd_descriptor,
         new java.lang.String[] { "CmdID", "CmdMsg", });
     internal_static_DDRCommProto_respCmd_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_DDRCommProto_respCmd_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respCmd_descriptor,
         new java.lang.String[] { "CmdID", "RespMsg", });
     internal_static_DDRCommProto_reqFile_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_DDRCommProto_reqFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_reqFile_descriptor,
-        new java.lang.String[] { "FileName", });
+        new java.lang.String[] { "TarLSMName", "FileType", "FileNames", });
     internal_static_DDRCommProto_respFile_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_DDRCommProto_respFile_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DDRCommProto_respFile_descriptor,
-        new java.lang.String[] { "FileName", "FileAddr", });
-    internal_static_DDRCommProto_notifyStatus_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_DDRCommProto_notifyStatus_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_DDRCommProto_notifyStatus_descriptor,
-        new java.lang.String[] { "StatusMsg", });
-    internal_static_DDRCommProto_notifyAlarm_descriptor =
+        new java.lang.String[] { "TarLSMName", "FileType", "FileNames", "FileContents", });
+    internal_static_DDRCommProto_reqFileAddr_descriptor =
       getDescriptor().getMessageTypes().get(15);
-    internal_static_DDRCommProto_notifyAlarm_fieldAccessorTable = new
+    internal_static_DDRCommProto_reqFileAddr_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_DDRCommProto_notifyAlarm_descriptor,
-        new java.lang.String[] { "AlarmMsg", });
-    internal_static_DDRCommProto_notifyTextChat_descriptor =
+        internal_static_DDRCommProto_reqFileAddr_descriptor,
+        new java.lang.String[] { "TarLSMName", "FileType", "FileNames", });
+    internal_static_DDRCommProto_respFileAddr_descriptor =
       getDescriptor().getMessageTypes().get(16);
-    internal_static_DDRCommProto_notifyTextChat_fieldAccessorTable = new
+    internal_static_DDRCommProto_respFileAddr_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_DDRCommProto_notifyTextChat_descriptor,
+        internal_static_DDRCommProto_respFileAddr_descriptor,
+        new java.lang.String[] { "TarLSMName", "FileType", "FileNames", "FileAddr", });
+    internal_static_DDRCommProto_reqStatus_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_DDRCommProto_reqStatus_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_reqStatus_descriptor,
+        new java.lang.String[] { "StatusMsg", });
+    internal_static_DDRCommProto_reqAlarm_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_DDRCommProto_reqAlarm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_reqAlarm_descriptor,
+        new java.lang.String[] { "AlarmMsg", });
+    internal_static_DDRCommProto_reqTextChat_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_DDRCommProto_reqTextChat_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DDRCommProto_reqTextChat_descriptor,
         new java.lang.String[] { "ChatText", });
   }
 

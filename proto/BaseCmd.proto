@@ -10,45 +10,91 @@ package DDRCommProto;
 
 message CommonHeader
 {
+	// type of message body, e.g., "reqLogin"
 	string bodyType = 1;
+	
+	// flow direction of the immediate transfer
 	enum eFlowDir {
-		RS2M = 0;
-		RS2RR = 1;
-		RR2RS = 2;
-		LS2C = 3;
-		C2LS = 4;
-		LS2LSM = 5;
-		LSM2LS = 6;
+		UNKNOWN2RS = 0;
+		RS2M = 1;
+		M2RS = 2;
+		RS2RR = 3;
+		RR2RS = 4;
+		UNKNOWN2LS = 5;
+		LS2C = 6;
+		C2LS = 7;
+		LS2LSM = 8;
+		LSM2LS = 9;
 	}
+	// repeated here is to indicate its validity (one and only one flowDirection)
 	repeated eFlowDir flowDirection = 2;
-	
-	enum eDestType {
-		NoDest = 0; // simple notification, nothing to be forwarded
-		LSMName = 1; // this message will be forwarded to LSM
-		Routing = 2; // this message will be forwarded along the previous routes
+		
+	// If bOriginal==1, it is a message from its source (not forwarded).
+	int32 bOriginal = 3;
+	enum eSrcCondition {
+		NoCond = 0;
+		Op = 1;
 	}
-	repeated eDestType destType = 3;
+	// if (srcCond==Op) && (bOriginal==1) && (immediate source is not an Op. client or Op.
+	// monitor), discard this whole frame. Otherwise okay to process.
+	eSrcCondition srcCond = 4;	
 	
-	// ignored for NoDest; a single string of target LSM name for LSMName; array of routing IP:Port strings (FILO) for Routing
-	repeated string destInfo = 4;
+	// NoForwarding: No direct forwarding. Need to decrypt and parse the message bodies. Typical
+	//               use is in "notify*".
+	// LSMAll:       For RS, forward the message body to RR; for LS, forward the message body
+	//               to all connected LSMs. For an LSM, respond if the message body asks for
+	//               response of its functionality (assuming no conflicts among different LSMs).
+	//               Typical use is in "reqCmd".
+	// CltMonAll:    For RS, forward the message body to all connected monitors; for LS, forward
+	//               the message body to all connected clients, and RS (if connected). Typical
+	//               use is in "reqStatus", "reqAlarm", and "reqTextChat".
+	// ToOp:         For RS, forward the message body to the Op. monitor (if so); for LS, forward
+	//               the message body to the Op. client if one connected client is Op., otherwise
+	//               to the RS. Typical use is in "reqTalk" from robot_LSM.
+	// RoutingBack:  In this case, field "prevRouteAddr" should NOT be empty. The last element in
+	//               that field will be the target address (IP:port string) to forward messages,
+	//               and that last element will be removed in the new CommonHeader sent along the 
+	//               the message body. Typical use is in "respCmd" and "respTalk".
+	enum eForwardingType {
+		NoForwarding = 0; // simple notification, nothing to be forwarded
+		LSMAll = 1; // message body will finally be forwarded to all LSMs
+		CltMonAll = 2; // message body will finally be forwarded to all clients/monitors
+		ToOp = 3; // message body will finally be forwarded to Op. (client/monitor)
+		RoutingBack = 4; // this message will be forwarded along the previous routes
+	}
+	eForwardingType forwardType = 5;
+	
+	enum eSrcRecType {
+		NoRec = 0; // routing info not recorded
+		RecSrc = 1; // IMMEDIATE source will be appended to the previous routes in form like “192.168.1.1:234”
+	}
+	eSrcRecType recType = 6;
+	repeated string prevRouteAddr = 7; // array of previous routes
 }
 
 // +++++++++++++++++++ Common message header +++++++++++++++++++ //
 
 // ------------------- Common message bodies ------------------- //
 
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message heartBeat
 {
 	string whatever = 1;
 }
 
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message bcLSAddr
 {
-	string name = 1;
-	repeated string ips = 2;
-	int32 port = 3;
+	message ServerInfo {
+		string name = 1;
+		repeated string ips = 2;
+		int32 port = 3;
+	}
+	ServerInfo LSInfo = 1;
 }
 
+// flowDirection = UNKNOWN2RS or UNKNOWN2LS
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message reqLogin
 {
 	enum eCltType {
@@ -70,6 +116,8 @@ message reqLogin
 	repeated msgAVStreamReq avStreamReq = 7;
 }
 
+// flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message respLogin
 {
 	enum eLoginRetCode {
@@ -89,6 +137,8 @@ message respLogin
 	int32 UID = 3;
 }
 
+// flowDirection = RS2M or LS2C
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message notifyTerminalAccess
 {
 	int32 bRRConnected2RS = 1;
@@ -98,17 +148,23 @@ message notifyTerminalAccess
 	repeated string nameLSMs = 5;
 }
 
+// flowDirection = RS2RR or RR2RS
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message notifySerAccess
 {
-	int32 nClients = 1;
-	int32 cTopOpLv = 2; // op. level of the top client
-	int64 cTopOpTime = 3; // connection time of the top client
-	int32 nMonitors = 4;
-	int32 mTopOpLv = 5; // op. level of the top monitor
-	int32 mTopOpTime = 6; // connection time of the top monitor
+	// field 1~3 for RS2RR
+	int32 nMonitors = 1;
+	int32 mTopOpLv = 2; // op. level of the top monitor
+	int32 mTopOpTime = 3; // connection time of the top monitor
+	// field 4~7 for RR2RS
+	int32 nClients = 4;
+	int32 cTopOpLv = 5; // op. level of the top client
+	int64 cTopOpTime = 6; // connection time of the top client
 	repeated string namesLSM = 7;
 }
 
+// flowDirection = RS2M or RS2RR or LS2C or LS2LSM
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message notifyAVStream
 {
 	message fullChannelInfo {
@@ -125,6 +181,15 @@ message notifyAVStream
 	repeated fullChannelInfo robotMonitorChannels = 2;
 }
 
+// if callerType == client,
+//		flowDirection = C2LS or LS2LSM
+//      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+// if callerType == monitor,
+//		flowDirection = M2RS or RS2RR or LS2LSM
+//      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
+// if callerType == robot_LSM,
+//		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+//      eSrcCondition = NoCond; forwardType = ToOp; eSrcRecType = RecSrc;
 message reqTalk
 {
 	enum eCallerType {
@@ -133,11 +198,28 @@ message reqTalk
 		robot_LSM = 2;
 	}
 	eCallerType callerType = 1;
-	int32 id1 = 2;
-	int32 id2 = 3;
-	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
+	int32 talkID = 2; // a randomly generated ID for this session of talk
+	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-audio+video
+	
+	// when the call is only between two local devices (client->LSM or LSM->client)
+	// these strings indicate caller's TCP server of talk. For client calling LSM,
+	// this address is on the client side and the LSM will try to receive data there;
+	// for LSM calling client, this address is on the LSM side and the client will try
+	// to send data there.
+	repeated string localTalkAddr = 4;
 }
 
+// if receiverType == client,
+//		flowDirection = C2LS or LS2LSM
+//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+// if callerType == monitor,
+//		flowDirection = M2RS or RS2RR or LS2LSM
+//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+// if receiverType == robot_LSM,
+//		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
+// Note that this message body is sent along with field "prevRouteAddr" of the previously
+// received message header (CommonHeader).
 message respTalk
 {
 	enum eReceiverType {
@@ -146,45 +228,110 @@ message respTalk
 		robot_LSM = 2;
 	}
 	eReceiverType receiverType = 1;
-	int32 id1 = 2;
-	int32 id2 = 3;
-	int32 avType = 4; // 0-N.A; 1-audio; 2-video; 3-audio+video
+	int32 talkID = 2; // a randomly generated ID for this session of talk
+	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-audio+video
 }
 
+// this is to maintain (dual) talk by sending heart beats
+// flowDirection = any possibility
+// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
+message reqTalkHB
+{
+	int32 callerTalkID = 1; // caller's talkID
+	int32 receiverTalkID = 2; // receiver's talkID
+}
+
+// flowDirection = M2RS or RS2RR or C2LS or LS2LSM or LSM2LS
+// eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
 message reqCmd
 {
 	int64 cmdID = 1;
 	string cmdMsg = 2;
 }
 
+// flowDirection = LSM2LS or RR2RS or RS2M or LS2C or LS2LSM
+// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
 message respCmd
 {
 	int64 cmdID = 1;
 	string respMsg = 2;
 }
 
+// flowDirection = LS2LSM
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message reqFile
 {
-	repeated string fileName = 1; // allow wildcards (*,?, etc)
+	string tarLSMName = 1;
+	enum eFileTypes {
+		FileContents = 0;
+		FileList = 1;
+		FolderFlist = 2;
+	}
+	eFileTypes fileType = 2;
+	repeated string fileNames = 3; // allow wildcards (*,?, etc)
 }
 
+// flowDirection = LSM2LS
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message respFile
 {
-	repeated string fileName = 1; // no wildcards
-	repeated string fileAddr = 2; // probably http address
+	string tarLSMName = 1;
+	enum eFileTypes {
+		FileContents = 0;
+		FileList = 1;
+		FolderFlist = 2;
+	}
+	eFileTypes fileType = 2;
+	repeated string fileNames = 3; // no wildcards
+	repeated string fileContents = 4; // ignored if fileType!=FileContents
 }
 
-message notifyStatus //LSM->LS 1. LS->C 2. LS-RR->RS->M
+// flowDirection = M2RS or RS2RR or C2LS
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+message reqFileAddr
+{
+	string tarLSMName = 1;
+	enum eFileTypes {
+		FileContents = 0;
+		FileList = 1;
+		FolderFlist = 2;
+	}
+	eFileTypes fileType = 2;
+	repeated string fileNames = 3;  // allow wildcards (*,?, etc)
+}
+
+// flowDirection = RR2RS or RS2M or LS2C
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+message respFileAddr
+{
+	string tarLSMName = 1;
+	enum eFileTypes {
+		FileContents = 0;
+		FileList = 1;
+		FolderFlist = 2;
+	}
+	eFileTypes fileType = 2;
+	repeated string fileNames = 3; // no wildcards
+	repeated string fileAddr = 4; // ignored if fileType!=FileContents
+}
+
+// flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+message reqStatus
 {
 	string statusMsg = 1;
 }
 
-message notifyAlarm //LSM->LS 1. LS->C 2. LS-RR->RS->M
+// flowDirection = LSM2LS or LS2C or RR2RS or RS2M
+// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+message reqAlarm
 {
 	string alarmMsg = 1;
 }
 
-message notifyTextChat //LSM->LS 1. LS->C 2. LS-RR->RS->M
+// flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M
+// eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
+message reqTextChat
 {
 	string chatText = 1;
 }

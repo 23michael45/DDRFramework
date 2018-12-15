@@ -39,7 +39,7 @@ namespace protobuf_BaseCmd_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[19];
+  static const ::google::protobuf::internal::ParseTable schema[23];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -53,6 +53,9 @@ extern CommonHeaderDefaultTypeInternal _CommonHeader_default_instance_;
 class bcLSAddr;
 class bcLSAddrDefaultTypeInternal;
 extern bcLSAddrDefaultTypeInternal _bcLSAddr_default_instance_;
+class bcLSAddr_ServerInfo;
+class bcLSAddr_ServerInfoDefaultTypeInternal;
+extern bcLSAddr_ServerInfoDefaultTypeInternal _bcLSAddr_ServerInfo_default_instance_;
 class heartBeat;
 class heartBeatDefaultTypeInternal;
 extern heartBeatDefaultTypeInternal _heartBeat_default_instance_;
@@ -62,42 +65,51 @@ extern notifyAVStreamDefaultTypeInternal _notifyAVStream_default_instance_;
 class notifyAVStream_fullChannelInfo;
 class notifyAVStream_fullChannelInfoDefaultTypeInternal;
 extern notifyAVStream_fullChannelInfoDefaultTypeInternal _notifyAVStream_fullChannelInfo_default_instance_;
-class notifyAlarm;
-class notifyAlarmDefaultTypeInternal;
-extern notifyAlarmDefaultTypeInternal _notifyAlarm_default_instance_;
 class notifySerAccess;
 class notifySerAccessDefaultTypeInternal;
 extern notifySerAccessDefaultTypeInternal _notifySerAccess_default_instance_;
-class notifyStatus;
-class notifyStatusDefaultTypeInternal;
-extern notifyStatusDefaultTypeInternal _notifyStatus_default_instance_;
 class notifyTerminalAccess;
 class notifyTerminalAccessDefaultTypeInternal;
 extern notifyTerminalAccessDefaultTypeInternal _notifyTerminalAccess_default_instance_;
-class notifyTextChat;
-class notifyTextChatDefaultTypeInternal;
-extern notifyTextChatDefaultTypeInternal _notifyTextChat_default_instance_;
+class reqAlarm;
+class reqAlarmDefaultTypeInternal;
+extern reqAlarmDefaultTypeInternal _reqAlarm_default_instance_;
 class reqCmd;
 class reqCmdDefaultTypeInternal;
 extern reqCmdDefaultTypeInternal _reqCmd_default_instance_;
 class reqFile;
 class reqFileDefaultTypeInternal;
 extern reqFileDefaultTypeInternal _reqFile_default_instance_;
+class reqFileAddr;
+class reqFileAddrDefaultTypeInternal;
+extern reqFileAddrDefaultTypeInternal _reqFileAddr_default_instance_;
 class reqLogin;
 class reqLoginDefaultTypeInternal;
 extern reqLoginDefaultTypeInternal _reqLogin_default_instance_;
 class reqLogin_msgAVStreamReq;
 class reqLogin_msgAVStreamReqDefaultTypeInternal;
 extern reqLogin_msgAVStreamReqDefaultTypeInternal _reqLogin_msgAVStreamReq_default_instance_;
+class reqStatus;
+class reqStatusDefaultTypeInternal;
+extern reqStatusDefaultTypeInternal _reqStatus_default_instance_;
 class reqTalk;
 class reqTalkDefaultTypeInternal;
 extern reqTalkDefaultTypeInternal _reqTalk_default_instance_;
+class reqTalkHB;
+class reqTalkHBDefaultTypeInternal;
+extern reqTalkHBDefaultTypeInternal _reqTalkHB_default_instance_;
+class reqTextChat;
+class reqTextChatDefaultTypeInternal;
+extern reqTextChatDefaultTypeInternal _reqTextChat_default_instance_;
 class respCmd;
 class respCmdDefaultTypeInternal;
 extern respCmdDefaultTypeInternal _respCmd_default_instance_;
 class respFile;
 class respFileDefaultTypeInternal;
 extern respFileDefaultTypeInternal _respFile_default_instance_;
+class respFileAddr;
+class respFileAddrDefaultTypeInternal;
+extern respFileAddrDefaultTypeInternal _respFileAddr_default_instance_;
 class respLogin;
 class respLoginDefaultTypeInternal;
 extern respLoginDefaultTypeInternal _respLogin_default_instance_;
@@ -109,21 +121,25 @@ namespace google {
 namespace protobuf {
 template<> ::DDRCommProto::CommonHeader* Arena::CreateMaybeMessage<::DDRCommProto::CommonHeader>(Arena*);
 template<> ::DDRCommProto::bcLSAddr* Arena::CreateMaybeMessage<::DDRCommProto::bcLSAddr>(Arena*);
+template<> ::DDRCommProto::bcLSAddr_ServerInfo* Arena::CreateMaybeMessage<::DDRCommProto::bcLSAddr_ServerInfo>(Arena*);
 template<> ::DDRCommProto::heartBeat* Arena::CreateMaybeMessage<::DDRCommProto::heartBeat>(Arena*);
 template<> ::DDRCommProto::notifyAVStream* Arena::CreateMaybeMessage<::DDRCommProto::notifyAVStream>(Arena*);
 template<> ::DDRCommProto::notifyAVStream_fullChannelInfo* Arena::CreateMaybeMessage<::DDRCommProto::notifyAVStream_fullChannelInfo>(Arena*);
-template<> ::DDRCommProto::notifyAlarm* Arena::CreateMaybeMessage<::DDRCommProto::notifyAlarm>(Arena*);
 template<> ::DDRCommProto::notifySerAccess* Arena::CreateMaybeMessage<::DDRCommProto::notifySerAccess>(Arena*);
-template<> ::DDRCommProto::notifyStatus* Arena::CreateMaybeMessage<::DDRCommProto::notifyStatus>(Arena*);
 template<> ::DDRCommProto::notifyTerminalAccess* Arena::CreateMaybeMessage<::DDRCommProto::notifyTerminalAccess>(Arena*);
-template<> ::DDRCommProto::notifyTextChat* Arena::CreateMaybeMessage<::DDRCommProto::notifyTextChat>(Arena*);
+template<> ::DDRCommProto::reqAlarm* Arena::CreateMaybeMessage<::DDRCommProto::reqAlarm>(Arena*);
 template<> ::DDRCommProto::reqCmd* Arena::CreateMaybeMessage<::DDRCommProto::reqCmd>(Arena*);
 template<> ::DDRCommProto::reqFile* Arena::CreateMaybeMessage<::DDRCommProto::reqFile>(Arena*);
+template<> ::DDRCommProto::reqFileAddr* Arena::CreateMaybeMessage<::DDRCommProto::reqFileAddr>(Arena*);
 template<> ::DDRCommProto::reqLogin* Arena::CreateMaybeMessage<::DDRCommProto::reqLogin>(Arena*);
 template<> ::DDRCommProto::reqLogin_msgAVStreamReq* Arena::CreateMaybeMessage<::DDRCommProto::reqLogin_msgAVStreamReq>(Arena*);
+template<> ::DDRCommProto::reqStatus* Arena::CreateMaybeMessage<::DDRCommProto::reqStatus>(Arena*);
 template<> ::DDRCommProto::reqTalk* Arena::CreateMaybeMessage<::DDRCommProto::reqTalk>(Arena*);
+template<> ::DDRCommProto::reqTalkHB* Arena::CreateMaybeMessage<::DDRCommProto::reqTalkHB>(Arena*);
+template<> ::DDRCommProto::reqTextChat* Arena::CreateMaybeMessage<::DDRCommProto::reqTextChat>(Arena*);
 template<> ::DDRCommProto::respCmd* Arena::CreateMaybeMessage<::DDRCommProto::respCmd>(Arena*);
 template<> ::DDRCommProto::respFile* Arena::CreateMaybeMessage<::DDRCommProto::respFile>(Arena*);
+template<> ::DDRCommProto::respFileAddr* Arena::CreateMaybeMessage<::DDRCommProto::respFileAddr>(Arena*);
 template<> ::DDRCommProto::respLogin* Arena::CreateMaybeMessage<::DDRCommProto::respLogin>(Arena*);
 template<> ::DDRCommProto::respTalk* Arena::CreateMaybeMessage<::DDRCommProto::respTalk>(Arena*);
 }  // namespace protobuf
@@ -131,18 +147,21 @@ template<> ::DDRCommProto::respTalk* Arena::CreateMaybeMessage<::DDRCommProto::r
 namespace DDRCommProto {
 
 enum CommonHeader_eFlowDir {
-  CommonHeader_eFlowDir_RS2M = 0,
-  CommonHeader_eFlowDir_RS2RR = 1,
-  CommonHeader_eFlowDir_RR2RS = 2,
-  CommonHeader_eFlowDir_LS2C = 3,
-  CommonHeader_eFlowDir_C2LS = 4,
-  CommonHeader_eFlowDir_LS2LSM = 5,
-  CommonHeader_eFlowDir_LSM2LS = 6,
+  CommonHeader_eFlowDir_UNKNOWN2RS = 0,
+  CommonHeader_eFlowDir_RS2M = 1,
+  CommonHeader_eFlowDir_M2RS = 2,
+  CommonHeader_eFlowDir_RS2RR = 3,
+  CommonHeader_eFlowDir_RR2RS = 4,
+  CommonHeader_eFlowDir_UNKNOWN2LS = 5,
+  CommonHeader_eFlowDir_LS2C = 6,
+  CommonHeader_eFlowDir_C2LS = 7,
+  CommonHeader_eFlowDir_LS2LSM = 8,
+  CommonHeader_eFlowDir_LSM2LS = 9,
   CommonHeader_eFlowDir_CommonHeader_eFlowDir_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   CommonHeader_eFlowDir_CommonHeader_eFlowDir_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool CommonHeader_eFlowDir_IsValid(int value);
-const CommonHeader_eFlowDir CommonHeader_eFlowDir_eFlowDir_MIN = CommonHeader_eFlowDir_RS2M;
+const CommonHeader_eFlowDir CommonHeader_eFlowDir_eFlowDir_MIN = CommonHeader_eFlowDir_UNKNOWN2RS;
 const CommonHeader_eFlowDir CommonHeader_eFlowDir_eFlowDir_MAX = CommonHeader_eFlowDir_LSM2LS;
 const int CommonHeader_eFlowDir_eFlowDir_ARRAYSIZE = CommonHeader_eFlowDir_eFlowDir_MAX + 1;
 
@@ -156,27 +175,71 @@ inline bool CommonHeader_eFlowDir_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<CommonHeader_eFlowDir>(
     CommonHeader_eFlowDir_descriptor(), name, value);
 }
-enum CommonHeader_eDestType {
-  CommonHeader_eDestType_NoDest = 0,
-  CommonHeader_eDestType_LSMName = 1,
-  CommonHeader_eDestType_Routing = 2,
-  CommonHeader_eDestType_CommonHeader_eDestType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  CommonHeader_eDestType_CommonHeader_eDestType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum CommonHeader_eSrcCondition {
+  CommonHeader_eSrcCondition_NoCond = 0,
+  CommonHeader_eSrcCondition_Op = 1,
+  CommonHeader_eSrcCondition_CommonHeader_eSrcCondition_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  CommonHeader_eSrcCondition_CommonHeader_eSrcCondition_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool CommonHeader_eDestType_IsValid(int value);
-const CommonHeader_eDestType CommonHeader_eDestType_eDestType_MIN = CommonHeader_eDestType_NoDest;
-const CommonHeader_eDestType CommonHeader_eDestType_eDestType_MAX = CommonHeader_eDestType_Routing;
-const int CommonHeader_eDestType_eDestType_ARRAYSIZE = CommonHeader_eDestType_eDestType_MAX + 1;
+bool CommonHeader_eSrcCondition_IsValid(int value);
+const CommonHeader_eSrcCondition CommonHeader_eSrcCondition_eSrcCondition_MIN = CommonHeader_eSrcCondition_NoCond;
+const CommonHeader_eSrcCondition CommonHeader_eSrcCondition_eSrcCondition_MAX = CommonHeader_eSrcCondition_Op;
+const int CommonHeader_eSrcCondition_eSrcCondition_ARRAYSIZE = CommonHeader_eSrcCondition_eSrcCondition_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* CommonHeader_eDestType_descriptor();
-inline const ::std::string& CommonHeader_eDestType_Name(CommonHeader_eDestType value) {
+const ::google::protobuf::EnumDescriptor* CommonHeader_eSrcCondition_descriptor();
+inline const ::std::string& CommonHeader_eSrcCondition_Name(CommonHeader_eSrcCondition value) {
   return ::google::protobuf::internal::NameOfEnum(
-    CommonHeader_eDestType_descriptor(), value);
+    CommonHeader_eSrcCondition_descriptor(), value);
 }
-inline bool CommonHeader_eDestType_Parse(
-    const ::std::string& name, CommonHeader_eDestType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<CommonHeader_eDestType>(
-    CommonHeader_eDestType_descriptor(), name, value);
+inline bool CommonHeader_eSrcCondition_Parse(
+    const ::std::string& name, CommonHeader_eSrcCondition* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CommonHeader_eSrcCondition>(
+    CommonHeader_eSrcCondition_descriptor(), name, value);
+}
+enum CommonHeader_eForwardingType {
+  CommonHeader_eForwardingType_NoForwarding = 0,
+  CommonHeader_eForwardingType_LSMAll = 1,
+  CommonHeader_eForwardingType_CltMonAll = 2,
+  CommonHeader_eForwardingType_ToOp = 3,
+  CommonHeader_eForwardingType_RoutingBack = 4,
+  CommonHeader_eForwardingType_CommonHeader_eForwardingType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  CommonHeader_eForwardingType_CommonHeader_eForwardingType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool CommonHeader_eForwardingType_IsValid(int value);
+const CommonHeader_eForwardingType CommonHeader_eForwardingType_eForwardingType_MIN = CommonHeader_eForwardingType_NoForwarding;
+const CommonHeader_eForwardingType CommonHeader_eForwardingType_eForwardingType_MAX = CommonHeader_eForwardingType_RoutingBack;
+const int CommonHeader_eForwardingType_eForwardingType_ARRAYSIZE = CommonHeader_eForwardingType_eForwardingType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* CommonHeader_eForwardingType_descriptor();
+inline const ::std::string& CommonHeader_eForwardingType_Name(CommonHeader_eForwardingType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    CommonHeader_eForwardingType_descriptor(), value);
+}
+inline bool CommonHeader_eForwardingType_Parse(
+    const ::std::string& name, CommonHeader_eForwardingType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CommonHeader_eForwardingType>(
+    CommonHeader_eForwardingType_descriptor(), name, value);
+}
+enum CommonHeader_eSrcRecType {
+  CommonHeader_eSrcRecType_NoRec = 0,
+  CommonHeader_eSrcRecType_RecSrc = 1,
+  CommonHeader_eSrcRecType_CommonHeader_eSrcRecType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  CommonHeader_eSrcRecType_CommonHeader_eSrcRecType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool CommonHeader_eSrcRecType_IsValid(int value);
+const CommonHeader_eSrcRecType CommonHeader_eSrcRecType_eSrcRecType_MIN = CommonHeader_eSrcRecType_NoRec;
+const CommonHeader_eSrcRecType CommonHeader_eSrcRecType_eSrcRecType_MAX = CommonHeader_eSrcRecType_RecSrc;
+const int CommonHeader_eSrcRecType_eSrcRecType_ARRAYSIZE = CommonHeader_eSrcRecType_eSrcRecType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* CommonHeader_eSrcRecType_descriptor();
+inline const ::std::string& CommonHeader_eSrcRecType_Name(CommonHeader_eSrcRecType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    CommonHeader_eSrcRecType_descriptor(), value);
+}
+inline bool CommonHeader_eSrcRecType_Parse(
+    const ::std::string& name, CommonHeader_eSrcRecType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CommonHeader_eSrcRecType>(
+    CommonHeader_eSrcRecType_descriptor(), name, value);
 }
 enum reqLogin_eCltType {
   reqLogin_eCltType_client = 0,
@@ -290,6 +353,94 @@ inline bool respTalk_eReceiverType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<respTalk_eReceiverType>(
     respTalk_eReceiverType_descriptor(), name, value);
 }
+enum reqFile_eFileTypes {
+  reqFile_eFileTypes_FileContents = 0,
+  reqFile_eFileTypes_FileList = 1,
+  reqFile_eFileTypes_FolderFlist = 2,
+  reqFile_eFileTypes_reqFile_eFileTypes_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  reqFile_eFileTypes_reqFile_eFileTypes_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool reqFile_eFileTypes_IsValid(int value);
+const reqFile_eFileTypes reqFile_eFileTypes_eFileTypes_MIN = reqFile_eFileTypes_FileContents;
+const reqFile_eFileTypes reqFile_eFileTypes_eFileTypes_MAX = reqFile_eFileTypes_FolderFlist;
+const int reqFile_eFileTypes_eFileTypes_ARRAYSIZE = reqFile_eFileTypes_eFileTypes_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* reqFile_eFileTypes_descriptor();
+inline const ::std::string& reqFile_eFileTypes_Name(reqFile_eFileTypes value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    reqFile_eFileTypes_descriptor(), value);
+}
+inline bool reqFile_eFileTypes_Parse(
+    const ::std::string& name, reqFile_eFileTypes* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<reqFile_eFileTypes>(
+    reqFile_eFileTypes_descriptor(), name, value);
+}
+enum respFile_eFileTypes {
+  respFile_eFileTypes_FileContents = 0,
+  respFile_eFileTypes_FileList = 1,
+  respFile_eFileTypes_FolderFlist = 2,
+  respFile_eFileTypes_respFile_eFileTypes_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  respFile_eFileTypes_respFile_eFileTypes_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool respFile_eFileTypes_IsValid(int value);
+const respFile_eFileTypes respFile_eFileTypes_eFileTypes_MIN = respFile_eFileTypes_FileContents;
+const respFile_eFileTypes respFile_eFileTypes_eFileTypes_MAX = respFile_eFileTypes_FolderFlist;
+const int respFile_eFileTypes_eFileTypes_ARRAYSIZE = respFile_eFileTypes_eFileTypes_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* respFile_eFileTypes_descriptor();
+inline const ::std::string& respFile_eFileTypes_Name(respFile_eFileTypes value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    respFile_eFileTypes_descriptor(), value);
+}
+inline bool respFile_eFileTypes_Parse(
+    const ::std::string& name, respFile_eFileTypes* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<respFile_eFileTypes>(
+    respFile_eFileTypes_descriptor(), name, value);
+}
+enum reqFileAddr_eFileTypes {
+  reqFileAddr_eFileTypes_FileContents = 0,
+  reqFileAddr_eFileTypes_FileList = 1,
+  reqFileAddr_eFileTypes_FolderFlist = 2,
+  reqFileAddr_eFileTypes_reqFileAddr_eFileTypes_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  reqFileAddr_eFileTypes_reqFileAddr_eFileTypes_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool reqFileAddr_eFileTypes_IsValid(int value);
+const reqFileAddr_eFileTypes reqFileAddr_eFileTypes_eFileTypes_MIN = reqFileAddr_eFileTypes_FileContents;
+const reqFileAddr_eFileTypes reqFileAddr_eFileTypes_eFileTypes_MAX = reqFileAddr_eFileTypes_FolderFlist;
+const int reqFileAddr_eFileTypes_eFileTypes_ARRAYSIZE = reqFileAddr_eFileTypes_eFileTypes_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* reqFileAddr_eFileTypes_descriptor();
+inline const ::std::string& reqFileAddr_eFileTypes_Name(reqFileAddr_eFileTypes value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    reqFileAddr_eFileTypes_descriptor(), value);
+}
+inline bool reqFileAddr_eFileTypes_Parse(
+    const ::std::string& name, reqFileAddr_eFileTypes* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<reqFileAddr_eFileTypes>(
+    reqFileAddr_eFileTypes_descriptor(), name, value);
+}
+enum respFileAddr_eFileTypes {
+  respFileAddr_eFileTypes_FileContents = 0,
+  respFileAddr_eFileTypes_FileList = 1,
+  respFileAddr_eFileTypes_FolderFlist = 2,
+  respFileAddr_eFileTypes_respFileAddr_eFileTypes_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  respFileAddr_eFileTypes_respFileAddr_eFileTypes_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool respFileAddr_eFileTypes_IsValid(int value);
+const respFileAddr_eFileTypes respFileAddr_eFileTypes_eFileTypes_MIN = respFileAddr_eFileTypes_FileContents;
+const respFileAddr_eFileTypes respFileAddr_eFileTypes_eFileTypes_MAX = respFileAddr_eFileTypes_FolderFlist;
+const int respFileAddr_eFileTypes_eFileTypes_ARRAYSIZE = respFileAddr_eFileTypes_eFileTypes_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* respFileAddr_eFileTypes_descriptor();
+inline const ::std::string& respFileAddr_eFileTypes_Name(respFileAddr_eFileTypes value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    respFileAddr_eFileTypes_descriptor(), value);
+}
+inline bool respFileAddr_eFileTypes_Parse(
+    const ::std::string& name, respFileAddr_eFileTypes* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<respFileAddr_eFileTypes>(
+    respFileAddr_eFileTypes_descriptor(), name, value);
+}
 // ===================================================================
 
 class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.CommonHeader) */ {
@@ -378,12 +529,18 @@ class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
   // nested types ----------------------------------------------------
 
   typedef CommonHeader_eFlowDir eFlowDir;
+  static const eFlowDir UNKNOWN2RS =
+    CommonHeader_eFlowDir_UNKNOWN2RS;
   static const eFlowDir RS2M =
     CommonHeader_eFlowDir_RS2M;
+  static const eFlowDir M2RS =
+    CommonHeader_eFlowDir_M2RS;
   static const eFlowDir RS2RR =
     CommonHeader_eFlowDir_RS2RR;
   static const eFlowDir RR2RS =
     CommonHeader_eFlowDir_RR2RS;
+  static const eFlowDir UNKNOWN2LS =
+    CommonHeader_eFlowDir_UNKNOWN2LS;
   static const eFlowDir LS2C =
     CommonHeader_eFlowDir_LS2C;
   static const eFlowDir C2LS =
@@ -413,32 +570,88 @@ class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
     return CommonHeader_eFlowDir_Parse(name, value);
   }
 
-  typedef CommonHeader_eDestType eDestType;
-  static const eDestType NoDest =
-    CommonHeader_eDestType_NoDest;
-  static const eDestType LSMName =
-    CommonHeader_eDestType_LSMName;
-  static const eDestType Routing =
-    CommonHeader_eDestType_Routing;
-  static inline bool eDestType_IsValid(int value) {
-    return CommonHeader_eDestType_IsValid(value);
+  typedef CommonHeader_eSrcCondition eSrcCondition;
+  static const eSrcCondition NoCond =
+    CommonHeader_eSrcCondition_NoCond;
+  static const eSrcCondition Op =
+    CommonHeader_eSrcCondition_Op;
+  static inline bool eSrcCondition_IsValid(int value) {
+    return CommonHeader_eSrcCondition_IsValid(value);
   }
-  static const eDestType eDestType_MIN =
-    CommonHeader_eDestType_eDestType_MIN;
-  static const eDestType eDestType_MAX =
-    CommonHeader_eDestType_eDestType_MAX;
-  static const int eDestType_ARRAYSIZE =
-    CommonHeader_eDestType_eDestType_ARRAYSIZE;
+  static const eSrcCondition eSrcCondition_MIN =
+    CommonHeader_eSrcCondition_eSrcCondition_MIN;
+  static const eSrcCondition eSrcCondition_MAX =
+    CommonHeader_eSrcCondition_eSrcCondition_MAX;
+  static const int eSrcCondition_ARRAYSIZE =
+    CommonHeader_eSrcCondition_eSrcCondition_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
-  eDestType_descriptor() {
-    return CommonHeader_eDestType_descriptor();
+  eSrcCondition_descriptor() {
+    return CommonHeader_eSrcCondition_descriptor();
   }
-  static inline const ::std::string& eDestType_Name(eDestType value) {
-    return CommonHeader_eDestType_Name(value);
+  static inline const ::std::string& eSrcCondition_Name(eSrcCondition value) {
+    return CommonHeader_eSrcCondition_Name(value);
   }
-  static inline bool eDestType_Parse(const ::std::string& name,
-      eDestType* value) {
-    return CommonHeader_eDestType_Parse(name, value);
+  static inline bool eSrcCondition_Parse(const ::std::string& name,
+      eSrcCondition* value) {
+    return CommonHeader_eSrcCondition_Parse(name, value);
+  }
+
+  typedef CommonHeader_eForwardingType eForwardingType;
+  static const eForwardingType NoForwarding =
+    CommonHeader_eForwardingType_NoForwarding;
+  static const eForwardingType LSMAll =
+    CommonHeader_eForwardingType_LSMAll;
+  static const eForwardingType CltMonAll =
+    CommonHeader_eForwardingType_CltMonAll;
+  static const eForwardingType ToOp =
+    CommonHeader_eForwardingType_ToOp;
+  static const eForwardingType RoutingBack =
+    CommonHeader_eForwardingType_RoutingBack;
+  static inline bool eForwardingType_IsValid(int value) {
+    return CommonHeader_eForwardingType_IsValid(value);
+  }
+  static const eForwardingType eForwardingType_MIN =
+    CommonHeader_eForwardingType_eForwardingType_MIN;
+  static const eForwardingType eForwardingType_MAX =
+    CommonHeader_eForwardingType_eForwardingType_MAX;
+  static const int eForwardingType_ARRAYSIZE =
+    CommonHeader_eForwardingType_eForwardingType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eForwardingType_descriptor() {
+    return CommonHeader_eForwardingType_descriptor();
+  }
+  static inline const ::std::string& eForwardingType_Name(eForwardingType value) {
+    return CommonHeader_eForwardingType_Name(value);
+  }
+  static inline bool eForwardingType_Parse(const ::std::string& name,
+      eForwardingType* value) {
+    return CommonHeader_eForwardingType_Parse(name, value);
+  }
+
+  typedef CommonHeader_eSrcRecType eSrcRecType;
+  static const eSrcRecType NoRec =
+    CommonHeader_eSrcRecType_NoRec;
+  static const eSrcRecType RecSrc =
+    CommonHeader_eSrcRecType_RecSrc;
+  static inline bool eSrcRecType_IsValid(int value) {
+    return CommonHeader_eSrcRecType_IsValid(value);
+  }
+  static const eSrcRecType eSrcRecType_MIN =
+    CommonHeader_eSrcRecType_eSrcRecType_MIN;
+  static const eSrcRecType eSrcRecType_MAX =
+    CommonHeader_eSrcRecType_eSrcRecType_MAX;
+  static const int eSrcRecType_ARRAYSIZE =
+    CommonHeader_eSrcRecType_eSrcRecType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eSrcRecType_descriptor() {
+    return CommonHeader_eSrcRecType_descriptor();
+  }
+  static inline const ::std::string& eSrcRecType_Name(eSrcRecType value) {
+    return CommonHeader_eSrcRecType_Name(value);
+  }
+  static inline bool eSrcRecType_Parse(const ::std::string& name,
+      eSrcRecType* value) {
+    return CommonHeader_eSrcRecType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
@@ -453,37 +666,27 @@ class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
   const ::google::protobuf::RepeatedField<int>& flowdirection() const;
   ::google::protobuf::RepeatedField<int>* mutable_flowdirection();
 
-  // repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
-  int desttype_size() const;
-  void clear_desttype();
-  static const int kDestTypeFieldNumber = 3;
-  ::DDRCommProto::CommonHeader_eDestType desttype(int index) const;
-  void set_desttype(int index, ::DDRCommProto::CommonHeader_eDestType value);
-  void add_desttype(::DDRCommProto::CommonHeader_eDestType value);
-  const ::google::protobuf::RepeatedField<int>& desttype() const;
-  ::google::protobuf::RepeatedField<int>* mutable_desttype();
-
-  // repeated string destInfo = 4;
-  int destinfo_size() const;
-  void clear_destinfo();
-  static const int kDestInfoFieldNumber = 4;
-  const ::std::string& destinfo(int index) const;
-  ::std::string* mutable_destinfo(int index);
-  void set_destinfo(int index, const ::std::string& value);
+  // repeated string prevRouteAddr = 7;
+  int prevrouteaddr_size() const;
+  void clear_prevrouteaddr();
+  static const int kPrevRouteAddrFieldNumber = 7;
+  const ::std::string& prevrouteaddr(int index) const;
+  ::std::string* mutable_prevrouteaddr(int index);
+  void set_prevrouteaddr(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_destinfo(int index, ::std::string&& value);
+  void set_prevrouteaddr(int index, ::std::string&& value);
   #endif
-  void set_destinfo(int index, const char* value);
-  void set_destinfo(int index, const char* value, size_t size);
-  ::std::string* add_destinfo();
-  void add_destinfo(const ::std::string& value);
+  void set_prevrouteaddr(int index, const char* value);
+  void set_prevrouteaddr(int index, const char* value, size_t size);
+  ::std::string* add_prevrouteaddr();
+  void add_prevrouteaddr(const ::std::string& value);
   #if LANG_CXX11
-  void add_destinfo(::std::string&& value);
+  void add_prevrouteaddr(::std::string&& value);
   #endif
-  void add_destinfo(const char* value);
-  void add_destinfo(const char* value, size_t size);
-  const ::google::protobuf::RepeatedPtrField< ::std::string>& destinfo() const;
-  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_destinfo();
+  void add_prevrouteaddr(const char* value);
+  void add_prevrouteaddr(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& prevrouteaddr() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_prevrouteaddr();
 
   // string bodyType = 1;
   void clear_bodytype();
@@ -499,16 +702,42 @@ class CommonHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_bodytype();
   void set_allocated_bodytype(::std::string* bodytype);
 
+  // int32 bOriginal = 3;
+  void clear_boriginal();
+  static const int kBOriginalFieldNumber = 3;
+  ::google::protobuf::int32 boriginal() const;
+  void set_boriginal(::google::protobuf::int32 value);
+
+  // .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
+  void clear_srccond();
+  static const int kSrcCondFieldNumber = 4;
+  ::DDRCommProto::CommonHeader_eSrcCondition srccond() const;
+  void set_srccond(::DDRCommProto::CommonHeader_eSrcCondition value);
+
+  // .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+  void clear_forwardtype();
+  static const int kForwardTypeFieldNumber = 5;
+  ::DDRCommProto::CommonHeader_eForwardingType forwardtype() const;
+  void set_forwardtype(::DDRCommProto::CommonHeader_eForwardingType value);
+
+  // .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+  void clear_rectype();
+  static const int kRecTypeFieldNumber = 6;
+  ::DDRCommProto::CommonHeader_eSrcRecType rectype() const;
+  void set_rectype(::DDRCommProto::CommonHeader_eSrcRecType value);
+
   // @@protoc_insertion_point(class_scope:DDRCommProto.CommonHeader)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedField<int> flowdirection_;
   mutable int _flowdirection_cached_byte_size_;
-  ::google::protobuf::RepeatedField<int> desttype_;
-  mutable int _desttype_cached_byte_size_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> destinfo_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> prevrouteaddr_;
   ::google::protobuf::internal::ArenaStringPtr bodytype_;
+  ::google::protobuf::int32 boriginal_;
+  int srccond_;
+  int forwardtype_;
+  int rectype_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -625,24 +854,24 @@ class heartBeat : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
-class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.bcLSAddr) */ {
+class bcLSAddr_ServerInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.bcLSAddr.ServerInfo) */ {
  public:
-  bcLSAddr();
-  virtual ~bcLSAddr();
+  bcLSAddr_ServerInfo();
+  virtual ~bcLSAddr_ServerInfo();
 
-  bcLSAddr(const bcLSAddr& from);
+  bcLSAddr_ServerInfo(const bcLSAddr_ServerInfo& from);
 
-  inline bcLSAddr& operator=(const bcLSAddr& from) {
+  inline bcLSAddr_ServerInfo& operator=(const bcLSAddr_ServerInfo& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  bcLSAddr(bcLSAddr&& from) noexcept
-    : bcLSAddr() {
+  bcLSAddr_ServerInfo(bcLSAddr_ServerInfo&& from) noexcept
+    : bcLSAddr_ServerInfo() {
     *this = ::std::move(from);
   }
 
-  inline bcLSAddr& operator=(bcLSAddr&& from) noexcept {
+  inline bcLSAddr_ServerInfo& operator=(bcLSAddr_ServerInfo&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -652,34 +881,34 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const bcLSAddr& default_instance();
+  static const bcLSAddr_ServerInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const bcLSAddr* internal_default_instance() {
-    return reinterpret_cast<const bcLSAddr*>(
-               &_bcLSAddr_default_instance_);
+  static inline const bcLSAddr_ServerInfo* internal_default_instance() {
+    return reinterpret_cast<const bcLSAddr_ServerInfo*>(
+               &_bcLSAddr_ServerInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  void Swap(bcLSAddr* other);
-  friend void swap(bcLSAddr& a, bcLSAddr& b) {
+  void Swap(bcLSAddr_ServerInfo* other);
+  friend void swap(bcLSAddr_ServerInfo& a, bcLSAddr_ServerInfo& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline bcLSAddr* New() const final {
-    return CreateMaybeMessage<bcLSAddr>(NULL);
+  inline bcLSAddr_ServerInfo* New() const final {
+    return CreateMaybeMessage<bcLSAddr_ServerInfo>(NULL);
   }
 
-  bcLSAddr* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<bcLSAddr>(arena);
+  bcLSAddr_ServerInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<bcLSAddr_ServerInfo>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const bcLSAddr& from);
-  void MergeFrom(const bcLSAddr& from);
+  void CopyFrom(const bcLSAddr_ServerInfo& from);
+  void MergeFrom(const bcLSAddr_ServerInfo& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -696,7 +925,7 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(bcLSAddr* other);
+  void InternalSwap(bcLSAddr_ServerInfo* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -754,13 +983,124 @@ class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::int32 port() const;
   void set_port(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.bcLSAddr)
+  // @@protoc_insertion_point(class_scope:DDRCommProto.bcLSAddr.ServerInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::std::string> ips_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 port_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class bcLSAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.bcLSAddr) */ {
+ public:
+  bcLSAddr();
+  virtual ~bcLSAddr();
+
+  bcLSAddr(const bcLSAddr& from);
+
+  inline bcLSAddr& operator=(const bcLSAddr& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  bcLSAddr(bcLSAddr&& from) noexcept
+    : bcLSAddr() {
+    *this = ::std::move(from);
+  }
+
+  inline bcLSAddr& operator=(bcLSAddr&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const bcLSAddr& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const bcLSAddr* internal_default_instance() {
+    return reinterpret_cast<const bcLSAddr*>(
+               &_bcLSAddr_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  void Swap(bcLSAddr* other);
+  friend void swap(bcLSAddr& a, bcLSAddr& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline bcLSAddr* New() const final {
+    return CreateMaybeMessage<bcLSAddr>(NULL);
+  }
+
+  bcLSAddr* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<bcLSAddr>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const bcLSAddr& from);
+  void MergeFrom(const bcLSAddr& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(bcLSAddr* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef bcLSAddr_ServerInfo ServerInfo;
+
+  // accessors -------------------------------------------------------
+
+  // .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+  bool has_lsinfo() const;
+  void clear_lsinfo();
+  static const int kLSInfoFieldNumber = 1;
+  private:
+  const ::DDRCommProto::bcLSAddr_ServerInfo& _internal_lsinfo() const;
+  public:
+  const ::DDRCommProto::bcLSAddr_ServerInfo& lsinfo() const;
+  ::DDRCommProto::bcLSAddr_ServerInfo* release_lsinfo();
+  ::DDRCommProto::bcLSAddr_ServerInfo* mutable_lsinfo();
+  void set_allocated_lsinfo(::DDRCommProto::bcLSAddr_ServerInfo* lsinfo);
+
+  // @@protoc_insertion_point(class_scope:DDRCommProto.bcLSAddr)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::DDRCommProto::bcLSAddr_ServerInfo* lsinfo_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -801,7 +1141,7 @@ class reqLogin_msgAVStreamReq : public ::google::protobuf::Message /* @@protoc_i
                &_reqLogin_msgAVStreamReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(reqLogin_msgAVStreamReq* other);
   friend void swap(reqLogin_msgAVStreamReq& a, reqLogin_msgAVStreamReq& b) {
@@ -926,7 +1266,7 @@ class reqLogin : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_reqLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(reqLogin* other);
   friend void swap(reqLogin& a, reqLogin& b) {
@@ -1131,7 +1471,7 @@ class respLogin : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_respLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(respLogin* other);
   friend void swap(respLogin& a, respLogin& b) {
@@ -1308,7 +1648,7 @@ class notifyTerminalAccess : public ::google::protobuf::Message /* @@protoc_inse
                &_notifyTerminalAccess_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   void Swap(notifyTerminalAccess* other);
   friend void swap(notifyTerminalAccess& a, notifyTerminalAccess& b) {
@@ -1455,7 +1795,7 @@ class notifySerAccess : public ::google::protobuf::Message /* @@protoc_insertion
                &_notifySerAccess_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   void Swap(notifySerAccess* other);
   friend void swap(notifySerAccess& a, notifySerAccess& b) {
@@ -1529,53 +1869,53 @@ class notifySerAccess : public ::google::protobuf::Message /* @@protoc_insertion
   const ::google::protobuf::RepeatedPtrField< ::std::string>& nameslsm() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_nameslsm();
 
-  // int32 nClients = 1;
-  void clear_nclients();
-  static const int kNClientsFieldNumber = 1;
-  ::google::protobuf::int32 nclients() const;
-  void set_nclients(::google::protobuf::int32 value);
-
-  // int32 cTopOpLv = 2;
-  void clear_ctopoplv();
-  static const int kCTopOpLvFieldNumber = 2;
-  ::google::protobuf::int32 ctopoplv() const;
-  void set_ctopoplv(::google::protobuf::int32 value);
-
-  // int64 cTopOpTime = 3;
-  void clear_ctopoptime();
-  static const int kCTopOpTimeFieldNumber = 3;
-  ::google::protobuf::int64 ctopoptime() const;
-  void set_ctopoptime(::google::protobuf::int64 value);
-
-  // int32 nMonitors = 4;
+  // int32 nMonitors = 1;
   void clear_nmonitors();
-  static const int kNMonitorsFieldNumber = 4;
+  static const int kNMonitorsFieldNumber = 1;
   ::google::protobuf::int32 nmonitors() const;
   void set_nmonitors(::google::protobuf::int32 value);
 
-  // int32 mTopOpLv = 5;
+  // int32 mTopOpLv = 2;
   void clear_mtopoplv();
-  static const int kMTopOpLvFieldNumber = 5;
+  static const int kMTopOpLvFieldNumber = 2;
   ::google::protobuf::int32 mtopoplv() const;
   void set_mtopoplv(::google::protobuf::int32 value);
 
-  // int32 mTopOpTime = 6;
+  // int32 mTopOpTime = 3;
   void clear_mtopoptime();
-  static const int kMTopOpTimeFieldNumber = 6;
+  static const int kMTopOpTimeFieldNumber = 3;
   ::google::protobuf::int32 mtopoptime() const;
   void set_mtopoptime(::google::protobuf::int32 value);
+
+  // int32 nClients = 4;
+  void clear_nclients();
+  static const int kNClientsFieldNumber = 4;
+  ::google::protobuf::int32 nclients() const;
+  void set_nclients(::google::protobuf::int32 value);
+
+  // int64 cTopOpTime = 6;
+  void clear_ctopoptime();
+  static const int kCTopOpTimeFieldNumber = 6;
+  ::google::protobuf::int64 ctopoptime() const;
+  void set_ctopoptime(::google::protobuf::int64 value);
+
+  // int32 cTopOpLv = 5;
+  void clear_ctopoplv();
+  static const int kCTopOpLvFieldNumber = 5;
+  ::google::protobuf::int32 ctopoplv() const;
+  void set_ctopoplv(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:DDRCommProto.notifySerAccess)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::std::string> nameslsm_;
-  ::google::protobuf::int32 nclients_;
-  ::google::protobuf::int32 ctopoplv_;
-  ::google::protobuf::int64 ctopoptime_;
   ::google::protobuf::int32 nmonitors_;
   ::google::protobuf::int32 mtopoplv_;
   ::google::protobuf::int32 mtopoptime_;
+  ::google::protobuf::int32 nclients_;
+  ::google::protobuf::int64 ctopoptime_;
+  ::google::protobuf::int32 ctopoplv_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -1616,7 +1956,7 @@ class notifyAVStream_fullChannelInfo : public ::google::protobuf::Message /* @@p
                &_notifyAVStream_fullChannelInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   void Swap(notifyAVStream_fullChannelInfo* other);
   friend void swap(notifyAVStream_fullChannelInfo& a, notifyAVStream_fullChannelInfo& b) {
@@ -1792,7 +2132,7 @@ class notifyAVStream : public ::google::protobuf::Message /* @@protoc_insertion_
                &_notifyAVStream_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   void Swap(notifyAVStream* other);
   friend void swap(notifyAVStream& a, notifyAVStream& b) {
@@ -1916,7 +2256,7 @@ class reqTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_reqTalk_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   void Swap(reqTalk* other);
   friend void swap(reqTalk& a, reqTalk& b) {
@@ -1996,27 +2336,43 @@ class reqTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
+  // repeated string localTalkAddr = 4;
+  int localtalkaddr_size() const;
+  void clear_localtalkaddr();
+  static const int kLocalTalkAddrFieldNumber = 4;
+  const ::std::string& localtalkaddr(int index) const;
+  ::std::string* mutable_localtalkaddr(int index);
+  void set_localtalkaddr(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_localtalkaddr(int index, ::std::string&& value);
+  #endif
+  void set_localtalkaddr(int index, const char* value);
+  void set_localtalkaddr(int index, const char* value, size_t size);
+  ::std::string* add_localtalkaddr();
+  void add_localtalkaddr(const ::std::string& value);
+  #if LANG_CXX11
+  void add_localtalkaddr(::std::string&& value);
+  #endif
+  void add_localtalkaddr(const char* value);
+  void add_localtalkaddr(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& localtalkaddr() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_localtalkaddr();
+
   // .DDRCommProto.reqTalk.eCallerType callerType = 1;
   void clear_callertype();
   static const int kCallerTypeFieldNumber = 1;
   ::DDRCommProto::reqTalk_eCallerType callertype() const;
   void set_callertype(::DDRCommProto::reqTalk_eCallerType value);
 
-  // int32 id1 = 2;
-  void clear_id1();
-  static const int kId1FieldNumber = 2;
-  ::google::protobuf::int32 id1() const;
-  void set_id1(::google::protobuf::int32 value);
+  // int32 talkID = 2;
+  void clear_talkid();
+  static const int kTalkIDFieldNumber = 2;
+  ::google::protobuf::int32 talkid() const;
+  void set_talkid(::google::protobuf::int32 value);
 
-  // int32 id2 = 3;
-  void clear_id2();
-  static const int kId2FieldNumber = 3;
-  ::google::protobuf::int32 id2() const;
-  void set_id2(::google::protobuf::int32 value);
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   void clear_avtype();
-  static const int kAvTypeFieldNumber = 4;
+  static const int kAvTypeFieldNumber = 3;
   ::google::protobuf::int32 avtype() const;
   void set_avtype(::google::protobuf::int32 value);
 
@@ -2024,9 +2380,9 @@ class reqTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(c
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> localtalkaddr_;
   int callertype_;
-  ::google::protobuf::int32 id1_;
-  ::google::protobuf::int32 id2_;
+  ::google::protobuf::int32 talkid_;
   ::google::protobuf::int32 avtype_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
@@ -2068,7 +2424,7 @@ class respTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_respTalk_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   void Swap(respTalk* other);
   friend void swap(respTalk& a, respTalk& b) {
@@ -2154,21 +2510,15 @@ class respTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::DDRCommProto::respTalk_eReceiverType receivertype() const;
   void set_receivertype(::DDRCommProto::respTalk_eReceiverType value);
 
-  // int32 id1 = 2;
-  void clear_id1();
-  static const int kId1FieldNumber = 2;
-  ::google::protobuf::int32 id1() const;
-  void set_id1(::google::protobuf::int32 value);
+  // int32 talkID = 2;
+  void clear_talkid();
+  static const int kTalkIDFieldNumber = 2;
+  ::google::protobuf::int32 talkid() const;
+  void set_talkid(::google::protobuf::int32 value);
 
-  // int32 id2 = 3;
-  void clear_id2();
-  static const int kId2FieldNumber = 3;
-  ::google::protobuf::int32 id2() const;
-  void set_id2(::google::protobuf::int32 value);
-
-  // int32 avType = 4;
+  // int32 avType = 3;
   void clear_avtype();
-  static const int kAvTypeFieldNumber = 4;
+  static const int kAvTypeFieldNumber = 3;
   ::google::protobuf::int32 avtype() const;
   void set_avtype(::google::protobuf::int32 value);
 
@@ -2177,9 +2527,118 @@ class respTalk : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   int receivertype_;
-  ::google::protobuf::int32 id1_;
-  ::google::protobuf::int32 id2_;
+  ::google::protobuf::int32 talkid_;
   ::google::protobuf::int32 avtype_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class reqTalkHB : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqTalkHB) */ {
+ public:
+  reqTalkHB();
+  virtual ~reqTalkHB();
+
+  reqTalkHB(const reqTalkHB& from);
+
+  inline reqTalkHB& operator=(const reqTalkHB& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  reqTalkHB(reqTalkHB&& from) noexcept
+    : reqTalkHB() {
+    *this = ::std::move(from);
+  }
+
+  inline reqTalkHB& operator=(reqTalkHB&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const reqTalkHB& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const reqTalkHB* internal_default_instance() {
+    return reinterpret_cast<const reqTalkHB*>(
+               &_reqTalkHB_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  void Swap(reqTalkHB* other);
+  friend void swap(reqTalkHB& a, reqTalkHB& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline reqTalkHB* New() const final {
+    return CreateMaybeMessage<reqTalkHB>(NULL);
+  }
+
+  reqTalkHB* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqTalkHB>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const reqTalkHB& from);
+  void MergeFrom(const reqTalkHB& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(reqTalkHB* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 callerTalkID = 1;
+  void clear_callertalkid();
+  static const int kCallerTalkIDFieldNumber = 1;
+  ::google::protobuf::int32 callertalkid() const;
+  void set_callertalkid(::google::protobuf::int32 value);
+
+  // int32 receiverTalkID = 2;
+  void clear_receivertalkid();
+  static const int kReceiverTalkIDFieldNumber = 2;
+  ::google::protobuf::int32 receivertalkid() const;
+  void set_receivertalkid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqTalkHB)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 callertalkid_;
+  ::google::protobuf::int32 receivertalkid_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -2220,7 +2679,7 @@ class reqCmd : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
                &_reqCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    14;
 
   void Swap(reqCmd* other);
   friend void swap(reqCmd& a, reqCmd& b) {
@@ -2338,7 +2797,7 @@ class respCmd : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_respCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    15;
 
   void Swap(respCmd* other);
   friend void swap(respCmd& a, respCmd& b) {
@@ -2456,7 +2915,7 @@ class reqFile : public ::google::protobuf::Message /* @@protoc_insertion_point(c
                &_reqFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    16;
 
   void Swap(reqFile* other);
   friend void swap(reqFile& a, reqFile& b) {
@@ -2506,35 +2965,85 @@ class reqFile : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // nested types ----------------------------------------------------
 
+  typedef reqFile_eFileTypes eFileTypes;
+  static const eFileTypes FileContents =
+    reqFile_eFileTypes_FileContents;
+  static const eFileTypes FileList =
+    reqFile_eFileTypes_FileList;
+  static const eFileTypes FolderFlist =
+    reqFile_eFileTypes_FolderFlist;
+  static inline bool eFileTypes_IsValid(int value) {
+    return reqFile_eFileTypes_IsValid(value);
+  }
+  static const eFileTypes eFileTypes_MIN =
+    reqFile_eFileTypes_eFileTypes_MIN;
+  static const eFileTypes eFileTypes_MAX =
+    reqFile_eFileTypes_eFileTypes_MAX;
+  static const int eFileTypes_ARRAYSIZE =
+    reqFile_eFileTypes_eFileTypes_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eFileTypes_descriptor() {
+    return reqFile_eFileTypes_descriptor();
+  }
+  static inline const ::std::string& eFileTypes_Name(eFileTypes value) {
+    return reqFile_eFileTypes_Name(value);
+  }
+  static inline bool eFileTypes_Parse(const ::std::string& name,
+      eFileTypes* value) {
+    return reqFile_eFileTypes_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
-  // repeated string fileName = 1;
-  int filename_size() const;
-  void clear_filename();
-  static const int kFileNameFieldNumber = 1;
-  const ::std::string& filename(int index) const;
-  ::std::string* mutable_filename(int index);
-  void set_filename(int index, const ::std::string& value);
+  // repeated string fileNames = 3;
+  int filenames_size() const;
+  void clear_filenames();
+  static const int kFileNamesFieldNumber = 3;
+  const ::std::string& filenames(int index) const;
+  ::std::string* mutable_filenames(int index);
+  void set_filenames(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_filename(int index, ::std::string&& value);
+  void set_filenames(int index, ::std::string&& value);
   #endif
-  void set_filename(int index, const char* value);
-  void set_filename(int index, const char* value, size_t size);
-  ::std::string* add_filename();
-  void add_filename(const ::std::string& value);
+  void set_filenames(int index, const char* value);
+  void set_filenames(int index, const char* value, size_t size);
+  ::std::string* add_filenames();
+  void add_filenames(const ::std::string& value);
   #if LANG_CXX11
-  void add_filename(::std::string&& value);
+  void add_filenames(::std::string&& value);
   #endif
-  void add_filename(const char* value);
-  void add_filename(const char* value, size_t size);
-  const ::google::protobuf::RepeatedPtrField< ::std::string>& filename() const;
-  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filename();
+  void add_filenames(const char* value);
+  void add_filenames(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filenames() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filenames();
+
+  // string tarLSMName = 1;
+  void clear_tarlsmname();
+  static const int kTarLSMNameFieldNumber = 1;
+  const ::std::string& tarlsmname() const;
+  void set_tarlsmname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_tarlsmname(::std::string&& value);
+  #endif
+  void set_tarlsmname(const char* value);
+  void set_tarlsmname(const char* value, size_t size);
+  ::std::string* mutable_tarlsmname();
+  ::std::string* release_tarlsmname();
+  void set_allocated_tarlsmname(::std::string* tarlsmname);
+
+  // .DDRCommProto.reqFile.eFileTypes fileType = 2;
+  void clear_filetype();
+  static const int kFileTypeFieldNumber = 2;
+  ::DDRCommProto::reqFile_eFileTypes filetype() const;
+  void set_filetype(::DDRCommProto::reqFile_eFileTypes value);
 
   // @@protoc_insertion_point(class_scope:DDRCommProto.reqFile)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> filename_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filenames_;
+  ::google::protobuf::internal::ArenaStringPtr tarlsmname_;
+  int filetype_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
@@ -2575,7 +3084,7 @@ class respFile : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_respFile_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    17;
 
   void Swap(respFile* other);
   friend void swap(respFile& a, respFile& b) {
@@ -2625,34 +3134,423 @@ class respFile : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // nested types ----------------------------------------------------
 
+  typedef respFile_eFileTypes eFileTypes;
+  static const eFileTypes FileContents =
+    respFile_eFileTypes_FileContents;
+  static const eFileTypes FileList =
+    respFile_eFileTypes_FileList;
+  static const eFileTypes FolderFlist =
+    respFile_eFileTypes_FolderFlist;
+  static inline bool eFileTypes_IsValid(int value) {
+    return respFile_eFileTypes_IsValid(value);
+  }
+  static const eFileTypes eFileTypes_MIN =
+    respFile_eFileTypes_eFileTypes_MIN;
+  static const eFileTypes eFileTypes_MAX =
+    respFile_eFileTypes_eFileTypes_MAX;
+  static const int eFileTypes_ARRAYSIZE =
+    respFile_eFileTypes_eFileTypes_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eFileTypes_descriptor() {
+    return respFile_eFileTypes_descriptor();
+  }
+  static inline const ::std::string& eFileTypes_Name(eFileTypes value) {
+    return respFile_eFileTypes_Name(value);
+  }
+  static inline bool eFileTypes_Parse(const ::std::string& name,
+      eFileTypes* value) {
+    return respFile_eFileTypes_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
-  // repeated string fileName = 1;
-  int filename_size() const;
-  void clear_filename();
-  static const int kFileNameFieldNumber = 1;
-  const ::std::string& filename(int index) const;
-  ::std::string* mutable_filename(int index);
-  void set_filename(int index, const ::std::string& value);
+  // repeated string fileNames = 3;
+  int filenames_size() const;
+  void clear_filenames();
+  static const int kFileNamesFieldNumber = 3;
+  const ::std::string& filenames(int index) const;
+  ::std::string* mutable_filenames(int index);
+  void set_filenames(int index, const ::std::string& value);
   #if LANG_CXX11
-  void set_filename(int index, ::std::string&& value);
+  void set_filenames(int index, ::std::string&& value);
   #endif
-  void set_filename(int index, const char* value);
-  void set_filename(int index, const char* value, size_t size);
-  ::std::string* add_filename();
-  void add_filename(const ::std::string& value);
+  void set_filenames(int index, const char* value);
+  void set_filenames(int index, const char* value, size_t size);
+  ::std::string* add_filenames();
+  void add_filenames(const ::std::string& value);
   #if LANG_CXX11
-  void add_filename(::std::string&& value);
+  void add_filenames(::std::string&& value);
   #endif
-  void add_filename(const char* value);
-  void add_filename(const char* value, size_t size);
-  const ::google::protobuf::RepeatedPtrField< ::std::string>& filename() const;
-  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filename();
+  void add_filenames(const char* value);
+  void add_filenames(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filenames() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filenames();
 
-  // repeated string fileAddr = 2;
+  // repeated string fileContents = 4;
+  int filecontents_size() const;
+  void clear_filecontents();
+  static const int kFileContentsFieldNumber = 4;
+  const ::std::string& filecontents(int index) const;
+  ::std::string* mutable_filecontents(int index);
+  void set_filecontents(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_filecontents(int index, ::std::string&& value);
+  #endif
+  void set_filecontents(int index, const char* value);
+  void set_filecontents(int index, const char* value, size_t size);
+  ::std::string* add_filecontents();
+  void add_filecontents(const ::std::string& value);
+  #if LANG_CXX11
+  void add_filecontents(::std::string&& value);
+  #endif
+  void add_filecontents(const char* value);
+  void add_filecontents(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filecontents() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filecontents();
+
+  // string tarLSMName = 1;
+  void clear_tarlsmname();
+  static const int kTarLSMNameFieldNumber = 1;
+  const ::std::string& tarlsmname() const;
+  void set_tarlsmname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_tarlsmname(::std::string&& value);
+  #endif
+  void set_tarlsmname(const char* value);
+  void set_tarlsmname(const char* value, size_t size);
+  ::std::string* mutable_tarlsmname();
+  ::std::string* release_tarlsmname();
+  void set_allocated_tarlsmname(::std::string* tarlsmname);
+
+  // .DDRCommProto.respFile.eFileTypes fileType = 2;
+  void clear_filetype();
+  static const int kFileTypeFieldNumber = 2;
+  ::DDRCommProto::respFile_eFileTypes filetype() const;
+  void set_filetype(::DDRCommProto::respFile_eFileTypes value);
+
+  // @@protoc_insertion_point(class_scope:DDRCommProto.respFile)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filenames_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filecontents_;
+  ::google::protobuf::internal::ArenaStringPtr tarlsmname_;
+  int filetype_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class reqFileAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqFileAddr) */ {
+ public:
+  reqFileAddr();
+  virtual ~reqFileAddr();
+
+  reqFileAddr(const reqFileAddr& from);
+
+  inline reqFileAddr& operator=(const reqFileAddr& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  reqFileAddr(reqFileAddr&& from) noexcept
+    : reqFileAddr() {
+    *this = ::std::move(from);
+  }
+
+  inline reqFileAddr& operator=(reqFileAddr&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const reqFileAddr& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const reqFileAddr* internal_default_instance() {
+    return reinterpret_cast<const reqFileAddr*>(
+               &_reqFileAddr_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  void Swap(reqFileAddr* other);
+  friend void swap(reqFileAddr& a, reqFileAddr& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline reqFileAddr* New() const final {
+    return CreateMaybeMessage<reqFileAddr>(NULL);
+  }
+
+  reqFileAddr* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqFileAddr>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const reqFileAddr& from);
+  void MergeFrom(const reqFileAddr& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(reqFileAddr* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef reqFileAddr_eFileTypes eFileTypes;
+  static const eFileTypes FileContents =
+    reqFileAddr_eFileTypes_FileContents;
+  static const eFileTypes FileList =
+    reqFileAddr_eFileTypes_FileList;
+  static const eFileTypes FolderFlist =
+    reqFileAddr_eFileTypes_FolderFlist;
+  static inline bool eFileTypes_IsValid(int value) {
+    return reqFileAddr_eFileTypes_IsValid(value);
+  }
+  static const eFileTypes eFileTypes_MIN =
+    reqFileAddr_eFileTypes_eFileTypes_MIN;
+  static const eFileTypes eFileTypes_MAX =
+    reqFileAddr_eFileTypes_eFileTypes_MAX;
+  static const int eFileTypes_ARRAYSIZE =
+    reqFileAddr_eFileTypes_eFileTypes_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eFileTypes_descriptor() {
+    return reqFileAddr_eFileTypes_descriptor();
+  }
+  static inline const ::std::string& eFileTypes_Name(eFileTypes value) {
+    return reqFileAddr_eFileTypes_Name(value);
+  }
+  static inline bool eFileTypes_Parse(const ::std::string& name,
+      eFileTypes* value) {
+    return reqFileAddr_eFileTypes_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated string fileNames = 3;
+  int filenames_size() const;
+  void clear_filenames();
+  static const int kFileNamesFieldNumber = 3;
+  const ::std::string& filenames(int index) const;
+  ::std::string* mutable_filenames(int index);
+  void set_filenames(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_filenames(int index, ::std::string&& value);
+  #endif
+  void set_filenames(int index, const char* value);
+  void set_filenames(int index, const char* value, size_t size);
+  ::std::string* add_filenames();
+  void add_filenames(const ::std::string& value);
+  #if LANG_CXX11
+  void add_filenames(::std::string&& value);
+  #endif
+  void add_filenames(const char* value);
+  void add_filenames(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filenames() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filenames();
+
+  // string tarLSMName = 1;
+  void clear_tarlsmname();
+  static const int kTarLSMNameFieldNumber = 1;
+  const ::std::string& tarlsmname() const;
+  void set_tarlsmname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_tarlsmname(::std::string&& value);
+  #endif
+  void set_tarlsmname(const char* value);
+  void set_tarlsmname(const char* value, size_t size);
+  ::std::string* mutable_tarlsmname();
+  ::std::string* release_tarlsmname();
+  void set_allocated_tarlsmname(::std::string* tarlsmname);
+
+  // .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+  void clear_filetype();
+  static const int kFileTypeFieldNumber = 2;
+  ::DDRCommProto::reqFileAddr_eFileTypes filetype() const;
+  void set_filetype(::DDRCommProto::reqFileAddr_eFileTypes value);
+
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqFileAddr)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filenames_;
+  ::google::protobuf::internal::ArenaStringPtr tarlsmname_;
+  int filetype_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class respFileAddr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.respFileAddr) */ {
+ public:
+  respFileAddr();
+  virtual ~respFileAddr();
+
+  respFileAddr(const respFileAddr& from);
+
+  inline respFileAddr& operator=(const respFileAddr& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  respFileAddr(respFileAddr&& from) noexcept
+    : respFileAddr() {
+    *this = ::std::move(from);
+  }
+
+  inline respFileAddr& operator=(respFileAddr&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const respFileAddr& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const respFileAddr* internal_default_instance() {
+    return reinterpret_cast<const respFileAddr*>(
+               &_respFileAddr_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    19;
+
+  void Swap(respFileAddr* other);
+  friend void swap(respFileAddr& a, respFileAddr& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline respFileAddr* New() const final {
+    return CreateMaybeMessage<respFileAddr>(NULL);
+  }
+
+  respFileAddr* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<respFileAddr>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const respFileAddr& from);
+  void MergeFrom(const respFileAddr& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(respFileAddr* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef respFileAddr_eFileTypes eFileTypes;
+  static const eFileTypes FileContents =
+    respFileAddr_eFileTypes_FileContents;
+  static const eFileTypes FileList =
+    respFileAddr_eFileTypes_FileList;
+  static const eFileTypes FolderFlist =
+    respFileAddr_eFileTypes_FolderFlist;
+  static inline bool eFileTypes_IsValid(int value) {
+    return respFileAddr_eFileTypes_IsValid(value);
+  }
+  static const eFileTypes eFileTypes_MIN =
+    respFileAddr_eFileTypes_eFileTypes_MIN;
+  static const eFileTypes eFileTypes_MAX =
+    respFileAddr_eFileTypes_eFileTypes_MAX;
+  static const int eFileTypes_ARRAYSIZE =
+    respFileAddr_eFileTypes_eFileTypes_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  eFileTypes_descriptor() {
+    return respFileAddr_eFileTypes_descriptor();
+  }
+  static inline const ::std::string& eFileTypes_Name(eFileTypes value) {
+    return respFileAddr_eFileTypes_Name(value);
+  }
+  static inline bool eFileTypes_Parse(const ::std::string& name,
+      eFileTypes* value) {
+    return respFileAddr_eFileTypes_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // repeated string fileNames = 3;
+  int filenames_size() const;
+  void clear_filenames();
+  static const int kFileNamesFieldNumber = 3;
+  const ::std::string& filenames(int index) const;
+  ::std::string* mutable_filenames(int index);
+  void set_filenames(int index, const ::std::string& value);
+  #if LANG_CXX11
+  void set_filenames(int index, ::std::string&& value);
+  #endif
+  void set_filenames(int index, const char* value);
+  void set_filenames(int index, const char* value, size_t size);
+  ::std::string* add_filenames();
+  void add_filenames(const ::std::string& value);
+  #if LANG_CXX11
+  void add_filenames(::std::string&& value);
+  #endif
+  void add_filenames(const char* value);
+  void add_filenames(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& filenames() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_filenames();
+
+  // repeated string fileAddr = 4;
   int fileaddr_size() const;
   void clear_fileaddr();
-  static const int kFileAddrFieldNumber = 2;
+  static const int kFileAddrFieldNumber = 4;
   const ::std::string& fileaddr(int index) const;
   ::std::string* mutable_fileaddr(int index);
   void set_fileaddr(int index, const ::std::string& value);
@@ -2671,35 +3569,57 @@ class respFile : public ::google::protobuf::Message /* @@protoc_insertion_point(
   const ::google::protobuf::RepeatedPtrField< ::std::string>& fileaddr() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_fileaddr();
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.respFile)
+  // string tarLSMName = 1;
+  void clear_tarlsmname();
+  static const int kTarLSMNameFieldNumber = 1;
+  const ::std::string& tarlsmname() const;
+  void set_tarlsmname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_tarlsmname(::std::string&& value);
+  #endif
+  void set_tarlsmname(const char* value);
+  void set_tarlsmname(const char* value, size_t size);
+  ::std::string* mutable_tarlsmname();
+  ::std::string* release_tarlsmname();
+  void set_allocated_tarlsmname(::std::string* tarlsmname);
+
+  // .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+  void clear_filetype();
+  static const int kFileTypeFieldNumber = 2;
+  ::DDRCommProto::respFileAddr_eFileTypes filetype() const;
+  void set_filetype(::DDRCommProto::respFileAddr_eFileTypes value);
+
+  // @@protoc_insertion_point(class_scope:DDRCommProto.respFileAddr)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> filename_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> filenames_;
   ::google::protobuf::RepeatedPtrField< ::std::string> fileaddr_;
+  ::google::protobuf::internal::ArenaStringPtr tarlsmname_;
+  int filetype_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_BaseCmd_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.notifyStatus) */ {
+class reqStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqStatus) */ {
  public:
-  notifyStatus();
-  virtual ~notifyStatus();
+  reqStatus();
+  virtual ~reqStatus();
 
-  notifyStatus(const notifyStatus& from);
+  reqStatus(const reqStatus& from);
 
-  inline notifyStatus& operator=(const notifyStatus& from) {
+  inline reqStatus& operator=(const reqStatus& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  notifyStatus(notifyStatus&& from) noexcept
-    : notifyStatus() {
+  reqStatus(reqStatus&& from) noexcept
+    : reqStatus() {
     *this = ::std::move(from);
   }
 
-  inline notifyStatus& operator=(notifyStatus&& from) noexcept {
+  inline reqStatus& operator=(reqStatus&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -2709,34 +3629,34 @@ class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const notifyStatus& default_instance();
+  static const reqStatus& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const notifyStatus* internal_default_instance() {
-    return reinterpret_cast<const notifyStatus*>(
-               &_notifyStatus_default_instance_);
+  static inline const reqStatus* internal_default_instance() {
+    return reinterpret_cast<const reqStatus*>(
+               &_reqStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    20;
 
-  void Swap(notifyStatus* other);
-  friend void swap(notifyStatus& a, notifyStatus& b) {
+  void Swap(reqStatus* other);
+  friend void swap(reqStatus& a, reqStatus& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline notifyStatus* New() const final {
-    return CreateMaybeMessage<notifyStatus>(NULL);
+  inline reqStatus* New() const final {
+    return CreateMaybeMessage<reqStatus>(NULL);
   }
 
-  notifyStatus* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<notifyStatus>(arena);
+  reqStatus* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqStatus>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const notifyStatus& from);
-  void MergeFrom(const notifyStatus& from);
+  void CopyFrom(const reqStatus& from);
+  void MergeFrom(const reqStatus& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -2753,7 +3673,7 @@ class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(notifyStatus* other);
+  void InternalSwap(reqStatus* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -2783,7 +3703,7 @@ class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_statusmsg();
   void set_allocated_statusmsg(::std::string* statusmsg);
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.notifyStatus)
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqStatus)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -2793,24 +3713,24 @@ class notifyStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.notifyAlarm) */ {
+class reqAlarm : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqAlarm) */ {
  public:
-  notifyAlarm();
-  virtual ~notifyAlarm();
+  reqAlarm();
+  virtual ~reqAlarm();
 
-  notifyAlarm(const notifyAlarm& from);
+  reqAlarm(const reqAlarm& from);
 
-  inline notifyAlarm& operator=(const notifyAlarm& from) {
+  inline reqAlarm& operator=(const reqAlarm& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  notifyAlarm(notifyAlarm&& from) noexcept
-    : notifyAlarm() {
+  reqAlarm(reqAlarm&& from) noexcept
+    : reqAlarm() {
     *this = ::std::move(from);
   }
 
-  inline notifyAlarm& operator=(notifyAlarm&& from) noexcept {
+  inline reqAlarm& operator=(reqAlarm&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -2820,34 +3740,34 @@ class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_poi
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const notifyAlarm& default_instance();
+  static const reqAlarm& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const notifyAlarm* internal_default_instance() {
-    return reinterpret_cast<const notifyAlarm*>(
-               &_notifyAlarm_default_instance_);
+  static inline const reqAlarm* internal_default_instance() {
+    return reinterpret_cast<const reqAlarm*>(
+               &_reqAlarm_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    21;
 
-  void Swap(notifyAlarm* other);
-  friend void swap(notifyAlarm& a, notifyAlarm& b) {
+  void Swap(reqAlarm* other);
+  friend void swap(reqAlarm& a, reqAlarm& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline notifyAlarm* New() const final {
-    return CreateMaybeMessage<notifyAlarm>(NULL);
+  inline reqAlarm* New() const final {
+    return CreateMaybeMessage<reqAlarm>(NULL);
   }
 
-  notifyAlarm* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<notifyAlarm>(arena);
+  reqAlarm* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqAlarm>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const notifyAlarm& from);
-  void MergeFrom(const notifyAlarm& from);
+  void CopyFrom(const reqAlarm& from);
+  void MergeFrom(const reqAlarm& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -2864,7 +3784,7 @@ class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(notifyAlarm* other);
+  void InternalSwap(reqAlarm* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -2894,7 +3814,7 @@ class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_alarmmsg();
   void set_allocated_alarmmsg(::std::string* alarmmsg);
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.notifyAlarm)
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqAlarm)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -2904,24 +3824,24 @@ class notifyAlarm : public ::google::protobuf::Message /* @@protoc_insertion_poi
 };
 // -------------------------------------------------------------------
 
-class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.notifyTextChat) */ {
+class reqTextChat : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DDRCommProto.reqTextChat) */ {
  public:
-  notifyTextChat();
-  virtual ~notifyTextChat();
+  reqTextChat();
+  virtual ~reqTextChat();
 
-  notifyTextChat(const notifyTextChat& from);
+  reqTextChat(const reqTextChat& from);
 
-  inline notifyTextChat& operator=(const notifyTextChat& from) {
+  inline reqTextChat& operator=(const reqTextChat& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  notifyTextChat(notifyTextChat&& from) noexcept
-    : notifyTextChat() {
+  reqTextChat(reqTextChat&& from) noexcept
+    : reqTextChat() {
     *this = ::std::move(from);
   }
 
-  inline notifyTextChat& operator=(notifyTextChat&& from) noexcept {
+  inline reqTextChat& operator=(reqTextChat&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -2931,34 +3851,34 @@ class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const notifyTextChat& default_instance();
+  static const reqTextChat& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const notifyTextChat* internal_default_instance() {
-    return reinterpret_cast<const notifyTextChat*>(
-               &_notifyTextChat_default_instance_);
+  static inline const reqTextChat* internal_default_instance() {
+    return reinterpret_cast<const reqTextChat*>(
+               &_reqTextChat_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    22;
 
-  void Swap(notifyTextChat* other);
-  friend void swap(notifyTextChat& a, notifyTextChat& b) {
+  void Swap(reqTextChat* other);
+  friend void swap(reqTextChat& a, reqTextChat& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline notifyTextChat* New() const final {
-    return CreateMaybeMessage<notifyTextChat>(NULL);
+  inline reqTextChat* New() const final {
+    return CreateMaybeMessage<reqTextChat>(NULL);
   }
 
-  notifyTextChat* New(::google::protobuf::Arena* arena) const final {
-    return CreateMaybeMessage<notifyTextChat>(arena);
+  reqTextChat* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<reqTextChat>(arena);
   }
   void CopyFrom(const ::google::protobuf::Message& from) final;
   void MergeFrom(const ::google::protobuf::Message& from) final;
-  void CopyFrom(const notifyTextChat& from);
-  void MergeFrom(const notifyTextChat& from);
+  void CopyFrom(const reqTextChat& from);
+  void MergeFrom(const reqTextChat& from);
   void Clear() final;
   bool IsInitialized() const final;
 
@@ -2975,7 +3895,7 @@ class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(notifyTextChat* other);
+  void InternalSwap(reqTextChat* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -3005,7 +3925,7 @@ class notifyTextChat : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_chattext();
   void set_allocated_chattext(::std::string* chattext);
 
-  // @@protoc_insertion_point(class_scope:DDRCommProto.notifyTextChat)
+  // @@protoc_insertion_point(class_scope:DDRCommProto.reqTextChat)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -3107,103 +4027,129 @@ CommonHeader::mutable_flowdirection() {
   return &flowdirection_;
 }
 
-// repeated .DDRCommProto.CommonHeader.eDestType destType = 3;
-inline int CommonHeader::desttype_size() const {
-  return desttype_.size();
+// int32 bOriginal = 3;
+inline void CommonHeader::clear_boriginal() {
+  boriginal_ = 0;
 }
-inline void CommonHeader::clear_desttype() {
-  desttype_.Clear();
+inline ::google::protobuf::int32 CommonHeader::boriginal() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.bOriginal)
+  return boriginal_;
 }
-inline ::DDRCommProto::CommonHeader_eDestType CommonHeader::desttype(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.destType)
-  return static_cast< ::DDRCommProto::CommonHeader_eDestType >(desttype_.Get(index));
-}
-inline void CommonHeader::set_desttype(int index, ::DDRCommProto::CommonHeader_eDestType value) {
-  desttype_.Set(index, value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.destType)
-}
-inline void CommonHeader::add_desttype(::DDRCommProto::CommonHeader_eDestType value) {
-  desttype_.Add(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.CommonHeader.destType)
-}
-inline const ::google::protobuf::RepeatedField<int>&
-CommonHeader::desttype() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.CommonHeader.destType)
-  return desttype_;
-}
-inline ::google::protobuf::RepeatedField<int>*
-CommonHeader::mutable_desttype() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.CommonHeader.destType)
-  return &desttype_;
+inline void CommonHeader::set_boriginal(::google::protobuf::int32 value) {
+  
+  boriginal_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.bOriginal)
 }
 
-// repeated string destInfo = 4;
-inline int CommonHeader::destinfo_size() const {
-  return destinfo_.size();
+// .DDRCommProto.CommonHeader.eSrcCondition srcCond = 4;
+inline void CommonHeader::clear_srccond() {
+  srccond_ = 0;
 }
-inline void CommonHeader::clear_destinfo() {
-  destinfo_.Clear();
+inline ::DDRCommProto::CommonHeader_eSrcCondition CommonHeader::srccond() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.srcCond)
+  return static_cast< ::DDRCommProto::CommonHeader_eSrcCondition >(srccond_);
 }
-inline const ::std::string& CommonHeader::destinfo(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.destInfo)
-  return destinfo_.Get(index);
+inline void CommonHeader::set_srccond(::DDRCommProto::CommonHeader_eSrcCondition value) {
+  
+  srccond_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.srcCond)
 }
-inline ::std::string* CommonHeader::mutable_destinfo(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.CommonHeader.destInfo)
-  return destinfo_.Mutable(index);
+
+// .DDRCommProto.CommonHeader.eForwardingType forwardType = 5;
+inline void CommonHeader::clear_forwardtype() {
+  forwardtype_ = 0;
 }
-inline void CommonHeader::set_destinfo(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.destInfo)
-  destinfo_.Mutable(index)->assign(value);
+inline ::DDRCommProto::CommonHeader_eForwardingType CommonHeader::forwardtype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.forwardType)
+  return static_cast< ::DDRCommProto::CommonHeader_eForwardingType >(forwardtype_);
+}
+inline void CommonHeader::set_forwardtype(::DDRCommProto::CommonHeader_eForwardingType value) {
+  
+  forwardtype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.forwardType)
+}
+
+// .DDRCommProto.CommonHeader.eSrcRecType recType = 6;
+inline void CommonHeader::clear_rectype() {
+  rectype_ = 0;
+}
+inline ::DDRCommProto::CommonHeader_eSrcRecType CommonHeader::rectype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.recType)
+  return static_cast< ::DDRCommProto::CommonHeader_eSrcRecType >(rectype_);
+}
+inline void CommonHeader::set_rectype(::DDRCommProto::CommonHeader_eSrcRecType value) {
+  
+  rectype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.recType)
+}
+
+// repeated string prevRouteAddr = 7;
+inline int CommonHeader::prevrouteaddr_size() const {
+  return prevrouteaddr_.size();
+}
+inline void CommonHeader::clear_prevrouteaddr() {
+  prevrouteaddr_.Clear();
+}
+inline const ::std::string& CommonHeader::prevrouteaddr(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.CommonHeader.prevRouteAddr)
+  return prevrouteaddr_.Get(index);
+}
+inline ::std::string* CommonHeader::mutable_prevrouteaddr(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.CommonHeader.prevRouteAddr)
+  return prevrouteaddr_.Mutable(index);
+}
+inline void CommonHeader::set_prevrouteaddr(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.prevRouteAddr)
+  prevrouteaddr_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void CommonHeader::set_destinfo(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.destInfo)
-  destinfo_.Mutable(index)->assign(std::move(value));
+inline void CommonHeader::set_prevrouteaddr(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.CommonHeader.prevRouteAddr)
+  prevrouteaddr_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void CommonHeader::set_destinfo(int index, const char* value) {
+inline void CommonHeader::set_prevrouteaddr(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  destinfo_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.CommonHeader.destInfo)
+  prevrouteaddr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.CommonHeader.prevRouteAddr)
 }
-inline void CommonHeader::set_destinfo(int index, const char* value, size_t size) {
-  destinfo_.Mutable(index)->assign(
+inline void CommonHeader::set_prevrouteaddr(int index, const char* value, size_t size) {
+  prevrouteaddr_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.CommonHeader.destInfo)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.CommonHeader.prevRouteAddr)
 }
-inline ::std::string* CommonHeader::add_destinfo() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.CommonHeader.destInfo)
-  return destinfo_.Add();
+inline ::std::string* CommonHeader::add_prevrouteaddr() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.CommonHeader.prevRouteAddr)
+  return prevrouteaddr_.Add();
 }
-inline void CommonHeader::add_destinfo(const ::std::string& value) {
-  destinfo_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.CommonHeader.destInfo)
+inline void CommonHeader::add_prevrouteaddr(const ::std::string& value) {
+  prevrouteaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.CommonHeader.prevRouteAddr)
 }
 #if LANG_CXX11
-inline void CommonHeader::add_destinfo(::std::string&& value) {
-  destinfo_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.CommonHeader.destInfo)
+inline void CommonHeader::add_prevrouteaddr(::std::string&& value) {
+  prevrouteaddr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.CommonHeader.prevRouteAddr)
 }
 #endif
-inline void CommonHeader::add_destinfo(const char* value) {
+inline void CommonHeader::add_prevrouteaddr(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  destinfo_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.CommonHeader.destInfo)
+  prevrouteaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.CommonHeader.prevRouteAddr)
 }
-inline void CommonHeader::add_destinfo(const char* value, size_t size) {
-  destinfo_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.CommonHeader.destInfo)
+inline void CommonHeader::add_prevrouteaddr(const char* value, size_t size) {
+  prevrouteaddr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.CommonHeader.prevRouteAddr)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-CommonHeader::destinfo() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.CommonHeader.destInfo)
-  return destinfo_;
+CommonHeader::prevrouteaddr() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.CommonHeader.prevRouteAddr)
+  return prevrouteaddr_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-CommonHeader::mutable_destinfo() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.CommonHeader.destInfo)
-  return &destinfo_;
+CommonHeader::mutable_prevrouteaddr() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.CommonHeader.prevRouteAddr)
+  return &prevrouteaddr_;
 }
 
 // -------------------------------------------------------------------
@@ -3265,142 +4211,200 @@ inline void heartBeat::set_allocated_whatever(::std::string* whatever) {
 
 // -------------------------------------------------------------------
 
-// bcLSAddr
+// bcLSAddr_ServerInfo
 
 // string name = 1;
-inline void bcLSAddr::clear_name() {
+inline void bcLSAddr_ServerInfo::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& bcLSAddr::name() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.name)
+inline const ::std::string& bcLSAddr_ServerInfo::name() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.ServerInfo.name)
   return name_.GetNoArena();
 }
-inline void bcLSAddr::set_name(const ::std::string& value) {
+inline void bcLSAddr_ServerInfo::set_name(const ::std::string& value) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ServerInfo.name)
 }
 #if LANG_CXX11
-inline void bcLSAddr::set_name(::std::string&& value) {
+inline void bcLSAddr_ServerInfo::set_name(::std::string&& value) {
   
   name_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.bcLSAddr.ServerInfo.name)
 }
 #endif
-inline void bcLSAddr::set_name(const char* value) {
+inline void bcLSAddr_ServerInfo::set_name(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.bcLSAddr.ServerInfo.name)
 }
-inline void bcLSAddr::set_name(const char* value, size_t size) {
+inline void bcLSAddr_ServerInfo::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.bcLSAddr.ServerInfo.name)
 }
-inline ::std::string* bcLSAddr::mutable_name() {
+inline ::std::string* bcLSAddr_ServerInfo::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.ServerInfo.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* bcLSAddr::release_name() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.bcLSAddr.name)
+inline ::std::string* bcLSAddr_ServerInfo::release_name() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.bcLSAddr.ServerInfo.name)
   
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void bcLSAddr::set_allocated_name(::std::string* name) {
+inline void bcLSAddr_ServerInfo::set_allocated_name(::std::string* name) {
   if (name != NULL) {
     
   } else {
     
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.bcLSAddr.name)
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.bcLSAddr.ServerInfo.name)
 }
 
 // repeated string ips = 2;
-inline int bcLSAddr::ips_size() const {
+inline int bcLSAddr_ServerInfo::ips_size() const {
   return ips_.size();
 }
-inline void bcLSAddr::clear_ips() {
+inline void bcLSAddr_ServerInfo::clear_ips() {
   ips_.Clear();
 }
-inline const ::std::string& bcLSAddr::ips(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.ips)
+inline const ::std::string& bcLSAddr_ServerInfo::ips(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.ServerInfo.ips)
   return ips_.Get(index);
 }
-inline ::std::string* bcLSAddr::mutable_ips(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.ips)
+inline ::std::string* bcLSAddr_ServerInfo::mutable_ips(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.ServerInfo.ips)
   return ips_.Mutable(index);
 }
-inline void bcLSAddr::set_ips(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ips)
+inline void bcLSAddr_ServerInfo::set_ips(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ServerInfo.ips)
   ips_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void bcLSAddr::set_ips(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ips)
+inline void bcLSAddr_ServerInfo::set_ips(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ServerInfo.ips)
   ips_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void bcLSAddr::set_ips(int index, const char* value) {
+inline void bcLSAddr_ServerInfo::set_ips(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
   ips_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
-inline void bcLSAddr::set_ips(int index, const char* value, size_t size) {
+inline void bcLSAddr_ServerInfo::set_ips(int index, const char* value, size_t size) {
   ips_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
-inline ::std::string* bcLSAddr::add_ips() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.bcLSAddr.ips)
+inline ::std::string* bcLSAddr_ServerInfo::add_ips() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.bcLSAddr.ServerInfo.ips)
   return ips_.Add();
 }
-inline void bcLSAddr::add_ips(const ::std::string& value) {
+inline void bcLSAddr_ServerInfo::add_ips(const ::std::string& value) {
   ips_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
 #if LANG_CXX11
-inline void bcLSAddr::add_ips(::std::string&& value) {
+inline void bcLSAddr_ServerInfo::add_ips(::std::string&& value) {
   ips_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_add:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
 #endif
-inline void bcLSAddr::add_ips(const char* value) {
+inline void bcLSAddr_ServerInfo::add_ips(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   ips_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
-inline void bcLSAddr::add_ips(const char* value, size_t size) {
+inline void bcLSAddr_ServerInfo::add_ips(const char* value, size_t size) {
   ips_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.bcLSAddr.ips)
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.bcLSAddr.ServerInfo.ips)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-bcLSAddr::ips() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.bcLSAddr.ips)
+bcLSAddr_ServerInfo::ips() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.bcLSAddr.ServerInfo.ips)
   return ips_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-bcLSAddr::mutable_ips() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.bcLSAddr.ips)
+bcLSAddr_ServerInfo::mutable_ips() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.bcLSAddr.ServerInfo.ips)
   return &ips_;
 }
 
 // int32 port = 3;
-inline void bcLSAddr::clear_port() {
+inline void bcLSAddr_ServerInfo::clear_port() {
   port_ = 0;
 }
-inline ::google::protobuf::int32 bcLSAddr::port() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.port)
+inline ::google::protobuf::int32 bcLSAddr_ServerInfo::port() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.ServerInfo.port)
   return port_;
 }
-inline void bcLSAddr::set_port(::google::protobuf::int32 value) {
+inline void bcLSAddr_ServerInfo::set_port(::google::protobuf::int32 value) {
   
   port_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.port)
+  // @@protoc_insertion_point(field_set:DDRCommProto.bcLSAddr.ServerInfo.port)
+}
+
+// -------------------------------------------------------------------
+
+// bcLSAddr
+
+// .DDRCommProto.bcLSAddr.ServerInfo LSInfo = 1;
+inline bool bcLSAddr::has_lsinfo() const {
+  return this != internal_default_instance() && lsinfo_ != NULL;
+}
+inline void bcLSAddr::clear_lsinfo() {
+  if (GetArenaNoVirtual() == NULL && lsinfo_ != NULL) {
+    delete lsinfo_;
+  }
+  lsinfo_ = NULL;
+}
+inline const ::DDRCommProto::bcLSAddr_ServerInfo& bcLSAddr::_internal_lsinfo() const {
+  return *lsinfo_;
+}
+inline const ::DDRCommProto::bcLSAddr_ServerInfo& bcLSAddr::lsinfo() const {
+  const ::DDRCommProto::bcLSAddr_ServerInfo* p = lsinfo_;
+  // @@protoc_insertion_point(field_get:DDRCommProto.bcLSAddr.LSInfo)
+  return p != NULL ? *p : *reinterpret_cast<const ::DDRCommProto::bcLSAddr_ServerInfo*>(
+      &::DDRCommProto::_bcLSAddr_ServerInfo_default_instance_);
+}
+inline ::DDRCommProto::bcLSAddr_ServerInfo* bcLSAddr::release_lsinfo() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.bcLSAddr.LSInfo)
+  
+  ::DDRCommProto::bcLSAddr_ServerInfo* temp = lsinfo_;
+  lsinfo_ = NULL;
+  return temp;
+}
+inline ::DDRCommProto::bcLSAddr_ServerInfo* bcLSAddr::mutable_lsinfo() {
+  
+  if (lsinfo_ == NULL) {
+    auto* p = CreateMaybeMessage<::DDRCommProto::bcLSAddr_ServerInfo>(GetArenaNoVirtual());
+    lsinfo_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.bcLSAddr.LSInfo)
+  return lsinfo_;
+}
+inline void bcLSAddr::set_allocated_lsinfo(::DDRCommProto::bcLSAddr_ServerInfo* lsinfo) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete lsinfo_;
+  }
+  if (lsinfo) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      lsinfo = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, lsinfo, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  lsinfo_ = lsinfo;
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.bcLSAddr.LSInfo)
 }
 
 // -------------------------------------------------------------------
@@ -3902,49 +4906,7 @@ notifyTerminalAccess::mutable_namelsms() {
 
 // notifySerAccess
 
-// int32 nClients = 1;
-inline void notifySerAccess::clear_nclients() {
-  nclients_ = 0;
-}
-inline ::google::protobuf::int32 notifySerAccess::nclients() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.nClients)
-  return nclients_;
-}
-inline void notifySerAccess::set_nclients(::google::protobuf::int32 value) {
-  
-  nclients_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.nClients)
-}
-
-// int32 cTopOpLv = 2;
-inline void notifySerAccess::clear_ctopoplv() {
-  ctopoplv_ = 0;
-}
-inline ::google::protobuf::int32 notifySerAccess::ctopoplv() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.cTopOpLv)
-  return ctopoplv_;
-}
-inline void notifySerAccess::set_ctopoplv(::google::protobuf::int32 value) {
-  
-  ctopoplv_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.cTopOpLv)
-}
-
-// int64 cTopOpTime = 3;
-inline void notifySerAccess::clear_ctopoptime() {
-  ctopoptime_ = GOOGLE_LONGLONG(0);
-}
-inline ::google::protobuf::int64 notifySerAccess::ctopoptime() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.cTopOpTime)
-  return ctopoptime_;
-}
-inline void notifySerAccess::set_ctopoptime(::google::protobuf::int64 value) {
-  
-  ctopoptime_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.cTopOpTime)
-}
-
-// int32 nMonitors = 4;
+// int32 nMonitors = 1;
 inline void notifySerAccess::clear_nmonitors() {
   nmonitors_ = 0;
 }
@@ -3958,7 +4920,7 @@ inline void notifySerAccess::set_nmonitors(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.nMonitors)
 }
 
-// int32 mTopOpLv = 5;
+// int32 mTopOpLv = 2;
 inline void notifySerAccess::clear_mtopoplv() {
   mtopoplv_ = 0;
 }
@@ -3972,7 +4934,7 @@ inline void notifySerAccess::set_mtopoplv(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.mTopOpLv)
 }
 
-// int32 mTopOpTime = 6;
+// int32 mTopOpTime = 3;
 inline void notifySerAccess::clear_mtopoptime() {
   mtopoptime_ = 0;
 }
@@ -3984,6 +4946,48 @@ inline void notifySerAccess::set_mtopoptime(::google::protobuf::int32 value) {
   
   mtopoptime_ = value;
   // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.mTopOpTime)
+}
+
+// int32 nClients = 4;
+inline void notifySerAccess::clear_nclients() {
+  nclients_ = 0;
+}
+inline ::google::protobuf::int32 notifySerAccess::nclients() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.nClients)
+  return nclients_;
+}
+inline void notifySerAccess::set_nclients(::google::protobuf::int32 value) {
+  
+  nclients_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.nClients)
+}
+
+// int32 cTopOpLv = 5;
+inline void notifySerAccess::clear_ctopoplv() {
+  ctopoplv_ = 0;
+}
+inline ::google::protobuf::int32 notifySerAccess::ctopoplv() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.cTopOpLv)
+  return ctopoplv_;
+}
+inline void notifySerAccess::set_ctopoplv(::google::protobuf::int32 value) {
+  
+  ctopoplv_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.cTopOpLv)
+}
+
+// int64 cTopOpTime = 6;
+inline void notifySerAccess::clear_ctopoptime() {
+  ctopoptime_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 notifySerAccess::ctopoptime() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.notifySerAccess.cTopOpTime)
+  return ctopoptime_;
+}
+inline void notifySerAccess::set_ctopoptime(::google::protobuf::int64 value) {
+  
+  ctopoptime_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.notifySerAccess.cTopOpTime)
 }
 
 // repeated string namesLSM = 7;
@@ -4394,35 +5398,21 @@ inline void reqTalk::set_callertype(::DDRCommProto::reqTalk_eCallerType value) {
   // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.callerType)
 }
 
-// int32 id1 = 2;
-inline void reqTalk::clear_id1() {
-  id1_ = 0;
+// int32 talkID = 2;
+inline void reqTalk::clear_talkid() {
+  talkid_ = 0;
 }
-inline ::google::protobuf::int32 reqTalk::id1() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalk.id1)
-  return id1_;
+inline ::google::protobuf::int32 reqTalk::talkid() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalk.talkID)
+  return talkid_;
 }
-inline void reqTalk::set_id1(::google::protobuf::int32 value) {
+inline void reqTalk::set_talkid(::google::protobuf::int32 value) {
   
-  id1_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.id1)
+  talkid_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.talkID)
 }
 
-// int32 id2 = 3;
-inline void reqTalk::clear_id2() {
-  id2_ = 0;
-}
-inline ::google::protobuf::int32 reqTalk::id2() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalk.id2)
-  return id2_;
-}
-inline void reqTalk::set_id2(::google::protobuf::int32 value) {
-  
-  id2_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.id2)
-}
-
-// int32 avType = 4;
+// int32 avType = 3;
 inline void reqTalk::clear_avtype() {
   avtype_ = 0;
 }
@@ -4434,6 +5424,75 @@ inline void reqTalk::set_avtype(::google::protobuf::int32 value) {
   
   avtype_ = value;
   // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.avType)
+}
+
+// repeated string localTalkAddr = 4;
+inline int reqTalk::localtalkaddr_size() const {
+  return localtalkaddr_.size();
+}
+inline void reqTalk::clear_localtalkaddr() {
+  localtalkaddr_.Clear();
+}
+inline const ::std::string& reqTalk::localtalkaddr(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalk.localTalkAddr)
+  return localtalkaddr_.Get(index);
+}
+inline ::std::string* reqTalk::mutable_localtalkaddr(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqTalk.localTalkAddr)
+  return localtalkaddr_.Mutable(index);
+}
+inline void reqTalk::set_localtalkaddr(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.localTalkAddr)
+  localtalkaddr_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void reqTalk::set_localtalkaddr(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalk.localTalkAddr)
+  localtalkaddr_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void reqTalk::set_localtalkaddr(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  localtalkaddr_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqTalk.localTalkAddr)
+}
+inline void reqTalk::set_localtalkaddr(int index, const char* value, size_t size) {
+  localtalkaddr_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqTalk.localTalkAddr)
+}
+inline ::std::string* reqTalk::add_localtalkaddr() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.reqTalk.localTalkAddr)
+  return localtalkaddr_.Add();
+}
+inline void reqTalk::add_localtalkaddr(const ::std::string& value) {
+  localtalkaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqTalk.localTalkAddr)
+}
+#if LANG_CXX11
+inline void reqTalk::add_localtalkaddr(::std::string&& value) {
+  localtalkaddr_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqTalk.localTalkAddr)
+}
+#endif
+inline void reqTalk::add_localtalkaddr(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  localtalkaddr_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.reqTalk.localTalkAddr)
+}
+inline void reqTalk::add_localtalkaddr(const char* value, size_t size) {
+  localtalkaddr_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.reqTalk.localTalkAddr)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+reqTalk::localtalkaddr() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.reqTalk.localTalkAddr)
+  return localtalkaddr_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+reqTalk::mutable_localtalkaddr() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.reqTalk.localTalkAddr)
+  return &localtalkaddr_;
 }
 
 // -------------------------------------------------------------------
@@ -4454,35 +5513,21 @@ inline void respTalk::set_receivertype(::DDRCommProto::respTalk_eReceiverType va
   // @@protoc_insertion_point(field_set:DDRCommProto.respTalk.receiverType)
 }
 
-// int32 id1 = 2;
-inline void respTalk::clear_id1() {
-  id1_ = 0;
+// int32 talkID = 2;
+inline void respTalk::clear_talkid() {
+  talkid_ = 0;
 }
-inline ::google::protobuf::int32 respTalk::id1() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respTalk.id1)
-  return id1_;
+inline ::google::protobuf::int32 respTalk::talkid() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respTalk.talkID)
+  return talkid_;
 }
-inline void respTalk::set_id1(::google::protobuf::int32 value) {
+inline void respTalk::set_talkid(::google::protobuf::int32 value) {
   
-  id1_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.respTalk.id1)
+  talkid_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.respTalk.talkID)
 }
 
-// int32 id2 = 3;
-inline void respTalk::clear_id2() {
-  id2_ = 0;
-}
-inline ::google::protobuf::int32 respTalk::id2() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respTalk.id2)
-  return id2_;
-}
-inline void respTalk::set_id2(::google::protobuf::int32 value) {
-  
-  id2_ = value;
-  // @@protoc_insertion_point(field_set:DDRCommProto.respTalk.id2)
-}
-
-// int32 avType = 4;
+// int32 avType = 3;
 inline void respTalk::clear_avtype() {
   avtype_ = 0;
 }
@@ -4494,6 +5539,38 @@ inline void respTalk::set_avtype(::google::protobuf::int32 value) {
   
   avtype_ = value;
   // @@protoc_insertion_point(field_set:DDRCommProto.respTalk.avType)
+}
+
+// -------------------------------------------------------------------
+
+// reqTalkHB
+
+// int32 callerTalkID = 1;
+inline void reqTalkHB::clear_callertalkid() {
+  callertalkid_ = 0;
+}
+inline ::google::protobuf::int32 reqTalkHB::callertalkid() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalkHB.callerTalkID)
+  return callertalkid_;
+}
+inline void reqTalkHB::set_callertalkid(::google::protobuf::int32 value) {
+  
+  callertalkid_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalkHB.callerTalkID)
+}
+
+// int32 receiverTalkID = 2;
+inline void reqTalkHB::clear_receivertalkid() {
+  receivertalkid_ = 0;
+}
+inline ::google::protobuf::int32 reqTalkHB::receivertalkid() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqTalkHB.receiverTalkID)
+  return receivertalkid_;
+}
+inline void reqTalkHB::set_receivertalkid(::google::protobuf::int32 value) {
+  
+  receivertalkid_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTalkHB.receiverTalkID)
 }
 
 // -------------------------------------------------------------------
@@ -4642,391 +5719,882 @@ inline void respCmd::set_allocated_respmsg(::std::string* respmsg) {
 
 // reqFile
 
-// repeated string fileName = 1;
-inline int reqFile::filename_size() const {
-  return filename_.size();
+// string tarLSMName = 1;
+inline void reqFile::clear_tarlsmname() {
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void reqFile::clear_filename() {
-  filename_.Clear();
+inline const ::std::string& reqFile::tarlsmname() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.tarLSMName)
+  return tarlsmname_.GetNoArena();
 }
-inline const ::std::string& reqFile::filename(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.fileName)
-  return filename_.Get(index);
-}
-inline ::std::string* reqFile::mutable_filename(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFile.fileName)
-  return filename_.Mutable(index);
-}
-inline void reqFile::set_filename(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileName)
-  filename_.Mutable(index)->assign(value);
+inline void reqFile::set_tarlsmname(const ::std::string& value) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.tarLSMName)
 }
 #if LANG_CXX11
-inline void reqFile::set_filename(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileName)
-  filename_.Mutable(index)->assign(std::move(value));
+inline void reqFile::set_tarlsmname(::std::string&& value) {
+  
+  tarlsmname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqFile.tarLSMName)
 }
 #endif
-inline void reqFile::set_filename(int index, const char* value) {
+inline void reqFile::set_tarlsmname(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  filename_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFile.fileName)
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFile.tarLSMName)
 }
-inline void reqFile::set_filename(int index, const char* value, size_t size) {
-  filename_.Mutable(index)->assign(
+inline void reqFile::set_tarlsmname(const char* value, size_t size) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFile.tarLSMName)
+}
+inline ::std::string* reqFile::mutable_tarlsmname() {
+  
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFile.tarLSMName)
+  return tarlsmname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* reqFile::release_tarlsmname() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqFile.tarLSMName)
+  
+  return tarlsmname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void reqFile::set_allocated_tarlsmname(::std::string* tarlsmname) {
+  if (tarlsmname != NULL) {
+    
+  } else {
+    
+  }
+  tarlsmname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tarlsmname);
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqFile.tarLSMName)
+}
+
+// .DDRCommProto.reqFile.eFileTypes fileType = 2;
+inline void reqFile::clear_filetype() {
+  filetype_ = 0;
+}
+inline ::DDRCommProto::reqFile_eFileTypes reqFile::filetype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.fileType)
+  return static_cast< ::DDRCommProto::reqFile_eFileTypes >(filetype_);
+}
+inline void reqFile::set_filetype(::DDRCommProto::reqFile_eFileTypes value) {
+  
+  filetype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileType)
+}
+
+// repeated string fileNames = 3;
+inline int reqFile::filenames_size() const {
+  return filenames_.size();
+}
+inline void reqFile::clear_filenames() {
+  filenames_.Clear();
+}
+inline const ::std::string& reqFile::filenames(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFile.fileNames)
+  return filenames_.Get(index);
+}
+inline ::std::string* reqFile::mutable_filenames(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFile.fileNames)
+  return filenames_.Mutable(index);
+}
+inline void reqFile::set_filenames(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileNames)
+  filenames_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void reqFile::set_filenames(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFile.fileNames)
+  filenames_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void reqFile::set_filenames(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFile.fileNames)
+}
+inline void reqFile::set_filenames(int index, const char* value, size_t size) {
+  filenames_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFile.fileName)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFile.fileNames)
 }
-inline ::std::string* reqFile::add_filename() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.reqFile.fileName)
-  return filename_.Add();
+inline ::std::string* reqFile::add_filenames() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.reqFile.fileNames)
+  return filenames_.Add();
 }
-inline void reqFile::add_filename(const ::std::string& value) {
-  filename_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileName)
+inline void reqFile::add_filenames(const ::std::string& value) {
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileNames)
 }
 #if LANG_CXX11
-inline void reqFile::add_filename(::std::string&& value) {
-  filename_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileName)
+inline void reqFile::add_filenames(::std::string&& value) {
+  filenames_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFile.fileNames)
 }
 #endif
-inline void reqFile::add_filename(const char* value) {
+inline void reqFile::add_filenames(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  filename_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.reqFile.fileName)
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.reqFile.fileNames)
 }
-inline void reqFile::add_filename(const char* value, size_t size) {
-  filename_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.reqFile.fileName)
+inline void reqFile::add_filenames(const char* value, size_t size) {
+  filenames_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.reqFile.fileNames)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-reqFile::filename() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.reqFile.fileName)
-  return filename_;
+reqFile::filenames() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.reqFile.fileNames)
+  return filenames_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-reqFile::mutable_filename() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.reqFile.fileName)
-  return &filename_;
+reqFile::mutable_filenames() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.reqFile.fileNames)
+  return &filenames_;
 }
 
 // -------------------------------------------------------------------
 
 // respFile
 
-// repeated string fileName = 1;
-inline int respFile::filename_size() const {
-  return filename_.size();
+// string tarLSMName = 1;
+inline void respFile::clear_tarlsmname() {
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void respFile::clear_filename() {
-  filename_.Clear();
+inline const ::std::string& respFile::tarlsmname() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.tarLSMName)
+  return tarlsmname_.GetNoArena();
 }
-inline const ::std::string& respFile::filename(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileName)
-  return filename_.Get(index);
-}
-inline ::std::string* respFile::mutable_filename(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileName)
-  return filename_.Mutable(index);
-}
-inline void respFile::set_filename(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileName)
-  filename_.Mutable(index)->assign(value);
+inline void respFile::set_tarlsmname(const ::std::string& value) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.tarLSMName)
 }
 #if LANG_CXX11
-inline void respFile::set_filename(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileName)
-  filename_.Mutable(index)->assign(std::move(value));
+inline void respFile::set_tarlsmname(::std::string&& value) {
+  
+  tarlsmname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.respFile.tarLSMName)
 }
 #endif
-inline void respFile::set_filename(int index, const char* value) {
+inline void respFile::set_tarlsmname(const char* value) {
   GOOGLE_DCHECK(value != NULL);
-  filename_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileName)
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.tarLSMName)
 }
-inline void respFile::set_filename(int index, const char* value, size_t size) {
-  filename_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileName)
+inline void respFile::set_tarlsmname(const char* value, size_t size) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.tarLSMName)
 }
-inline ::std::string* respFile::add_filename() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileName)
-  return filename_.Add();
+inline ::std::string* respFile::mutable_tarlsmname() {
+  
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.tarLSMName)
+  return tarlsmname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void respFile::add_filename(const ::std::string& value) {
-  filename_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileName)
+inline ::std::string* respFile::release_tarlsmname() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.respFile.tarLSMName)
+  
+  return tarlsmname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-#if LANG_CXX11
-inline void respFile::add_filename(::std::string&& value) {
-  filename_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileName)
-}
-#endif
-inline void respFile::add_filename(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  filename_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileName)
-}
-inline void respFile::add_filename(const char* value, size_t size) {
-  filename_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileName)
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-respFile::filename() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileName)
-  return filename_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-respFile::mutable_filename() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileName)
-  return &filename_;
+inline void respFile::set_allocated_tarlsmname(::std::string* tarlsmname) {
+  if (tarlsmname != NULL) {
+    
+  } else {
+    
+  }
+  tarlsmname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tarlsmname);
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.respFile.tarLSMName)
 }
 
-// repeated string fileAddr = 2;
-inline int respFile::fileaddr_size() const {
+// .DDRCommProto.respFile.eFileTypes fileType = 2;
+inline void respFile::clear_filetype() {
+  filetype_ = 0;
+}
+inline ::DDRCommProto::respFile_eFileTypes respFile::filetype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileType)
+  return static_cast< ::DDRCommProto::respFile_eFileTypes >(filetype_);
+}
+inline void respFile::set_filetype(::DDRCommProto::respFile_eFileTypes value) {
+  
+  filetype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileType)
+}
+
+// repeated string fileNames = 3;
+inline int respFile::filenames_size() const {
+  return filenames_.size();
+}
+inline void respFile::clear_filenames() {
+  filenames_.Clear();
+}
+inline const ::std::string& respFile::filenames(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileNames)
+  return filenames_.Get(index);
+}
+inline ::std::string* respFile::mutable_filenames(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileNames)
+  return filenames_.Mutable(index);
+}
+inline void respFile::set_filenames(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileNames)
+  filenames_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void respFile::set_filenames(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileNames)
+  filenames_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void respFile::set_filenames(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileNames)
+}
+inline void respFile::set_filenames(int index, const char* value, size_t size) {
+  filenames_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileNames)
+}
+inline ::std::string* respFile::add_filenames() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileNames)
+  return filenames_.Add();
+}
+inline void respFile::add_filenames(const ::std::string& value) {
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileNames)
+}
+#if LANG_CXX11
+inline void respFile::add_filenames(::std::string&& value) {
+  filenames_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileNames)
+}
+#endif
+inline void respFile::add_filenames(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileNames)
+}
+inline void respFile::add_filenames(const char* value, size_t size) {
+  filenames_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileNames)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+respFile::filenames() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileNames)
+  return filenames_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+respFile::mutable_filenames() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileNames)
+  return &filenames_;
+}
+
+// repeated string fileContents = 4;
+inline int respFile::filecontents_size() const {
+  return filecontents_.size();
+}
+inline void respFile::clear_filecontents() {
+  filecontents_.Clear();
+}
+inline const ::std::string& respFile::filecontents(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileContents)
+  return filecontents_.Get(index);
+}
+inline ::std::string* respFile::mutable_filecontents(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileContents)
+  return filecontents_.Mutable(index);
+}
+inline void respFile::set_filecontents(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileContents)
+  filecontents_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void respFile::set_filecontents(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileContents)
+  filecontents_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void respFile::set_filecontents(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filecontents_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileContents)
+}
+inline void respFile::set_filecontents(int index, const char* value, size_t size) {
+  filecontents_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileContents)
+}
+inline ::std::string* respFile::add_filecontents() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileContents)
+  return filecontents_.Add();
+}
+inline void respFile::add_filecontents(const ::std::string& value) {
+  filecontents_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileContents)
+}
+#if LANG_CXX11
+inline void respFile::add_filecontents(::std::string&& value) {
+  filecontents_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileContents)
+}
+#endif
+inline void respFile::add_filecontents(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filecontents_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileContents)
+}
+inline void respFile::add_filecontents(const char* value, size_t size) {
+  filecontents_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileContents)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+respFile::filecontents() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileContents)
+  return filecontents_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+respFile::mutable_filecontents() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileContents)
+  return &filecontents_;
+}
+
+// -------------------------------------------------------------------
+
+// reqFileAddr
+
+// string tarLSMName = 1;
+inline void reqFileAddr::clear_tarlsmname() {
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& reqFileAddr::tarlsmname() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFileAddr.tarLSMName)
+  return tarlsmname_.GetNoArena();
+}
+inline void reqFileAddr::set_tarlsmname(const ::std::string& value) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFileAddr.tarLSMName)
+}
+#if LANG_CXX11
+inline void reqFileAddr::set_tarlsmname(::std::string&& value) {
+  
+  tarlsmname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqFileAddr.tarLSMName)
+}
+#endif
+inline void reqFileAddr::set_tarlsmname(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFileAddr.tarLSMName)
+}
+inline void reqFileAddr::set_tarlsmname(const char* value, size_t size) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFileAddr.tarLSMName)
+}
+inline ::std::string* reqFileAddr::mutable_tarlsmname() {
+  
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFileAddr.tarLSMName)
+  return tarlsmname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* reqFileAddr::release_tarlsmname() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqFileAddr.tarLSMName)
+  
+  return tarlsmname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void reqFileAddr::set_allocated_tarlsmname(::std::string* tarlsmname) {
+  if (tarlsmname != NULL) {
+    
+  } else {
+    
+  }
+  tarlsmname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tarlsmname);
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqFileAddr.tarLSMName)
+}
+
+// .DDRCommProto.reqFileAddr.eFileTypes fileType = 2;
+inline void reqFileAddr::clear_filetype() {
+  filetype_ = 0;
+}
+inline ::DDRCommProto::reqFileAddr_eFileTypes reqFileAddr::filetype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFileAddr.fileType)
+  return static_cast< ::DDRCommProto::reqFileAddr_eFileTypes >(filetype_);
+}
+inline void reqFileAddr::set_filetype(::DDRCommProto::reqFileAddr_eFileTypes value) {
+  
+  filetype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFileAddr.fileType)
+}
+
+// repeated string fileNames = 3;
+inline int reqFileAddr::filenames_size() const {
+  return filenames_.size();
+}
+inline void reqFileAddr::clear_filenames() {
+  filenames_.Clear();
+}
+inline const ::std::string& reqFileAddr::filenames(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqFileAddr.fileNames)
+  return filenames_.Get(index);
+}
+inline ::std::string* reqFileAddr::mutable_filenames(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqFileAddr.fileNames)
+  return filenames_.Mutable(index);
+}
+inline void reqFileAddr::set_filenames(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFileAddr.fileNames)
+  filenames_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void reqFileAddr::set_filenames(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqFileAddr.fileNames)
+  filenames_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void reqFileAddr::set_filenames(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqFileAddr.fileNames)
+}
+inline void reqFileAddr::set_filenames(int index, const char* value, size_t size) {
+  filenames_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqFileAddr.fileNames)
+}
+inline ::std::string* reqFileAddr::add_filenames() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.reqFileAddr.fileNames)
+  return filenames_.Add();
+}
+inline void reqFileAddr::add_filenames(const ::std::string& value) {
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFileAddr.fileNames)
+}
+#if LANG_CXX11
+inline void reqFileAddr::add_filenames(::std::string&& value) {
+  filenames_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.reqFileAddr.fileNames)
+}
+#endif
+inline void reqFileAddr::add_filenames(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.reqFileAddr.fileNames)
+}
+inline void reqFileAddr::add_filenames(const char* value, size_t size) {
+  filenames_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.reqFileAddr.fileNames)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+reqFileAddr::filenames() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.reqFileAddr.fileNames)
+  return filenames_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+reqFileAddr::mutable_filenames() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.reqFileAddr.fileNames)
+  return &filenames_;
+}
+
+// -------------------------------------------------------------------
+
+// respFileAddr
+
+// string tarLSMName = 1;
+inline void respFileAddr::clear_tarlsmname() {
+  tarlsmname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& respFileAddr::tarlsmname() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFileAddr.tarLSMName)
+  return tarlsmname_.GetNoArena();
+}
+inline void respFileAddr::set_tarlsmname(const ::std::string& value) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.tarLSMName)
+}
+#if LANG_CXX11
+inline void respFileAddr::set_tarlsmname(::std::string&& value) {
+  
+  tarlsmname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.respFileAddr.tarLSMName)
+}
+#endif
+inline void respFileAddr::set_tarlsmname(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFileAddr.tarLSMName)
+}
+inline void respFileAddr::set_tarlsmname(const char* value, size_t size) {
+  
+  tarlsmname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFileAddr.tarLSMName)
+}
+inline ::std::string* respFileAddr::mutable_tarlsmname() {
+  
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFileAddr.tarLSMName)
+  return tarlsmname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* respFileAddr::release_tarlsmname() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.respFileAddr.tarLSMName)
+  
+  return tarlsmname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void respFileAddr::set_allocated_tarlsmname(::std::string* tarlsmname) {
+  if (tarlsmname != NULL) {
+    
+  } else {
+    
+  }
+  tarlsmname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tarlsmname);
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.respFileAddr.tarLSMName)
+}
+
+// .DDRCommProto.respFileAddr.eFileTypes fileType = 2;
+inline void respFileAddr::clear_filetype() {
+  filetype_ = 0;
+}
+inline ::DDRCommProto::respFileAddr_eFileTypes respFileAddr::filetype() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFileAddr.fileType)
+  return static_cast< ::DDRCommProto::respFileAddr_eFileTypes >(filetype_);
+}
+inline void respFileAddr::set_filetype(::DDRCommProto::respFileAddr_eFileTypes value) {
+  
+  filetype_ = value;
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.fileType)
+}
+
+// repeated string fileNames = 3;
+inline int respFileAddr::filenames_size() const {
+  return filenames_.size();
+}
+inline void respFileAddr::clear_filenames() {
+  filenames_.Clear();
+}
+inline const ::std::string& respFileAddr::filenames(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFileAddr.fileNames)
+  return filenames_.Get(index);
+}
+inline ::std::string* respFileAddr::mutable_filenames(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFileAddr.fileNames)
+  return filenames_.Mutable(index);
+}
+inline void respFileAddr::set_filenames(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.fileNames)
+  filenames_.Mutable(index)->assign(value);
+}
+#if LANG_CXX11
+inline void respFileAddr::set_filenames(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.fileNames)
+  filenames_.Mutable(index)->assign(std::move(value));
+}
+#endif
+inline void respFileAddr::set_filenames(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFileAddr.fileNames)
+}
+inline void respFileAddr::set_filenames(int index, const char* value, size_t size) {
+  filenames_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFileAddr.fileNames)
+}
+inline ::std::string* respFileAddr::add_filenames() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFileAddr.fileNames)
+  return filenames_.Add();
+}
+inline void respFileAddr::add_filenames(const ::std::string& value) {
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFileAddr.fileNames)
+}
+#if LANG_CXX11
+inline void respFileAddr::add_filenames(::std::string&& value) {
+  filenames_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFileAddr.fileNames)
+}
+#endif
+inline void respFileAddr::add_filenames(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  filenames_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFileAddr.fileNames)
+}
+inline void respFileAddr::add_filenames(const char* value, size_t size) {
+  filenames_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFileAddr.fileNames)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+respFileAddr::filenames() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFileAddr.fileNames)
+  return filenames_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+respFileAddr::mutable_filenames() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFileAddr.fileNames)
+  return &filenames_;
+}
+
+// repeated string fileAddr = 4;
+inline int respFileAddr::fileaddr_size() const {
   return fileaddr_.size();
 }
-inline void respFile::clear_fileaddr() {
+inline void respFileAddr::clear_fileaddr() {
   fileaddr_.Clear();
 }
-inline const ::std::string& respFile::fileaddr(int index) const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.respFile.fileAddr)
+inline const ::std::string& respFileAddr::fileaddr(int index) const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.respFileAddr.fileAddr)
   return fileaddr_.Get(index);
 }
-inline ::std::string* respFile::mutable_fileaddr(int index) {
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFile.fileAddr)
+inline ::std::string* respFileAddr::mutable_fileaddr(int index) {
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.respFileAddr.fileAddr)
   return fileaddr_.Mutable(index);
 }
-inline void respFile::set_fileaddr(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileAddr)
+inline void respFileAddr::set_fileaddr(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.fileAddr)
   fileaddr_.Mutable(index)->assign(value);
 }
 #if LANG_CXX11
-inline void respFile::set_fileaddr(int index, ::std::string&& value) {
-  // @@protoc_insertion_point(field_set:DDRCommProto.respFile.fileAddr)
+inline void respFileAddr::set_fileaddr(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:DDRCommProto.respFileAddr.fileAddr)
   fileaddr_.Mutable(index)->assign(std::move(value));
 }
 #endif
-inline void respFile::set_fileaddr(int index, const char* value) {
+inline void respFileAddr::set_fileaddr(int index, const char* value) {
   GOOGLE_DCHECK(value != NULL);
   fileaddr_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.respFileAddr.fileAddr)
 }
-inline void respFile::set_fileaddr(int index, const char* value, size_t size) {
+inline void respFileAddr::set_fileaddr(int index, const char* value, size_t size) {
   fileaddr_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.respFileAddr.fileAddr)
 }
-inline ::std::string* respFile::add_fileaddr() {
-  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFile.fileAddr)
+inline ::std::string* respFileAddr::add_fileaddr() {
+  // @@protoc_insertion_point(field_add_mutable:DDRCommProto.respFileAddr.fileAddr)
   return fileaddr_.Add();
 }
-inline void respFile::add_fileaddr(const ::std::string& value) {
+inline void respFileAddr::add_fileaddr(const ::std::string& value) {
   fileaddr_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFileAddr.fileAddr)
 }
 #if LANG_CXX11
-inline void respFile::add_fileaddr(::std::string&& value) {
+inline void respFileAddr::add_fileaddr(::std::string&& value) {
   fileaddr_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_add:DDRCommProto.respFileAddr.fileAddr)
 }
 #endif
-inline void respFile::add_fileaddr(const char* value) {
+inline void respFileAddr::add_fileaddr(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   fileaddr_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_add_char:DDRCommProto.respFileAddr.fileAddr)
 }
-inline void respFile::add_fileaddr(const char* value, size_t size) {
+inline void respFileAddr::add_fileaddr(const char* value, size_t size) {
   fileaddr_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFile.fileAddr)
+  // @@protoc_insertion_point(field_add_pointer:DDRCommProto.respFileAddr.fileAddr)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-respFile::fileaddr() const {
-  // @@protoc_insertion_point(field_list:DDRCommProto.respFile.fileAddr)
+respFileAddr::fileaddr() const {
+  // @@protoc_insertion_point(field_list:DDRCommProto.respFileAddr.fileAddr)
   return fileaddr_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-respFile::mutable_fileaddr() {
-  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFile.fileAddr)
+respFileAddr::mutable_fileaddr() {
+  // @@protoc_insertion_point(field_mutable_list:DDRCommProto.respFileAddr.fileAddr)
   return &fileaddr_;
 }
 
 // -------------------------------------------------------------------
 
-// notifyStatus
+// reqStatus
 
 // string statusMsg = 1;
-inline void notifyStatus::clear_statusmsg() {
+inline void reqStatus::clear_statusmsg() {
   statusmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& notifyStatus::statusmsg() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifyStatus.statusMsg)
+inline const ::std::string& reqStatus::statusmsg() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqStatus.statusMsg)
   return statusmsg_.GetNoArena();
 }
-inline void notifyStatus::set_statusmsg(const ::std::string& value) {
+inline void reqStatus::set_statusmsg(const ::std::string& value) {
   
   statusmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqStatus.statusMsg)
 }
 #if LANG_CXX11
-inline void notifyStatus::set_statusmsg(::std::string&& value) {
+inline void reqStatus::set_statusmsg(::std::string&& value) {
   
   statusmsg_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqStatus.statusMsg)
 }
 #endif
-inline void notifyStatus::set_statusmsg(const char* value) {
+inline void reqStatus::set_statusmsg(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   statusmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqStatus.statusMsg)
 }
-inline void notifyStatus::set_statusmsg(const char* value, size_t size) {
+inline void reqStatus::set_statusmsg(const char* value, size_t size) {
   
   statusmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqStatus.statusMsg)
 }
-inline ::std::string* notifyStatus::mutable_statusmsg() {
+inline ::std::string* reqStatus::mutable_statusmsg() {
   
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqStatus.statusMsg)
   return statusmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* notifyStatus::release_statusmsg() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.notifyStatus.statusMsg)
+inline ::std::string* reqStatus::release_statusmsg() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqStatus.statusMsg)
   
   return statusmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void notifyStatus::set_allocated_statusmsg(::std::string* statusmsg) {
+inline void reqStatus::set_allocated_statusmsg(::std::string* statusmsg) {
   if (statusmsg != NULL) {
     
   } else {
     
   }
   statusmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), statusmsg);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.notifyStatus.statusMsg)
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqStatus.statusMsg)
 }
 
 // -------------------------------------------------------------------
 
-// notifyAlarm
+// reqAlarm
 
 // string alarmMsg = 1;
-inline void notifyAlarm::clear_alarmmsg() {
+inline void reqAlarm::clear_alarmmsg() {
   alarmmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& notifyAlarm::alarmmsg() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifyAlarm.alarmMsg)
+inline const ::std::string& reqAlarm::alarmmsg() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqAlarm.alarmMsg)
   return alarmmsg_.GetNoArena();
 }
-inline void notifyAlarm::set_alarmmsg(const ::std::string& value) {
+inline void reqAlarm::set_alarmmsg(const ::std::string& value) {
   
   alarmmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqAlarm.alarmMsg)
 }
 #if LANG_CXX11
-inline void notifyAlarm::set_alarmmsg(::std::string&& value) {
+inline void reqAlarm::set_alarmmsg(::std::string&& value) {
   
   alarmmsg_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqAlarm.alarmMsg)
 }
 #endif
-inline void notifyAlarm::set_alarmmsg(const char* value) {
+inline void reqAlarm::set_alarmmsg(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   alarmmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqAlarm.alarmMsg)
 }
-inline void notifyAlarm::set_alarmmsg(const char* value, size_t size) {
+inline void reqAlarm::set_alarmmsg(const char* value, size_t size) {
   
   alarmmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqAlarm.alarmMsg)
 }
-inline ::std::string* notifyAlarm::mutable_alarmmsg() {
+inline ::std::string* reqAlarm::mutable_alarmmsg() {
   
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqAlarm.alarmMsg)
   return alarmmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* notifyAlarm::release_alarmmsg() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.notifyAlarm.alarmMsg)
+inline ::std::string* reqAlarm::release_alarmmsg() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqAlarm.alarmMsg)
   
   return alarmmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void notifyAlarm::set_allocated_alarmmsg(::std::string* alarmmsg) {
+inline void reqAlarm::set_allocated_alarmmsg(::std::string* alarmmsg) {
   if (alarmmsg != NULL) {
     
   } else {
     
   }
   alarmmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), alarmmsg);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.notifyAlarm.alarmMsg)
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqAlarm.alarmMsg)
 }
 
 // -------------------------------------------------------------------
 
-// notifyTextChat
+// reqTextChat
 
 // string chatText = 1;
-inline void notifyTextChat::clear_chattext() {
+inline void reqTextChat::clear_chattext() {
   chattext_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& notifyTextChat::chattext() const {
-  // @@protoc_insertion_point(field_get:DDRCommProto.notifyTextChat.chatText)
+inline const ::std::string& reqTextChat::chattext() const {
+  // @@protoc_insertion_point(field_get:DDRCommProto.reqTextChat.chatText)
   return chattext_.GetNoArena();
 }
-inline void notifyTextChat::set_chattext(const ::std::string& value) {
+inline void reqTextChat::set_chattext(const ::std::string& value) {
   
   chattext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_set:DDRCommProto.reqTextChat.chatText)
 }
 #if LANG_CXX11
-inline void notifyTextChat::set_chattext(::std::string&& value) {
+inline void reqTextChat::set_chattext(::std::string&& value) {
   
   chattext_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_set_rvalue:DDRCommProto.reqTextChat.chatText)
 }
 #endif
-inline void notifyTextChat::set_chattext(const char* value) {
+inline void reqTextChat::set_chattext(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   chattext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_set_char:DDRCommProto.reqTextChat.chatText)
 }
-inline void notifyTextChat::set_chattext(const char* value, size_t size) {
+inline void reqTextChat::set_chattext(const char* value, size_t size) {
   
   chattext_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_set_pointer:DDRCommProto.reqTextChat.chatText)
 }
-inline ::std::string* notifyTextChat::mutable_chattext() {
+inline ::std::string* reqTextChat::mutable_chattext() {
   
-  // @@protoc_insertion_point(field_mutable:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_mutable:DDRCommProto.reqTextChat.chatText)
   return chattext_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* notifyTextChat::release_chattext() {
-  // @@protoc_insertion_point(field_release:DDRCommProto.notifyTextChat.chatText)
+inline ::std::string* reqTextChat::release_chattext() {
+  // @@protoc_insertion_point(field_release:DDRCommProto.reqTextChat.chatText)
   
   return chattext_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void notifyTextChat::set_allocated_chattext(::std::string* chattext) {
+inline void reqTextChat::set_allocated_chattext(::std::string* chattext) {
   if (chattext != NULL) {
     
   } else {
     
   }
   chattext_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), chattext);
-  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.notifyTextChat.chatText)
+  // @@protoc_insertion_point(field_set_allocated:DDRCommProto.reqTextChat.chatText)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -5076,10 +6644,20 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::CommonHeader_eFlowDir>() {
   return ::DDRCommProto::CommonHeader_eFlowDir_descriptor();
 }
-template <> struct is_proto_enum< ::DDRCommProto::CommonHeader_eDestType> : ::std::true_type {};
+template <> struct is_proto_enum< ::DDRCommProto::CommonHeader_eSrcCondition> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::CommonHeader_eDestType>() {
-  return ::DDRCommProto::CommonHeader_eDestType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::CommonHeader_eSrcCondition>() {
+  return ::DDRCommProto::CommonHeader_eSrcCondition_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::CommonHeader_eForwardingType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::CommonHeader_eForwardingType>() {
+  return ::DDRCommProto::CommonHeader_eForwardingType_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::CommonHeader_eSrcRecType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::CommonHeader_eSrcRecType>() {
+  return ::DDRCommProto::CommonHeader_eSrcRecType_descriptor();
 }
 template <> struct is_proto_enum< ::DDRCommProto::reqLogin_eCltType> : ::std::true_type {};
 template <>
@@ -5105,6 +6683,26 @@ template <> struct is_proto_enum< ::DDRCommProto::respTalk_eReceiverType> : ::st
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::respTalk_eReceiverType>() {
   return ::DDRCommProto::respTalk_eReceiverType_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::reqFile_eFileTypes> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::reqFile_eFileTypes>() {
+  return ::DDRCommProto::reqFile_eFileTypes_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::respFile_eFileTypes> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::respFile_eFileTypes>() {
+  return ::DDRCommProto::respFile_eFileTypes_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::reqFileAddr_eFileTypes> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::reqFileAddr_eFileTypes>() {
+  return ::DDRCommProto::reqFileAddr_eFileTypes_descriptor();
+}
+template <> struct is_proto_enum< ::DDRCommProto::respFileAddr_eFileTypes> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::DDRCommProto::respFileAddr_eFileTypes>() {
+  return ::DDRCommProto::respFileAddr_eFileTypes_descriptor();
 }
 
 }  // namespace protobuf
