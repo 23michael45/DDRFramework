@@ -106,7 +106,7 @@ namespace DDRFramework
 	void TcpServerBase::Stop()
 	{
 
-		std::vector<std::string> keyvec;
+		std::vector<tcp::socket*> keyvec;
 
 		for (auto spSessionPair : m_SessionMap)
 		{
@@ -143,19 +143,17 @@ namespace DDRFramework
 	void TcpServerBase::HandleAccept(std::shared_ptr<TcpSessionBase> spSession, const asio::error_code& error)
 	{
 		if (!error)
-		{
-			std::string ip = spSession->GetSocket().remote_endpoint().address().to_string();
-			if (m_SessionMap.find(ip) == m_SessionMap.end())
+		{ 
+			if (m_SessionMap.find(&spSession->GetSocket()) == m_SessionMap.end())
 			{
-				m_SessionMap[ip] = spSession;
+				m_SessionMap[&spSession->GetSocket()] = spSession;
 				spSession->Start();
 			}
 			else
 			{
-				m_SessionMap[ip]->Stop();
+				/*m_SessionMap[spSession->GetSocket()]->Stop();
 				std::thread t(bind(&TcpServerBase::WaitUntilPreSessionDestroy, shared_from_this(), ip, spSession));
-				t.detach();
-				//m_SessionMap[ip].reset();
+				t.detach();*/
 
 
 			}
@@ -163,35 +161,33 @@ namespace DDRFramework
 
 		StartAccept();
 	}
-	void TcpServerBase::WaitUntilPreSessionDestroy(std::string ip ,std::shared_ptr<TcpSessionBase> spSession)
-	{
-		while (m_SessionMap.find(ip) != m_SessionMap.end())
-		{
-			std::this_thread::sleep_for(std::chrono::seconds(1));
-		}
+	//void TcpServerBase::WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession)
+	//{
+	//	while (m_SessionMap.find(spSession->GetSocket()) != m_SessionMap.end())
+	//	{
+	//		std::this_thread::sleep_for(std::chrono::seconds(1));
+	//	}
 
-		m_SessionMap[ip] = spSession;
-		spSession->Start();
-	}
+	//	m_SessionMap[socket] = spSession;
+	//	spSession->Start();
+	//}
 
 
 	void TcpServerBase::OnSessionDisconnect(TcpSocketContainer& container)
 	{
 		try
 		{
-			std::string remoteAddress = container.GetSocket().remote_endpoint().address().to_string();
-			if (m_SessionMap.find(remoteAddress) != m_SessionMap.end())
+			if (m_SessionMap.find(&container.GetSocket()) != m_SessionMap.end())
 			{
-				auto sp = m_SessionMap[remoteAddress];
+				auto sp = m_SessionMap[&container.GetSocket()];
 				sp->Release();
-				DebugLog("\nUse Count: %i", m_SessionMap[remoteAddress].use_count());
 				sp.reset();
-				m_SessionMap.erase(remoteAddress);
+				m_SessionMap.erase(&container.GetSocket());
 			}
 		}
 		catch (asio::error_code& e)
 		{
-			DebugLog("\nDisconnect Error %s",e.message().c_str())
+			DebugLog("\nDisconnect Error %s", e.message().c_str())
 		}
 		catch (asio::system_error& e)
 		{

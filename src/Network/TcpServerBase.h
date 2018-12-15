@@ -57,11 +57,13 @@ namespace DDRFramework
 
 		asio::io_context m_IOContext;
 		tcp::acceptor m_Acceptor;
-		std::map<std::string, std::shared_ptr<TcpSessionBase>> m_SessionMap;
-
+		
+		std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>> m_SessionMap;
+		
+		
 		asio::detail::thread_group m_WorkerThreads;
 	private:
-		void WaitUntilPreSessionDestroy(std::string ip, std::shared_ptr<TcpSessionBase> spSession);
+		//void WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession);
 	};
 }
 
