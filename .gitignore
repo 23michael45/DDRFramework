@@ -3,3 +3,4 @@
 /proto/BaseCmd.pb.h
 /proto/BaseCmd_pb2.py
 /proto/DDRCommProto/BaseCmd.java
+/tools/sqlite3/SQLiteDatabaseBrowserPortable/Data/*.ini
