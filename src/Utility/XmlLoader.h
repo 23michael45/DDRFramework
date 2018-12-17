@@ -20,7 +20,7 @@ namespace DDRFramework
 		template <typename T> 
 		T GetValue(std::string key)
 		{
-			std::istringstream  iss(key);
+			std::istringstream  iss(GetValue(key));
 			T t;
 			iss >> t;
 			return t;
