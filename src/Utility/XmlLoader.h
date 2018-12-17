@@ -17,8 +17,14 @@ namespace DDRFramework
 
 		std::string GetValue(std::string sheet, std::string key);
 		std::string GetValue(std::string key);
-
-
+		template <typename T> 
+		T GetValue(std::string key)
+		{
+			std::istringstream  iss(key);
+			T t;
+			iss >> t;
+			return t;
+		}
 
 		int GetElementCount(std::string sheet);
 		int GetElementCount();
@@ -37,6 +43,13 @@ namespace DDRFramework
 		void SetValue(std::string sheet, int count, std::string key, std::string value);
 		void SetValue(int count, std::string key, std::string value);
 		void SetValue(std::string key, std::string value);
+
+		template <typename T>
+		void SetValue(std::string key, T& value)
+		{
+			SetValue(key, std::string::to_string(value));
+		}
+
 		void DoSave(std::string filename); 
 		void DoSave();
 

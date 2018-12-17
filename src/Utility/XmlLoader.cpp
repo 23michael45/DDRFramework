@@ -135,7 +135,7 @@ namespace DDRFramework
 		return  GetElementCount(m_DefaultSheetName);
 	}
 
-	std::string  XmlLoader::GetColumnKey(int count)
+	 std::string XmlLoader::GetColumnKey(int count)
 	{
 		return GetColumnKey(m_DefaultSheetName,count);
 
@@ -155,7 +155,7 @@ namespace DDRFramework
 	}
 
 
-	std::string  XmlLoader::GetRowKey(int count)
+	std::string XmlLoader::GetRowKey(int count)
 	{
 		return GetRowKey(m_DefaultSheetName, count);
 
@@ -186,7 +186,8 @@ namespace DDRFramework
 	}
 	void XmlLoader::SetValue(std::string key, std::string value)
 	{
-		SetValue(0, key, value);
+		std::string v = "Value";
+		SetValue(m_RowKeyIndexMap[m_DefaultSheetName]->at(key), v, value);
 
 	}
 	void XmlLoader::DoSave()
