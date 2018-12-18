@@ -1,6 +1,7 @@
 
 #include "BaseMessageDispatcher.h"
 #include "../Utility/DDRMacro.h"
+#include "../Utility/Logger.h"
 
 
 using namespace google::protobuf;

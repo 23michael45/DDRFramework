@@ -1,6 +1,7 @@
 #include "TcpSocketContainer.h"
 #include "MessageSerializer.h"
 #include "../Utility/DDRMacro.h"
+#include "../Utility/Logger.h"
 
 #include "asio.hpp"
 #include <map>

@@ -1,5 +1,6 @@
 #include "TcpServerBase.h"
 #include "../Utility/DDRMacro.h"
+#include "../Utility/Logger.h"
 #include "../Network/BaseMessageDispatcher.h"
 #include "../Network/MessageSerializer.h"
 namespace DDRFramework

@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <memory>
 #include "../Utility/DDRMacro.h"
+#include "../Utility/Logger.h"
 
 template <class PT>
 class StateMachine;
