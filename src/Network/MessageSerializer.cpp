@@ -150,7 +150,7 @@ namespace DDRFramework
 
 		auto temp_headrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN));
 	
-		DDRCommLib::Txt_Encrypt(temp_headbuf.data().data(), temp_headbuf.size(), temp_headrawbuf.data(), temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
+		DDRFramework::Txt_Encrypt(temp_headbuf.data().data(), temp_headbuf.size(), temp_headrawbuf.data(), temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
 
 		cos.WriteRaw(temp_headrawbuf.data(), temp_headrawbuf.size());
 
@@ -169,7 +169,7 @@ namespace DDRFramework
 		auto temp_bodyrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN));
 
 
-		DDRCommLib::Txt_Encrypt(temp_bodybuf.data().data(), temp_bodybuf.size(), temp_bodyrawbuf.data(), temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
+		DDRFramework::Txt_Encrypt(temp_bodybuf.data().data(), temp_bodybuf.size(), temp_bodyrawbuf.data(), temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
 
 		cos.WriteRaw(temp_bodyrawbuf.data(), temp_bodyrawbuf.size());
 
@@ -307,7 +307,7 @@ namespace DDRFramework
 			auto temp_headrawbuf = asio::buffer(temp_headbufdecrypt.prepare(m_HeadLen - PROTOBUF_ENCRYPT_LEN));
 
 			
-			DDRCommLib::Txt_Decrypt(buf.data().data(), m_HeadLen, temp_headrawbuf.data(), m_HeadLen - PROTOBUF_ENCRYPT_LEN);
+			DDRFramework::Txt_Decrypt(buf.data().data(), m_HeadLen, temp_headrawbuf.data(), m_HeadLen - PROTOBUF_ENCRYPT_LEN);
 
 
 
@@ -413,7 +413,7 @@ namespace DDRFramework
 				auto temp_bodyrawbuf = asio::buffer(temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN));
 
 
-				DDRCommLib::Txt_Decrypt(buf.data().data(), m_BodyLen, temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+				DDRFramework::Txt_Decrypt(buf.data().data(), m_BodyLen, temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
 
 				spmsg->ParseFromArray(temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
 
@@ -444,7 +444,7 @@ namespace DDRFramework
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("%s---------------------------------------------------------------------------------------Body Deserialize Error", e.what());
+			DebugLog("%s---------------------------------------------------------------------------------------Body Dispatch Error", e.what());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}

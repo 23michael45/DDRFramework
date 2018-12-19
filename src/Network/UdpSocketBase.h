@@ -45,6 +45,10 @@ namespace DDRFramework
 		}
 		asio::io_context& GetIOContext();
 
+		std::shared_ptr<asio::ip::udp::socket> GetSocket()
+		{
+			return m_spSocket;
+		}
 	private:
 
 		std::function<void(UdpSocketBase&)> m_fOnDisconnect;

@@ -85,12 +85,20 @@ message heartBeat
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message bcLSAddr
 {
+	enum eServiceType {
+		LocalServer = 0;      //Local Server
+		RemoteServer = 1;		//Remote Server
+		RTSPStreamServer = 2; //RTSP Stream Server
+		TalkBackServer = 3;		//Talk Back Server
+	}
+	
 	message ServerInfo {
 		string name = 1;
-		repeated string ips = 2;
-		int32 port = 3;
+		eServiceType stype = 2;
+		repeated string ips = 3;
+		int32 port = 4;
 	}
-	ServerInfo LSInfo = 1;
+	repeated ServerInfo LSInfos = 1;
 }
 
 // flowDirection = UNKNOWN2RS or UNKNOWN2LS
@@ -324,9 +332,18 @@ message reqStatus
 
 // flowDirection = LSM2LS or LS2C or RR2RS or RS2M
 // eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
-message reqAlarm
+message reqFaceAlarm
 {
-	string alarmMsg = 1;
+	
+}
+
+message reqHotAlarm
+{
+	
+}
+message reqObsAlarm
+{
+	
 }
 
 // flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M

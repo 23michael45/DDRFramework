@@ -1,5 +1,9 @@
-#ifndef __DDRCOMMLIB_COMMON_FUNCTIONS_H_INCLUDED__
-#define __DDRCOMMLIB_COMMON_FUNCTIONS_H_INCLUDED__
+#ifndef __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
+#define __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
+
+#include <map>
+#include <vector>
+#include <asio.hpp>
 
 #ifndef BYTE
 typedef unsigned char BYTE;
@@ -14,7 +18,7 @@ typedef unsigned short U16;
 typedef long long I64;
 #endif
 
-namespace DDRCommLib {
+namespace DDRFramework {
 
 bool Txt_Encrypt(const void *pSrc, int lenSrc,
 	             const void *pTar, int lenTar);
@@ -50,6 +54,10 @@ int StrConv_g2u(char *inbuf, int inlen, char *outbuf, int outlen);
 int StrConv_u2g(char *inbuf, int inlen, char *outbuf, int outlen);
 #endif
 
+
+
+std::vector<std::string> GetLocalIPV4();
+std::map<std::string,std::string> GetSameSegmentIPV4(std::vector<std::string> left, std::vector<std::string> right);
 }
 
-#endif // __DDRCOMMLIB_COMMON_FUNCTIONS_H_INCLUDED__
+#endif // __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
