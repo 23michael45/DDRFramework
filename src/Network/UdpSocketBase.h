@@ -24,6 +24,7 @@ namespace DDRFramework
 		void Stop();
 		void DelayStop();
 		void ThreadEntry();
+		bool IsWorking();
 
 
 		void StartBroadcast(int port,std::shared_ptr<google::protobuf::Message> spMsg, int intervalintervalMillisecond);
@@ -81,7 +82,7 @@ namespace DDRFramework
 		asio::detail::array<char,1024> m_ReadStreamBuf;
 
 
-		
+		std::mutex m_UdpMutex;
 		
 		asio::io_context::strand m_ReadWriteStrand;
 	};

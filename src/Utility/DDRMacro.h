@@ -9,5 +9,9 @@
 #endif
 
 
+#define RegisterProcessor(action,name) action##name action##name;\
+m_ProcessorMap[action##name.GetTypeName()] = std::make_shared<name##Processor>(*this);
+
+
 
 #endif // DDRMacro_h__

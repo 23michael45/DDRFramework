@@ -25,10 +25,13 @@ namespace DDRFramework
 	}
 	void TcpSocketContainer::CheckBehavior()
 	{
-		if (m_spBehavior)
+		if (m_bConnected)
 		{
-			m_spBehavior->Update(shared_from_this());
-			m_IOContext.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
+			if (m_spBehavior)
+			{
+				m_spBehavior->Update(shared_from_this());
+				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
+			}
 		}
 
 	}
@@ -72,16 +75,20 @@ namespace DDRFramework
 
 	void TcpSocketContainer::PushData(asio::streambuf& buf)
 	{
-		std::lock_guard<std::mutex> lock(m_spSerializer->GetRecLock());
-		if (m_spSerializer)
+		if (m_bConnected)
 		{
-			std::ostream oshold(&m_spSerializer->GetRecBuf());
+			std::lock_guard<std::mutex> lock(m_spSerializer->GetRecLock());
+			if (m_spSerializer)
+			{
+				std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-			oshold.write((const char*)buf.data().data(), buf.size());
-			oshold.flush();
+				oshold.write((const char*)buf.data().data(), buf.size());
+				oshold.flush();
+
+			}
+			buf.consume(buf.size());
 
 		}
-		buf.consume(buf.size());
 	}
 
 	void TcpSocketContainer::Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
@@ -157,7 +164,7 @@ namespace DDRFramework
 		if (m_spBehavior)
 		{
 			m_spBehavior->OnStart(shared_from_this());
-			m_IOContext.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
+			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckBehavior, shared_from_this()));
 		}
 	}
 

@@ -42,8 +42,18 @@ namespace DDRFramework
 		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStop, shared_from_this()));
 		
 	}
+
+	bool UdpSocketBase::IsWorking()
+	{
+		if (m_Broadcasting || m_Receiving)
+		{
+			return true;
+		}
+		return false;
+	}
 	void UdpSocketBase::DelayStop()
 	{
+		std::lock_guard<std::mutex> lock(m_UdpMutex);
 		m_spRecvEnderEndpoint.reset();
 		m_spBroadcastEnderEndpoint.reset();
 
@@ -125,34 +135,41 @@ namespace DDRFramework
 
 	void UdpSocketBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
-		m_spSocket->async_send_to(spbuf->data(),*(m_spBroadcastEnderEndpoint.get()), std::bind(&UdpSocketBase::HandleWrite, shared_from_this(), std::placeholders::_1,spbuf));
-		
-		
+		if (m_Broadcasting)
+		{
+			m_spSocket->async_send_to(spbuf->data(), *(m_spBroadcastEnderEndpoint.get()), std::bind(&UdpSocketBase::HandleWrite, shared_from_this(), std::placeholders::_1, spbuf));
+
+		}
 
 	}
 	void UdpSocketBase::HandleWrite(const asio::error_code& ec,std::shared_ptr<asio::streambuf> spbuf) {
-		
+	
 
-		if (!ec)
-		{
-			if (m_Broadcasting)
+			if (!ec)
 			{
-				m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
-				std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
-				
+				if (m_Broadcasting)
+				{
+					m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
+					std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
+
+				}
 			}
-		}
-		else
-		{
-			DebugLog("\nUdp Write Failed:%s", ec.message());
-		}
+			else
+			{
+				DebugLog("\nUdp Write Failed:%s", ec.message());
+			}
+		
 	}
 
 	void UdpSocketBase::StartRead()
 	{
+		if (m_Receiving)
+		{
+			m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 
-		m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1 , std::placeholders::_2));
 
+
+		}
 
 		/*asio::ip::udp::endpoint sender_endpoint(asio::ip::udp::v4(), 7000);
 
@@ -168,32 +185,37 @@ namespace DDRFramework
 	}
 	void UdpSocketBase::HandleRead(const asio::error_code& ec,int len)
 	{
-		if (!ec)
+		std::lock_guard<std::mutex> lock(m_UdpMutex);
+		if (m_Receiving)
 		{
-			if (m_spSerializer)
+
+			if (!ec)
 			{
 				if (m_spSerializer)
 				{
-					std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-					oshold.write(m_ReadStreamBuf.data(), len);
-					oshold.flush();
+					if (m_spSerializer)
+					{
+						std::ostream oshold(&m_spSerializer->GetRecBuf());
 
+						oshold.write(m_ReadStreamBuf.data(), len);
+						oshold.flush();
+
+					}
+
+					m_spSerializer->Update();
 				}
 
-				m_spSerializer->Update();
+				if (m_Receiving)
+				{
+					m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+				}
 			}
-
-			if (m_Receiving)
+			else
 			{
-				m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+				DebugLog("\nUdp Read Failed:%s", ec.message().c_str());
 			}
 		}
-		else
-		{
-			DebugLog("\nUdp Read Failed:%s", ec.message().c_str());
-		}
-
 	}
 
 	void UdpSocketBase::Send(std::shared_ptr<google::protobuf::Message> spmsg)
