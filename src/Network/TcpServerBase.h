@@ -49,7 +49,7 @@ namespace DDRFramework
 
 		void ThreadEntry();
 
-		void StartAccept();
+		virtual std::shared_ptr<TcpSessionBase> StartAccept();
 		void HandleAccept(std::shared_ptr<TcpSessionBase> sp, const asio::error_code& error);
 
 		virtual void OnSessionDisconnect(TcpSocketContainer& container);
@@ -62,6 +62,8 @@ namespace DDRFramework
 		
 		
 		asio::detail::thread_group m_WorkerThreads;
+
+	
 	private:
 		//void WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession);
 	};

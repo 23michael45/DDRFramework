@@ -64,6 +64,11 @@ namespace DDRFramework
 		{
 			m_fOnSessionConnected = f;
 		}
+		void BindOnHookReceive(std::function<void(asio::streambuf&)> f)
+		{
+			m_fOnHookReceiveData = f;
+		}
+
 		bool IsConnected()
 		{
 			return m_bConnected;
@@ -105,6 +110,10 @@ namespace DDRFramework
 
 		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
 		std::function<void(TcpSocketContainer&)> m_fOnSessionConnected;
+
+
+		std::function<void(asio::streambuf&)> m_fOnHookReceiveData;
+
 
 		std::shared_ptr<BaseBehavior> m_spBehavior;
 	private:

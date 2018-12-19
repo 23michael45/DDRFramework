@@ -38,13 +38,14 @@ namespace DDRFramework
 	{
 		if (!ec)
 		{
-			m_TotalRev += m_ReadStreamBuf.size();
-			DebugLog("\nReceive:%i TotalRev:%i", m_ReadStreamBuf.size(), m_TotalRev);
-
-			PushData(m_ReadStreamBuf);
-
 			if (m_bConnected)
 			{
+				m_TotalRev += m_ReadStreamBuf.size();
+				//DebugLog("\nReceive:%i TotalRev:%i", m_ReadStreamBuf.size(), m_TotalRev);
+
+				PushData(m_ReadStreamBuf);
+
+
 				m_ReadWriteStrand.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 			}
 		}
@@ -133,12 +134,14 @@ namespace DDRFramework
 		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, TcpSessionBase, MessageSerializer, BaseMessageDispatcher,BaseHeadRuleRouter)
 			return spTcpSessionBase;
 	}
-	void TcpServerBase::StartAccept()
+	std::shared_ptr<TcpSessionBase> TcpServerBase::StartAccept()
 	{
 		auto spSession = BindSerializerDispatcher();
 		spSession->BindOnDisconnect(std::bind(&TcpServerBase::OnSessionDisconnect, shared_from_this(), std::placeholders::_1));
 		m_Acceptor.async_accept(spSession->GetSocket(),
 			std::bind(&TcpServerBase::HandleAccept, this, spSession,std::placeholders::_1));
+
+		return spSession;
 
 	}
 	void TcpServerBase::HandleAccept(std::shared_ptr<TcpSessionBase> spSession, const asio::error_code& error)

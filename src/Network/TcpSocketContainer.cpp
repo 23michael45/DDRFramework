@@ -48,7 +48,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("\CheckRead Finish");
+			//DebugLog("\CheckRead Finish");
 		}
 	}
 	void TcpSocketContainer::CheckWrite()
@@ -78,12 +78,22 @@ namespace DDRFramework
 		if (m_bConnected)
 		{
 			std::lock_guard<std::mutex> lock(m_spSerializer->GetRecLock());
-			if (m_spSerializer)
-			{
-				std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-				oshold.write((const char*)buf.data().data(), buf.size());
-				oshold.flush();
+			if (m_fOnHookReceiveData)
+			{
+				m_fOnHookReceiveData(buf);
+			}
+			else
+			{
+
+				if (m_spSerializer)
+				{
+					std::ostream oshold(&m_spSerializer->GetRecBuf());
+
+					oshold.write((const char*)buf.data().data(), buf.size());
+					oshold.flush();
+
+				}
 
 			}
 			buf.consume(buf.size());

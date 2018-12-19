@@ -193,8 +193,8 @@ namespace DDRFramework
 		mDataStreamSendQueue.push(spbuf);
 
 
-		m_TotalPackLen += spbuf->size();
-		DebugLog("\ntotal Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
+		//m_TotalPackLen += spbuf->size();
+		//DebugLog("\ntotal Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
 		//DebugLog("\nEnd Pack");
 		return true;
 	}

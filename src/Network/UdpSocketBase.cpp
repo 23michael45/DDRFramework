@@ -191,19 +191,26 @@ namespace DDRFramework
 
 			if (!ec)
 			{
-				if (m_spSerializer)
+				if (m_fOnHookReceiveData)
 				{
-
+					m_fOnHookReceiveData(m_ReadStreamBuf,len);
+				}
+				else
+				{
 					if (m_spSerializer)
 					{
-						std::ostream oshold(&m_spSerializer->GetRecBuf());
 
-						oshold.write(m_ReadStreamBuf.data(), len);
-						oshold.flush();
+						if (m_spSerializer)
+						{
+							std::ostream oshold(&m_spSerializer->GetRecBuf());
 
+							oshold.write(m_ReadStreamBuf.data(), len);
+							oshold.flush();
+
+						}
+
+						m_spSerializer->Update();
 					}
-
-					m_spSerializer->Update();
 				}
 
 				if (m_Receiving)

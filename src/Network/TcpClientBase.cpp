@@ -65,10 +65,9 @@ namespace DDRFramework
 			if (!ec)
 			{
 				//DebugLog("\nReceive:%i", m_ReadStreamBuf.size());
-
-				PushData(m_ReadStreamBuf);
 				if (m_bConnected)
 				{
+					PushData(m_ReadStreamBuf);
 					m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 				}
 			}
@@ -92,14 +91,12 @@ namespace DDRFramework
 	}
 	void TcpClientSessionBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
-		DebugLog("\nStart Write");
 		if (m_Socket.is_open())
 		{
 			m_TotalSendWill += spbuf->size();
 			asio::async_write(m_Socket, *spbuf.get(),asio::transfer_all(), std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		}
 
-		DebugLog("\nEnd Write");
 	}
 	void TcpClientSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
 	{
@@ -110,7 +107,7 @@ namespace DDRFramework
 			{
 				m_spSerializer->PopSendBuf();
 				m_TotalSend += size;
-				DebugLog("\nSend:%i TotalSend:%i TotalSendWill:%i", size, m_TotalSend, m_TotalSendWill);
+				//DebugLog("\nSend:%i TotalSend:%i TotalSendWill:%i", size, m_TotalSend, m_TotalSendWill);
 
 			}
 			else

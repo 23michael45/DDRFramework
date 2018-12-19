@@ -50,6 +50,10 @@ namespace DDRFramework
 		{
 			return m_spSocket;
 		}
+		void BindOnHookReceive(std::function<void(asio::detail::array<char, 1024>&, int)> f)
+		{
+			m_fOnHookReceiveData = f;
+		}
 	private:
 
 		std::function<void(UdpSocketBase&)> m_fOnDisconnect;
@@ -85,6 +89,8 @@ namespace DDRFramework
 		std::mutex m_UdpMutex;
 		
 		asio::io_context::strand m_ReadWriteStrand;
+
+		std::function<void(asio::detail::array<char, 1024>&,int)> m_fOnHookReceiveData;
 	};
 
 }
