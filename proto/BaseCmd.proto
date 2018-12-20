@@ -342,6 +342,27 @@ message reqTextChat
 	string chatText = 1;
 }
 
+
+
+
+
+
+
+message AVChannel
+{
+	enum ChannelType
+	{
+		Local = 0;
+		Remote = 1;
+	}
+	string srcIp = 1;
+	int32 srcPort = 2;
+	string dstIp = 3;
+	int32 dstPort = 4;
+	ChannelType type = 5;
+}
+
+
 //----------------------------------------------------------------------------------------------------------PC Android Client[[[[[[
 message reqVideoStreamAddr
 {
@@ -349,11 +370,7 @@ message reqVideoStreamAddr
 }
 message rspVideoStreamAddr
 {	
-	message VideoStreamChannel
-	{
-		string srcIp = 1;
-	}
-	repeated VideoStreamChannel channels = 1;
+	repeated AVChannel channels = 1;
 }
 message reqAudioStreamAddr
 {
@@ -361,17 +378,7 @@ message reqAudioStreamAddr
 }
 message rspAudioStreamAddr
 {
-	message AudioStreamChannel
-	{
-		enum ChannelType
-		{
-			Local = 0;
-			Remote = 1;
-		}
-		string srcIp = 1;
-		ChannelType type = 2;
-	}
-	repeated AudioStreamChannel channels = 1;
+	repeated AVChannel channels = 1;
 }
 
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
@@ -384,17 +391,7 @@ message reqAudioStreamServiceInfo
 }
 message rspAudioStreamServiceInfo
 {
-	message AudioStreamChannel
-	{
-		enum ChannelType
-		{
-			Local = 0;
-			Remote = 1;
-		}
-		string srcIp = 1;
-		ChannelType type = 2;
-	}
-	repeated AudioStreamChannel channels = 1;
+	repeated AVChannel channels = 1;
 }
 
 message reqVideoStreamServiceInfo
@@ -404,13 +401,7 @@ message reqVideoStreamServiceInfo
 }
 message rspVideoStreamServiceInfo
 {
-	message VideoStreamChannel
-	{
-	
-		string srcIp = 1;
-		string dstIP = 2;
-	}
-	repeated VideoStreamChannel channels = 1;
+	repeated AVChannel channels = 1;
 }
 
 
