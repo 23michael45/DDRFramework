@@ -124,7 +124,54 @@ namespace DDRFramework
 	void TcpSocketContainer::Send(std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		Send(nullptr, spmsg);
-	};
+	}
+	void TcpSocketContainer::Send(std::shared_ptr<asio::streambuf> spbuf)
+	{
+		if (m_bConnected)
+		{
+			//m_IOContext.post(std::bind(&MessageSerializer::Pack, m_spSerializer, spmsg));
+
+			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
+			if (m_spSerializer)
+			{
+				m_spSerializer->PushSendBuf(spbuf);
+
+			}
+		}
+		else
+		{
+			DebugLog("\nDisconnected Send Failed");
+
+		}
+	}
+	void TcpSocketContainer::Send(const void* psrc, int len)
+	{
+		if (m_bConnected)
+		{
+			//m_IOContext.post(std::bind(&MessageSerializer::Pack, m_spSerializer, spmsg));
+
+			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
+			if (m_spSerializer)
+			{
+
+				std::shared_ptr<asio::streambuf> spbuf = std::make_shared<asio::streambuf>();
+				std::ostream oshold(spbuf.get());
+
+				oshold.write((const char*)psrc, len);
+				oshold.flush();
+				m_spSerializer->PushSendBuf(spbuf);
+
+			}
+		}
+		else
+		{
+			DebugLog("\nDisconnected Send Failed");
+
+		}
+
+	}
+
+
 	tcp::socket& TcpSocketContainer::GetSocket()
 	{
 		return m_Socket;

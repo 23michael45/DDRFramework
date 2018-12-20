@@ -47,7 +47,8 @@ namespace DDRFramework
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
-
+		void Send(std::shared_ptr<asio::streambuf> spbuf);
+		void Send(const void* psrc, int len);
 
 		tcp::socket& GetSocket();
 

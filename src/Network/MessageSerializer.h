@@ -56,6 +56,11 @@ namespace DDRFramework
 			}
 			return nullptr;
 		}
+		void PushSendBuf(std::shared_ptr<asio::streambuf> spbuf)
+		{
+			std::lock_guard<std::mutex> lock(mMutexSend);
+			mDataStreamSendQueue.push(spbuf);
+		}
 		void PopSendBuf()
 		{
 			mDataStreamSendQueue.pop();

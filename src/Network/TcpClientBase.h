@@ -51,6 +51,8 @@ namespace DDRFramework
 		void ThreadEntry();
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
+		void Send(std::shared_ptr<asio::streambuf> spbuf);
+		void Send(const void* psrc, int len);
 
 		bool IsConnected()
 		{

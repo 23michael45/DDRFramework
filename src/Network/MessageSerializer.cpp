@@ -189,9 +189,8 @@ namespace DDRFramework
 
 		std::lock_guard<std::mutex> lock(mMutexSend);
 
-		auto spbuf = SerializeMsg(spheader,spmsg);
+		auto spbuf = SerializeMsg(spheader, spmsg);
 		mDataStreamSendQueue.push(spbuf);
-
 
 		//m_TotalPackLen += spbuf->size();
 		//DebugLog("\ntotal Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())

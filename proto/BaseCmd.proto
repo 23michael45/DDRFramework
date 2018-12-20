@@ -342,28 +342,67 @@ message reqTextChat
 	string chatText = 1;
 }
 
+//----------------------------------------------------------------------------------------------------------PC Android Client[[[[[[
+message reqVideoStreamAddr
+{
+	string name = 1;
+}
+message rspVideoStreamAddr
+{	
+	message VideoStreamChannel
+	{
+		string srcIp = 1;
+	}
+	repeated VideoStreamChannel channels = 1;
+}
+message reqAudioStreamAddr
+{
+	string name = 1;
+}
+message rspAudioStreamAddr
+{
+	message AudioStreamChannel
+	{
+		enum ChannelType
+		{
+			Local = 0;
+			Remote = 1;
+		}
+		string srcIp = 1;
+		ChannelType type = 2;
+	}
+	repeated AudioStreamChannel channels = 1;
+}
 
+//----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
 
-
-//----------------------------------------------------------------------------------------------------------StreamRelayService[
-message reqAudioStreamInfo
+//----------------------------------------------------------------------------------------------------------StreamRelayService[[[[[[
+message reqAudioStreamServiceInfo
 {
 	string name = 1;
 	
 }
-message rspAudioStreamInfo
+message rspAudioStreamServiceInfo
 {
-	string srcIp = 1;
-	string dstIP = 2;
-	string bandwidth = 3;
+	message AudioStreamChannel
+	{
+		enum ChannelType
+		{
+			Local = 0;
+			Remote = 1;
+		}
+		string srcIp = 1;
+		ChannelType type = 2;
+	}
+	repeated AudioStreamChannel channels = 1;
 }
 
-message reqVideoStreamInfo
+message reqVideoStreamServiceInfo
 {
 	string name = 1;
 	
 }
-message rspVideoStreamInfo
+message rspVideoStreamServiceInfo
 {
 	message VideoStreamChannel
 	{
@@ -375,7 +414,7 @@ message rspVideoStreamInfo
 }
 
 
-//----------------------------------------------------------------------------------------------------------StreamRelayService]
+//----------------------------------------------------------------------------------------------------------StreamRelayService]]]]]]
 
 
 

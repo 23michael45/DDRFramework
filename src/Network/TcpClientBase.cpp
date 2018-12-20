@@ -196,6 +196,22 @@ namespace DDRFramework
 
 		}
 	}
+	void TcpClientBase::Send(std::shared_ptr<asio::streambuf> spbuf)
+	{
+		if (m_spClient)
+		{
+			m_spClient->Send(spbuf);
+
+		}
+	}
+	void TcpClientBase::Send(const void* psrc, int len)
+	{
+		if (m_spClient)
+		{
+			m_spClient->Send(psrc,len);
+
+		}
+	}
 	void TcpClientBase::OnDisconnect(TcpSocketContainer& container)
 	{
 		if (m_spClient)
