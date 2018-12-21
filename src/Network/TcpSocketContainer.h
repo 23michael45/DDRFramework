@@ -57,6 +57,11 @@ namespace DDRFramework
 
 		void Release();
 
+
+
+		virtual void OnStart() {};
+		virtual void OnStop() {}
+
 		void BindOnDisconnect(std::function<void(TcpSocketContainer&)> f)
 		{
 			m_fOnSessionDisconnect = f;

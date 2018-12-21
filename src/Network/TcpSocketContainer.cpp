@@ -20,6 +20,7 @@ namespace DDRFramework
 	}
 	void  TcpSocketContainer::Start()
 	{
+		OnStart();
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 	}
@@ -180,6 +181,8 @@ namespace DDRFramework
 	{
 		m_bConnected = false;
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_this()));
+
+		OnStop();
 	}
 
 	std::shared_ptr<MessageSerializer> TcpSocketContainer::GetSerializer()

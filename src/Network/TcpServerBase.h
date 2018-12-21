@@ -25,6 +25,11 @@ namespace DDRFramework
 		virtual void HandleWrite(const asio::error_code&, size_t);
 
 
+
+
+		virtual void OnSessionConnect(TcpSocketContainer& container) {};
+		virtual void OnSessionDisconnect(TcpSocketContainer& container) {};
+
 	private:
 		int m_TotalRev;
 		asio::streambuf m_ReadStreamBuf;
@@ -51,6 +56,7 @@ namespace DDRFramework
 
 		virtual std::shared_ptr<TcpSessionBase> StartAccept();
 		void HandleAccept(std::shared_ptr<TcpSessionBase> sp, const asio::error_code& error);
+
 
 		virtual void OnSessionDisconnect(TcpSocketContainer& container);
 		virtual std::shared_ptr<TcpSessionBase> BindSerializerDispatcher();
