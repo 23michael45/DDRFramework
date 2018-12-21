@@ -4,3 +4,5 @@
 /proto/BaseCmd_pb2.py
 /proto/DDRCommProto/BaseCmd.java
 /tools/sqlite3/SQLiteDatabaseBrowserPortable/Data/*.ini
+/tools/xlsx2xml/xml/Client/*.xml
+/tools/xlsx2xml/xml/*.xml

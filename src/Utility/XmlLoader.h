@@ -1,4 +1,7 @@
-#pragma once
+#ifndef XmlLoader_h__
+#define XmlLoader_h__
+
+
 #include <map>
 #include <string>
 #include <vector>
@@ -77,3 +80,4 @@ namespace DDRFramework
 
 	};
 }
+#endif // XmlLoader_h__
