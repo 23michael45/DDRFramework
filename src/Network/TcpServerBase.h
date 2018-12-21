@@ -2,8 +2,10 @@
 #define TcpServerBase_h__
 #include "asio.hpp"
 #include <map>
+#include "../../proto/BaseCmd.pb.h"
 #include "TcpSocketContainer.h"
 using asio::ip::tcp;
+using namespace DDRCommProto;
 
 namespace DDRFramework
 {
@@ -16,7 +18,14 @@ namespace DDRFramework
 		~TcpSessionBase();
 		virtual void Start();
 
-
+		void AssignLoginInfo(reqLogin info)
+		{
+			m_reqLoginInfo.CopyFrom(info);
+		}
+		reqLogin& GetLoginInfo()
+		{
+			return m_reqLoginInfo;
+		}
 	protected:
 
 		virtual void StartRead();
@@ -29,9 +38,13 @@ namespace DDRFramework
 		virtual void OnSessionConnect(TcpSocketContainer& container) {};
 		virtual void OnSessionDisconnect(TcpSocketContainer& container) {};
 
+		
+
 	private:
 		int m_TotalRev;
 		asio::streambuf m_ReadStreamBuf;
+
+		reqLogin m_reqLoginInfo;//Login Information
 
 
 		auto shared_from_base() {
