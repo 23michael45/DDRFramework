@@ -76,6 +76,19 @@ public:
 	{
 
 	}
+
+	~StateMachine()
+	{
+		DebugLog("\nStateMachine Destroy");
+
+		for (auto iter = m_States.begin(); iter != m_States.end(); ++iter)
+		{
+			std::shared_ptr<State<PT>> sp = iter->second;
+			sp.reset();
+		}
+		m_States.clear();
+
+	}
 	/**
 	 *  Find state by id and return casted state
 	 *
@@ -259,17 +272,6 @@ public:
 		return m_spState.get();
 	}
 
-	~StateMachine()
-	{
-		DebugLog("\nStateMachine Destroy");
-
-		for (auto iter = m_States.begin(); iter != m_States.end(); ++iter)
-		{
-			std::shared_ptr<State<PT>> sp = iter->second;
-			sp.reset();
-		}
-
-	}
 
 private:
 	std::unordered_map<std::string, std::shared_ptr<State<PT>>> m_States;
