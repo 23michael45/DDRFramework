@@ -121,7 +121,7 @@ namespace DDRFramework
 		{
 			DebugLog("\n%s", e.what());
 			std::this_thread::sleep_for(std::chrono::seconds(1));
-			StartReceive(port);
+			StopReceive();
 		}
 	}
 	void UdpSocketBase::StopReceive()

@@ -54,9 +54,9 @@ namespace DDRFramework
 	}
 	void TcpSocketContainer::CheckWrite()
 	{
-		std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
 		if (m_spSerializer)
 		{
+			std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
 			if (m_bConnected)
 			{
 				auto spbuf = m_spSerializer->GetSendBuf();
@@ -171,7 +171,32 @@ namespace DDRFramework
 		}
 
 	}
+	void TcpSocketContainer::HandleWrite(const asio::error_code& ec, size_t size)
+	{
+		if (m_spSerializer)
+		{
+			std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
+			if (m_bConnected)
+			{
+				if (!ec)
+				{
+					m_spSerializer->PopSendBuf();
 
+				}
+				else
+				{
+					DebugLog("\nError on send: %s", ec.message().c_str());
+
+					Stop();
+
+				}
+
+				m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+
+			}
+		}
+
+	}
 
 	tcp::socket& TcpSocketContainer::GetSocket()
 	{
@@ -219,6 +244,10 @@ namespace DDRFramework
 
 	void TcpSocketContainer::BindBehavior(std::shared_ptr<BaseBehavior> behavior)
 	{
+		if (m_spBehavior)
+		{
+			m_spBehavior->OnStop(shared_from_this());
+		}
 		m_spBehavior = behavior;
 
 		if (m_spBehavior)

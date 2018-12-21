@@ -45,6 +45,9 @@ namespace DDRFramework
 		virtual void CheckWrite();
 		virtual void CheckBehavior();
 
+
+		void HandleWrite(const asio::error_code& ec, size_t size);
+
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
 		void Send(std::shared_ptr<asio::streambuf> spbuf);

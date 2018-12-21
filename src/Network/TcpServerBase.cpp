@@ -68,29 +68,6 @@ namespace DDRFramework
 		}
 
 	}
-	void TcpSessionBase::HandleWrite(const asio::error_code& ec, size_t size)
-	{
-		std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
-		if (!ec)
-		{
-			m_spSerializer->PopSendBuf();
-			//DebugLog("\nSend :%i", size);
-		}
-		else
-		{
-			DebugLog("\nError on send: %s", ec.message().c_str());
-
-			Stop();
-			
-		}
-
-		if (m_bConnected)
-		{
-			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
-
-		}
-	}
-	 
 
 	TcpServerBase::TcpServerBase(int port) :m_Acceptor(m_IOContext, tcp::endpoint(tcp::v4(), port))
 	{

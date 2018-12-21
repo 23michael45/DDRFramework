@@ -24,7 +24,6 @@ namespace DDRFramework
 		void StartRead();
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) override;
 		void HandleRead(const asio::error_code& ec);
-		void HandleWrite(const asio::error_code&, size_t);
 
 
 	private:
@@ -45,8 +44,8 @@ namespace DDRFramework
 		TcpClientBase();
 		~TcpClientBase();
 		void Start(int threadNum = 2);
-		void Connect(std::string address, std::string port);
-		void Disconnect();
+		std::shared_ptr<TcpClientSessionBase> Connect(std::string address, std::string port);
+		void Disconnect(TcpSocketContainer& container);
 		void Stop();
 		void ThreadEntry();
 
@@ -56,11 +55,27 @@ namespace DDRFramework
 
 		bool IsConnected()
 		{
-			if (m_spClient && m_spClient->IsConnected())
+			for (auto spSession : m_spClientMap)
 			{
-				return true;
+				if (spSession.second->IsConnected())
+				{
+					return true;
+				}
+
 			}
 			return false;
+		}
+		std::shared_ptr<TcpClientSessionBase> GetConnectedSession()
+		{
+			for (auto spSession : m_spClientMap)
+			{
+				if (spSession.second->IsConnected())
+				{
+					return spSession.second;
+				}
+
+			}
+			return nullptr;
 		}
 	protected:
 
@@ -69,7 +84,7 @@ namespace DDRFramework
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
-		std::shared_ptr<TcpClientSessionBase> m_spClient;
+		std::map<TcpSocketContainer*,std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
 		std::shared_ptr< asio::io_service::work > m_spWork;
 		std::string m_Address;
 		std::string m_Port;

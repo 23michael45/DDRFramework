@@ -22,7 +22,6 @@ namespace DDRFramework
 		virtual void StartRead();
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) override;
 		virtual void HandleRead(const asio::error_code& ec);
-		virtual void HandleWrite(const asio::error_code&, size_t);
 
 
 

@@ -98,7 +98,6 @@ namespace DDRFramework
 			} while (pCurState != spWaitState.get());
 
 		}
-
 	}
 
 	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<google::protobuf::Message> spmsg)
