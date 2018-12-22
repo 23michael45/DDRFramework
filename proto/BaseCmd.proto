@@ -323,16 +323,17 @@ message reqStatus
 // eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
 message reqFaceAlarm
 {
-	
+	string error = 1;
 }
 
 message reqHotAlarm
 {
-	
+	string error = 1;
 }
 message reqObsAlarm
 {
 	
+	string error = 1;
 }
 
 // flowDirection = C2LS or LS2C or RR2RS or M2RS or RS2M
@@ -378,6 +379,13 @@ message rspStreamAddr
 	repeated AVStreamSrcChannel channels = 1;
 	string error = 2;
 }
+message notifyAlarm
+{
+	eCltType from = 1;
+	string fromIP = 2;
+	string error = 3;
+	
+}
 
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
 
@@ -406,7 +414,11 @@ message notifyStreamServiceInfoChanged
 {
 	repeated AVChannelConfig channels = 1;
 }
-
+message reqStreamRelayAlarm
+{
+	string error = 1;
+	repeated eCltType to = 2;
+}
 
 //----------------------------------------------------------------------------------------------------------StreamRelayService]]]]]]
 
