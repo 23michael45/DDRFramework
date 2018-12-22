@@ -358,32 +358,39 @@ enum ChannelStreamType//bit mask
 	Audio = 1;
 	VideoAudio = 2;
 }
-message AVChannel
-{
-	
-
-	string src = 1;
-	repeated int32 srcport = 2;//if size if 0 ,port will not be used
-	string dst = 3;
-	repeated int32 dstport = 4;//if size if 0 ,port will not be used
-	ChannelNetworkType networkType = 5;
-	ChannelStreamType streamType = 6;
-}
 
 
 //----------------------------------------------------------------------------------------------------------PC Android Client[[[[[[
+message AVStreamSrcChannel
+{
+	string srcAddr = 1;
+	repeated int32 srcPort = 2;//size = 0 means donot use it 
+	ChannelStreamType streamType = 3;
+	ChannelNetworkType networkType = 4;
+}
+
 message reqStreamAddr
 {
 	ChannelNetworkType networkType = 1;
 }
 message rspStreamAddr
 {	
-	repeated AVChannel channels = 1;
+	repeated AVStreamSrcChannel channels = 1;
+	string error = 2;
 }
 
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
 
 //----------------------------------------------------------------------------------------------------------StreamRelayService[[[[[[
+message AVChannelConfig
+{
+	
+
+	string src = 1;
+	string dst = 2;
+	ChannelStreamType streamType = 3;
+}
+
 message reqStreamServiceInfo
 {
 	string name = 1;
@@ -392,12 +399,12 @@ message reqStreamServiceInfo
 message rspStreamServiceInfo
 {
 	int32 tcpPort = 1;
-	repeated AVChannel channels = 2;
+	repeated AVChannelConfig channels = 2;
 	
 }
 message notifyStreamServiceInfoChanged
 {
-	repeated AVChannel channels = 1;
+	repeated AVChannelConfig channels = 1;
 }
 
 
