@@ -5,20 +5,10 @@ namespace DDRFramework
 {
 	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)
 	{
-		m_TotalSend = 0; m_TotalSendWill = 0;
-	
-		int static i = 0;
-		i++;
-
-		DebugLog("\nTcpClientSessionBase %i",i);
 	}
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		int static i = 0;
-		i++;
-
-		DebugLog("\nTcpClientSessionBase Destroy %i", i);
 		DebugLog("\nTcpClientSessionBase Destroy");
 	}
 
@@ -104,7 +94,6 @@ namespace DDRFramework
 	{
 		if (m_Socket.is_open())
 		{
-			m_TotalSendWill += spbuf->size();
 			asio::async_write(m_Socket, *spbuf.get(),asio::transfer_all(), std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		}
 

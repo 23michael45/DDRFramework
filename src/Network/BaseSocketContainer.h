@@ -38,6 +38,8 @@ namespace DDRFramework
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
+
+		void PrintRemoteIP();
 	};
 
 }

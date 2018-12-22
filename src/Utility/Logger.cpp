@@ -127,4 +127,49 @@ namespace DDRFramework
 		DDRFramework::Log::getInstance()->write(DDRFramework::Log::Level::INFO, buff);
 	}
 
+	ConsoleDebug::ConsoleDebug()
+	{
+		m_Quit = false;
+		m_ToggleLog = true;
+		AddCommand("l", std::bind(&ConsoleDebug::ToggleLog, this));
+		AddCommand("q", std::bind(&ConsoleDebug::ToggleLog, this));
+	}
+	void ConsoleDebug::ToggleLog()
+	{
+		if (m_ToggleLog == true)
+		{
+			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE);
+
+		}
+		else
+		{
+
+			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE | DDRFramework::Log::Target::STDOUT);
+		}
+		m_ToggleLog = !m_ToggleLog;
+	}
+	void ConsoleDebug::Quit()
+	{
+		m_Quit = true;
+	}
+	void ConsoleDebug::ConsoleDebugLoop()
+	{
+		std::string input;
+		do
+		{
+			getline(cin, input);
+
+			if (m_Functionmap.find(input) != m_Functionmap.end())
+			{
+				m_Functionmap[input]();
+			}
+
+		} while (!m_Quit);
+	}
+
+	void ConsoleDebug::AddCommand(std::string cmd, std::function<void()> func)
+	{
+		m_Functionmap.insert(std::make_pair(cmd, func));
+	}
+
 }

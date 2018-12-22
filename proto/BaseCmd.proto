@@ -347,59 +347,55 @@ message reqTextChat
 
 
 
-
-message AVChannel
+enum ChannelNetworkType
 {
-	enum ChannelType
-	{
 		Local = 0;
 		Remote = 1;
-	}
-	string srcIp = 1;
-	int32 srcPort = 2;
-	string dstIp = 3;
-	int32 dstPort = 4;
-	ChannelType type = 5;
+}
+enum ChannelStreamType//bit mask
+{
+	Video = 0;
+	Audio = 1;
+	VideoAudio = 2;
+}
+message AVChannel
+{
+	
+
+	string src = 1;
+	repeated int32 srcport = 2;//if size if 0 ,port will not be used
+	string dst = 3;
+	repeated int32 dstport = 4;//if size if 0 ,port will not be used
+	ChannelNetworkType networkType = 5;
+	ChannelStreamType streamType = 6;
 }
 
 
 //----------------------------------------------------------------------------------------------------------PC Android Client[[[[[[
-message reqVideoStreamAddr
+message reqStreamAddr
 {
-	string name = 1;
+	ChannelNetworkType networkType = 1;
 }
-message rspVideoStreamAddr
+message rspStreamAddr
 {	
-	repeated AVChannel channels = 1;
-}
-message reqAudioStreamAddr
-{
-	string name = 1;
-}
-message rspAudioStreamAddr
-{
 	repeated AVChannel channels = 1;
 }
 
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
 
 //----------------------------------------------------------------------------------------------------------StreamRelayService[[[[[[
-message reqAudioStreamServiceInfo
+message reqStreamServiceInfo
 {
 	string name = 1;
 	
 }
-message rspAudioStreamServiceInfo
+message rspStreamServiceInfo
 {
-	repeated AVChannel channels = 1;
-}
-
-message reqVideoStreamServiceInfo
-{
-	string name = 1;
+	int32 tcpPort = 1;
+	repeated AVChannel channels = 2;
 	
 }
-message rspVideoStreamServiceInfo
+message notifyStreamServiceInfoChanged
 {
 	repeated AVChannel channels = 1;
 }

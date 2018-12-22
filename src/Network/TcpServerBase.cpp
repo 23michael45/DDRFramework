@@ -84,19 +84,11 @@ namespace DDRFramework
 	}
 	void TcpServerBase::Stop()
 	{
-
-		std::vector<tcp::socket*> keyvec;
-
 		for (auto spSessionPair : m_SessionMap)
 		{
 			spSessionPair.second->Stop();
-			keyvec.push_back(spSessionPair.first);
 		}
-
-		for (auto iter = keyvec.begin(); iter != keyvec.end(); ++iter)
-		{
-			m_SessionMap.erase(*iter);
-		}
+		m_SessionMap.clear();
 	}
 
 	void TcpServerBase::ThreadEntry()

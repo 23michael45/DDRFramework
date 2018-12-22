@@ -11,6 +11,8 @@
 #include <iomanip>
 #include <memory>
 #include <stdarg.h>
+#include "Singleton.h"
+#include <functional>
 
 using namespace std;
 
@@ -156,6 +158,27 @@ namespace DDRFramework {
 
 	void Print(const char* format, ...);
 	
+	class ConsoleDebug
+	{
+
+	public:
+		ConsoleDebug();
+
+		void ConsoleDebugLoop();
+		void AddCommand(std::string cmd, std::function<void()> func);
+
+		void ToggleLog();
+		void Quit();
+
+	protected:
+
+		std::map<std::string, std::function<void()>> m_Functionmap;
+
+		bool m_Quit;
+		bool m_ToggleLog;
+	};
+
+
 }
 
 #endif // Logger_h__

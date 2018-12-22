@@ -80,7 +80,10 @@ namespace DDRFramework
 		{
 			m_spBaseSocketContainer = sp;
 		}
-
+		std::shared_ptr<BaseSocketContainer> GetSocketContainer()
+		{
+			return m_spBaseSocketContainer;
+		}
 	protected:
 	
 		std::shared_ptr<StateMachine<MessageSerializer>> m_spStateMachine;

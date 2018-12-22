@@ -1,4 +1,6 @@
 #include "XmlLoader.h"
+#include "DDRMacro.h"
+#include "Logger.h"
 #include "tinyxml.h"
 
 namespace DDRFramework
@@ -10,8 +12,8 @@ namespace DDRFramework
 
 		if (!loadOkay)
 		{
-			printf("Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
-			exit(1);
+			DebugLog("\nCould not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
+			//exit(1);
 		}
 
 		TiXmlNode* rootNode = 0;

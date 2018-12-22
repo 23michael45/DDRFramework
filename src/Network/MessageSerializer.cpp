@@ -398,7 +398,6 @@ namespace DDRFramework
 
 
 			auto spmsg = CreateMessage(m_spCommonHeader->bodytype());
-
 			if (spmsg)
 			{
 
