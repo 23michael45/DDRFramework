@@ -2,6 +2,14 @@ syntax = "proto3";
 
 package DDRCommProto;
 
+//message head instruction
+//req： Client request , Message to Server
+//rsp:  Server response , Message to Client , response a request
+//chk:  Server check Client , expect a answer
+//ans:  Client answer a check , to Server
+//notify: Server notify Client , donot need any answer or response
+//HeartBeat: heartbeat , send every n sector
+//bc: broadcast by server through udp
 
 // Abbreviation: LS - local server; C - client (local); LSM - local service module
 //				 RS - remote server; M - monitor (remote); RR - remote robot (connect to RS)
@@ -253,64 +261,27 @@ message rspCmd
 	int64 cmdID = 1;
 	string rspMsg = 2;
 }
-
+enum eFileTypes {
+	FileContents = 0;
+	FileHttpAddress = 1;
+}
 // flowDirection = LS2LSM
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message reqFile
+message chkFileStatus
 {
-	string tarLSMName = 1;
-	enum eFileTypes {
-		FileContents = 0;
-		FileList = 1;
-		FolderFlist = 2;
-	}
-	eFileTypes fileType = 2;
-	repeated string fileNames = 3; // allow wildcards (*,?, etc)
+	eFileTypes fileType = 1;
+	repeated string fileNames = 2; // allow wildcards (*,?, etc)
 }
 
 // flowDirection = LSM2LS
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message rspFile
+message ansFileStatus
 {
-	string tarLSMName = 1;
-	enum eFileTypes {
-		FileContents = 0;
-		FileList = 1;
-		FolderFlist = 2;
-	}
-	eFileTypes fileType = 2;
-	repeated string fileNames = 3; // no wildcards
-	repeated string fileContents = 4; // ignored if fileType!=FileContents
+	eFileTypes fileType = 1;
+	repeated string fileAddrList = 2; // no wildcards
 }
 
-// flowDirection = M2RS or RS2RR or C2LS
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message reqFileAddr
-{
-	string tarLSMName = 1;
-	enum eFileTypes {
-		FileContents = 0;
-		FileList = 1;
-		FolderFlist = 2;
-	}
-	eFileTypes fileType = 2;
-	repeated string fileNames = 3;  // allow wildcards (*,?, etc)
-}
 
-// flowDirection = RR2RS or RS2M or LS2C
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message rspFileAddr
-{
-	string tarLSMName = 1;
-	enum eFileTypes {
-		FileContents = 0;
-		FileList = 1;
-		FolderFlist = 2;
-	}
-	eFileTypes fileType = 2;
-	repeated string fileNames = 3; // no wildcards
-	repeated string fileAddr = 4; // ignored if fileType!=FileContents
-}
 
 // flowDirection = LSM2LS or LS2C or RR2RS or RS2M
 // eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;
@@ -386,7 +357,23 @@ message notifyAlarm
 	string error = 3;
 	
 }
+// flowDirection = M2RS or RS2RR or C2LS
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+message reqFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated string fileNames = 3;  // allow wildcards (*,?, etc)
+}
 
+// flowDirection = RR2RS or RS2M or LS2C
+// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+message rspFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated string fileAddrList = 3; // ignored if fileType!=FileContents
+}
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]
 
 //----------------------------------------------------------------------------------------------------------StreamRelayService[[[[[[
