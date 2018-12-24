@@ -9,24 +9,25 @@
 #include <iostream>
 
 
-
-
-class HttpServer
+namespace DDRFramework
 {
-public:
-	HttpServer();
-	~HttpServer();
+
+	class HttpServer
+	{
+	public:
+		HttpServer();
+		~HttpServer();
 
 
-	const std::string currentDateTime();
-	void Start(std::string& address, std::string& port, std::string& docroot);
-	void Stop();
+		const std::string currentDateTime();
+		void Start(const std::string& address, const std::string& port,const  std::string& docroot);
+		void Stop();
 
-	void SaveJsonFile(Json::Value& value,std::string& name);
-private:
+		void SaveJsonFile(Json::Value& value, std::string& name);
+	private:
 
-	std::string mRootPath;
+		std::string mRootPath;
 
-};
-
+	};
+}
 #endif // HttpServer_h__

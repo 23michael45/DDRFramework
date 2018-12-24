@@ -9,3 +9,4 @@
 /tools/xlsx2xml/xml/LocalServer/LocalServerConfig.xml
 /tools/xlsx2xml/xml/LocalServer/StreamSrcProxyConfig.xml
 /tools/xlsx2xml/xml/StreamRelayService/StreamRelayConfig.xml
+/tools/xlsx2xml/xml/LocalServer/RemoteStreamProxyConfig.xml

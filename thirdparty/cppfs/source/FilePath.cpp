@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-
+#define MAX_PATH 1024
 
 namespace cppfs
 {
