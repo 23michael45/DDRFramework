@@ -24,9 +24,10 @@ namespace DDRFramework
 		void Stop();
 
 		void SaveJsonFile(Json::Value& value, std::string& name);
-	private:
+	protected:
 
-		std::string mRootPath;
+		std::string m_RootPath;
+		std::string m_Port;
 
 	};
 }

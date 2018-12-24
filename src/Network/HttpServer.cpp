@@ -27,7 +27,8 @@ namespace DDRFramework
 	{
 		try
 		{
-			mRootPath = docroot;
+			m_RootPath = docroot;
+			m_Port = port;
 
 			// Initialise the server.
 
@@ -55,7 +56,7 @@ namespace DDRFramework
 		try
 		{
 			std::ofstream f;
-			f.open(mRootPath + "/" + name + ".json", std::ofstream::out | std::ofstream::app);
+			f.open(m_RootPath + "/" + name + ".json", std::ofstream::out | std::ofstream::app);
 
 			Json::StreamWriterBuilder wb;
 			std::unique_ptr<Json::StreamWriter> writer(wb.newStreamWriter());
