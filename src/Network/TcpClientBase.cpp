@@ -41,7 +41,7 @@ namespace DDRFramework
 
 			if (m_fOnSessionConnected)
 			{
-				m_fOnSessionConnected(*this);
+				m_fOnSessionConnected(shared_from_this());
 			}
 		}
 		else
@@ -131,11 +131,11 @@ namespace DDRFramework
 
 		return spTcpClientSessionBase;
 	}
-	void TcpClientBase::Disconnect(TcpSocketContainer& container)
+	void TcpClientBase::Disconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 		if (IsConnected())
 		{
-			container.Stop();
+			spContainer->Stop();
 
 		}
 	}
@@ -191,14 +191,14 @@ namespace DDRFramework
 
 		}
 	}
-	void TcpClientBase::OnDisconnect(TcpSocketContainer& container)
+	void TcpClientBase::OnDisconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
-			container.Release();
-			m_spClientMap.erase(&container);
+		spContainer->Release();
+		m_spClientMap.erase(spContainer);
 
 		
 	}
-	void TcpClientBase::OnConnected(TcpSocketContainer& container)
+	void TcpClientBase::OnConnected(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 
 		DebugLog("\nOnConnected TcpClientBase");

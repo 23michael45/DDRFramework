@@ -146,16 +146,18 @@ namespace DDRFramework
 	//}
 
 
-	void TcpServerBase::OnSessionDisconnect(TcpSocketContainer& container)
+	void TcpServerBase::OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 		try
 		{
-			if (m_SessionMap.find(&container.GetSocket()) != m_SessionMap.end())
+			asio::ip::tcp::socket& sock = spContainer->GetSocket();
+			asio::ip::tcp::socket* psock = &sock;
+			if (m_SessionMap.find(psock) != m_SessionMap.end())
 			{
-				auto sp = m_SessionMap[&container.GetSocket()];
+				auto sp = m_SessionMap[psock];
 				sp->Release();
 				sp.reset();
-				m_SessionMap.erase(&container.GetSocket());
+				m_SessionMap.erase(psock);
 			}
 		}
 		catch (asio::error_code& e)

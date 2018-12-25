@@ -35,8 +35,8 @@ namespace DDRFramework
 
 
 
-		virtual void OnSessionConnect(TcpSocketContainer& container) {};
-		virtual void OnSessionDisconnect(TcpSocketContainer& container) {};
+		virtual void OnSessionConnect(std::shared_ptr<TcpSocketContainer> spContainer) {};
+		virtual void OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer) {};
 
 		
 
@@ -70,7 +70,7 @@ namespace DDRFramework
 		void HandleAccept(std::shared_ptr<TcpSessionBase> sp, const asio::error_code& error);
 
 
-		virtual void OnSessionDisconnect(TcpSocketContainer& container);
+		virtual void OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer);
 		virtual std::shared_ptr<TcpSessionBase> BindSerializerDispatcher();
 
 		asio::io_context m_IOContext;

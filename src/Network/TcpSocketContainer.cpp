@@ -238,7 +238,7 @@ namespace DDRFramework
 	{
 		if (m_fOnSessionDisconnect)
 		{
-			m_fOnSessionDisconnect(*this);
+			m_fOnSessionDisconnect(shared_from_this());
 		}
 	}
 

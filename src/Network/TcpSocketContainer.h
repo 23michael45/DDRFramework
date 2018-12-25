@@ -65,11 +65,11 @@ namespace DDRFramework
 		virtual void OnStart() {};
 		virtual void OnStop() {}
 
-		void BindOnDisconnect(std::function<void(TcpSocketContainer&)> f)
+		void BindOnDisconnect(std::function<void(std::shared_ptr<TcpSocketContainer>)> f)
 		{
 			m_fOnSessionDisconnect = f;
 		}
-		void BindOnConnected(std::function<void(TcpSocketContainer&)> f)
+		void BindOnConnected(std::function<void(std::shared_ptr<TcpSocketContainer>)> f)
 		{
 			m_fOnSessionConnected = f;
 		}
@@ -117,8 +117,8 @@ namespace DDRFramework
 		asio::io_context::strand m_ReadWriteStrand;
 
 
-		std::function<void(TcpSocketContainer&)> m_fOnSessionDisconnect;
-		std::function<void(TcpSocketContainer&)> m_fOnSessionConnected;
+		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionDisconnect;
+		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionConnected;
 
 
 		std::function<void(asio::streambuf&)> m_fOnHookReceiveData;

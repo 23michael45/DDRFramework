@@ -44,7 +44,7 @@ namespace DDRFramework
 		~TcpClientBase();
 		void Start(int threadNum = 2);
 		std::shared_ptr<TcpClientSessionBase> Connect(std::string address, std::string port);
-		void Disconnect(TcpSocketContainer& container);
+		void Disconnect(std::shared_ptr<TcpSocketContainer> spContainer);
 		void Stop();
 		void ThreadEntry();
 
@@ -78,12 +78,12 @@ namespace DDRFramework
 		}
 	protected:
 
-		virtual void OnDisconnect(TcpSocketContainer& container);
-		virtual void OnConnected(TcpSocketContainer& container);
+		virtual void OnDisconnect(std::shared_ptr<TcpSocketContainer> spContainer);
+		virtual void OnConnected(std::shared_ptr<TcpSocketContainer> spContainer);
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
-		std::map<TcpSocketContainer*,std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
+		std::map< std::shared_ptr<TcpSocketContainer>,std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
 		std::shared_ptr< asio::io_service::work > m_spWork;
 		std::string m_Address;
 		std::string m_Port;
