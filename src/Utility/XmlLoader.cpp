@@ -1,7 +1,12 @@
 #include "XmlLoader.h"
 #include "DDRMacro.h"
 #include "Logger.h"
-#include "tinyxml.h"
+
+#ifdef QT_PRECOMPILED_HEADER
+    #include "../../thirdparty/tinyxml/tinyxml.h"
+#else
+    #include "tinyxml.h"
+#endif
 
 namespace DDRFramework
 {
