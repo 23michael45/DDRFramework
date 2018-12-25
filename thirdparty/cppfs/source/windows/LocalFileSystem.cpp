@@ -54,7 +54,7 @@ namespace cppfs
 		size_t pos = 0;
 		std::vector<size_t> posvec;
 
-		std::string sformat = s;
+		std::string sformat = "(.*)" + s;
 		sformat = sformat.insert(pos, "(");
 
 		do

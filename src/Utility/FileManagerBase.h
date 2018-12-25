@@ -19,7 +19,7 @@ namespace DDRFramework
 
 		void SetRootPath(std::string root);
 		std::vector<std::string> CheckFiles();
-	private:
+	protected:
 
 		void CheckDir(std::string dir, std::vector<std::string>& vec);
 

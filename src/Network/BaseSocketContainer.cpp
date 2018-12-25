@@ -76,19 +76,19 @@ namespace DDRFramework
 		return m_spUdpSocketBase;
 	}
 
-	void BaseSocketContainer::PrintRemoteIP()
+	void BaseSocketContainer::PrintRemoteIP(std::string btype)
 	{
 		try
 		{
 			if (GetTcp())
 			{
-				DebugLog("\nReceive TCP Message from:%s", GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
+				DebugLog("\nReceive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
 
 			}
 			else if (GetUdp())
 			{
 
-				DebugLog("\nReceive UDP Message from:%s", GetUdp()->GetSocket()->remote_endpoint().address().to_string().c_str());
+				DebugLog("\nReceive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetSocket()->remote_endpoint().address().to_string().c_str());
 			}
 		}
 		catch (asio::error_code& e)

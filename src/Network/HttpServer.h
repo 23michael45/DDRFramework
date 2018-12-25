@@ -28,6 +28,7 @@ namespace DDRFramework
 
 		std::string m_RootPath;
 		std::string m_Port;
+		std::string m_IPAddress;
 
 	};
 }

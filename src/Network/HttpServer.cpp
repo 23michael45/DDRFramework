@@ -27,6 +27,7 @@ namespace DDRFramework
 	{
 		try
 		{
+			m_IPAddress = address;
 			m_RootPath = docroot;
 			m_Port = port;
 

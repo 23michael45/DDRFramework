@@ -23,8 +23,12 @@ namespace DDRFramework
 
 	void BaseMessageDispatcher::Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
+		auto btype = spHeader->bodytype();
+		if (btype.find("HeartBeat") == std::string::npos)
+		{
+			spParentSocketContainer->PrintRemoteIP(btype);
 
-		spParentSocketContainer->PrintRemoteIP();
+		}
 		if (m_ProcessorMap.find(spHeader->bodytype()) != m_ProcessorMap.end())
 		{
 			auto sp = m_ProcessorMap[spHeader->bodytype()];
