@@ -102,6 +102,8 @@ namespace DDRFramework
 
 		std::string GetIPAddress();
 
+		void SetRealtime(bool b);
+
 	protected:
 		void PushData(asio::streambuf& buf);
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) {};
@@ -125,6 +127,9 @@ namespace DDRFramework
 
 
 		std::shared_ptr<BaseBehavior> m_spBehavior;
+
+		int m_iCheckWriteSleep;
+		int m_iCheckReadSleep;
 	private:
 	};
 

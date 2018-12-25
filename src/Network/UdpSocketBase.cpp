@@ -149,6 +149,7 @@ namespace DDRFramework
 			{
 				if (m_Broadcasting)
 				{
+					std::this_thread::sleep_for(chrono::milliseconds(1));
 					m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartWrite, shared_from_this(), spbuf));
 					std::this_thread::sleep_for(std::chrono::milliseconds(m_IntervalintervalMillisecond));
 
@@ -215,6 +216,7 @@ namespace DDRFramework
 
 				if (m_Receiving)
 				{
+					std::this_thread::sleep_for(chrono::milliseconds(1));
 					m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
 				}
 			}

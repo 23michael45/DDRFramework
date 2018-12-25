@@ -5,13 +5,15 @@
 
 #include "asio.hpp"
 #include <map>
+#include <chrono>
+#include <thread>
 using asio::ip::tcp;
 
 namespace DDRFramework
 {
 	TcpSocketContainer::TcpSocketContainer(asio::io_context &context) : m_IOContext(context), m_Socket(context), m_bConnected(false), m_ReadWriteStrand(m_IOContext)
 	{
-
+		SetRealtime(false);
 	}
 	TcpSocketContainer::~TcpSocketContainer()
 	{
@@ -45,6 +47,11 @@ namespace DDRFramework
 			{
 				m_spSerializer->Update();
 			}
+			if (m_iCheckReadSleep > 0)
+			{
+				std::this_thread::sleep_for(chrono::milliseconds(m_iCheckReadSleep));
+
+			}
 			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
 		}
 		else
@@ -66,7 +73,11 @@ namespace DDRFramework
 				}
 				else
 				{
+					if (m_iCheckWriteSleep > 0)
+					{
+						std::this_thread::sleep_for(chrono::milliseconds(m_iCheckWriteSleep));
 
+					}
 					m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 				}
 
@@ -264,4 +275,21 @@ namespace DDRFramework
 			return m_Socket.remote_endpoint().address().to_string();
 		}
 	}
+
+	void TcpSocketContainer::SetRealtime(bool b)
+	{
+		if (b)
+		{
+			m_iCheckReadSleep = 0;
+			m_iCheckWriteSleep = 0;
+
+		}
+		else
+		{
+
+			m_iCheckReadSleep = 1;
+			m_iCheckWriteSleep = 1;
+		}
+	}
+
 }

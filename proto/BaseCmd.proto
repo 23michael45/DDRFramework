@@ -339,6 +339,7 @@ message AVStreamSrcChannel
 	repeated int32 srcPort = 2;//size = 0 means donot use it 
 	ChannelStreamType streamType = 3;
 	ChannelNetworkType networkType = 4;
+	int32 rate = 5;
 }
 
 message reqStreamAddr
@@ -348,7 +349,7 @@ message reqStreamAddr
 message rspStreamAddr
 {	
 	repeated AVStreamSrcChannel channels = 1;
-	string error = 2;
+	string error = 3;
 }
 message notifyAlarm
 {
@@ -385,6 +386,8 @@ message AVChannelConfig
 	string src = 1;
 	string dst = 2;
 	ChannelStreamType streamType = 3;
+	ChannelNetworkType networkType = 4;
+	int32 rate = 5;
 }
 
 message reqStreamServiceInfo

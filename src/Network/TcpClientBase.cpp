@@ -5,6 +5,7 @@ namespace DDRFramework
 {
 	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)
 	{
+		SetRealtime(true);
 	}
 
 	TcpClientSessionBase::~TcpClientSessionBase()
@@ -123,7 +124,7 @@ namespace DDRFramework
 
 		auto spTcpClientSessionBase = BindSerializerDispatcher();
 
-		m_spClientMap.insert(std::make_pair(spTcpClientSessionBase.get(),spTcpClientSessionBase));
+		m_spClientMap.insert(std::make_pair(spTcpClientSessionBase,spTcpClientSessionBase));
 
 		spTcpClientSessionBase->BindOnConnected(std::bind(&TcpClientBase::OnConnected, shared_from_this(), std::placeholders::_1));
 		spTcpClientSessionBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));

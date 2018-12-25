@@ -16,7 +16,15 @@ namespace DDRFramework
 
 		std::string GetValue(std::string sheet, int count, std::string key);
 		std::string GetValue(int count, std::string key);
-	
+		template <typename T>
+		T GetValue(int count, std::string key)
+		{
+			std::istringstream  iss(GetValue(count,key));
+			T t;
+			iss >> t;
+			return t;
+
+		}
 
 		std::string GetValue(std::string sheet, std::string key);
 		std::string GetValue(std::string key);
