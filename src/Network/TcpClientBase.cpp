@@ -5,7 +5,6 @@ namespace DDRFramework
 {
 	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)
 	{
-		SetRealtime(true);
 	}
 
 	TcpClientSessionBase::~TcpClientSessionBase()
