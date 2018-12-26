@@ -105,6 +105,7 @@ message bcLSAddr
 		eServiceType stype = 2;
 		repeated string ips = 3;
 		int32 port = 4; 
+		string robotid = 5;
 	}
 	repeated ServerInfo LSInfos = 1;
 }

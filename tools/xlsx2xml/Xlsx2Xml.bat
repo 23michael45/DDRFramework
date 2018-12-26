@@ -10,9 +10,10 @@ xcopy /Y %CurrentPath%\xml\*.* %CurrentPath%\..\..\..\DDRLocalServer\DDR_LocalSe
 
 xcopy /Y %CurrentPath%\xml\Client\*.* %CurrentPath%\..\..\..\DDRLocalServer\DDR_LocalClient\Config\Client /s /i
 xcopy /Y %CurrentPath%\xml\Localization.* %CurrentPath%\..\..\..\DDRLocalServer\DDR_LocalClient\Config /s /i
+xcopy /Y %CurrentPath%\xml\Global.* %CurrentPath%\..\..\..\DDRLocalServer\DDR_LocalClient\Config /s /i
 
 xcopy /Y %CurrentPath%\xml\StreamRelayService\*.* %CurrentPath%\..\..\..\DDRStreamRelayService\DDRStreamRelayService\Config\StreamRelayService /s /i
 xcopy /Y %CurrentPath%\xml\Localization.* %CurrentPath%\..\..\..\DDRStreamRelayService\DDRStreamRelayService\Config /s /i
-
+xcopy /Y %CurrentPath%\xml\Global.* %CurrentPath%\..\..\..\DDRStreamRelayService\DDRStreamRelayService\Config /s /i
 
 cd %PrePath%
