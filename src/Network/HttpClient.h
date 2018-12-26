@@ -8,17 +8,17 @@
 namespace DDRFramework
 {
 
-	class  HttpClientSession : std::enable_shared_from_this<HttpClientSession>
+	class  HttpSession : public std::enable_shared_from_this<HttpSession>
 	{
 	public:
-		HttpClientSession();
-		~HttpClientSession();
+		HttpSession();
+		~HttpSession();
 
 		curl_asio::data_action::type  on_transfer_data_read(std::ofstream &out, const asio::const_buffer& buffer);
 		void on_transfer_done(curl_asio::transfer::ptr transfer, std::ofstream &out, const std::string &file, CURLcode result);
 		void DoGet(std::string& url, std::string outfile);
 
-		void ThreadEntry(std::string& url, std::string outfile);
+		void ThreadEntry(std::string url, std::string outfile);
 		void DoPost();
 	private:
 
