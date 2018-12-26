@@ -4,22 +4,26 @@
 #include <fstream>
 #include "../../Shared/thirdparty/curl-asio/curl-asio.hpp"
 #include "../../thirdparty/asio/include/asio.hpp"
+#include <memory>
 namespace DDRFramework
 {
 
-	class  HttpSession
+	class  HttpClientSession : std::enable_shared_from_this<HttpClientSession>
 	{
 	public:
-		HttpSession();
-		~HttpSession();
+		HttpClientSession();
+		~HttpClientSession();
 
 		curl_asio::data_action::type  on_transfer_data_read(std::ofstream &out, const asio::const_buffer& buffer);
 		void on_transfer_done(curl_asio::transfer::ptr transfer, std::ofstream &out, const std::string &file, CURLcode result);
 		void DoGet(std::string& url, std::string outfile);
 
-
+		void ThreadEntry(std::string& url, std::string outfile);
+		void DoPost();
 	private:
 
+		asio::io_context m_ContextIO;
+		std::shared_ptr<asio::io_context::work> m_spWork;
 	};
 
 }
