@@ -181,7 +181,7 @@ public:
 			std::string referer;
 			std::string useragent;
 			std::list<std::string> http_header;
-			std::string interface;
+			std::string curl_interface;
 
 			options()
 				: protocols(CURLPROTO_ALL),
@@ -465,8 +465,8 @@ public:
 				::curl_easy_setopt(handle_, CURLOPT_HTTPHEADER, httpheader_);
 			}
 
-			if (!opt.interface.empty())
-				::curl_easy_setopt(handle_, CURLOPT_INTERFACE, ("if!" + opt.interface).c_str());
+			if (!opt.curl_interface.empty())
+				::curl_easy_setopt(handle_, CURLOPT_INTERFACE, ("if!" + opt.curl_interface).c_str());
 
 			::curl_easy_setopt(handle_, CURLOPT_WRITEFUNCTION, curl_write_function);
 			::curl_easy_setopt(handle_, CURLOPT_WRITEDATA, this);

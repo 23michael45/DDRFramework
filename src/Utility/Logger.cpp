@@ -152,6 +152,23 @@ namespace DDRFramework
 	{
 		m_Quit = true;
 	}
+
+	std::vector<std::string> ConsoleDebug::split(const std::string &text, char sep)
+	{
+		std::vector<std::string> tokens;
+		std::size_t start = 0, end = 0;
+		while ((end = text.find(sep, start)) != std::string::npos) {
+			if (end != start) {
+				tokens.push_back(text.substr(start, end - start));
+			}
+			start = end + 1;
+		}
+		if (end != start) {
+			tokens.push_back(text.substr(start));
+		}
+		return tokens;
+	}
+
 	void ConsoleDebug::ConsoleDebugLoop()
 	{
 		std::string input;
@@ -159,9 +176,14 @@ namespace DDRFramework
 		{
 			getline(cin, input);
 
-			if (m_Functionmap.find(input) != m_Functionmap.end())
+			m_CurrentCmd = input;
+
+			auto vec = split(m_CurrentCmd,':');
+			auto cmd = vec[0];
+
+			if (m_Functionmap.find(cmd) != m_Functionmap.end())
 			{
-				m_Functionmap[input]();
+				m_Functionmap[cmd]();
 			}
 
 		} while (!m_Quit);

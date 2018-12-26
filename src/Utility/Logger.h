@@ -13,6 +13,7 @@
 #include <stdarg.h>
 #include "Singleton.h"
 #include <functional>
+#include <vector>
 
 using namespace std;
 
@@ -170,12 +171,17 @@ namespace DDRFramework {
 		void ToggleLog();
 		void Quit();
 
+
+
+		std::vector<std::string> split(const std::string &text, char sep);
 	protected:
 
 		std::map<std::string, std::function<void()>> m_Functionmap;
 
 		bool m_Quit;
 		bool m_ToggleLog;
+
+		std::string m_CurrentCmd;
 	};
 
 
