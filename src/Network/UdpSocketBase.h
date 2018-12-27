@@ -46,9 +46,13 @@ namespace DDRFramework
 		}
 		asio::io_context& GetIOContext();
 
-		std::shared_ptr<asio::ip::udp::socket> GetSocket()
+		std::shared_ptr<asio::ip::udp::socket> GetSendSocket()
 		{
-			return m_spSocket;
+			return m_spSendSocket;
+		}
+		std::shared_ptr<asio::ip::udp::socket> GetRecvSocket()
+		{
+			return m_spRecvSocket;
 		}
 		void BindOnHookReceive(std::function<void(asio::detail::array<char, 1024>&, int)> f)
 		{
@@ -69,7 +73,8 @@ namespace DDRFramework
 
 
 		asio::io_context m_IOContext;
-		std::shared_ptr<asio::ip::udp::socket> m_spSocket;
+		std::shared_ptr<asio::ip::udp::socket> m_spSendSocket;
+		std::shared_ptr<asio::ip::udp::socket> m_spRecvSocket;
 
 		std::shared_ptr< asio::io_service::work > m_spWork;
 		int m_IntervalintervalMillisecond;

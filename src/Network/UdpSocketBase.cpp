@@ -61,8 +61,18 @@ namespace DDRFramework
 		m_Receiving = false;
 		m_spWork.reset();
 		m_spSerializer.reset();
-		m_spSocket->close();
-		m_spSocket.reset();
+		if (m_spSendSocket)
+		{
+			m_spSendSocket->close();
+			m_spSendSocket.reset();
+
+		}
+		if (m_spRecvSocket)
+		{
+			m_spRecvSocket->close();
+			m_spRecvSocket.reset();
+
+		}
 		if (m_fOnDisconnect)
 		{
 			m_fOnDisconnect(*this);
@@ -74,10 +84,10 @@ namespace DDRFramework
 		m_spBroadcastEnderEndpoint = std::make_shared<asio::ip::udp::endpoint>(asio::ip::address_v4::broadcast(), port);
 
 
-		m_spSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext);// , *(m_spBroadcastEnderEndpoint.get());
-		m_spSocket->open(asio::ip::udp::v4());
-		m_spSocket->set_option(asio::ip::udp::socket::reuse_address(true));
-		m_spSocket->set_option(asio::socket_base::broadcast(true));
+		m_spSendSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext);// , *(m_spBroadcastEnderEndpoint.get());
+		m_spSendSocket->open(asio::ip::udp::v4());
+		m_spSendSocket->set_option(asio::ip::udp::socket::reuse_address(true));
+		m_spSendSocket->set_option(asio::socket_base::broadcast(true));
 
 
 
@@ -110,10 +120,12 @@ namespace DDRFramework
 			m_Receiving = true;
 			m_spRecvEnderEndpoint = std::make_shared<asio::ip::udp::endpoint>(asio::ip::address_v4::any(), port);
 			//m_spSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext), *(m_spRecvEnderEndpoint.get());
-			m_spSocket = std::make_shared<asio::ip::udp::socket>(m_IOContext, *(m_spRecvEnderEndpoint.get()));
-			m_spSocket->set_option(asio::ip::udp::socket::reuse_address(true));
-			//m_spSocket->open(m_spRecvEnderEndpoint->protocol());
 
+			m_spRecvSocket = std::make_shared<asio::ip::udp::socket>(m_IOContext);
+
+			m_spRecvSocket->open(m_spRecvEnderEndpoint->protocol());
+			m_spRecvSocket->set_option(asio::ip::udp::socket::reuse_address(true));
+			m_spRecvSocket->bind(*m_spRecvEnderEndpoint.get());
 
 			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
 		}
@@ -137,7 +149,7 @@ namespace DDRFramework
 	{
 		if (m_Broadcasting)
 		{
-			m_spSocket->async_send_to(spbuf->data(), *(m_spBroadcastEnderEndpoint.get()), std::bind(&UdpSocketBase::HandleWrite, shared_from_this(), std::placeholders::_1, spbuf));
+			m_spSendSocket->async_send_to(spbuf->data(), *(m_spBroadcastEnderEndpoint.get()), std::bind(&UdpSocketBase::HandleWrite, shared_from_this(), std::placeholders::_1, spbuf));
 
 		}
 
@@ -166,7 +178,7 @@ namespace DDRFramework
 	{
 		if (m_Receiving)
 		{
-			m_spSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
+			m_spRecvSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 
 
 
