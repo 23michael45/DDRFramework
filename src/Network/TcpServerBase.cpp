@@ -85,11 +85,19 @@ namespace DDRFramework
 	}
 	void TcpServerBase::Stop()
 	{
+		std::vector<std::shared_ptr<TcpSessionBase>> vec;
+
 		for (auto spSessionPair : m_SessionMap)
 		{
-			spSessionPair.second->Stop();
+			auto spSession = spSessionPair.second;
+			vec.push_back(spSession);
+		}//donot clear map heae , session stop will call ondisconncet callback ,and session ptr will be remove in ondisconnect function
+
+		for (auto spSession : vec)
+		{
+
+			spSession->Stop();
 		}
-		m_SessionMap.clear();
 	}
 
 	void TcpServerBase::ThreadEntry()
