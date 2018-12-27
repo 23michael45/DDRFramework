@@ -16,6 +16,7 @@
 #include "../../Shared/thirdparty/mini-al/mini_al.h"
 #endif
 
+#include "../../src/Network/TcpSocketContainer.h"
 
 namespace DDRFramework
 {
@@ -33,7 +34,6 @@ namespace DDRFramework
 		bool StartPlay();
 		void StopPlay();
 
-
 	private:
 
 
@@ -47,6 +47,8 @@ namespace DDRFramework
 		mal_uint32 capturedSampleCount = 0;
 		mal_int16* pCapturedSamples = NULL;
 		mal_uint32 playbackSample = 0;
+
+		std::shared_ptr<TcpSocketContainer> m_spSession;
 	};
 
 

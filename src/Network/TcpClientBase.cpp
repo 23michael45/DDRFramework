@@ -9,7 +9,7 @@ namespace DDRFramework
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		DebugLog("\nTcpClientSessionBase Destroy");
+		DebugLog("TcpClientSessionBase Destroy");
 	}
 
 	void TcpClientSessionBase::Start(std::string ip, std::string port)
@@ -46,7 +46,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("\nConnect Failed No Server");
+			DebugLog("Connect Failed No Server");
 			Stop();
 		}
 
@@ -65,7 +65,7 @@ namespace DDRFramework
 			{
 				if (!ec)
 				{
-					//DebugLog("\nReceive:%i", m_ReadStreamBuf.size());
+					//DebugLog("Receive:%i", m_ReadStreamBuf.size());
 
 					PushData(m_ReadStreamBuf);
 					m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
@@ -73,19 +73,19 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("\nError on receive: :%s", ec.message().c_str());
+					DebugLog("Error on receive: :%s", ec.message().c_str());
 					Stop();
 				}
 			}
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("\nError  :%s", e.what());
+			DebugLog("Error  :%s", e.what());
 			
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("\nError  :%s", e.what());
+			DebugLog("Error  :%s", e.what());
 
 		}
 
@@ -100,6 +100,53 @@ namespace DDRFramework
 	}
 
 
+	HookTcpClientSession::HookTcpClientSession(asio::io_context& context) : DDRFramework::TcpClientSessionBase(context)
+	{
+		SetRealtime(true);
+	}
+	HookTcpClientSession::~HookTcpClientSession()
+	{
+		DebugLog("HookTcpClientSession Destroy")
+	}
+
+	void HookTcpClientSession::StartRead()
+	{
+		asio::async_read(m_Socket, m_ReadStreamBuf, asio::transfer_at_least(1), std::bind(&HookTcpClientSession::HandleRead, shared_from_base(), std::placeholders::_1));
+
+	}
+	void HookTcpClientSession::HandleRead(const asio::error_code& ec)
+	{
+		try
+		{
+			if (m_bConnected)
+			{
+				if (!ec)
+				{
+					//DebugLog("Receive:%i", m_ReadStreamBuf.size());
+
+					OnHookReceive(m_ReadStreamBuf);
+					m_ReadWriteStrand.post(std::bind(&HookTcpClientSession::StartRead, shared_from_base()));
+
+				}
+				else
+				{
+					DebugLog("Error on receive: :%s", ec.message().c_str());
+					Stop();
+				}
+			}
+		}
+		catch (std::exception& e)
+		{
+			DebugLog("Error  :%s", e.what());
+
+		}
+		catch (asio::system_error& e)
+		{
+			DebugLog("Error  :%s", e.what());
+
+		}
+	}
+
 
 
 	TcpClientBase::TcpClientBase()
@@ -107,7 +154,7 @@ namespace DDRFramework
 	}
 	TcpClientBase::~TcpClientBase()
 	{
-		DebugLog("\nTcpClientBase Destroy");
+		DebugLog("TcpClientBase Destroy");
 		m_spClientMap.clear();
 	}
 	void TcpClientBase::Start(int threadNum)
@@ -152,10 +199,10 @@ namespace DDRFramework
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("\nError: %s", e.what());
+			DebugLog("Error: %s", e.what());
 
 		}
-		DebugLog("\nThreadEntry Finish");
+		DebugLog("ThreadEntry Finish");
 	}
 	std::shared_ptr<TcpClientSessionBase> TcpClientBase::BindSerializerDispatcher()
 	{
@@ -201,7 +248,7 @@ namespace DDRFramework
 	void TcpClientBase::OnConnected(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 
-		DebugLog("\nOnConnected TcpClientBase");
+		DebugLog("OnConnected TcpClientBase");
 
 	}
 

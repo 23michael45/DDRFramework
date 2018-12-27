@@ -79,7 +79,7 @@ public:
 
 	~StateMachine()
 	{
-		DebugLog("\nStateMachine Destroy");
+		DebugLog("StateMachine Destroy");
 
 		for (auto iter = m_States.begin(); iter != m_States.end(); ++iter)
 		{

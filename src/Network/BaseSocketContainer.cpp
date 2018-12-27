@@ -24,7 +24,7 @@ namespace DDRFramework
 		{
 			m_spUdpSocketBase.reset();
 		}
-		DebugLog("\nBaseSocketContainer Destroy");
+		DebugLog("BaseSocketContainer Destroy");
 	}
 
 	void BaseSocketContainer::SetTcp(std::shared_ptr<TcpSocketContainer> sp)
@@ -82,13 +82,13 @@ namespace DDRFramework
 		{
 			if (GetTcp())
 			{
-				DebugLog("\nReceive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
+				DebugLog("Receive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
 
 			}
 			else if (GetUdp())
 			{
 
-				DebugLog("\nReceive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
+				DebugLog("Receive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
 			}
 		}
 		catch (asio::error_code& e)

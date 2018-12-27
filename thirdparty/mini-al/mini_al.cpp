@@ -18543,19 +18543,22 @@ void mal_device_uninit(mal_device* pDevice)
 void mal_device_set_recv_callback(mal_device* pDevice, mal_recv_proc proc)
 {
     if (pDevice == NULL) return;
-    mal_atomic_exchange_ptr(&pDevice->onRecv, proc);
+    //mal_atomic_exchange_ptr(&pDevice->onRecv, proc);
+	pDevice->onRecv = proc;
 }
 
 void mal_device_set_send_callback(mal_device* pDevice, mal_send_proc proc)
 {
     if (pDevice == NULL) return;
-    mal_atomic_exchange_ptr(&pDevice->onSend, proc);
+    //mal_atomic_exchange_ptr(&pDevice->onSend, proc);
+	pDevice->onSend = proc;
 }
 
 void mal_device_set_stop_callback(mal_device* pDevice, mal_stop_proc proc)
 {
     if (pDevice == NULL) return;
-    mal_atomic_exchange_ptr(&pDevice->onStop, proc);
+    //mal_atomic_exchange_ptr(&pDevice->onStop, proc);
+	pDevice->onStop = proc;
 }
 
 mal_result mal_device_start(mal_device* pDevice)

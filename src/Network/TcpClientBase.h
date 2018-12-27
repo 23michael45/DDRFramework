@@ -21,18 +21,40 @@ namespace DDRFramework
 		
 		void ResolveHandler(const asio::error_code& ec, tcp::resolver::iterator i);
 		void ConnectHandler(const asio::error_code& ec, tcp::resolver::iterator i);
-		void StartRead();
+		virtual void StartRead();
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) override;
-		void HandleRead(const asio::error_code& ec);
+		virtual void HandleRead(const asio::error_code& ec);
 
 
-	private:
+		asio::streambuf& GetRecvBuf()
+		{
+			return m_ReadStreamBuf;
+		}
+	protected:
+
 		tcp::resolver m_Resolver;
 		asio::streambuf m_ReadStreamBuf;
 
 		auto shared_from_base() {
 			return std::static_pointer_cast<TcpClientSessionBase>(shared_from_this());
 		}
+	};
+	class HookTcpClientSession : public TcpClientSessionBase
+	{
+	public:
+		HookTcpClientSession(asio::io_context& context);
+		~HookTcpClientSession();
+
+		auto shared_from_base() {
+			return std::static_pointer_cast<HookTcpClientSession>(shared_from_this());
+		}
+
+		virtual void OnHookReceive(asio::streambuf& buf) {};
+
+		virtual void StartRead() override;
+		virtual void HandleRead(const asio::error_code& ec) override;
+	protected:
+
 	};
 
 

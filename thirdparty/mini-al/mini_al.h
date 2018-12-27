@@ -1,7 +1,7 @@
 #ifndef mini_al_h__
 #define mini_al_h__
 
-
+#include <functional>
 
 
 #ifdef __cplusplus
@@ -1104,10 +1104,15 @@ typedef struct
 #define MAL_MAX_PERIODS_DSOUND                          4
 #define MAL_MAX_PERIODS_OPENAL                          4
 
-typedef void(*mal_log_proc) (mal_context* pContext, mal_device* pDevice, const char* message);
-typedef void(*mal_recv_proc)(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples);
-typedef mal_uint32(*mal_send_proc)(mal_device* pDevice, mal_uint32 frameCount, void* pSamples);
-typedef void(*mal_stop_proc)(mal_device* pDevice);
+typedef void(*mal_log_proc_ptr) (mal_context* pContext, mal_device* pDevice, const char* message);
+typedef void(*mal_recv_procc_ptr)(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples);
+typedef mal_uint32(*mal_send_procc_ptr)(mal_device* pDevice, mal_uint32 frameCount, void* pSamples);
+typedef void(*mal_stop_procc_ptr)(mal_device* pDevice);
+
+using mal_log_proc = std::function<void(mal_context* pContext, mal_device* pDevice, const char* message)>;
+using mal_recv_proc = std::function<void(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples)>;
+using mal_send_proc = std::function<mal_uint32(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)>;
+using mal_stop_proc = std::function<void(mal_device* pDevice)>;
 
 typedef enum
 {

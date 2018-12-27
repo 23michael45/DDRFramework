@@ -39,7 +39,7 @@ namespace DDRFramework
 
 	MessageSerializer::~MessageSerializer()
 	{
-		DebugLog("\nSerializer Destroy");
+		DebugLog("Serializer Destroy");
 		Deinit();
 	}
 
@@ -108,7 +108,7 @@ namespace DDRFramework
 	{
 		auto spbuf = std::make_shared<asio::streambuf>();
 
-		//DebugLog("\nStart Pack");
+		//DebugLog("Start Pack");
 		string stype = spmsg->GetTypeName();
 
 		int bodylen = spmsg->ByteSize();
@@ -192,8 +192,8 @@ namespace DDRFramework
 		mDataStreamSendQueue.push(spbuf);
 
 		//m_TotalPackLen += spbuf->size();
-		//DebugLog("\ntotal Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
-		//DebugLog("\nEnd Pack");
+		//DebugLog("total Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
+		//DebugLog("End Pack");
 		return true;
 	}
 	bool MessageSerializer::IgnoreBody(std::shared_ptr<CommonHeader> spHeader)
@@ -215,7 +215,7 @@ namespace DDRFramework
 
 	void ParsePBHState::updateWithDeltaTime(float delta)
 	{
-		//DebugLog("\nParsePBHState");
+		//DebugLog("ParsePBHState");
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
@@ -242,7 +242,7 @@ namespace DDRFramework
 	}
 	void ParseLengthState::updateWithDeltaTime(float delta)
 	{
-		//DebugLog("\nParseLengthState");
+		//DebugLog("ParseLengthState");
 
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
@@ -362,7 +362,7 @@ namespace DDRFramework
 		}
 		catch (google::protobuf::FatalException& e)
 		{
-			DebugLog("\nParseHead error %s" , e.message().c_str());
+			DebugLog("ParseHead error %s" , e.message().c_str());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 			
 		}
@@ -374,7 +374,7 @@ namespace DDRFramework
 	void ParseBodyState::updateWithDeltaTime(float delta)
 	{
 
-		//DebugLog("\nParseBodyState");
+		//DebugLog("ParseBodyState");
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
@@ -447,7 +447,7 @@ namespace DDRFramework
 		}
 		catch (google::protobuf::FatalException& e)
 		{
-			DebugLog("\nParseHead error %s", e.message().c_str());
+			DebugLog("ParseHead error %s", e.message().c_str());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 
 		}
@@ -459,7 +459,7 @@ namespace DDRFramework
 	void WaitNextBuffState::updateWithDeltaTime(float delta)
 	{
 
-		//DebugLog("\nParseBodyState");
+		//DebugLog("ParseBodyState");
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 

@@ -26,6 +26,11 @@ namespace DDRFramework
 		{
 			return m_reqLoginInfo;
 		}
+
+		asio::streambuf& GetRecvBuf()
+		{
+			return m_ReadStreamBuf;
+		}
 	protected:
 
 		virtual void StartRead();
@@ -33,17 +38,10 @@ namespace DDRFramework
 		virtual void HandleRead(const asio::error_code& ec);
 
 
-
-
-		virtual void OnSessionConnect(std::shared_ptr<TcpSocketContainer> spContainer) {};
-		virtual void OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer) {};
-
 		
 
-	private:
-		int m_TotalRev;
+	protected:
 		asio::streambuf m_ReadStreamBuf;
-
 		reqLogin m_reqLoginInfo;//Login Information
 
 
@@ -62,6 +60,9 @@ namespace DDRFramework
 		void Start(int threadNum = 2);
 		void Stop();
 
+
+		std::shared_ptr<TcpSessionBase> GetTcpSessionBySocket(tcp::socket* pSocket);
+		std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& GetTcpSocketContainerMap();
 	protected:
 
 		void ThreadEntry();
@@ -84,6 +85,49 @@ namespace DDRFramework
 	
 	private:
 		//void WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession);
+	};
+
+
+
+
+	class HookTcpSession : public TcpSessionBase
+	{
+	public:
+		HookTcpSession(asio::io_context& context);
+		~HookTcpSession();
+
+		auto shared_from_base() {
+			return std::static_pointer_cast<HookTcpSession>(shared_from_this());
+		}
+
+		virtual void OnHookReceive(asio::streambuf& buf) {};
+
+		virtual void StartRead() override;
+		virtual void HandleRead(const asio::error_code& ec) override;
+	protected:
+	};
+
+
+	class HookTcpServer : public TcpServerBase
+	{
+	public:
+		HookTcpServer(int port);
+		~HookTcpServer();
+
+
+		virtual std::shared_ptr<TcpSessionBase> BindSerializerDispatcher() override;
+
+
+
+		auto shared_from_base() {
+			return std::static_pointer_cast<HookTcpServer>(shared_from_this());
+		}
+
+
+		virtual std::shared_ptr<TcpSessionBase> StartAccept() override;
+
+	protected:
+
 	};
 }
 

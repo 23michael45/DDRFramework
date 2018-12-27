@@ -17,7 +17,7 @@ namespace DDRFramework
 
 		if (!loadOkay)
 		{
-			DebugLog("\nCould not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
+			DebugLog("Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
 			//exit(1);
 		}
 

@@ -8,22 +8,26 @@ namespace DDRFramework
 
 	TcpSessionBase::TcpSessionBase(asio::io_context& context):TcpSocketContainer::TcpSocketContainer(context)
 	{
-		m_TotalRev = 0;
 		m_bConnected = true;
 	}
 	TcpSessionBase::~TcpSessionBase()
 	{
 
-		DebugLog("\nTcpSessionBase Destroy");
+		DebugLog("TcpSessionBase Destroy");
 	}
 
 	void TcpSessionBase::Start()
 	{	
-		DebugLog("\nConnection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str());
+		DebugLog("Connection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str());
 		TcpSocketContainer::Start();
 
 		if (m_bConnected)
 		{
+
+			if (m_fOnSessionConnected)
+			{
+				m_fOnSessionConnected(shared_from_this());
+			}
 
 			m_IOContext.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 		}
@@ -40,12 +44,7 @@ namespace DDRFramework
 		{
 			if (m_bConnected)
 			{
-				m_TotalRev += m_ReadStreamBuf.size();
-				//DebugLog("\nReceive:%i TotalRev:%i", m_ReadStreamBuf.size(), m_TotalRev);
-
 				PushData(m_ReadStreamBuf);
-
-
 				m_ReadWriteStrand.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 			}
 		}
@@ -53,7 +52,7 @@ namespace DDRFramework
 		{
 			Stop();
 
-			DebugLog("\nError on receive: :%s", ec.message().c_str());
+			DebugLog("Error on receive: :%s", ec.message().c_str());
 		}
 
 	}
@@ -71,10 +70,12 @@ namespace DDRFramework
 
 	TcpServerBase::TcpServerBase(int port) :m_Acceptor(m_IOContext, tcp::endpoint(tcp::v4(), port))
 	{
+		DebugLog("TcpServerBase  Create");
 	}
 
 	TcpServerBase::~TcpServerBase()
 	{
+		DebugLog("TcpServerBase  Destroy");
 	}
 
 
@@ -121,6 +122,7 @@ namespace DDRFramework
 			{
 				m_SessionMap[&spSession->GetSocket()] = spSession;
 				spSession->Start();
+
 			}
 			else
 			{
@@ -162,16 +164,107 @@ namespace DDRFramework
 		}
 		catch (asio::error_code& e)
 		{
-			DebugLog("\nDisconnect Error %s", e.message().c_str())
+			DebugLog("Disconnect Error %s", e.message().c_str())
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("\nDisconnect Error %s", e.what())
+			DebugLog("Disconnect Error %s", e.what())
 		}
 		catch (std::exception& e)
 		{
 
-			DebugLog("\nDisconnect Error %s", e.what())
+			DebugLog("Disconnect Error %s", e.what())
 		}
+	}
+
+	std::shared_ptr<TcpSessionBase> TcpServerBase::GetTcpSessionBySocket(tcp::socket* pSocket)
+	{
+		if (m_SessionMap.find(pSocket) != m_SessionMap.end())
+		{
+			return m_SessionMap[pSocket];
+		}
+		return nullptr;
+	}
+
+	std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& TcpServerBase::GetTcpSocketContainerMap()
+	{
+		return m_SessionMap;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+	HookTcpSession::HookTcpSession(asio::io_context& context) : DDRFramework::TcpSessionBase(context)
+	{
+		SetRealtime(true);
+	}
+	HookTcpSession::~HookTcpSession()
+	{
+		DebugLog("HookTcpSession Destroy")
+	}
+	void HookTcpSession::StartRead()
+	{
+		asio::async_read(m_Socket, m_ReadStreamBuf, asio::transfer_at_least(1), std::bind(&HookTcpSession::HandleRead, shared_from_base(), std::placeholders::_1));
+
+	}
+	void HookTcpSession::HandleRead(const asio::error_code& ec)
+	{
+		if (!ec)
+		{
+			if (m_bConnected)
+			{
+				OnHookReceive(m_ReadStreamBuf);
+				m_ReadStreamBuf.consume(m_ReadStreamBuf.size());
+				m_ReadWriteStrand.post(std::bind(&HookTcpSession::StartRead, shared_from_base()));
+			}
+		}
+		else
+		{
+			Stop();
+			DebugLog("Error on receive: :%s", ec.message().c_str());
+		}
+	}
+
+
+
+
+	HookTcpServer::HookTcpServer(int port) :TcpServerBase(port)
+	{
+	}
+
+
+	HookTcpServer::~HookTcpServer()
+	{
+		DebugLog("HookTcpServer Destroy")
+	}
+
+
+	std::shared_ptr<TcpSessionBase> HookTcpServer::BindSerializerDispatcher()
+	{
+		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, HookTcpSession, MessageSerializer, BaseMessageDispatcher, BaseHeadRuleRouter)
+			return spHookTcpSession;
+	}
+	std::shared_ptr<TcpSessionBase> HookTcpServer::StartAccept()
+	{
+		auto spSession = TcpServerBase::StartAccept();
+
+		auto spStreamRelayTcpSession = dynamic_pointer_cast<HookTcpSession>(spSession);
+
+		return spSession;
 	}
 }

@@ -1,5 +1,7 @@
 #include "AudioCodec.h"
 #include <memory>
+#include <fstream>
+#include "../../thirdparty/asio/include/asio.hpp"
 
 
 
@@ -12,39 +14,6 @@ namespace DDRFramework
 
 	AudioCodec::~AudioCodec()
 	{
-	}
-	void on_recv_frames(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples)
-	{
-		/*mal_uint32 sampleCount = frameCount * pDevice->channels;
-
-		mal_uint32 newCapturedSampleCount = capturedSampleCount + sampleCount;
-		mal_int16* pNewCapturedSamples = (mal_int16*)realloc(pCapturedSamples, newCapturedSampleCount * sizeof(mal_int16));
-		if (pNewCapturedSamples == NULL) {
-			return;
-		}
-
-		memcpy(pNewCapturedSamples + capturedSampleCount, pSamples, sampleCount * sizeof(mal_int16));
-
-		pCapturedSamples = pNewCapturedSamples;
-		capturedSampleCount = newCapturedSampleCount;*/
-	}
-
-	mal_uint32 on_send_frames(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)
-	{
-		//mal_uint32 samplesToRead = frameCount * pDevice->channels;
-		//if (samplesToRead > capturedSampleCount - playbackSample) {
-		//	samplesToRead = capturedSampleCount - playbackSample;
-		//}
-
-		//if (samplesToRead == 0) {
-		//	return 0;
-		//}
-
-		//memcpy(pSamples, pCapturedSamples + playbackSample, samplesToRead * sizeof(mal_int16));
-		//playbackSample += samplesToRead;
-
-		//return samplesToRead / pDevice->channels;
-		return 0;
 	}
 
 
@@ -61,6 +30,7 @@ namespace DDRFramework
 	}
 	void AudioCodec::Deinit()
 	{
+
 		mal_context_uninit(&m_Context);
 
 	}

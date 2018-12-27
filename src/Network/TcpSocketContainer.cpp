@@ -17,7 +17,7 @@ namespace DDRFramework
 	}
 	TcpSocketContainer::~TcpSocketContainer()
 	{
-		DebugLog("\nTcpSocketContainer Destroy");
+		DebugLog("TcpSocketContainer Destroy");
 		Release();
 	}
 	void  TcpSocketContainer::Start()
@@ -128,7 +128,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("\nDisconnected Send Failed");
+			DebugLog("Disconnected Send Failed");
 
 		}
 
@@ -152,7 +152,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("\nDisconnected Send Failed");
+			DebugLog("Disconnected Send Failed");
 
 		}
 	}
@@ -177,7 +177,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("\nDisconnected Send Failed");
+			DebugLog("Disconnected Send Failed");
 
 		}
 
@@ -196,7 +196,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("\nError on send: %s", ec.message().c_str());
+					DebugLog("Error on send: %s", ec.message().c_str());
 
 					Stop();
 

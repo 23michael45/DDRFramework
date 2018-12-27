@@ -10,7 +10,7 @@ namespace DDRFramework
 
 	HttpSession::~HttpSession()
 	{
-		DebugLog("\nHttpSession Destroy")
+		DebugLog("HttpSession Destroy")
 	}
 
 
@@ -27,7 +27,7 @@ namespace DDRFramework
 		{
 			out.close();
 
-			DebugLog("\nTransfer of %s  completed successfully ( %d  seconds)! Content saved to file: %s ", transfer->info().effective_url().c_str(), transfer->info().total_time(), file.c_str());
+			DebugLog("Transfer of %s  completed successfully ( %d  seconds)! Content saved to file: %s ", transfer->info().effective_url().c_str(), transfer->info().total_time(), file.c_str());
 		}
 		else
 		{
@@ -58,7 +58,7 @@ namespace DDRFramework
 		}
 
 
-		DebugLog("\nHttpSession Entry Finish")
+		DebugLog("HttpSession Entry Finish")
 	}
 
 	void HttpSession::DoGet(std::string& url, std::string outfile)
@@ -69,7 +69,7 @@ namespace DDRFramework
 	}
 	void HttpSession::DoPost()
 	{
-		DebugLog("\nPost");
+		DebugLog("Post");
 	}
 
 }
