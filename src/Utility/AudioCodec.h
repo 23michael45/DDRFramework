@@ -34,6 +34,12 @@ namespace DDRFramework
 		bool StartPlay();
 		void StopPlay();
 
+
+		mal_uint32 on_send_frames_to_device(mal_device* pDevice, mal_uint32 frameCount, void* pSamples);
+
+		void StartPlayFile(std::string fileName);
+		void StopPlayFile();
+
 	private:
 
 
@@ -42,6 +48,11 @@ namespace DDRFramework
 		mal_device_config m_Config;
 		mal_device m_CaptureDevice;
 		mal_device m_PlaybackDevice;
+
+
+		mal_device_config m_FileConfig;
+		mal_device m_PlayFileDevice;
+		mal_decoder m_FileDecoder;
 
 
 		mal_uint32 capturedSampleCount = 0;
