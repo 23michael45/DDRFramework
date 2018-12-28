@@ -37,6 +37,18 @@ namespace DDRFramework
 			return t;
 		}
 
+		std::string GetRCValue(std::string sheet, std::string rowkey, std::string colkey);
+		std::string GetRCValue(std::string rowkey, std::string colkey);
+		template <typename T>
+		T GetRCValue(std::string key,std::string colkey)
+		{
+			std::istringstream  iss(GetRCValue(key, colkey));
+			T t;
+			iss >> t;
+			return t;
+		}
+
+
 		int GetElementCount(std::string sheet);
 		int GetElementCount();
 		int ColumnGetKeyCount();
@@ -49,6 +61,19 @@ namespace DDRFramework
 		std::string GetRowKey(int count);
 		int RowGetKeyCount(std::string sheet);
 		std::string GetRowKey(std::string sheet, int count);
+
+		int RowGetKeyIndex(std::string key)
+		{
+			RowGetKeyIndex(m_DefaultSheetName, key);
+		}
+		int RowGetKeyIndex(std::string sheet, std::string key)
+		{
+			if (m_RowKeyIndexMap.find(sheet) != m_RowKeyIndexMap.end())
+			{
+				return m_RowKeyIndexMap[sheet]->at(key);
+			}
+			return -1;
+		}
 
 
 		void SetValue(std::string sheet, int count, std::string key, std::string value);

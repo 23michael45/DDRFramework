@@ -125,6 +125,8 @@ namespace DDRFramework
 					//DebugLog("Receive:%i", m_ReadStreamBuf.size());
 
 					OnHookReceive(m_ReadStreamBuf);
+
+					m_ReadStreamBuf.consume(m_ReadStreamBuf.size());
 					m_ReadWriteStrand.post(std::bind(&HookTcpClientSession::StartRead, shared_from_base()));
 
 				}

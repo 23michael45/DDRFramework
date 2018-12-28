@@ -133,6 +133,21 @@ namespace DDRFramework
 
 
 
+	std::string XmlLoader::GetRCValue(std::string rowkey, std::string colkey)
+	{
+		GetRCValue(m_DefaultSheetName, rowkey, colkey);
+	}
+
+	std::string XmlLoader::GetRCValue(std::string sheet, std::string rowkey, std::string colkey)
+	{
+		int index = RowGetKeyIndex(sheet, rowkey);
+		if (index != -1)
+		{
+			return GetValue(index, colkey);
+		}
+		return "";
+	}
+
 	int XmlLoader::GetElementCount(std::string sheet)
 	{
 		return  m_SheetMap[sheet]->size();
