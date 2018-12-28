@@ -262,6 +262,290 @@ message rspCmd
 	int64 cmdID = 1;
 	string rspMsg = 2;
 }
+//-----------------------------------ClientCmd[[[[[
+enum eCmdRspType{
+	eSuccess = 0;				// Cmd success
+	eCmdFailed = 1;				// Cmd failed
+	eNoAuthority = 2;			// user no authority
+	eRobotNoLogin = 3;			// robot no online
+	eLSMNoLogin = 4;			// lsm no online
+}
+// Cmd move 
+message reqCmdMove{ 
+	float line_speed = 1;		// Cmd Robot forward or back off
+	float angulau_speed =2;		// Cmd Robot turn left or right
+}
+message rspCmdMove{
+	eCmdRspType type =1;
+}
+// Cmd change speed
+message reqCmdChangeSpeed{
+	char add_speed = 1;		// Cmd change robot speed of autorun | 0x01 = speed up | 0xff = speed down
+}
+message rspCmdChangeSpeed{
+	eCmdRspType type = 1;
+}
+// Cmd pause or resume
+message reqCmdPauseResume {
+	string error = 1; 			// Cmd robot Pause or Resume of autorun
+}
+message rspCmdPauseResume{
+	eCmdRspType type = 1;
+}
+// Cmd IPC Shutdown or ReStart or Volume
+enum eCmdIPCMode{
+	eShutDown = 0;		//	close IPC
+	eReStart = 1;		//	restart IPC
+	eVolume = 3;		//	change IPC volume
+} 
+message reqCmdIPC{
+	eCmdIPCMode mode = 1;	// Cmd IPC to Shutdown or ReStart or Volume
+	int32 values = 2;		//	volume change values
+}
+message rspCmdIPC{
+	eCmdIPCMode mode = 1;	// IPC implement Shutdown or ReStart or Volume
+	eCmdRspType type = 1;
+	int32 values = 3;		// Current volume
+}
+// Cmd Robot start or stop play audio
+message reqCmdAudio{
+	enum eAudioMode{
+		eTTS = 0;				// TTS : "helloword"
+		eFile = 1;				// File : "c:\aaa\bbb\ccc.wav" | "aaa.wav"
+	}
+	enum eAudioOperational{
+		eStart = 0;
+		eStop = 1;
+	}
+	eAudioOperational = 1;		// Cmd start or stop
+	eAudioMode type = 2;		// audio play mode
+	string Audiostr = 3;		// TTS or File content 
+	int32 level = 4;			// play audio level
+}
+message rspCmdVoiceAlarm{
+	eCmdRspType type = 1;
+}
+// Cmd update config
+message reqCmdUpdateConfig{
+	string data = 1;			// config.dat change cmd
+	string dataname = 2;		// change dataname
+}
+message rspCmdUpdateConfig{
+	eCmdRspType type = 1;
+	string dataname = 2;		// change dataname
+}
+// Cmd get configdata
+message reqCmdGetConfigdata{
+	string error = 1;
+}
+message rspCmdGetConfigdata{
+	eCmdRspType type = 1;
+	repeated char configdata = 2;	// config.dat
+}
+// Cmd set work path
+message reqCmdSetWorkPath{
+	string route_name = 1;		// route_name : OneRoute_XXXXXX
+	string path_name = 2;		// path_name : path_auto.txt
+	float speed = 3;			// speed : 0~0.7
+}
+message rspCmdSetWorkPath {
+	eCmdRspType type = 1;
+}
+// Cmd add face
+enum ePersonType{
+	eWhiteList = 0;
+	eBlackList =1;
+	eRedList = 2;
+}
+message reqCmdAddFace {
+	string name = 1;			
+	PersonType type = 2;		
+	repeated char picdata = 3;	// face picture data
+}
+message rspCmdAddFace{
+	eCmdRspType type = 1;
+}
+// Cmd Get alarm params
+enum eAlarmType{
+	eFaceAlarmParams = 0;
+	eThermalAlarmParams = 1;
+}
+message reqCmdGetAlarmParams{
+	eAlarmType alarmtype = 1;		// Get Face params or Thermal params
+}
+message rspCmdThermalGetParams{
+	eCmdRspType type = 1;
+	eAlarmType alarmtype = 2;		// rsp Face params or Thermal params
+	float alarmtemp = 2;
+}
+// Cmd operation face database
+message reqCmdFaceDataBaseOrder{
+	string Order = 1;				// Order ： "SELECT COUNT(*) FROM DDRPersonLib;" | "SELECT * FROM DDRPersonLib WHERE PersonIndex = 3;"
+}
+message FaceDataBaseData{
+	int32 id = 1;				
+	string name = 2;
+	ePersonType type = 3;
+	string label = 4;
+}
+message rspCmdFaceDataBaseOrder {
+	enum eRspDataBaseType{
+		eError = 0;
+		eQueryCount = 1;
+		eDeleteSuccess = 2;
+		eDetailedData = 3;
+	}
+	eCmdRspType type = 1;
+	repeated FaceDataBaseData data = 2;
+}
+// Cmd set face confidence or alarm params
+enum eFaceParams{
+	eConfidence = 0;				// over Confidence output to recognition	advise : > 0.9
+	eAlarmTemp = 1;					// over alarmtemp output to display			advise : 60~80 | 67
+}
+message reqCmdSetFaceParams{
+	eFaceParams param = 1;
+	float param_num = 2;
+}
+message rspCmdSetFaceParams{
+	eCmdRspType type = 1;
+	eFaceParams param = 2;
+}
+// Cmd set autochat type
+message reqCmdAutoChat{
+	enum eAutoChatType{
+		eStartOnline = 0;			
+		eStartOffline = 1;
+		eStop = 2;
+	}
+	eAutoChatType type = 1;
+	int32 comnum = 2;			// MIC number
+}
+message rspCmdAutoChat{
+	eCmdRspType type = 1;
+}
+// Cmd create or query ot
+message reqCmdGeneralOctree{
+	enum eOctreeType{
+		eCreate = 0;
+		eQuery = 1;
+	}
+	string route_name = 1;			// route_name : OneRoute_XXXXXX
+	eOctreeType type = 2;			// create or query ot
+}
+message rspCmdGeneralOctree {
+	enum eRspOctreeType{
+		eFileNotExists = 0;
+		eFileExists = 1;
+		eInCreate = 2;
+	}
+	eCmdRspType type = 1;
+	eRspOctreeType otype = 2;
+}
+// Cmd change robot runmode
+enum eCmdActionMode{
+	eAutoDynamic = 0;
+	eAutoStatic = 1;
+	eBlindWaldDynamic = 2;
+	eBlindWaldStatic = 3;
+	eRec = 4;
+	eReCharging = 5;
+}
+// Cmd start to autorun or rec
+message reqCmdStartActionMode{
+	eCmdActionMode mode = 1;
+	string route_name = 2;
+}
+message rspCmdStartActionMode{
+	eCmdActionMode mode = 1;
+	eCmdRspType type = 2;
+}
+// Cmd stop autorun or out rec
+message reqCmdEndActionMode{
+	string error = 1;
+}
+message rspCmdEndActionMode{
+	eCmdActionMode = 1;
+	eCmdRspType = 2;
+	string route_name = 3;
+}
+
+//-----------------------------------ClientCmd]]]]]
+
+//-----------------------------------ClientStatus[[[[[
+// BaseStatus
+message notifyBaseStatus{
+	int32 mode = 1;
+	int32 sonmode =2;
+	float batt = 3;
+	float temp = 4;
+	float hum = 5;
+	float pm25 = 6;
+	int32 stopstat = 7;
+	int64 funcstat = 8;
+	int32 voiceloop = 9;
+	string currroute = 10;
+	string currpath = 11;
+	float currspeed = 12;
+	string currwalkstyle = 13;
+	float posx = 14;
+	float posy = 15;
+	float posdirection = 16;
+	float poslinespeed = 17;
+	float posangulauspeed = 18;
+	double longitude = 19;
+	double latitude = 20;
+	int64 timestamp = 21;
+	int32 thermalmaxx = 22;
+	int32 thermalmaxy = 23;
+	float thermalmaxvalue = 24;
+}
+//ObsStatus
+message OAInfo{
+	float startangle = 1;
+	float endangle = 2;
+	float dist = 3;
+}
+message notifyObsData{
+	int32 greedred = 1;
+	float maxdist = 2;
+	repeated OAInfo oastat = 3;
+}
+//-----------------------------------ClientStatus]]]]]
+
+//-----------------------------------ClientAlarm[[[[[
+// Alarm Thermal or ObsStatus
+message notifyAlarmInfo{
+	enum eAlarmType{
+		eThermalAlarm = 0;
+		eObsStatusAlarm = 1;
+	}
+	eAlarmType type = 1;
+	string alarmcontent= 2;
+}
+// Alarm face
+message notifyAlarmNewFace{
+	ePersonType type = 1;
+	string name = 2;
+	float socre = 3;
+	int64 prevtime = 4;
+	repeated char facedecode = 5;
+}
+// Alarm Fire
+message AlarmFirePos{
+	int32 posx = 1;
+	int32 posy = 2;
+	int32 poswidth = 3;
+	int32 posheight = 4;
+	int32 maxtem = 5;
+	int32 avgtem = 6;
+	int32 alarmpointcount = 7;
+}
+message notifyAlarmFire {
+	repeated AlarmFirePos pos = 1;
+}
+
+//-----------------------------------ClientAlarm]]]]]
 enum eFileTypes {
 	FileContents = 0;
 	FileHttpAddress = 1;
