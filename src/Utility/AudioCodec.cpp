@@ -2,7 +2,7 @@
 #include <memory>
 #include <fstream>
 #include "../../thirdparty/asio/include/asio.hpp"
-
+#include <functional>
 
 
 namespace DDRFramework
@@ -79,4 +79,47 @@ namespace DDRFramework
 	{
 		mal_device_uninit(&m_PlaybackDevice);
 	}
+
+	mal_uint32 AudioCodec::on_send_frames_to_device(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)
+	{
+		mal_decoder* pDecoder = (mal_decoder*)pDevice->pUserData;
+		if (pDecoder == NULL) {
+			return 0;
+		}
+
+		return (mal_uint32)mal_decoder_read(pDecoder, frameCount, pSamples);
+	}
+
+	void AudioCodec::StartPlayFile(std::string fileName)
+	{
+		mal_result result = mal_decoder_init_file(fileName.c_str(), NULL, &m_FileDecoder);
+		if (result != MAL_SUCCESS) {
+			return;
+		}
+
+		m_FileConfig = mal_device_config_init_playback(m_FileDecoder.outputFormat,m_FileDecoder.outputChannels,m_FileDecoder.outputSampleRate,std::bind(&AudioCodec::on_send_frames_to_device, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
+		mal_device device;
+		if (mal_device_init(NULL, mal_device_type_playback, NULL, &m_FileConfig, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
+			printf("Failed to open playback device.\n");
+			mal_decoder_uninit(&m_FileDecoder);
+			return;
+		}
+
+		if (mal_device_start(&m_PlayFileDevice) != MAL_SUCCESS) {
+			printf("Failed to start playback device.\n");
+			mal_device_uninit(&m_PlayFileDevice);
+			mal_decoder_uninit(&m_FileDecoder);
+			return;
+		}
+
+	}
+
+	void AudioCodec::StopPlayFile()
+	{
+		mal_device_uninit(&m_PlayFileDevice);
+		mal_decoder_uninit(&m_FileDecoder);
+
+	}
+
 }
