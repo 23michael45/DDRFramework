@@ -135,7 +135,7 @@ namespace DDRFramework
 
 	std::string XmlLoader::GetRCValue(std::string rowkey, std::string colkey)
 	{
-		GetRCValue(m_DefaultSheetName, rowkey, colkey);
+		return GetRCValue(m_DefaultSheetName, rowkey, colkey);
 	}
 
 	std::string XmlLoader::GetRCValue(std::string sheet, std::string rowkey, std::string colkey)

@@ -4,6 +4,7 @@
 
 #include <map>
 #include <string>
+#include <sstream>
 #include <vector>
 
 namespace DDRFramework
@@ -20,6 +21,7 @@ namespace DDRFramework
 		T GetValue(int count, std::string key)
 		{
 			std::istringstream  iss(GetValue(count,key));
+			iss.exceptions(std::ios::failbit);
 			T t;
 			iss >> t;
 			return t;
@@ -32,6 +34,7 @@ namespace DDRFramework
 		T GetValue(std::string key)
 		{
 			std::istringstream  iss(GetValue(key));
+			iss.exceptions(std::ios::failbit);
 			T t;
 			iss >> t;
 			return t;
@@ -43,6 +46,7 @@ namespace DDRFramework
 		T GetRCValue(std::string key,std::string colkey)
 		{
 			std::istringstream  iss(GetRCValue(key, colkey));
+			iss.exceptions(std::ios::failbit);
 			T t;
 			iss >> t;
 			return t;
@@ -64,7 +68,7 @@ namespace DDRFramework
 
 		int RowGetKeyIndex(std::string key)
 		{
-			RowGetKeyIndex(m_DefaultSheetName, key);
+			return RowGetKeyIndex(m_DefaultSheetName, key);
 		}
 		int RowGetKeyIndex(std::string sheet, std::string key)
 		{
