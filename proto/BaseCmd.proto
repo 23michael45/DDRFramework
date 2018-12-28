@@ -271,40 +271,48 @@ enum eCmdRspType{
 	eLSMNoLogin = 4;			// lsm no online
 }
 // Cmd move 
-message reqCmdMove{ 
+message reqCmdMove
+{ 
 	float line_speed = 1;		// Cmd Robot forward or back off
 	float angulau_speed =2;		// Cmd Robot turn left or right
 }
-message rspCmdMove{
+message rspCmdMove
+{
 	eCmdRspType type =1;
 }
 // Cmd change speed
-message reqCmdChangeSpeed{
-	char add_speed = 1;		// Cmd change robot speed of autorun | 0x01 = speed up | 0xff = speed down
+message reqCmdChangeSpeed
+{
+	int32 add_speed = 1;		// Cmd change robot speed of autorun | 0x01 = speed up | 0xff = speed down
 }
-message rspCmdChangeSpeed{
+message rspCmdChangeSpeed
+{
 	eCmdRspType type = 1;
 }
 // Cmd pause or resume
-message reqCmdPauseResume {
+message reqCmdPauseResume 
+{
 	string error = 1; 			// Cmd robot Pause or Resume of autorun
 }
-message rspCmdPauseResume{
+message rspCmdPauseResume
+{
 	eCmdRspType type = 1;
 }
 // Cmd IPC Shutdown or ReStart or Volume
 enum eCmdIPCMode{
 	eShutDown = 0;		//	close IPC
 	eReStart = 1;		//	restart IPC
-	eVolume = 3;		//	change IPC volume
+	eVolume = 2;		//	change IPC volume
 } 
-message reqCmdIPC{
+message reqCmdIPC
+{
 	eCmdIPCMode mode = 1;	// Cmd IPC to Shutdown or ReStart or Volume
 	int32 values = 2;		//	volume change values
 }
-message rspCmdIPC{
+message rspCmdIPC
+{
 	eCmdIPCMode mode = 1;	// IPC implement Shutdown or ReStart or Volume
-	eCmdRspType type = 1;
+	eCmdRspType type = 2;
 	int32 values = 3;		// Current volume
 }
 // Cmd Robot start or stop play audio
@@ -317,7 +325,7 @@ message reqCmdAudio{
 		eStart = 0;
 		eStop = 1;
 	}
-	eAudioOperational = 1;		// Cmd start or stop
+	eAudioOperational audiop = 1;		// Cmd start or stop
 	eAudioMode type = 2;		// audio play mode
 	string Audiostr = 3;		// TTS or File content 
 	int32 level = 4;			// play audio level
@@ -340,7 +348,7 @@ message reqCmdGetConfigdata{
 }
 message rspCmdGetConfigdata{
 	eCmdRspType type = 1;
-	repeated char configdata = 2;	// config.dat
+	repeated int32 configdata = 2;	// config.dat
 }
 // Cmd set work path
 message reqCmdSetWorkPath{
@@ -359,8 +367,8 @@ enum ePersonType{
 }
 message reqCmdAddFace {
 	string name = 1;			
-	PersonType type = 2;		
-	repeated char picdata = 3;	// face picture data
+	ePersonType type = 2;		
+	repeated int32 picdata = 3;	// face picture data
 }
 message rspCmdAddFace{
 	eCmdRspType type = 1;
@@ -376,7 +384,7 @@ message reqCmdGetAlarmParams{
 message rspCmdThermalGetParams{
 	eCmdRspType type = 1;
 	eAlarmType alarmtype = 2;		// rsp Face params or Thermal params
-	float alarmtemp = 2;
+	float alarmtemp = 3;
 }
 // Cmd operation face database
 message reqCmdFaceDataBaseOrder{
@@ -465,13 +473,12 @@ message reqCmdEndActionMode{
 	string error = 1;
 }
 message rspCmdEndActionMode{
-	eCmdActionMode = 1;
-	eCmdRspType = 2;
+	eCmdActionMode actionmode = 1;
+	eCmdRspType type = 2;
 	string route_name = 3;
 }
 
 //-----------------------------------ClientCmd]]]]]
-
 //-----------------------------------ClientStatus[[[[[
 // BaseStatus
 message notifyBaseStatus{
@@ -529,7 +536,7 @@ message notifyAlarmNewFace{
 	string name = 2;
 	float socre = 3;
 	int64 prevtime = 4;
-	repeated char facedecode = 5;
+	repeated int32 facedecode = 5;
 }
 // Alarm Fire
 message AlarmFirePos{
