@@ -8,6 +8,15 @@
 extern "C" {
 #endif
 
+#ifdef DR_FLAC_IMPLEMENTATION
+#include "../../Shared/thirdparty/mini-al/extras/dr_flac.h"  // Enables FLAC decoding.
+#endif
+#ifdef DR_MP3_IMPLEMENTATION
+#include "../../Shared/thirdparty/mini-al/extras/dr_mp3.h"   // Enables MP3 decoding.
+#endif
+#ifdef DR_WAV_IMPLEMENTATION
+#include "../../Shared/thirdparty/mini-al/extras/dr_wav.h"   // Enables WAV decoding.
+#endif
 
 #if defined(_MSC_VER)
 #pragma warning(push)

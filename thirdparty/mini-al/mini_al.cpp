@@ -3211,6 +3211,7 @@ ULONG   mal_IAudioClient_Release(mal_IAudioClient* pThis)                       
 HRESULT mal_IAudioClient_Initialize(mal_IAudioClient* pThis, MAL_AUDCLNT_SHAREMODE shareMode, DWORD streamFlags, MAL_REFERENCE_TIME bufferDuration, MAL_REFERENCE_TIME periodicity, const WAVEFORMATEX* pFormat, const GUID* pAudioSessionGuid) { return pThis->lpVtbl->Initialize(pThis, shareMode, streamFlags, bufferDuration, periodicity, pFormat, pAudioSessionGuid); }
 HRESULT mal_IAudioClient_GetBufferSize(mal_IAudioClient* pThis, mal_uint32* pNumBufferFrames)                { return pThis->lpVtbl->GetBufferSize(pThis, pNumBufferFrames); }
 HRESULT mal_IAudioClient_GetStreamLatency(mal_IAudioClient* pThis, MAL_REFERENCE_TIME* pLatency)             { return pThis->lpVtbl->GetStreamLatency(pThis, pLatency); }
+
 HRESULT mal_IAudioClient_GetCurrentPadding(mal_IAudioClient* pThis, mal_uint32* pNumPaddingFrames)           { return pThis->lpVtbl->GetCurrentPadding(pThis, pNumPaddingFrames); }
 HRESULT mal_IAudioClient_IsFormatSupported(mal_IAudioClient* pThis, MAL_AUDCLNT_SHAREMODE shareMode, const WAVEFORMATEX* pFormat, WAVEFORMATEX** ppClosestMatch) { return pThis->lpVtbl->IsFormatSupported(pThis, shareMode, pFormat, ppClosestMatch); }
 HRESULT mal_IAudioClient_GetMixFormat(mal_IAudioClient* pThis, WAVEFORMATEX** ppDeviceFormat)            { return pThis->lpVtbl->GetMixFormat(pThis, ppDeviceFormat); }
@@ -24659,7 +24660,7 @@ mal_result mal_decoder__init_dsp(mal_decoder* pDecoder, const mal_decoder_config
 }
 
 // WAV
-#ifdef dr_wav_h
+#ifdef DR_WAV_IMPLEMENTATION
 #define MAL_HAS_WAV
 
 size_t mal_decoder_internal_on_read__wav(void* pUserData, void* pBufferOut, size_t bytesToRead)

@@ -562,7 +562,7 @@ enum eFileTypes {
 message chkFileStatus
 {
 	eFileTypes fileType = 1;
-	repeated string fileNames = 2; // allow wildcards (*,?, etc)
+	repeated bytes fileNames = 2; // allow wildcards (*,?, etc)
 }
 
 // flowDirection = LSM2LS
@@ -570,7 +570,7 @@ message chkFileStatus
 message ansFileStatus
 {
 	eFileTypes fileType = 1;
-	repeated string fileAddrList = 2; // no wildcards
+	repeated bytes fileAddrList = 2; // no wildcards
 }
 
 
@@ -656,7 +656,7 @@ message reqFileAddress
 {
 	eCltType tarServiceType = 1;
 	eFileTypes fileType = 2;
-	repeated string fileNames = 3;  // allow wildcards (*,?, etc)
+	repeated bytes fileNames = 3;  // allow wildcards (*,?, etc)
 }
 
 // flowDirection = RR2RS or RS2M or LS2C
@@ -665,7 +665,7 @@ message rspFileAddress
 {
 	eCltType tarServiceType = 1;
 	eFileTypes fileType = 2;
-	repeated string fileAddrList = 3; // ignored if fileType!=FileContents
+	repeated bytes fileAddrList = 3; // ignored if fileType!=FileContents
 	string error = 4;
 }
 //----------------------------------------------------------------------------------------------------------PC Android Client]]]]]]

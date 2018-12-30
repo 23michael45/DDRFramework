@@ -1,5 +1,5 @@
-
-#pragma once
+#ifndef LocalFileSystem_h__
+#define LocalFileSystem_h__
 
 
 #include <memory>
@@ -37,3 +37,5 @@ public:
 
 
 } // namespace cppfs
+
+#endif // LocalFileSystem_h__

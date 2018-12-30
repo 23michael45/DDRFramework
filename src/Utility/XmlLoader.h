@@ -6,6 +6,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "DDRMacro.h"
+#include "Logger.h"
 
 namespace DDRFramework
 {
@@ -20,12 +22,17 @@ namespace DDRFramework
 		template <typename T>
 		T GetValue(int count, std::string key)
 		{
-			std::istringstream  iss(GetValue(count,key));
-			iss.exceptions(std::ios::failbit);
-			T t;
-			iss >> t;
-			return t;
-
+			try
+			{
+				std::istringstream  iss(GetValue(count, key));
+				T t;
+				iss >> t;
+				return t;
+			}
+			catch (std::exception& e)
+			{
+				DebugLog("%s",e.what())
+			}
 		}
 
 		std::string GetValue(std::string sheet, std::string key);

@@ -1,6 +1,6 @@
 #ifndef __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
 #define __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
-
+#include <new>
 #include <map>
 #include <vector>
 #include <asio.hpp>
@@ -58,6 +58,29 @@ int StrConv_u2g(char *inbuf, int inlen, char *outbuf, int outlen);
 
 std::vector<std::string> GetLocalIPV4();
 std::map<std::string,std::string> GetSameSegmentIPV4(std::vector<std::string> left, std::vector<std::string> right);
+
+
+
+
+
+
+// 多字节编码转为UTF8编码  
+bool MBToUTF8(std::vector<char>& pu8, const char* pmb, int mLen);
+
+// UTF8编码转为多字节编码  
+bool UTF8ToMB(std::vector<char>& pmb, const char* pu8, int utf8Len);
+
+// 多字节编码转为Unicode编码  
+bool MBToUnicode(std::vector<wchar_t>& pun, const char* pmb, int mLen);
+
+//Unicode编码转为多字节编码  
+bool UnicodeToMB(std::vector<char>& pmb, const wchar_t* pun, int uLen);
+
+// UTF8编码转为Unicode  
+bool UTF8ToUnicode(std::vector<wchar_t>& pun, const char* pu8, int utf8Len);
+
+// Unicode编码转为UTF8  
+bool UnicodeToUTF8(std::vector<char>& pu8, const wchar_t* pun, int uLen);
 }
 
 #endif // __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
