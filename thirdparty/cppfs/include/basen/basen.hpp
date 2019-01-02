@@ -52,7 +52,7 @@ void decode_b64(Iter1 start, Iter1 end, Iter2 out);
 namespace impl
 {
 
-const int ERROR = -1;
+const int BASEN_ERROR = -1;
 
 namespace {
 
@@ -99,7 +99,7 @@ struct b16_conversion_traits
         } else if (c >= 'A' && c <= 'F') {
             return c - 'A' + 10;
         }
-        return ERROR;
+        return BASEN_ERROR;
     }
 };
 
@@ -124,7 +124,7 @@ struct b32_conversion_traits
         } else if (c >= '2' && c <= '7') {
             return c - '2' + 26;
         }
-        return ERROR;
+        return BASEN_ERROR;
     }
 };
 
@@ -156,7 +156,7 @@ struct b64_conversion_traits
         } else if (c == '/') {
             return c - '/' + alph_len * 2 + 11;
         }
-        return ERROR;
+        return BASEN_ERROR;
     }
 };
 
@@ -173,7 +173,7 @@ void decode(Iter1 start, Iter1 end, Iter2 out)
             continue;
         }
         char value = ConversionTraits::decode(*iter);
-        if (value == ERROR) {
+        if (value == BASEN_ERROR) {
             // malformed data, but let's go on...
             ++iter;
             continue;

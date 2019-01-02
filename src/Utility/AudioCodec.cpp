@@ -34,20 +34,7 @@ namespace DDRFramework
 		mal_uint32 samplesToRead = frameCount * pDevice->channels;
 
 		asio::streambuf* pbuf;
-		std::shared_ptr<asio::streambuf> spbuf = nullptr;
-
-
-		auto pair = GetQueueAudio();
-		if (pair.first >= 0 && pair.second)//if exsit element to play
-		{
-			pbuf = pair.second.get();
-		}
-		else
-		{
-			pbuf = &m_AudioRecvBuf;
-		}
-
-
+		pbuf = &m_AudioRecvBuf;
 
 		size_t len = pbuf->size();
 		if (len < samplesToRead * sizeof(mal_int16))
@@ -55,8 +42,6 @@ namespace DDRFramework
 
 			memcpy(pSamples, pbuf->data().data(), len);
 			pbuf->consume(len);
-
-			EndPlay(pair);
 
 			return len / sizeof(mal_int16) / pDevice->channels;
 		}
@@ -71,6 +56,30 @@ namespace DDRFramework
 
 	}
 
+	mal_uint32 AudioCodec::on_send_frames_wavfile(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)
+	{
+		if (m_spCurrentWavBufInfo)
+		{
+			m_spCurrentWavBufInfo->m_CurrentFrame += frameCount;
+		}
+		mal_decoder* pDecoder = (mal_decoder*)pDevice->pUserData;
+		if (pDecoder == NULL) {
+			return 0;
+		}
+
+		if (pDecoder->memory.currentReadPos >= pDecoder->memory.dataSize)
+		{
+			StopPlayBuf();
+
+			if (m_OnFinishPlayWavFunc)
+			{
+				m_OnFinishPlayWavFunc(m_spCurrentWavBufInfo);
+			}
+		}
+
+
+		return (mal_uint32)mal_decoder_read(pDecoder, frameCount, pSamples);
+	}
 
 
 
@@ -107,7 +116,7 @@ namespace DDRFramework
 		mal_context_uninit(&m_Context);
 
 	}
-	bool AudioCodec::StartRecord()
+	bool AudioCodec::StartDeviceRecord()
 	{
 		printf("Recording...\n");
 		if (mal_device_init(&m_Context, mal_device_type_capture, NULL, &m_Config, NULL, &m_CaptureDevice) != MAL_SUCCESS) {
@@ -124,12 +133,12 @@ namespace DDRFramework
 		}
 		return true;
 	}
-	void AudioCodec::StopRecord()
+	void AudioCodec::StopDeviceRecord()
 	{
 		mal_device_uninit(&m_CaptureDevice);
 	}
 
-	bool AudioCodec::StartPlay()
+	bool AudioCodec::StartDevicePlay()
 	{
 		printf("Playing...\n");
 		if (mal_device_init(&m_Context, mal_device_type_playback, NULL, &m_Config, NULL, &m_PlaybackDevice) != MAL_SUCCESS) {
@@ -148,105 +157,95 @@ namespace DDRFramework
 		return true;
 
 	}
-	void AudioCodec::StopPlay()
+	void AudioCodec::StopDevicePlay()
 	{
 		mal_device_uninit(&m_PlaybackDevice);
 	}
 
-	mal_uint32 AudioCodec::on_send_frames_to_device(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)
+	void AudioCodec::PushAudioRecvBuf(asio::streambuf& buf)
 	{
-		mal_decoder* pDecoder = (mal_decoder*)pDevice->pUserData;
-		if (pDecoder == NULL) {
-			return 0;
-		}
-
-		return (mal_uint32)mal_decoder_read(pDecoder, frameCount, pSamples);
+		std::lock_guard<std::mutex> lock(m_AudioRecvMutex);
+		std::ostream oshold(&m_AudioRecvBuf);
+		oshold.write((const char*)buf.data().data(), buf.size());
+		oshold.flush();
 	}
-	void AudioCodec::StartPlayFile(asio::streambuf& buf)
+
+	bool AudioCodec::StartPlayBuf(std::shared_ptr<WavBufInfo> spInfo, int frameCount)
 	{
-		mal_result result = mal_decoder_init_memory_wav(buf.data().data(),buf.size(), (const mal_decoder_config*)&m_FileConfig, &m_FileDecoder);
+		if (m_spCurrentWavBufInfo)
+		{
+			return false;
+		}
+		m_spCurrentWavBufInfo = spInfo;
+		m_spCurrentWavBufInfo->m_CurrentFrame = frameCount;
+		auto spbuf = spInfo->m_spBuf;
+		mal_result result = mal_decoder_init_memory_wav(spbuf->data().data(), spbuf->size(), (const mal_decoder_config*)&m_FileConfig, &m_FileDecoder);
 		if (result != MAL_SUCCESS) {
-			return;
+			return false;
+		}
+		if (frameCount > 0)
+		{
+			mal_decoder_seek_to_frame(&m_FileDecoder, frameCount);
 		}
 
+		auto config = mal_device_config_init_playback(m_FileDecoder.outputFormat, m_FileDecoder.outputChannels, m_FileDecoder.outputSampleRate, std::bind(&AudioCodec::on_send_frames_wavfile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
-	}
-	void AudioCodec::StartPlayFile(std::string fileName)
-	{
-		mal_result result = mal_decoder_init_file(fileName.c_str(), NULL, &m_FileDecoder);
-		if (result != MAL_SUCCESS) {
-			return;
-		}
-
-		m_FileConfig = mal_device_config_init_playback(m_FileDecoder.outputFormat,m_FileDecoder.outputChannels,m_FileDecoder.outputSampleRate,std::bind(&AudioCodec::on_send_frames_to_device, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-
-		mal_device device;
-		if (mal_device_init(NULL, mal_device_type_playback, NULL, &m_FileConfig, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
+		if (mal_device_init(NULL, mal_device_type_playback, NULL, &config, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
 			printf("Failed to open playback device.\n");
 			mal_decoder_uninit(&m_FileDecoder);
-			return;
+			return false;
 		}
 
 		if (mal_device_start(&m_PlayFileDevice) != MAL_SUCCESS) {
 			printf("Failed to start playback device.\n");
 			mal_device_uninit(&m_PlayFileDevice);
 			mal_decoder_uninit(&m_FileDecoder);
-			return;
+			return false;
 		}
 
+		return true;
+
+	}
+	bool AudioCodec::StartPlayFile(std::string fileName)	
+	{
+		if (m_spCurrentWavBufInfo)
+		{
+			return false;
+		}
+
+		mal_result result = mal_decoder_init_file(fileName.c_str(), NULL, &m_FileDecoder);
+		if (result != MAL_SUCCESS) {
+			return false;
+		}
+
+		m_FileConfig = mal_device_config_init_playback(m_FileDecoder.outputFormat,m_FileDecoder.outputChannels,m_FileDecoder.outputSampleRate,std::bind(&AudioCodec::on_send_frames_wavfile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+
+		mal_device device;
+		if (mal_device_init(NULL, mal_device_type_playback, NULL, &m_FileConfig, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
+			printf("Failed to open playback device.\n");
+			mal_decoder_uninit(&m_FileDecoder);
+			return false;
+		}
+
+		if (mal_device_start(&m_PlayFileDevice) != MAL_SUCCESS) {
+			printf("Failed to start playback device.\n");
+			mal_device_uninit(&m_PlayFileDevice);
+			mal_decoder_uninit(&m_FileDecoder);
+			return false;
+		}
+
+		return true;
 	}
 
-	void AudioCodec::StopPlayFile()
+	int  AudioCodec::StopPlayBuf()
 	{
 		mal_device_uninit(&m_PlayFileDevice);
 		mal_decoder_uninit(&m_FileDecoder);
 
-	}
 
-
-
-	void AudioCodec::PlayAudio(std::shared_ptr<asio::streambuf> spbuf, int priority)
-	{
-		std::lock_guard<std::mutex> lock(m_AudioQueueMutex);
-		if (m_AudioQueueMap.find(priority) == m_AudioQueueMap.end())
-		{
-			auto spQueue = std::make_shared<std::queue<std::shared_ptr<asio::streambuf>>>();
-			m_AudioQueueMap.insert(make_pair(priority, spQueue));
-		}
-
-		if (spbuf)
-		{
-			auto spQueue = m_AudioQueueMap[priority];
-			spQueue->push(spbuf);
-
-		}
-	}
-
-	void AudioCodec::EndPlay(std::pair<int, std::shared_ptr<asio::streambuf>> pair)
-	{
-		std::lock_guard<std::mutex> lock(m_AudioQueueMutex);
-		if (m_AudioQueueMap.find(pair.first) != m_AudioQueueMap.end())
-		{
-			m_AudioQueueMap[pair.first]->pop();
-		}
-	}
-
-	std::pair<int, std::shared_ptr<asio::streambuf>> AudioCodec::GetQueueAudio()
-	{
-		std::lock_guard<std::mutex> lock(m_AudioQueueMutex);
-		std::shared_ptr<asio::streambuf> spbuf;
-		for (auto spQueuePair : m_AudioQueueMap)
-		{
-			auto spQueue = spQueuePair.second;
-			if (spQueue->size() > 0)
-			{
-				spbuf = spQueue->front();
-				spQueue->pop();
-
-				return make_pair(spQueuePair.first, spbuf);
-			}
-		}
-		return std::make_pair(-1, nullptr);
+		m_spCurrentWavBufInfo.reset();
+		int frame = m_spCurrentWavBufInfo->m_CurrentFrame;
+		return frame;
 	}
 
 }
