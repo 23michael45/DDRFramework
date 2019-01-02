@@ -12,8 +12,7 @@
 #include "../../thirdparty/cppfs/include/cppfs/windows/LocalFileSystem.h"
 #endif
 
-
-
+#include "../../Shared/src/Utility/CommonFunc.h"
 #include "../../../Shared/src/Utility/DDRMacro.h"
 #include "../../../Shared/src/Utility/Logger.h"
 using namespace cppfs;
@@ -24,7 +23,7 @@ namespace DDRFramework
 	FileManagerBase::FileManagerBase()
 	{
 
-		cppfs::FilePath path(cppfs::getexepath());
+		cppfs::FilePath path(DDRFramework::getexepath());
 		m_RootPath = path.directoryPath();
 
 

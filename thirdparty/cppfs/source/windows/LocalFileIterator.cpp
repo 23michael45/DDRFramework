@@ -1,11 +1,12 @@
 
 #include <cppfs/windows/LocalFileIterator.h>
-
-#include <Windows.h>
-
 #include <cppfs/FilePath.h>
 #include <cppfs/windows/LocalFileSystem.h>
+#include "../../Shared/src/Utility/CommonFunc.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif // _WIN32
 
 namespace cppfs
 {
@@ -78,7 +79,7 @@ namespace cppfs
 		}
 
 		// Return filename of current item
-		return WStringToString(std::wstring(static_cast<WIN32_FIND_DATA *>(m_findData)->cFileName));
+		return DDRFramework::WStringToString(std::wstring(static_cast<WIN32_FIND_DATA *>(m_findData)->cFileName));
 	}
 
 	void LocalFileIterator::next()
@@ -99,7 +100,7 @@ namespace cppfs
 				std::string query = FilePath(m_path).fullPath() + "/*";
 
 
-				m_findHandle = FindFirstFileW(StringToWString(query).c_str(), static_cast<WIN32_FIND_DATA *>(m_findData));
+				m_findHandle = FindFirstFileW(DDRFramework::StringToWString(query).c_str(), static_cast<WIN32_FIND_DATA *>(m_findData));
 
 				// Abort if directory could not be opened
 				if (m_findHandle == INVALID_HANDLE_VALUE)
@@ -124,7 +125,7 @@ namespace cppfs
 			m_index++;
 
 			// Get filename
-			filename = WStringToString(std::wstring(static_cast<WIN32_FIND_DATA *>(m_findData)->cFileName));
+			filename = DDRFramework::WStringToString(std::wstring(static_cast<WIN32_FIND_DATA *>(m_findData)->cFileName));
 		} while (filename == ".." || filename == ".");
 	}
 

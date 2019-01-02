@@ -3,12 +3,16 @@
 
 #include <fstream>
 
-#include <Windows.h>
-
 #include <cppfs/cppfs.h>
 #include <cppfs/FilePath.h>
 #include <cppfs/windows/LocalFileSystem.h>
 #include <cppfs/windows/LocalFileIterator.h>
+#include "../../Shared/src/Utility/CommonFunc.h"
+
+
+#ifdef _WIN32
+#include <Windows.h>
+#endif // _WIN32
 
 
 namespace cppfs
@@ -105,7 +109,7 @@ std::vector<std::string> LocalFileHandle::listFiles() const
     // Open directory
     WIN32_FIND_DATA findData;
     std::string query = FilePath(m_path).fullPath() + "/*";
-    HANDLE findHandle = FindFirstFileW(StringToWString(query).c_str(), &findData);
+    HANDLE findHandle = FindFirstFileW(DDRFramework::StringToWString(query).c_str(), &findData);
 
     if (findHandle == INVALID_HANDLE_VALUE)
     {
@@ -121,7 +125,7 @@ std::vector<std::string> LocalFileHandle::listFiles() const
         // Ignore . and ..
         if (name != L".." && name != L".")
         {
-            entries.push_back(WStringToString(name));
+            entries.push_back(DDRFramework::WStringToString(name));
         }
     } while (FindNextFile(findHandle, &findData));
 
