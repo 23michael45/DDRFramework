@@ -68,7 +68,7 @@ Curl_hash_init(struct curl_hash *h,
   h->comp_func = comparator;
   h->dtor = dtor;
   h->size = 0;
-  h->slots = slots_num;
+  h->slots_num = slots_num;
 
   h->table = malloc(slots_num * sizeof(struct curl_llist));
   if(h->table) {
@@ -77,7 +77,7 @@ Curl_hash_init(struct curl_hash *h,
       Curl_llist_init(&h->table[i], (curl_llist_dtor) hash_element_dtor);
     return 0; /* fine */
   }
-  h->slots = 0;
+  h->slots_num = 0;
   return 1; /* failure */
 }
 
@@ -96,7 +96,7 @@ mk_hash_element(const void *key, size_t key_len, const void *p)
   return he;
 }
 
-#define FETCH_LIST(x,y,z) &x->table[x->hash_func(y, z, x->slots)]
+#define FETCH_LIST(x,y,z) &x->table[x->hash_func(y, z, x->slots_num)]
 
 /* Insert the data in the hash. If there already was a match in the hash,
  * that data is replaced.
@@ -183,7 +183,7 @@ Curl_hash_apply(curl_hash *h, void *user,
   struct curl_llist_element  *le;
   int                  i;
 
-  for(i = 0; i < h->slots; ++i) {
+  for(i = 0; i < h->slots_num; ++i) {
     for(le = (h->table[i])->head;
         le;
         le = le->next) {
@@ -206,13 +206,13 @@ Curl_hash_destroy(struct curl_hash *h)
 {
   int i;
 
-  for(i = 0; i < h->slots; ++i) {
+  for(i = 0; i < h->slots_num; ++i) {
     Curl_llist_destroy(&h->table[i], (void *) h);
   }
 
   Curl_safefree(h->table);
   h->size = 0;
-  h->slots = 0;
+  h->slots_num = 0;
 }
 
 /* Removes all the entries in the given hash.
@@ -238,7 +238,7 @@ Curl_hash_clean_with_criterium(struct curl_hash *h, void *user,
   if(!h)
     return;
 
-  for(i = 0; i < h->slots; ++i) {
+  for(i = 0; i < h->slots_num; ++i) {
     list = &h->table[i];
     le = list->head; /* get first list entry */
     while(le) {
@@ -297,7 +297,7 @@ Curl_hash_next_element(struct curl_hash_iterator *iter)
   /* If we have reached the end of the list, find the next one */
   if(!iter->current_element) {
     int i;
-    for(i = iter->slot_index; i < h->slots; i++) {
+    for(i = iter->slot_index; i < h->slots_num; i++) {
       if(h->table[i].head) {
         iter->current_element = h->table[i].head;
         iter->slot_index = i + 1;
