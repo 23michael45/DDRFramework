@@ -9,7 +9,6 @@
 namespace DDRFramework
 {
 
-
 	HttpSession::HttpSession():m_spWork(std::make_shared<asio::io_context::work>(m_ContextIO))
 	{
 	}
@@ -53,12 +52,12 @@ namespace DDRFramework
 		m_spWork.reset();
 	}
 
-	size_t write_file(void *ptr, size_t size, size_t nmemb, void *pfile) {
+	size_t write_file(void *ptr, size_t size, size_t nmemb, void *pData) {
 
 		string data((const char*)ptr, (size_t)size * nmemb);
 
-		auto pfs = ((std::ofstream*)pfile);
-		pfs->write((const char*)ptr, size * nmemb);
+		auto pSession = ((HttpSession*)pData);
+		pSession->WriteFileStream(ptr, size * nmemb);
 
 		return size * nmemb;
 	}
@@ -74,9 +73,8 @@ namespace DDRFramework
 
 		curl_easy_setopt(m_pCurl, CURLOPT_WRITEFUNCTION, write_file);
 
-
-		std::ofstream out(outfile);
-		curl_easy_setopt(m_pCurl, CURLOPT_WRITEDATA, &out);
+		m_OutFileStream.open(outfile, std::ios::binary);
+		curl_easy_setopt(m_pCurl, CURLOPT_WRITEDATA, this);
 		/* Perform the request, res will get the return code */
 		CURLcode res = curl_easy_perform(m_pCurl);
 		/* Check for errors */
@@ -84,30 +82,15 @@ namespace DDRFramework
 			fprintf(stderr, "curl_easy_perform() failed: %s\n",
 				curl_easy_strerror(res));
 		}
-		out.close();
-
+		m_OutFileStream.close();
 
 		curl_easy_cleanup(m_pCurl);
-		
-		/*curl_asio curl(m_ContextIO);
-		curl_asio::transfer::ptr transfer = curl.create_transfer();
-		if (transfer)
-		{
-			transfer->opt.protocols = CURLPROTO_HTTP | CURLPROTO_HTTPS;
-			transfer->opt.max_redirs = 5;
-			transfer->opt.redir_protocols = CURLPROTO_HTTP | CURLPROTO_HTTPS;
-			transfer->opt.follow_location = true;
-		
-			transfer->on_data_read = std::bind(&HttpSession::on_transfer_data_read, shared_from_this(), std::ref(out), std::placeholders::_1);
-			transfer->on_done = std::bind(&HttpSession::on_transfer_done, shared_from_this(), transfer, std::ref(out), outfile, std::placeholders::_1);
-			if (transfer->start(url))
-			{
-				m_ContextIO.run();
-			}
-		}*/
-
-
 		DebugLog("HttpSession Entry Finish")
+
+		if (m_OnDoneFunc)
+		{
+			m_OnDoneFunc(0);
+		}
 	}
 
 	void HttpSession::DoGet(std::string& url, std::string outfile)

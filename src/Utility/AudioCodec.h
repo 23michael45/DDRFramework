@@ -8,7 +8,8 @@
 #endif
 
 #include "../../src/Network/TcpSocketContainer.h"
-
+#include "../../src/Utility/DDRMacro.h"
+#include "../../src/Utility/Logger.h"
 #include <queue>
 #include <stack>
 
@@ -16,6 +17,11 @@ namespace DDRFramework
 {
 	struct WavBufInfo
 	{
+		~WavBufInfo()
+		{
+			DebugLog("Destroy WavBufInfo");
+		}
+
 		std::shared_ptr<asio::streambuf> m_spBuf;
 		int m_CurrentFrame;
 		int m_Priority;
@@ -45,10 +51,7 @@ namespace DDRFramework
 		mal_uint32 on_send_frames_wavfile(mal_device* pDevice, mal_uint32 frameCount, void* pSamples);
 
 
-		bool StartPlayBuf(std::shared_ptr<WavBufInfo> spInfo,int frameCount = 0);
-		bool StartPlayFile(std::string fileName);
-		
-		//return current framecount
+		bool StartPlayBuf(std::shared_ptr<WavBufInfo> spInfo);
 		std::shared_ptr<WavBufInfo> StopPlayBuf();
 
 
@@ -74,15 +77,15 @@ namespace DDRFramework
 
 	private:
 
-		mal_context m_Context;
+		mal_context* m_pContext;
 		mal_device_config m_Config;
-		mal_device m_CaptureDevice;
-		mal_device m_PlaybackDevice;
+		mal_device* m_pCaptureDevice;
+		mal_device* m_pPlaybackDevice;
 
 
 		mal_device_config m_FileConfig;
-		mal_device m_PlayFileDevice;
-		mal_decoder m_FileDecoder;
+		mal_device* m_pPlayFileDevice;
+		mal_decoder* m_pFileDecoder;
 
 
 		mal_uint32 capturedSampleCount = 0;
@@ -99,6 +102,7 @@ namespace DDRFramework
 
 		std::mutex m_AudioRecvMutex;
 
+		std::mutex m_AudioBufPlayMutex;
 
 	};
 

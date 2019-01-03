@@ -9,7 +9,10 @@
 
 namespace DDRFramework
 {
-
+	template<typename T> void SAFE_DELETE(T*& a) {
+		delete a;
+		a = NULL;
+	}
 
 	void AudioCodec::on_recv_frames_device(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples)
 	{
@@ -69,11 +72,11 @@ namespace DDRFramework
 
 		if (pDecoder->memory.currentReadPos >= pDecoder->memory.dataSize)
 		{
-			StopPlayBuf();
 
 			if (m_OnFinishPlayWavFunc)
 			{
-				m_OnFinishPlayWavFunc(m_spCurrentWavBufInfo);
+				std::thread t(m_OnFinishPlayWavFunc, m_spCurrentWavBufInfo);
+				t.detach();
 			}
 		}
 
@@ -85,10 +88,20 @@ namespace DDRFramework
 
 	AudioCodec::AudioCodec()
 	{
+		m_pCaptureDevice = nullptr;
+		m_pFileDecoder = nullptr;
+		m_pPlaybackDevice = nullptr;
+		m_pPlayFileDevice = nullptr;
+		m_pContext = nullptr;
 	}
 
 	AudioCodec::~AudioCodec()
 	{
+		StopDevicePlay();
+		StopDeviceRecord();
+		StopPlayBuf();
+
+		Deinit();
 	}
 
 
@@ -101,9 +114,11 @@ namespace DDRFramework
 		mal_recv_proc recv = std::bind(&AudioCodec::on_recv_frames_device, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		mal_send_proc send = std::bind(&AudioCodec::on_send_frames_device, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 		
-
-		if (mal_context_init(NULL, 0, NULL, &m_Context) != MAL_SUCCESS) {
+		m_pContext = new mal_context();
+		if (mal_context_init(NULL, 0, NULL, m_pContext) != MAL_SUCCESS) {
 			DebugLog("Failed to initialize audio context.");
+
+			SAFE_DELETE(m_pContext);
 			return -1;
 		}
 
@@ -112,22 +127,31 @@ namespace DDRFramework
 	}
 	void AudioCodec::Deinit()
 	{
+		if (m_pContext)
+		{
+			mal_context_uninit(m_pContext); 
+			SAFE_DELETE(m_pContext);
+		}
 
-		mal_context_uninit(&m_Context);
 
 	}
 	bool AudioCodec::StartDeviceRecord()
 	{
 		printf("Recording...\n");
-		if (mal_device_init(&m_Context, mal_device_type_capture, NULL, &m_Config, NULL, &m_CaptureDevice) != MAL_SUCCESS) {
-			mal_context_uninit(&m_Context);
+
+		if (mal_device_init(m_pContext, mal_device_type_capture, NULL, &m_Config, NULL, m_pCaptureDevice) != MAL_SUCCESS) {
+			mal_context_uninit(m_pContext);
+
+			SAFE_DELETE(m_pContext);
 			printf("Failed to initialize capture device.\n");
 			return -2;
 		}
-
-		if (mal_device_start(&m_CaptureDevice) != MAL_SUCCESS) {
-			mal_device_uninit(&m_CaptureDevice);
-			mal_context_uninit(&m_Context);
+		m_pCaptureDevice = new mal_device();
+		if (mal_device_start(m_pCaptureDevice) != MAL_SUCCESS) {
+			mal_device_uninit(m_pCaptureDevice);
+			mal_context_uninit(m_pContext);
+			SAFE_DELETE(m_pCaptureDevice);
+			SAFE_DELETE(m_pContext);
 			printf("Failed to start capture device.\n");
 			return -3;
 		}
@@ -135,21 +159,29 @@ namespace DDRFramework
 	}
 	void AudioCodec::StopDeviceRecord()
 	{
-		mal_device_uninit(&m_CaptureDevice);
+		if (m_pCaptureDevice)
+		{
+			mal_device_uninit(m_pCaptureDevice);
+			SAFE_DELETE(m_pCaptureDevice);
+		}
 	}
 
 	bool AudioCodec::StartDevicePlay()
 	{
 		printf("Playing...\n");
-		if (mal_device_init(&m_Context, mal_device_type_playback, NULL, &m_Config, NULL, &m_PlaybackDevice) != MAL_SUCCESS) {
-			mal_context_uninit(&m_Context);
+		if (mal_device_init(m_pContext, mal_device_type_playback, NULL, &m_Config, NULL, m_pPlaybackDevice) != MAL_SUCCESS) {
+			mal_context_uninit(m_pContext);
+			SAFE_DELETE(m_pContext);
 			printf("Failed to initialize playback device.\n");
 			return -4;
 		}
+		m_pPlaybackDevice = new mal_device();
+		if (mal_device_start(m_pPlaybackDevice) != MAL_SUCCESS) {
+			mal_device_uninit(m_pPlaybackDevice);
+			mal_context_uninit(m_pContext);
 
-		if (mal_device_start(&m_PlaybackDevice) != MAL_SUCCESS) {
-			mal_device_uninit(&m_PlaybackDevice);
-			mal_context_uninit(&m_Context);
+			SAFE_DELETE(m_pPlaybackDevice);
+			SAFE_DELETE(m_pContext);
 			printf("Failed to start playback device.\n");
 			return -5;
 		}
@@ -159,7 +191,11 @@ namespace DDRFramework
 	}
 	void AudioCodec::StopDevicePlay()
 	{
-		mal_device_uninit(&m_PlaybackDevice);
+		if (m_pPlaybackDevice)
+		{
+			mal_device_uninit(m_pPlaybackDevice);
+			SAFE_DELETE(m_pPlaybackDevice);
+		}
 	}
 
 	void AudioCodec::PushAudioRecvBuf(asio::streambuf& buf)
@@ -170,77 +206,68 @@ namespace DDRFramework
 		oshold.flush();
 	}
 
-	bool AudioCodec::StartPlayBuf(std::shared_ptr<WavBufInfo> spInfo, int frameCount)
+	bool AudioCodec::StartPlayBuf(std::shared_ptr<WavBufInfo> spInfo)
 	{
+		std::lock_guard<std::mutex> lock(m_AudioBufPlayMutex);
+
 		if (m_spCurrentWavBufInfo)
 		{
 			return false;
 		}
 		m_spCurrentWavBufInfo = spInfo;
-		m_spCurrentWavBufInfo->m_CurrentFrame = frameCount;
 		auto spbuf = spInfo->m_spBuf;
-		mal_result result = mal_decoder_init_memory_wav(spbuf->data().data(), spbuf->size(), (const mal_decoder_config*)&m_FileConfig, &m_FileDecoder);
+
+		memset(&m_FileConfig, 0, sizeof(m_FileConfig));
+
+		m_pFileDecoder = new mal_decoder();
+		mal_result result = mal_decoder_init_memory_wav(spbuf->data().data(), spbuf->size(), (const mal_decoder_config*)&m_FileConfig, m_pFileDecoder);
 		if (result != MAL_SUCCESS) {
+			SAFE_DELETE(m_pFileDecoder);
 			return false;
 		}
-		if (frameCount > 0)
+		if (m_spCurrentWavBufInfo->m_CurrentFrame > 0)
 		{
-			mal_decoder_seek_to_frame(&m_FileDecoder, frameCount);
+			mal_decoder_seek_to_frame(m_pFileDecoder, m_spCurrentWavBufInfo->m_CurrentFrame);
 		}
 
-		auto config = mal_device_config_init_playback(m_FileDecoder.outputFormat, m_FileDecoder.outputChannels, m_FileDecoder.outputSampleRate, std::bind(&AudioCodec::on_send_frames_wavfile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+		auto config = mal_device_config_init_playback(m_pFileDecoder->outputFormat, m_pFileDecoder->outputChannels, m_pFileDecoder->outputSampleRate, std::bind(&AudioCodec::on_send_frames_wavfile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
-		if (mal_device_init(NULL, mal_device_type_playback, NULL, &config, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
+		m_pPlayFileDevice = new mal_device();
+		if (mal_device_init(NULL, mal_device_type_playback, NULL, &config, m_pFileDecoder, m_pPlayFileDevice) != MAL_SUCCESS) {
 			printf("Failed to open playback device.\n");
-			mal_decoder_uninit(&m_FileDecoder);
+			mal_decoder_uninit(m_pFileDecoder);
+			SAFE_DELETE(m_pFileDecoder);
+			SAFE_DELETE(m_pPlayFileDevice);
 			return false;
 		}
 
-		if (mal_device_start(&m_PlayFileDevice) != MAL_SUCCESS) {
+		if (mal_device_start(m_pPlayFileDevice) != MAL_SUCCESS) {
 			printf("Failed to start playback device.\n");
-			mal_device_uninit(&m_PlayFileDevice);
-			mal_decoder_uninit(&m_FileDecoder);
+			mal_device_uninit(m_pPlayFileDevice);
+			mal_decoder_uninit(m_pFileDecoder);
+			SAFE_DELETE(m_pPlayFileDevice);
+			SAFE_DELETE(m_pFileDecoder);
 			return false;
 		}
 
 		return true;
 
-	}
-	bool AudioCodec::StartPlayFile(std::string fileName)	
-	{
-		if (m_spCurrentWavBufInfo)
-		{
-			return false;
-		}
-
-		mal_result result = mal_decoder_init_file(fileName.c_str(), NULL, &m_FileDecoder);
-		if (result != MAL_SUCCESS) {
-			return false;
-		}
-
-		m_FileConfig = mal_device_config_init_playback(m_FileDecoder.outputFormat,m_FileDecoder.outputChannels,m_FileDecoder.outputSampleRate,std::bind(&AudioCodec::on_send_frames_wavfile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-
-		mal_device device;
-		if (mal_device_init(NULL, mal_device_type_playback, NULL, &m_FileConfig, &m_FileDecoder, &m_PlayFileDevice) != MAL_SUCCESS) {
-			printf("Failed to open playback device.\n");
-			mal_decoder_uninit(&m_FileDecoder);
-			return false;
-		}
-
-		if (mal_device_start(&m_PlayFileDevice) != MAL_SUCCESS) {
-			printf("Failed to start playback device.\n");
-			mal_device_uninit(&m_PlayFileDevice);
-			mal_decoder_uninit(&m_FileDecoder);
-			return false;
-		}
-
-		return true;
 	}
 
 	std::shared_ptr<WavBufInfo>  AudioCodec::StopPlayBuf()
 	{
-		mal_device_uninit(&m_PlayFileDevice);
-		mal_decoder_uninit(&m_FileDecoder);
+		std::lock_guard<std::mutex> lock(m_AudioBufPlayMutex);
+
+		if (m_pPlayFileDevice)
+		{
+			mal_device_uninit(m_pPlayFileDevice);
+			SAFE_DELETE(m_pPlayFileDevice);
+		}
+		if (m_pFileDecoder)
+		{
+			mal_decoder_uninit(m_pFileDecoder);
+			SAFE_DELETE(m_pFileDecoder);
+		}
 
 
 		auto sp = m_spCurrentWavBufInfo;

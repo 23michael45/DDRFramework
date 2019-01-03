@@ -23,13 +23,33 @@ namespace DDRFramework
 
 		void ThreadEntry(std::string url, std::string outfile);
 		void DoPost();
+
+		void WriteFileStream(const void* ptr,int len)
+		{
+			m_OutFileStream.write((const char*)ptr, len);
+			if (m_OnReadDataFunc)
+			{
+				m_OnReadDataFunc(len);
+			}
+		}
+		void BindOnReadDataFunc(std::function<void(float)> f)
+		{
+			m_OnReadDataFunc = f;
+		}
+		void BindOnDoneFunc(std::function<void(float)> f)
+		{
+			m_OnDoneFunc = f;
+		}
 	private:
 
 		asio::io_context m_ContextIO;
 		std::shared_ptr<asio::io_context::work> m_spWork;
 
-
+		std::ofstream m_OutFileStream;
 		CURL* m_pCurl;
+
+		std::function<void(float)> m_OnReadDataFunc;
+		std::function<void(float)> m_OnDoneFunc;
 	};
 
 }
