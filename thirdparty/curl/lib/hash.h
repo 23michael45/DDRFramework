@@ -52,7 +52,7 @@ struct curl_hash {
   /* Comparator function to compare keys */
   comp_function comp_func;
   curl_hash_dtor   dtor;
-  int slots_num;
+  int slots;
   size_t size;
 };
 

@@ -49,7 +49,7 @@ namespace DDRFramework
 		bool StartPlayFile(std::string fileName);
 		
 		//return current framecount
-		int StopPlayBuf();
+		std::shared_ptr<WavBufInfo> StopPlayBuf();
 
 
 
@@ -61,6 +61,15 @@ namespace DDRFramework
 		{
 			m_OnFinishPlayWavFunc = func;
 
+		}
+		bool IsPlayingWave()
+		{
+			if (m_spCurrentWavBufInfo)
+			{
+				return true;
+			}
+			return false;
+				
 		}
 
 	private:

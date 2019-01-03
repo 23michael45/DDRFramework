@@ -237,15 +237,15 @@ namespace DDRFramework
 		return true;
 	}
 
-	int  AudioCodec::StopPlayBuf()
+	std::shared_ptr<WavBufInfo>  AudioCodec::StopPlayBuf()
 	{
 		mal_device_uninit(&m_PlayFileDevice);
 		mal_decoder_uninit(&m_FileDecoder);
 
 
+		auto sp = m_spCurrentWavBufInfo;
 		m_spCurrentWavBufInfo.reset();
-		int frame = m_spCurrentWavBufInfo->m_CurrentFrame;
-		return frame;
+		return sp;
 	}
 
 }
