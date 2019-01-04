@@ -117,17 +117,8 @@ namespace DDRFramework
 	{
 		try
 		{
-			m_Receiving = true;
-			m_spRecvEnderEndpoint = std::make_shared<asio::ip::udp::endpoint>(asio::ip::address_v4::any(), port);
-			//m_spSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext), *(m_spRecvEnderEndpoint.get());
 
-			m_spRecvSocket = std::make_shared<asio::ip::udp::socket>(m_IOContext);
-
-			m_spRecvSocket->open(m_spRecvEnderEndpoint->protocol());
-			m_spRecvSocket->set_option(asio::ip::udp::socket::reuse_address(true));
-			m_spRecvSocket->bind(*m_spRecvEnderEndpoint.get());
-
-			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStart, shared_from_this(),port));
 		}
 		catch (asio::system_error& e)
 		{
@@ -136,6 +127,8 @@ namespace DDRFramework
 			StopReceive();
 		}
 	}
+
+
 	void UdpSocketBase::StopReceive()
 	{
 		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::FreeRead, shared_from_this()));
@@ -178,10 +171,17 @@ namespace DDRFramework
 	{
 		if (m_Receiving)
 		{
-			m_spRecvSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
+			if (m_spRecvSocket)
+			{
+				m_spRecvSocket->async_receive(asio::buffer(m_ReadStreamBuf), std::bind(&UdpSocketBase::HandleRead, shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 
+			}
+			else
+			{
+				std::this_thread::sleep_for(chrono::milliseconds(1));
+				m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
 
-
+			}
 		}
 
 		/*asio::ip::udp::endpoint sender_endpoint(asio::ip::udp::v4(), 7000);
@@ -196,7 +196,24 @@ namespace DDRFramework
 
 
 	}
-	void UdpSocketBase::HandleRead(const asio::error_code& ec,int len)
+
+	void UdpSocketBase::DelayStart(int port)
+	{
+
+		m_Receiving = true;
+		m_spRecvEnderEndpoint = std::make_shared<asio::ip::udp::endpoint>(asio::ip::address_v4::any(), port);
+		//m_spSocket = std::make_shared< asio::ip::udp::socket>(m_IOContext), *(m_spRecvEnderEndpoint.get());
+
+		m_spRecvSocket = std::make_shared<asio::ip::udp::socket>(m_IOContext);
+
+		m_spRecvSocket->open(m_spRecvEnderEndpoint->protocol());
+		m_spRecvSocket->set_option(asio::ip::udp::socket::reuse_address(true));
+		m_spRecvSocket->bind(*m_spRecvEnderEndpoint.get());
+
+		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::StartRead, shared_from_this()));
+	}
+
+	void UdpSocketBase::HandleRead(const asio::error_code& ec, int len)
 	{
 		std::lock_guard<std::mutex> lock(m_UdpMutex);
 		if (m_Receiving)

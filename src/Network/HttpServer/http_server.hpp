@@ -22,7 +22,8 @@ namespace http {
 			const std::string& doc_root);
 
 		/// Run the server's io_service loop.
-		void run();
+		void start();
+		void stop();;
 
 	    private:
 		/// Perform an asynchronous accept operation.

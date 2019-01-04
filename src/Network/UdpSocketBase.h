@@ -68,6 +68,7 @@ namespace DDRFramework
 		
 		
 		void StartRead();
+		void DelayStart(int port);
 		void HandleRead(const asio::error_code& ec, int len);
 		void FreeRead();
 
