@@ -119,6 +119,14 @@ namespace DDRFramework
 		{
 			commonHeader.CopyFrom(*(spheader.get()));
 		}
+		else
+		{
+			spheader = MsgRouterManager::Instance()->FindCommonHeader(stype);
+			if (spheader)
+			{
+				commonHeader.CopyFrom(*(spheader.get()));
+			}
+		}
 
 		commonHeader.set_bodytype(stype);
 
@@ -145,8 +153,6 @@ namespace DDRFramework
 		temp_heados.flush();
 		
 		asio::streambuf temp_headbufencrypt;
-		temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
-
 		auto temp_headrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN));
 	
 		DDRFramework::Txt_Encrypt(temp_headbuf.data().data(), temp_headbuf.size(), temp_headrawbuf.data(), temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
@@ -164,8 +170,7 @@ namespace DDRFramework
 
 
 		asio::streambuf temp_bodybufencrypt;
-		temp_bodybufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
-		auto temp_bodyrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN));
+		auto temp_bodyrawbuf = asio::buffer(temp_bodybufencrypt.prepare(temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN));
 
 
 		DDRFramework::Txt_Encrypt(temp_bodybuf.data().data(), temp_bodybuf.size(), temp_bodyrawbuf.data(), temp_bodybuf.size() + PROTOBUF_ENCRYPT_LEN);
@@ -183,6 +188,68 @@ namespace DDRFramework
 
 	}
 
+
+	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen, bool needEncryptBody)
+	{
+
+		int headlen = spheader->ByteSize();
+
+		int totallen = 8 + headlen + bodylen;//+10 means Encrypt head and body 
+
+		auto spbuf = std::make_shared<asio::streambuf>();
+		std::ostream oshold(spbuf.get());
+		google::protobuf::io::OstreamOutputStream oos(&oshold);
+		google::protobuf::io::CodedOutputStream cos(&oos);
+
+
+		cos.WriteRaw(HeadSignal, sizeof(int));
+
+#ifdef PROTOBUF_ENCRYPT
+
+		cos.WriteLittleEndian32(totallen + PROTOBUF_ENCRYPT_LEN);//don't *2 cause buf has already been encrypt here
+		cos.WriteLittleEndian32(headlen + PROTOBUF_ENCRYPT_LEN);
+
+		asio::streambuf temp_headbuf;
+		std::ostream temp_heados(&temp_headbuf);
+		spheader->SerializeToOstream(&temp_heados);
+		temp_heados.flush();
+
+		asio::streambuf temp_headbufencrypt;
+		auto temp_headrawbuf = asio::buffer(temp_headbufencrypt.prepare(temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN));
+
+		DDRFramework::Txt_Encrypt(temp_headbuf.data().data(), temp_headbuf.size(), temp_headrawbuf.data(), temp_headbuf.size() + PROTOBUF_ENCRYPT_LEN);
+
+		cos.WriteRaw(temp_headrawbuf.data(), temp_headrawbuf.size());
+
+
+		if (needEncryptBody)
+		{
+
+			asio::streambuf temp_bodybufencrypt;
+			auto temp_bodyrawbuf = asio::buffer(temp_bodybufencrypt.prepare(bodylen + PROTOBUF_ENCRYPT_LEN));
+			DDRFramework::Txt_Encrypt(spbuf->data().data(), bodylen, temp_bodyrawbuf.data(), bodylen + PROTOBUF_ENCRYPT_LEN);
+
+			cos.WriteRaw(temp_bodyrawbuf.data(), temp_bodyrawbuf.size());
+
+		}
+		else
+		{
+			cos.WriteRaw(buf.data().data(), bodylen);
+		}
+
+#else
+		cos.WriteLittleEndian32(totallen);
+		cos.WriteLittleEndian32(headlen);
+
+		commonHeader.SerializeToCodedStream(&cos);
+		//spmsg->SerializeToCodedStream(&cos);
+		cos.WriteRaw(buf.data().data(), bodylen);
+#endif
+		return spbuf;
+
+	}
+
+
 	bool MessageSerializer::Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 
@@ -196,11 +263,25 @@ namespace DDRFramework
 		//DebugLog("End Pack");
 		return true;
 	}
-	bool MessageSerializer::IgnoreBody(std::shared_ptr<CommonHeader> spHeader)
+
+	bool MessageSerializer::Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen)
+	{
+		std::lock_guard<std::mutex> lock(mMutexSend);
+
+		auto spbuf = SerializeMsg(spheader, buf,bodylen);
+		mDataStreamSendQueue.push(spbuf);
+
+		//m_TotalPackLen += spbuf->size();
+		//DebugLog("total Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
+		//DebugLog("End Pack");
+		return true;
+	}
+
+	bool MessageSerializer::IgnoreBody(std::shared_ptr<CommonHeader> spHeader, asio::streambuf& buf, int bodylen)
 	{
 		if (m_spHeadRuleRouter)
 		{
-			return m_spHeadRuleRouter->IgnoreBody(m_spBaseSocketContainer, spHeader);
+			return m_spHeadRuleRouter->IgnoreBody(m_spBaseSocketContainer, spHeader,buf,bodylen);
 		}
 		return false;
 	}
@@ -304,7 +385,7 @@ namespace DDRFramework
 
 			auto temp_headrawbuf = asio::buffer(temp_headbufdecrypt.prepare(m_HeadLen - PROTOBUF_ENCRYPT_LEN));
 
-			
+
 			DDRFramework::Txt_Decrypt(buf.data().data(), m_HeadLen, temp_headrawbuf.data(), m_HeadLen - PROTOBUF_ENCRYPT_LEN);
 
 
@@ -321,37 +402,12 @@ namespace DDRFramework
 			int bodyLen = m_TotalLen - m_HeadLen - sizeof(int) * 2;
 
 
+			std::shared_ptr<ParseBodyState> sp = m_spParentStateMachine.lock()->findState<ParseBodyState>();
+			sp->SetLen(spCommonHeader, bodyLen);
+
+			m_spParentStateMachine.lock()->enterState<ParseBodyState>();
 
 
-			//do header logic
-			//if message body ignore , 
-
-			bool bIgnoreBody = false;
-			if (m_spParentObject.lock())
-			{
-				bIgnoreBody = m_spParentObject.lock()->IgnoreBody(spCommonHeader);
-			}
-
-
-			//do ignore logic
-
-			if (bIgnoreBody)
-			{
-
-				buf.consume(bodyLen);
-
-				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
-				return;
-			}
-			else
-			{
-
-				std::shared_ptr<ParseBodyState> sp = m_spParentStateMachine.lock()->findState<ParseBodyState>();
-				sp->SetLen(spCommonHeader, bodyLen);
-
-				m_spParentStateMachine.lock()->enterState<ParseBodyState>();
-
-			}
 
 		}
 		catch (std::exception& e)
@@ -362,14 +418,10 @@ namespace DDRFramework
 		}
 		catch (google::protobuf::FatalException& e)
 		{
-			DebugLog("ParseHead error %s" , e.message().c_str());
+			DebugLog("ParseHead error %s", e.message().c_str());
 			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
-			
+
 		}
-
-
-
-
 	}
 	void ParseBodyState::updateWithDeltaTime(float delta)
 	{
@@ -386,72 +438,81 @@ namespace DDRFramework
 			return;
 		}
 
+		//do header logic
+		//if message body ignore , 
 
-
-
-		//std::istream ishold(&buf);
-		//google::protobuf::io::IstreamInputStream iis(&ishold, m_BodyLen);
-		//google::protobuf::io::CodedInputStream cis(&iis);
-
-		try  
+		bool bIgnoreBody = false;
+		if (m_spParentObject.lock())
 		{
-
-
-			auto spmsg = CreateMessage(m_spCommonHeader->bodytype());
-			if (spmsg)
+			bIgnoreBody = m_spParentObject.lock()->IgnoreBody(m_spCommonHeader,buf,m_BodyLen);
+		}
+		if (bIgnoreBody)
+		{
+			buf.consume(m_BodyLen);
+			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+			return;
+		}
+		else
+		{
+			try
 			{
+
+
+				auto spmsg = CreateMessage(m_spCommonHeader->bodytype());
+				if (spmsg)
+				{
 
 #ifdef PROTOBUF_ENCRYPT
 
-				asio::streambuf temp_bodybufdecrypt;
-				temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+					asio::streambuf temp_bodybufdecrypt;
+					temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN);
 
 
-				auto temp_bodyrawbuf = asio::buffer(temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN));
+					auto temp_bodyrawbuf = asio::buffer(temp_bodybufdecrypt.prepare(m_BodyLen - PROTOBUF_ENCRYPT_LEN));
 
 
-				DDRFramework::Txt_Decrypt(buf.data().data(), m_BodyLen, temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+					DDRFramework::Txt_Decrypt(buf.data().data(), m_BodyLen, temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
 
-				spmsg->ParseFromArray(temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
+					spmsg->ParseFromArray(temp_bodyrawbuf.data(), m_BodyLen - PROTOBUF_ENCRYPT_LEN);
 
 #else
 
-				spmsg->ParseFromArray(buf.data().data(), m_BodyLen);
+					spmsg->ParseFromArray(buf.data().data(), m_BodyLen);
 #endif
-				buf.consume(m_BodyLen);
+					buf.consume(m_BodyLen);
 
 
-				//do body logic
+					//do body logic
 
-				if (m_spParentObject.lock())
-				{
-										
-					m_spParentObject.lock()->Dispatch(m_spCommonHeader, spmsg);
+					if (m_spParentObject.lock())
+					{
+
+						m_spParentObject.lock()->Dispatch(m_spCommonHeader, spmsg);
+					}
+
+
+					m_spParentStateMachine.lock()->enterState<ParsePBHState>();
 				}
+				else
+				{
 
-
-				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+					DebugLog("---------------------------------------------------------------------------------------Body Deserialize Error");
+					m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+				}
 			}
-			else
+			catch (std::exception& e)
 			{
-
-				DebugLog("---------------------------------------------------------------------------------------Body Deserialize Error");
+				DebugLog("%s---------------------------------------------------------------------------------------Body Dispatch Error", e.what());
 				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+
+			}
+			catch (google::protobuf::FatalException& e)
+			{
+				DebugLog("ParseHead error %s", e.message().c_str());
+				m_spParentStateMachine.lock()->enterState<ParsePBHState>();
+
 			}
 		}
-		catch (std::exception& e)
-		{
-			DebugLog("%s---------------------------------------------------------------------------------------Body Dispatch Error", e.what());
-			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
-
-		}
-		catch (google::protobuf::FatalException& e)
-		{
-			DebugLog("ParseHead error %s", e.message().c_str());
-			m_spParentStateMachine.lock()->enterState<ParsePBHState>();
-
-		}
-
 
 	}
 

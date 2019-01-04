@@ -213,14 +213,18 @@ namespace DDRFramework
 		return spTcpClientSessionBase;
 	}
 
-	void TcpClientBase::Send(std::shared_ptr<google::protobuf::Message> spmsg)
+	void TcpClientBase::Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		auto sp = GetConnectedSession();
 		if (sp)
 		{
-			sp->Send(spmsg);
+			sp->Send(spheader,spmsg);
 
 		}
+	}
+	void TcpClientBase::Send(std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+		Send(nullptr, spmsg);
 	}
 	void TcpClientBase::Send(std::shared_ptr<asio::streambuf> spbuf)
 	{

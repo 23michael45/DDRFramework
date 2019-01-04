@@ -137,6 +137,26 @@ namespace DDRFramework
 	{
 		Send(nullptr, spmsg);
 	}
+
+	void TcpSocketContainer::Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen)
+	{
+		if (m_bConnected)
+		{
+			//m_IOContext.post(std::bind(&MessageSerializer::Pack, m_spSerializer, spmsg));
+
+			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
+			if (m_spSerializer)
+			{
+				m_spSerializer->Pack(spheader, buf, bodylen);
+
+			}
+		}
+		else
+		{
+			DebugLog("Disconnected Send Failed");
+
+		}
+	}
 	void TcpSocketContainer::Send(std::shared_ptr<asio::streambuf> spbuf)
 	{
 		if (m_bConnected)

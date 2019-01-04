@@ -21,63 +21,24 @@ message CommonHeader
 	// type of message body, e.g., "reqLogin"
 	string bodyType = 1;
 	
+	message PassNode //any service or client that has received 
+	{
+		eCltType nodeType = 1;
+		int32 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
+	}
+	
+	repeated eCltType fromType = 2;// repeated here is to indicate its validity
+	repeated eCltType toCltType = 3;// repeated here is to indicate its validity
+	repeated PassNode passNode = 4;// repeated here is to record the route
+	
 	// flow direction of the immediate transfer
 	enum eFlowDir {
-		UNKNOWN2RS = 0;
-		RS2M = 1;
-		M2RS = 2;
-		RS2RR = 3;
-		RR2RS = 4;
-		UNKNOWN2LS = 5;
-		LS2C = 6;
-		C2LS = 7;
-		LS2LSM = 8;
-		LSM2LS = 9;
+		Forward = 0;    //req is forward ,maybe from client to any service,through center server
+		Backward = 1;   //rsp is backward, maybe from service to client,through center server
 	}
-	// repeated here is to indicate its validity (one and only one flowDirection)
-	repeated eFlowDir flowDirection = 2;
-		
-	// If bOriginal==1, it is a message from its source (not forwarded).
-	int32 bOriginal = 3;
-	enum eSrcCondition {
-		NoCond = 0;
-		Op = 1;
-	}
-	// if (srcCond==Op) && (bOriginal==1) && (immediate source is not an Op. client or Op.
-	// monitor), discard this whole frame. Otherwise okay to process.
-	eSrcCondition srcCond = 4;	
+	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
 	
-	// NoForwarding: No direct forwarding. Need to decrypt and parse the message bodies. Typical
-	//               use is in "notify*".
-	// LSMAll:       For RS, forward the message body to RR; for LS, forward the message body
-	//               to all connected LSMs. For an LSM, rspond if the message body asks for
-	//               rsponse of its functionality (assuming no conflicts among different LSMs).
-	//               Typical use is in "reqCmd".
-	// CltMonAll:    For RS, forward the message body to all connected monitors; for LS, forward
-	//               the message body to all connected clients, and RS (if connected). Typical
-	//               use is in "reqStatus", "reqAlarm", and "reqTextChat".
-	// ToOp:         For RS, forward the message body to the Op. monitor (if so); for LS, forward
-	//               the message body to the Op. client if one connected client is Op., otherwise
-	//               to the RS. Typical use is in "reqTalk" from robot_LSM.
-	// RoutingBack:  In this case, field "prevRouteAddr" should NOT be empty. The last element in
-	//               that field will be the target address (IP:port string) to forward messages,
-	//               and that last element will be removed in the new CommonHeader sent along the 
-	//               the message body. Typical use is in "rspCmd" and "rspTalk".
-	enum eForwardingType {
-		NoForwarding = 0; // simple notification, nothing to be forwarded
-		LSMAll = 1; // message body will finally be forwarded to all LSMs
-		CltMonAll = 2; // message body will finally be forwarded to all clients/monitors
-		ToOp = 3; // message body will finally be forwarded to Op. (client/monitor)
-		RoutingBack = 4; // this message will be forwarded along the previous routes
-	}
-	eForwardingType forwardType = 5;
 	
-	enum eSrcRecType {
-		NoRec = 0; // routing info not recorded
-		RecSrc = 1; // IMMEDIATE source will be appended to the previous routes in form like “192.168.1.1:234”
-	}
-	eSrcRecType recType = 6;
-	repeated string prevRouteAddr = 7; // array of previous routes
 }
 
 // +++++++++++++++++++ Common message header +++++++++++++++++++ //
@@ -110,14 +71,20 @@ message bcLSAddr
 	repeated ServerInfo LSInfos = 1;
 }
 
-
+//bit mask: 0x01 0x02 0x04 0x08 0x10 0x20 0x40 0x80...
 enum eCltType {
-	ePCClient = 0;
-	eAndroidClient = 1;
-	eLSMStreamRelay = 2;
-	eLSMSlamNavigation = 3;
-	eLSMFaceRecognition = 4;
-	eLSMThermalImaging =5;
+	eNull = 0x0;
+	ePCClient = 0x01;
+	eAndroidClient = 0x02;
+	eAllClient = 0xff;
+	eLSMStreamRelay = 0x100;
+	eLSMSlamNavigation = 0x200;
+	eLSMFaceRecognition = 0x400;
+	eLSMThermalImaging =0x800;
+	eAllLSM = 0xff00;
+	eLocalServer = 0x10000;
+	eRemoteServer = 0x20000;
+	eAllServer = 0xff0000;
 }
 // flowDirection = UNKNOWN2RS or UNKNOWN2LS
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
@@ -247,21 +214,6 @@ message reqTalkHB
 	int32 receiverTalkID = 2; // receiver's talkID
 }
 
-// flowDirection = M2RS or RS2RR or C2LS or LS2LSM or LSM2LS
-// eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
-message reqCmd
-{
-	int64 cmdID = 1;
-	string cmdMsg = 2;
-}
-
-// flowDirection = LSM2LS or RR2RS or RS2M or LS2C or LS2LSM
-// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
-message rspCmd
-{
-	int64 cmdID = 1;
-	string rspMsg = 2;
-}
 //-----------------------------------ClientCmd[[[[[
 enum eCmdRspType{
 	eSuccess = 0;				// Cmd success

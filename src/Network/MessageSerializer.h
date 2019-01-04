@@ -28,7 +28,11 @@ namespace DDRFramework
 
 		std::shared_ptr<asio::streambuf> SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
 		std::shared_ptr<asio::streambuf> SerializeMsg(std::shared_ptr<google::protobuf::Message> spmsg);
-		bool Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
+		std::shared_ptr<asio::streambuf> SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf,int bodylen,bool needEncryptBody = false);
+
+
+		bool Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
+		bool Pack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen);
 
 		std::mutex& GetRecLock()
 		{
@@ -74,7 +78,7 @@ namespace DDRFramework
 		}
 		void Dispatch(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
-		bool IgnoreBody(std::shared_ptr<DDRCommProto::CommonHeader> spHeader);
+		bool IgnoreBody(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, asio::streambuf& buf, int bodylen);
 
 		void BindBaseSocketContainer(std::shared_ptr<BaseSocketContainer> sp)
 		{
@@ -102,6 +106,7 @@ namespace DDRFramework
 
 		char m_TempRecvBuffer[TEMP_BUFFER_SIZE];
 		int m_TotalPackLen;
+
 	};
 
 	class MessageSerializerState : public State<MessageSerializer>

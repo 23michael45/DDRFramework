@@ -48,8 +48,13 @@ namespace DDRFramework
 
 		void HandleWrite(const asio::error_code& ec, size_t size);
 
+		//send proto msg
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
-		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
+		//send proto msg with head
+		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
+		//send proto msg buf with head
+		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen);
+		//send raw buf
 		void Send(std::shared_ptr<asio::streambuf> spbuf);
 		void Send(const void* psrc, int len);
 
