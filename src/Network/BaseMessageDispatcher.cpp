@@ -18,6 +18,10 @@ namespace DDRFramework
 
 	BaseMessageDispatcher::~BaseMessageDispatcher()
 	{
+		for (auto pair : m_ProcessorMap)
+		{
+			pair.second.reset();
+		}
 		DebugLog("BaseMessageDispatcher Destroy");
 	}
 
@@ -67,4 +71,16 @@ namespace DDRFramework
 
 		//}
 	}
+
+	BaseUdpMessageDispatcher::BaseUdpMessageDispatcher()
+	{
+
+	}
+
+
+	BaseUdpMessageDispatcher::~BaseUdpMessageDispatcher()
+	{
+		DebugLog("LocalClientUdpDispatcher Destroy");
+	}
+
 }

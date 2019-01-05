@@ -37,9 +37,13 @@ namespace DDRFramework
 
 	void UdpSocketBase::Stop()
 	{
-		m_Broadcasting = false;
-		m_Receiving = false;
-		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStop, shared_from_this()));
+		if (m_Broadcasting || m_Receiving)
+		{
+			m_Broadcasting = false;
+			m_Receiving = false;
+			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStop, shared_from_this()));
+
+		}
 		
 	}
 
@@ -117,7 +121,6 @@ namespace DDRFramework
 	{
 		try
 		{
-
 			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::DelayStart, shared_from_this(),port));
 		}
 		catch (asio::system_error& e)
@@ -131,8 +134,12 @@ namespace DDRFramework
 
 	void UdpSocketBase::StopReceive()
 	{
-		m_ReadWriteStrand.post(std::bind(&UdpSocketBase::FreeRead, shared_from_this()));
-		m_Receiving = false;
+		if (m_Receiving)
+		{
+			m_ReadWriteStrand.post(std::bind(&UdpSocketBase::FreeRead, shared_from_this()));
+			m_Receiving = false;
+
+		}
 	}
 	void UdpSocketBase::FreeRead()
 	{

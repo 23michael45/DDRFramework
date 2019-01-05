@@ -139,14 +139,14 @@ namespace DDRFramework
 	{
 		printf("Recording...\n");
 
+		m_pCaptureDevice = new mal_device();
 		if (mal_device_init(m_pContext, mal_device_type_capture, NULL, &m_Config, NULL, m_pCaptureDevice) != MAL_SUCCESS) {
-			mal_context_uninit(m_pContext);
-
+			mal_context_uninit(m_pContext); 
+			SAFE_DELETE(m_pCaptureDevice);
 			SAFE_DELETE(m_pContext);
 			printf("Failed to initialize capture device.\n");
 			return -2;
 		}
-		m_pCaptureDevice = new mal_device();
 		if (mal_device_start(m_pCaptureDevice) != MAL_SUCCESS) {
 			mal_device_uninit(m_pCaptureDevice);
 			mal_context_uninit(m_pContext);
@@ -169,13 +169,16 @@ namespace DDRFramework
 	bool AudioCodec::StartDevicePlay()
 	{
 		printf("Playing...\n");
+
+		m_pPlaybackDevice = new mal_device();
 		if (mal_device_init(m_pContext, mal_device_type_playback, NULL, &m_Config, NULL, m_pPlaybackDevice) != MAL_SUCCESS) {
 			mal_context_uninit(m_pContext);
+
+			SAFE_DELETE(m_pPlaybackDevice);
 			SAFE_DELETE(m_pContext);
 			printf("Failed to initialize playback device.\n");
 			return -4;
 		}
-		m_pPlaybackDevice = new mal_device();
 		if (mal_device_start(m_pPlaybackDevice) != MAL_SUCCESS) {
 			mal_device_uninit(m_pPlaybackDevice);
 			mal_context_uninit(m_pContext);

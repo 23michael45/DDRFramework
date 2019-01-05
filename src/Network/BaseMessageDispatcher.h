@@ -33,4 +33,17 @@ namespace DDRFramework
 		//std::set<std::shared_ptr<std::thread>> m_AsyncThreadSet;
 	};
 
+	class BaseUdpMessageDispatcher : public DDRFramework::BaseMessageDispatcher
+	{
+	public:
+		BaseUdpMessageDispatcher();
+		~BaseUdpMessageDispatcher();
+
+		template<class TMsg,class TProcessor>
+		void AddProcessor()
+		{
+			TMsg tmsg;
+			m_ProcessorMap[tmsg.GetTypeName()] = std::make_shared<TProcessor>(*this);
+		}
+	};
 }
