@@ -12,85 +12,102 @@ namespace DDRFramework
 {
 	XmlLoader::XmlLoader(std::string fileName) :m_FileName(fileName)
 	{
-		TiXmlDocument doc(m_FileName.c_str());
-		bool loadOkay = doc.LoadFile();
-
-		if (!loadOkay)
+		try
 		{
-			DebugLog("Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
-			//exit(1);
-		}
 
-		TiXmlNode* rootNode = 0;
-		TiXmlNode* sheetNode = 0;
-		TiXmlElement* rootElement = 0;
-		TiXmlElement* sheetElement = 0;
-		TiXmlElement* itemElement = 0;
+			TiXmlDocument doc(m_FileName.c_str());
+			bool loadOkay = doc.LoadFile();
 
-		rootNode = doc.FirstChild("Root");
-		rootElement = rootNode->ToElement();
-
-		bool firstSheet = true;
-		for (sheetNode = rootElement->FirstChild(); sheetNode != 0; sheetNode = sheetNode->NextSibling())
-		{
-			sheetElement = sheetNode->ToElement();
-
-
-			std::shared_ptr<KVMapVector> spVector = std::make_shared<KVMapVector>();
-			m_SheetMap[sheetElement->Value()] = spVector;
-			if (firstSheet)
+			if (!loadOkay)
 			{
-				m_DefaultSheetName = sheetElement->Value();
-				firstSheet = false;
+				DebugLog("Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
+				//exit(1);
 			}
 
-			std::shared_ptr<KeyVector> spColumnKeyVector = std::make_shared<KeyVector>();
-			m_ColumnKeyMap[sheetElement->Value()] = spColumnKeyVector;
-
-
-			std::shared_ptr<KeyIndexMap> spRowKeyIndexMap = std::make_shared<KeyIndexMap>();
-			m_RowKeyIndexMap[sheetElement->Value()] = spRowKeyIndexMap;
-			std::shared_ptr<IndexKeyMap> spRowIndexKeyMap = std::make_shared<IndexKeyMap>();
-			m_RowIndexKeyMap[sheetElement->Value()] = spRowIndexKeyMap;
-
-
-
+			TiXmlNode* rootNode = 0;
+			TiXmlNode* sheetNode = 0;
+			TiXmlElement* rootElement = 0;
+			TiXmlElement* sheetElement = 0;
 			TiXmlElement* itemElement = 0;
-			TiXmlNode* itemNode = 0;
 
-			bool firstElement = true;
-			int rownum = 0;
-			for (itemNode = sheetElement->FirstChild(); itemNode != 0; itemNode = itemNode->NextSibling())
+			rootNode = doc.FirstChild("Root");
+			if (!rootNode)
 			{
-				itemElement = itemNode->ToElement();
+				throw std::exception();
+			}
 
-				spRowKeyIndexMap->insert(std::make_pair(itemElement->FirstAttribute()->Value(), rownum));
-				spRowIndexKeyMap->insert(std::make_pair(rownum, itemElement->FirstAttribute()->Value()));
+			rootElement = rootNode->ToElement();
+
+			bool firstSheet = true;
+			for (sheetNode = rootElement->FirstChild(); sheetNode != 0; sheetNode = sheetNode->NextSibling())
+			{
+				sheetElement = sheetNode->ToElement();
 
 
-
-				std::shared_ptr<KVMap> spMap = std::make_shared<KVMap>();
-				TiXmlAttribute* attr;
-				for (attr = itemElement->FirstAttribute(); attr != 0; attr = attr->Next())
+				std::shared_ptr<KVMapVector> spVector = std::make_shared<KVMapVector>();
+				m_SheetMap[sheetElement->Value()] = spVector;
+				if (firstSheet)
 				{
+					m_DefaultSheetName = sheetElement->Value();
+					firstSheet = false;
+				}
 
-					spMap->insert(std::pair<std::string, std::string>(attr->Name(), attr->Value()));
+				std::shared_ptr<KeyVector> spColumnKeyVector = std::make_shared<KeyVector>();
+				m_ColumnKeyMap[sheetElement->Value()] = spColumnKeyVector;
 
-					if (firstElement)
+
+				std::shared_ptr<KeyIndexMap> spRowKeyIndexMap = std::make_shared<KeyIndexMap>();
+				m_RowKeyIndexMap[sheetElement->Value()] = spRowKeyIndexMap;
+				std::shared_ptr<IndexKeyMap> spRowIndexKeyMap = std::make_shared<IndexKeyMap>();
+				m_RowIndexKeyMap[sheetElement->Value()] = spRowIndexKeyMap;
+
+
+
+				TiXmlElement* itemElement = 0;
+				TiXmlNode* itemNode = 0;
+
+				bool firstElement = true;
+				int rownum = 0;
+				for (itemNode = sheetElement->FirstChild(); itemNode != 0; itemNode = itemNode->NextSibling())
+				{
+					itemElement = itemNode->ToElement();
+
+					spRowKeyIndexMap->insert(std::make_pair(itemElement->FirstAttribute()->Value(), rownum));
+					spRowIndexKeyMap->insert(std::make_pair(rownum, itemElement->FirstAttribute()->Value()));
+
+
+
+					std::shared_ptr<KVMap> spMap = std::make_shared<KVMap>();
+					TiXmlAttribute* attr;
+					for (attr = itemElement->FirstAttribute(); attr != 0; attr = attr->Next())
 					{
 
-						spColumnKeyVector->push_back(attr->Name());
+						spMap->insert(std::pair<std::string, std::string>(attr->Name(), attr->Value()));
+
+						if (firstElement)
+						{
+
+							spColumnKeyVector->push_back(attr->Name());
+						}
+
 					}
+					firstElement = false;
 
+					spVector->push_back(spMap);
+
+
+					rownum++;
 				}
-				firstElement = false;
 
-				spVector->push_back(spMap);
-
-
-				rownum++;
 			}
-
+		}
+		catch (std::exception& e)
+		{
+			DebugLog("XmlLoader Construct Failed : %s -- %s", fileName.c_str(), e.what());
+		}
+		catch (...)
+		{
+			DebugLog("XmlLoader Construct Failed : %s", fileName.c_str());
 		}
 	}
 
@@ -100,32 +117,66 @@ namespace DDRFramework
 
 	std::string XmlLoader::GetValue(std::string sheet, int count, std::string key)
 	{
-		std::string s = m_SheetMap[sheet]->at(count)->at(key);
-		return s;
-
+		try {
+			if (m_SheetMap.find(sheet) != m_SheetMap.end() && m_SheetMap[sheet]->size() < count && m_SheetMap[sheet]->at(count)->find(key) != m_SheetMap[sheet]->at(count)->end())
+			{
+				std::string s = m_SheetMap[sheet]->at(count)->at(key);
+				return s;
+			}
+		}
+		catch (std::exception& e)
+		{
+			DebugLog("%s", e.what());
+		}
+		return "";
 	}
 
 
 	std::string XmlLoader::GetValue(int count, std::string key)
 	{
-
-		std::string s = m_SheetMap[m_DefaultSheetName]->at(count)->at(key);
-		return s;
+		try {
+			if (m_SheetMap.find(m_DefaultSheetName) != m_SheetMap.end() && m_SheetMap[m_DefaultSheetName]->size() > count && m_SheetMap[m_DefaultSheetName]->at(count)->find(key) != m_SheetMap[m_DefaultSheetName]->at(count)->end())
+			{
+				std::string s = m_SheetMap[m_DefaultSheetName]->at(count)->at(key);
+				return s;
+			}
+		}
+		catch (std::exception& e)
+		{
+			DebugLog("%s", e.what());
+		}
+		return "";
 	}
 
 	
 	
 	std::string XmlLoader::GetValue(std::string sheet,std::string key)
 	{
-		int rowkeyindex = m_RowKeyIndexMap[sheet]->at(key);
-		std::string s = m_SheetMap[sheet]->at(rowkeyindex)->at("Value");
-		return s;
+		try
+		{
+			if (m_RowKeyIndexMap.find(sheet) != m_RowKeyIndexMap.end() && m_RowKeyIndexMap[sheet]->find(key) != m_RowKeyIndexMap[sheet]->end())
+			{
+				int rowkeyindex = m_RowKeyIndexMap[sheet]->at(key);
+
+				if (m_SheetMap.find(sheet) != m_SheetMap.end() && m_SheetMap[sheet]->size() > rowkeyindex && m_SheetMap[sheet]->at(rowkeyindex)->find("Value")  != m_SheetMap[sheet]->at(rowkeyindex)->end())
+				{
+					std::string s = m_SheetMap[sheet]->at(rowkeyindex)->at("Value");
+					return s;
+				}
+			}
+
+		}
+		catch (std::exception& e)
+		{
+			DebugLog("%s", e.what());
+		}
+		return "";
 
 	}
 
 	std::string XmlLoader::GetValue(std::string key)
 	{
-		std::string s = GetValue(m_DefaultSheetName,key);
+		std::string s = GetValue(m_DefaultSheetName, key);
 		return s;
 
 	}

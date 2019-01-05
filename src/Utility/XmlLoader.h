@@ -40,11 +40,19 @@ namespace DDRFramework
 		template <typename T> 
 		T GetValue(std::string key)
 		{
-			std::istringstream  iss(GetValue(key));
-			iss.exceptions(std::ios::failbit);
-			T t;
-			iss >> t;
-			return t;
+			try
+			{
+				std::istringstream  iss(GetValue(key));
+				iss.exceptions(std::ios::failbit);
+				T t;
+				iss >> t;
+				return t;
+			}
+			catch (std::exception& e)
+			{
+				DebugLog("%s",e.what())
+			}
+			return 0;
 		}
 
 		std::string GetRCValue(std::string sheet, std::string rowkey, std::string colkey);
