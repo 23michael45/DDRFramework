@@ -89,6 +89,8 @@ namespace DDRFramework {
 	std::string WStringToString(const std::wstring& str);
 	std::string getexepath();
 	std::string getStartWildRegex(const std::string& s);
+
+	void DisableMouseSelectConsole();
 }
 
 #endif // __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__

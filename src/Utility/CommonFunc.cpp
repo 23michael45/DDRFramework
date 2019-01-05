@@ -887,4 +887,19 @@ namespace DDRFramework {
 		return sformat;
 	}
 
+	void DisableMouseSelectConsole()
+	{
+#ifdef _WINDOWS
+		SetConsoleOutputCP(CP_UTF8);
+		//FreeConsole();
+		HWND hwnd = GetConsoleWindow();
+
+		HANDLE hStdOut = GetStdHandle(STD_INPUT_HANDLE);
+		DWORD prev_mode;
+		GetConsoleMode(hStdOut, &prev_mode);
+		SetConsoleMode(hStdOut, prev_mode & ~ENABLE_QUICK_EDIT_MODE);
+		//ShowWindow(hwnd, SW_SHOWMINNOACTIVE);
+#endif
+	}
+
 }
