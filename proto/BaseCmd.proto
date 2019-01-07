@@ -282,7 +282,7 @@ message reqCmdAudio{
 	string Audiostr = 3;		// TTS or File content 
 	int32 level = 4;			// play audio level
 }
-message rspCmdVoiceAlarm{
+message rspCmdAudio{
 	eCmdRspType type = 1;
 }
 // Cmd update config
