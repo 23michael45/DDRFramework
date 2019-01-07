@@ -76,7 +76,7 @@ static int rtsp_getsock_do(struct connectdata *conn,
  */
 static CURLcode rtsp_rtp_readwrite(struct Curl_easy *data,
                                    struct connectdata *conn,
-                                   ssize_t *nread,
+                                   curl_ssize_t *nread,
                                    bool *readmore);
 
 static CURLcode rtsp_setup_connection(struct connectdata *conn);
@@ -620,13 +620,13 @@ static CURLcode rtsp_do(struct connectdata *conn, bool *done)
 
 static CURLcode rtsp_rtp_readwrite(struct Curl_easy *data,
                                    struct connectdata *conn,
-                                   ssize_t *nread,
+                                   curl_ssize_t *nread,
                                    bool *readmore) {
   struct SingleRequest *k = &data->req;
   struct rtsp_conn *rtspc = &(conn->proto.rtspc);
 
   char *rtp; /* moving pointer to rtp data */
-  ssize_t rtp_dataleft; /* how much data left to parse in this round */
+  curl_ssize_t rtp_dataleft; /* how much data left to parse in this round */
   char *scratch;
   CURLcode result;
 

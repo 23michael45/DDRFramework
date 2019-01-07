@@ -32,7 +32,7 @@ extern const struct Curl_handler Curl_handler_ftps;
 #endif
 
 CURLcode Curl_ftpsend(struct connectdata *, const char *cmd);
-CURLcode Curl_GetFTPResponse(ssize_t *nread, struct connectdata *conn,
+CURLcode Curl_GetFTPResponse(curl_ssize_t *nread, struct connectdata *conn,
                              int *ftpcode);
 #endif /* CURL_DISABLE_FTP */
 

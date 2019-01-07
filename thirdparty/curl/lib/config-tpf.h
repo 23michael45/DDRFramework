@@ -680,7 +680,7 @@
 /* #undef size_t */
 
 /* the signed version of size_t */
-/* #undef ssize_t */
+/* #undef curl_ssize_t */
 
 /* Define to 1 if you have the getnameinfo function. */
 /* #undef HAVE_GETNAMEINFO 1 */

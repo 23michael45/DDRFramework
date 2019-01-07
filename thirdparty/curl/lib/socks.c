@@ -51,11 +51,11 @@
 int Curl_blockread_all(struct connectdata *conn, /* connection data */
                        curl_socket_t sockfd,     /* read from this socket */
                        char *buf,                /* store read data here */
-                       ssize_t buffersize,       /* max amount to read */
-                       ssize_t *n)               /* amount bytes read */
+                       curl_ssize_t buffersize,       /* max amount to read */
+                       curl_ssize_t *n)               /* amount bytes read */
 {
-  ssize_t nread;
-  ssize_t allread = 0;
+  curl_ssize_t nread;
+  curl_ssize_t allread = 0;
   int result;
   *n = 0;
   for(;;) {
@@ -219,10 +219,10 @@ CURLcode Curl_SOCKS4(const char *proxy_user,
    */
   {
     int result;
-    ssize_t actualread;
-    ssize_t written;
-    ssize_t hostnamelen = 0;
-    ssize_t packetsize = 9 +
+    curl_ssize_t actualread;
+    curl_ssize_t written;
+    curl_ssize_t hostnamelen = 0;
+    curl_ssize_t packetsize = 9 +
       strlen((char *)socksreq + 8); /* size including NUL */
 
     /* If SOCKS4a, set special invalid IP address 0.0.0.x */
@@ -232,7 +232,7 @@ CURLcode Curl_SOCKS4(const char *proxy_user,
       socksreq[6] = 0;
       socksreq[7] = 1;
       /* If still enough room in buffer, also append hostname */
-      hostnamelen = (ssize_t)strlen(hostname) + 1; /* length including NUL */
+      hostnamelen = (curl_ssize_t)strlen(hostname) + 1; /* length including NUL */
       if(packetsize + hostnamelen <= SOCKS4REQLEN)
         strcpy((char *)socksreq + packetsize, hostname);
       else
@@ -249,7 +249,7 @@ CURLcode Curl_SOCKS4(const char *proxy_user,
     }
     if(protocol4a && hostnamelen == 0) {
       /* SOCKS4a with very long hostname - send that name separately */
-      hostnamelen = (ssize_t)strlen(hostname) + 1;
+      hostnamelen = (curl_ssize_t)strlen(hostname) + 1;
       code = Curl_write_plain(conn, sock, (char *)hostname, hostnamelen,
                               &written);
       if(code || (written != hostnamelen)) {
@@ -375,8 +375,8 @@ CURLcode Curl_SOCKS5(const char *proxy_user,
 
   unsigned char socksreq[600]; /* room for large user/pw (255 max each) */
   int idx;
-  ssize_t actualread;
-  ssize_t written;
+  curl_ssize_t actualread;
+  curl_ssize_t written;
   int result;
   CURLcode code;
   curl_socket_t sock = conn->sock[sockindex];
@@ -385,7 +385,7 @@ CURLcode Curl_SOCKS5(const char *proxy_user,
   bool socks5_resolve_local =
     (conn->socks_proxy.proxytype == CURLPROXY_SOCKS5) ? TRUE : FALSE;
   const size_t hostname_len = strlen(hostname);
-  ssize_t len = 0;
+  curl_ssize_t len = 0;
   const unsigned long auth = data->set.socks5auth;
   bool allow_gssapi = FALSE;
 

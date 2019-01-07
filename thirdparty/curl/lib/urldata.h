@@ -100,14 +100,14 @@
 #include "splay.h"
 
 /* return the count of bytes sent, or -1 on error */
-typedef ssize_t (Curl_send)(struct connectdata *conn, /* connection data */
+typedef curl_ssize_t (Curl_send)(struct connectdata *conn, /* connection data */
                             int sockindex,            /* socketindex */
                             const void *buf,          /* data to write */
                             size_t len,               /* max amount to write */
                             CURLcode *err);           /* error to return */
 
 /* return the count of bytes read, or -1 on error */
-typedef ssize_t (Curl_recv)(struct connectdata *conn, /* connection data */
+typedef curl_ssize_t (Curl_recv)(struct connectdata *conn, /* connection data */
                             int sockindex,            /* socketindex */
                             char *buf,                /* store data here */
                             size_t len,               /* max amount to read */
@@ -599,7 +599,7 @@ struct SingleRequest {
 
   /* 'upload_present' is used to keep a byte counter of how much data there is
      still left in the buffer, aimed for upload. */
-  ssize_t upload_present;
+  curl_ssize_t upload_present;
 
    /* 'upload_fromhere' is used as a read-pointer when we uploaded parts of a
       buffer, so the next read should read from where this pointer points to,
@@ -688,7 +688,7 @@ struct Curl_handler {
   /* If used, this function gets called from transfer.c:readwrite_data() to
      allow the protocol to do extra reads/writes */
   CURLcode (*readwrite)(struct Curl_easy *data, struct connectdata *conn,
-                        ssize_t *nread, bool *readmore);
+                        curl_ssize_t *nread, bool *readmore);
 
   /* This function can perform various checks on the connection. See
      CONNCHECK_* for more information about the checks that can be performed,

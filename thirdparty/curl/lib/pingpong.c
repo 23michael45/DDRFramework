@@ -161,7 +161,7 @@ CURLcode Curl_pp_vsendf(struct pingpong *pp,
                         const char *fmt,
                         va_list args)
 {
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   size_t write_len;
   char *fmt_crlf;
   char *s;
@@ -223,7 +223,7 @@ CURLcode Curl_pp_vsendf(struct pingpong *pp,
   if(conn->data->set.verbose)
     Curl_debug(conn->data, CURLINFO_HEADER_OUT, s, (size_t)bytes_written);
 
-  if(bytes_written != (ssize_t)write_len) {
+  if(bytes_written != (curl_ssize_t)write_len) {
     /* the whole chunk was not sent, keep it around and adjust sizes */
     pp->sendthis = s;
     pp->sendsize = write_len;
@@ -274,9 +274,9 @@ CURLcode Curl_pp_readresp(curl_socket_t sockfd,
                           int *code, /* return the server code if done */
                           size_t *size) /* size of the response */
 {
-  ssize_t perline; /* count bytes per line */
+  curl_ssize_t perline; /* count bytes per line */
   bool keepon = TRUE;
-  ssize_t gotbytes;
+  curl_ssize_t gotbytes;
   char *ptr;
   struct connectdata *conn = pp->conn;
   struct Curl_easy *data = conn->data;
@@ -289,7 +289,7 @@ CURLcode Curl_pp_readresp(curl_socket_t sockfd,
   ptr = buf + pp->nread_resp;
 
   /* number of bytes in the current line, so far */
-  perline = (ssize_t)(ptr-pp->linestart_resp);
+  perline = (curl_ssize_t)(ptr-pp->linestart_resp);
 
   while((pp->nread_resp < (size_t)data->set.buffer_size) &&
         (keepon && !result)) {
@@ -298,7 +298,7 @@ CURLcode Curl_pp_readresp(curl_socket_t sockfd,
       /* we had data in the "cache", copy that instead of doing an actual
        * read
        *
-       * pp->cache_size is cast to ssize_t here.  This should be safe, because
+       * pp->cache_size is cast to curl_ssize_t here.  This should be safe, because
        * it would have been populated with something of size int to begin
        * with, even though its datatype may be larger than an int.
        */
@@ -307,7 +307,7 @@ CURLcode Curl_pp_readresp(curl_socket_t sockfd,
         return CURLE_RECV_ERROR;
       }
       memcpy(ptr, pp->cache, pp->cache_size);
-      gotbytes = (ssize_t)pp->cache_size;
+      gotbytes = (curl_ssize_t)pp->cache_size;
       free(pp->cache);    /* free the cache */
       pp->cache = NULL;   /* clear the pointer */
       pp->cache_size = 0; /* zero the size just in case */
@@ -350,8 +350,8 @@ CURLcode Curl_pp_readresp(curl_socket_t sockfd,
       /* we got a whole chunk of data, which can be anything from one
        * byte to a set of lines and possible just a piece of the last
        * line */
-      ssize_t i;
-      ssize_t clipamount = 0;
+      curl_ssize_t i;
+      curl_ssize_t clipamount = 0;
       bool restart = FALSE;
 
       data->req.headerbytecount += (long)gotbytes;
@@ -485,14 +485,14 @@ CURLcode Curl_pp_flushsend(struct pingpong *pp)
 {
   /* we have a piece of a command still left to send */
   struct connectdata *conn = pp->conn;
-  ssize_t written;
+  curl_ssize_t written;
   curl_socket_t sock = conn->sock[FIRSTSOCKET];
   CURLcode result = Curl_write(conn, sock, pp->sendthis + pp->sendsize -
                                pp->sendleft, pp->sendleft, &written);
   if(result)
     return result;
 
-  if(written != (ssize_t)pp->sendleft) {
+  if(written != (curl_ssize_t)pp->sendleft) {
     /* only a fraction was sent */
     pp->sendleft -= written;
   }

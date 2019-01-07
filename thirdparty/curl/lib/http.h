@@ -84,7 +84,7 @@ CURLcode Curl_http_setup_conn(struct connectdata *conn);
 /* The following functions are defined in http_chunks.c */
 void Curl_httpchunk_init(struct connectdata *conn);
 CHUNKcode Curl_httpchunk_read(struct connectdata *conn, char *datap,
-                              ssize_t length, ssize_t *wrote);
+                              curl_ssize_t length, curl_ssize_t *wrote);
 
 /* These functions are in http.c */
 void Curl_http_auth_stage(struct Curl_easy *data, int stage);
@@ -232,7 +232,7 @@ struct http_conn {
 
 CURLcode Curl_http_readwrite_headers(struct Curl_easy *data,
                                      struct connectdata *conn,
-                                     ssize_t *nread,
+                                     curl_ssize_t *nread,
                                      bool *stop_reading);
 
 /**

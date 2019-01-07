@@ -704,7 +704,7 @@ static void close_one(struct ssl_connect_data *connssl,
 }
 
 
-static ssize_t gskit_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t gskit_send(struct connectdata *conn, int sockindex,
                            const void *mem, size_t len, CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
@@ -725,11 +725,11 @@ static ssize_t gskit_send(struct connectdata *conn, int sockindex,
     *curlcode = cc;
     written = -1;
   }
-  return (ssize_t) written; /* number of bytes */
+  return (curl_ssize_t) written; /* number of bytes */
 }
 
 
-static ssize_t gskit_recv(struct connectdata *conn, int num, char *buf,
+static curl_ssize_t gskit_recv(struct connectdata *conn, int num, char *buf,
                            size_t buffersize, CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[num];
@@ -754,7 +754,7 @@ static ssize_t gskit_recv(struct connectdata *conn, int num, char *buf,
     nread = -1;
     break;
   }
-  return (ssize_t) nread;
+  return (curl_ssize_t) nread;
 }
 
 static CURLcode
@@ -1262,7 +1262,7 @@ static int Curl_gskit_shutdown(struct connectdata *conn, int sockindex)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
   struct Curl_easy *data = conn->data;
-  ssize_t nread;
+  curl_ssize_t nread;
   int what;
   int rc;
   char buf[120];

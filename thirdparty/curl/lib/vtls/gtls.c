@@ -154,10 +154,10 @@ static int gtls_mapped_sockerrno(void)
 }
 #endif
 
-static ssize_t Curl_gtls_push(void *s, const void *buf, size_t len)
+static curl_ssize_t Curl_gtls_push(void *s, const void *buf, size_t len)
 {
   curl_socket_t sock = *(curl_socket_t *)s;
-  ssize_t ret = swrite(sock, buf, len);
+  curl_ssize_t ret = swrite(sock, buf, len);
 #if defined(USE_WINSOCK) && !defined(GNUTLS_MAPS_WINSOCK_ERRORS)
   if(ret < 0)
     gnutls_transport_set_global_errno(gtls_mapped_sockerrno());
@@ -165,10 +165,10 @@ static ssize_t Curl_gtls_push(void *s, const void *buf, size_t len)
   return ret;
 }
 
-static ssize_t Curl_gtls_pull(void *s, void *buf, size_t len)
+static curl_ssize_t Curl_gtls_pull(void *s, void *buf, size_t len)
 {
   curl_socket_t sock = *(curl_socket_t *)s;
-  ssize_t ret = sread(sock, buf, len);
+  curl_ssize_t ret = sread(sock, buf, len);
 #if defined(USE_WINSOCK) && !defined(GNUTLS_MAPS_WINSOCK_ERRORS)
   if(ret < 0)
     gnutls_transport_set_global_errno(gtls_mapped_sockerrno());
@@ -176,12 +176,12 @@ static ssize_t Curl_gtls_pull(void *s, void *buf, size_t len)
   return ret;
 }
 
-static ssize_t Curl_gtls_push_ssl(void *s, const void *buf, size_t len)
+static curl_ssize_t Curl_gtls_push_ssl(void *s, const void *buf, size_t len)
 {
   return gnutls_record_send((gnutls_session_t) s, buf, len);
 }
 
-static ssize_t Curl_gtls_pull_ssl(void *s, void *buf, size_t len)
+static curl_ssize_t Curl_gtls_pull_ssl(void *s, void *buf, size_t len)
 {
   return gnutls_record_recv((gnutls_session_t) s, buf, len);
 }
@@ -1584,14 +1584,14 @@ static bool Curl_gtls_data_pending(const struct connectdata *conn,
   return res;
 }
 
-static ssize_t gtls_send(struct connectdata *conn,
+static curl_ssize_t gtls_send(struct connectdata *conn,
                          int sockindex,
                          const void *mem,
                          size_t len,
                          CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
-  ssize_t rc = gnutls_record_send(BACKEND->session, mem, len);
+  curl_ssize_t rc = gnutls_record_send(BACKEND->session, mem, len);
 
   if(rc < 0) {
     *curlcode = (rc == GNUTLS_E_AGAIN)
@@ -1636,7 +1636,7 @@ static void Curl_gtls_close(struct connectdata *conn, int sockindex)
 static int Curl_gtls_shutdown(struct connectdata *conn, int sockindex)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
-  ssize_t result;
+  curl_ssize_t result;
   int retval = 0;
   struct Curl_easy *data = conn->data;
   bool done = FALSE;
@@ -1703,14 +1703,14 @@ static int Curl_gtls_shutdown(struct connectdata *conn, int sockindex)
   return retval;
 }
 
-static ssize_t gtls_recv(struct connectdata *conn, /* connection data */
+static curl_ssize_t gtls_recv(struct connectdata *conn, /* connection data */
                          int num,                  /* socketindex */
                          char *buf,                /* store read data here */
                          size_t buffersize,        /* max amount to read */
                          CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[num];
-  ssize_t ret;
+  curl_ssize_t ret;
 
   ret = gnutls_record_recv(BACKEND->session, buf, buffersize);
   if((ret == GNUTLS_E_AGAIN) || (ret == GNUTLS_E_INTERRUPTED)) {

@@ -441,7 +441,7 @@ static CURLcode ldap_done(struct connectdata *conn, CURLcode res,
   return CURLE_OK;
 }
 
-static ssize_t ldap_recv(struct connectdata *conn, int sockindex, char *buf,
+static curl_ssize_t ldap_recv(struct connectdata *conn, int sockindex, char *buf,
                          size_t len, CURLcode *err)
 {
   ldapconninfo *li = conn->proto.generic;

@@ -319,12 +319,12 @@
 /* Define as the return type of signal handlers (int or void).  */
 #define RETSIGTYPE void
 
-/* Define ssize_t if it is not an available 'typedefed' type */
+/* Define curl_ssize_t if it is not an available 'typedefed' type */
 #if (defined(__WATCOMC__) && (__WATCOMC__ >= 1240)) || defined(__POCC__)
 #elif defined(_WIN64)
-#define ssize_t __int64
+#define curl_ssize_t __int64
 #else
-#define ssize_t int
+#define curl_ssize_t int
 #endif
 
 /* ---------------------------------------------------------------- */

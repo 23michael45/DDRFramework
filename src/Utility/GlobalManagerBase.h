@@ -17,6 +17,7 @@ namespace DDRFramework
 		std::string GetRobotID();
 
 		LocalizationLoader& GetLocalizationConfig();
+		XmlLoader& GetGlobalConfig();
 
 	protected:
 

@@ -105,8 +105,8 @@ CURLcode Curl_SOCKS5_gssapi_negotiate(int sockindex,
   struct Curl_easy *data = conn->data;
   curl_socket_t sock = conn->sock[sockindex];
   CURLcode code;
-  ssize_t actualread;
-  ssize_t written;
+  curl_ssize_t actualread;
+  curl_ssize_t written;
   int result;
   OM_uint32 gss_major_status, gss_minor_status, gss_status;
   OM_uint32 gss_ret_flags;
@@ -212,7 +212,7 @@ CURLcode Curl_SOCKS5_gssapi_negotiate(int sockindex,
       code = Curl_write_plain(conn, sock, (char *)gss_send_token.value,
                               gss_send_token.length, &written);
 
-      if(code || ((ssize_t)gss_send_token.length != written)) {
+      if(code || ((curl_ssize_t)gss_send_token.length != written)) {
         failf(data, "Failed to send GSS-API authentication token.");
         gss_release_name(&gss_status, &server);
         gss_release_buffer(&gss_status, &gss_recv_token);
@@ -425,7 +425,7 @@ CURLcode Curl_SOCKS5_gssapi_negotiate(int sockindex,
   else {
     code = Curl_write_plain(conn, sock, (char *)gss_w_token.value,
                             gss_w_token.length, &written);
-    if(code || ((ssize_t)gss_w_token.length != written)) {
+    if(code || ((curl_ssize_t)gss_w_token.length != written)) {
       failf(data, "Failed to send GSS-API encryption type.");
       gss_release_buffer(&gss_status, &gss_w_token);
       gss_delete_sec_context(&gss_status, &gss_context, NULL);

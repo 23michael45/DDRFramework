@@ -1046,4 +1046,4 @@
 #undef size_t
 
 /* the signed version of size_t */
-#undef ssize_t
+#undef curl_ssize_t

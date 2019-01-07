@@ -148,7 +148,7 @@ krb5_auth(void *app_data, struct connectdata *conn)
   int ret = AUTH_OK;
   char *p;
   const char *host = conn->host.name;
-  ssize_t nread;
+  curl_ssize_t nread;
   curl_socklen_t l = sizeof(conn->local_addr);
   struct Curl_easy *data = conn->data;
   CURLcode result;

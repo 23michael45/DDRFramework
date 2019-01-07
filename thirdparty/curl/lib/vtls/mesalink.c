@@ -343,7 +343,7 @@ mesalink_connect_step3(struct connectdata *conn, int sockindex)
   return result;
 }
 
-static ssize_t
+static curl_ssize_t
 mesalink_send(struct connectdata *conn, int sockindex, const void *mem,
               size_t len, CURLcode *curlcode)
 {
@@ -388,7 +388,7 @@ Curl_mesalink_close(struct connectdata *conn, int sockindex)
   }
 }
 
-static ssize_t
+static curl_ssize_t
 mesalink_recv(struct connectdata *conn, int num, char *buf, size_t buffersize,
               CURLcode *curlcode)
 {

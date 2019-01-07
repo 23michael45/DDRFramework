@@ -687,7 +687,7 @@ cyassl_connect_step3(struct connectdata *conn,
 }
 
 
-static ssize_t cyassl_send(struct connectdata *conn,
+static curl_ssize_t cyassl_send(struct connectdata *conn,
                            int sockindex,
                            const void *mem,
                            size_t len,
@@ -733,7 +733,7 @@ static void Curl_cyassl_close(struct connectdata *conn, int sockindex)
   }
 }
 
-static ssize_t cyassl_recv(struct connectdata *conn,
+static curl_ssize_t cyassl_recv(struct connectdata *conn,
                            int num,
                            char *buf,
                            size_t buffersize,

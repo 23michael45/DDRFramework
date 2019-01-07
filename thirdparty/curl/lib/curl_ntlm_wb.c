@@ -262,7 +262,7 @@ static CURLcode ntlm_wb_response(struct connectdata *conn,
     return CURLE_OUT_OF_MEMORY;
 
   while(len_in > 0) {
-    ssize_t written = swrite(conn->ntlm_auth_hlpr_socket, input, len_in);
+    curl_ssize_t written = swrite(conn->ntlm_auth_hlpr_socket, input, len_in);
     if(written == -1) {
       /* Interrupted by a signal, retry it */
       if(errno == EINTR)
@@ -275,7 +275,7 @@ static CURLcode ntlm_wb_response(struct connectdata *conn,
   }
   /* Read one line */
   while(1) {
-    ssize_t size;
+    curl_ssize_t size;
     char *newbuf;
 
     size = sread(conn->ntlm_auth_hlpr_socket, buf + len_out, NTLM_BUFSIZE);

@@ -60,28 +60,28 @@ bool Curl_recv_has_postponed_data(struct connectdata *conn, int sockindex);
 CURLcode Curl_read_plain(curl_socket_t sockfd,
                          char *buf,
                          size_t bytesfromsocket,
-                         ssize_t *n);
+                         curl_ssize_t *n);
 
-ssize_t Curl_recv_plain(struct connectdata *conn, int num, char *buf,
+curl_ssize_t Curl_recv_plain(struct connectdata *conn, int num, char *buf,
                         size_t len, CURLcode *code);
-ssize_t Curl_send_plain(struct connectdata *conn, int num,
+curl_ssize_t Curl_send_plain(struct connectdata *conn, int num,
                         const void *mem, size_t len, CURLcode *code);
 
 /* internal read-function, does plain socket, SSL and krb4 */
 CURLcode Curl_read(struct connectdata *conn, curl_socket_t sockfd,
                    char *buf, size_t buffersize,
-                   ssize_t *n);
+                   curl_ssize_t *n);
 /* internal write-function, does plain socket, SSL, SCP, SFTP and krb4 */
 CURLcode Curl_write(struct connectdata *conn,
                     curl_socket_t sockfd,
                     const void *mem, size_t len,
-                    ssize_t *written);
+                    curl_ssize_t *written);
 
 /* internal write-function, does plain sockets ONLY */
 CURLcode Curl_write_plain(struct connectdata *conn,
                           curl_socket_t sockfd,
                           const void *mem, size_t len,
-                          ssize_t *written);
+                          curl_ssize_t *written);
 
 /* the function used to output verbose information */
 int Curl_debug(struct Curl_easy *data, curl_infotype type,

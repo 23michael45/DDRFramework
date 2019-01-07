@@ -108,8 +108,8 @@ void Curl_httpchunk_init(struct connectdata *conn)
  */
 CHUNKcode Curl_httpchunk_read(struct connectdata *conn,
                               char *datap,
-                              ssize_t datalen,
-                              ssize_t *wrotep)
+                              curl_ssize_t datalen,
+                              curl_ssize_t *wrotep)
 {
   CURLcode result = CURLE_OK;
   struct Curl_easy *data = conn->data;

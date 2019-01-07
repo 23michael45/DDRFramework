@@ -646,7 +646,7 @@ polarssl_connect_step3(struct connectdata *conn,
   return CURLE_OK;
 }
 
-static ssize_t polarssl_send(struct connectdata *conn,
+static curl_ssize_t polarssl_send(struct connectdata *conn,
                              int sockindex,
                              const void *mem,
                              size_t len,
@@ -677,7 +677,7 @@ static void Curl_polarssl_close(struct connectdata *conn, int sockindex)
   ssl_free(&BACKEND->ssl);
 }
 
-static ssize_t polarssl_recv(struct connectdata *conn,
+static curl_ssize_t polarssl_recv(struct connectdata *conn,
                              int num,
                              char *buf,
                              size_t buffersize,
@@ -685,7 +685,7 @@ static ssize_t polarssl_recv(struct connectdata *conn,
 {
   struct ssl_connect_data *connssl = &conn->ssl[num];
   int ret = -1;
-  ssize_t len = -1;
+  curl_ssize_t len = -1;
 
   memset(buf, 0, buffersize);
   ret = ssl_read(&BACKEND->ssl, (unsigned char *)buf, buffersize);

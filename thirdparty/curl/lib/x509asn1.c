@@ -249,7 +249,7 @@ static const char *int2str(const char *beg, const char *end)
   return curl_maprintf("%s%lx", val >= 10? "0x": "", val);
 }
 
-static ssize_t
+static curl_ssize_t
 utf8asn1str(char **to, int type, const char *from, const char *end)
 {
   size_t inlength = end - from;
@@ -588,7 +588,7 @@ static const char *ASN1tostr(curl_asn1Element *elem, int type)
   return (const char *) NULL;   /* Unsupported. */
 }
 
-static ssize_t encodeDN(char *buf, size_t n, curl_asn1Element *dn)
+static curl_ssize_t encodeDN(char *buf, size_t n, curl_asn1Element *dn)
 {
   curl_asn1Element rdn;
   curl_asn1Element atv;
@@ -664,7 +664,7 @@ static ssize_t encodeDN(char *buf, size_t n, curl_asn1Element *dn)
 static const char *DNtostr(curl_asn1Element *dn)
 {
   char *buf = (char *) NULL;
-  ssize_t n = encodeDN(buf, 0, dn);
+  curl_ssize_t n = encodeDN(buf, 0, dn);
 
   /* Convert an ASN.1 distinguished name into a printable string.
      Return the dynamically allocated string, or NULL if an error occurs. */
@@ -1129,7 +1129,7 @@ CURLcode Curl_verifyhost(struct connectdata *conn,
   char *dnsname;
   int matched = -1;
   size_t addrlen = (size_t) -1;
-  ssize_t len;
+  curl_ssize_t len;
   const char * const hostname = SSL_IS_PROXY()? conn->http_proxy.host.name:
                                                 conn->host.name;
   const char * const dispname = SSL_IS_PROXY()?

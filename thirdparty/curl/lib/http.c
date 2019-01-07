@@ -1125,7 +1125,7 @@ CURLcode Curl_add_buffer_send(Curl_send_buffer **inp,
                               int socketindex)
 
 {
-  ssize_t amount;
+  curl_ssize_t amount;
   CURLcode result;
   char *ptr;
   size_t size;
@@ -1212,7 +1212,7 @@ CURLcode Curl_add_buffer_send(Curl_send_buffer **inp,
     }
 
     /* 'amount' can never be a very large value here so typecasting it so a
-       signed 31 bit value should not cause problems even if ssize_t is
+       signed 31 bit value should not cause problems even if curl_ssize_t is
        64bit */
     *bytes_written += (long)amount;
 
@@ -3139,12 +3139,12 @@ static void print_http_error(struct Curl_easy *data)
  */
 CURLcode Curl_http_readwrite_headers(struct Curl_easy *data,
                                        struct connectdata *conn,
-                                       ssize_t *nread,
+                                       curl_ssize_t *nread,
                                        bool *stop_reading)
 {
   CURLcode result;
   struct SingleRequest *k = &data->req;
-  ssize_t onread = *nread;
+  curl_ssize_t onread = *nread;
   char *ostr = k->str;
 
   /* header line within buffer loop */
@@ -3184,7 +3184,7 @@ CURLcode Curl_http_readwrite_headers(struct Curl_easy *data,
 
     /* decrease the size of the remaining (supposed) header line */
     rest_length = (k->end_ptr - k->str) + 1;
-    *nread -= (ssize_t)rest_length;
+    *nread -= (curl_ssize_t)rest_length;
 
     k->str = k->end_ptr + 1; /* move past new line */
 

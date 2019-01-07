@@ -86,6 +86,6 @@ extern const struct Curl_handler Curl_handler_smtps;
 #define SMTP_EOB_REPL "\x0d\x0a\x2e\x2e"
 #define SMTP_EOB_REPL_LEN 4
 
-CURLcode Curl_smtp_escape_eob(struct connectdata *conn, const ssize_t nread);
+CURLcode Curl_smtp_escape_eob(struct connectdata *conn, const curl_ssize_t nread);
 
 #endif /* HEADER_CURL_SMTP_H */

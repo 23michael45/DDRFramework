@@ -73,8 +73,8 @@
 /* Define if struct sockaddr_in6 has the sin6_scope_id member */
 #define HAVE_SOCKADDR_IN6_SIN6_SCOPE_ID 1
 
-/* Define this to 'int' if ssize_t is not an available typedefed type */
-#undef ssize_t
+/* Define this to 'int' if curl_ssize_t is not an available typedefed type */
+#undef curl_ssize_t
 
 /* Define this as a suitable file to read random data from */
 #undef RANDOM_FILE

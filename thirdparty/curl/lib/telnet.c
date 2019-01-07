@@ -96,7 +96,7 @@ static CURLcode check_wsock2(struct Curl_easy *data);
 static
 CURLcode telrcv(struct connectdata *,
                 const unsigned char *inbuf, /* Data received from socket */
-                ssize_t count);             /* Number of bytes received */
+                curl_ssize_t count);             /* Number of bytes received */
 
 #ifndef CURL_DISABLE_VERBOSE_STRINGS
 static void printoption(struct Curl_easy *data,
@@ -121,7 +121,7 @@ static CURLcode telnet_do(struct connectdata *conn, bool *done);
 static CURLcode telnet_done(struct connectdata *conn,
                                  CURLcode, bool premature);
 static CURLcode send_telnet_data(struct connectdata *conn,
-                                 char *buffer, ssize_t nread);
+                                 char *buffer, curl_ssize_t nread);
 
 /* For negotiation compliant to RFC 1143 */
 #define CURL_NO          0
@@ -346,7 +346,7 @@ static void printoption(struct Curl_easy *data,
 static void send_negotiation(struct connectdata *conn, int cmd, int option)
 {
    unsigned char buf[3];
-   ssize_t bytes_written;
+   curl_ssize_t bytes_written;
    struct Curl_easy *data = conn->data;
 
    buf[0] = CURL_IAC;
@@ -923,7 +923,7 @@ static void suboption(struct connectdata *conn)
 {
   struct curl_slist *v;
   unsigned char temp[2048];
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   size_t len;
   int err;
   char varname[128] = "";
@@ -998,7 +998,7 @@ static void suboption(struct connectdata *conn)
 
 static void sendsuboption(struct connectdata *conn, int option)
 {
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   int err;
   unsigned short x, y;
   unsigned char *uc1, *uc2;
@@ -1055,7 +1055,7 @@ static void sendsuboption(struct connectdata *conn, int option)
 static
 CURLcode telrcv(struct connectdata *conn,
                 const unsigned char *inbuf, /* Data received from socket */
-                ssize_t count)              /* Number of bytes received */
+                curl_ssize_t count)              /* Number of bytes received */
 {
   unsigned char c;
   CURLcode result;
@@ -1217,12 +1217,12 @@ CURLcode telrcv(struct connectdata *conn,
 
 /* Escape and send a telnet data block */
 static CURLcode send_telnet_data(struct connectdata *conn,
-                                 char *buffer, ssize_t nread)
+                                 char *buffer, curl_ssize_t nread)
 {
-  ssize_t escapes, i, outlen;
+  curl_ssize_t escapes, i, outlen;
   unsigned char *outbuf = NULL;
   CURLcode result = CURLE_OK;
-  ssize_t bytes_written, total_written;
+  curl_ssize_t bytes_written, total_written;
 
   /* Determine size of new buffer after escaping */
   escapes = 0;
@@ -1234,7 +1234,7 @@ static CURLcode send_telnet_data(struct connectdata *conn,
   if(outlen == nread)
     outbuf = (unsigned char *)buffer;
   else {
-    ssize_t j;
+    curl_ssize_t j;
     outbuf = malloc(nread + escapes + 1);
     if(!outbuf)
       return CURLE_OUT_OF_MEMORY;
@@ -1321,7 +1321,7 @@ static CURLcode telnet_do(struct connectdata *conn, bool *done)
   curl_off_t total_dl = 0;
   curl_off_t total_ul = 0;
 #endif
-  ssize_t nread;
+  curl_ssize_t nread;
   struct curltime now;
   bool keepon = TRUE;
   char *buf = data->state.buffer;

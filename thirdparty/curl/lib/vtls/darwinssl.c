@@ -203,7 +203,7 @@ static OSStatus SocketRead(SSLConnectionRef connection,
   int sock = BACKEND->ssl_sockfd;
   OSStatus rtn = noErr;
   size_t bytesRead;
-  ssize_t rrtn;
+  curl_ssize_t rrtn;
   int theErr;
 
   *dataLength = 0;
@@ -261,7 +261,7 @@ static OSStatus SocketWrite(SSLConnectionRef connection,
   /*int sock = *(int *)connection;*/
   struct ssl_connect_data *connssl = (struct ssl_connect_data *)connection;
   int sock = BACKEND->ssl_sockfd;
-  ssize_t length;
+  curl_ssize_t length;
   size_t dataLen = *dataLength;
   const UInt8 *dataPtr = (UInt8 *)data;
   OSStatus ortn;
@@ -2028,7 +2028,7 @@ static long pem_to_der(const char *in, unsigned char **out, size_t *outlen)
 static int read_cert(const char *file, unsigned char **out, size_t *outlen)
 {
   int fd;
-  ssize_t n, len = 0, cap = 512;
+  curl_ssize_t n, len = 0, cap = 512;
   unsigned char buf[512], *data;
 
   fd = open(file, 0);
@@ -2953,7 +2953,7 @@ static int Curl_darwinssl_shutdown(struct connectdata *conn, int sockindex)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
   struct Curl_easy *data = conn->data;
-  ssize_t nread;
+  curl_ssize_t nread;
   int what;
   int rc;
   char buf[120];
@@ -3107,7 +3107,7 @@ static bool Curl_darwinssl_false_start(void)
   return FALSE;
 }
 
-static ssize_t darwinssl_send(struct connectdata *conn,
+static curl_ssize_t darwinssl_send(struct connectdata *conn,
                               int sockindex,
                               const void *mem,
                               size_t len,
@@ -3170,10 +3170,10 @@ static ssize_t darwinssl_send(struct connectdata *conn,
       }
     }
   }
-  return (ssize_t)processed;
+  return (curl_ssize_t)processed;
 }
 
-static ssize_t darwinssl_recv(struct connectdata *conn,
+static curl_ssize_t darwinssl_recv(struct connectdata *conn,
                               int num,
                               char *buf,
                               size_t buffersize,
@@ -3188,7 +3188,7 @@ static ssize_t darwinssl_recv(struct connectdata *conn,
     switch(err) {
       case errSSLWouldBlock:  /* return how much we read (if anything) */
         if(processed)
-          return (ssize_t)processed;
+          return (curl_ssize_t)processed;
         *curlcode = CURLE_AGAIN;
         return -1L;
         break;
@@ -3210,7 +3210,7 @@ static ssize_t darwinssl_recv(struct connectdata *conn,
         break;
     }
   }
-  return (ssize_t)processed;
+  return (curl_ssize_t)processed;
 }
 
 static void *Curl_darwinssl_get_internals(struct ssl_connect_data *connssl,

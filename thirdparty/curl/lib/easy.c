@@ -1141,7 +1141,7 @@ CURLcode curl_easy_recv(struct Curl_easy *data, void *buffer, size_t buflen,
 {
   curl_socket_t sfd;
   CURLcode result;
-  ssize_t n1;
+  curl_ssize_t n1;
   struct connectdata *c;
 
   if(Curl_is_in_callback(data))
@@ -1171,7 +1171,7 @@ CURLcode curl_easy_send(struct Curl_easy *data, const void *buffer,
 {
   curl_socket_t sfd;
   CURLcode result;
-  ssize_t n1;
+  curl_ssize_t n1;
   struct connectdata *c = NULL;
 
   if(Curl_is_in_callback(data))

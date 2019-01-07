@@ -81,7 +81,7 @@ static CURLcode gopher_do(struct connectdata *conn, bool *done)
   char *path = data->state.up.path;
   char *sel = NULL;
   char *sel_org = NULL;
-  ssize_t amount, k;
+  curl_ssize_t amount, k;
   size_t len;
 
   *done = TRUE; /* unconditionally */

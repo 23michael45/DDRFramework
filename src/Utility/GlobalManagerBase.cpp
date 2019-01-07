@@ -20,6 +20,11 @@ namespace DDRFramework
 		return m_LocalizationConfig;
 	}
 
+	DDRFramework::XmlLoader& GlobalManagerBase::GetGlobalConfig()
+	{
+		return m_GlobalConfig;
+	}
+
 	GlobalManagerClientBase::GlobalManagerClientBase()
 	{
 

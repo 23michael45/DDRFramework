@@ -40,7 +40,7 @@ CURLcode Curl_rtsp_parseheader(struct connectdata *conn, char *header);
  */
 struct rtsp_conn {
   char *rtp_buf;
-  ssize_t rtp_bufsize;
+  curl_ssize_t rtp_bufsize;
   int rtp_channel;
 };
 

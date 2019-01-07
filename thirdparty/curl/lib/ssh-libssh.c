@@ -2255,7 +2255,7 @@ static CURLcode scp_done(struct connectdata *conn, CURLcode status,
 
 }
 
-static ssize_t scp_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t scp_send(struct connectdata *conn, int sockindex,
                         const void *mem, size_t len, CURLcode *err)
 {
   int rc;
@@ -2284,10 +2284,10 @@ static ssize_t scp_send(struct connectdata *conn, int sockindex,
   return len;
 }
 
-static ssize_t scp_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t scp_recv(struct connectdata *conn, int sockindex,
                         char *mem, size_t len, CURLcode *err)
 {
-  ssize_t nread;
+  curl_ssize_t nread;
   (void) err;
   (void) sockindex; /* we only support SCP on the fixed known primary socket */
 
@@ -2402,10 +2402,10 @@ static CURLcode sftp_done(struct connectdata *conn, CURLcode status,
 }
 
 /* return number of sent bytes */
-static ssize_t sftp_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t sftp_send(struct connectdata *conn, int sockindex,
                          const void *mem, size_t len, CURLcode *err)
 {
-  ssize_t nwrite;
+  curl_ssize_t nwrite;
   (void)sockindex;
 
   nwrite = sftp_write(conn->proto.sshc.sftp_file, mem, len);
@@ -2431,10 +2431,10 @@ static ssize_t sftp_send(struct connectdata *conn, int sockindex,
  * Return number of received (decrypted) bytes
  * or <0 on error
  */
-static ssize_t sftp_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t sftp_recv(struct connectdata *conn, int sockindex,
                          char *mem, size_t len, CURLcode *err)
 {
-  ssize_t nread;
+  curl_ssize_t nread;
   (void)sockindex;
 
   DEBUGASSERT(len < CURL_MAX_READ_SIZE);

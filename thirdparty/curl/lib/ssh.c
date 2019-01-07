@@ -3094,14 +3094,14 @@ static CURLcode scp_done(struct connectdata *conn, CURLcode status,
 
 }
 
-static ssize_t scp_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t scp_send(struct connectdata *conn, int sockindex,
                         const void *mem, size_t len, CURLcode *err)
 {
-  ssize_t nwrite;
+  curl_ssize_t nwrite;
   (void)sockindex; /* we only support SCP on the fixed known primary socket */
 
   /* libssh2_channel_write() returns int! */
-  nwrite = (ssize_t)
+  nwrite = (curl_ssize_t)
     libssh2_channel_write(conn->proto.sshc.ssh_channel, mem, len);
 
   ssh_block2waitfor(conn, (nwrite == LIBSSH2_ERROR_EAGAIN)?TRUE:FALSE);
@@ -3118,14 +3118,14 @@ static ssize_t scp_send(struct connectdata *conn, int sockindex,
   return nwrite;
 }
 
-static ssize_t scp_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t scp_recv(struct connectdata *conn, int sockindex,
                         char *mem, size_t len, CURLcode *err)
 {
-  ssize_t nread;
+  curl_ssize_t nread;
   (void)sockindex; /* we only support SCP on the fixed known primary socket */
 
   /* libssh2_channel_read() returns int */
-  nread = (ssize_t)
+  nread = (curl_ssize_t)
     libssh2_channel_read(conn->proto.sshc.ssh_channel, mem, len);
 
   ssh_block2waitfor(conn, (nread == LIBSSH2_ERROR_EAGAIN)?TRUE:FALSE);
@@ -3231,11 +3231,11 @@ static CURLcode sftp_done(struct connectdata *conn, CURLcode status,
 }
 
 /* return number of sent bytes */
-static ssize_t sftp_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t sftp_send(struct connectdata *conn, int sockindex,
                          const void *mem, size_t len, CURLcode *err)
 {
-  ssize_t nwrite;   /* libssh2_sftp_write() used to return size_t in 0.14
-                       but is changed to ssize_t in 0.15. These days we don't
+  curl_ssize_t nwrite;   /* libssh2_sftp_write() used to return size_t in 0.14
+                       but is changed to curl_ssize_t in 0.15. These days we don't
                        support libssh2 0.15*/
   (void)sockindex;
 
@@ -3259,10 +3259,10 @@ static ssize_t sftp_send(struct connectdata *conn, int sockindex,
  * Return number of received (decrypted) bytes
  * or <0 on error
  */
-static ssize_t sftp_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t sftp_recv(struct connectdata *conn, int sockindex,
                          char *mem, size_t len, CURLcode *err)
 {
-  ssize_t nread;
+  curl_ssize_t nread;
   (void)sockindex;
 
   nread = libssh2_sftp_read(conn->proto.sshc.sftp_handle, mem, len);

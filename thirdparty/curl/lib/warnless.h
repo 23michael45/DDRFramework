@@ -49,11 +49,11 @@ unsigned int curlx_sltoui(long slnum);
 
 unsigned short curlx_sltous(long slnum);
 
-ssize_t curlx_uztosz(size_t uznum);
+curl_ssize_t curlx_uztosz(size_t uznum);
 
 size_t curlx_sotouz(curl_off_t sonum);
 
-int curlx_sztosi(ssize_t sznum);
+int curlx_sztosi(curl_ssize_t sznum);
 
 unsigned short curlx_uitous(unsigned int uinum);
 
@@ -73,9 +73,9 @@ curl_socket_t curlx_sitosk(int i);
 
 #if defined(WIN32) || defined(_WIN32)
 
-ssize_t curlx_read(int fd, void *buf, size_t count);
+curl_ssize_t curlx_read(int fd, void *buf, size_t count);
 
-ssize_t curlx_write(int fd, const void *buf, size_t count);
+curl_ssize_t curlx_write(int fd, const void *buf, size_t count);
 
 #ifndef BUILDING_WARNLESS_C
 #  undef  read

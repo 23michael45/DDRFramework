@@ -2236,14 +2236,14 @@ static CURLcode Curl_nss_connect_nonblocking(struct connectdata *conn,
   return nss_connect_common(conn, sockindex, done);
 }
 
-static ssize_t nss_send(struct connectdata *conn,  /* connection data */
+static curl_ssize_t nss_send(struct connectdata *conn,  /* connection data */
                         int sockindex,             /* socketindex */
                         const void *mem,           /* send this data */
                         size_t len,                /* amount to write */
                         CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
-  ssize_t rc;
+  curl_ssize_t rc;
 
   /* The SelectClientCert() hook uses this for infof() and failf() but the
      handle stored in nss_setup_connect() could have already been freed. */
@@ -2273,14 +2273,14 @@ static ssize_t nss_send(struct connectdata *conn,  /* connection data */
   return rc; /* number of bytes */
 }
 
-static ssize_t nss_recv(struct connectdata *conn,  /* connection data */
+static curl_ssize_t nss_recv(struct connectdata *conn,  /* connection data */
                         int sockindex,             /* socketindex */
                         char *buf,                 /* store read data here */
                         size_t buffersize,         /* max amount to read */
                         CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
-  ssize_t nread;
+  curl_ssize_t nread;
 
   /* The SelectClientCert() hook uses this for infof() and failf() but the
      handle stored in nss_setup_connect() could have already been freed. */

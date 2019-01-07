@@ -328,7 +328,7 @@ static CURLcode CONNECT(struct connectdata *conn,
       int error = SELECT_OK;
 
       while(s->keepon && !error) {
-        ssize_t gotbytes;
+        curl_ssize_t gotbytes;
 
         /* make sure we have space to read more data */
         if(s->ptr >= &s->connect_buffer[CONNECT_BUFFER_SIZE]) {
@@ -384,7 +384,7 @@ static CURLcode CONNECT(struct connectdata *conn,
             /* chunked-encoded body, so we need to do the chunked dance
                properly to know when the end of the body is reached */
             CHUNKcode r;
-            ssize_t tookcareof = 0;
+            curl_ssize_t tookcareof = 0;
 
             /* now parse the chunked piece of data so that we can
                properly tell when the stream ends */

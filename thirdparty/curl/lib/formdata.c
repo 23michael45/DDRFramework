@@ -898,7 +898,7 @@ CURLcode Curl_getformdata(struct Curl_easy *data,
           result = curl_mime_data_cb(part, clen,
                                      fread_func, NULL, NULL, post->userp);
         else {
-          result = curl_mime_data(part, post->contents, (ssize_t) clen);
+          result = curl_mime_data(part, post->contents, (curl_ssize_t) clen);
 #ifdef CURL_DOES_CONVERSIONS
           /* Convert textual contents now. */
           if(!result && data && part->datasize)

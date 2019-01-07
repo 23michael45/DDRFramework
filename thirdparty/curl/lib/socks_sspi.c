@@ -65,8 +65,8 @@ CURLcode Curl_SOCKS5_gssapi_negotiate(int sockindex,
   struct Curl_easy *data = conn->data;
   curl_socket_t sock = conn->sock[sockindex];
   CURLcode code;
-  ssize_t actualread;
-  ssize_t written;
+  curl_ssize_t actualread;
+  curl_ssize_t written;
   int result;
   /* Needs GSS-API authentication */
   SECURITY_STATUS status;

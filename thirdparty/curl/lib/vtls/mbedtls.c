@@ -738,7 +738,7 @@ mbed_connect_step3(struct connectdata *conn,
   return CURLE_OK;
 }
 
-static ssize_t mbed_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t mbed_send(struct connectdata *conn, int sockindex,
                          const void *mem, size_t len,
                          CURLcode *curlcode)
 {
@@ -777,13 +777,13 @@ static void Curl_mbedtls_close(struct connectdata *conn, int sockindex)
 #endif /* THREADING_SUPPORT */
 }
 
-static ssize_t mbed_recv(struct connectdata *conn, int num,
+static curl_ssize_t mbed_recv(struct connectdata *conn, int num,
                          char *buf, size_t buffersize,
                          CURLcode *curlcode)
 {
   struct ssl_connect_data *connssl = &conn->ssl[num];
   int ret = -1;
-  ssize_t len = -1;
+  curl_ssize_t len = -1;
 
   memset(buf, 0, buffersize);
   ret = mbedtls_ssl_read(&BACKEND->ssl, (unsigned char *)buf,

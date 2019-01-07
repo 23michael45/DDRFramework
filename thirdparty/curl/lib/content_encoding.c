@@ -353,10 +353,10 @@ static enum {
   GZIP_OK,
   GZIP_BAD,
   GZIP_UNDERFLOW
-} check_gzip_header(unsigned char const *data, ssize_t len, ssize_t *headerlen)
+} check_gzip_header(unsigned char const *data, curl_ssize_t len, curl_ssize_t *headerlen)
 {
   int method, flags;
-  const ssize_t totallen = len;
+  const curl_ssize_t totallen = len;
 
   /* The shortest header is 10 bytes */
   if(len < 10)
@@ -378,7 +378,7 @@ static enum {
   data += 10;
 
   if(flags & EXTRA_FIELD) {
-    ssize_t extra_len;
+    curl_ssize_t extra_len;
 
     if(len < 2)
       return GZIP_UNDERFLOW;
@@ -467,7 +467,7 @@ static CURLcode gzip_unencode_write(struct connectdata *conn,
   case ZLIB_INIT:
   {
     /* Initial call state */
-    ssize_t hlen;
+    curl_ssize_t hlen;
 
     switch(check_gzip_header((unsigned char *) buf, nbytes, &hlen)) {
     case GZIP_OK:
@@ -505,7 +505,7 @@ static CURLcode gzip_unencode_write(struct connectdata *conn,
   case ZLIB_GZIP_HEADER:
   {
     /* Need more gzip header data state */
-    ssize_t hlen;
+    curl_ssize_t hlen;
     z->avail_in += (uInt) nbytes;
     z->next_in = Curl_saferealloc(z->next_in, z->avail_in);
     if(z->next_in == NULL) {

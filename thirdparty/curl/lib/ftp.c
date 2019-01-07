@@ -383,7 +383,7 @@ static CURLcode ReceivedServerConnect(struct connectdata *conn, bool *received)
   struct pingpong *pp = &ftpc->pp;
   int result;
   time_t timeout_ms;
-  ssize_t nread;
+  curl_ssize_t nread;
   int ftpcode;
 
   *received = FALSE;
@@ -625,7 +625,7 @@ static CURLcode ftp_readresp(curl_socket_t sockfd,
  *
  */
 
-CURLcode Curl_GetFTPResponse(ssize_t *nreadp, /* return number of bytes read */
+CURLcode Curl_GetFTPResponse(curl_ssize_t *nreadp, /* return number of bytes read */
                              struct connectdata *conn,
                              int *ftpcode) /* return the ftp-code */
 {
@@ -3138,7 +3138,7 @@ static CURLcode ftp_done(struct connectdata *conn, CURLcode status,
   struct FTP *ftp = data->req.protop;
   struct ftp_conn *ftpc = &conn->proto.ftpc;
   struct pingpong *pp = &ftpc->pp;
-  ssize_t nread;
+  curl_ssize_t nread;
   int ftpcode;
   CURLcode result = CURLE_OK;
   char *path = NULL;
@@ -3366,7 +3366,7 @@ static
 CURLcode ftp_sendquote(struct connectdata *conn, struct curl_slist *quote)
 {
   struct curl_slist *item;
-  ssize_t nread;
+  curl_ssize_t nread;
   int ftpcode;
   CURLcode result;
   struct ftp_conn *ftpc = &conn->proto.ftpc;
@@ -3955,7 +3955,7 @@ static CURLcode ftp_do(struct connectdata *conn, bool *done)
 
 CURLcode Curl_ftpsend(struct connectdata *conn, const char *cmd)
 {
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
 #define SBUF_SIZE 1024
   char s[SBUF_SIZE];
   size_t write_len;
@@ -3999,7 +3999,7 @@ CURLcode Curl_ftpsend(struct connectdata *conn, const char *cmd)
     if(conn->data->set.verbose)
       Curl_debug(conn->data, CURLINFO_HEADER_OUT, sptr, (size_t)bytes_written);
 
-    if(bytes_written != (ssize_t)write_len) {
+    if(bytes_written != (curl_ssize_t)write_len) {
       write_len -= bytes_written;
       sptr += bytes_written;
     }
@@ -4193,7 +4193,7 @@ CURLcode ftp_parse_url_path(struct connectdata *conn)
       /* parse the URL path into separate path components */
       while((slash_pos = strchr(cur_pos, '/')) != NULL) {
         /* 1 or 0 pointer offset to indicate absolute directory */
-        ssize_t absolute_dir = ((cur_pos - ftp->path > 0) &&
+        curl_ssize_t absolute_dir = ((cur_pos - ftp->path > 0) &&
                                 (ftpc->dirdepth == 0))?1:0;
 
         /* seek out the next path component */

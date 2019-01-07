@@ -448,7 +448,7 @@ static CURLcode tftp_connect_for_rx(tftp_state_data_t *state,
 static CURLcode tftp_send_first(tftp_state_data_t *state, tftp_event_t event)
 {
   size_t sbytes;
-  ssize_t senddata;
+  curl_ssize_t senddata;
   const char *mode = "octet";
   char *filename;
   struct Curl_easy *data = state->conn->data;
@@ -539,7 +539,7 @@ static CURLcode tftp_send_first(tftp_state_data_t *state, tftp_event_t event)
                       (SEND_TYPE_ARG3)sbytes, 0,
                       state->conn->ip_addr->ai_addr,
                       state->conn->ip_addr->ai_addrlen);
-    if(senddata != (ssize_t)sbytes) {
+    if(senddata != (curl_ssize_t)sbytes) {
       failf(data, "%s", Curl_strerror(state->conn, SOCKERRNO));
     }
     free(filename);
@@ -587,7 +587,7 @@ static CURLcode tftp_send_first(tftp_state_data_t *state, tftp_event_t event)
  **********************************************************/
 static CURLcode tftp_rx(tftp_state_data_t *state, tftp_event_t event)
 {
-  ssize_t sbytes;
+  curl_ssize_t sbytes;
   int rblock;
   struct Curl_easy *data = state->conn->data;
 
@@ -627,7 +627,7 @@ static CURLcode tftp_rx(tftp_state_data_t *state, tftp_event_t event)
     }
 
     /* Check if completed (That is, a less than full packet is received) */
-    if(state->rbytes < (ssize_t)state->blksize + 4) {
+    if(state->rbytes < (curl_ssize_t)state->blksize + 4) {
       state->state = TFTP_STATE_FIN;
     }
     else {
@@ -709,7 +709,7 @@ static CURLcode tftp_rx(tftp_state_data_t *state, tftp_event_t event)
 static CURLcode tftp_tx(tftp_state_data_t *state, tftp_event_t event)
 {
   struct Curl_easy *data = state->conn->data;
-  ssize_t sbytes;
+  curl_ssize_t sbytes;
   CURLcode result = CURLE_OK;
   struct SingleRequest *k = &data->req;
   size_t cb; /* Bytes currently read */

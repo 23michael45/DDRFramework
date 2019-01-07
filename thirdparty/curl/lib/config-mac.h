@@ -99,7 +99,7 @@
 #define RECV_TYPE_ARG2 void *
 #define RECV_TYPE_ARG3 size_t
 #define RECV_TYPE_ARG4 int
-#define RECV_TYPE_RETV ssize_t
+#define RECV_TYPE_RETV curl_ssize_t
 
 #define HAVE_RECVFROM 1
 #define RECVFROM_TYPE_ARG1 int
@@ -108,7 +108,7 @@
 #define RECVFROM_TYPE_ARG4 int
 #define RECVFROM_TYPE_ARG5 struct sockaddr
 #define RECVFROM_TYPE_ARG6 int
-#define RECVFROM_TYPE_RETV ssize_t
+#define RECVFROM_TYPE_RETV curl_ssize_t
 #define RECVFROM_TYPE_ARG2_IS_VOID 1
 
 #define HAVE_SEND 1
@@ -117,7 +117,7 @@
 #define SEND_TYPE_ARG2 void *
 #define SEND_TYPE_ARG3 size_T
 #define SEND_TYPE_ARG4 int
-#define SEND_TYPE_RETV ssize_t
+#define SEND_TYPE_RETV curl_ssize_t
 
 #define HAVE_EXTRA_STRICMP_H 1
 #define HAVE_EXTRA_STRDUP_H  1

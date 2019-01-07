@@ -917,6 +917,6 @@
 /* #undef size_t */
 
 /* the signed version of size_t */
-/* #undef ssize_t */
+/* #undef curl_ssize_t */
 
 #endif /* HEADER_CURL_CONFIG_VXWORKS_H */

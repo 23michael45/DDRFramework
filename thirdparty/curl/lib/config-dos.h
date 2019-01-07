@@ -149,7 +149,7 @@
 
 #if defined(__HIGHC__) || \
     (defined(__GNUC__) && (__GNUC__ < 4))
-  #define ssize_t  int
+  #define curl_ssize_t  int
 #endif
 
 #define CURL_CA_BUNDLE  getenv("CURL_CA_BUNDLE")

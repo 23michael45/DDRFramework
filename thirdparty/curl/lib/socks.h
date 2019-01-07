@@ -38,8 +38,8 @@
 int Curl_blockread_all(struct connectdata *conn,
                        curl_socket_t sockfd,
                        char *buf,
-                       ssize_t buffersize,
-                       ssize_t *n);
+                       curl_ssize_t buffersize,
+                       curl_ssize_t *n);
 
 /*
  * This function logs in to a SOCKS4(a) proxy and sends the specifics to the

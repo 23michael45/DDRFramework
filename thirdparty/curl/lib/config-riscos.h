@@ -71,8 +71,8 @@
 /* Define if struct sockaddr_in6 has the sin6_scope_id member */
 #define HAVE_SOCKADDR_IN6_SIN6_SCOPE_ID 1
 
-/* Define this to 'int' if ssize_t is not an available typedefed type */
-#undef ssize_t
+/* Define this to 'int' if curl_ssize_t is not an available typedefed type */
+#undef curl_ssize_t
 
 /* Define this as a suitable file to read random data from */
 #undef RANDOM_FILE
@@ -415,7 +415,7 @@
 #undef size_t
 
 /* Define to `int' if <sys/types.h> does not define. */
-#undef ssize_t
+#undef curl_ssize_t
 
 /* Define if you have the ioctl function. */
 #define HAVE_IOCTL
@@ -460,7 +460,7 @@
 #define RECV_TYPE_ARG4 int
 
 /* Define to the function return type for recv. */
-#define RECV_TYPE_RETV ssize_t
+#define RECV_TYPE_RETV curl_ssize_t
 
 /* Define 1 if you have the recvfrom function. */
 #define HAVE_RECVFROM 1
@@ -487,7 +487,7 @@
 #define RECVFROM_TYPE_ARG6 int
 
 /* Define to the function return type for recvfrom. */
-#define RECVFROM_TYPE_RETV ssize_t
+#define RECVFROM_TYPE_RETV curl_ssize_t
 
 /* Define if you have the send function. */
 #define HAVE_SEND 1
@@ -508,6 +508,6 @@
 #define SEND_TYPE_ARG4 int
 
 /* Define to the function return type for send. */
-#define SEND_TYPE_RETV ssize_t
+#define SEND_TYPE_RETV curl_ssize_t
 
 #endif /* HEADER_CURL_CONFIG_RISCOS_H */

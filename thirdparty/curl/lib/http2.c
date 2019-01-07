@@ -72,7 +72,7 @@
 #endif
 
 
-static ssize_t http2_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t http2_recv(struct connectdata *conn, int sockindex,
                           char *mem, size_t len, CURLcode *err);
 static bool http2_connisdead(struct connectdata *conn);
 static int h2_session_send(struct Curl_easy *data,
@@ -205,7 +205,7 @@ static bool http2_connisdead(struct connectdata *conn)
          only "protocol frames" */
       CURLcode result;
       struct http_conn *httpc = &conn->proto.httpc;
-      ssize_t nread = -1;
+      curl_ssize_t nread = -1;
       if(httpc->recv_underlying)
         /* if called "too early", this pointer isn't setup yet! */
         nread = ((Curl_recv *)httpc->recv_underlying)(
@@ -387,13 +387,13 @@ const char *Curl_http2_strerror(uint32_t err)
  * size |length| to the network and return the number of bytes actually
  * written. See the documentation of nghttp2_send_callback for the details.
  */
-static ssize_t send_callback(nghttp2_session *h2,
+static curl_ssize_t send_callback(nghttp2_session *h2,
                              const uint8_t *data, size_t length, int flags,
                              void *userp)
 {
   struct connectdata *conn = (struct connectdata *)userp;
   struct http_conn *c = &conn->proto.httpc;
-  ssize_t written;
+  curl_ssize_t written;
   CURLcode result = CURLE_OK;
 
   (void)h2;
@@ -1058,7 +1058,7 @@ static int on_header(nghttp2_session *session, const nghttp2_frame *frame,
   return 0; /* 0 is successful */
 }
 
-static ssize_t data_source_read_callback(nghttp2_session *session,
+static curl_ssize_t data_source_read_callback(nghttp2_session *session,
                                          int32_t stream_id,
                                          uint8_t *buf, size_t length,
                                          uint32_t *data_flags,
@@ -1251,7 +1251,7 @@ CURLcode Curl_http2_request_upgrade(Curl_send_buffer *req,
                                     struct connectdata *conn)
 {
   CURLcode result;
-  ssize_t binlen;
+  curl_ssize_t binlen;
   char *base64;
   size_t blen;
   struct SingleRequest *k = &conn->data->req;
@@ -1309,9 +1309,9 @@ static int h2_process_pending_input(struct connectdata *conn,
                                     struct http_conn *httpc,
                                     CURLcode *err)
 {
-  ssize_t nread;
+  curl_ssize_t nread;
   char *inbuf;
-  ssize_t rv;
+  curl_ssize_t rv;
   struct Curl_easy *data = conn->data;
 
   nread = httpc->inbuflen - httpc->nread_inbuf;
@@ -1393,7 +1393,7 @@ CURLcode Curl_http2_done_sending(struct connectdata *conn)
   return result;
 }
 
-static ssize_t http2_handle_stream_close(struct connectdata *conn,
+static curl_ssize_t http2_handle_stream_close(struct connectdata *conn,
                                          struct Curl_easy *data,
                                          struct HTTP *stream, CURLcode *err)
 {
@@ -1514,12 +1514,12 @@ static int h2_session_send(struct Curl_easy *data,
   return nghttp2_session_send(h2);
 }
 
-static ssize_t http2_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t http2_recv(struct connectdata *conn, int sockindex,
                           char *mem, size_t len, CURLcode *err)
 {
   CURLcode result = CURLE_OK;
-  ssize_t rv;
-  ssize_t nread;
+  curl_ssize_t rv;
+  curl_ssize_t nread;
   struct http_conn *httpc = &conn->proto.httpc;
   struct Curl_easy *data = conn->data;
   struct HTTP *stream = data->req.protop;
@@ -1704,7 +1704,7 @@ static ssize_t http2_recv(struct connectdata *conn, int sockindex,
     }
   }
   if(stream->memlen) {
-    ssize_t retlen = stream->memlen;
+    curl_ssize_t retlen = stream->memlen;
     H2BUGF(infof(data, "http2_recv: returns %zd for stream %u\n",
                  retlen, stream->stream_id));
     stream->memlen = 0;
@@ -1805,7 +1805,7 @@ static header_instruction inspect_header(const char *name, size_t namelen,
   }
 }
 
-static ssize_t http2_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t http2_send(struct connectdata *conn, int sockindex,
                           const void *mem, size_t len, CURLcode *err)
 {
   /*
@@ -2170,7 +2170,7 @@ CURLcode Curl_http2_switched(struct connectdata *conn,
   CURLcode result;
   struct http_conn *httpc = &conn->proto.httpc;
   int rv;
-  ssize_t nproc;
+  curl_ssize_t nproc;
   struct Curl_easy *data = conn->data;
   struct HTTP *stream = conn->data->req.protop;
 
@@ -2259,7 +2259,7 @@ CURLcode Curl_http2_switched(struct connectdata *conn,
 
   H2BUGF(infof(data, "nghttp2_session_mem_recv() returns %zd\n", nproc));
 
-  if((ssize_t)nread == nproc) {
+  if((curl_ssize_t)nread == nproc) {
     httpc->inbuflen = 0;
     httpc->nread_inbuf = 0;
   }

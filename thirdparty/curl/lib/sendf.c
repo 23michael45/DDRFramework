@@ -168,7 +168,7 @@ static void pre_receive_plain(struct connectdata *conn, int num)
         bytestorecv = psnd->allocated_size;
       }
       if(psnd->buffer) {
-        ssize_t recvedbytes;
+        curl_ssize_t recvedbytes;
         DEBUGASSERT(psnd->bindsock == sockfd);
         recvedbytes = sread(sockfd, psnd->buffer + psnd->recv_size,
                             bytestorecv);
@@ -181,7 +181,7 @@ static void pre_receive_plain(struct connectdata *conn, int num)
   }
 }
 
-static ssize_t get_pre_recved(struct connectdata *conn, int num, char *buf,
+static curl_ssize_t get_pre_recved(struct connectdata *conn, int num, char *buf,
                               size_t len)
 {
   struct postponed_data * const psnd = &(conn->postponed[num]);
@@ -214,7 +214,7 @@ static ssize_t get_pre_recved(struct connectdata *conn, int num, char *buf,
     psnd->bindsock = CURL_SOCKET_BAD;
 #endif /* DEBUGBUILD */
   }
-  return (ssize_t)copysize;
+  return (curl_ssize_t)copysize;
 }
 #else  /* ! USE_RECV_BEFORE_SEND_WORKAROUND */
 /* Use "do-nothing" macros instead of functions when workaround not used */
@@ -287,7 +287,7 @@ CURLcode Curl_sendf(curl_socket_t sockfd, struct connectdata *conn,
                     const char *fmt, ...)
 {
   struct Curl_easy *data = conn->data;
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   size_t write_len;
   CURLcode result = CURLE_OK;
   char *s;
@@ -339,9 +339,9 @@ CURLcode Curl_write(struct connectdata *conn,
                     curl_socket_t sockfd,
                     const void *mem,
                     size_t len,
-                    ssize_t *written)
+                    curl_ssize_t *written)
 {
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   CURLcode result = CURLE_OK;
   int num = (sockfd == conn->sock[SECONDARYSOCKET]);
 
@@ -368,11 +368,11 @@ CURLcode Curl_write(struct connectdata *conn,
   }
 }
 
-ssize_t Curl_send_plain(struct connectdata *conn, int num,
+curl_ssize_t Curl_send_plain(struct connectdata *conn, int num,
                         const void *mem, size_t len, CURLcode *code)
 {
   curl_socket_t sockfd = conn->sock[num];
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   /* WinSock will destroy unread received data if send() is
      failed.
      To avoid lossage of received data, recv() must be
@@ -429,9 +429,9 @@ CURLcode Curl_write_plain(struct connectdata *conn,
                           curl_socket_t sockfd,
                           const void *mem,
                           size_t len,
-                          ssize_t *written)
+                          curl_ssize_t *written)
 {
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   CURLcode result;
   int num = (sockfd == conn->sock[SECONDARYSOCKET]);
 
@@ -442,11 +442,11 @@ CURLcode Curl_write_plain(struct connectdata *conn,
   return result;
 }
 
-ssize_t Curl_recv_plain(struct connectdata *conn, int num, char *buf,
+curl_ssize_t Curl_recv_plain(struct connectdata *conn, int num, char *buf,
                         size_t len, CURLcode *code)
 {
   curl_socket_t sockfd = conn->sock[num];
-  ssize_t nread;
+  curl_ssize_t nread;
   /* Check and return data that already received and storied in internal
      intermediate buffer */
   nread = get_pre_recved(conn, num, buf, len);
@@ -682,9 +682,9 @@ CURLcode Curl_client_write(struct connectdata *conn,
 CURLcode Curl_read_plain(curl_socket_t sockfd,
                          char *buf,
                          size_t bytesfromsocket,
-                         ssize_t *n)
+                         curl_ssize_t *n)
 {
-  ssize_t nread = sread(sockfd, buf, bytesfromsocket);
+  curl_ssize_t nread = sread(sockfd, buf, bytesfromsocket);
 
   if(-1 == nread) {
     int err = SOCKERRNO;
@@ -714,10 +714,10 @@ CURLcode Curl_read(struct connectdata *conn, /* connection data */
                    curl_socket_t sockfd,     /* read from this socket */
                    char *buf,                /* store read data here */
                    size_t sizerequested,     /* max amount to read */
-                   ssize_t *n)               /* amount bytes read */
+                   curl_ssize_t *n)               /* amount bytes read */
 {
   CURLcode result = CURLE_RECV_ERROR;
-  ssize_t nread = 0;
+  curl_ssize_t nread = 0;
   size_t bytesfromsocket = 0;
   char *buffertofill = NULL;
   struct Curl_easy *data = conn->data;
@@ -744,7 +744,7 @@ CURLcode Curl_read(struct connectdata *conn, /* connection data */
       conn->read_pos += bytestocopy;
       conn->bits.stream_was_rewound = FALSE;
 
-      *n = (ssize_t)bytestocopy;
+      *n = (curl_ssize_t)bytestocopy;
       return CURLE_OK;
     }
     /* If we come here, it means that there is no data to read from the buffer,

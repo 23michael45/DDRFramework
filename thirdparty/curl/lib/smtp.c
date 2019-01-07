@@ -1187,8 +1187,8 @@ static CURLcode smtp_done(struct connectdata *conn, CURLcode status,
   struct SMTP *smtp = data->req.protop;
   struct pingpong *pp = &conn->proto.smtpc.pp;
   char *eob;
-  ssize_t len;
-  ssize_t bytes_written;
+  curl_ssize_t len;
+  curl_ssize_t bytes_written;
 
   (void)premature;
 
@@ -1539,7 +1539,7 @@ static CURLcode smtp_parse_custom_request(struct connectdata *conn)
   return result;
 }
 
-CURLcode Curl_smtp_escape_eob(struct connectdata *conn, const ssize_t nread)
+CURLcode Curl_smtp_escape_eob(struct connectdata *conn, const curl_ssize_t nread)
 {
   /* When sending a SMTP payload we must detect CRLF. sequences making sure
      they are sent as CRLF.. instead, as a . on the beginning of a line will
@@ -1547,8 +1547,8 @@ CURLcode Curl_smtp_escape_eob(struct connectdata *conn, const ssize_t nread)
      genuine CRLF.CRLF which isn't escaped will wrongly be detected as end of
      data by the server
   */
-  ssize_t i;
-  ssize_t si;
+  curl_ssize_t i;
+  curl_ssize_t si;
   struct Curl_easy *data = conn->data;
   struct SMTP *smtp = data->req.protop;
   char *scratch = data->state.scratch;

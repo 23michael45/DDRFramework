@@ -102,16 +102,16 @@
 #endif
 
 #if (SIZEOF_SIZE_T == SIZEOF_SHORT)
-#  define CURL_MASK_SSIZE_T  CURL_MASK_SSHORT
+#  define CURL_MASK_curl_ssize_t  CURL_MASK_SSHORT
 #  define CURL_MASK_USIZE_T  CURL_MASK_USHORT
 #elif (SIZEOF_SIZE_T == SIZEOF_INT)
-#  define CURL_MASK_SSIZE_T  CURL_MASK_SINT
+#  define CURL_MASK_curl_ssize_t  CURL_MASK_SINT
 #  define CURL_MASK_USIZE_T  CURL_MASK_UINT
 #elif (SIZEOF_SIZE_T == SIZEOF_LONG)
-#  define CURL_MASK_SSIZE_T  CURL_MASK_SLONG
+#  define CURL_MASK_curl_ssize_t  CURL_MASK_SLONG
 #  define CURL_MASK_USIZE_T  CURL_MASK_ULONG
 #elif (SIZEOF_SIZE_T == SIZEOF_CURL_OFF_T)
-#  define CURL_MASK_SSIZE_T  CURL_MASK_SCOFFT
+#  define CURL_MASK_curl_ssize_t  CURL_MASK_SCOFFT
 #  define CURL_MASK_USIZE_T  CURL_MASK_UCOFFT
 #else
 #  error "SIZEOF_SIZE_T not defined"
@@ -322,18 +322,18 @@ unsigned short curlx_sltous(long slnum)
 }
 
 /*
-** unsigned size_t to signed ssize_t
+** unsigned size_t to signed curl_ssize_t
 */
 
-ssize_t curlx_uztosz(size_t uznum)
+curl_ssize_t curlx_uztosz(size_t uznum)
 {
 #ifdef __INTEL_COMPILER
 #  pragma warning(push)
 #  pragma warning(disable:810) /* conversion may lose significant bits */
 #endif
 
-  DEBUGASSERT(uznum <= (size_t) CURL_MASK_SSIZE_T);
-  return (ssize_t)(uznum & (size_t) CURL_MASK_SSIZE_T);
+  DEBUGASSERT(uznum <= (size_t) CURL_MASK_curl_ssize_t);
+  return (curl_ssize_t)(uznum & (size_t) CURL_MASK_curl_ssize_t);
 
 #ifdef __INTEL_COMPILER
 #  pragma warning(pop)
@@ -360,10 +360,10 @@ size_t curlx_sotouz(curl_off_t sonum)
 }
 
 /*
-** signed ssize_t to signed int
+** signed curl_ssize_t to signed int
 */
 
-int curlx_sztosi(ssize_t sznum)
+int curlx_sztosi(curl_ssize_t sznum)
 {
 #ifdef __INTEL_COMPILER
 #  pragma warning(push)
@@ -374,7 +374,7 @@ int curlx_sztosi(ssize_t sznum)
 #if (SIZEOF_INT < SIZEOF_SIZE_T)
   DEBUGASSERT((size_t) sznum <= (size_t) CURL_MASK_SINT);
 #endif
-  return (int)(sznum & (ssize_t) CURL_MASK_SINT);
+  return (int)(sznum & (curl_ssize_t) CURL_MASK_SINT);
 
 #ifdef __INTEL_COMPILER
 #  pragma warning(pop)
@@ -465,7 +465,7 @@ size_t curlx_sitouz(int sinum)
 
 int curlx_sktosi(curl_socket_t s)
 {
-  return (int)((ssize_t) s);
+  return (int)((curl_ssize_t) s);
 }
 
 /*
@@ -474,21 +474,21 @@ int curlx_sktosi(curl_socket_t s)
 
 curl_socket_t curlx_sitosk(int i)
 {
-  return (curl_socket_t)((ssize_t) i);
+  return (curl_socket_t)((curl_ssize_t) i);
 }
 
 #endif /* USE_WINSOCK */
 
 #if defined(WIN32) || defined(_WIN32)
 
-ssize_t curlx_read(int fd, void *buf, size_t count)
+curl_ssize_t curlx_read(int fd, void *buf, size_t count)
 {
-  return (ssize_t)read(fd, buf, curlx_uztoui(count));
+  return (curl_ssize_t)read(fd, buf, curlx_uztoui(count));
 }
 
-ssize_t curlx_write(int fd, const void *buf, size_t count)
+curl_ssize_t curlx_write(int fd, const void *buf, size_t count)
 {
-  return (ssize_t)write(fd, buf, curlx_uztoui(count));
+  return (curl_ssize_t)write(fd, buf, curlx_uztoui(count));
 }
 
 #endif /* WIN32 || _WIN32 */

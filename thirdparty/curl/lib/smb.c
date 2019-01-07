@@ -289,7 +289,7 @@ static CURLcode smb_recv_message(struct connectdata *conn, void **msg)
 {
   struct smb_conn *smbc = &conn->proto.smbc;
   char *buf = smbc->recv_buf;
-  ssize_t bytes_read;
+  curl_ssize_t bytes_read;
   size_t nbt_size;
   size_t msg_size;
   size_t len = MAX_MESSAGE_SIZE - smbc->got;
@@ -360,11 +360,11 @@ static void smb_format_message(struct connectdata *conn, struct smb_header *h,
   h->pid = smb_swap16((unsigned short) pid);
 }
 
-static CURLcode smb_send(struct connectdata *conn, ssize_t len,
+static CURLcode smb_send(struct connectdata *conn, curl_ssize_t len,
                          size_t upload_size)
 {
   struct smb_conn *smbc = &conn->proto.smbc;
-  ssize_t bytes_written;
+  curl_ssize_t bytes_written;
   CURLcode result;
 
   result = Curl_write(conn, FIRSTSOCKET, conn->data->state.ulbuf,
@@ -385,8 +385,8 @@ static CURLcode smb_send(struct connectdata *conn, ssize_t len,
 static CURLcode smb_flush(struct connectdata *conn)
 {
   struct smb_conn *smbc = &conn->proto.smbc;
-  ssize_t bytes_written;
-  ssize_t len = smbc->send_size - smbc->sent;
+  curl_ssize_t bytes_written;
+  curl_ssize_t len = smbc->send_size - smbc->sent;
   CURLcode result;
 
   if(!smbc->send_size)

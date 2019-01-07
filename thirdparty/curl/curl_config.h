@@ -1005,7 +1005,7 @@
 /* #undef size_t */
 
 /* the signed version of size_t */
-#define ssize_t __int64
+#define curl_ssize_t __int64
 
 /* Define to 1 if you have the mach_absolute_time function. */
 /* #undef HAVE_MACH_ABSOLUTE_TIME */

@@ -405,7 +405,7 @@ get_cert_location(TCHAR *path, DWORD *store_name, TCHAR **store_path,
 static CURLcode
 schannel_connect_step1(struct connectdata *conn, int sockindex)
 {
-  ssize_t written = -1;
+  curl_ssize_t written = -1;
   struct Curl_easy *data = conn->data;
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
   SecBuffer outbuf;
@@ -848,7 +848,7 @@ static CURLcode
 schannel_connect_step2(struct connectdata *conn, int sockindex)
 {
   int i;
-  ssize_t nread = -1, written = -1;
+  curl_ssize_t nread = -1, written = -1;
   struct Curl_easy *data = conn->data;
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
   unsigned char *reallocated_buffer;
@@ -1425,11 +1425,11 @@ schannel_connect_common(struct connectdata *conn, int sockindex,
   return CURLE_OK;
 }
 
-static ssize_t
+static curl_ssize_t
 schannel_send(struct connectdata *conn, int sockindex,
               const void *buf, size_t len, CURLcode *err)
 {
-  ssize_t written = -1;
+  curl_ssize_t written = -1;
   size_t data_len = 0;
   unsigned char *data = NULL;
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
@@ -1507,7 +1507,7 @@ schannel_send(struct connectdata *conn, int sockindex,
 
     /* send entire message or fail */
     while(len > (size_t)written) {
-      ssize_t this_write;
+      curl_ssize_t this_write;
       time_t timeleft;
       int what;
 
@@ -1570,12 +1570,12 @@ schannel_send(struct connectdata *conn, int sockindex,
   return written;
 }
 
-static ssize_t
+static curl_ssize_t
 schannel_recv(struct connectdata *conn, int sockindex,
               char *buf, size_t len, CURLcode *err)
 {
   size_t size = 0;
-  ssize_t nread = -1;
+  curl_ssize_t nread = -1;
   struct Curl_easy *data = conn->data;
   struct ssl_connect_data *connssl = &conn->ssl[sockindex];
   unsigned char *reallocated_buffer;
@@ -1867,7 +1867,7 @@ cleanup:
     infof(data, "schannel: decrypted data buffer: offset %zu length %zu\n",
           BACKEND->decdata_offset, BACKEND->decdata_length);
     *err = CURLE_OK;
-    return (ssize_t)size;
+    return (curl_ssize_t)size;
   }
 
   if(!*err && !BACKEND->recv_connection_closed)
@@ -1992,7 +1992,7 @@ static int Curl_schannel_shutdown(struct connectdata *conn, int sockindex)
 
     if((sspi_status == SEC_E_OK) || (sspi_status == SEC_I_CONTEXT_EXPIRED)) {
       /* send close message which is in output buffer */
-      ssize_t written;
+      curl_ssize_t written;
       result = Curl_write_plain(conn, conn->sock[sockindex], outbuf.pvBuffer,
                                 outbuf.cbBuffer, &written);
 

@@ -452,7 +452,7 @@ static CURLcode readwrite_data(struct Curl_easy *data,
                                bool *comeback)
 {
   CURLcode result = CURLE_OK;
-  ssize_t nread; /* number of bytes read */
+  curl_ssize_t nread; /* number of bytes read */
   size_t excess = 0; /* excess bytes read */
   bool readmore = FALSE; /* used by RTP to signal for more data */
   int maxloops = 100;
@@ -759,7 +759,7 @@ static CURLcode readwrite_data(struct Curl_easy *data,
           }
         }
 
-        nread = (ssize_t) (k->maxdownload - k->bytecount);
+        nread = (curl_ssize_t) (k->maxdownload - k->bytecount);
         if(nread < 0) /* this should be unusual */
           nread = 0;
 
@@ -827,7 +827,7 @@ static CURLcode readwrite_data(struct Curl_easy *data,
            it doesn't read out of buffer */
         excess = &k->buf[data->set.buffer_size] - k->str;
       }
-      nread = (ssize_t)excess;
+      nread = (curl_ssize_t)excess;
 
       result = conn->handler->readwrite(data, conn, &nread, &readmore);
       if(result)
@@ -912,10 +912,10 @@ static CURLcode readwrite_upload(struct Curl_easy *data,
                                  struct connectdata *conn,
                                  int *didwhat)
 {
-  ssize_t i, si;
-  ssize_t bytes_written;
+  curl_ssize_t i, si;
+  curl_ssize_t bytes_written;
   CURLcode result;
-  ssize_t nread; /* number of bytes read */
+  curl_ssize_t nread; /* number of bytes read */
   bool sending_http_headers = FALSE;
   struct SingleRequest *k = &data->req;
 

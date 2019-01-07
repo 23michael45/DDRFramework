@@ -1130,7 +1130,7 @@ static int Curl_ossl_check_cxn(struct connectdata *conn)
      recv MSG_PEEK instead. Bug #795 */
 #ifdef MSG_PEEK
   char buf;
-  ssize_t nread;
+  curl_ssize_t nread;
   nread = recv((RECV_TYPE_ARG1)conn->sock[FIRSTSOCKET], (RECV_TYPE_ARG2)&buf,
                (RECV_TYPE_ARG3)1, (RECV_TYPE_ARG4)MSG_PEEK);
   if(nread == 0)
@@ -1295,7 +1295,7 @@ static int Curl_ossl_shutdown(struct connectdata *conn, int sockindex)
   char buf[256]; /* We will use this for the OpenSSL error buffer, so it has
                     to be at least 256 bytes long. */
   unsigned long sslerror;
-  ssize_t nread;
+  curl_ssize_t nread;
   int buffsize;
   int err;
   bool done = FALSE;
@@ -1318,7 +1318,7 @@ static int Curl_ossl_shutdown(struct connectdata *conn, int sockindex)
 
         /* Something to read, let's do it and hope that it is the close
            notify alert from the server */
-        nread = (ssize_t)SSL_read(BACKEND->handle, buf, buffsize);
+        nread = (curl_ssize_t)SSL_read(BACKEND->handle, buf, buffsize);
         err = SSL_get_error(BACKEND->handle, (int)nread);
 
         switch(err) {
@@ -3655,7 +3655,7 @@ static bool Curl_ossl_data_pending(const struct connectdata *conn,
 
 static size_t Curl_ossl_version(char *buffer, size_t size);
 
-static ssize_t ossl_send(struct connectdata *conn,
+static curl_ssize_t ossl_send(struct connectdata *conn,
                          int sockindex,
                          const void *mem,
                          size_t len,
@@ -3717,10 +3717,10 @@ static ssize_t ossl_send(struct connectdata *conn,
     return -1;
   }
   *curlcode = CURLE_OK;
-  return (ssize_t)rc; /* number of bytes */
+  return (curl_ssize_t)rc; /* number of bytes */
 }
 
-static ssize_t ossl_recv(struct connectdata *conn, /* connection data */
+static curl_ssize_t ossl_recv(struct connectdata *conn, /* connection data */
                          int num,                  /* socketindex */
                          char *buf,                /* store read data here */
                          size_t buffersize,        /* max amount to read */
@@ -3728,14 +3728,14 @@ static ssize_t ossl_recv(struct connectdata *conn, /* connection data */
 {
   char error_buffer[256];
   unsigned long sslerror;
-  ssize_t nread;
+  curl_ssize_t nread;
   int buffsize;
   struct ssl_connect_data *connssl = &conn->ssl[num];
 
   ERR_clear_error();
 
   buffsize = (buffersize > (size_t)INT_MAX) ? INT_MAX : (int)buffersize;
-  nread = (ssize_t)SSL_read(BACKEND->handle, buf, buffsize);
+  nread = (curl_ssize_t)SSL_read(BACKEND->handle, buf, buffsize);
   if(nread <= 0) {
     /* failed SSL_read */
     int err = SSL_get_error(BACKEND->handle, (int)nread);

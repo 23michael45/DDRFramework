@@ -676,7 +676,7 @@
 #define RECV_TYPE_ARG2 void *
 #define RECV_TYPE_ARG3 size_t
 #define RECV_TYPE_ARG4 int
-#define RECV_TYPE_RETV ssize_t
+#define RECV_TYPE_RETV curl_ssize_t
 
 #define RECVFROM_TYPE_ARG1 int
 #define RECVFROM_TYPE_ARG2 void
@@ -684,7 +684,7 @@
 #define RECVFROM_TYPE_ARG4 int
 #define RECVFROM_TYPE_ARG5 struct sockaddr
 #define RECVFROM_TYPE_ARG6 size_t
-#define RECVFROM_TYPE_RETV ssize_t
+#define RECVFROM_TYPE_RETV curl_ssize_t
 #define RECVFROM_TYPE_ARG2_IS_VOID 1
 
 #define SEND_TYPE_ARG1 int
@@ -692,7 +692,7 @@
 #define SEND_TYPE_ARG2 void *
 #define SEND_TYPE_ARG3 size_t
 #define SEND_TYPE_ARG4 int
-#define SEND_TYPE_RETV ssize_t
+#define SEND_TYPE_RETV curl_ssize_t
 
 
 /* Define as the return type of signal handlers (`int' or `void'). */
@@ -787,7 +787,7 @@
 /* #undef size_t */
 
 /* the signed version of size_t */
-/* #undef ssize_t */
+/* #undef curl_ssize_t */
 
 /* Enabling curl debug mode when building in Symbian debug mode would work */
 /* except that debug mode introduces new exports that must be frozen. */

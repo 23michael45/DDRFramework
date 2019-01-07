@@ -277,11 +277,11 @@ static CURLcode rtmp_disconnect(struct connectdata *conn,
   return CURLE_OK;
 }
 
-static ssize_t rtmp_recv(struct connectdata *conn, int sockindex, char *buf,
+static curl_ssize_t rtmp_recv(struct connectdata *conn, int sockindex, char *buf,
                          size_t len, CURLcode *err)
 {
   RTMP *r = conn->proto.generic;
-  ssize_t nread;
+  curl_ssize_t nread;
 
   (void)sockindex; /* unused */
 
@@ -298,11 +298,11 @@ static ssize_t rtmp_recv(struct connectdata *conn, int sockindex, char *buf,
   return nread;
 }
 
-static ssize_t rtmp_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t rtmp_send(struct connectdata *conn, int sockindex,
                          const void *buf, size_t len, CURLcode *err)
 {
   RTMP *r = conn->proto.generic;
-  ssize_t num;
+  curl_ssize_t num;
 
   (void)sockindex; /* unused */
 

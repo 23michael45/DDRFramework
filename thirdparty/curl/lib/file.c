@@ -501,7 +501,7 @@ static CURLcode file_do(struct connectdata *conn, bool *done)
   Curl_pgrsTime(data, TIMER_STARTTRANSFER);
 
   while(!result) {
-    ssize_t nread;
+    curl_ssize_t nread;
     /* Don't fill a whole buffer if we want less than all data */
     size_t bytestoread;
 

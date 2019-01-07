@@ -115,7 +115,7 @@ static char level_to_char(int level)
 static int ftp_send_command(struct connectdata *conn, const char *message, ...)
 {
   int ftp_code;
-  ssize_t nread = 0;
+  curl_ssize_t nread = 0;
   va_list args;
   char print_buffer[50];
 
@@ -142,7 +142,7 @@ socket_read(curl_socket_t fd, void *to, size_t len)
 {
   char *to_p = to;
   CURLcode result;
-  ssize_t nread;
+  curl_ssize_t nread;
 
   while(len > 0) {
     result = Curl_read_plain(fd, to_p, len, &nread);
@@ -170,7 +170,7 @@ socket_write(struct connectdata *conn, curl_socket_t fd, const void *to,
 {
   const char *to_p = to;
   CURLcode result;
-  ssize_t written;
+  curl_ssize_t written;
 
   while(len > 0) {
     result = Curl_write_plain(conn, fd, to_p, len, &written);
@@ -229,7 +229,7 @@ buffer_read(struct krb5buffer *buf, void *data, size_t len)
 }
 
 /* Matches Curl_recv signature */
-static ssize_t sec_recv(struct connectdata *conn, int sockindex,
+static curl_ssize_t sec_recv(struct connectdata *conn, int sockindex,
                         char *buffer, size_t len, CURLcode *err)
 {
   size_t bytes_read;
@@ -326,10 +326,10 @@ static void do_sec_send(struct connectdata *conn, curl_socket_t fd,
   free(buffer);
 }
 
-static ssize_t sec_write(struct connectdata *conn, curl_socket_t fd,
+static curl_ssize_t sec_write(struct connectdata *conn, curl_socket_t fd,
                          const char *buffer, size_t length)
 {
-  ssize_t tx = 0, len = conn->buffer_size;
+  curl_ssize_t tx = 0, len = conn->buffer_size;
 
   len -= conn->mech->overhead(conn->app_data, conn->data_prot,
                               curlx_sztosi(len));
@@ -348,7 +348,7 @@ static ssize_t sec_write(struct connectdata *conn, curl_socket_t fd,
 }
 
 /* Matches Curl_send signature */
-static ssize_t sec_send(struct connectdata *conn, int sockindex,
+static curl_ssize_t sec_send(struct connectdata *conn, int sockindex,
                         const void *buffer, size_t len, CURLcode *err)
 {
   curl_socket_t fd = conn->sock[sockindex];
@@ -359,7 +359,7 @@ static ssize_t sec_send(struct connectdata *conn, int sockindex,
 int Curl_sec_read_msg(struct connectdata *conn, char *buffer,
                       enum protection_level level)
 {
-  /* decoded_len should be size_t or ssize_t but conn->mech->decode returns an
+  /* decoded_len should be size_t or curl_ssize_t but conn->mech->decode returns an
      int */
   int decoded_len;
   char *buf;
