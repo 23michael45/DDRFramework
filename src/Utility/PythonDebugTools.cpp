@@ -51,6 +51,8 @@ namespace DDRFramework
 		//std::string setbasePath = GlobalManager::Instance()->GetGlobalConfig().GetValue("PythonPath");
 		std::string setbasePath = "sys.path.append('" + m_BasePath + "')";
 
+		DebugLog("Set Python Base Path %s",m_BasePath.c_str());
+
 		PyRun_SimpleString(setbasePath.c_str());
 
 

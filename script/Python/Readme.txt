@@ -4,7 +4,7 @@ Python 调试说明
 
 调试客户端：
 	1 打开服务器  DDR_LocalServer.exe
-	2 Copy   Share/script/Python 目录到某一路径  并配置Global配置表中PythonPath路径到此路径
+	2 Copy   Share/script/Python 目录到某一路径  并配置Global配置表中PythonPath路径到此路径   注意WINDOWS下路径要用/   不要用\
 	3 打开Python路径下ProtoData.py   编写客户端期望收到的 python 函数 例如 
 		def rspMove():
 			rspCmdMove = PB.reqCmdMove()
@@ -27,7 +27,7 @@ Python 调试说明
 
 调试LSM服务:
 	1 打开服务器  DDR_LocalServer.exe 及客户端模拟程序 DDR_LocalClient
-	2 Copy   Share/script/Python 目录到某一路径  并配置Global配置表中PythonPath路径到此路径
+	2 Copy   Share/script/Python 目录到某一路径  并配置Global配置表中PythonPath路径到此路径  注意WINDOWS下路径要用/   不要用\
 	3 打开Python路径下ProtoData.py   编写LSM期望收到的 python 函数 例如 
 		def rspMove():
 			rspCmdMove = PB.reqCmdMove()
