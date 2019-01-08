@@ -97,8 +97,6 @@ namespace DDRFramework
 
 	void GlobalManagerClientBase::TcpConnect(std::string ip, std::string port)
 	{
-		GetUdpClient()->StopReceive();
-		GetUdpClient()->Stop();
 		GetTcpClient()->Connect(ip, port);
 	}
 
