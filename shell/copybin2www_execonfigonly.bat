@@ -13,10 +13,10 @@ xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\*.exe %CurrentPath%
 
 
 xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Release\Config %CurrentPath%\..\..\www\bin\x64\Release\Config /s /i
-xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Release\Config %CurrentPath%\..\..\www\bin\x64、Release\Config /s /i
+xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Release\Config %CurrentPath%\..\..\www\bin\x64\Release\Config /s /i
 
 
 xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Debug\Config %CurrentPath%\..\..\www\bin\x64\Debug\Config /s /i
-xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\Config %CurrentPath%\..\..\www\bin\Debug\Config /s /i
+xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\Config %CurrentPath%\..\..\www\bin\x64\Debug\Config /s /i
 
 cd %PrePath%
