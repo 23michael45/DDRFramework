@@ -13,7 +13,19 @@ namespace DDRFramework
 {
 	PythonDebugTools::PythonDebugTools(std::string path)
 	{
-		m_BasePath = path;
+		if (path.empty())
+		{
+
+			std::string exedir = DDRFramework::getexepath();
+			cppfs::FilePath fpath(exedir);
+			exedir = fpath.directoryPath() + "/Python";
+			m_BasePath = exedir;
+		}
+		else
+		{
+
+			m_BasePath = path;
+		}
 	}
 
 	PythonDebugTools::~PythonDebugTools()
@@ -44,9 +56,6 @@ namespace DDRFramework
 	{
 		Py_Initialize();
 		PyRun_SimpleString("import sys");
-		//std::string setbasePath = DDRFramework::getexepath();
-		//cppfs::FilePath fpath(setbasePath);
-		//setbasePath = "sys.path.append('" + fpath.directoryPath() + "/Python')";
 
 		//std::string setbasePath = GlobalManager::Instance()->GetGlobalConfig().GetValue("PythonPath");
 		std::string setbasePath = "sys.path.append('" + m_BasePath + "')";
@@ -55,6 +64,13 @@ namespace DDRFramework
 
 		PyRun_SimpleString(setbasePath.c_str());
 
+
+
+		std::string exedir = DDRFramework::getexepath();
+		cppfs::FilePath fpath(exedir);
+		exedir = fpath.directoryPath();
+		std::wstring wexedir = DDRFramework::StringToWString(exedir);
+		Py_SetPythonHome((wchar_t*)wexedir.c_str());
 
 		PyObject* pMsg = RunModuleFunc("ProtoData", funcName, nullptr);
 		if (pMsg)

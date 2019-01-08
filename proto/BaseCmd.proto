@@ -110,49 +110,7 @@ message rspLogin
 	eCltType yourRole = 2;
 }
 
-// flowDirection = RS2M or LS2C
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message notifyTerminalAccess
-{
-	int32 bRRConnected2RS = 1;
-	int32 bOp = 2;
-	int32 nMonitors = 3;
-	int32 nClients = 4;
-	repeated string nameLSMs = 5;
-}
 
-// flowDirection = RS2RR or RR2RS
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message notifySerAccess
-{
-	// field 1~3 for RS2RR
-	int32 nMonitors = 1;
-	int32 mTopOpLv = 2; // op. level of the top monitor
-	int32 mTopOpTime = 3; // connection time of the top monitor
-	// field 4~7 for RR2RS
-	int32 nClients = 4;
-	int32 cTopOpLv = 5; // op. level of the top client
-	int64 cTopOpTime = 6; // connection time of the top client
-	repeated string namesLSM = 7;
-}
-
-// flowDirection = RS2M or RS2RR or LS2C or LS2LSM
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
-message notifyAVStream
-{
-	message fullChannelInfo {
-		int32 devType = 1;
-		int32 dataType = 2; // 0-N.A; 1-audio; 2-video; 3-audio+video
-		string localResAccStr = 3; // UTF-8
-		string channelDescription = 4; // UTF-8
-		int32 bwReq = 5; // bandwidth requirement in kbps		
-		int64 remoteIP = 6;
-		int32 remotePort = 7;
-		string remotePass = 8; // a special string that serves as the key to streaming servers
-	}	
-	fullChannelInfo reservedChannel = 1;
-	repeated fullChannelInfo robotMonitorChannels = 2;
-}
 
 // if callerType == client,
 //		flowDirection = C2LS or LS2LSM
@@ -558,11 +516,6 @@ message reqTextChat
 	string chatText = 1;
 }
 
-
-
-
-
-
 enum ChannelNetworkType
 {
 		Local = 0;
@@ -595,6 +548,12 @@ message rspStreamAddr
 	repeated AVStreamSrcChannel channels = 1;
 	string error = 3;
 }
+message notifyStreamAddr
+{	
+	repeated AVStreamSrcChannel channels = 1;
+	string error = 3;
+}
+
 message notifyAlarm
 {
 	eCltType from = 1;

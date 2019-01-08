@@ -890,7 +890,7 @@ namespace DDRFramework {
 	void DisableMouseSelectConsole()
 	{
 #ifdef _WINDOWS
-		SetConsoleOutputCP(CP_UTF8);
+		//SetConsoleOutputCP(CP_UTF8);
 		//FreeConsole();
 		HWND hwnd = GetConsoleWindow();
 
