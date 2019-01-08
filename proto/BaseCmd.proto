@@ -50,6 +50,19 @@ message HeartBeat
 {
 	string whatever = 1;
 }
+message reqRemoteServerList
+{
+	string fromip = 1;
+}
+message rspRemoteServerList
+{
+	message RemoteServer{
+		string name = 1;
+		string ip = 2;
+		int32 port =3;
+	}
+	repeated RemoteServer servers = 1;
+}
 
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message bcLSAddr
