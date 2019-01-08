@@ -10,3 +10,12 @@
 /tools/xlsx2xml/xml/LocalServer/StreamSrcProxyConfig.xml
 /tools/xlsx2xml/xml/StreamRelayService/StreamRelayConfig.xml
 /tools/xlsx2xml/xml/LocalServer/RemoteStreamProxyConfig.xml
+/script/Python/__pycache__/BaseCmd_pb2.cpython-36.pyc
+/script/Python/__pycache__/BaseCmd_pb2.cpython-37.pyc
+/script/Python/__pycache__/ClientPythonDebugger.cpython-36.pyc
+/script/Python/__pycache__/ProtoData.cpython-36.pyc
+/script/Python/__pycache__/ProtoData.cpython-37.pyc
+/script/Python/__pycache__/PythonDebugger.cpython-36.pyc
+/script/Python/__pycache__/PythonDebugger.cpython-37.pyc
+/script/Python/__pycache__/six.cpython-36.pyc
+/script/Python/__pycache__/six.cpython-37.pyc
