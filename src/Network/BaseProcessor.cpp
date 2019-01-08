@@ -23,22 +23,31 @@ namespace DDRFramework
 
 	MsgRouterManager::MsgRouterManager()
 	{
-
 		REG_ROUTE(reqCmdMove, eCltType::eLSMSlamNavigation,CommonHeader_eFlowDir_Forward)
-			REG_ROUTE(reqCmdChangeSpeed, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
-			REG_ROUTE(reqCmdPauseResume, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdChangeSpeed, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdPauseResume, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdUpdateConfig, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdGetConfigdata, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdSetWorkPath, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdGeneralOctree, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdStartActionMode, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdEndActionMode, eCltType::eLSMSlamNavigation, CommonHeader_eFlowDir_Forward)
+
+		REG_ROUTE(reqCmdIPC, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdAudio, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdAutoChat, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+
+		REG_ROUTE(reqCmdAddFace, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdFaceDataBaseOrder, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdSetFaceParams, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
+
+		REG_ROUTE(reqCmdGetAlarmParams, eCltType::eAllLSM, CommonHeader_eFlowDir_Forward)
+		
+		REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 
 
-			REG_ROUTE(reqCmdIPC, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
-			REG_ROUTE(reqCmdAudio, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
-
-
-			REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
-
-
-
-			REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+		REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+		REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 	}
 
 	std::shared_ptr<DDRCommProto::CommonHeader> MsgRouterManager::FindCommonHeader(std::string bodytype)
