@@ -36,9 +36,20 @@ namespace DDRFramework
 			REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 
 
+			REG_ROUTE(reqCmdAddFace, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
+
+
+			REG_ROUTE(reqCmdUpdateConfig, eCltType::eLocalServer, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(reqCmdGetConfigdata, eCltType::eLocalServer, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(reqCmdSetWorkPath, eCltType::eLocalServer, CommonHeader_eFlowDir_Forward)
+
 
 			REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 			REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+
+
+
+
 	}
 
 	std::shared_ptr<DDRCommProto::CommonHeader> MsgRouterManager::FindCommonHeader(std::string bodytype)
