@@ -1,3 +1,4 @@
+#coding=utf-8
 import BaseCmd_pb2 as PB
 import ProtoData as PD
 
