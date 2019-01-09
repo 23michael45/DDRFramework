@@ -355,7 +355,7 @@ enum eAlarmType{
 message reqCmdGetAlarmParams{
 	eAlarmType alarmtype = 1;		// Get Face params or Thermal params
 }
-message rspCmdThermalGetParams{
+message rspCmdGetAlarmParams{
 	eCmdRspType type = 1;
 	eAlarmType alarmtype = 2;		// rsp Face params or Thermal params
 	float alarmtemp = 3;

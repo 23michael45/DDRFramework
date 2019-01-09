@@ -46,8 +46,26 @@ namespace DDRFramework
 		REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 
 
-		REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 		REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdChangeSpeed, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdPauseResume, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdUpdateConfig, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdGetConfigdata, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdSetWorkPath, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdGeneralOctree, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdStartActionMode, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdEndActionMode, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+
+			REG_ROUTE(rspCmdIPC, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdAudio, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdAutoChat, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+
+			REG_ROUTE(rspCmdAddFace, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdFaceDataBaseOrder, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdSetFaceParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+
+			REG_ROUTE(rspCmdGetAlarmParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
 
 
