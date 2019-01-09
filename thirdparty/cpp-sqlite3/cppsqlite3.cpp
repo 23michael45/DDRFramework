@@ -26,7 +26,7 @@ int sqlite3_decode_binary(const unsigned char *in, unsigned char *out);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace detail
+namespace sqlitedetail
 {
 
 	SQLite3Memory::SQLite3Memory() :
@@ -207,7 +207,7 @@ const char* CppSQLite3Buffer::format(const char* szFormat, ...)
 	try
 	{
 		va_start(va, szFormat);
-		mBuf = detail::SQLite3Memory(szFormat, va);
+		mBuf = sqlitedetail::SQLite3Memory(szFormat, va);
 		va_end(va);
 		return static_cast<const char*>(mBuf.getBuffer());
 	}

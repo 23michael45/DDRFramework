@@ -12,18 +12,24 @@ echo The current directory is %~dp0
 set CurrentPath=%~dp0
 cd %CurrentPath%
 
-rem Copy Server Db and Config 
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml %CurrentPath%..\..\DDRLocalServer\DDR_LocalServer\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRLocalServer\x64\Debug\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRLocalServer\x64\Release\Config\Global.xml /s /i
+
+call loadpath.bat
 
 
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml %CurrentPath%..\..\DDRLocalServer\DDR_LocalClient\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRLocalServer\x64\Debug\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRLocalServer\x64\Release\Config\Global.xml /s /i
+rem copy to project
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_LocalClient_Project_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_LocalServer_Project_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_BroadcastServer_Project_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_RemoteServer_Project_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDRStreamRelayService_Project_Path%\Config\Global.xml /s /i
 
 
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml %CurrentPath%..\..\DDRStreamRelayService\DDRStreamRelayService\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRStreamRelayService\x64\Debug\Config\Global.xml /s /i
-xcopy /Y %CurrentPath%..\tools\xlsx2xml\xml\Global_183.xml   %CurrentPath%..\..\DDRStreamRelayService\x64\Release\Config\Global.xml /s /i
+rem copy to build
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_LocalServer_Debug_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDR_LocalServer_Release_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDRStreamRelayService_Debug_Path%\Config\Global.xml /s /i
+xcopy /Y %BaseXmlPath%\Global_183.xml %DDRStreamRelayService_Release_Path%\Config\Global.xml /s /i
+
+
+
 

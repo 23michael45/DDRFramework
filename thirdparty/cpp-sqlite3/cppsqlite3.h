@@ -14,7 +14,7 @@
 
 #define CPPSQLITE_ERROR 1000
 
-namespace detail
+namespace sqlitedetail
 {
 	/**
 	 * RAII class for managing memory allocated by sqlite
@@ -95,7 +95,7 @@ public:
 
 private:
 
-	detail::SQLite3Memory mBuf;
+	sqlitedetail::SQLite3Memory mBuf;
 };
 
 

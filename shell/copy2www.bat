@@ -5,7 +5,10 @@ cd %CurrentPath%
 
 
 
-xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\*.* %CurrentPath%\..\..\www\bin\x64 /s /i
-xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\*.* %CurrentPath%\..\..\www\bin\x64 /s /i
+xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\*.dll %CurrentPath%\..\..\www\bin\x64 /s /i
+xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\*.dll %CurrentPath%\..\..\www\bin\x64 /s /i
+
+xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\*.exe %CurrentPath%\..\..\www\bin\x64 /s /i
+xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\*.exe %CurrentPath%\..\..\www\bin\x64 /s /i
 
 cd %PrePath%
