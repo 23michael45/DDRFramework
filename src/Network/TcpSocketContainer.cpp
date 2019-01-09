@@ -113,6 +113,27 @@ namespace DDRFramework
 		}
 	}
 
+	void TcpSocketContainer::SendBack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+		if (m_bConnected)
+		{
+			//m_IOContext.post(std::bind(&MessageSerializer::Pack, m_spSerializer, spmsg));
+
+			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
+			if (m_spSerializer)
+			{
+				spheader->set_flowdirection(0, CommonHeader_eFlowDir_Backward);
+				m_spSerializer->Pack(spheader, spmsg);
+
+			}
+		}
+		else
+		{
+			DebugLog("Disconnected Send Failed");
+
+		}
+
+	}
 	void TcpSocketContainer::Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		if (m_bConnected)

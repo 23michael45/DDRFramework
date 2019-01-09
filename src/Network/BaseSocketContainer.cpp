@@ -61,6 +61,13 @@ namespace DDRFramework
 		}
 
 	}
+	void BaseSocketContainer::SendBack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg)
+	{
+		if (m_SocketType == EST_TCP)
+		{
+			m_spTcpSocketContainer->SendBack(spheader, spmsg);
+		}
+	}
 	void BaseSocketContainer::Send(std::shared_ptr<google::protobuf::Message> spmsg)
 	{
 		Send(nullptr, spmsg);

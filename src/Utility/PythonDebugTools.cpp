@@ -112,7 +112,7 @@ namespace DDRFramework
 		std::string type_name;
 		RunPython(funcname, &pdata, size, type_name);
 
-		if (pdata && size > 0)
+		if (!type_name.empty())
 		{
 			auto spMsg = std::shared_ptr<google::protobuf::Message>(NULL);
 			const Descriptor* descriptor =

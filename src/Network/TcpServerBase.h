@@ -18,14 +18,7 @@ namespace DDRFramework
 		~TcpSessionBase();
 		virtual void Start();
 
-		void AssignLoginInfo(reqLogin info)
-		{
-			m_reqLoginInfo.CopyFrom(info);
-		}
-		reqLogin& GetLoginInfo()
-		{
-			return m_reqLoginInfo;
-		}
+
 
 		asio::streambuf& GetRecvBuf()
 		{
@@ -42,8 +35,6 @@ namespace DDRFramework
 
 	protected:
 		asio::streambuf m_ReadStreamBuf;
-		reqLogin m_reqLoginInfo;//Login Information
-
 
 		auto shared_from_base() {
 			return std::static_pointer_cast<TcpSessionBase>(shared_from_this());

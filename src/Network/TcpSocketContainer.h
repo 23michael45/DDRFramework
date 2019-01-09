@@ -52,6 +52,8 @@ namespace DDRFramework
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
 		//send proto msg with head
 		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
+		//send bask to a client that route store in spheader
+		void SendBack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
 		//send proto msg buf with head
 		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen);
 		//send raw buf

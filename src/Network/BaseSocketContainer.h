@@ -37,7 +37,8 @@ namespace DDRFramework
 		asio::io_context& GetIOContext();
 
 		void Send(std::shared_ptr<google::protobuf::Message> spmsg);
-		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader,std::shared_ptr<google::protobuf::Message> spmsg);
+		void Send(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
+		void SendBack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
 
 		void PrintRemoteIP(std::string btype);
 	};

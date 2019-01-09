@@ -44,12 +44,15 @@ message CommonHeader
 // +++++++++++++++++++ Common message header +++++++++++++++++++ //
 
 // ------------------- Common message bodies ------------------- //
-
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message HeartBeat
 {
 	string whatever = 1;
 }
+
+
+//-----------------------------------------------------------------------------------------------------------------Remote Server[[[[[
+
+//request get remote serverlist , from client or local server to broadcast server
 message reqRemoteServerList
 {
 	string fromip = 1;
@@ -63,8 +66,56 @@ message rspRemoteServerList
 	}
 	repeated RemoteServer servers = 1;
 }
+//register a localserver to a  remote server,ls represent a robot entity. from local server to remote server
+message reqRegisteLS
+{
+	string udid = 1;
+	string name = 2;
+}
+message rspRegisteLS
+{
+	string error = 1;
+}
 
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+//client login to a remote server , from client in internet to remote server
+message reqRemoteLogin
+{
+	eCltType type = 1;
+	string username = 2; // nickname for clients/monitors, module name for LSM, ignored for RR
+	string userpwd = 3;
+}
+message rspRemoteLogin
+{
+	message LSEntity
+	{
+		string udid = 1;
+		string name = 2;
+	}
+	repeated LSEntity lslist = 1;
+	
+	
+	enum eRemoteLoginRetCode {
+		success = 0;
+		server_busy = 1;
+		server_limit_reached = 2;
+		incorrect_password = 3;
+	}
+	eRemoteLoginRetCode retcode = 2;
+}
+
+
+//remote client select a local server (a robot) to control or watch
+message reqSelectLS
+{
+	string udid = 1;
+}
+message rspSelectLS
+{
+	string error = 1;
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------Remote Server]]]]]]]]]]]]]]]]]]]]]]]]]]]
 message bcLSAddr
 {
 	enum eServiceType {
