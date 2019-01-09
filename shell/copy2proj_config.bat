@@ -28,8 +28,8 @@ xcopy /Y %DDR_LocalClient_Project_Path%\Config %DDR_LocalServer_Debug_Path%\Conf
 xcopy /Y %DDR_LocalClient_Project_Path%\Config %DDR_LocalServer_Release_Path%\Config /s /i
 xcopy /Y %DDR_LocalServer_Project_Path%\Config %DDR_LocalServer_Debug_Path%\Config /s /i
 xcopy /Y %DDR_LocalServer_Project_Path%\Config %DDR_LocalServer_Release_Path%\Config /s /i
-xcopy /Y %DDR_RemoteServer_Project_Path%\Config %DDR_RemoteServer_Debug_Path%\Config /s /i
-xcopy /Y %DDR_RemoteServer_Project_Path%\Config %DDR_RemoteServer_Release_Path%\Config /s /i
+xcopy /Y %DDR_RemoteServer_Project_Path%\Config %DDR_LocalServer_Debug_Path%\Config /s /i
+xcopy /Y %DDR_RemoteServer_Project_Path%\Config %DDR_LocalServer_Release_Path%\Config /s /i
 xcopy /Y %DDR_BroadcastServer_Project_Path%\Config %DDR_LocalServer_Debug_Path%\Config /s /i
 xcopy /Y %DDR_BroadcastServer_Project_Path%\Config %DDR_LocalServer_Release_Path%\Config /s /i
 

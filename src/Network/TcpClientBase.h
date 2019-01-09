@@ -79,6 +79,7 @@ namespace DDRFramework
 
 		bool IsConnected()
 		{
+			std::lock_guard<std::mutex> lock(m_MapMutex);
 			for (auto spSession : m_spClientMap)
 			{
 				if (spSession.second->IsConnected())
@@ -91,6 +92,7 @@ namespace DDRFramework
 		}
 		std::shared_ptr<TcpClientSessionBase> GetConnectedSession()
 		{
+			std::lock_guard<std::mutex> lock(m_MapMutex);
 			for (auto spSession : m_spClientMap)
 			{
 				if (spSession.second->IsConnected())
@@ -108,7 +110,10 @@ namespace DDRFramework
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
-		std::map< std::shared_ptr<TcpSocketContainer>,std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
+		std::map< std::shared_ptr<TcpSocketContainer>, std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
+		std::mutex m_MapMutex;
+
+
 		std::shared_ptr< asio::io_service::work > m_spWork;
 		std::string m_Address;
 		std::string m_Port;

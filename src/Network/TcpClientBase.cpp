@@ -156,6 +156,7 @@ namespace DDRFramework
 	}
 	TcpClientBase::~TcpClientBase()
 	{
+		std::lock_guard<std::mutex> lock(m_MapMutex);
 		DebugLog("TcpClientBase Destroy");
 		m_spClientMap.clear();
 	}
@@ -166,6 +167,7 @@ namespace DDRFramework
 	}
 	std::shared_ptr<TcpClientSessionBase> TcpClientBase::Connect(std::string address, std::string port)
 	{
+		std::lock_guard<std::mutex> lock(m_MapMutex);
 		m_Address = address;
 		m_Port = port;
 
@@ -191,6 +193,17 @@ namespace DDRFramework
 
 	void TcpClientBase::Stop()
 	{
+		std::lock_guard<std::mutex> lock(m_MapMutex);
+		std::vector<std::shared_ptr<TcpClientSessionBase>> vec;
+		for (auto spSession : m_spClientMap)
+		{
+			vec.push_back(spSession.second);
+		}
+		m_spClientMap.clear();
+		for (auto spSession : vec)
+		{
+			spSession->Stop();
+		}
 		m_spWork.reset();
 	}
 	void TcpClientBase::ThreadEntry()
@@ -246,6 +259,7 @@ namespace DDRFramework
 	}
 	void TcpClientBase::OnDisconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
+		std::lock_guard<std::mutex> lock(m_MapMutex);
 		spContainer->Release();
 		m_spClientMap.erase(spContainer);
 
