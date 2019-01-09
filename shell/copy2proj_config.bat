@@ -8,7 +8,8 @@ call loadpath.bat
 
 rem -----------------------------------------------------------Copy DDRLocalServer Config DB to Project and  to Build Path-----------------------------------------------------------
 rem Copy Server Db  to Project
-xcopy /Y %LocalServerDBPath%\*.db %DDR_LocalServer_Project_Path% /s /i
+xcopy /Y %LocalServerDBPath%\LocalServerDB.db %DDR_LocalServer_Project_Path% /s /i
+xcopy /Y %RemoteServerDBPath%\RemoteServerDB.db %DDR_RemoteServer_Project_Path% /s /i
 
 
 rem Copy Base Config to Project
@@ -34,7 +35,16 @@ xcopy /Y %DDR_BroadcastServer_Project_Path%\Config %DDR_LocalServer_Debug_Path%\
 xcopy /Y %DDR_BroadcastServer_Project_Path%\Config %DDR_LocalServer_Release_Path%\Config /s /i
 
 
+rem Copy DB to Build
+xcopy /Y %DDR_LocalServer_Project_Path%\*.db %DDR_LocalServer_Debug_Path% /s /i
+xcopy /Y %DDR_RemoteServer_Project_Path%\*.db %DDR_LocalServer_Debug_Path% /s /i
+
+xcopy /Y %DDR_LocalServer_Project_Path%\*.db %DDR_LocalServer_Release_Path% /s /i
+xcopy /Y %DDR_RemoteServer_Project_Path%\*.db %DDR_LocalServer_Release_Path% /s /i
+
+
 rem -----------------------------------------------------------Copy DDRStreamRelayService Config to Project and to Build Path-----------------------------------------------------------
+
 
 rem Copy Base Config to Project
 xcopy /Y %BaseXmlPath%\*.xml %DDRStreamRelayService_Project_Path%\Config /i

@@ -3,12 +3,17 @@ echo The current directory is %~dp0
 set CurrentPath=%~dp0
 cd %CurrentPath%
 
+call loadpath.bat
 
-xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Release\Config %CurrentPath%\..\..\www\bin\x64\Release\Config /s /i
-xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Release\Config %CurrentPath%\..\..\www\bin\x64\Release\Config /s /i
+xcopy /Y %DDR_LocalServer_Debug_Path%\Config %WWW_Debug_Path%\Config /s /i
+xcopy /Y %DDRStreamRelayService_Debug_Path%\Config %WWW_Debug_Path%\Config /s /i
 
 
-xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Debug\Config %CurrentPath%\..\..\www\bin\x64\Debug\Config /s /i
-xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\Config %CurrentPath%\..\..\www\bin\x64\Debug\Config /s /i
+xcopy /Y %DDR_LocalServer_Release_Path%\Config %WWW_Release_Path%\Config /s /i
+xcopy /Y %DDRStreamRelayService_Release_Path%\Config %WWW_Release_Path%\Config /s /i
+
+
+xcopy /Y %DDR_LocalServer_Debug_Path%\*.db %WWW_Debug_Path% /s /i
+xcopy /Y %DDR_LocalServer_Release_Path%\*.db %WWW_Release_Path% /s /i
 
 cd %PrePath%

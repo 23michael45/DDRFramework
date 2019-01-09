@@ -6,6 +6,7 @@ cd %CurrentPath%
 
 rem -----------------------------------------------------------Config DB Path------------------------------------------------------
 set LocalServerDBPath=%CurrentPath%..\tools\sqlite3
+set RemoteServerDBPath=%CurrentPath%..\tools\sqlite3
 set LocalServerXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\LocalServer
 set RemoteServerXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\RemoteServer
 
@@ -32,4 +33,9 @@ set DDR_LocalServer_Release_Path=%CurrentPath%\..\..\DDRLocalServer\x64\Release
 set DDRStreamRelayService_Debug_Path=%CurrentPath%\..\..\DDRStreamRelayService\x64\Debug
 set DDRStreamRelayService_Release_Path=%CurrentPath%\..\..\DDRStreamRelayService\x64\Release
 
+
+
+rem -----------------------------------------------------------WWW Path-----------------------------------------------------------
+set WWW_Debug_Path=%CurrentPath%\..\..\www\bin\x64\Debug
+set WWW_Release_Path=%CurrentPath%\..\..\www\bin\x64\Release
 
