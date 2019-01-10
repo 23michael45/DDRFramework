@@ -24,9 +24,9 @@ namespace DDRFramework
 		oshold.write((const char*)pSamples, sampleCount * sizeof(mal_int16));
 		oshold.flush();
 
-		if (m_spSession)
+		for (auto spSessionSendTo : m_spSessionSendToSet)
 		{
-			m_spSession->Send(buf);
+			spSessionSendTo->Send(buf);
 		}
 
 	}

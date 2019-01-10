@@ -56,9 +56,25 @@ namespace DDRFramework
 
 
 
-		void SetTcpSession(std::shared_ptr<TcpSocketContainer> sp)
+		void SetTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
-			m_spSession = sp;
+			m_spSessionReceive = sp;
+		}
+		void AddTcpSendToSession(std::shared_ptr<TcpSocketContainer> sp)
+		{
+			if (m_spSessionSendToSet.find(sp) == m_spSessionSendToSet.end())
+			{
+				m_spSessionSendToSet.insert(sp);
+
+			}
+		}
+		void RemoveTcpSendToSession(std::shared_ptr<TcpSocketContainer> sp)
+		{
+			if (m_spSessionSendToSet.find(sp) != m_spSessionSendToSet.end())
+			{
+				m_spSessionSendToSet.erase(sp);
+
+			}
 		}
 		void BindOnFinishPlayWave(std::function<void(std::shared_ptr<WavBufInfo>)> func)
 		{
@@ -92,7 +108,8 @@ namespace DDRFramework
 		mal_int16* pCapturedSamples = NULL;
 		mal_uint32 playbackSample = 0;
 
-		std::shared_ptr<TcpSocketContainer> m_spSession;
+		std::shared_ptr<TcpSocketContainer> m_spSessionReceive;
+		std::set<std::shared_ptr<TcpSocketContainer>> m_spSessionSendToSet;
 
 		std::function<void(std::shared_ptr<WavBufInfo>)> m_OnFinishPlayWavFunc;
 		std::shared_ptr<WavBufInfo> m_spCurrentWavBufInfo;

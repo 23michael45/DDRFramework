@@ -113,7 +113,14 @@ message rspSelectLS
 {
 	string error = 1;
 }
-
+message reqUnselectLS
+{
+	string udid = 1;
+}
+message rspUnselectLS
+{
+	string error = 1;
+}
 
 //-----------------------------------------------------------------------------------------------------------------Remote Server]]]]]]]]]]]]]]]]]]]]]]]]]]]
 message bcLSAddr
@@ -175,66 +182,6 @@ message rspLogin
 }
 
 
-
-// if callerType == client,
-//		flowDirection = C2LS or LS2LSM
-//      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
-// if callerType == monitor,
-//		flowDirection = M2RS or RS2RR or LS2LSM
-//      eSrcCondition = Op; forwardType = LSMAll; eSrcRecType = RecSrc;
-// if callerType == robot_LSM,
-//		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
-//      eSrcCondition = NoCond; forwardType = ToOp; eSrcRecType = RecSrc;
-message reqTalk
-{
-	enum eCallerType {
-		client = 0;
-		monitor = 1;
-		robot_LSM = 2;
-	}
-	eCallerType callerType = 1;
-	int32 talkID = 2; // a randomly generated ID for this session of talk
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-audio+video
-	
-	// when the call is only between two local devices (client->LSM or LSM->client)
-	// these strings indicate caller's TCP server of talk. For client calling LSM,
-	// this address is on the client side and the LSM will try to receive data there;
-	// for LSM calling client, this address is on the LSM side and the client will try
-	// to send data there.
-	repeated string localTalkAddr = 4;
-}
-
-// if receiverType == client,
-//		flowDirection = C2LS or LS2LSM
-//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
-// if callerType == monitor,
-//		flowDirection = M2RS or RS2RR or LS2LSM
-//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
-// if receiverType == robot_LSM,
-//		flowDirection = LSM2LS or LS2C or RR2RS or RS2M
-//      eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = RecSrc;
-// Note that this message body is sent along with field "prevRouteAddr" of the previously
-// received message header (CommonHeader).
-message rspTalk
-{
-	enum eReceiverType {
-		client = 0;
-		monitor = 1;
-		robot_LSM = 2;
-	}
-	eReceiverType receiverType = 1;
-	int32 talkID = 2; // a randomly generated ID for this session of talk
-	int32 avType = 3; // 0-N.A; 1-audio; 2-video; 3-audio+video
-}
-
-// this is to maintain (dual) talk by sending heart beats
-// flowDirection = any possibility
-// eSrcCondition = NoCond; forwardType = RoutingBack; eSrcRecType = NoRec;
-message reqTalkHB
-{
-	int32 callerTalkID = 1; // caller's talkID
-	int32 receiverTalkID = 2; // receiver's talkID
-}
 
 //-----------------------------------ClientCmd[[[[[
 enum eCmdRspType{
@@ -611,6 +558,26 @@ message rspStreamAddr
 {	
 	repeated AVStreamSrcChannel channels = 1;
 	string error = 3;
+}
+
+
+message reqAudioTalk
+{
+	enum eOpMode {
+		eStart = 0;
+		eStop = 1;
+	}
+	enum eNetType
+	{
+		eLocal = 0;
+		eRemote = 1;
+	}
+	eOpMode opType = 1;
+	eNetType netType = 2;
+}
+message rspTalk
+{
+	string error = 1;
 }
 message notifyStreamAddr
 {	
