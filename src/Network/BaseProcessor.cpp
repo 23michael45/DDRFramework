@@ -70,14 +70,14 @@ namespace DDRFramework
 
 
 
-			REG_ROUTE(notifyBaseStatus, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyObsData, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyAlarmInfo, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyAlarmNewFace, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyAlarmFire, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyStreamAddr, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyAlarm, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(notifyStreamServiceInfoChanged, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(notifyBaseStatus, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyObsData, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyAlarmInfo, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyAlarmNewFace, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyAlarmFire, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyStreamAddr, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyAlarm, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(notifyStreamServiceInfoChanged, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
 
 
 	}
