@@ -1,8 +1,11 @@
-#ifndef __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
-#define __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
+#ifndef CommonFunc_h__
+#define CommonFunc_h__
+
+
 #include <new>
 #include <map>
 #include <vector>
+#include <string>
 
 
 #ifndef BYTE
@@ -88,9 +91,12 @@ namespace DDRFramework {
 	std::wstring StringToWString(const std::string& str);
 	std::string WStringToString(const std::wstring& str);
 	std::string getexepath();
-	std::string getStartWildRegex(const std::string& s);
+	std::string getStarWildRegex(const std::string& s, bool bbegin);
+	std::string replace_all(std::string& str, std::string sub, std::string replaceto);
+	std::vector<std::string> split(const std::string &text, char sep);
+
 
 	void DisableMouseSelectConsole();
 }
 
-#endif // __DDRFramework_COMMON_FUNCTIONS_H_INCLUDED__
+#endif // CommonFunc_h__

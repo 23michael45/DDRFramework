@@ -173,7 +173,6 @@ namespace DDRFramework {
 
 
 
-		std::vector<std::string> split(const std::string &text, char sep);
 	protected:
 
 		std::map<std::string, std::function<void()>> m_Functionmap;

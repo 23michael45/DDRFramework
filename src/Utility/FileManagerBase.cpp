@@ -39,9 +39,10 @@ namespace DDRFramework
 	}
 
 
-	void FileManagerBase::CheckDir(std::string dir, std::vector<std::string>& vec)
+	void FileManagerBase::CheckDir(std::string dir,std::string file, std::vector<std::string>& vec, std::shared_ptr <treenode<std::string>> sptreenode)
 	{
-		cppfs::FileHandle fhandel = fs::open(dir);
+		std::string full = dir + "/" + file;
+		cppfs::FileHandle fhandel = fs::open(full);
 		if (fhandel.exists())
 		{
 			if (fhandel.isDirectory())
@@ -51,23 +52,138 @@ namespace DDRFramework
 
 
 
-				for (auto file : files)
+				for (auto subfile : files)
 				{
-					CheckDir(dir + "/" + file, vec);
+					auto sp = std::make_shared<treenode<std::string>>();
+					sp->m_value = subfile;
+					sp->m_parent = sptreenode;
+					sptreenode->insert(sp);
+
+
+					CheckDir(full , subfile, vec, sp);
 				}
 			}
 			else
 			{
+				sptreenode->m_value = file;
 				vec.push_back(dir);
 			}
 
 		}
 	}
+
+	void FileManagerBase::MatchRelativeRoot(std::shared_ptr<treenode<std::string>> spnode, std::string format, std::vector<std::shared_ptr<treenode<std::string>>>& vec)
+	{
+		if (std::regex_match(spnode->m_value, std::regex(format)))
+		{
+			vec.push_back(spnode);
+		}
+
+		for (auto spleaf : spnode->m_leafmap)
+		{
+			MatchRelativeRoot(spleaf, format, vec);
+		}
+	}
+
+	void FileManagerBase::MatchFullPath(std::shared_ptr<treenode<std::string>> spnode, std::vector<string>& fmtvec, int level, std::vector<std::shared_ptr<treenode<std::string>>>& vec)
+	{
+		if (std::regex_match(spnode->m_value, std::regex(fmtvec[level])))
+		{
+			if (level == fmtvec.size() - 1)
+			{
+				vec.push_back(spnode);
+				return;
+			}
+			else
+			{
+				for (auto spleaf : spnode->m_leafmap)
+				{
+					MatchFullPath(spleaf, fmtvec, level + 1, vec);
+				}
+
+			}
+
+		}
+	}
+
 	std::vector<string> FileManagerBase::CheckFiles()
 	{
+		m_FileTree.create();
+
 		std::vector<std::string> files;
-		CheckDir(m_RootPath, files);
+
+		m_FileTree.m_spRoot->m_value = m_RootPath;
+		m_FileTree.m_spRoot->m_parent = std::weak_ptr<treenode<std::string>>();
+		CheckDir(m_RootPath, "", files,m_FileTree.m_spRoot);
 		return files;
 
 	}
+
+	DDRFramework::tree<std::string>& FileManagerBase::GetTree()
+	{
+		return m_FileTree;
+	}
+
+	void FileManagerBase::PrintTreeNode(std::shared_ptr<treenode<std::string>> sptreenode, int level /*= 0*/)
+	{
+		printf("\n");
+		for (int i = 0; i < level; i++)
+		{
+			printf("    ");
+		}
+		printf(sptreenode->m_value.c_str());
+
+		for (auto sp : sptreenode->m_leafmap)
+		{
+			PrintTreeNode(sp, level + 1);
+		}
+	}
+
+
+	std::vector<std::string> FileManagerBase::Match(std::string fmt)
+	{
+		std::vector<std::shared_ptr<treenode<std::string>>> vec = MatchNode(fmt);
+		std::vector<std::string> files;
+		for (auto sp : vec)
+		{
+			std::string value;
+			sp->getfull(value);
+			files.push_back(value);
+		}
+		return files;
+	}
+
+	std::vector<std::shared_ptr<treenode<std::string>>> FileManagerBase::MatchNode(std::string fmt)
+	{
+		auto& tree = GetTree();
+		fmt = replace_all(fmt, "\\", "/");
+		fmt = replace_all(fmt, "//", "/");
+		auto vec = split(fmt, '/');
+
+		std::vector<string> wildvec;
+		int i = 0;
+		for (auto s : vec)
+		{
+			std::string finalstr = DDRFramework::getStarWildRegex(s, i == 0 ? true : false);
+			wildvec.push_back(finalstr);
+			i++;
+		}
+
+		//find relative root
+		std::vector<std::shared_ptr<treenode<std::string>>> matchrootnode;
+		if (wildvec.size() > 0)
+		{
+			std::string rootfmt = wildvec[0];
+			MatchRelativeRoot(tree.m_spRoot, rootfmt, matchrootnode);
+		}
+
+
+		std::vector<std::shared_ptr<treenode<std::string>>> matchfullnode;
+		for (auto spNode : matchrootnode)
+		{
+			MatchFullPath(spNode, wildvec, 0, matchfullnode);
+		}
+		return matchfullnode;
+	}
+
 }

@@ -4,6 +4,7 @@
 #include <thread>
 #include <chrono>
 #include <codecvt>
+#include <regex>
 
 #include <asio.hpp>
 
@@ -849,13 +850,22 @@ namespace DDRFramework {
 	}
 
 #endif
-	std::string getStartWildRegex(const std::string& s)
+	std::string getStarWildRegex(const std::string& s,bool bbegin)
 	{
 		size_t pos = 0;
 		std::vector<size_t> posvec;
+		std::string sformat;
+		if (bbegin)
+		{
+			sformat = "(.*)(" + s;
+			pos = 5;
+		}
+		else
+		{
 
-		std::string sformat = "(.*)(" + s;
-		pos = 4;
+			sformat = "(" + s;
+			pos = 1;
+		}
 		do
 		{
 
@@ -884,7 +894,42 @@ namespace DDRFramework {
 
 
 		} while (pos > 0);
+
+
+		sformat = replace_all(sformat, "()", "");
 		return sformat;
+	}
+	std::string replace_all(std::string& str, std::string sub, std::string replaceto)
+	{
+		size_t index = 0;
+		while (true) {
+			/* Locate the substring to replace. */
+			index = str.find(sub, index);
+			if (index == std::string::npos) break;
+
+			/* Make the replacement. */
+			str.replace(index, sub.length(), replaceto);
+
+			/* Advance index forward so the next iteration doesn't pick it up as well. */
+			index += sub.length();
+		}
+		return str;
+	}
+
+	std::vector<std::string> split(const std::string &text, char sep)
+	{
+		std::vector<std::string> tokens;
+		std::size_t start = 0, end = 0;
+		while ((end = text.find(sep, start)) != std::string::npos) {
+			if (end != start) {
+				tokens.push_back(text.substr(start, end - start));
+			}
+			start = end + 1;
+		}
+		if (end != start) {
+			tokens.push_back(text.substr(start));
+		}
+		return tokens;
 	}
 
 	void DisableMouseSelectConsole()

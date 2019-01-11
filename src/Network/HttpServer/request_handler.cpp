@@ -6,7 +6,9 @@
 #include "reply.hpp"
 #include "request.hpp"
 #include <iostream>
+#include "../../Utility/DDRMacro.h"
 
+#include "../../Utility/Logger.h"
 namespace http {
     namespace server {
 
@@ -51,7 +53,7 @@ namespace http {
 
 	    // Open the file to send back.
 	    std::string full_path = doc_root_ + request_path;//文件的完整目录
-	    std::cout<<full_path<<std::endl;
+		DebugLog("Http Server handle request:%s", full_path.c_str());
 	    std::ifstream is(full_path.c_str(), std::ios::in | std::ios::binary);//打开文件
 	    if (!is)
 	    {
