@@ -10,6 +10,7 @@
 #include <set>
 #include "DDRMacro.h"
 #include "Logger.h"
+#include "CommonFunc.h"
 
 namespace DDRFramework
 {
