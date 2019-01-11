@@ -24,8 +24,15 @@ namespace DDRFramework
 		~MsgRouterManager() {};
 
 		std::shared_ptr<CommonHeader> FindCommonHeader(std::string bodytype);
+
+		void SetCltType(eCltType type)
+		{
+			m_CltType = type;
+		}
 	private:
 		std::map<string, std::shared_ptr<CommonHeader>> m_RouteMsgHeaderMap;
+
+		eCltType m_CltType;
 	};
 
 	class BaseHeadRuleRouter

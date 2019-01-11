@@ -27,12 +27,8 @@ namespace DDRFramework
 
 	void BaseMessageDispatcher::Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
-		auto btype = spHeader->bodytype();
-		if (btype.find("HeartBeat") == std::string::npos)
-		{
-			spParentSocketContainer->PrintRemoteIP(btype);
-
-		}
+		Hook(spParentSocketContainer, spHeader, spMsg);
+	
 		if (m_ProcessorMap.find(spHeader->bodytype()) != m_ProcessorMap.end())
 		{
 			auto sp = m_ProcessorMap[spHeader->bodytype()];
@@ -53,7 +49,34 @@ namespace DDRFramework
 			}
 		}
 	}
-	void BaseMessageDispatcher::AsyncThreadEntry(std::shared_ptr<BaseProcessor> spProcessor ,std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
+
+	void BaseMessageDispatcher::Hook(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
+	{
+		auto btype = spHeader->bodytype();
+		if (btype.find("HeartBeat") == std::string::npos)
+		{
+			spParentSocketContainer->PrintRemoteIP(btype);
+		}
+		else if (btype == "DDRCommProto.rspLogin")
+		{
+			rspLogin* pRaw = reinterpret_cast<rspLogin*>(spMsg.get());
+			if (pRaw)
+			{
+				MsgRouterManager::Instance()->SetCltType(pRaw->yourrole());
+			}
+		}
+		else if (btype == "DDRCommProto.rspRemoteLogin")
+		{
+			rspRemoteLogin* pRaw = reinterpret_cast<rspRemoteLogin*>(spMsg.get());
+			if (pRaw)
+			{
+
+				MsgRouterManager::Instance()->SetCltType(pRaw->yourrole());
+			}
+		}
+	}
+
+	void BaseMessageDispatcher::AsyncThreadEntry(std::shared_ptr<BaseProcessor> spProcessor, std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
 		if (spProcessor)
 		{

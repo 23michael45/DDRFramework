@@ -16,7 +16,8 @@ namespace DDRFramework
 	#define REG_ROUTE(cmd,totype,dir) \
 	cmd cmd;\
 	std::shared_ptr<CommonHeader> sp##cmd = std::make_shared<CommonHeader>();\
-	sp##cmd->add_toclttype(totype);\
+	sp##cmd->set_toclttype(totype);\
+	sp##cmd->set_fromclttype(m_CltType);\
 	sp##cmd->add_flowdirection(dir);\
 	m_RouteMsgHeaderMap.insert(make_pair(##cmd.GetTypeName(), sp##cmd));
 
@@ -43,7 +44,6 @@ namespace DDRFramework
 
 		REG_ROUTE(reqCmdGetAlarmParams, eCltType::eAllLSM, CommonHeader_eFlowDir_Forward)
 		
-		REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 
 
 		REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
@@ -65,7 +65,6 @@ namespace DDRFramework
 			REG_ROUTE(rspCmdSetFaceParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
 			REG_ROUTE(rspCmdGetAlarmParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-			REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
 
 
@@ -80,6 +79,10 @@ namespace DDRFramework
 			REG_ROUTE(notifyStreamServiceInfoChanged, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
 
 
+
+			//File is complex,use req rsp and chk ans to do  it
+			//REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+			//REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 	}
 
 	std::shared_ptr<DDRCommProto::CommonHeader> MsgRouterManager::FindCommonHeader(std::string bodytype)

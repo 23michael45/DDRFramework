@@ -27,14 +27,16 @@ message CommonHeader
 		int32 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
 	}
 	
-	repeated eCltType fromType = 2;// repeated here is to indicate its validity
-	repeated eCltType toCltType = 3;// repeated here is to indicate its validity
-	repeated PassNode passNode = 4;// repeated here is to record the route
+	eCltType fromCltType = 2;
+	eCltType toCltType = 3;
+	repeated PassNode passNodeArray = 4;// repeated here is to record the route
 	
 	// flow direction of the immediate transfer
 	enum eFlowDir {
 		Forward = 0;    //req is forward ,maybe from client to any service,through center server
 		Backward = 1;   //rsp is backward, maybe from service to client,through center server
+		RecordInQueue = 2;//some sequence msgs need to be use a header to record its route,like  reqFileAddr chkFileStatus ,mannually record passnode in processor
+		ReturnPopQueue = 3;//some sequence msgs to back to the origin use recorded header,like ansFileStatus,rspFileAddr ,mannually use passnode in processor
 	}
 	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
 	
@@ -101,6 +103,7 @@ message rspRemoteLogin
 		incorrect_password = 3;
 	}
 	eRemoteLoginRetCode retcode = 2;
+	eCltType yourRole = 3;
 }
 
 
@@ -145,8 +148,10 @@ message bcLSAddr
 //bit mask: 0x01 0x02 0x04 0x08 0x10 0x20 0x40 0x80...
 enum eCltType {
 	eNull = 0x0;
-	ePCClient = 0x01;
-	eAndroidClient = 0x02;
+	eLocalPCClient = 0x01;
+	eLocalAndroidClient = 0x02;	
+	eRemotePCClient = 0x04;
+	eRemoteAndroidClient = 0x08;
 	eAllClient = 0xff;
 	eLSMStreamRelay = 0x100;
 	eLSMSlamNavigation = 0x200;

@@ -23,6 +23,8 @@ namespace DDRFramework
 
 		virtual void Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer,std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
+		virtual void Hook(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr <google::protobuf::Message> spMsg);
+
 		
 		void AsyncThreadEntry(std::shared_ptr<BaseProcessor> spProcessor, std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 		void EraseThread(std::shared_ptr<std::thread> spThread);
