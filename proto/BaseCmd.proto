@@ -479,6 +479,12 @@ message notifyAlarmFire {
 }
 
 //-----------------------------------ClientAlarm]]]]]
+
+
+
+
+//-----------------------------------FileOperation[[[[
+
 enum eFileTypes {
 	FileContents = 0;
 	FileHttpAddress = 1;
@@ -499,7 +505,15 @@ message ansFileStatus
 	repeated bytes fileAddrList = 2; // no wildcards
 }
 
+//remote server notify localserver --> localhttpserver to upload files
+message notifyUploadFile
+{
+	string httpAddr = 1;
+	repeated bytes fileNames = 2; // no wildcards
+	
+}
 
+//-----------------------------------FileOperation]]]]]
 
 // flowDirection = LSM2LS or LS2C or RR2RS or RS2M
 // eSrcCondition = NoCond; forwardType = CltMonAll; eSrcRecType = NoRec;

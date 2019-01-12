@@ -8,7 +8,8 @@
 #include <string>
 namespace DDRFramework
 {
-	size_t write_file(void *ptr, size_t size, size_t nmemb, void *pfile);
+	size_t write_download_file(void *ptr, size_t size, size_t nmemb, void *pfile);
+	size_t write_upload_file(void *buffer, size_t size, size_t nmemb, void *userp);
 	class  HttpSession : public std::enable_shared_from_this<HttpSession>
 	{
 	public:
@@ -20,9 +21,13 @@ namespace DDRFramework
 	
 
 		void DoGet(std::string& url, std::string outfile);
+		void GetThread(std::string url, std::string outfile);
 
-		void ThreadEntry(std::string url, std::string outfile);
-		void DoPost();
+
+
+
+		void DoPost(std::string url, std::string basedir, std::string inputfile);
+		void PostThread(std::string url, std::string basedir, std::string inputfile);
 
 		void WriteFileStream(const void* ptr,int len)
 		{
