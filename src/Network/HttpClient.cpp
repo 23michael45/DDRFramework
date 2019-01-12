@@ -26,39 +26,6 @@ namespace DDRFramework
 	}
 
 
-
-	curl_asio::data_action::type HttpSession::on_transfer_data_read(std::ofstream &out, const asio::const_buffer& buffer)
-	{
-		try
-		{
-			out.write(asio::buffer_cast<const char*>(buffer), asio::buffer_size(buffer));
-			return curl_asio::data_action::success;
-		}
-		catch (std::exception& e)
-		{
-			DebugLog("%s", e.what());
-		}
-		return curl_asio::data_action::abort;
-	}
-
-	void HttpSession::on_transfer_done(curl_asio::transfer::ptr transfer, std::ofstream &out, const std::string &file, CURLcode result)
-	{
-		if (result == CURLE_OK)
-		{
-			out.close();
-
-			DebugLog("Transfer of %s  completed successfully ( %d  seconds)! Content saved to file: %s ", transfer->info().effective_url().c_str(), transfer->info().total_time(), file.c_str());
-		}
-		else
-		{
-			DebugLog("Transfer of %s  failed with error %i", transfer->info().effective_url().c_str(), result);
-		}
-		transfer->on_data_read = nullptr;
-		transfer->on_done = nullptr;
-		transfer.reset();
-		m_spWork.reset();
-	}
-
 	size_t write_download_file(void *ptr, size_t size, size_t nmemb, void *pData) {
 
 		string data((const char*)ptr, (size_t)size * nmemb);

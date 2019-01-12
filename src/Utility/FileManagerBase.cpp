@@ -39,7 +39,12 @@ namespace DDRFramework
 	}
 
 
-	void FileManagerBase::CheckDir(std::string dir,std::string file, std::vector<std::string>& vec, std::shared_ptr <treenode<std::string>> sptreenode)
+	std::string FileManagerBase::GetRootPath()
+	{
+		return m_RootPath;
+	}
+
+	void FileManagerBase::CheckDir(std::string dir, std::string file, std::vector<std::string>& vec, std::shared_ptr <treenode<std::string>> sptreenode)
 	{
 		std::string full = dir + "/" + file;
 		cppfs::FileHandle fhandel = fs::open(full);
@@ -185,5 +190,58 @@ namespace DDRFramework
 		}
 		return matchfullnode;
 	}
+
+
+
+
+	std::string FileManagerBase::HttpAddr2BaseDir(std::string httpaddr)
+	{
+		int index = httpaddr.find_first_of(':');
+		index = httpaddr.find(':', index + 1);
+		index = httpaddr.find('/', index + 1);
+
+		std::string full = httpaddr.replace(httpaddr.begin(), httpaddr.begin() + index, m_RootPath);
+		full = replace_all(full, "///", "/");
+		full = replace_all(full, "//", "/");
+
+		return full;
+	}
+
+	std::string FileManagerBase::GetRelativeDir(std::string httpaddr)
+	{
+		int index = httpaddr.find_first_of(':');
+		index = httpaddr.find(':', index + 1);
+		index = httpaddr.find('/', index + 1);
+
+		std::string relativepath = httpaddr.replace(httpaddr.begin(), httpaddr.begin() + index, "");
+		relativepath = replace_all(relativepath, "///", "/");
+		relativepath = replace_all(relativepath, "//", "/");
+
+		return relativepath;
+
+	}
+	std::string FileManagerBase::GetFullDirFromRelative(std::string relativepath)
+	{
+		std::string full = m_RootPath + relativepath;	
+		full = replace_all(relativepath, "//", "/");
+		return full;
+	}
+
+	bool FileManagerBase::FileExist(std::string url)
+	{
+		std::string full = url;
+		if (url.substr(0, 4) == "http")
+		{
+			full = HttpAddr2BaseDir(url);
+		}
+
+		cppfs::FileHandle fhandel = fs::open(full);
+		if (fhandel.exists())
+		{
+			return true;
+		}
+		return false;
+	}
+
 
 }

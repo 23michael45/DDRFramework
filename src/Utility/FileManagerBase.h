@@ -121,6 +121,7 @@ namespace DDRFramework
 		~FileManagerBase();
 
 		void SetRootPath(std::string root);
+		std::string GetRootPath();
 		std::vector<std::string> CheckFiles();
 
 		tree<std::string>& GetTree();
@@ -129,6 +130,13 @@ namespace DDRFramework
 		void PrintTreeNode(std::shared_ptr<treenode<std::string>> sptreenode, int level = 0);
 
 		std::vector<std::string> Match(std::string fmt);
+
+
+
+		std::string HttpAddr2BaseDir(std::string httpaddr);
+		std::string GetRelativeDir(std::string httpaddr);
+		std::string GetFullDirFromRelative(std::string relativepath);
+		bool FileExist(std::string url);               
 
 	protected:
 
