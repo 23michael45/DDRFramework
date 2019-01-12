@@ -211,13 +211,31 @@ void LocalFileHandle::setPermissions(unsigned long)
 {
 }
 
+bool LocalFileHandle::createDirectoryRecursively(std::string path)
+{
+	try
+	{
+		int pos = 0;
+		do
+		{
+			pos = path.find_first_of("\\/", pos + 1);
+			CreateDirectoryA(path.substr(0, pos).c_str(), NULL);
+		} while (pos != std::string::npos);
+
+		return true;
+	}
+	catch (std::exception& e)
+	{
+		return false;
+	}
+}
 bool LocalFileHandle::createDirectory()
 {
     // Check directory
     if (exists()) return false;
 
     // Create directory
-    if (!CreateDirectoryA(m_path.c_str(), nullptr))
+    if (!createDirectoryRecursively(m_path.c_str()))
     {
         return false;
     }

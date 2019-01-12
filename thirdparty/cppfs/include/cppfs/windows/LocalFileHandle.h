@@ -71,6 +71,8 @@ public:
 
 
 protected:
+
+	bool createDirectoryRecursively(std::string path);
     void readFileInfo() const;
 
 

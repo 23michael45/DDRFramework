@@ -6,6 +6,13 @@
 #include "../../Shared/thirdparty/curl/include/curl/easy.h"
 #include <sstream>
 #include <iostream>
+#include "../../../Shared/thirdparty/cppfs/include/cppfs/windows/LocalFileSystem.h"
+#include "../../../Shared/thirdparty/cppfs/include/cppfs/FilePath.h"
+#include "../../../Shared/thirdparty/cppfs/include/cppfs/FileHandle.h"
+#include "../../../Shared/thirdparty/cppfs/include/cppfs/fs.h"
+
+
+
 namespace DDRFramework
 {
 
@@ -72,6 +79,10 @@ namespace DDRFramework
 		curl_easy_setopt(m_pCurl, CURLOPT_ACCEPT_ENCODING, "deflate");
 
 		curl_easy_setopt(m_pCurl, CURLOPT_WRITEFUNCTION, write_download_file);
+
+		cppfs::FilePath fp(outfile);
+		cppfs::FileHandle fhandel = cppfs::fs::open(fp.directoryPath());
+		fhandel.createDirectory();
 
 		m_OutFileStream.open(outfile, std::ios::binary);
 		curl_easy_setopt(m_pCurl, CURLOPT_WRITEDATA, this);
