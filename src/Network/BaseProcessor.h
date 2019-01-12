@@ -29,6 +29,10 @@ namespace DDRFramework
 		{
 			m_CltType = type;
 		}
+
+		void RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader,std::shared_ptr<TcpSocketContainer> spSession);
+		bool ReturnPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, int& IntPtr, eCltType& type);
+		bool IsLastPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader);
 	private:
 		std::map<string, std::shared_ptr<CommonHeader>> m_RouteMsgHeaderMap;
 

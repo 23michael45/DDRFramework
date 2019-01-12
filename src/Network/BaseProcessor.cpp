@@ -94,4 +94,40 @@ namespace DDRFramework
 		return nullptr;
 	}
 
+	void MsgRouterManager::RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<TcpSocketContainer> spSession)
+	{
+		CommonHeader_PassNode* pNode = spHeader->add_passnodearray();
+		pNode->set_nodetype(m_CltType);
+		pNode->set_receivesessionid((int)spSession.get());
+	}
+
+	bool MsgRouterManager::ReturnPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, int& IntPtr, eCltType& type)
+	{
+		auto passnodes = spHeader->mutable_passnodearray();
+		google::protobuf::RepeatedPtrField<CommonHeader_PassNode>::reverse_iterator rit = passnodes->rbegin();
+
+
+		if (rit != passnodes->rend())
+		{
+
+			IntPtr = rit->receivesessionid();
+			type = rit->nodetype();
+
+
+			passnodes->erase((rit + 1).base());
+			if (type == m_CltType)
+			{
+				return true;
+			}
+		}
+
+		DebugLog("PassNode Return Error.Type not same");
+		return false;
+	}
+
+	bool MsgRouterManager::IsLastPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader)
+	{
+		return spHeader->passnodearray().size() == 0;
+	}
+
 }
