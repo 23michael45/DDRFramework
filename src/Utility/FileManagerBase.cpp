@@ -26,6 +26,7 @@ namespace DDRFramework
 		cppfs::FilePath path(DDRFramework::getexepath());
 		m_RootPath = path.directoryPath();
 
+		CheckFiles();
 
 	}
 	FileManagerBase::~FileManagerBase()
@@ -207,13 +208,22 @@ namespace DDRFramework
 		return full;
 	}
 
-	std::string FileManagerBase::GetRelativeDir(std::string httpaddr)
+	std::string FileManagerBase::GetRelativeDirFromHttp(std::string httpaddr)
 	{
 		int index = httpaddr.find_first_of(':');
 		index = httpaddr.find(':', index + 1);
 		index = httpaddr.find('/', index + 1);
 
 		std::string relativepath = httpaddr.replace(httpaddr.begin(), httpaddr.begin() + index, "");
+		relativepath = replace_all(relativepath, "///", "/");
+		relativepath = replace_all(relativepath, "//", "/");
+
+		return relativepath;
+
+	}	
+	std::string FileManagerBase::GetRelativeDirFromFull(std::string fullpath)
+	{
+		std::string relativepath = fullpath.replace(fullpath.begin(), fullpath.begin() + m_RootPath.length(), "");
 		relativepath = replace_all(relativepath, "///", "/");
 		relativepath = replace_all(relativepath, "//", "/");
 

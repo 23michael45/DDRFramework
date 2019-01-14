@@ -25,6 +25,7 @@ message CommonHeader
 	{
 		eCltType nodeType = 1;
 		int32 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
+		repeated int32 IntptrData = 3;//store a pointer that to some data structure
 	}
 	
 	eCltType fromCltType = 2;
@@ -39,7 +40,6 @@ message CommonHeader
 		ReturnPopQueue = 3;//some sequence msgs to back to the origin use recorded header,like ansFileStatus,rspFileAddr ,mannually use passnode in processor
 	}
 	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
-	
 	
 }
 
@@ -494,7 +494,9 @@ enum eFileTypes {
 message chkFileStatus
 {
 	eFileTypes fileType = 1;
-	repeated bytes fileNames = 2; // allow wildcards (*,?, etc)
+	repeated bytes filefmt = 2; // wildcards fmt
+	repeated bytes existfiles = 3; // relavtive path
+	eCltType tarServiceType = 4;
 }
 
 // flowDirection = LSM2LS
@@ -509,7 +511,16 @@ message ansFileStatus
 message notifyUploadFile
 {
 	string httpAddr = 1;
-	repeated bytes fileNames = 2; // no wildcards
+	repeated bytes filefmt = 2; // wildcards fmt
+	repeated bytes existfiles = 3; // relavtive path
+	eCltType tarServiceType = 4;
+	
+}
+//local server notify remote server
+message notifyUploadFileProgress
+{
+	float progress = 1;//0-1 ,1 is upload finish
+	repeated bytes uploadedfiles = 2; // relavtive path
 	
 }
 
@@ -611,8 +622,8 @@ message notifyAlarm
 	string error = 3;
 	
 }
-// flowDirection = M2RS or RS2RR or C2LS
-// eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
+
+//local client req file
 message reqFileAddress
 {
 	eCltType tarServiceType = 1;
@@ -623,6 +634,22 @@ message reqFileAddress
 // flowDirection = RR2RS or RS2M or LS2C
 // eSrcCondition = NoCond; forwardType = NoForwarding; eSrcRecType = NoRec;
 message rspFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated bytes fileAddrList = 3; // ignored if fileType!=FileContents
+	string error = 4;
+}
+
+//remote client reqfile
+message reqRemoteFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated bytes fileNames = 3;  // allow wildcards (*,?, etc)
+}
+
+message rspRemoteFileAddress
 {
 	eCltType tarServiceType = 1;
 	eFileTypes fileType = 2;
