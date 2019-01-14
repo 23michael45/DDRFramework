@@ -134,7 +134,8 @@ namespace DDRFramework
 
 
 		std::string HttpAddr2BaseDir(std::string httpaddr);
-		std::string GetRelativeDir(std::string httpaddr);
+		std::string GetRelativeDirFromHttp(std::string httpaddr);
+		std::string GetRelativeDirFromFull(std::string fullpath);
 		std::string GetFullDirFromRelative(std::string relativepath);
 		bool FileExist(std::string url);               
 

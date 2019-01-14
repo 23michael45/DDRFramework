@@ -79,10 +79,12 @@ namespace DDRFramework
 			REG_ROUTE(notifyStreamServiceInfoChanged, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
 
 
+			REG_ROUTE(reqFileAddress, eCltType::eAllLSM, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
-			//File is complex,use req rsp and chk ans to do  it
-			//REG_ROUTE(reqFileAddress, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
-			//REG_ROUTE(rspFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			//Remote File is complex,use req rsp and chk ans to do  it
+			//REG_ROUTE(reqRemoteFileAddress, eCltType::eAllLSM, CommonHeader_eFlowDir_Forward)
+			//REG_ROUTE(rspRemoteFileAddress, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 	}
 
 	std::shared_ptr<DDRCommProto::CommonHeader> MsgRouterManager::FindCommonHeader(std::string bodytype)
@@ -94,14 +96,24 @@ namespace DDRFramework
 		return nullptr;
 	}
 
-	void MsgRouterManager::RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<TcpSocketContainer> spSession)
+	CommonHeader_PassNode* MsgRouterManager::RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<TcpSocketContainer> spSession)
 	{
 		CommonHeader_PassNode* pNode = spHeader->add_passnodearray();
 		pNode->set_nodetype(m_CltType);
 		pNode->set_receivesessionid((int)spSession.get());
+		return pNode;
+	}	
+	CommonHeader_PassNode* MsgRouterManager::RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<TcpSocketContainer> spSession, std::vector<int> dataptrs)
+	{
+		CommonHeader_PassNode* pNode = RecordPassNode(spHeader, spSession);
+		for (auto ptr : dataptrs)
+		{
+			pNode->add_intptrdata(ptr);
+		}
+		return pNode;
 	}
 
-	bool MsgRouterManager::ReturnPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, int& IntPtr, eCltType& type)
+	bool MsgRouterManager::ReturnPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, CommonHeader_PassNode& passnode)
 	{
 		auto passnodes = spHeader->mutable_passnodearray();
 		google::protobuf::RepeatedPtrField<CommonHeader_PassNode>::reverse_iterator rit = passnodes->rbegin();
@@ -109,13 +121,9 @@ namespace DDRFramework
 
 		if (rit != passnodes->rend())
 		{
-
-			IntPtr = rit->receivesessionid();
-			type = rit->nodetype();
-
-
+			passnode.CopyFrom(*rit);
 			passnodes->erase((rit + 1).base());
-			if (type == m_CltType)
+			if (passnode.nodetype() == m_CltType)
 			{
 				return true;
 			}

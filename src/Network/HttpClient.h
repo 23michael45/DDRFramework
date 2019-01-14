@@ -16,14 +16,11 @@ namespace DDRFramework
 		HttpSession();
 		~HttpSession();
 
-		void DoGet(std::string& url, std::string outfile);
-		void GetThread(std::string url, std::string outfile);
-
-
-
-
+		void DoGet(std::string url, std::string outfile);
+		void DoGet(std::vector<std::string> urls, std::vector<std::string>  outfiles);
+		
 		void DoPost(std::string url, std::string basedir, std::string inputfile);
-		void PostThread(std::string url, std::string basedir, std::string inputfile);
+		void DoPost(std::string url, std::string basedir, std::vector<std::string> inputfiles); 
 
 		void WriteFileStream(const void* ptr,int len)
 		{
@@ -37,11 +34,19 @@ namespace DDRFramework
 		{
 			m_OnReadDataFunc = f;
 		}
-		void BindOnDoneFunc(std::function<void(float)> f)
+		void BindOnGetDoneFunc(std::function<void(float)> f)
 		{
-			m_OnDoneFunc = f;
+			m_OnGetDoneFunc = f;
+		}
+		void BindOnPostDoneFunc(std::function<void(float)> f)
+		{
+			m_OnPostDoneFunc = f;
 		}
 	private:
+		void GetOneFile(std::string url, std::string outfile);
+		void GetThread(std::vector<std::string> urls, std::vector<std::string> outfiles);
+		void PostOneFile(std::string url, std::string basedir, std::string inputfile);
+		void PostThread(std::string url, std::string basedir, std::vector<std::string> inputfiles);
 
 		asio::io_context m_ContextIO;
 		std::shared_ptr<asio::io_context::work> m_spWork;
@@ -50,7 +55,8 @@ namespace DDRFramework
 		CURL* m_pCurl;
 
 		std::function<void(float)> m_OnReadDataFunc;
-		std::function<void(float)> m_OnDoneFunc;
+		std::function<void(float)> m_OnGetDoneFunc;
+		std::function<void(float)> m_OnPostDoneFunc;
 	};
 
 }

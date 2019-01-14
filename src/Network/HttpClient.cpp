@@ -35,10 +35,41 @@ namespace DDRFramework
 
 		return size * nmemb;
 	}
-	void HttpSession::GetThread(std::string url, std::string outfile)
+	void HttpSession::GetThread(std::vector<std::string> urls, std::vector<std::string> outfiles)
+	{
+		for (int i = 0 ; i< urls.size();i++)
+		{
+			GetOneFile(urls[i], outfiles[i]);
+		}
+		if (m_OnGetDoneFunc)
+		{
+			m_OnGetDoneFunc(1);
+		}
+	}
+
+	void HttpSession::DoGet(std::string url, std::string outfile)
+	{
+		std::vector<std::string> urls;
+		urls.push_back(url);
+		std::vector<std::string> outfiles;
+		outfiles.push_back(outfile);
+		auto func = std::bind(&HttpSession::GetThread, shared_from_this(), urls, outfiles);
+		std::thread t(func);
+		t.detach();
+	}
+
+
+	void HttpSession::DoGet(std::vector<std::string> urls, std::vector<std::string> outfiles)
+	{
+		auto func = std::bind(&HttpSession::GetThread, shared_from_this(), urls, outfiles);
+		std::thread t(func);
+		t.detach();
+	}
+
+	void HttpSession::GetOneFile(std::string url, std::string outfile)
 	{
 		m_pCurl = curl_easy_init();
-	
+
 		curl_easy_setopt(m_pCurl, CURLOPT_URL, url.c_str());
 		/* example.com is redirected, so we tell libcurl to follow redirection */
 		curl_easy_setopt(m_pCurl, CURLOPT_FOLLOWLOCATION, 1L);
@@ -65,27 +96,8 @@ namespace DDRFramework
 		curl_easy_cleanup(m_pCurl);
 		DebugLog("HttpSession Entry Finish")
 
-		if (m_OnDoneFunc)
-		{
-			m_OnDoneFunc(0);
-		}
+		
 	}
-
-	void HttpSession::DoGet(std::string& url, std::string outfile)
-	{
-		auto func = std::bind(&HttpSession::GetThread, shared_from_this(), url, outfile);
-		std::thread t(func);
-		t.detach();
-	}
-
-
-
-
-
-
-
-
-
 
 	size_t write_upload_file(void *buffer, size_t size, size_t nmemb, void *userp) {
 		FILE *fptr = (FILE*)userp;
@@ -96,14 +108,23 @@ namespace DDRFramework
 
 	void HttpSession::DoPost(std::string url,std::string basedir, std::string inputfile)
 	{
-		auto func = std::bind(&HttpSession::PostThread, shared_from_this(), url, basedir,inputfile);
+		std::vector<std::string> vec;
+		vec.push_back(inputfile);
+		auto func = std::bind(&HttpSession::PostThread, shared_from_this(), url, basedir,vec);
 		std::thread t(func);
 		t.detach();
 
 	}
-	void HttpSession::PostThread(std::string url, std::string basedir, std::string inputfile)
-	{
 
+	void HttpSession::DoPost(std::string url, std::string basedir, std::vector<std::string> inputfiles)
+	{
+		auto func = std::bind(&HttpSession::PostThread, shared_from_this(), url, basedir, inputfiles);
+		std::thread t(func);
+		t.detach();
+	}
+
+	void HttpSession::PostOneFile(std::string url, std::string basedir, std::string inputfile)
+	{
 		std::string fullpath = basedir + inputfile;
 		std::ifstream in(fullpath.c_str(), std::ifstream::ate | std::ifstream::binary);
 		in.seekg(0, std::ios::end);    // go to the end  
@@ -111,7 +132,7 @@ namespace DDRFramework
 		char* buffer = new char[length];
 		in.read(buffer, length);       // read the whole file into the buffer  
 		in.close();
-	
+
 		curl_global_init(CURL_GLOBAL_ALL);
 		CURL* hCurl = curl_easy_init();
 		if (hCurl != NULL)
@@ -153,6 +174,19 @@ namespace DDRFramework
 		}
 
 		curl_global_cleanup();
+	}
+
+	void HttpSession::PostThread(std::string url, std::string basedir, std::vector<std::string> inputfiles)
+	{
+		for (auto inputfile : inputfiles)
+		{
+			PostOneFile(url, basedir,inputfile);
+		}
+		if (m_OnPostDoneFunc)
+		{
+			m_OnPostDoneFunc(1);
+		}
+
 	}
 
 }
