@@ -73,7 +73,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("Error on receive: :%s", ec.message().c_str());
+					DebugLog("Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
 					Stop();
 				}
 			}
@@ -132,7 +132,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("Error on receive: :%s", ec.message().c_str());
+					DebugLog("Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
 					Stop();
 				}
 			}

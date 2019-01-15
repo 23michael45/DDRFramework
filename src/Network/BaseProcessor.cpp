@@ -100,7 +100,7 @@ namespace DDRFramework
 	{
 		CommonHeader_PassNode* pNode = spHeader->add_passnodearray();
 		pNode->set_nodetype(m_CltType);
-		pNode->set_receivesessionid((int)spSession.get());
+		pNode->set_receivesessionid((size_t)spSession.get());
 		return pNode;
 	}	
 	CommonHeader_PassNode* MsgRouterManager::RecordPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<TcpSocketContainer> spSession, std::vector<int> dataptrs)
