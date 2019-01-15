@@ -3,6 +3,9 @@
 #include <windows.h>
 #include <DbgHelp.h>
 #include <stdlib.h>
+#include "CommonFunc.h"
+#include "cppfs/cppfs.h"
+#include "cppfs/FilePath.h"
 #pragma comment(lib, "dbghelp.lib")
 
 //#ifndef _M_IX86
@@ -78,7 +81,10 @@ namespace DDRFramework
 
 	LONG __stdcall MyUnhandledExceptionFilter(PEXCEPTION_POINTERS pExceptionInfo)
 	{
-		std::wstring timestring = GetTimeNowString() + L".dmp";
+		cppfs::FilePath path(DDRFramework::getexepath());
+		std::string exename = path.baseName();
+		std::wstring wexename = StringToWString(exename);;
+		std::wstring timestring = wexename + L"-" + GetTimeNowString() + L".dmp";
 		CreateMiniDump(pExceptionInfo, timestring.c_str());
 
 		return EXCEPTION_EXECUTE_HANDLER;
