@@ -52,7 +52,7 @@ namespace DDRFramework
 		{
 			Stop();
 
-			DebugLog("TcpSessionBase Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
+			DebugLog("TcpSessionBase Error on receive: %s", ec.message().c_str());
 		}
 
 	}
@@ -244,7 +244,7 @@ namespace DDRFramework
 		else
 		{
 			Stop();
-			DebugLog("TcpSessionBase Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
+			DebugLog("TcpSessionBase Error on receive:  %s",  ec.message().c_str());
 		}
 	}
 

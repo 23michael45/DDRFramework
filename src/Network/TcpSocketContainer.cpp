@@ -237,7 +237,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("TcpSocketContainer Error on send: %s : %s",m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
+					DebugLog("TcpSocketContainer Error on send:  %s" , ec.message().c_str());
 
 					Stop();
 
