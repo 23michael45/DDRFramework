@@ -84,8 +84,8 @@ namespace DDRFramework
 		cppfs::FilePath path(DDRFramework::getexepath());
 		std::string exename = path.baseName();
 		std::wstring wexename = StringToWString(exename);;
-		std::wstring timestring = wexename + L"-" + GetTimeNowString() + L".dmp";
-		CreateMiniDump(pExceptionInfo, timestring.c_str());
+		std::wstring filename = wexename + L"-" + GetTimeNowString() + L".dmp";
+		CreateMiniDump(pExceptionInfo, filename.c_str());
 
 		return EXCEPTION_EXECUTE_HANDLER;
 	}
