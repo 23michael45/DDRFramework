@@ -253,7 +253,7 @@ message reqCmdAudio{
 	}
 	eAudioOperational audiop = 1;		// Cmd start or stop
 	eAudioMode type = 2;		// audio play mode
-	string Audiostr = 3;		// TTS or File content 
+	bytes Audiostr = 3;		// TTS or File content 
 	int32 level = 4;			// play audio level
 }
 message rspCmdAudio{

@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "CommonFunc.h"
+#include "cppfs/cppfs.h"
+#include "cppfs/FilePath.h"
 
 
 using namespace std;
@@ -32,7 +34,11 @@ namespace DDRFramework
 			// Set logger to write to a file
 			//log->setTarget(Log::Target::LOG_FILE);
 			log->setTarget(Log::Target::STDOUT | Log::Target::LOG_FILE);
-			log->setFile(GetTimeNowstring() + ".log");
+
+			cppfs::FilePath path(DDRFramework::getexepath());
+			std::string exename = path.baseName();
+			std::string filename = exename + "-" + GetTimeNowstring() + ".log";
+			log->setFile(filename + ".log");
 
 		}
 		return log;

@@ -237,7 +237,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("Error on send: %s", ec.message().c_str());
+					DebugLog("TcpSocketContainer Error on send:  %s" , ec.message().c_str());
 
 					Stop();
 

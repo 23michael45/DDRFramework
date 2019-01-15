@@ -12,6 +12,10 @@ xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Debug\*.exe %CurrentPath%\..\..\
 xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\*.exe %CurrentPath%\..\..\www\bin\x64\Debug\ /s /i
 
 
+xcopy /Y %CurrentPath%\..\..\DDRLocalServer\x64\Debug\*.pdb %CurrentPath%\..\..\www\bin\x64\Debug\ /s /i
+xcopy /Y %CurrentPath%\..\..\DDRStreamRelayService\x64\Debug\*.pdb %CurrentPath%\..\..\www\bin\x64\Debug\ /s /i
+
+
 
 
 
