@@ -9,10 +9,7 @@
 
 namespace DDRFramework
 {
-	template<typename T> void SAFE_DELETE(T*& a) {
-		delete a;
-		a = NULL;
-	}
+
 
 	void AudioCodec::on_recv_frames_device(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples)
 	{

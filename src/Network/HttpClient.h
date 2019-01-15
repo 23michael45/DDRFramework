@@ -45,7 +45,7 @@ namespace DDRFramework
 	private:
 		void GetOneFile(std::string url, std::string outfile);
 		void GetThread(std::vector<std::string> urls, std::vector<std::string> outfiles);
-		void PostOneFile(std::string url, std::string basedir, std::string inputfile);
+		bool PostOneFile(std::string url, std::string basedir, std::string inputfile);
 		void PostThread(std::string url, std::string basedir, std::vector<std::string> inputfiles);
 
 		asio::io_context m_ContextIO;

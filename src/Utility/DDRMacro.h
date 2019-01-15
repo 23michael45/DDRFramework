@@ -12,6 +12,9 @@
 #define RegisterProcessor(action,name) action##name action##name;\
 m_ProcessorMap[action##name.GetTypeName()] = std::make_shared<name##Processor>(*this);
 
-
+template<typename T> void SAFE_DELETE(T*& a) {
+	delete a;
+	a = NULL;
+}
 
 #endif // DDRMacro_h__

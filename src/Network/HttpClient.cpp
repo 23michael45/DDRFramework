@@ -123,10 +123,16 @@ namespace DDRFramework
 		t.detach();
 	}
 
-	void HttpSession::PostOneFile(std::string url, std::string basedir, std::string inputfile)
+	bool HttpSession::PostOneFile(std::string url, std::string basedir, std::string inputfile)
 	{
 		std::string fullpath = basedir + inputfile;
 		std::ifstream in(fullpath.c_str(), std::ifstream::ate | std::ifstream::binary);
+
+		if (in.fail())
+		{
+			return false;
+
+		}
 		in.seekg(0, std::ios::end);    // go to the end  
 		int length = in.tellg();
 		char* buffer = new char[length];
@@ -167,6 +173,12 @@ namespace DDRFramework
 			if (res != CURLE_OK)
 			{
 				std::wcout << "Error" << std::endl;
+				curl_formfree(pFormPost);
+				curl_easy_cleanup(hCurl);
+				delete[] buffer;
+				curl_global_cleanup();
+				return false;
+
 			}
 			curl_formfree(pFormPost);
 			curl_easy_cleanup(hCurl);
@@ -174,6 +186,7 @@ namespace DDRFramework
 		}
 
 		curl_global_cleanup();
+		return true;
 	}
 
 	void HttpSession::PostThread(std::string url, std::string basedir, std::vector<std::string> inputfiles)

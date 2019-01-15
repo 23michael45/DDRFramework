@@ -37,6 +37,7 @@ namespace DDRFramework
 	void FileManagerBase::SetRootPath(std::string root)
 	{
 		m_RootPath = root;
+		CheckFiles();
 	}
 
 

@@ -24,8 +24,8 @@ message CommonHeader
 	message PassNode //any service or client that has received 
 	{
 		eCltType nodeType = 1;
-		int32 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
-		repeated int32 IntptrData = 3;//store a pointer that to some data structure
+		int64 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
+		repeated int64 IntptrData = 3;//store a pointer that to some data structure
 	}
 	
 	eCltType fromCltType = 2;

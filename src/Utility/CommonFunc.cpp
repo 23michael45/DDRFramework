@@ -897,6 +897,7 @@ namespace DDRFramework {
 
 
 		sformat = replace_all(sformat, "()", "");
+		sformat = replace_all(sformat, "(.)", "(\\.)");
 		return sformat;
 	}
 	std::string replace_all(std::string& str, std::string sub, std::string replaceto)
