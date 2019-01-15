@@ -18,7 +18,7 @@ namespace DDRFramework
 
 	void TcpSessionBase::Start()
 	{	
-		DebugLog("Connection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str().c_str());
+		DebugLog("Connection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str());
 		TcpSocketContainer::Start();
 
 		if (m_bConnected)
@@ -52,7 +52,7 @@ namespace DDRFramework
 		{
 			Stop();
 
-			DebugLog("Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
+			DebugLog("TcpSessionBase Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
 		}
 
 	}
@@ -244,7 +244,7 @@ namespace DDRFramework
 		else
 		{
 			Stop();
-			DebugLog("Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
+			DebugLog("TcpSessionBase Error on receive: %s : %s", m_Socket.remote_endpoint().address().to_string().c_str(), ec.message().c_str());
 		}
 	}
 
