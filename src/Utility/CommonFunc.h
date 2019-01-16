@@ -84,7 +84,6 @@ namespace DDRFramework {
 
 	// Unicode±àÂë×ªÎªUTF8  
 	bool UnicodeToUTF8(std::vector<char>& pu8, const wchar_t* pun, int uLen);
-	bool UnicodeToUTF8(std::vector<char>& pu8, const wchar_t* pun, int uLen);
 
 	std::wstring s2w(const std::string& utf8string);
 	std::string w2s(const std::wstring& utf16Str);

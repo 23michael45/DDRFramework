@@ -7,6 +7,7 @@
 #include "request.hpp"
 #include <iostream>
 #include "../../Utility/DDRMacro.h"
+#include "../../Utility/CommonFunc.h"
 
 #include "../../Utility/Logger.h"
 namespace http {
@@ -53,8 +54,22 @@ namespace http {
 
 	    // Open the file to send back.
 	    std::string full_path = doc_root_ + request_path;//文件的完整目录
-		DebugLog("Http Server handle request:%s", full_path.c_str());
-	    std::ifstream is(full_path.c_str(), std::ios::in | std::ios::binary);//打开文件
+
+		//std::wstring wfull_path = DDRFramework::StringToWString(full_path);
+
+		std::vector<char> pmb;
+		bool b = DDRFramework::UTF8ToMB(pmb, full_path.c_str(), full_path.length());
+		if (b == false)
+		{
+			rep = reply::stock_reply(reply::not_found);
+			return;
+		}
+
+		std::string full(pmb.begin(), pmb.end());
+
+
+		DebugLog("Http Server handle request:%s", full.c_str());
+	    std::ifstream is(full.c_str(), std::ios::in | std::ios::binary);//打开文件
 	    if (!is)
 	    {
 		rep = reply::stock_reply(reply::not_found);
