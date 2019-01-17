@@ -34,6 +34,7 @@ namespace DDRFramework
 
 	MessageSerializer::MessageSerializer()
 	{
+		m_bReachMaxQueue = false;
 		m_TotalPackLen = 0;
 	}
 
@@ -59,12 +60,20 @@ namespace DDRFramework
 
 		m_spStateMachine->enterState<ParsePBHState>();
 
+		if (!m_spDataStreamSendQueue)
+		{
+			m_spDataStreamSendQueue = std::make_shared<std::queue<std::shared_ptr<asio::streambuf>>>();
+		}
 	}
 
 	void MessageSerializer::Deinit()
 	{
+		if (m_spDataStreamSendQueue)
+		{
+			m_spDataStreamSendQueue.reset();
+		}
 
-		while (!mDataStreamSendQueue.empty()) mDataStreamSendQueue.pop();
+		//while (!m_DataStreamSendQueue.empty()) m_DataStreamSendQueue.pop();
 		if (m_spDispatcher)
 		{
 
@@ -256,7 +265,10 @@ namespace DDRFramework
 		std::lock_guard<std::mutex> lock(mMutexSend);
 
 		auto spbuf = SerializeMsg(spheader, spmsg);
-		mDataStreamSendQueue.push(spbuf);
+
+
+		PushSendBuf(spbuf);
+		//m_spDataStreamSendQueue.push(spbuf);
 
 		//m_TotalPackLen += spbuf->size();
 		//DebugLog("total Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
@@ -269,7 +281,9 @@ namespace DDRFramework
 		std::lock_guard<std::mutex> lock(mMutexSend);
 
 		auto spbuf = SerializeMsg(spheader, buf,bodylen);
-		mDataStreamSendQueue.push(spbuf);
+
+		PushSendBuf(spbuf);
+		//m_DataStreamSendQueue.push(spbuf);
 
 		//m_TotalPackLen += spbuf->size();
 		//DebugLog("total Pack Len:%i   Queue Len: %i ", m_TotalPackLen, mDataStreamSendQueue.size())
@@ -284,6 +298,63 @@ namespace DDRFramework
 			return m_spHeadRuleRouter->IgnoreBody(m_spBaseSocketContainer, spHeader,buf,bodylen);
 		}
 		return false;
+	}
+
+	std::shared_ptr<asio::streambuf> MessageSerializer::GetSendBuf()
+	{
+		if (m_spDataStreamSendQueue && m_spDataStreamSendQueue->size() > 0)
+		{
+			auto sp = m_spDataStreamSendQueue->front();
+			//mDataStreamSendQueue.pop();
+			return sp;
+		}
+		return nullptr;
+	}
+
+	void MessageSerializer::PushSendBuf(std::shared_ptr<asio::streambuf> spbuf)
+	{
+		//std::lock_guard<std::mutex> lock(mMutexSend);//don't lock here ,lock it by caller
+
+		if (m_spDataStreamSendQueue)
+		{
+			m_spDataStreamSendQueue->push(spbuf);
+		
+			if (m_spDataStreamSendQueue->size() > MAX_SEND_QUEUESIZE)
+			{
+				m_bReachMaxQueue = true;
+			}
+		}
+		//m_DataStreamSendQueue.push(spbuf);
+	}
+
+	void MessageSerializer::PopSendBuf()
+	{
+		auto spbuf = GetSendBuf();
+		if (spbuf)
+		{
+			spbuf->consume(spbuf->size());
+			spbuf.reset();
+
+		}
+		else
+		{
+			return;
+		}
+
+		if (m_spDataStreamSendQueue)
+		{
+			m_spDataStreamSendQueue->pop();
+
+			if (m_spDataStreamSendQueue->empty() && m_bReachMaxQueue)
+			{
+				m_spDataStreamSendQueue.reset();
+				m_spDataStreamSendQueue = std::make_shared<std::queue<std::shared_ptr<asio::streambuf>>>();
+
+				m_bReachMaxQueue = false;
+
+			}
+		}
+		//m_DataStreamSendQueue.pop();
 	}
 
 	void MessageSerializer::Dispatch(std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)

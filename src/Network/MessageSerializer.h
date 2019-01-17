@@ -10,6 +10,7 @@
 
 #define HeadSignal "pbh\0"
 #define TEMP_BUFFER_SIZE 4096
+#define  MAX_SEND_QUEUESIZE 256
 namespace DDRFramework
 {
 	class BaseMessageDispatcher;
@@ -50,25 +51,9 @@ namespace DDRFramework
 		{
 			return mDataStreamReceive;
 		}
-		std::shared_ptr<asio::streambuf> GetSendBuf()
-		{
-			if (mDataStreamSendQueue.size() > 0)
-			{
-				auto sp = mDataStreamSendQueue.front();
-			   //mDataStreamSendQueue.pop();
-			   return sp;
-			}
-			return nullptr;
-		}
-		void PushSendBuf(std::shared_ptr<asio::streambuf> spbuf)
-		{
-			std::lock_guard<std::mutex> lock(mMutexSend);
-			mDataStreamSendQueue.push(spbuf);
-		}
-		void PopSendBuf()
-		{
-			mDataStreamSendQueue.pop();
-		}
+		std::shared_ptr<asio::streambuf> GetSendBuf();
+		void PushSendBuf(std::shared_ptr<asio::streambuf> spbuf);
+		void PopSendBuf();
 
 		void BindDispatcher(std::shared_ptr<BaseMessageDispatcher> spDispatcher, std::shared_ptr<BaseHeadRuleRouter> spHeadRuleRouter = nullptr)
 		{
@@ -93,7 +78,10 @@ namespace DDRFramework
 		std::shared_ptr<StateMachine<MessageSerializer>> m_spStateMachine;
 
 		asio::streambuf mDataStreamReceive;
-		std::queue<std::shared_ptr<asio::streambuf>> mDataStreamSendQueue;
+		//std::queue<std::shared_ptr<asio::streambuf>> m_DataStreamSendQueue;
+
+		std::shared_ptr<std::queue<std::shared_ptr<asio::streambuf>>> m_spDataStreamSendQueue;
+		bool m_bReachMaxQueue;
 
 		std::mutex mMutexRec;
 		std::mutex mMutexSend;
