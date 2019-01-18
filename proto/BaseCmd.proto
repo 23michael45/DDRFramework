@@ -281,70 +281,12 @@ message reqCmdSetWorkPath{
 	string route_name = 1;		// route_name : OneRoute_XXXXXX
 	string path_name = 2;		// path_name : path_auto.txt
 	float speed = 3;			// speed : 0~0.7
+	string walk_style = 4;		// walk style. Time to walk, infinite loop
 }
 message rspCmdSetWorkPath {
 	eCmdRspType type = 1;
 }
-// Cmd add face
-enum ePersonType{
-	eWhiteList = 0;
-	eBlackList =1;
-	eRedList = 2;
-}
-message reqCmdAddFace {
-	string name = 1;			
-	ePersonType type = 2;		
-	repeated int32 picdata = 3;	// face picture data
-}
-message rspCmdAddFace{
-	eCmdRspType type = 1;
-}
-// Cmd Get alarm params
-enum eAlarmType{
-	eFaceAlarmParams = 0;
-	eThermalAlarmParams = 1;
-}
-message reqCmdGetAlarmParams{
-	eAlarmType alarmtype = 1;		// Get Face params or Thermal params
-}
-message rspCmdGetAlarmParams{
-	eCmdRspType type = 1;
-	eAlarmType alarmtype = 2;		// rsp Face params or Thermal params
-	float alarmtemp = 3;
-}
-// Cmd operation face database
-message reqCmdFaceDataBaseOrder{
-	string Order = 1;				// Order ： "SELECT COUNT(*) FROM DDRPersonLib;" | "SELECT * FROM DDRPersonLib WHERE PersonIndex = 3;"
-}
-message FaceDataBaseData{
-	int32 id = 1;				
-	string name = 2;
-	ePersonType type = 3;
-	string label = 4;
-}
-message rspCmdFaceDataBaseOrder {
-	enum eRspDataBaseType{
-		eError = 0;
-		eQueryCount = 1;
-		eDeleteSuccess = 2;
-		eDetailedData = 3;
-	}
-	eCmdRspType type = 1;
-	repeated FaceDataBaseData data = 2;
-}
-// Cmd set face confidence or alarm params
-enum eFaceParams{
-	eConfidence = 0;				// over Confidence output to recognition	advise : > 0.9
-	eAlarmTemp = 1;					// over alarmtemp output to display			advise : 60~80 | 67
-}
-message reqCmdSetFaceParams{
-	eFaceParams param = 1;
-	float param_num = 2;
-}
-message rspCmdSetFaceParams{
-	eCmdRspType type = 1;
-	eFaceParams param = 2;
-}
+
 // Cmd set autochat type
 message reqCmdAutoChat{
 	enum eAutoChatType{
@@ -693,13 +635,103 @@ message reqStreamRelayAlarm
 
 //----------------------------------------------------------------------------------------------------------StreamRelayService]]]]]]
 
+//----------------------------------------------------------------------------------------------------------ThermalService[[[[[[
+
+message ThermalServerConfig
+{
+	float alarm_temp = 1;
+}
+
+// Get Thermal server params
+message reqCmdGetThermalParams
+{
+	string error = 1;		
+}
+
+message rspCmdGetThermalParams
+{
+	ThermalServerConfig thermal_config = 1;
+}
+
+// Set Thermal server params
+message reqCmdSetThermalParams
+{
+	ThermalServerConfig thermal_config = 1;	
+}
+
+message rspCmdSetThermalParams
+{
+	eCmdRspType type = 1;
+}
+
+//----------------------------------------------------------------------------------------------------------ThermalService]]]]]]
 
 
+//----------------------------------------------------------------------------------------------------------FaceService[[[[[[
 
+// Cmd add face
+enum ePersonType{
+	eWhiteList = 0;
+	eBlackList =1;
+	eRedList = 2;
+}
 
+message reqCmdAddFace {
+	string name = 1;			
+	ePersonType type = 2;		
+	repeated int32 picdata = 3;	// face picture data
+}
+message rspCmdAddFace{
+	eCmdRspType type = 1;
+}
 
+// Cmd operation face database
+message reqCmdFaceDataBaseOrder{
+	string Order = 1;				// Order ： "SELECT COUNT(*) FROM DDRPersonLib;" | "SELECT * FROM DDRPersonLib WHERE PersonIndex = 3;"
+}
+message FaceDataBaseData{
+	int32 id = 1;				
+	string name = 2;
+	ePersonType type = 3;
+	string label = 4;
+}
+message rspCmdFaceDataBaseOrder {
+	enum eRspDataBaseType{
+		eError = 0;
+		eQueryCount = 1;
+		eDeleteSuccess = 2;
+		eDetailedData = 3;
+	}
+	eCmdRspType type = 1;
+	repeated FaceDataBaseData data = 2;
+}
 
+// Cmd Get alarm params
 
+message FaceServerConfig
+{
+	float Confidence = 1; // Confidence (0 - 100)
+	float Face_quality = 2; // Face quality (0 - 1)
+}
+
+// Get Face params
+message reqCmdGetFaceParams{
+	string error = 1;		
+}
+
+message rspCmdGetFaceParams{
+	FaceServerConfig Face_config = 1;
+}
+
+// Set Face params
+message reqCmdSetFaceParams{
+	FaceServerConfig Face_config = 1;	
+}
+
+message rspCmdSetFaceParams{
+	eCmdRspType type = 1;
+}
+//----------------------------------------------------------------------------------------------------------FaceService]]]]]]
 
 
 
