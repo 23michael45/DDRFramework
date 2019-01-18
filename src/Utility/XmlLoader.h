@@ -102,7 +102,7 @@ namespace DDRFramework
 		template <typename T>
 		void SetValue(std::string key, T& value)
 		{
-			SetValue(key, std::string::to_string(value));
+			SetValue(key, std::to_string(value));
 		}
 
 		void DoSave(std::string filename); 
