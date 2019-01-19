@@ -41,9 +41,10 @@ namespace DDRFramework
 		REG_ROUTE(reqCmdAddFace, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
 		REG_ROUTE(reqCmdFaceDataBaseOrder, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
 		REG_ROUTE(reqCmdSetFaceParams, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdGetFaceParams, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
 
-		REG_ROUTE(reqCmdGetAlarmParams, eCltType::eAllLSM, CommonHeader_eFlowDir_Forward)
-		
+		REG_ROUTE(reqCmdGetThermalParams, eCltType::eLSMThermalImaging, CommonHeader_eFlowDir_Forward)
+		REG_ROUTE(reqCmdSetThermalParams, eCltType::eLSMThermalImaging, CommonHeader_eFlowDir_Forward)
 
 
 		REG_ROUTE(rspCmdMove, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
@@ -63,10 +64,10 @@ namespace DDRFramework
 			REG_ROUTE(rspCmdAddFace, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 			REG_ROUTE(rspCmdFaceDataBaseOrder, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 			REG_ROUTE(rspCmdSetFaceParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdGetFaceParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
-			REG_ROUTE(rspCmdGetAlarmParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
-
-
+			REG_ROUTE(rspCmdGetThermalParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
+			REG_ROUTE(rspCmdSetThermalParams, eCltType::eAllClient, CommonHeader_eFlowDir_Backward)
 
 
 			REG_ROUTE(notifyBaseStatus, eCltType::eAllClient, CommonHeader_eFlowDir_Forward)
