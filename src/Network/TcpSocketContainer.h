@@ -27,6 +27,9 @@ auto sp##headrulerouter = std::make_shared<headrulerouter>();\
 sp##serializer->Init();\
 sp##serializer->BindDispatcher(sp##dispatcher,sp##headrulerouter);
 
+#define SHARED_FROM_BASE(CTYPE) std::shared_ptr<CTYPE> shared_from_base() {\
+	return std::static_pointer_cast<CTYPE>(shared_from_this());\
+}
 
 namespace DDRFramework
 {

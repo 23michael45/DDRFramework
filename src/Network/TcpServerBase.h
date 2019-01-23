@@ -36,9 +36,8 @@ namespace DDRFramework
 	protected:
 		asio::streambuf m_ReadStreamBuf;
 
-		auto shared_from_base() {
-			return std::static_pointer_cast<TcpSessionBase>(shared_from_this());
-		}
+
+		SHARED_FROM_BASE(TcpSessionBase)
 	};
 
 	class TcpServerBase : public std::enable_shared_from_this<TcpServerBase>
@@ -87,9 +86,7 @@ namespace DDRFramework
 		HookTcpSession(asio::io_context& context);
 		~HookTcpSession();
 
-		auto shared_from_base() {
-			return std::static_pointer_cast<HookTcpSession>(shared_from_this());
-		}
+		SHARED_FROM_BASE(HookTcpSession)
 
 		virtual void OnHookReceive(asio::streambuf& buf) {};
 
@@ -110,10 +107,7 @@ namespace DDRFramework
 
 
 
-		auto shared_from_base() {
-			return std::static_pointer_cast<HookTcpServer>(shared_from_this());
-		}
-
+		SHARED_FROM_BASE(HookTcpServer)
 
 		virtual std::shared_ptr<TcpSessionBase> StartAccept() override;
 
