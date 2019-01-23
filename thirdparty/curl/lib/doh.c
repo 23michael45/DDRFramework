@@ -29,7 +29,7 @@
 #include "sendf.h"
 #include "multiif.h"
 #include "url.h"
-#include "share.h"
+#include "shared.h"
 #include "curl_base64.h"
 #include "connect.h"
 #include "strdup.h"

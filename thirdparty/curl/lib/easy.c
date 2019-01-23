@@ -57,7 +57,7 @@
 #include "url.h"
 #include "getinfo.h"
 #include "hostip.h"
-#include "share.h"
+#include "shared.h"
 #include "strdup.h"
 #include "progress.h"
 #include "easyif.h"

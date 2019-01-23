@@ -31,7 +31,7 @@
 #include "multiif.h"
 #include "sendf.h"
 #include "conncache.h"
-#include "share.h"
+#include "shared.h"
 #include "sigpipe.h"
 #include "connect.h"
 

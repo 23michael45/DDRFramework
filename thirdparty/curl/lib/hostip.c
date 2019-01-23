@@ -55,7 +55,7 @@
 #include "hostip.h"
 #include "hash.h"
 #include "rand.h"
-#include "share.h"
+#include "shared.h"
 #include "strerror.h"
 #include "url.h"
 #include "inet_ntop.h"

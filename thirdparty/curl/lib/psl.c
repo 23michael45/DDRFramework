@@ -27,7 +27,7 @@
 #ifdef USE_LIBPSL
 
 #include "psl.h"
-#include "share.h"
+#include "shared.h"
 
 /* The last 3 #include files should be in this order */
 #include "curl_printf.h"

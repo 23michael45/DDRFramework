@@ -61,7 +61,7 @@
 #include "curl_ntlm_wb.h"
 #include "http_negotiate.h"
 #include "url.h"
-#include "share.h"
+#include "shared.h"
 #include "hostip.h"
 #include "http.h"
 #include "select.h"

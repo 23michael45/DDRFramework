@@ -37,7 +37,7 @@
 #include "progress.h"
 #include "content_encoding.h"
 #include "strcase.h"
-#include "share.h"
+#include "shared.h"
 #include "vtls/vtls.h"
 #include "warnless.h"
 #include "sendf.h"

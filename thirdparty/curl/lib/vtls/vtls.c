@@ -56,7 +56,7 @@
 #include "strcase.h"
 #include "url.h"
 #include "progress.h"
-#include "share.h"
+#include "shared.h"
 #include "multiif.h"
 #include "timeval.h"
 #include "curl_md5.h"

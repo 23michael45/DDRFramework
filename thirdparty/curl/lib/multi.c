@@ -30,7 +30,7 @@
 #include "connect.h"
 #include "progress.h"
 #include "easyif.h"
-#include "share.h"
+#include "shared.h"
 #include "psl.h"
 #include "multiif.h"
 #include "sendf.h"
