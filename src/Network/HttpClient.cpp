@@ -6,7 +6,6 @@
 #include "../../Shared/thirdparty/curl/include/curl/easy.h"
 #include <sstream>
 #include <iostream>
-#include "../../../Shared/thirdparty/cppfs/include/cppfs/windows/LocalFileSystem.h"
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/FilePath.h"
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/FileHandle.h"
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/fs.h"
