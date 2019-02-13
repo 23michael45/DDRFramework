@@ -359,7 +359,7 @@ message notifyBaseStatus{
 	int32 stopstat = 7;
 	int64 funcstat = 8;
 	int32 voiceloop = 9;
-	string currroute = 10;
+	bytes currroute = 10;
 	string currpath = 11;
 	float currspeed = 12;
 	string currwalkstyle = 13;
