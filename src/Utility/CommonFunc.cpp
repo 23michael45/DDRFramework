@@ -605,6 +605,37 @@ namespace DDRFramework {
 		return rmap;
 	}
 
+	std::string MBToUTF8String(std::string mbstr)
+	{
+
+		std::vector<char> utf8;
+		bool b = DDRFramework::MBToUTF8(utf8, mbstr.c_str(), mbstr.length());
+		if (b == false)
+		{
+			return mbstr;
+		}
+		else
+		{
+			std::string full(utf8.begin(), utf8.end());
+			return full;
+		}
+	}
+	std::string UTF8ToMBString(std::string utf8str)
+	{
+
+		std::vector<char> mb;
+		bool b = DDRFramework::UTF8ToMB(mb, utf8str.c_str(), utf8str.length());
+		if (b == false)
+		{
+			return utf8str;
+		}
+		else
+		{
+			std::string full(mb.begin(), mb.end());
+			return full;
+		}
+	}
+
 	bool MBToUTF8(std::vector<char>& pu8, const char* pmb, int mLen)
 	{
 		// convert an MBCS string to widechar   

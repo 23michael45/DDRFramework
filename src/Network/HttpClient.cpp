@@ -9,7 +9,7 @@
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/FilePath.h"
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/FileHandle.h"
 #include "../../../Shared/thirdparty/cppfs/include/cppfs/fs.h"
-
+#include "../../Shared/src/Utility/CommonFunc.h"
 
 
 namespace DDRFramework
@@ -67,6 +67,7 @@ namespace DDRFramework
 
 	void HttpSession::GetOneFile(std::string url, std::string outfile)
 	{
+		outfile = DDRFramework::UTF8ToMBString(outfile);
 		m_pCurl = curl_easy_init();
 
 		curl_easy_setopt(m_pCurl, CURLOPT_URL, url.c_str());

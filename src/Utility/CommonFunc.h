@@ -75,9 +75,11 @@ namespace DDRFramework {
 
 	// 多字节编码转为Unicode编码  
 	bool MBToUnicode(std::vector<wchar_t>& pun, const char* pmb, int mLen);
+	std::string MBToUTF8String(std::string mbstr);
 
 	//Unicode编码转为多字节编码  
 	bool UnicodeToMB(std::vector<char>& pmb, const wchar_t* pun, int uLen);
+	std::string UTF8ToMBString(std::string utf8str);
 
 	// UTF8编码转为Unicode  
 	bool UTF8ToUnicode(std::vector<wchar_t>& pun, const char* pu8, int utf8Len);

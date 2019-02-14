@@ -57,15 +57,9 @@ namespace http {
 
 		//std::wstring wfull_path = DDRFramework::StringToWString(full_path);
 
-		std::vector<char> pmb;
-		bool b = DDRFramework::UTF8ToMB(pmb, full_path.c_str(), full_path.length());
-		if (b == false)
-		{
-			rep = reply::stock_reply(reply::not_found);
-			return;
-		}
+		std::string full = DDRFramework::UTF8ToMBString(full_path);
 
-		std::string full(pmb.begin(), pmb.end());
+		//std::string full = full_path;
 
 
 		DebugLog("Http Server handle request:%s", full.c_str());

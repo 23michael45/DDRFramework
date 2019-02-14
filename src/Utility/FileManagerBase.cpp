@@ -146,7 +146,7 @@ namespace DDRFramework
 		}
 	}
 
-
+	
 	std::vector<std::string> FileManagerBase::Match(std::string fmt)
 	{
 		std::vector<std::shared_ptr<treenode<std::string>>> vec = MatchNode(fmt);
@@ -155,6 +155,9 @@ namespace DDRFramework
 		{
 			std::string value;
 			sp->getfull(value);
+
+			value = DDRFramework::MBToUTF8String(value);
+
 			files.push_back(value);
 		}
 		return files;
