@@ -278,7 +278,7 @@ message rspCmdGetConfigdata{
 }
 // Cmd set work path
 message reqCmdSetWorkPath{
-	string route_name = 1;		// route_name : OneRoute_XXXXXX
+	bytes route_name = 1;		// route_name : OneRoute_XXXXXX
 	string path_name = 2;		// path_name : path_auto.txt
 	float speed = 3;			// speed : 0~0.7
 	string walk_style = 4;		// walk style. Time to walk, infinite loop
@@ -306,7 +306,7 @@ message reqCmdGeneralOctree{
 		eCreate = 0;
 		eQuery = 1;
 	}
-	string route_name = 1;			// route_name : OneRoute_XXXXXX
+	bytes route_name = 1;			// route_name : OneRoute_XXXXXX
 	eOctreeType type = 2;			// create or query ot
 }
 message rspCmdGeneralOctree {
@@ -330,7 +330,7 @@ enum eCmdActionMode{
 // Cmd start to autorun or rec
 message reqCmdStartActionMode{
 	eCmdActionMode mode = 1;
-	string route_name = 2;
+	bytes route_name = 2;
 }
 message rspCmdStartActionMode{
 	eCmdActionMode mode = 1;
@@ -343,7 +343,7 @@ message reqCmdEndActionMode{
 message rspCmdEndActionMode{
 	eCmdActionMode actionmode = 1;
 	eCmdRspType type = 2;
-	string route_name = 3;
+	bytes route_name = 3;
 }
 
 //-----------------------------------ClientCmd]]]]]
@@ -677,7 +677,7 @@ enum ePersonType{
 }
 
 message reqCmdAddFace {
-	string name = 1;			
+	bytes name = 1;			
 	ePersonType type = 2;		
 	repeated int32 picdata = 3;	// face picture data
 }
@@ -691,7 +691,7 @@ message reqCmdFaceDataBaseOrder{
 }
 message FaceDataBaseData{
 	int32 id = 1;				
-	string name = 2;
+	bytes name = 2;
 	ePersonType type = 3;
 	string label = 4;
 }
