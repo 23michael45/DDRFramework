@@ -244,7 +244,7 @@ namespace DDRFramework
 		else
 		{
 			Stop();
-			DebugLog("TcpSessionBase Error on receive:  %s",  ec.message().c_str());
+			DebugLog("HookTcpSession Error on receive:  %s",  ec.message().c_str());
 		}
 	}
 
