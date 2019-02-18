@@ -33,7 +33,7 @@
 #include "mqtt/connect_options.h"
 #include "mqtt/disconnect_options.h"
 #include "mqtt/exception.h"
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include "mqtt/callback.h"
 #include <vector>
 

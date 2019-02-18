@@ -26,7 +26,7 @@
 
 #include "MQTTAsync.h"
 #include "mqtt/delivery_token.h"
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include "mqtt/types.h"
 #include <vector>
 

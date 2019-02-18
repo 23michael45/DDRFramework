@@ -32,7 +32,7 @@
 #include "mqtt/iclient_persistence.h"
 #include "mqtt/iaction_listener.h"
 #include "mqtt/exception.h"
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include "mqtt/callback.h"
 #include "mqtt/thread_queue.h"
 #include "mqtt/iasync_client.h"

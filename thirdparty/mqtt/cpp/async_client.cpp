@@ -18,7 +18,7 @@
 
 #include "mqtt/async_client.h"
 #include "mqtt/token.h"
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include "mqtt/response_options.h"
 #include "mqtt/disconnect_options.h"
 #include <thread>

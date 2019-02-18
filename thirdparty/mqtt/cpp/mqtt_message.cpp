@@ -17,7 +17,7 @@
  *******************************************************************************/
 
 
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include <cstring>
 #include <utility>
 

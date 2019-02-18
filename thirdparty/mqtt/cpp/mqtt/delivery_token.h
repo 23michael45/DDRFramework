@@ -26,7 +26,7 @@
 
 #include "MQTTAsync.h"
 #include "mqtt/token.h"
-#include "mqtt/message.h"
+#include "mqtt/mqtt_message.h"
 #include <memory>
 
 namespace mqtt {
