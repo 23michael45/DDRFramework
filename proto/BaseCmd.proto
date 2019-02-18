@@ -520,6 +520,7 @@ message AVStreamSrcChannel
 	ChannelStreamType streamType = 3;
 	ChannelNetworkType networkType = 4;
 	int32 rate = 5;
+	bytes srcname = 6;
 }
 
 message reqStreamAddr
@@ -610,6 +611,7 @@ message AVChannelConfig
 	ChannelStreamType streamType = 3;
 	ChannelNetworkType networkType = 4;
 	int32 rate = 5;
+	bytes srcname = 6;
 }
 
 message reqStreamServiceInfo
