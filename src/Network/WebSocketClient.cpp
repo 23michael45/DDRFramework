@@ -1,55 +1,72 @@
 #include "WebSocketClient.h"
-bool DDRFramework::WebSocketClient::Connect(std::string uri)
+
+
+DDRFramework::connection_metadata::connection_metadata(int id, websocketpp::connection_hdl hdl, std::string uri, websocket_endpoint* pendpoint) : m_id(id)
+, m_hdl(hdl)
+, m_status("Connecting")
+, m_uri(uri)
+, m_server("N/A")
+, m_pendpoint(pendpoint)
 {
-	m_CurrentID = m_EndPoint.connect(uri);
-	if (m_CurrentID != -1) {
-		std::cout << "> Created connection with id " << m_CurrentID << std::endl;
-		return true;
-	}
-	return false;
+
 }
 
-void DDRFramework::WebSocketClient::Close()
+
+
+
+
+void DDRFramework::connection_metadata::on_open(client * c, websocketpp::connection_hdl hdl)
 {
-	if (m_CurrentID != -1) {
-		int close_code = websocketpp::close::status::normal;
-		m_EndPoint.close(m_CurrentID, close_code, "");
+	m_status = "Open";
+
+	client::connection_ptr con = c->get_con_from_hdl(hdl);
+	m_server = con->get_response_header("Server");
+}
+
+void DDRFramework::connection_metadata::on_fail(client * c, websocketpp::connection_hdl hdl)
+{
+	m_status = "Failed";
+
+	client::connection_ptr con = c->get_con_from_hdl(hdl);
+	m_server = con->get_response_header("Server");
+	m_error_reason = con->get_ec().message();
+}
+
+void DDRFramework::connection_metadata::on_close(client * c, websocketpp::connection_hdl hdl)
+{
+	m_status = "Closed";
+	client::connection_ptr con = c->get_con_from_hdl(hdl);
+	std::stringstream s;
+	s << "close code: " << con->get_remote_close_code() << " ("
+		<< websocketpp::close::status::get_string(con->get_remote_close_code())
+		<< "), close reason: " << con->get_remote_close_reason();
+	m_error_reason = s.str();
+}
+
+void DDRFramework::connection_metadata::on_message(websocketpp::connection_hdl, client::message_ptr msg)
+{
+	/*if (msg->get_opcode() == websocketpp::frame::opcode::text) {
+		m_messages.push_back("<< " + msg->get_payload());
+	}
+	else {
+		m_messages.push_back("<< " + websocketpp::utility::to_hex(msg->get_payload()));
+	}*/
+	if (m_pendpoint)
+	{
+		m_pendpoint->onmessage(msg->get_payload());
 	}
 }
 
-void DDRFramework::WebSocketClient::Send(std::string msg)
+int DDRFramework::connection_metadata::get_id() const
 {
-	if (m_CurrentID != -1) {
-		m_EndPoint.send(m_CurrentID, msg);
-	}
+	return m_id;
 }
 
-void DDRFramework::WebSocketClient::Show()
+std::string DDRFramework::connection_metadata::get_status() const
 {
-	if (m_CurrentID != -1) {
-		connection_metadata::ptr metadata = m_EndPoint.get_metadata(m_CurrentID);
-		if (metadata) {
-			std::cout << *metadata << std::endl;
-		}
-		else {
-			std::cout << "> Unknown connection id " << m_CurrentID << std::endl;
-		}
-	}
+	return m_status;
 }
 
-std::ostream & DDRFramework::operator<<(std::ostream & out, connection_metadata const & data)
-{
-	out << "> URI: " << data.m_uri << "\n"
-		<< "> Status: " << data.m_status << "\n"
-		<< "> Remote Server: " << (data.m_server.empty() ? "None Specified" : data.m_server) << "\n"
-		<< "> Error/close reason: " << (data.m_error_reason.empty() ? "N/A" : data.m_error_reason) << "\n";
-	out << "> Messages Processed: (" << data.m_messages.size() << ") \n";
 
-	std::vector<std::string>::const_iterator it;
-	for (it = data.m_messages.begin(); it != data.m_messages.end(); ++it) {
-		out << *it << "\n";
-	}
 
-	return out;
-}
 

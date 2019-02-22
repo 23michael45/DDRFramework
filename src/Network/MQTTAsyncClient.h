@@ -145,7 +145,7 @@ namespace DDRFramework
 	public:
 		MQTTAsyncClient(std::string server, std::string clientid);
 
-		void Connect();
+		bool Connect();
 		void Disconnect();
 		void Publish(std::string topic, std::string content);
 		void Subscribe(std::string topic);

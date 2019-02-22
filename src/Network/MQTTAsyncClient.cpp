@@ -57,7 +57,7 @@ namespace DDRFramework
 		m_Client.set_callback(m_Callback);
 	}
 
-	void MQTTAsyncClient::Connect()
+	bool MQTTAsyncClient::Connect()
 	{
 		try {
 			cout << "\nConnecting..." << endl;
@@ -65,9 +65,13 @@ namespace DDRFramework
 			cout << "Waiting for the connection..." << endl;
 			conntok->wait();
 			cout << "  ...OK" << endl;
+
+			return true;
 		}
 		catch (const mqtt::exception& exc) {
 			cerr << exc.what() << endl;
+		
+			return false;
 		}
 
 
@@ -75,6 +79,10 @@ namespace DDRFramework
 
 	void MQTTAsyncClient::Disconnect()
 	{
+		if (!m_IsConnected)
+		{
+			return;
+		}
 		try {
 			// Disconnect
 			cout << "\nDisconnecting..." << endl;
