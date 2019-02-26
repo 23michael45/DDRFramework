@@ -346,6 +346,31 @@ message rspCmdEndActionMode{
 	bytes route_name = 3;
 }
 
+// Cmd Delete curr route data
+message reqCmdDeleteCurrRouteOrPath{
+	bytes route_name = 1;
+	bytes path_name = 2; // if path_name is null. delete curr route floder.
+}
+message rspCmdDeleteCurrRouteOrPath{
+	eCmdRspType type = 1;
+}
+
+// Get curr route or data list
+message reqCmdGetCurrRouteAndPath
+{
+	string error = 1;
+}
+
+message RouteData{
+	bytes route_name = 1;
+	repeated bytes path_name = 2;
+}
+
+message rspCmdGetCurrRouteAndPath{
+	eCmdRspType type = 1;
+	repeated RouteData route_data = 2;
+}
+
 //-----------------------------------ClientCmd]]]]]
 //-----------------------------------ClientStatus[[[[[
 // BaseStatus
