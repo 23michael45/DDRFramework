@@ -130,6 +130,7 @@ namespace DDRFramework
 
 		//return utf8 file path
 		std::vector<std::string> Match(std::string fmt);
+		std::vector<std::string> MatchDir(std::string dir, std::string fmt);
 
 
 

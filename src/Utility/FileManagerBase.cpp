@@ -163,6 +163,36 @@ namespace DDRFramework
 		return files;
 	}
 
+	std::vector<std::string> FileManagerBase::MatchDir(std::string dir, std::string fmt)
+	{
+		std::string finalfmt = DDRFramework::getStarWildRegex(fmt, false);
+
+
+		std::vector<std::string> vec;
+		std::string full = m_RootPath + "/" + dir;
+		cppfs::FileHandle fhandel = fs::open(full);
+		if (fhandel.exists())
+		{
+			if (fhandel.isDirectory())
+			{
+				auto files = fhandel.listFiles();
+
+				
+				for (auto subfile : files)
+				{
+					if (std::regex_match(subfile, std::regex(finalfmt)))
+					{
+						vec.push_back(dir + "/" + subfile);
+					}
+
+
+				}
+			}
+
+		}
+		return vec;
+	}
+
 	std::vector<std::shared_ptr<treenode<std::string>>> FileManagerBase::MatchNode(std::string fmt)
 	{
 		auto& tree = GetTree();
