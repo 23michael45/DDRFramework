@@ -55,11 +55,29 @@ namespace DDRFramework
 		std::shared_ptr<WavBufInfo> StopPlayBuf();
 
 
-
 		void SetTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
 			m_spSessionReceive = sp;
 		}
+
+		bool HasTcpReceiveSession()
+		{
+			if (m_spSessionReceive != nullptr)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		bool IsTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
+		{
+			if (sp == m_spSessionReceive)
+			{
+				return true;
+			}
+			return false;
+		}
+
 		void AddTcpSendToSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
 			if (m_spSessionSendToSet.find(sp) == m_spSessionSendToSet.end())
