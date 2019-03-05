@@ -26,7 +26,7 @@ message CommonHeader
 		eCltType nodeType = 1;
 		int64 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
 		repeated int64 IntptrData = 3;//store a pointer that to some data structure
-		
+		string fromIP = 4;//src IP Address
 	}
 	
 	eCltType fromCltType = 2;
@@ -42,7 +42,6 @@ message CommonHeader
 	}
 	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
 	
-	string srcIP = 6;//src IP Address
 	
 }
 

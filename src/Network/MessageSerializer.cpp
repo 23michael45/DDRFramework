@@ -139,19 +139,6 @@ namespace DDRFramework
 
 		commonHeader.set_bodytype(stype);
 
-		auto spTcp = m_spBaseSocketContainer->GetTcp();
-		if (spTcp)
-		{
-
-			auto ip = spTcp->GetSocket().remote_endpoint().address().to_string();
-			commonHeader.set_srcip(ip);
-
-		}
-		else
-		{
-			//auto spUdp = m_spBaseSocketContainer->GetUdp();
-		}
-
 
 
 		int headlen = commonHeader.ByteSize();
@@ -214,17 +201,6 @@ namespace DDRFramework
 
 	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen, bool needEncryptBody)
 	{
-		auto spTcp = m_spBaseSocketContainer->GetTcp();
-		if (spheader && spTcp)
-		{
-			auto ip = spTcp->GetSocket().remote_endpoint().address().to_string();
-			spheader->set_srcip(ip);
-
-		}
-		else
-		{
-			//auto spUdp = m_spBaseSocketContainer->GetUdp();
-		}
 
 		int headlen = spheader->ByteSize();
 
