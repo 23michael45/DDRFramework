@@ -26,6 +26,7 @@ message CommonHeader
 		eCltType nodeType = 1;
 		int64 receiveSessionID = 2;//session shared_ptr value ,the session is which received the message
 		repeated int64 IntptrData = 3;//store a pointer that to some data structure
+		
 	}
 	
 	eCltType fromCltType = 2;
@@ -40,6 +41,8 @@ message CommonHeader
 		ReturnPopQueue = 3;//some sequence msgs to back to the origin use recorded header,like ansFileStatus,rspFileAddr ,mannually use passnode in processor
 	}
 	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
+	
+	string srcIP = 6;//src IP Address
 	
 }
 
@@ -575,8 +578,10 @@ message reqAudioTalk
 }
 enum eTalkStatus
 {
-	ETS_OK = 0;    //成功对讲（服务端可接收）
+	ETS_START_OK = 0;    //成功对讲（服务端可接收）
 	ETS_USE_BY_OTHER = 1;//被其它客户端占用
+	ETS_STOP_OK = 2;//成功停止
+	ETS_NO_USER_CONNECTED_WITH_IP = 3;//流服务没有被相应IP的客户端连接
 }
 message rspAudioTalk
 {

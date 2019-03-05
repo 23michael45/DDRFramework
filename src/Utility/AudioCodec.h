@@ -55,14 +55,14 @@ namespace DDRFramework
 		std::shared_ptr<WavBufInfo> StopPlayBuf();
 
 
-		void SetTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
+		void SetTcpReceiveSessionIP(std::string ip = "")
 		{
-			m_spSessionReceive = sp;
+			m_spSessionReceiveIP = ip;
 		}
 
 		bool HasTcpReceiveSession()
 		{
-			if (m_spSessionReceive != nullptr)
+			if (m_spSessionReceiveIP != "")
 			{
 				return true;
 			}
@@ -71,9 +71,22 @@ namespace DDRFramework
 
 		bool IsTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
-			if (sp == m_spSessionReceive)
+			try
 			{
-				return true;
+				if (sp)
+				{
+					auto fromip = sp->GetSocket().remote_endpoint().address().to_string();
+					if (fromip == m_spSessionReceiveIP)
+					{
+						return true;
+					}
+				}
+			}
+			catch (std::exception& e)
+			{
+
+				DebugLog("IsTcpReceiveSession Error %s", e.what())
+				
 			}
 			return false;
 		}
@@ -126,7 +139,7 @@ namespace DDRFramework
 		mal_int16* pCapturedSamples = NULL;
 		mal_uint32 playbackSample = 0;
 
-		std::shared_ptr<TcpSocketContainer> m_spSessionReceive;
+		std::string m_spSessionReceiveIP;
 		std::set<std::shared_ptr<TcpSocketContainer>> m_spSessionSendToSet;
 
 		std::function<void(std::shared_ptr<WavBufInfo>)> m_OnFinishPlayWavFunc;
