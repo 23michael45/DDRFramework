@@ -144,7 +144,7 @@ namespace DDRFramework
 		{
 
 			auto ip = spTcp->GetSocket().remote_endpoint().address().to_string();
-			spheader->set_srcip(ip);
+			commonHeader.set_srcip(ip);
 
 		}
 		else
@@ -215,7 +215,7 @@ namespace DDRFramework
 	std::shared_ptr<asio::streambuf> MessageSerializer::SerializeMsg(std::shared_ptr<DDRCommProto::CommonHeader> spheader, asio::streambuf& buf, int bodylen, bool needEncryptBody)
 	{
 		auto spTcp = m_spBaseSocketContainer->GetTcp();
-		if (spTcp)
+		if (spheader && spTcp)
 		{
 			auto ip = spTcp->GetSocket().remote_endpoint().address().to_string();
 			spheader->set_srcip(ip);
