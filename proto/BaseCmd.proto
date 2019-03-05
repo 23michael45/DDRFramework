@@ -573,10 +573,17 @@ message reqAudioTalk
 	eOpMode opType = 1;
 	eNetType netType = 2;
 }
-message rspTalk
+enum eTalkStatus
 {
-	string error = 1;
+	ETS_OK = 0;    //成功对讲（服务端可接收）
+	ETS_USE_BY_OTHER = 1;//被其它客户端占用
 }
+message rspAudioTalk
+{
+	eTalkStatus status = 1;
+	string error = 2;
+}
+
 message notifyStreamAddr
 {	
 	repeated AVStreamSrcChannel channels = 1;
