@@ -140,18 +140,21 @@ namespace DDRFramework
 		m_Quit = false;
 		m_ToggleLog = true;
 		AddCommand("l", std::bind(&ConsoleDebug::ToggleLog, this));
-		AddCommand("q", std::bind(&ConsoleDebug::ToggleLog, this));
+		AddCommand("q", std::bind(&ConsoleDebug::Quit, this));
 	}
 	void ConsoleDebug::ToggleLog()
 	{
 		if (m_ToggleLog == true)
 		{
+
+			printf_s("\nToggleLog Turn Off Console");
 			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE);
 
 		}
 		else
 		{
 
+			printf_s("\nToggleLog Turn On Console");
 			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE | DDRFramework::Log::Target::STDOUT);
 		}
 		m_ToggleLog = !m_ToggleLog;
