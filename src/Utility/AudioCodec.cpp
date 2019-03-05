@@ -10,7 +10,7 @@
 namespace DDRFramework
 {
 
-
+	//sound wav from mic to client
 	void AudioCodec::on_recv_frames_device(mal_device* pDevice, mal_uint32 frameCount, const void* pSamples)
 	{
 		mal_uint32 sampleCount = frameCount * pDevice->channels;
@@ -21,6 +21,9 @@ namespace DDRFramework
 		oshold.write((const char*)pSamples, sampleCount * sizeof(mal_int16));
 		oshold.flush();
 
+
+		std::lock_guard<std::mutex> lock(m_AudioSendMutex);
+
 		for (auto spSessionSendTo : m_spSessionSendToSet)
 		{
 			spSessionSendTo->Send(buf);
@@ -28,6 +31,7 @@ namespace DDRFramework
 
 	}
 
+	//sound wav from  client to speaker
 	mal_uint32 AudioCodec::on_send_frames_device(mal_device* pDevice, mal_uint32 frameCount, void* pSamples)
 	{
 		std::lock_guard<std::mutex> lock(m_AudioRecvMutex);

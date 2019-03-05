@@ -69,18 +69,15 @@ namespace DDRFramework
 			return false;
 		}
 
-		bool IsTcpReceiveSession(std::shared_ptr<TcpSocketContainer> sp)
+		bool IsTcpReceiveSession(std::string ip)
 		{
 			try
 			{
-				if (sp)
+				if (ip != "" && m_spSessionReceiveIP != "" && ip == m_spSessionReceiveIP)
 				{
-					auto fromip = sp->GetSocket().remote_endpoint().address().to_string();
-					if (fromip == m_spSessionReceiveIP)
-					{
-						return true;
-					}
+					return true;
 				}
+				
 			}
 			catch (std::exception& e)
 			{
@@ -93,6 +90,7 @@ namespace DDRFramework
 
 		void AddTcpSendToSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
+			std::lock_guard<std::mutex> lock(m_AudioSendMutex);
 			if (m_spSessionSendToSet.find(sp) == m_spSessionSendToSet.end())
 			{
 				m_spSessionSendToSet.insert(sp);
@@ -101,6 +99,7 @@ namespace DDRFramework
 		}
 		void RemoveTcpSendToSession(std::shared_ptr<TcpSocketContainer> sp)
 		{
+			std::lock_guard<std::mutex> lock(m_AudioSendMutex);
 			if (m_spSessionSendToSet.find(sp) != m_spSessionSendToSet.end())
 			{
 				m_spSessionSendToSet.erase(sp);
@@ -149,6 +148,8 @@ namespace DDRFramework
 		asio::streambuf m_AudioRecvBuf;
 
 		std::mutex m_AudioRecvMutex;
+
+		std::mutex m_AudioSendMutex;
 
 		std::mutex m_AudioBufPlayMutex;
 

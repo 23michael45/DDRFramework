@@ -140,6 +140,9 @@ namespace DDRFramework
 
 		int m_iCheckWriteSleep;
 		int m_iCheckReadSleep;
+
+
+		std::string m_fromIP;
 	private:
 	};
 

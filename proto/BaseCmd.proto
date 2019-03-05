@@ -581,6 +581,7 @@ enum eTalkStatus
 	ETS_USE_BY_OTHER = 1;//被其它客户端占用
 	ETS_STOP_OK = 2;//成功停止
 	ETS_NO_USER_CONNECTED_WITH_IP = 3;//流服务没有被相应IP的客户端连接
+	ETS_UNKNOWN_ERROR = 4;//末知错误
 }
 message rspAudioTalk
 {

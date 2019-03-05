@@ -25,6 +25,10 @@ namespace DDRFramework
 		OnStart();
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
+
+
+		auto ip = GetSocket().remote_endpoint().address().to_string();
+		m_fromIP = ip;
 	}
 	void TcpSocketContainer::CheckBehavior()
 	{
@@ -317,7 +321,9 @@ namespace DDRFramework
 	{
 		if (m_Socket.is_open())
 		{
-			return m_Socket.remote_endpoint().address().to_string();
+			//return m_Socket.remote_endpoint().address().to_string();
+		
+			return m_fromIP;
 		}
 	}
 
