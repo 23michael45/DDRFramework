@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='DDRCommProto',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rBaseCmd.proto\x12\x0c\x44\x44RCommProto\"\xdf\x02\n\x0c\x43ommonHeader\x12\x10\n\x08\x62odyType\x18\x01 \x01(\t\x12(\n\x08\x66romType\x18\x02 \x03(\x0e\x32\x16.DDRCommProto.eCltType\x12)\n\ttoCltType\x18\x03 \x03(\x0e\x32\x16.DDRCommProto.eCltType\x12\x35\n\x08passNode\x18\x04 \x03(\x0b\x32#.DDRCommProto.CommonHeader.PassNode\x12:\n\rflowDirection\x18\x05 \x03(\x0e\x32#.DDRCommProto.CommonHeader.eFlowDir\x1aN\n\x08PassNode\x12(\n\x08nodeType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x18\n\x10receiveSessionID\x18\x02 \x01(\x05\"%\n\x08\x65\x46lowDir\x12\x0b\n\x07\x46orward\x10\x00\x12\x0c\n\x08\x42\x61\x63kward\x10\x01\"\x1d\n\tHeartBeat\x12\x10\n\x08whatever\x18\x01 \x01(\t\"\x97\x02\n\x08\x62\x63LSAddr\x12\x32\n\x07LSInfos\x18\x01 \x03(\x0b\x32!.DDRCommProto.bcLSAddr.ServerInfo\x1az\n\nServerInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x32\n\x05stype\x18\x02 \x01(\x0e\x32#.DDRCommProto.bcLSAddr.eServiceType\x12\x0b\n\x03ips\x18\x03 \x03(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\x12\x0f\n\x07robotid\x18\x05 \x01(\t\"[\n\x0c\x65ServiceType\x12\x0f\n\x0bLocalServer\x10\x00\x12\x10\n\x0cRemoteServer\x10\x01\x12\x14\n\x10RTSPStreamServer\x10\x02\x12\x12\n\x0eTalkBackServer\x10\x03\"S\n\x08reqLogin\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0f\n\x07userpwd\x18\x03 \x01(\t\"\xcc\x01\n\x08rspLogin\x12\x35\n\x07retcode\x18\x01 \x01(\x0e\x32$.DDRCommProto.rspLogin.eLoginRetCode\x12(\n\x08yourRole\x18\x02 \x01(\x0e\x32\x16.DDRCommProto.eCltType\"_\n\reLoginRetCode\x12\x0b\n\x07success\x10\x00\x12\x0f\n\x0bserver_busy\x10\x01\x12\x18\n\x14server_limit_reached\x10\x02\x12\x16\n\x12incorrect_password\x10\x03\"s\n\x14notifyTerminalAccess\x12\x17\n\x0f\x62RRConnected2RS\x18\x01 \x01(\x05\x12\x0b\n\x03\x62Op\x18\x02 \x01(\x05\x12\x11\n\tnMonitors\x18\x03 \x01(\x05\x12\x10\n\x08nClients\x18\x04 \x01(\x05\x12\x10\n\x08nameLSMs\x18\x05 \x03(\t\"\x94\x01\n\x0fnotifySerAccess\x12\x11\n\tnMonitors\x18\x01 \x01(\x05\x12\x10\n\x08mTopOpLv\x18\x02 \x01(\x05\x12\x12\n\nmTopOpTime\x18\x03 \x01(\x05\x12\x10\n\x08nClients\x18\x04 \x01(\x05\x12\x10\n\x08\x63TopOpLv\x18\x05 \x01(\x05\x12\x12\n\ncTopOpTime\x18\x06 \x01(\x03\x12\x10\n\x08namesLSM\x18\x07 \x03(\t\"\xd7\x02\n\x0enotifyAVStream\x12\x45\n\x0freservedChannel\x18\x01 \x01(\x0b\x32,.DDRCommProto.notifyAVStream.fullChannelInfo\x12J\n\x14robotMonitorChannels\x18\x02 \x03(\x0b\x32,.DDRCommProto.notifyAVStream.fullChannelInfo\x1a\xb1\x01\n\x0f\x66ullChannelInfo\x12\x0f\n\x07\x64\x65vType\x18\x01 \x01(\x05\x12\x10\n\x08\x64\x61taType\x18\x02 \x01(\x05\x12\x16\n\x0elocalResAccStr\x18\x03 \x01(\t\x12\x1a\n\x12\x63hannelDescription\x18\x04 \x01(\t\x12\r\n\x05\x62wReq\x18\x05 \x01(\x05\x12\x10\n\x08remoteIP\x18\x06 \x01(\x03\x12\x12\n\nremotePort\x18\x07 \x01(\x05\x12\x12\n\nremotePass\x18\x08 \x01(\t\"\xae\x01\n\x07reqTalk\x12\x35\n\ncallerType\x18\x01 \x01(\x0e\x32!.DDRCommProto.reqTalk.eCallerType\x12\x0e\n\x06talkID\x18\x02 \x01(\x05\x12\x0e\n\x06\x61vType\x18\x03 \x01(\x05\x12\x15\n\rlocalTalkAddr\x18\x04 \x03(\t\"5\n\x0b\x65\x43\x61llerType\x12\n\n\x06\x63lient\x10\x00\x12\x0b\n\x07monitor\x10\x01\x12\r\n\trobot_LSM\x10\x02\"\x9d\x01\n\x07rspTalk\x12\x39\n\x0creceiverType\x18\x01 \x01(\x0e\x32#.DDRCommProto.rspTalk.eReceiverType\x12\x0e\n\x06talkID\x18\x02 \x01(\x05\x12\x0e\n\x06\x61vType\x18\x03 \x01(\x05\"7\n\reReceiverType\x12\n\n\x06\x63lient\x10\x00\x12\x0b\n\x07monitor\x10\x01\x12\r\n\trobot_LSM\x10\x02\"9\n\treqTalkHB\x12\x14\n\x0c\x63\x61llerTalkID\x18\x01 \x01(\x05\x12\x16\n\x0ereceiverTalkID\x18\x02 \x01(\x05\"7\n\nreqCmdMove\x12\x12\n\nline_speed\x18\x01 \x01(\x02\x12\x15\n\rangulau_speed\x18\x02 \x01(\x02\"5\n\nrspCmdMove\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"&\n\x11reqCmdChangeSpeed\x12\x11\n\tadd_speed\x18\x01 \x01(\x05\"<\n\x11rspCmdChangeSpeed\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"\"\n\x11reqCmdPauseResume\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"<\n\x11rspCmdPauseResume\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"D\n\treqCmdIPC\x12\'\n\x04mode\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdIPCMode\x12\x0e\n\x06values\x18\x02 \x01(\x05\"m\n\trspCmdIPC\x12\'\n\x04mode\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdIPCMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x0e\n\x06values\x18\x03 \x01(\x05\"\xee\x01\n\x0breqCmdAudio\x12;\n\x06\x61udiop\x18\x01 \x01(\x0e\x32+.DDRCommProto.reqCmdAudio.eAudioOperational\x12\x32\n\x04type\x18\x02 \x01(\x0e\x32$.DDRCommProto.reqCmdAudio.eAudioMode\x12\x10\n\x08\x41udiostr\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\x05\"!\n\neAudioMode\x12\x08\n\x04\x65TTS\x10\x00\x12\t\n\x05\x65\x46ile\x10\x01\"*\n\x11\x65\x41udioOperational\x12\n\n\x06\x65Start\x10\x00\x12\t\n\x05\x65Stop\x10\x01\";\n\x10rspCmdVoiceAlarm\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"4\n\x12reqCmdUpdateConfig\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61taname\x18\x02 \x01(\t\"O\n\x12rspCmdUpdateConfig\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x10\n\x08\x64\x61taname\x18\x02 \x01(\t\"$\n\x13reqCmdGetConfigdata\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"R\n\x13rspCmdGetConfigdata\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x12\n\nconfigdata\x18\x02 \x03(\x05\"I\n\x11reqCmdSetWorkPath\x12\x12\n\nroute_name\x18\x01 \x01(\t\x12\x11\n\tpath_name\x18\x02 \x01(\t\x12\r\n\x05speed\x18\x03 \x01(\x02\"<\n\x11rspCmdSetWorkPath\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"W\n\rreqCmdAddFace\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\x0f\n\x07picdata\x18\x03 \x03(\x05\"8\n\rrspCmdAddFace\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"C\n\x14reqCmdGetAlarmParams\x12+\n\talarmtype\x18\x01 \x01(\x0e\x32\x18.DDRCommProto.eAlarmType\"\x81\x01\n\x16rspCmdThermalGetParams\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12+\n\talarmtype\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eAlarmType\x12\x11\n\talarmtemp\x18\x03 \x01(\x02\"(\n\x17reqCmdFaceDataBaseOrder\x12\r\n\x05Order\x18\x01 \x01(\t\"d\n\x10\x46\x61\x63\x65\x44\x61taBaseData\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\'\n\x04type\x18\x03 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\r\n\x05label\x18\x04 \x01(\t\"\xc8\x01\n\x17rspCmdFaceDataBaseOrder\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12,\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x1e.DDRCommProto.FaceDataBaseData\"V\n\x10\x65RspDataBaseType\x12\n\n\x06\x65\x45rror\x10\x00\x12\x0f\n\x0b\x65QueryCount\x10\x01\x12\x12\n\x0e\x65\x44\x65leteSuccess\x10\x02\x12\x11\n\reDetailedData\x10\x03\"R\n\x13reqCmdSetFaceParams\x12(\n\x05param\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eFaceParams\x12\x11\n\tparam_num\x18\x02 \x01(\x02\"h\n\x13rspCmdSetFaceParams\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12(\n\x05param\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eFaceParams\"\x9b\x01\n\x0ereqCmdAutoChat\x12\x38\n\x04type\x18\x01 \x01(\x0e\x32*.DDRCommProto.reqCmdAutoChat.eAutoChatType\x12\x0e\n\x06\x63omnum\x18\x02 \x01(\x05\"?\n\reAutoChatType\x12\x10\n\x0c\x65StartOnline\x10\x00\x12\x11\n\reStartOffline\x10\x01\x12\t\n\x05\x65Stop\x10\x02\"9\n\x0erspCmdAutoChat\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"\x8e\x01\n\x13reqCmdGeneralOctree\x12\x12\n\nroute_name\x18\x01 \x01(\t\x12;\n\x04type\x18\x02 \x01(\x0e\x32-.DDRCommProto.reqCmdGeneralOctree.eOctreeType\"&\n\x0b\x65OctreeType\x12\x0b\n\x07\x65\x43reate\x10\x00\x12\n\n\x06\x65Query\x10\x01\"\xc5\x01\n\x13rspCmdGeneralOctree\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12?\n\x05otype\x18\x02 \x01(\x0e\x32\x30.DDRCommProto.rspCmdGeneralOctree.eRspOctreeType\"D\n\x0e\x65RspOctreeType\x12\x12\n\x0e\x65\x46ileNotExists\x10\x00\x12\x0f\n\x0b\x65\x46ileExists\x10\x01\x12\r\n\teInCreate\x10\x02\"W\n\x15reqCmdStartActionMode\x12*\n\x04mode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\x12\n\nroute_name\x18\x02 \x01(\t\"l\n\x15rspCmdStartActionMode\x12*\n\x04mode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"$\n\x13reqCmdEndActionMode\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x84\x01\n\x13rspCmdEndActionMode\x12\x30\n\nactionmode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x12\n\nroute_name\x18\x03 \x01(\t\"\xca\x03\n\x10notifyBaseStatus\x12\x0c\n\x04mode\x18\x01 \x01(\x05\x12\x0f\n\x07sonmode\x18\x02 \x01(\x05\x12\x0c\n\x04\x62\x61tt\x18\x03 \x01(\x02\x12\x0c\n\x04temp\x18\x04 \x01(\x02\x12\x0b\n\x03hum\x18\x05 \x01(\x02\x12\x0c\n\x04pm25\x18\x06 \x01(\x02\x12\x10\n\x08stopstat\x18\x07 \x01(\x05\x12\x10\n\x08\x66uncstat\x18\x08 \x01(\x03\x12\x11\n\tvoiceloop\x18\t \x01(\x05\x12\x11\n\tcurrroute\x18\n \x01(\t\x12\x10\n\x08\x63urrpath\x18\x0b \x01(\t\x12\x11\n\tcurrspeed\x18\x0c \x01(\x02\x12\x15\n\rcurrwalkstyle\x18\r \x01(\t\x12\x0c\n\x04posx\x18\x0e \x01(\x02\x12\x0c\n\x04posy\x18\x0f \x01(\x02\x12\x14\n\x0cposdirection\x18\x10 \x01(\x02\x12\x14\n\x0cposlinespeed\x18\x11 \x01(\x02\x12\x17\n\x0fposangulauspeed\x18\x12 \x01(\x02\x12\x11\n\tlongitude\x18\x13 \x01(\x01\x12\x10\n\x08latitude\x18\x14 \x01(\x01\x12\x11\n\ttimestamp\x18\x15 \x01(\x03\x12\x13\n\x0bthermalmaxx\x18\x16 \x01(\x05\x12\x13\n\x0bthermalmaxy\x18\x17 \x01(\x05\x12\x17\n\x0fthermalmaxvalue\x18\x18 \x01(\x02\"<\n\x06OAInfo\x12\x12\n\nstartangle\x18\x01 \x01(\x02\x12\x10\n\x08\x65ndangle\x18\x02 \x01(\x02\x12\x0c\n\x04\x64ist\x18\x03 \x01(\x02\"X\n\rnotifyObsData\x12\x10\n\x08greedred\x18\x01 \x01(\x05\x12\x0f\n\x07maxdist\x18\x02 \x01(\x02\x12$\n\x06oastat\x18\x03 \x03(\x0b\x32\x14.DDRCommProto.OAInfo\"\x95\x01\n\x0fnotifyAlarmInfo\x12\x36\n\x04type\x18\x01 \x01(\x0e\x32(.DDRCommProto.notifyAlarmInfo.eAlarmType\x12\x14\n\x0c\x61larmcontent\x18\x02 \x01(\t\"4\n\neAlarmType\x12\x11\n\reThermalAlarm\x10\x00\x12\x13\n\x0f\x65ObsStatusAlarm\x10\x01\"\x80\x01\n\x12notifyAlarmNewFace\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05socre\x18\x03 \x01(\x02\x12\x10\n\x08prevtime\x18\x04 \x01(\x03\x12\x12\n\nfacedecode\x18\x05 \x03(\x05\"\x88\x01\n\x0c\x41larmFirePos\x12\x0c\n\x04posx\x18\x01 \x01(\x05\x12\x0c\n\x04posy\x18\x02 \x01(\x05\x12\x10\n\x08poswidth\x18\x03 \x01(\x05\x12\x11\n\tposheight\x18\x04 \x01(\x05\x12\x0e\n\x06maxtem\x18\x05 \x01(\x05\x12\x0e\n\x06\x61vgtem\x18\x06 \x01(\x05\x12\x17\n\x0f\x61larmpointcount\x18\x07 \x01(\x05\":\n\x0fnotifyAlarmFire\x12\'\n\x03pos\x18\x01 \x03(\x0b\x32\x1a.DDRCommProto.AlarmFirePos\"N\n\rchkFileStatus\x12*\n\x08\x66ileType\x18\x01 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x11\n\tfileNames\x18\x02 \x03(\x0c\"Q\n\ransFileStatus\x12*\n\x08\x66ileType\x18\x01 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x14\n\x0c\x66ileAddrList\x18\x02 \x03(\x0c\"\x1e\n\treqStatus\x12\x11\n\tstatusMsg\x18\x01 \x01(\t\"\x1d\n\x0creqFaceAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1c\n\x0breqHotAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1c\n\x0breqObsAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1f\n\x0breqTextChat\x12\x10\n\x08\x63hatText\x18\x01 \x01(\t\"\xb0\x01\n\x12\x41VStreamSrcChannel\x12\x0f\n\x07srcAddr\x18\x01 \x01(\t\x12\x0f\n\x07srcPort\x18\x02 \x03(\x05\x12\x33\n\nstreamType\x18\x03 \x01(\x0e\x32\x1f.DDRCommProto.ChannelStreamType\x12\x35\n\x0bnetworkType\x18\x04 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\x12\x0c\n\x04rate\x18\x05 \x01(\x05\"F\n\rreqStreamAddr\x12\x35\n\x0bnetworkType\x18\x01 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\"R\n\rrspStreamAddr\x12\x32\n\x08\x63hannels\x18\x01 \x03(\x0b\x32 .DDRCommProto.AVStreamSrcChannel\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"R\n\x0bnotifyAlarm\x12$\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x0e\n\x06\x66romIP\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"\x7f\n\x0ereqFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x11\n\tfileNames\x18\x03 \x03(\x0c\"\x91\x01\n\x0erspFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x14\n\x0c\x66ileAddrList\x18\x03 \x03(\x0c\x12\r\n\x05\x65rror\x18\x04 \x01(\t\"\xa5\x01\n\x0f\x41VChannelConfig\x12\x0b\n\x03src\x18\x01 \x01(\t\x12\x0b\n\x03\x64st\x18\x02 \x01(\t\x12\x33\n\nstreamType\x18\x03 \x01(\x0e\x32\x1f.DDRCommProto.ChannelStreamType\x12\x35\n\x0bnetworkType\x18\x04 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\x12\x0c\n\x04rate\x18\x05 \x01(\x05\"$\n\x14reqStreamServiceInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\"X\n\x14rspStreamServiceInfo\x12\x0f\n\x07tcpPort\x18\x01 \x01(\x05\x12/\n\x08\x63hannels\x18\x02 \x03(\x0b\x32\x1d.DDRCommProto.AVChannelConfig\"Q\n\x1enotifyStreamServiceInfoChanged\x12/\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x1d.DDRCommProto.AVChannelConfig\"H\n\x13reqStreamRelayAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12\"\n\x02to\x18\x02 \x03(\x0e\x32\x16.DDRCommProto.eCltType*\xf6\x01\n\x08\x65\x43ltType\x12\t\n\x05\x65Null\x10\x00\x12\r\n\tePCClient\x10\x01\x12\x12\n\x0e\x65\x41ndroidClient\x10\x02\x12\x0f\n\neAllClient\x10\xff\x01\x12\x14\n\x0f\x65LSMStreamRelay\x10\x80\x02\x12\x17\n\x12\x65LSMSlamNavigation\x10\x80\x04\x12\x18\n\x13\x65LSMFaceRecognition\x10\x80\x08\x12\x17\n\x12\x65LSMThermalImaging\x10\x80\x10\x12\r\n\x07\x65\x41llLSM\x10\x80\xfe\x03\x12\x12\n\x0c\x65LocalServer\x10\x80\x80\x04\x12\x13\n\reRemoteServer\x10\x80\x80\x08\x12\x11\n\neAllServer\x10\x80\x80\xfc\x07*a\n\x0b\x65\x43mdRspType\x12\x0c\n\x08\x65Success\x10\x00\x12\x0e\n\neCmdFailed\x10\x01\x12\x10\n\x0c\x65NoAuthority\x10\x02\x12\x11\n\reRobotNoLogin\x10\x03\x12\x0f\n\x0b\x65LSMNoLogin\x10\x04*7\n\x0b\x65\x43mdIPCMode\x12\r\n\teShutDown\x10\x00\x12\x0c\n\x08\x65ReStart\x10\x01\x12\x0b\n\x07\x65Volume\x10\x02*;\n\x0b\x65PersonType\x12\x0e\n\neWhiteList\x10\x00\x12\x0e\n\neBlackList\x10\x01\x12\x0c\n\x08\x65RedList\x10\x02*;\n\neAlarmType\x12\x14\n\x10\x65\x46\x61\x63\x65\x41larmParams\x10\x00\x12\x17\n\x13\x65ThermalAlarmParams\x10\x01*.\n\x0b\x65\x46\x61\x63\x65Params\x12\x0f\n\x0b\x65\x43onfidence\x10\x00\x12\x0e\n\neAlarmTemp\x10\x01*{\n\x0e\x65\x43mdActionMode\x12\x10\n\x0c\x65\x41utoDynamic\x10\x00\x12\x0f\n\x0b\x65\x41utoStatic\x10\x01\x12\x15\n\x11\x65\x42lindWaldDynamic\x10\x02\x12\x14\n\x10\x65\x42lindWaldStatic\x10\x03\x12\x08\n\x04\x65Rec\x10\x04\x12\x0f\n\x0b\x65ReCharging\x10\x05*3\n\neFileTypes\x12\x10\n\x0c\x46ileContents\x10\x00\x12\x13\n\x0f\x46ileHttpAddress\x10\x01*+\n\x12\x43hannelNetworkType\x12\t\n\x05Local\x10\x00\x12\n\n\x06Remote\x10\x01*9\n\x11\x43hannelStreamType\x12\t\n\x05Video\x10\x00\x12\t\n\x05\x41udio\x10\x01\x12\x0e\n\nVideoAudio\x10\x02\x62\x06proto3')
+  serialized_pb=_b('\n\rBaseCmd.proto\x12\x0c\x44\x44RCommProto\"\xa2\x03\n\x0c\x43ommonHeader\x12\x10\n\x08\x62odyType\x18\x01 \x01(\t\x12+\n\x0b\x66romCltType\x18\x02 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12)\n\ttoCltType\x18\x03 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12:\n\rpassNodeArray\x18\x04 \x03(\x0b\x32#.DDRCommProto.CommonHeader.PassNode\x12:\n\rflowDirection\x18\x05 \x03(\x0e\x32#.DDRCommProto.CommonHeader.eFlowDir\x1a\x62\n\x08PassNode\x12(\n\x08nodeType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x18\n\x10receiveSessionID\x18\x02 \x01(\x03\x12\x12\n\nIntptrData\x18\x03 \x03(\x03\"L\n\x08\x65\x46lowDir\x12\x0b\n\x07\x46orward\x10\x00\x12\x0c\n\x08\x42\x61\x63kward\x10\x01\x12\x11\n\rRecordInQueue\x10\x02\x12\x12\n\x0eReturnPopQueue\x10\x03\"\x1d\n\tHeartBeat\x12\x10\n\x08whatever\x18\x01 \x01(\t\"%\n\x13reqRemoteServerList\x12\x0e\n\x06\x66romip\x18\x01 \x01(\t\"\x8e\x01\n\x13rspRemoteServerList\x12?\n\x07servers\x18\x01 \x03(\x0b\x32..DDRCommProto.rspRemoteServerList.RemoteServer\x1a\x36\n\x0cRemoteServer\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"*\n\x0creqRegisteLS\x12\x0c\n\x04udid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1d\n\x0crspRegisteLS\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"Y\n\x0ereqRemoteLogin\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0f\n\x07userpwd\x18\x03 \x01(\t\"\xc3\x02\n\x0erspRemoteLogin\x12\x35\n\x06lslist\x18\x01 \x03(\x0b\x32%.DDRCommProto.rspRemoteLogin.LSEntity\x12\x41\n\x07retcode\x18\x02 \x01(\x0e\x32\x30.DDRCommProto.rspRemoteLogin.eRemoteLoginRetCode\x12(\n\x08yourRole\x18\x03 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x1a&\n\x08LSEntity\x12\x0c\n\x04udid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"e\n\x13\x65RemoteLoginRetCode\x12\x0b\n\x07success\x10\x00\x12\x0f\n\x0bserver_busy\x10\x01\x12\x18\n\x14server_limit_reached\x10\x02\x12\x16\n\x12incorrect_password\x10\x03\"\x1b\n\x0breqSelectLS\x12\x0c\n\x04udid\x18\x01 \x01(\t\"\x1c\n\x0brspSelectLS\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1d\n\rreqUnselectLS\x12\x0c\n\x04udid\x18\x01 \x01(\t\"\x1e\n\rrspUnselectLS\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x97\x02\n\x08\x62\x63LSAddr\x12\x32\n\x07LSInfos\x18\x01 \x03(\x0b\x32!.DDRCommProto.bcLSAddr.ServerInfo\x1az\n\nServerInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x32\n\x05stype\x18\x02 \x01(\x0e\x32#.DDRCommProto.bcLSAddr.eServiceType\x12\x0b\n\x03ips\x18\x03 \x03(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\x12\x0f\n\x07robotid\x18\x05 \x01(\t\"[\n\x0c\x65ServiceType\x12\x0f\n\x0bLocalServer\x10\x00\x12\x10\n\x0cRemoteServer\x10\x01\x12\x14\n\x10RTSPStreamServer\x10\x02\x12\x12\n\x0eTalkBackServer\x10\x03\"S\n\x08reqLogin\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x0f\n\x07userpwd\x18\x03 \x01(\t\"\xcc\x01\n\x08rspLogin\x12\x35\n\x07retcode\x18\x01 \x01(\x0e\x32$.DDRCommProto.rspLogin.eLoginRetCode\x12(\n\x08yourRole\x18\x02 \x01(\x0e\x32\x16.DDRCommProto.eCltType\"_\n\reLoginRetCode\x12\x0b\n\x07success\x10\x00\x12\x0f\n\x0bserver_busy\x10\x01\x12\x18\n\x14server_limit_reached\x10\x02\x12\x16\n\x12incorrect_password\x10\x03\"7\n\nreqCmdMove\x12\x12\n\nline_speed\x18\x01 \x01(\x02\x12\x15\n\rangulau_speed\x18\x02 \x01(\x02\"5\n\nrspCmdMove\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"&\n\x11reqCmdChangeSpeed\x12\x11\n\tadd_speed\x18\x01 \x01(\x05\"<\n\x11rspCmdChangeSpeed\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"\"\n\x11reqCmdPauseResume\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"<\n\x11rspCmdPauseResume\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"D\n\treqCmdIPC\x12\'\n\x04mode\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdIPCMode\x12\x0e\n\x06values\x18\x02 \x01(\x05\"m\n\trspCmdIPC\x12\'\n\x04mode\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdIPCMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x0e\n\x06values\x18\x03 \x01(\x05\"\xee\x01\n\x0breqCmdAudio\x12;\n\x06\x61udiop\x18\x01 \x01(\x0e\x32+.DDRCommProto.reqCmdAudio.eAudioOperational\x12\x32\n\x04type\x18\x02 \x01(\x0e\x32$.DDRCommProto.reqCmdAudio.eAudioMode\x12\x10\n\x08\x41udiostr\x18\x03 \x01(\x0c\x12\r\n\x05level\x18\x04 \x01(\x05\"!\n\neAudioMode\x12\x08\n\x04\x65TTS\x10\x00\x12\t\n\x05\x65\x46ile\x10\x01\"*\n\x11\x65\x41udioOperational\x12\n\n\x06\x65Start\x10\x00\x12\t\n\x05\x65Stop\x10\x01\"6\n\x0brspCmdAudio\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"4\n\x12reqCmdUpdateConfig\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\x12\x10\n\x08\x64\x61taname\x18\x02 \x01(\t\"O\n\x12rspCmdUpdateConfig\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x10\n\x08\x64\x61taname\x18\x02 \x01(\t\"$\n\x13reqCmdGetConfigdata\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"R\n\x13rspCmdGetConfigdata\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x12\n\nconfigdata\x18\x02 \x03(\x05\"]\n\x11reqCmdSetWorkPath\x12\x12\n\nroute_name\x18\x01 \x01(\x0c\x12\x11\n\tpath_name\x18\x02 \x01(\t\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x12\n\nwalk_style\x18\x04 \x01(\t\"<\n\x11rspCmdSetWorkPath\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"\x9b\x01\n\x0ereqCmdAutoChat\x12\x38\n\x04type\x18\x01 \x01(\x0e\x32*.DDRCommProto.reqCmdAutoChat.eAutoChatType\x12\x0e\n\x06\x63omnum\x18\x02 \x01(\x05\"?\n\reAutoChatType\x12\x10\n\x0c\x65StartOnline\x10\x00\x12\x11\n\reStartOffline\x10\x01\x12\t\n\x05\x65Stop\x10\x02\"9\n\x0erspCmdAutoChat\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"\x8e\x01\n\x13reqCmdGeneralOctree\x12\x12\n\nroute_name\x18\x01 \x01(\x0c\x12;\n\x04type\x18\x02 \x01(\x0e\x32-.DDRCommProto.reqCmdGeneralOctree.eOctreeType\"&\n\x0b\x65OctreeType\x12\x0b\n\x07\x65\x43reate\x10\x00\x12\n\n\x06\x65Query\x10\x01\"\xc5\x01\n\x13rspCmdGeneralOctree\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12?\n\x05otype\x18\x02 \x01(\x0e\x32\x30.DDRCommProto.rspCmdGeneralOctree.eRspOctreeType\"D\n\x0e\x65RspOctreeType\x12\x12\n\x0e\x65\x46ileNotExists\x10\x00\x12\x0f\n\x0b\x65\x46ileExists\x10\x01\x12\r\n\teInCreate\x10\x02\"W\n\x15reqCmdStartActionMode\x12*\n\x04mode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\x12\n\nroute_name\x18\x02 \x01(\x0c\"l\n\x15rspCmdStartActionMode\x12*\n\x04mode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"$\n\x13reqCmdEndActionMode\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x84\x01\n\x13rspCmdEndActionMode\x12\x30\n\nactionmode\x18\x01 \x01(\x0e\x32\x1c.DDRCommProto.eCmdActionMode\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12\x12\n\nroute_name\x18\x03 \x01(\x0c\"D\n\x1breqCmdDeleteCurrRouteOrPath\x12\x12\n\nroute_name\x18\x01 \x01(\x0c\x12\x11\n\tpath_name\x18\x02 \x01(\x0c\"F\n\x1brspCmdDeleteCurrRouteOrPath\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"*\n\x19reqCmdGetCurrRouteAndPath\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"2\n\tRouteData\x12\x12\n\nroute_name\x18\x01 \x01(\x0c\x12\x11\n\tpath_name\x18\x02 \x03(\x0c\"q\n\x19rspCmdGetCurrRouteAndPath\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12+\n\nroute_data\x18\x02 \x03(\x0b\x32\x17.DDRCommProto.RouteData\"\xca\x03\n\x10notifyBaseStatus\x12\x0c\n\x04mode\x18\x01 \x01(\x05\x12\x0f\n\x07sonmode\x18\x02 \x01(\x05\x12\x0c\n\x04\x62\x61tt\x18\x03 \x01(\x02\x12\x0c\n\x04temp\x18\x04 \x01(\x02\x12\x0b\n\x03hum\x18\x05 \x01(\x02\x12\x0c\n\x04pm25\x18\x06 \x01(\x02\x12\x10\n\x08stopstat\x18\x07 \x01(\x05\x12\x10\n\x08\x66uncstat\x18\x08 \x01(\x03\x12\x11\n\tvoiceloop\x18\t \x01(\x05\x12\x11\n\tcurrroute\x18\n \x01(\x0c\x12\x10\n\x08\x63urrpath\x18\x0b \x01(\t\x12\x11\n\tcurrspeed\x18\x0c \x01(\x02\x12\x15\n\rcurrwalkstyle\x18\r \x01(\t\x12\x0c\n\x04posx\x18\x0e \x01(\x02\x12\x0c\n\x04posy\x18\x0f \x01(\x02\x12\x14\n\x0cposdirection\x18\x10 \x01(\x02\x12\x14\n\x0cposlinespeed\x18\x11 \x01(\x02\x12\x17\n\x0fposangulauspeed\x18\x12 \x01(\x02\x12\x11\n\tlongitude\x18\x13 \x01(\x01\x12\x10\n\x08latitude\x18\x14 \x01(\x01\x12\x11\n\ttimestamp\x18\x15 \x01(\x03\x12\x13\n\x0bthermalmaxx\x18\x16 \x01(\x05\x12\x13\n\x0bthermalmaxy\x18\x17 \x01(\x05\x12\x17\n\x0fthermalmaxvalue\x18\x18 \x01(\x02\"<\n\x06OAInfo\x12\x12\n\nstartangle\x18\x01 \x01(\x02\x12\x10\n\x08\x65ndangle\x18\x02 \x01(\x02\x12\x0c\n\x04\x64ist\x18\x03 \x01(\x02\"X\n\rnotifyObsData\x12\x10\n\x08greedred\x18\x01 \x01(\x05\x12\x0f\n\x07maxdist\x18\x02 \x01(\x02\x12$\n\x06oastat\x18\x03 \x03(\x0b\x32\x14.DDRCommProto.OAInfo\"\x95\x01\n\x0fnotifyAlarmInfo\x12\x36\n\x04type\x18\x01 \x01(\x0e\x32(.DDRCommProto.notifyAlarmInfo.eAlarmType\x12\x14\n\x0c\x61larmcontent\x18\x02 \x01(\t\"4\n\neAlarmType\x12\x11\n\reThermalAlarm\x10\x00\x12\x13\n\x0f\x65ObsStatusAlarm\x10\x01\"\x80\x01\n\x12notifyAlarmNewFace\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05socre\x18\x03 \x01(\x02\x12\x10\n\x08prevtime\x18\x04 \x01(\x03\x12\x12\n\nfacedecode\x18\x05 \x03(\x05\"\x88\x01\n\x0c\x41larmFirePos\x12\x0c\n\x04posx\x18\x01 \x01(\x05\x12\x0c\n\x04posy\x18\x02 \x01(\x05\x12\x10\n\x08poswidth\x18\x03 \x01(\x05\x12\x11\n\tposheight\x18\x04 \x01(\x05\x12\x0e\n\x06maxtem\x18\x05 \x01(\x05\x12\x0e\n\x06\x61vgtem\x18\x06 \x01(\x05\x12\x17\n\x0f\x61larmpointcount\x18\x07 \x01(\x05\":\n\x0fnotifyAlarmFire\x12\'\n\x03pos\x18\x01 \x03(\x0b\x32\x1a.DDRCommProto.AlarmFirePos\"\x90\x01\n\rchkFileStatus\x12*\n\x08\x66ileType\x18\x01 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x0f\n\x07\x66ilefmt\x18\x02 \x03(\x0c\x12\x12\n\nexistfiles\x18\x03 \x03(\x0c\x12.\n\x0etarServiceType\x18\x04 \x01(\x0e\x32\x16.DDRCommProto.eCltType\"Q\n\ransFileStatus\x12*\n\x08\x66ileType\x18\x01 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x14\n\x0c\x66ileAddrList\x18\x02 \x03(\x0c\"y\n\x10notifyUploadFile\x12\x10\n\x08httpAddr\x18\x01 \x01(\t\x12\x0f\n\x07\x66ilefmt\x18\x02 \x03(\x0c\x12\x12\n\nexistfiles\x18\x03 \x03(\x0c\x12.\n\x0etarServiceType\x18\x04 \x01(\x0e\x32\x16.DDRCommProto.eCltType\"C\n\x18notifyUploadFileProgress\x12\x10\n\x08progress\x18\x01 \x01(\x02\x12\x15\n\ruploadedfiles\x18\x02 \x03(\x0c\"\x1e\n\treqStatus\x12\x11\n\tstatusMsg\x18\x01 \x01(\t\"\x1d\n\x0creqFaceAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1c\n\x0breqHotAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1c\n\x0breqObsAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"\x1f\n\x0breqTextChat\x12\x10\n\x08\x63hatText\x18\x01 \x01(\t\"\xc1\x01\n\x12\x41VStreamSrcChannel\x12\x0f\n\x07srcAddr\x18\x01 \x01(\t\x12\x0f\n\x07srcPort\x18\x02 \x03(\x05\x12\x33\n\nstreamType\x18\x03 \x01(\x0e\x32\x1f.DDRCommProto.ChannelStreamType\x12\x35\n\x0bnetworkType\x18\x04 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\x12\x0c\n\x04rate\x18\x05 \x01(\x05\x12\x0f\n\x07srcname\x18\x06 \x01(\x0c\"F\n\rreqStreamAddr\x12\x35\n\x0bnetworkType\x18\x01 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\"R\n\rrspStreamAddr\x12\x32\n\x08\x63hannels\x18\x01 \x03(\x0b\x32 .DDRCommProto.AVStreamSrcChannel\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"\xbf\x01\n\x0creqAudioTalk\x12\x32\n\x06opType\x18\x01 \x01(\x0e\x32\".DDRCommProto.reqAudioTalk.eOpMode\x12\x34\n\x07netType\x18\x02 \x01(\x0e\x32#.DDRCommProto.reqAudioTalk.eNetType\" \n\x07\x65OpMode\x12\n\n\x06\x65Start\x10\x00\x12\t\n\x05\x65Stop\x10\x01\"#\n\x08\x65NetType\x12\n\n\x06\x65Local\x10\x00\x12\x0b\n\x07\x65Remote\x10\x01\"H\n\x0crspAudioTalk\x12)\n\x06status\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eTalkStatus\x12\r\n\x05\x65rror\x18\x02 \x01(\t\"U\n\x10notifyStreamAddr\x12\x32\n\x08\x63hannels\x18\x01 \x03(\x0b\x32 .DDRCommProto.AVStreamSrcChannel\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"R\n\x0bnotifyAlarm\x12$\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12\x0e\n\x06\x66romIP\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\t\"\x7f\n\x0ereqFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x11\n\tfileNames\x18\x03 \x03(\x0c\"\x91\x01\n\x0erspFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x14\n\x0c\x66ileAddrList\x18\x03 \x03(\x0c\x12\r\n\x05\x65rror\x18\x04 \x01(\t\"\x85\x01\n\x14reqRemoteFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x11\n\tfileNames\x18\x03 \x03(\x0c\"\x97\x01\n\x14rspRemoteFileAddress\x12.\n\x0etarServiceType\x18\x01 \x01(\x0e\x32\x16.DDRCommProto.eCltType\x12*\n\x08\x66ileType\x18\x02 \x01(\x0e\x32\x18.DDRCommProto.eFileTypes\x12\x14\n\x0c\x66ileAddrList\x18\x03 \x03(\x0c\x12\r\n\x05\x65rror\x18\x04 \x01(\t\"\xb6\x01\n\x0f\x41VChannelConfig\x12\x0b\n\x03src\x18\x01 \x01(\t\x12\x0b\n\x03\x64st\x18\x02 \x01(\t\x12\x33\n\nstreamType\x18\x03 \x01(\x0e\x32\x1f.DDRCommProto.ChannelStreamType\x12\x35\n\x0bnetworkType\x18\x04 \x01(\x0e\x32 .DDRCommProto.ChannelNetworkType\x12\x0c\n\x04rate\x18\x05 \x01(\x05\x12\x0f\n\x07srcname\x18\x06 \x01(\x0c\"$\n\x14reqStreamServiceInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\"X\n\x14rspStreamServiceInfo\x12\x0f\n\x07tcpPort\x18\x01 \x01(\x05\x12/\n\x08\x63hannels\x18\x02 \x03(\x0b\x32\x1d.DDRCommProto.AVChannelConfig\"Q\n\x1enotifyStreamServiceInfoChanged\x12/\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x1d.DDRCommProto.AVChannelConfig\"H\n\x13reqStreamRelayAlarm\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12\"\n\x02to\x18\x02 \x03(\x0e\x32\x16.DDRCommProto.eCltType\")\n\x13ThermalServerConfig\x12\x12\n\nalarm_temp\x18\x01 \x01(\x02\"\'\n\x16reqCmdGetThermalParams\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"S\n\x16rspCmdGetThermalParams\x12\x39\n\x0ethermal_config\x18\x01 \x01(\x0b\x32!.DDRCommProto.ThermalServerConfig\"S\n\x16reqCmdSetThermalParams\x12\x39\n\x0ethermal_config\x18\x01 \x01(\x0b\x32!.DDRCommProto.ThermalServerConfig\"A\n\x16rspCmdSetThermalParams\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"W\n\rreqCmdAddFace\x12\x0c\n\x04name\x18\x01 \x01(\x0c\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\x0f\n\x07picdata\x18\x03 \x03(\x05\"8\n\rrspCmdAddFace\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\"(\n\x17reqCmdFaceDataBaseOrder\x12\r\n\x05Order\x18\x01 \x01(\t\"d\n\x10\x46\x61\x63\x65\x44\x61taBaseData\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\x0c\x12\'\n\x04type\x18\x03 \x01(\x0e\x32\x19.DDRCommProto.ePersonType\x12\r\n\x05label\x18\x04 \x01(\t\"\xc8\x01\n\x17rspCmdFaceDataBaseOrder\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType\x12,\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x1e.DDRCommProto.FaceDataBaseData\"V\n\x10\x65RspDataBaseType\x12\n\n\x06\x65\x45rror\x10\x00\x12\x0f\n\x0b\x65QueryCount\x10\x01\x12\x12\n\x0e\x65\x44\x65leteSuccess\x10\x02\x12\x11\n\reDetailedData\x10\x03\"<\n\x10\x46\x61\x63\x65ServerConfig\x12\x12\n\nConfidence\x18\x01 \x01(\x02\x12\x14\n\x0c\x46\x61\x63\x65_quality\x18\x02 \x01(\x02\"$\n\x13reqCmdGetFaceParams\x12\r\n\x05\x65rror\x18\x01 \x01(\t\"J\n\x13rspCmdGetFaceParams\x12\x33\n\x0b\x46\x61\x63\x65_config\x18\x01 \x01(\x0b\x32\x1e.DDRCommProto.FaceServerConfig\"J\n\x13reqCmdSetFaceParams\x12\x33\n\x0b\x46\x61\x63\x65_config\x18\x01 \x01(\x0b\x32\x1e.DDRCommProto.FaceServerConfig\">\n\x13rspCmdSetFaceParams\x12\'\n\x04type\x18\x01 \x01(\x0e\x32\x19.DDRCommProto.eCmdRspType*\xaf\x02\n\x08\x65\x43ltType\x12\t\n\x05\x65Null\x10\x00\x12\x12\n\x0e\x65LocalPCClient\x10\x01\x12\x17\n\x13\x65LocalAndroidClient\x10\x02\x12\x13\n\x0f\x65RemotePCClient\x10\x04\x12\x18\n\x14\x65RemoteAndroidClient\x10\x08\x12\x0f\n\neAllClient\x10\xff\x01\x12\x14\n\x0f\x65LSMStreamRelay\x10\x80\x02\x12\x17\n\x12\x65LSMSlamNavigation\x10\x80\x04\x12\x18\n\x13\x65LSMFaceRecognition\x10\x80\x08\x12\x17\n\x12\x65LSMThermalImaging\x10\x80\x10\x12\r\n\x07\x65\x41llLSM\x10\x80\xfe\x03\x12\x12\n\x0c\x65LocalServer\x10\x80\x80\x04\x12\x13\n\reRemoteServer\x10\x80\x80\x08\x12\x11\n\neAllServer\x10\x80\x80\xfc\x07*a\n\x0b\x65\x43mdRspType\x12\x0c\n\x08\x65Success\x10\x00\x12\x0e\n\neCmdFailed\x10\x01\x12\x10\n\x0c\x65NoAuthority\x10\x02\x12\x11\n\reRobotNoLogin\x10\x03\x12\x0f\n\x0b\x65LSMNoLogin\x10\x04*7\n\x0b\x65\x43mdIPCMode\x12\r\n\teShutDown\x10\x00\x12\x0c\n\x08\x65ReStart\x10\x01\x12\x0b\n\x07\x65Volume\x10\x02*{\n\x0e\x65\x43mdActionMode\x12\x10\n\x0c\x65\x41utoDynamic\x10\x00\x12\x0f\n\x0b\x65\x41utoStatic\x10\x01\x12\x15\n\x11\x65\x42lindWaldDynamic\x10\x02\x12\x14\n\x10\x65\x42lindWaldStatic\x10\x03\x12\x08\n\x04\x65Rec\x10\x04\x12\x0f\n\x0b\x65ReCharging\x10\x05*3\n\neFileTypes\x12\x10\n\x0c\x46ileContents\x10\x00\x12\x13\n\x0f\x46ileHttpAddress\x10\x01*+\n\x12\x43hannelNetworkType\x12\t\n\x05Local\x10\x00\x12\n\n\x06Remote\x10\x01*9\n\x11\x43hannelStreamType\x12\t\n\x05Video\x10\x00\x12\t\n\x05\x41udio\x10\x01\x12\x0e\n\nVideoAudio\x10\x02*/\n\x0b\x65TalkStatus\x12\n\n\x06\x45TS_OK\x10\x00\x12\x14\n\x10\x45TS_USE_BY_OTHER\x10\x01*;\n\x0b\x65PersonType\x12\x0e\n\neWhiteList\x10\x00\x12\x0e\n\neBlackList\x10\x01\x12\x0c\n\x08\x65RedList\x10\x02\x62\x06proto3')
 )
 
 _ECLTTYPE = _descriptor.EnumDescriptor(
@@ -34,54 +34,62 @@ _ECLTTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ePCClient', index=1, number=1,
+      name='eLocalPCClient', index=1, number=1,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eAndroidClient', index=2, number=2,
+      name='eLocalAndroidClient', index=2, number=2,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eAllClient', index=3, number=255,
+      name='eRemotePCClient', index=3, number=4,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eLSMStreamRelay', index=4, number=256,
+      name='eRemoteAndroidClient', index=4, number=8,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eLSMSlamNavigation', index=5, number=512,
+      name='eAllClient', index=5, number=255,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eLSMFaceRecognition', index=6, number=1024,
+      name='eLSMStreamRelay', index=6, number=256,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eLSMThermalImaging', index=7, number=2048,
+      name='eLSMSlamNavigation', index=7, number=512,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eAllLSM', index=8, number=65280,
+      name='eLSMFaceRecognition', index=8, number=1024,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eLocalServer', index=9, number=65536,
+      name='eLSMThermalImaging', index=9, number=2048,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eRemoteServer', index=10, number=131072,
+      name='eAllLSM', index=10, number=65280,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='eAllServer', index=11, number=16711680,
+      name='eLocalServer', index=11, number=65536,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eRemoteServer', index=12, number=131072,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eAllServer', index=13, number=16711680,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7572,
-  serialized_end=7818,
+  serialized_start=8979,
+  serialized_end=9282,
 )
 _sym_db.RegisterEnumDescriptor(_ECLTTYPE)
 
@@ -115,8 +123,8 @@ _ECMDRSPTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7820,
-  serialized_end=7917,
+  serialized_start=9284,
+  serialized_end=9381,
 )
 _sym_db.RegisterEnumDescriptor(_ECMDRSPTYPE)
 
@@ -142,85 +150,12 @@ _ECMDIPCMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7919,
-  serialized_end=7974,
+  serialized_start=9383,
+  serialized_end=9438,
 )
 _sym_db.RegisterEnumDescriptor(_ECMDIPCMODE)
 
 eCmdIPCMode = enum_type_wrapper.EnumTypeWrapper(_ECMDIPCMODE)
-_EPERSONTYPE = _descriptor.EnumDescriptor(
-  name='ePersonType',
-  full_name='DDRCommProto.ePersonType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eWhiteList', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eBlackList', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eRedList', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=7976,
-  serialized_end=8035,
-)
-_sym_db.RegisterEnumDescriptor(_EPERSONTYPE)
-
-ePersonType = enum_type_wrapper.EnumTypeWrapper(_EPERSONTYPE)
-_EALARMTYPE = _descriptor.EnumDescriptor(
-  name='eAlarmType',
-  full_name='DDRCommProto.eAlarmType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eFaceAlarmParams', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eThermalAlarmParams', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=8037,
-  serialized_end=8096,
-)
-_sym_db.RegisterEnumDescriptor(_EALARMTYPE)
-
-eAlarmType = enum_type_wrapper.EnumTypeWrapper(_EALARMTYPE)
-_EFACEPARAMS = _descriptor.EnumDescriptor(
-  name='eFaceParams',
-  full_name='DDRCommProto.eFaceParams',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eConfidence', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eAlarmTemp', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=8098,
-  serialized_end=8144,
-)
-_sym_db.RegisterEnumDescriptor(_EFACEPARAMS)
-
-eFaceParams = enum_type_wrapper.EnumTypeWrapper(_EFACEPARAMS)
 _ECMDACTIONMODE = _descriptor.EnumDescriptor(
   name='eCmdActionMode',
   full_name='DDRCommProto.eCmdActionMode',
@@ -254,8 +189,8 @@ _ECMDACTIONMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8146,
-  serialized_end=8269,
+  serialized_start=9440,
+  serialized_end=9563,
 )
 _sym_db.RegisterEnumDescriptor(_ECMDACTIONMODE)
 
@@ -277,8 +212,8 @@ _EFILETYPES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8271,
-  serialized_end=8322,
+  serialized_start=9565,
+  serialized_end=9616,
 )
 _sym_db.RegisterEnumDescriptor(_EFILETYPES)
 
@@ -300,8 +235,8 @@ _CHANNELNETWORKTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8324,
-  serialized_end=8367,
+  serialized_start=9618,
+  serialized_end=9661,
 )
 _sym_db.RegisterEnumDescriptor(_CHANNELNETWORKTYPE)
 
@@ -327,15 +262,67 @@ _CHANNELSTREAMTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8369,
-  serialized_end=8426,
+  serialized_start=9663,
+  serialized_end=9720,
 )
 _sym_db.RegisterEnumDescriptor(_CHANNELSTREAMTYPE)
 
 ChannelStreamType = enum_type_wrapper.EnumTypeWrapper(_CHANNELSTREAMTYPE)
+_ETALKSTATUS = _descriptor.EnumDescriptor(
+  name='eTalkStatus',
+  full_name='DDRCommProto.eTalkStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ETS_OK', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ETS_USE_BY_OTHER', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=9722,
+  serialized_end=9769,
+)
+_sym_db.RegisterEnumDescriptor(_ETALKSTATUS)
+
+eTalkStatus = enum_type_wrapper.EnumTypeWrapper(_ETALKSTATUS)
+_EPERSONTYPE = _descriptor.EnumDescriptor(
+  name='ePersonType',
+  full_name='DDRCommProto.ePersonType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eWhiteList', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eBlackList', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eRedList', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=9771,
+  serialized_end=9830,
+)
+_sym_db.RegisterEnumDescriptor(_EPERSONTYPE)
+
+ePersonType = enum_type_wrapper.EnumTypeWrapper(_EPERSONTYPE)
 eNull = 0
-ePCClient = 1
-eAndroidClient = 2
+eLocalPCClient = 1
+eLocalAndroidClient = 2
+eRemotePCClient = 4
+eRemoteAndroidClient = 8
 eAllClient = 255
 eLSMStreamRelay = 256
 eLSMSlamNavigation = 512
@@ -353,13 +340,6 @@ eLSMNoLogin = 4
 eShutDown = 0
 eReStart = 1
 eVolume = 2
-eWhiteList = 0
-eBlackList = 1
-eRedList = 2
-eFaceAlarmParams = 0
-eThermalAlarmParams = 1
-eConfidence = 0
-eAlarmTemp = 1
 eAutoDynamic = 0
 eAutoStatic = 1
 eBlindWaldDynamic = 2
@@ -373,6 +353,11 @@ Remote = 1
 Video = 0
 Audio = 1
 VideoAudio = 2
+ETS_OK = 0
+ETS_USE_BY_OTHER = 1
+eWhiteList = 0
+eBlackList = 1
+eRedList = 2
 
 
 _COMMONHEADER_EFLOWDIR = _descriptor.EnumDescriptor(
@@ -389,13 +374,51 @@ _COMMONHEADER_EFLOWDIR = _descriptor.EnumDescriptor(
       name='Backward', index=1, number=1,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RecordInQueue', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ReturnPopQueue', index=3, number=3,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=346,
-  serialized_end=383,
+  serialized_start=374,
+  serialized_end=450,
 )
 _sym_db.RegisterEnumDescriptor(_COMMONHEADER_EFLOWDIR)
+
+_RSPREMOTELOGIN_EREMOTELOGINRETCODE = _descriptor.EnumDescriptor(
+  name='eRemoteLoginRetCode',
+  full_name='DDRCommProto.rspRemoteLogin.eRemoteLoginRetCode',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='success', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='server_busy', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='server_limit_reached', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='incorrect_password', index=3, number=3,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=1056,
+  serialized_end=1157,
+)
+_sym_db.RegisterEnumDescriptor(_RSPREMOTELOGIN_EREMOTELOGINRETCODE)
 
 _BCLSADDR_ESERVICETYPE = _descriptor.EnumDescriptor(
   name='eServiceType',
@@ -422,8 +445,8 @@ _BCLSADDR_ESERVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=605,
-  serialized_end=696,
+  serialized_start=1470,
+  serialized_end=1561,
 )
 _sym_db.RegisterEnumDescriptor(_BCLSADDR_ESERVICETYPE)
 
@@ -452,62 +475,10 @@ _RSPLOGIN_ELOGINRETCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=893,
-  serialized_end=988,
+  serialized_start=1758,
+  serialized_end=1853,
 )
 _sym_db.RegisterEnumDescriptor(_RSPLOGIN_ELOGINRETCODE)
-
-_REQTALK_ECALLERTYPE = _descriptor.EnumDescriptor(
-  name='eCallerType',
-  full_name='DDRCommProto.reqTalk.eCallerType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='client', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='monitor', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='robot_LSM', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1726,
-  serialized_end=1779,
-)
-_sym_db.RegisterEnumDescriptor(_REQTALK_ECALLERTYPE)
-
-_RSPTALK_ERECEIVERTYPE = _descriptor.EnumDescriptor(
-  name='eReceiverType',
-  full_name='DDRCommProto.rspTalk.eReceiverType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='client', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='monitor', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='robot_LSM', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=1884,
-  serialized_end=1939,
-)
-_sym_db.RegisterEnumDescriptor(_RSPTALK_ERECEIVERTYPE)
 
 _REQCMDAUDIO_EAUDIOMODE = _descriptor.EnumDescriptor(
   name='eAudioMode',
@@ -526,8 +497,8 @@ _REQCMDAUDIO_EAUDIOMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2655,
-  serialized_end=2688,
+  serialized_start=2510,
+  serialized_end=2543,
 )
 _sym_db.RegisterEnumDescriptor(_REQCMDAUDIO_EAUDIOMODE)
 
@@ -548,10 +519,150 @@ _REQCMDAUDIO_EAUDIOOPERATIONAL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2690,
-  serialized_end=2732,
+  serialized_start=2545,
+  serialized_end=2587,
 )
 _sym_db.RegisterEnumDescriptor(_REQCMDAUDIO_EAUDIOOPERATIONAL)
+
+_REQCMDAUTOCHAT_EAUTOCHATTYPE = _descriptor.EnumDescriptor(
+  name='eAutoChatType',
+  full_name='DDRCommProto.reqCmdAutoChat.eAutoChatType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eStartOnline', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eStartOffline', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eStop', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=3152,
+  serialized_end=3215,
+)
+_sym_db.RegisterEnumDescriptor(_REQCMDAUTOCHAT_EAUTOCHATTYPE)
+
+_REQCMDGENERALOCTREE_EOCTREETYPE = _descriptor.EnumDescriptor(
+  name='eOctreeType',
+  full_name='DDRCommProto.reqCmdGeneralOctree.eOctreeType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eCreate', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eQuery', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=3381,
+  serialized_end=3419,
+)
+_sym_db.RegisterEnumDescriptor(_REQCMDGENERALOCTREE_EOCTREETYPE)
+
+_RSPCMDGENERALOCTREE_ERSPOCTREETYPE = _descriptor.EnumDescriptor(
+  name='eRspOctreeType',
+  full_name='DDRCommProto.rspCmdGeneralOctree.eRspOctreeType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eFileNotExists', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eFileExists', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eInCreate', index=2, number=2,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=3551,
+  serialized_end=3619,
+)
+_sym_db.RegisterEnumDescriptor(_RSPCMDGENERALOCTREE_ERSPOCTREETYPE)
+
+_NOTIFYALARMINFO_EALARMTYPE = _descriptor.EnumDescriptor(
+  name='eAlarmType',
+  full_name='DDRCommProto.notifyAlarmInfo.eAlarmType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eThermalAlarm', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eObsStatusAlarm', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=5057,
+  serialized_end=5109,
+)
+_sym_db.RegisterEnumDescriptor(_NOTIFYALARMINFO_EALARMTYPE)
+
+_REQAUDIOTALK_EOPMODE = _descriptor.EnumDescriptor(
+  name='eOpMode',
+  full_name='DDRCommProto.reqAudioTalk.eOpMode',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eStart', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eStop', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=6494,
+  serialized_end=6526,
+)
+_sym_db.RegisterEnumDescriptor(_REQAUDIOTALK_EOPMODE)
+
+_REQAUDIOTALK_ENETTYPE = _descriptor.EnumDescriptor(
+  name='eNetType',
+  full_name='DDRCommProto.reqAudioTalk.eNetType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='eLocal', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='eRemote', index=1, number=1,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=6528,
+  serialized_end=6563,
+)
+_sym_db.RegisterEnumDescriptor(_REQAUDIOTALK_ENETTYPE)
 
 _RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE = _descriptor.EnumDescriptor(
   name='eRspDataBaseType',
@@ -578,106 +689,10 @@ _RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3796,
-  serialized_end=3882,
+  serialized_start=8574,
+  serialized_end=8660,
 )
 _sym_db.RegisterEnumDescriptor(_RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE)
-
-_REQCMDAUTOCHAT_EAUTOCHATTYPE = _descriptor.EnumDescriptor(
-  name='eAutoChatType',
-  full_name='DDRCommProto.reqCmdAutoChat.eAutoChatType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eStartOnline', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eStartOffline', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eStop', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4167,
-  serialized_end=4230,
-)
-_sym_db.RegisterEnumDescriptor(_REQCMDAUTOCHAT_EAUTOCHATTYPE)
-
-_REQCMDGENERALOCTREE_EOCTREETYPE = _descriptor.EnumDescriptor(
-  name='eOctreeType',
-  full_name='DDRCommProto.reqCmdGeneralOctree.eOctreeType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eCreate', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eQuery', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4396,
-  serialized_end=4434,
-)
-_sym_db.RegisterEnumDescriptor(_REQCMDGENERALOCTREE_EOCTREETYPE)
-
-_RSPCMDGENERALOCTREE_ERSPOCTREETYPE = _descriptor.EnumDescriptor(
-  name='eRspOctreeType',
-  full_name='DDRCommProto.rspCmdGeneralOctree.eRspOctreeType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eFileNotExists', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eFileExists', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eInCreate', index=2, number=2,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=4566,
-  serialized_end=4634,
-)
-_sym_db.RegisterEnumDescriptor(_RSPCMDGENERALOCTREE_ERSPOCTREETYPE)
-
-_NOTIFYALARMINFO_EALARMTYPE = _descriptor.EnumDescriptor(
-  name='eAlarmType',
-  full_name='DDRCommProto.notifyAlarmInfo.eAlarmType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='eThermalAlarm', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='eObsStatusAlarm', index=1, number=1,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=5719,
-  serialized_end=5771,
-)
-_sym_db.RegisterEnumDescriptor(_NOTIFYALARMINFO_EALARMTYPE)
 
 
 _COMMONHEADER_PASSNODE = _descriptor.Descriptor(
@@ -696,8 +711,15 @@ _COMMONHEADER_PASSNODE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='receiveSessionID', full_name='DDRCommProto.CommonHeader.PassNode.receiveSessionID', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='IntptrData', full_name='DDRCommProto.CommonHeader.PassNode.IntptrData', index=2,
+      number=3, type=3, cpp_type=2, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -713,8 +735,8 @@ _COMMONHEADER_PASSNODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=266,
-  serialized_end=344,
+  serialized_start=274,
+  serialized_end=372,
 )
 
 _COMMONHEADER = _descriptor.Descriptor(
@@ -732,21 +754,21 @@ _COMMONHEADER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fromType', full_name='DDRCommProto.CommonHeader.fromType', index=1,
-      number=2, type=14, cpp_type=8, label=3,
-      has_default_value=False, default_value=[],
+      name='fromCltType', full_name='DDRCommProto.CommonHeader.fromCltType', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='toCltType', full_name='DDRCommProto.CommonHeader.toCltType', index=2,
-      number=3, type=14, cpp_type=8, label=3,
-      has_default_value=False, default_value=[],
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='passNode', full_name='DDRCommProto.CommonHeader.passNode', index=3,
+      name='passNodeArray', full_name='DDRCommProto.CommonHeader.passNodeArray', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -773,7 +795,7 @@ _COMMONHEADER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=32,
-  serialized_end=383,
+  serialized_end=450,
 )
 
 
@@ -803,8 +825,435 @@ _HEARTBEAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=385,
-  serialized_end=414,
+  serialized_start=452,
+  serialized_end=481,
+)
+
+
+_REQREMOTESERVERLIST = _descriptor.Descriptor(
+  name='reqRemoteServerList',
+  full_name='DDRCommProto.reqRemoteServerList',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='fromip', full_name='DDRCommProto.reqRemoteServerList.fromip', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=483,
+  serialized_end=520,
+)
+
+
+_RSPREMOTESERVERLIST_REMOTESERVER = _descriptor.Descriptor(
+  name='RemoteServer',
+  full_name='DDRCommProto.rspRemoteServerList.RemoteServer',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='DDRCommProto.rspRemoteServerList.RemoteServer.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='DDRCommProto.rspRemoteServerList.RemoteServer.ip', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='DDRCommProto.rspRemoteServerList.RemoteServer.port', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=611,
+  serialized_end=665,
+)
+
+_RSPREMOTESERVERLIST = _descriptor.Descriptor(
+  name='rspRemoteServerList',
+  full_name='DDRCommProto.rspRemoteServerList',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='servers', full_name='DDRCommProto.rspRemoteServerList.servers', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_RSPREMOTESERVERLIST_REMOTESERVER, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=523,
+  serialized_end=665,
+)
+
+
+_REQREGISTELS = _descriptor.Descriptor(
+  name='reqRegisteLS',
+  full_name='DDRCommProto.reqRegisteLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='udid', full_name='DDRCommProto.reqRegisteLS.udid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='DDRCommProto.reqRegisteLS.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=667,
+  serialized_end=709,
+)
+
+
+_RSPREGISTELS = _descriptor.Descriptor(
+  name='rspRegisteLS',
+  full_name='DDRCommProto.rspRegisteLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.rspRegisteLS.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=711,
+  serialized_end=740,
+)
+
+
+_REQREMOTELOGIN = _descriptor.Descriptor(
+  name='reqRemoteLogin',
+  full_name='DDRCommProto.reqRemoteLogin',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.reqRemoteLogin.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='username', full_name='DDRCommProto.reqRemoteLogin.username', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='userpwd', full_name='DDRCommProto.reqRemoteLogin.userpwd', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=742,
+  serialized_end=831,
+)
+
+
+_RSPREMOTELOGIN_LSENTITY = _descriptor.Descriptor(
+  name='LSEntity',
+  full_name='DDRCommProto.rspRemoteLogin.LSEntity',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='udid', full_name='DDRCommProto.rspRemoteLogin.LSEntity.udid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='DDRCommProto.rspRemoteLogin.LSEntity.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1016,
+  serialized_end=1054,
+)
+
+_RSPREMOTELOGIN = _descriptor.Descriptor(
+  name='rspRemoteLogin',
+  full_name='DDRCommProto.rspRemoteLogin',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='lslist', full_name='DDRCommProto.rspRemoteLogin.lslist', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='retcode', full_name='DDRCommProto.rspRemoteLogin.retcode', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='yourRole', full_name='DDRCommProto.rspRemoteLogin.yourRole', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_RSPREMOTELOGIN_LSENTITY, ],
+  enum_types=[
+    _RSPREMOTELOGIN_EREMOTELOGINRETCODE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=834,
+  serialized_end=1157,
+)
+
+
+_REQSELECTLS = _descriptor.Descriptor(
+  name='reqSelectLS',
+  full_name='DDRCommProto.reqSelectLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='udid', full_name='DDRCommProto.reqSelectLS.udid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1159,
+  serialized_end=1186,
+)
+
+
+_RSPSELECTLS = _descriptor.Descriptor(
+  name='rspSelectLS',
+  full_name='DDRCommProto.rspSelectLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.rspSelectLS.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1188,
+  serialized_end=1216,
+)
+
+
+_REQUNSELECTLS = _descriptor.Descriptor(
+  name='reqUnselectLS',
+  full_name='DDRCommProto.reqUnselectLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='udid', full_name='DDRCommProto.reqUnselectLS.udid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1218,
+  serialized_end=1247,
+)
+
+
+_RSPUNSELECTLS = _descriptor.Descriptor(
+  name='rspUnselectLS',
+  full_name='DDRCommProto.rspUnselectLS',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.rspUnselectLS.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1249,
+  serialized_end=1279,
 )
 
 
@@ -862,8 +1311,8 @@ _BCLSADDR_SERVERINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=481,
-  serialized_end=603,
+  serialized_start=1346,
+  serialized_end=1468,
 )
 
 _BCLSADDR = _descriptor.Descriptor(
@@ -893,8 +1342,8 @@ _BCLSADDR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=417,
-  serialized_end=696,
+  serialized_start=1282,
+  serialized_end=1561,
 )
 
 
@@ -938,8 +1387,8 @@ _REQLOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=698,
-  serialized_end=781,
+  serialized_start=1563,
+  serialized_end=1646,
 )
 
 
@@ -977,394 +1426,8 @@ _RSPLOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=784,
-  serialized_end=988,
-)
-
-
-_NOTIFYTERMINALACCESS = _descriptor.Descriptor(
-  name='notifyTerminalAccess',
-  full_name='DDRCommProto.notifyTerminalAccess',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='bRRConnected2RS', full_name='DDRCommProto.notifyTerminalAccess.bRRConnected2RS', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='bOp', full_name='DDRCommProto.notifyTerminalAccess.bOp', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nMonitors', full_name='DDRCommProto.notifyTerminalAccess.nMonitors', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nClients', full_name='DDRCommProto.notifyTerminalAccess.nClients', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nameLSMs', full_name='DDRCommProto.notifyTerminalAccess.nameLSMs', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=990,
-  serialized_end=1105,
-)
-
-
-_NOTIFYSERACCESS = _descriptor.Descriptor(
-  name='notifySerAccess',
-  full_name='DDRCommProto.notifySerAccess',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='nMonitors', full_name='DDRCommProto.notifySerAccess.nMonitors', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mTopOpLv', full_name='DDRCommProto.notifySerAccess.mTopOpLv', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='mTopOpTime', full_name='DDRCommProto.notifySerAccess.mTopOpTime', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='nClients', full_name='DDRCommProto.notifySerAccess.nClients', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='cTopOpLv', full_name='DDRCommProto.notifySerAccess.cTopOpLv', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='cTopOpTime', full_name='DDRCommProto.notifySerAccess.cTopOpTime', index=5,
-      number=6, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='namesLSM', full_name='DDRCommProto.notifySerAccess.namesLSM', index=6,
-      number=7, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1108,
-  serialized_end=1256,
-)
-
-
-_NOTIFYAVSTREAM_FULLCHANNELINFO = _descriptor.Descriptor(
-  name='fullChannelInfo',
-  full_name='DDRCommProto.notifyAVStream.fullChannelInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='devType', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.devType', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='dataType', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.dataType', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='localResAccStr', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.localResAccStr', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='channelDescription', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.channelDescription', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='bwReq', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.bwReq', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='remoteIP', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.remoteIP', index=5,
-      number=6, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='remotePort', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.remotePort', index=6,
-      number=7, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='remotePass', full_name='DDRCommProto.notifyAVStream.fullChannelInfo.remotePass', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1425,
-  serialized_end=1602,
-)
-
-_NOTIFYAVSTREAM = _descriptor.Descriptor(
-  name='notifyAVStream',
-  full_name='DDRCommProto.notifyAVStream',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='reservedChannel', full_name='DDRCommProto.notifyAVStream.reservedChannel', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='robotMonitorChannels', full_name='DDRCommProto.notifyAVStream.robotMonitorChannels', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[_NOTIFYAVSTREAM_FULLCHANNELINFO, ],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1259,
-  serialized_end=1602,
-)
-
-
-_REQTALK = _descriptor.Descriptor(
-  name='reqTalk',
-  full_name='DDRCommProto.reqTalk',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='callerType', full_name='DDRCommProto.reqTalk.callerType', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='talkID', full_name='DDRCommProto.reqTalk.talkID', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='avType', full_name='DDRCommProto.reqTalk.avType', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='localTalkAddr', full_name='DDRCommProto.reqTalk.localTalkAddr', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _REQTALK_ECALLERTYPE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1605,
-  serialized_end=1779,
-)
-
-
-_RSPTALK = _descriptor.Descriptor(
-  name='rspTalk',
-  full_name='DDRCommProto.rspTalk',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='receiverType', full_name='DDRCommProto.rspTalk.receiverType', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='talkID', full_name='DDRCommProto.rspTalk.talkID', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='avType', full_name='DDRCommProto.rspTalk.avType', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _RSPTALK_ERECEIVERTYPE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1782,
-  serialized_end=1939,
-)
-
-
-_REQTALKHB = _descriptor.Descriptor(
-  name='reqTalkHB',
-  full_name='DDRCommProto.reqTalkHB',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='callerTalkID', full_name='DDRCommProto.reqTalkHB.callerTalkID', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='receiverTalkID', full_name='DDRCommProto.reqTalkHB.receiverTalkID', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1941,
-  serialized_end=1998,
+  serialized_start=1649,
+  serialized_end=1853,
 )
 
 
@@ -1401,8 +1464,8 @@ _REQCMDMOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2000,
-  serialized_end=2055,
+  serialized_start=1855,
+  serialized_end=1910,
 )
 
 
@@ -1432,8 +1495,8 @@ _RSPCMDMOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2057,
-  serialized_end=2110,
+  serialized_start=1912,
+  serialized_end=1965,
 )
 
 
@@ -1463,8 +1526,8 @@ _REQCMDCHANGESPEED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2112,
-  serialized_end=2150,
+  serialized_start=1967,
+  serialized_end=2005,
 )
 
 
@@ -1494,8 +1557,8 @@ _RSPCMDCHANGESPEED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2152,
-  serialized_end=2212,
+  serialized_start=2007,
+  serialized_end=2067,
 )
 
 
@@ -1525,8 +1588,8 @@ _REQCMDPAUSERESUME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2214,
-  serialized_end=2248,
+  serialized_start=2069,
+  serialized_end=2103,
 )
 
 
@@ -1556,8 +1619,8 @@ _RSPCMDPAUSERESUME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2250,
-  serialized_end=2310,
+  serialized_start=2105,
+  serialized_end=2165,
 )
 
 
@@ -1594,8 +1657,8 @@ _REQCMDIPC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2312,
-  serialized_end=2380,
+  serialized_start=2167,
+  serialized_end=2235,
 )
 
 
@@ -1639,8 +1702,8 @@ _RSPCMDIPC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2382,
-  serialized_end=2491,
+  serialized_start=2237,
+  serialized_end=2346,
 )
 
 
@@ -1667,8 +1730,8 @@ _REQCMDAUDIO = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='Audiostr', full_name='DDRCommProto.reqCmdAudio.Audiostr', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1693,20 +1756,20 @@ _REQCMDAUDIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2494,
-  serialized_end=2732,
+  serialized_start=2349,
+  serialized_end=2587,
 )
 
 
-_RSPCMDVOICEALARM = _descriptor.Descriptor(
-  name='rspCmdVoiceAlarm',
-  full_name='DDRCommProto.rspCmdVoiceAlarm',
+_RSPCMDAUDIO = _descriptor.Descriptor(
+  name='rspCmdAudio',
+  full_name='DDRCommProto.rspCmdAudio',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.rspCmdVoiceAlarm.type', index=0,
+      name='type', full_name='DDRCommProto.rspCmdAudio.type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1724,8 +1787,8 @@ _RSPCMDVOICEALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2734,
-  serialized_end=2793,
+  serialized_start=2589,
+  serialized_end=2643,
 )
 
 
@@ -1762,8 +1825,8 @@ _REQCMDUPDATECONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2795,
-  serialized_end=2847,
+  serialized_start=2645,
+  serialized_end=2697,
 )
 
 
@@ -1800,8 +1863,8 @@ _RSPCMDUPDATECONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2849,
-  serialized_end=2928,
+  serialized_start=2699,
+  serialized_end=2778,
 )
 
 
@@ -1831,8 +1894,8 @@ _REQCMDGETCONFIGDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2930,
-  serialized_end=2966,
+  serialized_start=2780,
+  serialized_end=2816,
 )
 
 
@@ -1869,8 +1932,8 @@ _RSPCMDGETCONFIGDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2968,
-  serialized_end=3050,
+  serialized_start=2818,
+  serialized_end=2900,
 )
 
 
@@ -1883,8 +1946,8 @@ _REQCMDSETWORKPATH = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='route_name', full_name='DDRCommProto.reqCmdSetWorkPath.route_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -1902,6 +1965,13 @@ _REQCMDSETWORKPATH = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='walk_style', full_name='DDRCommProto.reqCmdSetWorkPath.walk_style', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1914,8 +1984,8 @@ _REQCMDSETWORKPATH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3052,
-  serialized_end=3125,
+  serialized_start=2902,
+  serialized_end=2995,
 )
 
 
@@ -1945,358 +2015,8 @@ _RSPCMDSETWORKPATH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3127,
-  serialized_end=3187,
-)
-
-
-_REQCMDADDFACE = _descriptor.Descriptor(
-  name='reqCmdAddFace',
-  full_name='DDRCommProto.reqCmdAddFace',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='DDRCommProto.reqCmdAddFace.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.reqCmdAddFace.type', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='picdata', full_name='DDRCommProto.reqCmdAddFace.picdata', index=2,
-      number=3, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3189,
-  serialized_end=3276,
-)
-
-
-_RSPCMDADDFACE = _descriptor.Descriptor(
-  name='rspCmdAddFace',
-  full_name='DDRCommProto.rspCmdAddFace',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.rspCmdAddFace.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3278,
-  serialized_end=3334,
-)
-
-
-_REQCMDGETALARMPARAMS = _descriptor.Descriptor(
-  name='reqCmdGetAlarmParams',
-  full_name='DDRCommProto.reqCmdGetAlarmParams',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='alarmtype', full_name='DDRCommProto.reqCmdGetAlarmParams.alarmtype', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3336,
-  serialized_end=3403,
-)
-
-
-_RSPCMDTHERMALGETPARAMS = _descriptor.Descriptor(
-  name='rspCmdThermalGetParams',
-  full_name='DDRCommProto.rspCmdThermalGetParams',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.rspCmdThermalGetParams.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='alarmtype', full_name='DDRCommProto.rspCmdThermalGetParams.alarmtype', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='alarmtemp', full_name='DDRCommProto.rspCmdThermalGetParams.alarmtemp', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3406,
-  serialized_end=3535,
-)
-
-
-_REQCMDFACEDATABASEORDER = _descriptor.Descriptor(
-  name='reqCmdFaceDataBaseOrder',
-  full_name='DDRCommProto.reqCmdFaceDataBaseOrder',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Order', full_name='DDRCommProto.reqCmdFaceDataBaseOrder.Order', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3537,
-  serialized_end=3577,
-)
-
-
-_FACEDATABASEDATA = _descriptor.Descriptor(
-  name='FaceDataBaseData',
-  full_name='DDRCommProto.FaceDataBaseData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='DDRCommProto.FaceDataBaseData.id', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='DDRCommProto.FaceDataBaseData.name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.FaceDataBaseData.type', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='label', full_name='DDRCommProto.FaceDataBaseData.label', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3579,
-  serialized_end=3679,
-)
-
-
-_RSPCMDFACEDATABASEORDER = _descriptor.Descriptor(
-  name='rspCmdFaceDataBaseOrder',
-  full_name='DDRCommProto.rspCmdFaceDataBaseOrder',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.rspCmdFaceDataBaseOrder.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='DDRCommProto.rspCmdFaceDataBaseOrder.data', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3682,
-  serialized_end=3882,
-)
-
-
-_REQCMDSETFACEPARAMS = _descriptor.Descriptor(
-  name='reqCmdSetFaceParams',
-  full_name='DDRCommProto.reqCmdSetFaceParams',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='param', full_name='DDRCommProto.reqCmdSetFaceParams.param', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='param_num', full_name='DDRCommProto.reqCmdSetFaceParams.param_num', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3884,
-  serialized_end=3966,
-)
-
-
-_RSPCMDSETFACEPARAMS = _descriptor.Descriptor(
-  name='rspCmdSetFaceParams',
-  full_name='DDRCommProto.rspCmdSetFaceParams',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='DDRCommProto.rspCmdSetFaceParams.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='param', full_name='DDRCommProto.rspCmdSetFaceParams.param', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3968,
-  serialized_end=4072,
+  serialized_start=2997,
+  serialized_end=3057,
 )
 
 
@@ -2334,8 +2054,8 @@ _REQCMDAUTOCHAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4075,
-  serialized_end=4230,
+  serialized_start=3060,
+  serialized_end=3215,
 )
 
 
@@ -2365,8 +2085,8 @@ _RSPCMDAUTOCHAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4232,
-  serialized_end=4289,
+  serialized_start=3217,
+  serialized_end=3274,
 )
 
 
@@ -2379,8 +2099,8 @@ _REQCMDGENERALOCTREE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='route_name', full_name='DDRCommProto.reqCmdGeneralOctree.route_name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -2404,8 +2124,8 @@ _REQCMDGENERALOCTREE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4292,
-  serialized_end=4434,
+  serialized_start=3277,
+  serialized_end=3419,
 )
 
 
@@ -2443,8 +2163,8 @@ _RSPCMDGENERALOCTREE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4437,
-  serialized_end=4634,
+  serialized_start=3422,
+  serialized_end=3619,
 )
 
 
@@ -2464,8 +2184,8 @@ _REQCMDSTARTACTIONMODE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='route_name', full_name='DDRCommProto.reqCmdStartActionMode.route_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -2481,8 +2201,8 @@ _REQCMDSTARTACTIONMODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4636,
-  serialized_end=4723,
+  serialized_start=3621,
+  serialized_end=3708,
 )
 
 
@@ -2519,8 +2239,8 @@ _RSPCMDSTARTACTIONMODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4725,
-  serialized_end=4833,
+  serialized_start=3710,
+  serialized_end=3818,
 )
 
 
@@ -2550,8 +2270,8 @@ _REQCMDENDACTIONMODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4835,
-  serialized_end=4871,
+  serialized_start=3820,
+  serialized_end=3856,
 )
 
 
@@ -2578,7 +2298,107 @@ _RSPCMDENDACTIONMODE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='route_name', full_name='DDRCommProto.rspCmdEndActionMode.route_name', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3859,
+  serialized_end=3991,
+)
+
+
+_REQCMDDELETECURRROUTEORPATH = _descriptor.Descriptor(
+  name='reqCmdDeleteCurrRouteOrPath',
+  full_name='DDRCommProto.reqCmdDeleteCurrRouteOrPath',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='route_name', full_name='DDRCommProto.reqCmdDeleteCurrRouteOrPath.route_name', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='path_name', full_name='DDRCommProto.reqCmdDeleteCurrRouteOrPath.path_name', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3993,
+  serialized_end=4061,
+)
+
+
+_RSPCMDDELETECURRROUTEORPATH = _descriptor.Descriptor(
+  name='rspCmdDeleteCurrRouteOrPath',
+  full_name='DDRCommProto.rspCmdDeleteCurrRouteOrPath',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdDeleteCurrRouteOrPath.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4063,
+  serialized_end=4133,
+)
+
+
+_REQCMDGETCURRROUTEANDPATH = _descriptor.Descriptor(
+  name='reqCmdGetCurrRouteAndPath',
+  full_name='DDRCommProto.reqCmdGetCurrRouteAndPath',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.reqCmdGetCurrRouteAndPath.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -2595,8 +2415,84 @@ _RSPCMDENDACTIONMODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4874,
-  serialized_end=5006,
+  serialized_start=4135,
+  serialized_end=4177,
+)
+
+
+_ROUTEDATA = _descriptor.Descriptor(
+  name='RouteData',
+  full_name='DDRCommProto.RouteData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='route_name', full_name='DDRCommProto.RouteData.route_name', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='path_name', full_name='DDRCommProto.RouteData.path_name', index=1,
+      number=2, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4179,
+  serialized_end=4229,
+)
+
+
+_RSPCMDGETCURRROUTEANDPATH = _descriptor.Descriptor(
+  name='rspCmdGetCurrRouteAndPath',
+  full_name='DDRCommProto.rspCmdGetCurrRouteAndPath',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdGetCurrRouteAndPath.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='route_data', full_name='DDRCommProto.rspCmdGetCurrRouteAndPath.route_data', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4231,
+  serialized_end=4344,
 )
 
 
@@ -2672,8 +2568,8 @@ _NOTIFYBASESTATUS = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='currroute', full_name='DDRCommProto.notifyBaseStatus.currroute', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=10, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -2787,8 +2683,8 @@ _NOTIFYBASESTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5009,
-  serialized_end=5467,
+  serialized_start=4347,
+  serialized_end=4805,
 )
 
 
@@ -2832,8 +2728,8 @@ _OAINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5469,
-  serialized_end=5529,
+  serialized_start=4807,
+  serialized_end=4867,
 )
 
 
@@ -2877,8 +2773,8 @@ _NOTIFYOBSDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5531,
-  serialized_end=5619,
+  serialized_start=4869,
+  serialized_end=4957,
 )
 
 
@@ -2916,8 +2812,8 @@ _NOTIFYALARMINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5622,
-  serialized_end=5771,
+  serialized_start=4960,
+  serialized_end=5109,
 )
 
 
@@ -2975,8 +2871,8 @@ _NOTIFYALARMNEWFACE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5774,
-  serialized_end=5902,
+  serialized_start=5112,
+  serialized_end=5240,
 )
 
 
@@ -3048,8 +2944,8 @@ _ALARMFIREPOS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5905,
-  serialized_end=6041,
+  serialized_start=5243,
+  serialized_end=5379,
 )
 
 
@@ -3079,8 +2975,8 @@ _NOTIFYALARMFIRE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6043,
-  serialized_end=6101,
+  serialized_start=5381,
+  serialized_end=5439,
 )
 
 
@@ -3099,9 +2995,23 @@ _CHKFILESTATUS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fileNames', full_name='DDRCommProto.chkFileStatus.fileNames', index=1,
+      name='filefmt', full_name='DDRCommProto.chkFileStatus.filefmt', index=1,
       number=2, type=12, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='existfiles', full_name='DDRCommProto.chkFileStatus.existfiles', index=2,
+      number=3, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tarServiceType', full_name='DDRCommProto.chkFileStatus.tarServiceType', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -3117,8 +3027,8 @@ _CHKFILESTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6103,
-  serialized_end=6181,
+  serialized_start=5442,
+  serialized_end=5586,
 )
 
 
@@ -3155,8 +3065,98 @@ _ANSFILESTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6183,
-  serialized_end=6264,
+  serialized_start=5588,
+  serialized_end=5669,
+)
+
+
+_NOTIFYUPLOADFILE = _descriptor.Descriptor(
+  name='notifyUploadFile',
+  full_name='DDRCommProto.notifyUploadFile',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='httpAddr', full_name='DDRCommProto.notifyUploadFile.httpAddr', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='filefmt', full_name='DDRCommProto.notifyUploadFile.filefmt', index=1,
+      number=2, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='existfiles', full_name='DDRCommProto.notifyUploadFile.existfiles', index=2,
+      number=3, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tarServiceType', full_name='DDRCommProto.notifyUploadFile.tarServiceType', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5671,
+  serialized_end=5792,
+)
+
+
+_NOTIFYUPLOADFILEPROGRESS = _descriptor.Descriptor(
+  name='notifyUploadFileProgress',
+  full_name='DDRCommProto.notifyUploadFileProgress',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='progress', full_name='DDRCommProto.notifyUploadFileProgress.progress', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='uploadedfiles', full_name='DDRCommProto.notifyUploadFileProgress.uploadedfiles', index=1,
+      number=2, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5794,
+  serialized_end=5861,
 )
 
 
@@ -3186,8 +3186,8 @@ _REQSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6266,
-  serialized_end=6296,
+  serialized_start=5863,
+  serialized_end=5893,
 )
 
 
@@ -3217,8 +3217,8 @@ _REQFACEALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6298,
-  serialized_end=6327,
+  serialized_start=5895,
+  serialized_end=5924,
 )
 
 
@@ -3248,8 +3248,8 @@ _REQHOTALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6329,
-  serialized_end=6357,
+  serialized_start=5926,
+  serialized_end=5954,
 )
 
 
@@ -3279,8 +3279,8 @@ _REQOBSALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6359,
-  serialized_end=6387,
+  serialized_start=5956,
+  serialized_end=5984,
 )
 
 
@@ -3310,8 +3310,8 @@ _REQTEXTCHAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6389,
-  serialized_end=6420,
+  serialized_start=5986,
+  serialized_end=6017,
 )
 
 
@@ -3357,6 +3357,13 @@ _AVSTREAMSRCCHANNEL = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='srcname', full_name='DDRCommProto.AVStreamSrcChannel.srcname', index=5,
+      number=6, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -3369,8 +3376,8 @@ _AVSTREAMSRCCHANNEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6423,
-  serialized_end=6599,
+  serialized_start=6020,
+  serialized_end=6213,
 )
 
 
@@ -3400,8 +3407,8 @@ _REQSTREAMADDR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6601,
-  serialized_end=6671,
+  serialized_start=6215,
+  serialized_end=6285,
 )
 
 
@@ -3438,8 +3445,124 @@ _RSPSTREAMADDR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6673,
-  serialized_end=6755,
+  serialized_start=6287,
+  serialized_end=6369,
+)
+
+
+_REQAUDIOTALK = _descriptor.Descriptor(
+  name='reqAudioTalk',
+  full_name='DDRCommProto.reqAudioTalk',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='opType', full_name='DDRCommProto.reqAudioTalk.opType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='netType', full_name='DDRCommProto.reqAudioTalk.netType', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _REQAUDIOTALK_EOPMODE,
+    _REQAUDIOTALK_ENETTYPE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6372,
+  serialized_end=6563,
+)
+
+
+_RSPAUDIOTALK = _descriptor.Descriptor(
+  name='rspAudioTalk',
+  full_name='DDRCommProto.rspAudioTalk',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='DDRCommProto.rspAudioTalk.status', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.rspAudioTalk.error', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6565,
+  serialized_end=6637,
+)
+
+
+_NOTIFYSTREAMADDR = _descriptor.Descriptor(
+  name='notifyStreamAddr',
+  full_name='DDRCommProto.notifyStreamAddr',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='channels', full_name='DDRCommProto.notifyStreamAddr.channels', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.notifyStreamAddr.error', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6639,
+  serialized_end=6724,
 )
 
 
@@ -3483,8 +3606,8 @@ _NOTIFYALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6757,
-  serialized_end=6839,
+  serialized_start=6726,
+  serialized_end=6808,
 )
 
 
@@ -3528,8 +3651,8 @@ _REQFILEADDRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6841,
-  serialized_end=6968,
+  serialized_start=6810,
+  serialized_end=6937,
 )
 
 
@@ -3580,8 +3703,105 @@ _RSPFILEADDRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6971,
-  serialized_end=7116,
+  serialized_start=6940,
+  serialized_end=7085,
+)
+
+
+_REQREMOTEFILEADDRESS = _descriptor.Descriptor(
+  name='reqRemoteFileAddress',
+  full_name='DDRCommProto.reqRemoteFileAddress',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tarServiceType', full_name='DDRCommProto.reqRemoteFileAddress.tarServiceType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fileType', full_name='DDRCommProto.reqRemoteFileAddress.fileType', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fileNames', full_name='DDRCommProto.reqRemoteFileAddress.fileNames', index=2,
+      number=3, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7088,
+  serialized_end=7221,
+)
+
+
+_RSPREMOTEFILEADDRESS = _descriptor.Descriptor(
+  name='rspRemoteFileAddress',
+  full_name='DDRCommProto.rspRemoteFileAddress',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tarServiceType', full_name='DDRCommProto.rspRemoteFileAddress.tarServiceType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fileType', full_name='DDRCommProto.rspRemoteFileAddress.fileType', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fileAddrList', full_name='DDRCommProto.rspRemoteFileAddress.fileAddrList', index=2,
+      number=3, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.rspRemoteFileAddress.error', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7224,
+  serialized_end=7375,
 )
 
 
@@ -3627,6 +3847,13 @@ _AVCHANNELCONFIG = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='srcname', full_name='DDRCommProto.AVChannelConfig.srcname', index=5,
+      number=6, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -3639,8 +3866,8 @@ _AVCHANNELCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7119,
-  serialized_end=7284,
+  serialized_start=7378,
+  serialized_end=7560,
 )
 
 
@@ -3670,8 +3897,8 @@ _REQSTREAMSERVICEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7286,
-  serialized_end=7322,
+  serialized_start=7562,
+  serialized_end=7598,
 )
 
 
@@ -3708,8 +3935,8 @@ _RSPSTREAMSERVICEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7324,
-  serialized_end=7412,
+  serialized_start=7600,
+  serialized_end=7688,
 )
 
 
@@ -3739,8 +3966,8 @@ _NOTIFYSTREAMSERVICEINFOCHANGED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7414,
-  serialized_end=7495,
+  serialized_start=7690,
+  serialized_end=7771,
 )
 
 
@@ -3777,17 +4004,540 @@ _REQSTREAMRELAYALARM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7497,
-  serialized_end=7569,
+  serialized_start=7773,
+  serialized_end=7845,
+)
+
+
+_THERMALSERVERCONFIG = _descriptor.Descriptor(
+  name='ThermalServerConfig',
+  full_name='DDRCommProto.ThermalServerConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='alarm_temp', full_name='DDRCommProto.ThermalServerConfig.alarm_temp', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7847,
+  serialized_end=7888,
+)
+
+
+_REQCMDGETTHERMALPARAMS = _descriptor.Descriptor(
+  name='reqCmdGetThermalParams',
+  full_name='DDRCommProto.reqCmdGetThermalParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.reqCmdGetThermalParams.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7890,
+  serialized_end=7929,
+)
+
+
+_RSPCMDGETTHERMALPARAMS = _descriptor.Descriptor(
+  name='rspCmdGetThermalParams',
+  full_name='DDRCommProto.rspCmdGetThermalParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='thermal_config', full_name='DDRCommProto.rspCmdGetThermalParams.thermal_config', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7931,
+  serialized_end=8014,
+)
+
+
+_REQCMDSETTHERMALPARAMS = _descriptor.Descriptor(
+  name='reqCmdSetThermalParams',
+  full_name='DDRCommProto.reqCmdSetThermalParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='thermal_config', full_name='DDRCommProto.reqCmdSetThermalParams.thermal_config', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8016,
+  serialized_end=8099,
+)
+
+
+_RSPCMDSETTHERMALPARAMS = _descriptor.Descriptor(
+  name='rspCmdSetThermalParams',
+  full_name='DDRCommProto.rspCmdSetThermalParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdSetThermalParams.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8101,
+  serialized_end=8166,
+)
+
+
+_REQCMDADDFACE = _descriptor.Descriptor(
+  name='reqCmdAddFace',
+  full_name='DDRCommProto.reqCmdAddFace',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='DDRCommProto.reqCmdAddFace.name', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.reqCmdAddFace.type', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='picdata', full_name='DDRCommProto.reqCmdAddFace.picdata', index=2,
+      number=3, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8168,
+  serialized_end=8255,
+)
+
+
+_RSPCMDADDFACE = _descriptor.Descriptor(
+  name='rspCmdAddFace',
+  full_name='DDRCommProto.rspCmdAddFace',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdAddFace.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8257,
+  serialized_end=8313,
+)
+
+
+_REQCMDFACEDATABASEORDER = _descriptor.Descriptor(
+  name='reqCmdFaceDataBaseOrder',
+  full_name='DDRCommProto.reqCmdFaceDataBaseOrder',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='Order', full_name='DDRCommProto.reqCmdFaceDataBaseOrder.Order', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8315,
+  serialized_end=8355,
+)
+
+
+_FACEDATABASEDATA = _descriptor.Descriptor(
+  name='FaceDataBaseData',
+  full_name='DDRCommProto.FaceDataBaseData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='DDRCommProto.FaceDataBaseData.id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='DDRCommProto.FaceDataBaseData.name', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.FaceDataBaseData.type', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='label', full_name='DDRCommProto.FaceDataBaseData.label', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8357,
+  serialized_end=8457,
+)
+
+
+_RSPCMDFACEDATABASEORDER = _descriptor.Descriptor(
+  name='rspCmdFaceDataBaseOrder',
+  full_name='DDRCommProto.rspCmdFaceDataBaseOrder',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdFaceDataBaseOrder.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='DDRCommProto.rspCmdFaceDataBaseOrder.data', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8460,
+  serialized_end=8660,
+)
+
+
+_FACESERVERCONFIG = _descriptor.Descriptor(
+  name='FaceServerConfig',
+  full_name='DDRCommProto.FaceServerConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='Confidence', full_name='DDRCommProto.FaceServerConfig.Confidence', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='Face_quality', full_name='DDRCommProto.FaceServerConfig.Face_quality', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8662,
+  serialized_end=8722,
+)
+
+
+_REQCMDGETFACEPARAMS = _descriptor.Descriptor(
+  name='reqCmdGetFaceParams',
+  full_name='DDRCommProto.reqCmdGetFaceParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='DDRCommProto.reqCmdGetFaceParams.error', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8724,
+  serialized_end=8760,
+)
+
+
+_RSPCMDGETFACEPARAMS = _descriptor.Descriptor(
+  name='rspCmdGetFaceParams',
+  full_name='DDRCommProto.rspCmdGetFaceParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='Face_config', full_name='DDRCommProto.rspCmdGetFaceParams.Face_config', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8762,
+  serialized_end=8836,
+)
+
+
+_REQCMDSETFACEPARAMS = _descriptor.Descriptor(
+  name='reqCmdSetFaceParams',
+  full_name='DDRCommProto.reqCmdSetFaceParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='Face_config', full_name='DDRCommProto.reqCmdSetFaceParams.Face_config', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8838,
+  serialized_end=8912,
+)
+
+
+_RSPCMDSETFACEPARAMS = _descriptor.Descriptor(
+  name='rspCmdSetFaceParams',
+  full_name='DDRCommProto.rspCmdSetFaceParams',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='DDRCommProto.rspCmdSetFaceParams.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=8914,
+  serialized_end=8976,
 )
 
 _COMMONHEADER_PASSNODE.fields_by_name['nodeType'].enum_type = _ECLTTYPE
 _COMMONHEADER_PASSNODE.containing_type = _COMMONHEADER
-_COMMONHEADER.fields_by_name['fromType'].enum_type = _ECLTTYPE
+_COMMONHEADER.fields_by_name['fromCltType'].enum_type = _ECLTTYPE
 _COMMONHEADER.fields_by_name['toCltType'].enum_type = _ECLTTYPE
-_COMMONHEADER.fields_by_name['passNode'].message_type = _COMMONHEADER_PASSNODE
+_COMMONHEADER.fields_by_name['passNodeArray'].message_type = _COMMONHEADER_PASSNODE
 _COMMONHEADER.fields_by_name['flowDirection'].enum_type = _COMMONHEADER_EFLOWDIR
 _COMMONHEADER_EFLOWDIR.containing_type = _COMMONHEADER
+_RSPREMOTESERVERLIST_REMOTESERVER.containing_type = _RSPREMOTESERVERLIST
+_RSPREMOTESERVERLIST.fields_by_name['servers'].message_type = _RSPREMOTESERVERLIST_REMOTESERVER
+_REQREMOTELOGIN.fields_by_name['type'].enum_type = _ECLTTYPE
+_RSPREMOTELOGIN_LSENTITY.containing_type = _RSPREMOTELOGIN
+_RSPREMOTELOGIN.fields_by_name['lslist'].message_type = _RSPREMOTELOGIN_LSENTITY
+_RSPREMOTELOGIN.fields_by_name['retcode'].enum_type = _RSPREMOTELOGIN_EREMOTELOGINRETCODE
+_RSPREMOTELOGIN.fields_by_name['yourRole'].enum_type = _ECLTTYPE
+_RSPREMOTELOGIN_EREMOTELOGINRETCODE.containing_type = _RSPREMOTELOGIN
 _BCLSADDR_SERVERINFO.fields_by_name['stype'].enum_type = _BCLSADDR_ESERVICETYPE
 _BCLSADDR_SERVERINFO.containing_type = _BCLSADDR
 _BCLSADDR.fields_by_name['LSInfos'].message_type = _BCLSADDR_SERVERINFO
@@ -3796,13 +4546,6 @@ _REQLOGIN.fields_by_name['type'].enum_type = _ECLTTYPE
 _RSPLOGIN.fields_by_name['retcode'].enum_type = _RSPLOGIN_ELOGINRETCODE
 _RSPLOGIN.fields_by_name['yourRole'].enum_type = _ECLTTYPE
 _RSPLOGIN_ELOGINRETCODE.containing_type = _RSPLOGIN
-_NOTIFYAVSTREAM_FULLCHANNELINFO.containing_type = _NOTIFYAVSTREAM
-_NOTIFYAVSTREAM.fields_by_name['reservedChannel'].message_type = _NOTIFYAVSTREAM_FULLCHANNELINFO
-_NOTIFYAVSTREAM.fields_by_name['robotMonitorChannels'].message_type = _NOTIFYAVSTREAM_FULLCHANNELINFO
-_REQTALK.fields_by_name['callerType'].enum_type = _REQTALK_ECALLERTYPE
-_REQTALK_ECALLERTYPE.containing_type = _REQTALK
-_RSPTALK.fields_by_name['receiverType'].enum_type = _RSPTALK_ERECEIVERTYPE
-_RSPTALK_ERECEIVERTYPE.containing_type = _RSPTALK
 _RSPCMDMOVE.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDCHANGESPEED.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDPAUSERESUME.fields_by_name['type'].enum_type = _ECMDRSPTYPE
@@ -3813,22 +4556,10 @@ _REQCMDAUDIO.fields_by_name['audiop'].enum_type = _REQCMDAUDIO_EAUDIOOPERATIONAL
 _REQCMDAUDIO.fields_by_name['type'].enum_type = _REQCMDAUDIO_EAUDIOMODE
 _REQCMDAUDIO_EAUDIOMODE.containing_type = _REQCMDAUDIO
 _REQCMDAUDIO_EAUDIOOPERATIONAL.containing_type = _REQCMDAUDIO
-_RSPCMDVOICEALARM.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_RSPCMDAUDIO.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDUPDATECONFIG.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDGETCONFIGDATA.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDSETWORKPATH.fields_by_name['type'].enum_type = _ECMDRSPTYPE
-_REQCMDADDFACE.fields_by_name['type'].enum_type = _EPERSONTYPE
-_RSPCMDADDFACE.fields_by_name['type'].enum_type = _ECMDRSPTYPE
-_REQCMDGETALARMPARAMS.fields_by_name['alarmtype'].enum_type = _EALARMTYPE
-_RSPCMDTHERMALGETPARAMS.fields_by_name['type'].enum_type = _ECMDRSPTYPE
-_RSPCMDTHERMALGETPARAMS.fields_by_name['alarmtype'].enum_type = _EALARMTYPE
-_FACEDATABASEDATA.fields_by_name['type'].enum_type = _EPERSONTYPE
-_RSPCMDFACEDATABASEORDER.fields_by_name['type'].enum_type = _ECMDRSPTYPE
-_RSPCMDFACEDATABASEORDER.fields_by_name['data'].message_type = _FACEDATABASEDATA
-_RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE.containing_type = _RSPCMDFACEDATABASEORDER
-_REQCMDSETFACEPARAMS.fields_by_name['param'].enum_type = _EFACEPARAMS
-_RSPCMDSETFACEPARAMS.fields_by_name['type'].enum_type = _ECMDRSPTYPE
-_RSPCMDSETFACEPARAMS.fields_by_name['param'].enum_type = _EFACEPARAMS
 _REQCMDAUTOCHAT.fields_by_name['type'].enum_type = _REQCMDAUTOCHAT_EAUTOCHATTYPE
 _REQCMDAUTOCHAT_EAUTOCHATTYPE.containing_type = _REQCMDAUTOCHAT
 _RSPCMDAUTOCHAT.fields_by_name['type'].enum_type = _ECMDRSPTYPE
@@ -3842,38 +4573,69 @@ _RSPCMDSTARTACTIONMODE.fields_by_name['mode'].enum_type = _ECMDACTIONMODE
 _RSPCMDSTARTACTIONMODE.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 _RSPCMDENDACTIONMODE.fields_by_name['actionmode'].enum_type = _ECMDACTIONMODE
 _RSPCMDENDACTIONMODE.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_RSPCMDDELETECURRROUTEORPATH.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_RSPCMDGETCURRROUTEANDPATH.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_RSPCMDGETCURRROUTEANDPATH.fields_by_name['route_data'].message_type = _ROUTEDATA
 _NOTIFYOBSDATA.fields_by_name['oastat'].message_type = _OAINFO
 _NOTIFYALARMINFO.fields_by_name['type'].enum_type = _NOTIFYALARMINFO_EALARMTYPE
 _NOTIFYALARMINFO_EALARMTYPE.containing_type = _NOTIFYALARMINFO
 _NOTIFYALARMNEWFACE.fields_by_name['type'].enum_type = _EPERSONTYPE
 _NOTIFYALARMFIRE.fields_by_name['pos'].message_type = _ALARMFIREPOS
 _CHKFILESTATUS.fields_by_name['fileType'].enum_type = _EFILETYPES
+_CHKFILESTATUS.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
 _ANSFILESTATUS.fields_by_name['fileType'].enum_type = _EFILETYPES
+_NOTIFYUPLOADFILE.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
 _AVSTREAMSRCCHANNEL.fields_by_name['streamType'].enum_type = _CHANNELSTREAMTYPE
 _AVSTREAMSRCCHANNEL.fields_by_name['networkType'].enum_type = _CHANNELNETWORKTYPE
 _REQSTREAMADDR.fields_by_name['networkType'].enum_type = _CHANNELNETWORKTYPE
 _RSPSTREAMADDR.fields_by_name['channels'].message_type = _AVSTREAMSRCCHANNEL
+_REQAUDIOTALK.fields_by_name['opType'].enum_type = _REQAUDIOTALK_EOPMODE
+_REQAUDIOTALK.fields_by_name['netType'].enum_type = _REQAUDIOTALK_ENETTYPE
+_REQAUDIOTALK_EOPMODE.containing_type = _REQAUDIOTALK
+_REQAUDIOTALK_ENETTYPE.containing_type = _REQAUDIOTALK
+_RSPAUDIOTALK.fields_by_name['status'].enum_type = _ETALKSTATUS
+_NOTIFYSTREAMADDR.fields_by_name['channels'].message_type = _AVSTREAMSRCCHANNEL
 _NOTIFYALARM.fields_by_name['from'].enum_type = _ECLTTYPE
 _REQFILEADDRESS.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
 _REQFILEADDRESS.fields_by_name['fileType'].enum_type = _EFILETYPES
 _RSPFILEADDRESS.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
 _RSPFILEADDRESS.fields_by_name['fileType'].enum_type = _EFILETYPES
+_REQREMOTEFILEADDRESS.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
+_REQREMOTEFILEADDRESS.fields_by_name['fileType'].enum_type = _EFILETYPES
+_RSPREMOTEFILEADDRESS.fields_by_name['tarServiceType'].enum_type = _ECLTTYPE
+_RSPREMOTEFILEADDRESS.fields_by_name['fileType'].enum_type = _EFILETYPES
 _AVCHANNELCONFIG.fields_by_name['streamType'].enum_type = _CHANNELSTREAMTYPE
 _AVCHANNELCONFIG.fields_by_name['networkType'].enum_type = _CHANNELNETWORKTYPE
 _RSPSTREAMSERVICEINFO.fields_by_name['channels'].message_type = _AVCHANNELCONFIG
 _NOTIFYSTREAMSERVICEINFOCHANGED.fields_by_name['channels'].message_type = _AVCHANNELCONFIG
 _REQSTREAMRELAYALARM.fields_by_name['to'].enum_type = _ECLTTYPE
+_RSPCMDGETTHERMALPARAMS.fields_by_name['thermal_config'].message_type = _THERMALSERVERCONFIG
+_REQCMDSETTHERMALPARAMS.fields_by_name['thermal_config'].message_type = _THERMALSERVERCONFIG
+_RSPCMDSETTHERMALPARAMS.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_REQCMDADDFACE.fields_by_name['type'].enum_type = _EPERSONTYPE
+_RSPCMDADDFACE.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_FACEDATABASEDATA.fields_by_name['type'].enum_type = _EPERSONTYPE
+_RSPCMDFACEDATABASEORDER.fields_by_name['type'].enum_type = _ECMDRSPTYPE
+_RSPCMDFACEDATABASEORDER.fields_by_name['data'].message_type = _FACEDATABASEDATA
+_RSPCMDFACEDATABASEORDER_ERSPDATABASETYPE.containing_type = _RSPCMDFACEDATABASEORDER
+_RSPCMDGETFACEPARAMS.fields_by_name['Face_config'].message_type = _FACESERVERCONFIG
+_REQCMDSETFACEPARAMS.fields_by_name['Face_config'].message_type = _FACESERVERCONFIG
+_RSPCMDSETFACEPARAMS.fields_by_name['type'].enum_type = _ECMDRSPTYPE
 DESCRIPTOR.message_types_by_name['CommonHeader'] = _COMMONHEADER
 DESCRIPTOR.message_types_by_name['HeartBeat'] = _HEARTBEAT
+DESCRIPTOR.message_types_by_name['reqRemoteServerList'] = _REQREMOTESERVERLIST
+DESCRIPTOR.message_types_by_name['rspRemoteServerList'] = _RSPREMOTESERVERLIST
+DESCRIPTOR.message_types_by_name['reqRegisteLS'] = _REQREGISTELS
+DESCRIPTOR.message_types_by_name['rspRegisteLS'] = _RSPREGISTELS
+DESCRIPTOR.message_types_by_name['reqRemoteLogin'] = _REQREMOTELOGIN
+DESCRIPTOR.message_types_by_name['rspRemoteLogin'] = _RSPREMOTELOGIN
+DESCRIPTOR.message_types_by_name['reqSelectLS'] = _REQSELECTLS
+DESCRIPTOR.message_types_by_name['rspSelectLS'] = _RSPSELECTLS
+DESCRIPTOR.message_types_by_name['reqUnselectLS'] = _REQUNSELECTLS
+DESCRIPTOR.message_types_by_name['rspUnselectLS'] = _RSPUNSELECTLS
 DESCRIPTOR.message_types_by_name['bcLSAddr'] = _BCLSADDR
 DESCRIPTOR.message_types_by_name['reqLogin'] = _REQLOGIN
 DESCRIPTOR.message_types_by_name['rspLogin'] = _RSPLOGIN
-DESCRIPTOR.message_types_by_name['notifyTerminalAccess'] = _NOTIFYTERMINALACCESS
-DESCRIPTOR.message_types_by_name['notifySerAccess'] = _NOTIFYSERACCESS
-DESCRIPTOR.message_types_by_name['notifyAVStream'] = _NOTIFYAVSTREAM
-DESCRIPTOR.message_types_by_name['reqTalk'] = _REQTALK
-DESCRIPTOR.message_types_by_name['rspTalk'] = _RSPTALK
-DESCRIPTOR.message_types_by_name['reqTalkHB'] = _REQTALKHB
 DESCRIPTOR.message_types_by_name['reqCmdMove'] = _REQCMDMOVE
 DESCRIPTOR.message_types_by_name['rspCmdMove'] = _RSPCMDMOVE
 DESCRIPTOR.message_types_by_name['reqCmdChangeSpeed'] = _REQCMDCHANGESPEED
@@ -3883,22 +4645,13 @@ DESCRIPTOR.message_types_by_name['rspCmdPauseResume'] = _RSPCMDPAUSERESUME
 DESCRIPTOR.message_types_by_name['reqCmdIPC'] = _REQCMDIPC
 DESCRIPTOR.message_types_by_name['rspCmdIPC'] = _RSPCMDIPC
 DESCRIPTOR.message_types_by_name['reqCmdAudio'] = _REQCMDAUDIO
-DESCRIPTOR.message_types_by_name['rspCmdVoiceAlarm'] = _RSPCMDVOICEALARM
+DESCRIPTOR.message_types_by_name['rspCmdAudio'] = _RSPCMDAUDIO
 DESCRIPTOR.message_types_by_name['reqCmdUpdateConfig'] = _REQCMDUPDATECONFIG
 DESCRIPTOR.message_types_by_name['rspCmdUpdateConfig'] = _RSPCMDUPDATECONFIG
 DESCRIPTOR.message_types_by_name['reqCmdGetConfigdata'] = _REQCMDGETCONFIGDATA
 DESCRIPTOR.message_types_by_name['rspCmdGetConfigdata'] = _RSPCMDGETCONFIGDATA
 DESCRIPTOR.message_types_by_name['reqCmdSetWorkPath'] = _REQCMDSETWORKPATH
 DESCRIPTOR.message_types_by_name['rspCmdSetWorkPath'] = _RSPCMDSETWORKPATH
-DESCRIPTOR.message_types_by_name['reqCmdAddFace'] = _REQCMDADDFACE
-DESCRIPTOR.message_types_by_name['rspCmdAddFace'] = _RSPCMDADDFACE
-DESCRIPTOR.message_types_by_name['reqCmdGetAlarmParams'] = _REQCMDGETALARMPARAMS
-DESCRIPTOR.message_types_by_name['rspCmdThermalGetParams'] = _RSPCMDTHERMALGETPARAMS
-DESCRIPTOR.message_types_by_name['reqCmdFaceDataBaseOrder'] = _REQCMDFACEDATABASEORDER
-DESCRIPTOR.message_types_by_name['FaceDataBaseData'] = _FACEDATABASEDATA
-DESCRIPTOR.message_types_by_name['rspCmdFaceDataBaseOrder'] = _RSPCMDFACEDATABASEORDER
-DESCRIPTOR.message_types_by_name['reqCmdSetFaceParams'] = _REQCMDSETFACEPARAMS
-DESCRIPTOR.message_types_by_name['rspCmdSetFaceParams'] = _RSPCMDSETFACEPARAMS
 DESCRIPTOR.message_types_by_name['reqCmdAutoChat'] = _REQCMDAUTOCHAT
 DESCRIPTOR.message_types_by_name['rspCmdAutoChat'] = _RSPCMDAUTOCHAT
 DESCRIPTOR.message_types_by_name['reqCmdGeneralOctree'] = _REQCMDGENERALOCTREE
@@ -3907,6 +4660,11 @@ DESCRIPTOR.message_types_by_name['reqCmdStartActionMode'] = _REQCMDSTARTACTIONMO
 DESCRIPTOR.message_types_by_name['rspCmdStartActionMode'] = _RSPCMDSTARTACTIONMODE
 DESCRIPTOR.message_types_by_name['reqCmdEndActionMode'] = _REQCMDENDACTIONMODE
 DESCRIPTOR.message_types_by_name['rspCmdEndActionMode'] = _RSPCMDENDACTIONMODE
+DESCRIPTOR.message_types_by_name['reqCmdDeleteCurrRouteOrPath'] = _REQCMDDELETECURRROUTEORPATH
+DESCRIPTOR.message_types_by_name['rspCmdDeleteCurrRouteOrPath'] = _RSPCMDDELETECURRROUTEORPATH
+DESCRIPTOR.message_types_by_name['reqCmdGetCurrRouteAndPath'] = _REQCMDGETCURRROUTEANDPATH
+DESCRIPTOR.message_types_by_name['RouteData'] = _ROUTEDATA
+DESCRIPTOR.message_types_by_name['rspCmdGetCurrRouteAndPath'] = _RSPCMDGETCURRROUTEANDPATH
 DESCRIPTOR.message_types_by_name['notifyBaseStatus'] = _NOTIFYBASESTATUS
 DESCRIPTOR.message_types_by_name['OAInfo'] = _OAINFO
 DESCRIPTOR.message_types_by_name['notifyObsData'] = _NOTIFYOBSDATA
@@ -3916,6 +4674,8 @@ DESCRIPTOR.message_types_by_name['AlarmFirePos'] = _ALARMFIREPOS
 DESCRIPTOR.message_types_by_name['notifyAlarmFire'] = _NOTIFYALARMFIRE
 DESCRIPTOR.message_types_by_name['chkFileStatus'] = _CHKFILESTATUS
 DESCRIPTOR.message_types_by_name['ansFileStatus'] = _ANSFILESTATUS
+DESCRIPTOR.message_types_by_name['notifyUploadFile'] = _NOTIFYUPLOADFILE
+DESCRIPTOR.message_types_by_name['notifyUploadFileProgress'] = _NOTIFYUPLOADFILEPROGRESS
 DESCRIPTOR.message_types_by_name['reqStatus'] = _REQSTATUS
 DESCRIPTOR.message_types_by_name['reqFaceAlarm'] = _REQFACEALARM
 DESCRIPTOR.message_types_by_name['reqHotAlarm'] = _REQHOTALARM
@@ -3924,24 +4684,43 @@ DESCRIPTOR.message_types_by_name['reqTextChat'] = _REQTEXTCHAT
 DESCRIPTOR.message_types_by_name['AVStreamSrcChannel'] = _AVSTREAMSRCCHANNEL
 DESCRIPTOR.message_types_by_name['reqStreamAddr'] = _REQSTREAMADDR
 DESCRIPTOR.message_types_by_name['rspStreamAddr'] = _RSPSTREAMADDR
+DESCRIPTOR.message_types_by_name['reqAudioTalk'] = _REQAUDIOTALK
+DESCRIPTOR.message_types_by_name['rspAudioTalk'] = _RSPAUDIOTALK
+DESCRIPTOR.message_types_by_name['notifyStreamAddr'] = _NOTIFYSTREAMADDR
 DESCRIPTOR.message_types_by_name['notifyAlarm'] = _NOTIFYALARM
 DESCRIPTOR.message_types_by_name['reqFileAddress'] = _REQFILEADDRESS
 DESCRIPTOR.message_types_by_name['rspFileAddress'] = _RSPFILEADDRESS
+DESCRIPTOR.message_types_by_name['reqRemoteFileAddress'] = _REQREMOTEFILEADDRESS
+DESCRIPTOR.message_types_by_name['rspRemoteFileAddress'] = _RSPREMOTEFILEADDRESS
 DESCRIPTOR.message_types_by_name['AVChannelConfig'] = _AVCHANNELCONFIG
 DESCRIPTOR.message_types_by_name['reqStreamServiceInfo'] = _REQSTREAMSERVICEINFO
 DESCRIPTOR.message_types_by_name['rspStreamServiceInfo'] = _RSPSTREAMSERVICEINFO
 DESCRIPTOR.message_types_by_name['notifyStreamServiceInfoChanged'] = _NOTIFYSTREAMSERVICEINFOCHANGED
 DESCRIPTOR.message_types_by_name['reqStreamRelayAlarm'] = _REQSTREAMRELAYALARM
+DESCRIPTOR.message_types_by_name['ThermalServerConfig'] = _THERMALSERVERCONFIG
+DESCRIPTOR.message_types_by_name['reqCmdGetThermalParams'] = _REQCMDGETTHERMALPARAMS
+DESCRIPTOR.message_types_by_name['rspCmdGetThermalParams'] = _RSPCMDGETTHERMALPARAMS
+DESCRIPTOR.message_types_by_name['reqCmdSetThermalParams'] = _REQCMDSETTHERMALPARAMS
+DESCRIPTOR.message_types_by_name['rspCmdSetThermalParams'] = _RSPCMDSETTHERMALPARAMS
+DESCRIPTOR.message_types_by_name['reqCmdAddFace'] = _REQCMDADDFACE
+DESCRIPTOR.message_types_by_name['rspCmdAddFace'] = _RSPCMDADDFACE
+DESCRIPTOR.message_types_by_name['reqCmdFaceDataBaseOrder'] = _REQCMDFACEDATABASEORDER
+DESCRIPTOR.message_types_by_name['FaceDataBaseData'] = _FACEDATABASEDATA
+DESCRIPTOR.message_types_by_name['rspCmdFaceDataBaseOrder'] = _RSPCMDFACEDATABASEORDER
+DESCRIPTOR.message_types_by_name['FaceServerConfig'] = _FACESERVERCONFIG
+DESCRIPTOR.message_types_by_name['reqCmdGetFaceParams'] = _REQCMDGETFACEPARAMS
+DESCRIPTOR.message_types_by_name['rspCmdGetFaceParams'] = _RSPCMDGETFACEPARAMS
+DESCRIPTOR.message_types_by_name['reqCmdSetFaceParams'] = _REQCMDSETFACEPARAMS
+DESCRIPTOR.message_types_by_name['rspCmdSetFaceParams'] = _RSPCMDSETFACEPARAMS
 DESCRIPTOR.enum_types_by_name['eCltType'] = _ECLTTYPE
 DESCRIPTOR.enum_types_by_name['eCmdRspType'] = _ECMDRSPTYPE
 DESCRIPTOR.enum_types_by_name['eCmdIPCMode'] = _ECMDIPCMODE
-DESCRIPTOR.enum_types_by_name['ePersonType'] = _EPERSONTYPE
-DESCRIPTOR.enum_types_by_name['eAlarmType'] = _EALARMTYPE
-DESCRIPTOR.enum_types_by_name['eFaceParams'] = _EFACEPARAMS
 DESCRIPTOR.enum_types_by_name['eCmdActionMode'] = _ECMDACTIONMODE
 DESCRIPTOR.enum_types_by_name['eFileTypes'] = _EFILETYPES
 DESCRIPTOR.enum_types_by_name['ChannelNetworkType'] = _CHANNELNETWORKTYPE
 DESCRIPTOR.enum_types_by_name['ChannelStreamType'] = _CHANNELSTREAMTYPE
+DESCRIPTOR.enum_types_by_name['eTalkStatus'] = _ETALKSTATUS
+DESCRIPTOR.enum_types_by_name['ePersonType'] = _EPERSONTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CommonHeader = _reflection.GeneratedProtocolMessageType('CommonHeader', (_message.Message,), dict(
@@ -3965,6 +4744,92 @@ HeartBeat = _reflection.GeneratedProtocolMessageType('HeartBeat', (_message.Mess
   # @@protoc_insertion_point(class_scope:DDRCommProto.HeartBeat)
   ))
 _sym_db.RegisterMessage(HeartBeat)
+
+reqRemoteServerList = _reflection.GeneratedProtocolMessageType('reqRemoteServerList', (_message.Message,), dict(
+  DESCRIPTOR = _REQREMOTESERVERLIST,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqRemoteServerList)
+  ))
+_sym_db.RegisterMessage(reqRemoteServerList)
+
+rspRemoteServerList = _reflection.GeneratedProtocolMessageType('rspRemoteServerList', (_message.Message,), dict(
+
+  RemoteServer = _reflection.GeneratedProtocolMessageType('RemoteServer', (_message.Message,), dict(
+    DESCRIPTOR = _RSPREMOTESERVERLIST_REMOTESERVER,
+    __module__ = 'BaseCmd_pb2'
+    # @@protoc_insertion_point(class_scope:DDRCommProto.rspRemoteServerList.RemoteServer)
+    ))
+  ,
+  DESCRIPTOR = _RSPREMOTESERVERLIST,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspRemoteServerList)
+  ))
+_sym_db.RegisterMessage(rspRemoteServerList)
+_sym_db.RegisterMessage(rspRemoteServerList.RemoteServer)
+
+reqRegisteLS = _reflection.GeneratedProtocolMessageType('reqRegisteLS', (_message.Message,), dict(
+  DESCRIPTOR = _REQREGISTELS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqRegisteLS)
+  ))
+_sym_db.RegisterMessage(reqRegisteLS)
+
+rspRegisteLS = _reflection.GeneratedProtocolMessageType('rspRegisteLS', (_message.Message,), dict(
+  DESCRIPTOR = _RSPREGISTELS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspRegisteLS)
+  ))
+_sym_db.RegisterMessage(rspRegisteLS)
+
+reqRemoteLogin = _reflection.GeneratedProtocolMessageType('reqRemoteLogin', (_message.Message,), dict(
+  DESCRIPTOR = _REQREMOTELOGIN,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqRemoteLogin)
+  ))
+_sym_db.RegisterMessage(reqRemoteLogin)
+
+rspRemoteLogin = _reflection.GeneratedProtocolMessageType('rspRemoteLogin', (_message.Message,), dict(
+
+  LSEntity = _reflection.GeneratedProtocolMessageType('LSEntity', (_message.Message,), dict(
+    DESCRIPTOR = _RSPREMOTELOGIN_LSENTITY,
+    __module__ = 'BaseCmd_pb2'
+    # @@protoc_insertion_point(class_scope:DDRCommProto.rspRemoteLogin.LSEntity)
+    ))
+  ,
+  DESCRIPTOR = _RSPREMOTELOGIN,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspRemoteLogin)
+  ))
+_sym_db.RegisterMessage(rspRemoteLogin)
+_sym_db.RegisterMessage(rspRemoteLogin.LSEntity)
+
+reqSelectLS = _reflection.GeneratedProtocolMessageType('reqSelectLS', (_message.Message,), dict(
+  DESCRIPTOR = _REQSELECTLS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqSelectLS)
+  ))
+_sym_db.RegisterMessage(reqSelectLS)
+
+rspSelectLS = _reflection.GeneratedProtocolMessageType('rspSelectLS', (_message.Message,), dict(
+  DESCRIPTOR = _RSPSELECTLS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspSelectLS)
+  ))
+_sym_db.RegisterMessage(rspSelectLS)
+
+reqUnselectLS = _reflection.GeneratedProtocolMessageType('reqUnselectLS', (_message.Message,), dict(
+  DESCRIPTOR = _REQUNSELECTLS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqUnselectLS)
+  ))
+_sym_db.RegisterMessage(reqUnselectLS)
+
+rspUnselectLS = _reflection.GeneratedProtocolMessageType('rspUnselectLS', (_message.Message,), dict(
+  DESCRIPTOR = _RSPUNSELECTLS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspUnselectLS)
+  ))
+_sym_db.RegisterMessage(rspUnselectLS)
 
 bcLSAddr = _reflection.GeneratedProtocolMessageType('bcLSAddr', (_message.Message,), dict(
 
@@ -3994,56 +4859,6 @@ rspLogin = _reflection.GeneratedProtocolMessageType('rspLogin', (_message.Messag
   # @@protoc_insertion_point(class_scope:DDRCommProto.rspLogin)
   ))
 _sym_db.RegisterMessage(rspLogin)
-
-notifyTerminalAccess = _reflection.GeneratedProtocolMessageType('notifyTerminalAccess', (_message.Message,), dict(
-  DESCRIPTOR = _NOTIFYTERMINALACCESS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.notifyTerminalAccess)
-  ))
-_sym_db.RegisterMessage(notifyTerminalAccess)
-
-notifySerAccess = _reflection.GeneratedProtocolMessageType('notifySerAccess', (_message.Message,), dict(
-  DESCRIPTOR = _NOTIFYSERACCESS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.notifySerAccess)
-  ))
-_sym_db.RegisterMessage(notifySerAccess)
-
-notifyAVStream = _reflection.GeneratedProtocolMessageType('notifyAVStream', (_message.Message,), dict(
-
-  fullChannelInfo = _reflection.GeneratedProtocolMessageType('fullChannelInfo', (_message.Message,), dict(
-    DESCRIPTOR = _NOTIFYAVSTREAM_FULLCHANNELINFO,
-    __module__ = 'BaseCmd_pb2'
-    # @@protoc_insertion_point(class_scope:DDRCommProto.notifyAVStream.fullChannelInfo)
-    ))
-  ,
-  DESCRIPTOR = _NOTIFYAVSTREAM,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.notifyAVStream)
-  ))
-_sym_db.RegisterMessage(notifyAVStream)
-_sym_db.RegisterMessage(notifyAVStream.fullChannelInfo)
-
-reqTalk = _reflection.GeneratedProtocolMessageType('reqTalk', (_message.Message,), dict(
-  DESCRIPTOR = _REQTALK,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqTalk)
-  ))
-_sym_db.RegisterMessage(reqTalk)
-
-rspTalk = _reflection.GeneratedProtocolMessageType('rspTalk', (_message.Message,), dict(
-  DESCRIPTOR = _RSPTALK,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspTalk)
-  ))
-_sym_db.RegisterMessage(rspTalk)
-
-reqTalkHB = _reflection.GeneratedProtocolMessageType('reqTalkHB', (_message.Message,), dict(
-  DESCRIPTOR = _REQTALKHB,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqTalkHB)
-  ))
-_sym_db.RegisterMessage(reqTalkHB)
 
 reqCmdMove = _reflection.GeneratedProtocolMessageType('reqCmdMove', (_message.Message,), dict(
   DESCRIPTOR = _REQCMDMOVE,
@@ -4108,12 +4923,12 @@ reqCmdAudio = _reflection.GeneratedProtocolMessageType('reqCmdAudio', (_message.
   ))
 _sym_db.RegisterMessage(reqCmdAudio)
 
-rspCmdVoiceAlarm = _reflection.GeneratedProtocolMessageType('rspCmdVoiceAlarm', (_message.Message,), dict(
-  DESCRIPTOR = _RSPCMDVOICEALARM,
+rspCmdAudio = _reflection.GeneratedProtocolMessageType('rspCmdAudio', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDAUDIO,
   __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdVoiceAlarm)
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdAudio)
   ))
-_sym_db.RegisterMessage(rspCmdVoiceAlarm)
+_sym_db.RegisterMessage(rspCmdAudio)
 
 reqCmdUpdateConfig = _reflection.GeneratedProtocolMessageType('reqCmdUpdateConfig', (_message.Message,), dict(
   DESCRIPTOR = _REQCMDUPDATECONFIG,
@@ -4156,69 +4971,6 @@ rspCmdSetWorkPath = _reflection.GeneratedProtocolMessageType('rspCmdSetWorkPath'
   # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdSetWorkPath)
   ))
 _sym_db.RegisterMessage(rspCmdSetWorkPath)
-
-reqCmdAddFace = _reflection.GeneratedProtocolMessageType('reqCmdAddFace', (_message.Message,), dict(
-  DESCRIPTOR = _REQCMDADDFACE,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdAddFace)
-  ))
-_sym_db.RegisterMessage(reqCmdAddFace)
-
-rspCmdAddFace = _reflection.GeneratedProtocolMessageType('rspCmdAddFace', (_message.Message,), dict(
-  DESCRIPTOR = _RSPCMDADDFACE,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdAddFace)
-  ))
-_sym_db.RegisterMessage(rspCmdAddFace)
-
-reqCmdGetAlarmParams = _reflection.GeneratedProtocolMessageType('reqCmdGetAlarmParams', (_message.Message,), dict(
-  DESCRIPTOR = _REQCMDGETALARMPARAMS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdGetAlarmParams)
-  ))
-_sym_db.RegisterMessage(reqCmdGetAlarmParams)
-
-rspCmdThermalGetParams = _reflection.GeneratedProtocolMessageType('rspCmdThermalGetParams', (_message.Message,), dict(
-  DESCRIPTOR = _RSPCMDTHERMALGETPARAMS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdThermalGetParams)
-  ))
-_sym_db.RegisterMessage(rspCmdThermalGetParams)
-
-reqCmdFaceDataBaseOrder = _reflection.GeneratedProtocolMessageType('reqCmdFaceDataBaseOrder', (_message.Message,), dict(
-  DESCRIPTOR = _REQCMDFACEDATABASEORDER,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdFaceDataBaseOrder)
-  ))
-_sym_db.RegisterMessage(reqCmdFaceDataBaseOrder)
-
-FaceDataBaseData = _reflection.GeneratedProtocolMessageType('FaceDataBaseData', (_message.Message,), dict(
-  DESCRIPTOR = _FACEDATABASEDATA,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.FaceDataBaseData)
-  ))
-_sym_db.RegisterMessage(FaceDataBaseData)
-
-rspCmdFaceDataBaseOrder = _reflection.GeneratedProtocolMessageType('rspCmdFaceDataBaseOrder', (_message.Message,), dict(
-  DESCRIPTOR = _RSPCMDFACEDATABASEORDER,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdFaceDataBaseOrder)
-  ))
-_sym_db.RegisterMessage(rspCmdFaceDataBaseOrder)
-
-reqCmdSetFaceParams = _reflection.GeneratedProtocolMessageType('reqCmdSetFaceParams', (_message.Message,), dict(
-  DESCRIPTOR = _REQCMDSETFACEPARAMS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdSetFaceParams)
-  ))
-_sym_db.RegisterMessage(reqCmdSetFaceParams)
-
-rspCmdSetFaceParams = _reflection.GeneratedProtocolMessageType('rspCmdSetFaceParams', (_message.Message,), dict(
-  DESCRIPTOR = _RSPCMDSETFACEPARAMS,
-  __module__ = 'BaseCmd_pb2'
-  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdSetFaceParams)
-  ))
-_sym_db.RegisterMessage(rspCmdSetFaceParams)
 
 reqCmdAutoChat = _reflection.GeneratedProtocolMessageType('reqCmdAutoChat', (_message.Message,), dict(
   DESCRIPTOR = _REQCMDAUTOCHAT,
@@ -4275,6 +5027,41 @@ rspCmdEndActionMode = _reflection.GeneratedProtocolMessageType('rspCmdEndActionM
   # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdEndActionMode)
   ))
 _sym_db.RegisterMessage(rspCmdEndActionMode)
+
+reqCmdDeleteCurrRouteOrPath = _reflection.GeneratedProtocolMessageType('reqCmdDeleteCurrRouteOrPath', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDDELETECURRROUTEORPATH,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdDeleteCurrRouteOrPath)
+  ))
+_sym_db.RegisterMessage(reqCmdDeleteCurrRouteOrPath)
+
+rspCmdDeleteCurrRouteOrPath = _reflection.GeneratedProtocolMessageType('rspCmdDeleteCurrRouteOrPath', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDDELETECURRROUTEORPATH,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdDeleteCurrRouteOrPath)
+  ))
+_sym_db.RegisterMessage(rspCmdDeleteCurrRouteOrPath)
+
+reqCmdGetCurrRouteAndPath = _reflection.GeneratedProtocolMessageType('reqCmdGetCurrRouteAndPath', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDGETCURRROUTEANDPATH,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdGetCurrRouteAndPath)
+  ))
+_sym_db.RegisterMessage(reqCmdGetCurrRouteAndPath)
+
+RouteData = _reflection.GeneratedProtocolMessageType('RouteData', (_message.Message,), dict(
+  DESCRIPTOR = _ROUTEDATA,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.RouteData)
+  ))
+_sym_db.RegisterMessage(RouteData)
+
+rspCmdGetCurrRouteAndPath = _reflection.GeneratedProtocolMessageType('rspCmdGetCurrRouteAndPath', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDGETCURRROUTEANDPATH,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdGetCurrRouteAndPath)
+  ))
+_sym_db.RegisterMessage(rspCmdGetCurrRouteAndPath)
 
 notifyBaseStatus = _reflection.GeneratedProtocolMessageType('notifyBaseStatus', (_message.Message,), dict(
   DESCRIPTOR = _NOTIFYBASESTATUS,
@@ -4339,6 +5126,20 @@ ansFileStatus = _reflection.GeneratedProtocolMessageType('ansFileStatus', (_mess
   ))
 _sym_db.RegisterMessage(ansFileStatus)
 
+notifyUploadFile = _reflection.GeneratedProtocolMessageType('notifyUploadFile', (_message.Message,), dict(
+  DESCRIPTOR = _NOTIFYUPLOADFILE,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.notifyUploadFile)
+  ))
+_sym_db.RegisterMessage(notifyUploadFile)
+
+notifyUploadFileProgress = _reflection.GeneratedProtocolMessageType('notifyUploadFileProgress', (_message.Message,), dict(
+  DESCRIPTOR = _NOTIFYUPLOADFILEPROGRESS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.notifyUploadFileProgress)
+  ))
+_sym_db.RegisterMessage(notifyUploadFileProgress)
+
 reqStatus = _reflection.GeneratedProtocolMessageType('reqStatus', (_message.Message,), dict(
   DESCRIPTOR = _REQSTATUS,
   __module__ = 'BaseCmd_pb2'
@@ -4395,6 +5196,27 @@ rspStreamAddr = _reflection.GeneratedProtocolMessageType('rspStreamAddr', (_mess
   ))
 _sym_db.RegisterMessage(rspStreamAddr)
 
+reqAudioTalk = _reflection.GeneratedProtocolMessageType('reqAudioTalk', (_message.Message,), dict(
+  DESCRIPTOR = _REQAUDIOTALK,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqAudioTalk)
+  ))
+_sym_db.RegisterMessage(reqAudioTalk)
+
+rspAudioTalk = _reflection.GeneratedProtocolMessageType('rspAudioTalk', (_message.Message,), dict(
+  DESCRIPTOR = _RSPAUDIOTALK,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspAudioTalk)
+  ))
+_sym_db.RegisterMessage(rspAudioTalk)
+
+notifyStreamAddr = _reflection.GeneratedProtocolMessageType('notifyStreamAddr', (_message.Message,), dict(
+  DESCRIPTOR = _NOTIFYSTREAMADDR,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.notifyStreamAddr)
+  ))
+_sym_db.RegisterMessage(notifyStreamAddr)
+
 notifyAlarm = _reflection.GeneratedProtocolMessageType('notifyAlarm', (_message.Message,), dict(
   DESCRIPTOR = _NOTIFYALARM,
   __module__ = 'BaseCmd_pb2'
@@ -4415,6 +5237,20 @@ rspFileAddress = _reflection.GeneratedProtocolMessageType('rspFileAddress', (_me
   # @@protoc_insertion_point(class_scope:DDRCommProto.rspFileAddress)
   ))
 _sym_db.RegisterMessage(rspFileAddress)
+
+reqRemoteFileAddress = _reflection.GeneratedProtocolMessageType('reqRemoteFileAddress', (_message.Message,), dict(
+  DESCRIPTOR = _REQREMOTEFILEADDRESS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqRemoteFileAddress)
+  ))
+_sym_db.RegisterMessage(reqRemoteFileAddress)
+
+rspRemoteFileAddress = _reflection.GeneratedProtocolMessageType('rspRemoteFileAddress', (_message.Message,), dict(
+  DESCRIPTOR = _RSPREMOTEFILEADDRESS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspRemoteFileAddress)
+  ))
+_sym_db.RegisterMessage(rspRemoteFileAddress)
 
 AVChannelConfig = _reflection.GeneratedProtocolMessageType('AVChannelConfig', (_message.Message,), dict(
   DESCRIPTOR = _AVCHANNELCONFIG,
@@ -4450,6 +5286,111 @@ reqStreamRelayAlarm = _reflection.GeneratedProtocolMessageType('reqStreamRelayAl
   # @@protoc_insertion_point(class_scope:DDRCommProto.reqStreamRelayAlarm)
   ))
 _sym_db.RegisterMessage(reqStreamRelayAlarm)
+
+ThermalServerConfig = _reflection.GeneratedProtocolMessageType('ThermalServerConfig', (_message.Message,), dict(
+  DESCRIPTOR = _THERMALSERVERCONFIG,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.ThermalServerConfig)
+  ))
+_sym_db.RegisterMessage(ThermalServerConfig)
+
+reqCmdGetThermalParams = _reflection.GeneratedProtocolMessageType('reqCmdGetThermalParams', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDGETTHERMALPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdGetThermalParams)
+  ))
+_sym_db.RegisterMessage(reqCmdGetThermalParams)
+
+rspCmdGetThermalParams = _reflection.GeneratedProtocolMessageType('rspCmdGetThermalParams', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDGETTHERMALPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdGetThermalParams)
+  ))
+_sym_db.RegisterMessage(rspCmdGetThermalParams)
+
+reqCmdSetThermalParams = _reflection.GeneratedProtocolMessageType('reqCmdSetThermalParams', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDSETTHERMALPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdSetThermalParams)
+  ))
+_sym_db.RegisterMessage(reqCmdSetThermalParams)
+
+rspCmdSetThermalParams = _reflection.GeneratedProtocolMessageType('rspCmdSetThermalParams', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDSETTHERMALPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdSetThermalParams)
+  ))
+_sym_db.RegisterMessage(rspCmdSetThermalParams)
+
+reqCmdAddFace = _reflection.GeneratedProtocolMessageType('reqCmdAddFace', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDADDFACE,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdAddFace)
+  ))
+_sym_db.RegisterMessage(reqCmdAddFace)
+
+rspCmdAddFace = _reflection.GeneratedProtocolMessageType('rspCmdAddFace', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDADDFACE,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdAddFace)
+  ))
+_sym_db.RegisterMessage(rspCmdAddFace)
+
+reqCmdFaceDataBaseOrder = _reflection.GeneratedProtocolMessageType('reqCmdFaceDataBaseOrder', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDFACEDATABASEORDER,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdFaceDataBaseOrder)
+  ))
+_sym_db.RegisterMessage(reqCmdFaceDataBaseOrder)
+
+FaceDataBaseData = _reflection.GeneratedProtocolMessageType('FaceDataBaseData', (_message.Message,), dict(
+  DESCRIPTOR = _FACEDATABASEDATA,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.FaceDataBaseData)
+  ))
+_sym_db.RegisterMessage(FaceDataBaseData)
+
+rspCmdFaceDataBaseOrder = _reflection.GeneratedProtocolMessageType('rspCmdFaceDataBaseOrder', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDFACEDATABASEORDER,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdFaceDataBaseOrder)
+  ))
+_sym_db.RegisterMessage(rspCmdFaceDataBaseOrder)
+
+FaceServerConfig = _reflection.GeneratedProtocolMessageType('FaceServerConfig', (_message.Message,), dict(
+  DESCRIPTOR = _FACESERVERCONFIG,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.FaceServerConfig)
+  ))
+_sym_db.RegisterMessage(FaceServerConfig)
+
+reqCmdGetFaceParams = _reflection.GeneratedProtocolMessageType('reqCmdGetFaceParams', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDGETFACEPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdGetFaceParams)
+  ))
+_sym_db.RegisterMessage(reqCmdGetFaceParams)
+
+rspCmdGetFaceParams = _reflection.GeneratedProtocolMessageType('rspCmdGetFaceParams', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDGETFACEPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdGetFaceParams)
+  ))
+_sym_db.RegisterMessage(rspCmdGetFaceParams)
+
+reqCmdSetFaceParams = _reflection.GeneratedProtocolMessageType('reqCmdSetFaceParams', (_message.Message,), dict(
+  DESCRIPTOR = _REQCMDSETFACEPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.reqCmdSetFaceParams)
+  ))
+_sym_db.RegisterMessage(reqCmdSetFaceParams)
+
+rspCmdSetFaceParams = _reflection.GeneratedProtocolMessageType('rspCmdSetFaceParams', (_message.Message,), dict(
+  DESCRIPTOR = _RSPCMDSETFACEPARAMS,
+  __module__ = 'BaseCmd_pb2'
+  # @@protoc_insertion_point(class_scope:DDRCommProto.rspCmdSetFaceParams)
+  ))
+_sym_db.RegisterMessage(rspCmdSetFaceParams)
 
 
 # @@protoc_insertion_point(module_scope)

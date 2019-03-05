@@ -36,7 +36,8 @@ namespace DDRFramework
 
 		REG_ROUTE(reqCmdIPC, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 		REG_ROUTE(reqCmdAudio, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
-		REG_ROUTE(reqCmdAutoChat, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(reqCmdAutoChat, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
+			REG_ROUTE(reqAudioTalk, eCltType::eLSMStreamRelay, CommonHeader_eFlowDir_Forward)
 
 		REG_ROUTE(reqCmdAddFace, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)
 		REG_ROUTE(reqCmdFaceDataBaseOrder, eCltType::eLSMFaceRecognition, CommonHeader_eFlowDir_Forward)

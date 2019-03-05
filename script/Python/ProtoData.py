@@ -20,6 +20,10 @@ def rspMove():
     rspCmdMove.type = PB.eSuccess
     return rspCmdMove
 
+def reqAudioTalk():
+    reqAudioTalk = PB.reqAudioTalk()
+    #reqAudioTalk.optype = PB.eStart
+    return reqAudioTalk
 
 def notifyAlarmInfo():
     notifyAlarm = PB.notifyAlarmInfo()
