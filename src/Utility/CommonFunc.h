@@ -98,6 +98,9 @@ namespace DDRFramework {
 
 
 	void DisableMouseSelectConsole();
+
+	bool DDRDeleteFile(const char* szFile);
+	bool DDRRemoveDir(const char* szFileDir);
 }
 
 #endif // CommonFunc_h__
