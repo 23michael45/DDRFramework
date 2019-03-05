@@ -979,4 +979,56 @@ namespace DDRFramework {
 #endif
 	}
 
+	bool DDRDeleteFile(const char* szFile)
+	{
+#ifdef _WINDOWS
+		if (!::DeleteFileA(szFile))
+		{
+			return false;
+		}
+		return true;
+#else
+		// this is linux system
+		return false;
+#endif
+	}
+
+	bool DDRRemoveDir(const char* szFileDir)
+	{
+#ifdef _WINDOWS
+		std::string strDir = szFileDir;
+		if (strDir.at(strDir.length() - 1) != '\\')
+		{
+			strDir += '\\';
+		}
+
+		WIN32_FIND_DATAA wfd;
+		HANDLE hFind = ::FindFirstFileA((strDir + "*.*").c_str(), &wfd);
+		if (hFind == INVALID_HANDLE_VALUE)
+			return false;
+		do
+		{
+			if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			{
+				if (stricmp(wfd.cFileName, ".") != 0 &&
+					stricmp(wfd.cFileName, "..") != 0)
+					DDRRemoveDir((strDir + wfd.cFileName).c_str());
+			}
+			else
+			{
+				::DeleteFileA((strDir + wfd.cFileName).c_str());
+			}
+		} while (::FindNextFileA(hFind, &wfd));
+		::FindClose(hFind);
+		if (!::RemoveDirectoryA(szFileDir))
+		{
+			return false;
+		}
+		return true;
+#else
+		// this is linux system
+		return false;
+#endif
+	}
+
 }
