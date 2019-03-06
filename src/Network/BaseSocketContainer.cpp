@@ -89,22 +89,24 @@ namespace DDRFramework
 		{
 			if (GetTcp())
 			{
-				DebugLog("Receive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
+				DebugLog("\nReceive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
 
 			}
 			else if (GetUdp())
 			{
 
-				DebugLog("Receive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
+				//DebugLog("\nReceive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
+				DebugLog("\nReceive UDP Message %s ", btype.c_str())
 			}
 		}
 		catch (asio::error_code& e)
 		{
-			
+
+			DebugLog("\nPrintRemoteIP ASIO %s", e.message().c_str())
 		}
 		catch (std::exception& e)
 		{
-
+			DebugLog("\nPrintRemoteIP %s", e.what())
 		}
 	}
 }

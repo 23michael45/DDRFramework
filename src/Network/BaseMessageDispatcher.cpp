@@ -27,26 +27,36 @@ namespace DDRFramework
 
 	void BaseMessageDispatcher::Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
-		Hook(spParentSocketContainer, spHeader, spMsg);
-	
-		if (m_ProcessorMap.find(spHeader->bodytype()) != m_ProcessorMap.end())
+		try
 		{
-			auto sp = m_ProcessorMap[spHeader->bodytype()];
-			if (sp)
-			{
-				sp->Process(spParentSocketContainer, spHeader, spMsg);
 
-				//spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
+			Hook(spParentSocketContainer, spHeader, spMsg);
 
-				auto spThread = std::make_shared<std::thread>(std::bind(&BaseMessageDispatcher::AsyncThreadEntry, shared_from_this(), sp, spParentSocketContainer, spHeader, spMsg));
-				spThread->detach();
-				//m_AsyncThreadSet.insert(spThread);
-			
-			}
-			else
+			if (m_ProcessorMap.find(spHeader->bodytype()) != m_ProcessorMap.end())
 			{
-				DebugLog("Dispatch Error Processor Empty");
+				auto sp = m_ProcessorMap[spHeader->bodytype()];
+				if (sp)
+				{
+					sp->Process(spParentSocketContainer, spHeader, spMsg);
+
+					//spParentSocketContainer->GetIOContext().post(std::bind(&BaseProcessor::AsyncProcess, sp, spParentSocketContainer, spHeader, spMsg));
+
+					auto spThread = std::make_shared<std::thread>(std::bind(&BaseMessageDispatcher::AsyncThreadEntry, shared_from_this(), sp, spParentSocketContainer, spHeader, spMsg));
+					spThread->detach();
+					//m_AsyncThreadSet.insert(spThread);
+
+				}
+				else
+				{
+					DebugLog("Dispatch Error Processor Empty");
+				}
 			}
+
+		}
+		catch (const std::exception& e)
+		{
+
+			DebugLog("Dispatch Exception %s", e.what())
 		}
 	}
 

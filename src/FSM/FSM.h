@@ -258,7 +258,15 @@ public:
 	{
 		if (m_spState != nullptr)
 		{
-			m_spState->updateWithDeltaTime(delta);
+			try
+			{
+				m_spState->updateWithDeltaTime(delta);
+			}
+			catch (std::exception& e)
+			{
+				DebugLog("\nupdateWithDeltaTime Error", e.what());
+
+			}
 		}
 	}
 
