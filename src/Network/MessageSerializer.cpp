@@ -502,6 +502,18 @@ namespace DDRFramework
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
 
+#ifdef PROTOBUF_ENCRYPT
+		if (m_BodyLen == PROTOBUF_ENCRYPT_LEN)
+		{
+		}
+		else if (buf.size() < m_BodyLen)
+		{
+			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
+			sp->SetPreStateAndNextLen(typeid(ParseBodyState).name(), m_BodyLen);
+			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
+			return;
+		}
+#else
 		if (buf.size() < m_BodyLen)
 		{
 			std::shared_ptr<WaitNextBuffState> sp = m_spParentStateMachine.lock()->findState< WaitNextBuffState>();
@@ -509,6 +521,7 @@ namespace DDRFramework
 			m_spParentStateMachine.lock()->enterState<WaitNextBuffState>();
 			return;
 		}
+#endif
 
 		//do header logic
 		//if message body ignore , 
