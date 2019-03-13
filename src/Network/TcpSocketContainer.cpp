@@ -191,6 +191,7 @@ namespace DDRFramework
 			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
 			if (m_spSerializer)
 			{
+				std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
 				m_spSerializer->PushSendBuf(spbuf);
 
 			}
@@ -216,6 +217,8 @@ namespace DDRFramework
 
 				oshold.write((const char*)psrc, len);
 				oshold.flush();
+
+				std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
 				m_spSerializer->PushSendBuf(spbuf);
 
 			}

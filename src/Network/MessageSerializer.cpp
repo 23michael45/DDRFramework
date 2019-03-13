@@ -330,6 +330,7 @@ namespace DDRFramework
 
 	void MessageSerializer::PopSendBuf()
 	{
+		//std::lock_guard<std::mutex> lock(mMutexSend);//don't lock here ,lock it by caller
 		auto spbuf = GetSendBuf();
 		if (spbuf)
 		{

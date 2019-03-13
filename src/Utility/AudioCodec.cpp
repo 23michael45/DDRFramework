@@ -17,16 +17,22 @@ namespace DDRFramework
 
 		std::shared_ptr<asio::streambuf> buf = std::make_shared<asio::streambuf>();
 
-		std::ostream oshold(buf.get());
-		oshold.write((const char*)pSamples, sampleCount * sizeof(mal_int16));
-		oshold.flush();
-
-
-		std::lock_guard<std::mutex> lock(m_AudioSendMutex);
-
-		for (auto spSessionSendTo : m_spSessionSendToSet)
+		if (pSamples != nullptr && sampleCount > 0)
 		{
-			spSessionSendTo->Send(buf);
+
+
+			std::ostream oshold(buf.get());
+			oshold.write((const char*)pSamples, sampleCount * sizeof(mal_int16));
+			oshold.flush();
+
+			//DebugLog("on_recv_frames_device %d", sampleCount);
+
+			std::lock_guard<std::mutex> lock(m_AudioSendMutex);
+
+			for (auto spSessionSendTo : m_spSessionSendToSet)
+			{
+				spSessionSendTo->Send(buf);
+			}
 		}
 
 	}

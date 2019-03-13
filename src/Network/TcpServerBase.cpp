@@ -59,6 +59,7 @@ namespace DDRFramework
 	void TcpSessionBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
 
+		//DebugLog("StartWrite %d", spbuf->size());
 		if (m_Socket.is_open())
 		{
 
