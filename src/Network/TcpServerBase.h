@@ -57,8 +57,8 @@ namespace DDRFramework
 
 		void ThreadEntry();
 
-		virtual std::shared_ptr<TcpSessionBase> StartAccept();
-		void HandleAccept(std::shared_ptr<TcpSessionBase> sp, const asio::error_code& error);
+		std::shared_ptr<TcpSessionBase> StartAccept();
+		virtual void HandleAccept(std::shared_ptr<TcpSessionBase> sp, const asio::error_code& error);
 
 
 		virtual void OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer);
@@ -109,7 +109,6 @@ namespace DDRFramework
 
 		SHARED_FROM_BASE(HookTcpServer)
 
-		virtual std::shared_ptr<TcpSessionBase> StartAccept() override;
 
 	protected:
 

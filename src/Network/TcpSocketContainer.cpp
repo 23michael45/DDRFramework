@@ -266,10 +266,14 @@ namespace DDRFramework
 		if (m_bConnected)
 		{
 			m_bConnected = false;
+
+
+			//on stop must before callOnDisconnect;cause OnStop will delete session in map,then call ondisconnect will destroy session.  if destroy session before delete ,crash may occur
+			OnStop();
+
 			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_this()));//cannot stop twice so we judge bConnected first,otherwiese it will call CallOnDisconnect twice,maybe on called this time ,and io_context pause,and the other will be call next time when the io_context resume
 
 
-			OnStop();
 		}
 	}
 

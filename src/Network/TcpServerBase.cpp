@@ -268,12 +268,5 @@ namespace DDRFramework
 		BIND_IOCONTEXT_SERIALIZER_DISPATCHER(m_IOContext, HookTcpSession, MessageSerializer, BaseMessageDispatcher, BaseHeadRuleRouter)
 			return spHookTcpSession;
 	}
-	std::shared_ptr<TcpSessionBase> HookTcpServer::StartAccept()
-	{
-		auto spSession = TcpServerBase::StartAccept();
 
-		auto spStreamRelayTcpSession = dynamic_pointer_cast<HookTcpSession>(spSession);
-
-		return spSession;
-	}
 }
