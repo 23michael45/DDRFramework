@@ -11,8 +11,8 @@ namespace DDRFramework
 
 	void MQTTAsyncClient::pub_action_listener::on_success(const mqtt::token& tok)
 	{
-		cout << "\tListener success for token: "
-			<< tok.get_message_id() << endl;
+		//cout << "\tListener success for token: "
+		//	<< tok.get_message_id() << endl;
 	}
 
 	void MQTTAsyncClient::delivery_action_listener::on_failure(const mqtt::token& tok)
@@ -98,17 +98,18 @@ namespace DDRFramework
 	void MQTTAsyncClient::Publish(std::string topic, std::string content)
 	{
 		try {
-			cout << "\nSending final message..." << endl;
-			delivery_action_listener deliveryListener;
+			//cout << "\nSending final message..." << endl;
+		//	delivery_action_listener deliveryListener;
 			mqtt::message_ptr pubmsg = mqtt::make_message(topic.c_str(), content.c_str());
 			pubmsg->set_qos(QOS);
 
-			m_Client.publish(pubmsg, nullptr, deliveryListener);
+			//m_Client.publish(pubmsg, nullptr, deliveryListener);
+			m_Client.publish(pubmsg);
 
-			while (!deliveryListener.is_done()) {
-				this_thread::sleep_for(std::chrono::milliseconds(100));
-			}
-			cout << "OK" << endl;
+			//while (!deliveryListener.is_done()) {
+			//	this_thread::sleep_for(std::chrono::milliseconds(100));
+			//}
+			//cout << "OK" << endl;
 		}
 		catch (const mqtt::exception& exc) {
 			cerr << exc.what() << endl;
