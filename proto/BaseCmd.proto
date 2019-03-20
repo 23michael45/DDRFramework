@@ -159,6 +159,7 @@ enum eCltType {
 	eLSMSlamNavigation = 0x200;
 	eLSMFaceRecognition = 0x400;
 	eLSMThermalImaging =0x800;
+	eLSMVirtual = 0x1000;
 	eAllLSM = 0xff00;
 	eLocalServer = 0x10000;
 	eRemoteServer = 0x20000;

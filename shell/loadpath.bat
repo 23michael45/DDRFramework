@@ -13,6 +13,7 @@ set RemoteServerXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\RemoteServer
 set BaseXmlPath=%CurrentPath%..\tools\xlsx2xml\xml
 set ClientXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\Client
 set StreamRelayServiceXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\StreamRelayService
+set VirtualServiceXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\VirtualService
 set BroadcastServerXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\BroadcastServer
 set MobileXmlPath=%CurrentPath%..\tools\xlsx2xml\xml\MobileService
 
@@ -24,6 +25,7 @@ set DDR_LocalServer_Project_Path=%CurrentPath%\..\..\DDRLocalServer\DDR_LocalSer
 set DDR_BroadcastServer_Project_Path=%CurrentPath%\..\..\DDRLocalServer\DDR_BroadcastServer
 set DDR_RemoteServer_Project_Path=%CurrentPath%\..\..\DDRLocalServer\DDR_RemoteServer
 set DDRStreamRelayService_Project_Path=%CurrentPath%\..\..\DDRStreamRelayService\DDRStreamRelayService
+set DDR_VirtualService_Project_Path=%CurrentPath%\..\..\DDRLocalServer\DDR_VirtualService
 
 
 
