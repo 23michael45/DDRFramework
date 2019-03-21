@@ -5,6 +5,35 @@
 #include "cppfs/cppfs.h"
 #include "cppfs/FilePath.h"
 
+#ifdef WIN32
+#include "Windows.h"
+
+int gettimeofday(struct timeval * tp, struct timezone * tzp)
+{
+	// Note: some broken versions only have 8 trailing zero's, the correct epoch has 9 trailing zero's
+	// This magic number is the number of 100 nanosecond intervals since January 1, 1601 (UTC)
+	// until 00:00:00 January 1, 1970 
+	static const uint64_t EPOCH = ((uint64_t)116444736000000000ULL);
+
+	SYSTEMTIME  system_time;
+	FILETIME    file_time;
+	uint64_t    time;
+
+	GetSystemTime(&system_time);
+	SystemTimeToFileTime(&system_time, &file_time);
+	time = ((uint64_t)file_time.dwLowDateTime);
+	time += ((uint64_t)file_time.dwHighDateTime) << 32;
+
+	tp->tv_sec = (long)((time - EPOCH) / 10000000L);
+	tp->tv_usec = (long)(system_time.wMilliseconds * 1000);
+	return 0;
+}
+#else
+#include <sys/time.h>
+
+#endif // WIN32
+
+
 
 using namespace std;
 namespace DDRFramework
@@ -99,9 +128,18 @@ namespace DDRFramework
 			std::time_t time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 			struct tm * timeStruct = std::localtime(&time);
 
+
+			struct timeval tv;
+			gettimeofday(&tv, NULL);
+			int millisec = lrint(tv.tv_usec / 1000.0); // Round to nearest millisec
+
 			char timeStr[80];
-			strftime(timeStr, 80, "%d/%b/%Y:%H:%M:%S %z", timeStruct);
-			toLog += " [" + std::string(timeStr) + "]";
+			strftime(timeStr, 80, "%d/%b/%Y:%H:%M:%S", timeStruct);
+
+
+			char fullstr[80];
+			sprintf(fullstr, " [ %s:%03d ]", timeStr, millisec);
+			toLog +=  std::string(fullstr);
 		}
 
 		// Append the message to our log statement

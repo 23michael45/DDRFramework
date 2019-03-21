@@ -144,25 +144,36 @@ namespace DDRFramework
 	}
 	bool AudioCodec::StartDeviceRecord()
 	{
-		printf("Recording...\n");
+		try
+		{
 
-		m_pCaptureDevice = new mal_device();
-		if (mal_device_init(m_pContext, mal_device_type_capture, NULL, &m_Config, NULL, m_pCaptureDevice) != MAL_SUCCESS) {
-			mal_context_uninit(m_pContext); 
-			SAFE_DELETE(m_pCaptureDevice);
-			SAFE_DELETE(m_pContext);
-			printf("Failed to initialize capture device.\n");
-			return -2;
+			printf("Recording...\n");
+			if (m_pCaptureDevice == NULL)
+			{
+				m_pCaptureDevice = new mal_device();
+				if (mal_device_init(m_pContext, mal_device_type_capture, NULL, &m_Config, NULL, m_pCaptureDevice) != MAL_SUCCESS) {
+					mal_context_uninit(m_pContext);
+					SAFE_DELETE(m_pCaptureDevice);
+					SAFE_DELETE(m_pContext);
+					printf("Failed to initialize capture device.\n");
+					return false;
+				}
+				if (mal_device_start(m_pCaptureDevice) != MAL_SUCCESS) {
+					mal_device_uninit(m_pCaptureDevice);
+					mal_context_uninit(m_pContext);
+					SAFE_DELETE(m_pCaptureDevice);
+					SAFE_DELETE(m_pContext);
+					printf("Failed to start capture device.\n");
+					return false;
+				}
+				return true;
+			}
 		}
-		if (mal_device_start(m_pCaptureDevice) != MAL_SUCCESS) {
-			mal_device_uninit(m_pCaptureDevice);
-			mal_context_uninit(m_pContext);
-			SAFE_DELETE(m_pCaptureDevice);
-			SAFE_DELETE(m_pContext);
-			printf("Failed to start capture device.\n");
-			return -3;
+		catch (std::exception& e)
+		{
+
+			return false;
 		}
-		return true;
 	}
 	void AudioCodec::StopDeviceRecord()
 	{
@@ -176,27 +187,30 @@ namespace DDRFramework
 	bool AudioCodec::StartDevicePlay()
 	{
 		printf("Playing...\n");
+		if (m_pPlaybackDevice == NULL)
+		{
+			m_pPlaybackDevice = new mal_device();
+			if (mal_device_init(m_pContext, mal_device_type_playback, NULL, &m_Config, NULL, m_pPlaybackDevice) != MAL_SUCCESS) {
+				mal_context_uninit(m_pContext);
 
-		m_pPlaybackDevice = new mal_device();
-		if (mal_device_init(m_pContext, mal_device_type_playback, NULL, &m_Config, NULL, m_pPlaybackDevice) != MAL_SUCCESS) {
-			mal_context_uninit(m_pContext);
+				SAFE_DELETE(m_pPlaybackDevice);
+				SAFE_DELETE(m_pContext);
+				printf("Failed to initialize playback device.\n");
+				return false;
+			}
+			if (mal_device_start(m_pPlaybackDevice) != MAL_SUCCESS) {
+				mal_device_uninit(m_pPlaybackDevice);
+				mal_context_uninit(m_pContext);
 
-			SAFE_DELETE(m_pPlaybackDevice);
-			SAFE_DELETE(m_pContext);
-			printf("Failed to initialize playback device.\n");
-			return -4;
+				SAFE_DELETE(m_pPlaybackDevice);
+				SAFE_DELETE(m_pContext);
+				printf("Failed to start playback device.\n");
+				return false;
+			}
+
+			return true;
 		}
-		if (mal_device_start(m_pPlaybackDevice) != MAL_SUCCESS) {
-			mal_device_uninit(m_pPlaybackDevice);
-			mal_context_uninit(m_pContext);
-
-			SAFE_DELETE(m_pPlaybackDevice);
-			SAFE_DELETE(m_pContext);
-			printf("Failed to start playback device.\n");
-			return -5;
-		}
-
-		return true;
+		return false;
 
 	}
 	void AudioCodec::StopDevicePlay()

@@ -187,6 +187,7 @@ message rspLogin
 	}
 	eLoginRetCode retcode = 1;
 	eCltType yourRole = 2;
+	int32 priority = 3;
 }
 
 
