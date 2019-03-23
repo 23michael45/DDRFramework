@@ -10,6 +10,7 @@
 #include "DDRMacro.h"
 #include "Logger.h"
 #include "CommonFunc.h"
+#include <mutex>
 
 namespace DDRFramework
 {
