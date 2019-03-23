@@ -159,6 +159,7 @@ namespace DDRFramework
 
 	void TcpServerBase::OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
+		std::lock_guard<std::mutex> lock(m_mapMutex);
 		try
 		{
 			asio::ip::tcp::socket& sock = spContainer->GetSocket();
@@ -166,9 +167,10 @@ namespace DDRFramework
 			if (m_SessionMap.find(psock) != m_SessionMap.end())
 			{
 				auto sp = m_SessionMap[psock];
+				//erase first then release and reset  , cause somewhere may call map to get session,it will get a empty sp if reset first
+				m_SessionMap.erase(psock);
 				sp->Release();
 				sp.reset();
-				m_SessionMap.erase(psock);
 			}
 		}
 		catch (asio::error_code& e)
@@ -195,8 +197,20 @@ namespace DDRFramework
 		return nullptr;
 	}
 
+	std::vector<std::shared_ptr<DDRFramework::TcpSessionBase>> TcpServerBase::GetConnectedSessions()
+	{
+		std::lock_guard<std::mutex> lock(m_mapMutex);
+		std::vector<std::shared_ptr<TcpSessionBase>> vec;
+		for (auto spPair : m_SessionMap)
+		{
+			vec.push_back(spPair.second);
+		}
+		return vec;
+	}
+
 	std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& TcpServerBase::GetTcpSocketContainerMap()
 	{
+
 		return m_SessionMap;
 	}
 

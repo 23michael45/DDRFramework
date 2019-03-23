@@ -52,7 +52,7 @@ namespace DDRFramework
 
 
 		std::shared_ptr<TcpSessionBase> GetTcpSessionBySocket(tcp::socket* pSocket);
-		std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& GetTcpSocketContainerMap();
+		std::vector<std::shared_ptr<TcpSessionBase>> GetConnectedSessions();
 	protected:
 
 		void ThreadEntry();
@@ -64,6 +64,8 @@ namespace DDRFramework
 		virtual void OnSessionDisconnect(std::shared_ptr<TcpSocketContainer> spContainer);
 		virtual std::shared_ptr<TcpSessionBase> BindSerializerDispatcher();
 
+		std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& GetTcpSocketContainerMap();
+
 		asio::io_context m_IOContext;
 		tcp::acceptor m_Acceptor;
 		
@@ -74,7 +76,9 @@ namespace DDRFramework
 
 	
 	private:
-		//void WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession);
+
+		std::mutex m_mapMutex;
+
 	};
 
 
