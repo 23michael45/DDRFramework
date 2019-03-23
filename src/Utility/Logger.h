@@ -20,14 +20,14 @@ using namespace std;
 namespace DDRFramework {
 	class Log {
 	public:
-		enum class Target : short {
+		enum Target : short {
 			DISABLED = 1,
 			STDOUT = 2,
 			STDERR = 4,
 			LOG_FILE = 8
 		};
 
-		enum class Level : short {
+		enum Level : short {
 			DEBUG = 1,
 			INFO = 2,
 			NOTICE = 3,
@@ -118,6 +118,11 @@ namespace DDRFramework {
 			this->levelEnabled = true;
 		}
 
+		Target getTarget()
+		{
+			return logTarget;
+		}
+
 	protected:
 		Log() {}
 
@@ -168,7 +173,8 @@ namespace DDRFramework {
 		void ConsoleDebugLoop();
 		void AddCommand(std::string cmd, std::function<void()> func);
 
-		void ToggleLog();
+		void ToggleLogConsole();
+		void ToggleLogFile();
 		void Quit();
 
 
@@ -178,7 +184,8 @@ namespace DDRFramework {
 		std::map<std::string, std::function<void()>> m_Functionmap;
 
 		bool m_Quit;
-		bool m_ToggleLog;
+		bool m_ToggleLogConsole;
+		bool m_ToggleLogFile;
 
 		std::string m_CurrentCmd;
 	};

@@ -6,7 +6,8 @@
 #include "cppfs/FilePath.h"
 
 #ifdef WIN32
-#include "Windows.h"
+#include <winsock.h>
+#include <Windows.h>
 
 int gettimeofday(struct timeval * tp, struct timezone * tzp)
 {
@@ -62,7 +63,7 @@ namespace DDRFramework
 
 			// Set logger to write to a file
 			//log->setTarget(Log::Target::LOG_FILE);
-			log->setTarget(Log::Target::STDOUT | Log::Target::LOG_FILE);
+			log->setTarget(Log::Target::STDOUT);
 
 			cppfs::FilePath path(DDRFramework::getexepath());
 			std::string exename = path.baseName();
@@ -176,26 +177,54 @@ namespace DDRFramework
 	ConsoleDebug::ConsoleDebug()
 	{
 		m_Quit = false;
-		m_ToggleLog = true;
-		AddCommand("l", std::bind(&ConsoleDebug::ToggleLog, this));
+		m_ToggleLogConsole = true;
+		m_ToggleLogFile = false;
+		AddCommand("l", std::bind(&ConsoleDebug::ToggleLogConsole, this));
+		AddCommand("lf", std::bind(&ConsoleDebug::ToggleLogFile, this));
 		AddCommand("q", std::bind(&ConsoleDebug::Quit, this));
 	}
-	void ConsoleDebug::ToggleLog()
+
+	void ConsoleDebug::ToggleLogConsole()
 	{
-		if (m_ToggleLog == true)
+		m_ToggleLogConsole = !m_ToggleLogConsole;
+
+		auto target = DDRFramework::Log::getInstance()->getTarget();
+		if (m_ToggleLogConsole == true)
 		{
 
 			printf_s("\nToggleLog Turn Off Console");
-			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE);
+
+			target = target | DDRFramework::Log::Target::STDOUT;
 
 		}
 		else
 		{
 
 			printf_s("\nToggleLog Turn On Console");
-			DDRFramework::Log::getInstance()->setTarget(DDRFramework::Log::Target::LOG_FILE | DDRFramework::Log::Target::STDOUT);
+			target = (DDRFramework::Log::Target)(target | ~DDRFramework::Log::Target::STDOUT);
 		}
-		m_ToggleLog = !m_ToggleLog;
+
+		DDRFramework::Log::getInstance()->setTarget(target);
+	}	
+	void ConsoleDebug::ToggleLogFile()
+	{
+		m_ToggleLogFile = !m_ToggleLogFile;
+
+		auto target = DDRFramework::Log::getInstance()->getTarget();
+		if (m_ToggleLogFile == true)
+		{
+
+			printf_s("\nToggleLog Turn Off File");
+			target = target | DDRFramework::Log::Target::LOG_FILE;
+
+		}
+		else
+		{
+
+			printf_s("\nToggleLog Turn On File");
+			target = (DDRFramework::Log::Target)(target | ~DDRFramework::Log::Target::LOG_FILE);
+		}
+		DDRFramework::Log::getInstance()->setTarget(target);
 	}
 	void ConsoleDebug::Quit()
 	{

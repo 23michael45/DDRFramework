@@ -14,7 +14,7 @@ m_ProcessorMap[action##name.GetTypeName()] = std::make_shared<name##Processor>(*
 
 template<typename T> void SAFE_DELETE(T*& a) {
 	delete a;
-	a = NULL;
+	a = nullptr;
 }
 
 #endif // DDRMacro_h__

@@ -318,14 +318,24 @@ namespace DDRFramework
 
 		if (m_spDataStreamSendQueue)
 		{
-			m_spDataStreamSendQueue->push(spbuf);
-		
-			if (m_spDataStreamSendQueue->size() > MAX_SEND_QUEUESIZE)
+			int size = spbuf->size();
+			if (size > 0)
 			{
-				m_bReachMaxQueue = true;
+				m_spDataStreamSendQueue->push(spbuf);
+
+				if (m_spDataStreamSendQueue->size() > MAX_SEND_QUEUESIZE)
+				{
+					m_bReachMaxQueue = true;
+				}
 			}
+			else
+			{
+				DebugLog("Push Send Buf 0 Size")
+
+			
+			}
+
 		}
-		//m_DataStreamSendQueue.push(spbuf);
 	}
 
 	void MessageSerializer::PopSendBuf()
@@ -334,7 +344,9 @@ namespace DDRFramework
 		auto spbuf = GetSendBuf();
 		if (spbuf)
 		{
-			spbuf->consume(spbuf->size());
+			//do not need consume here,cause write function already consume it
+			//int size = spbuf->size();
+			//spbuf->consume(size);
 			spbuf.reset();
 
 		}
