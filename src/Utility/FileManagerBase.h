@@ -154,6 +154,7 @@ namespace DDRFramework
 		tree<std::string> m_FileTree;
 
 
+		std::mutex m_FileMutex;
 
 	};
 }

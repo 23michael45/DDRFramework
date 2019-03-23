@@ -1,8 +1,10 @@
 #include "FileManagerBase.h"
-
+#include <chrono>
+#include <thread>
 #include <iostream>
 #include <string>
 #include <regex>
+#include <mutex>
 #include "../../thirdparty/cppfs/include/cppfs/fs.h"
 #include "../../thirdparty/cppfs/include/cppfs/FileHandle.h"
 #include "../../thirdparty/cppfs/include/cppfs/FileIterator.h"
@@ -115,6 +117,9 @@ namespace DDRFramework
 
 	std::vector<string> FileManagerBase::CheckFiles()
 	{
+
+		std::lock_guard<std::mutex> lock(m_FileMutex);
+
 		m_FileTree.create();
 
 		std::vector<std::string> files;
@@ -133,6 +138,8 @@ namespace DDRFramework
 
 	void FileManagerBase::PrintTreeNode(std::shared_ptr<treenode<std::string>> sptreenode, int level /*= 0*/)
 	{
+
+		std::lock_guard<std::mutex> lock(m_FileMutex);
 		printf("\n");
 		for (int i = 0; i < level; i++)
 		{
@@ -149,6 +156,7 @@ namespace DDRFramework
 	
 	std::vector<std::string> FileManagerBase::Match(std::string fmt)
 	{
+		std::lock_guard<std::mutex> lock(m_FileMutex);
 		std::vector<std::shared_ptr<treenode<std::string>>> vec = MatchNode(fmt);
 		std::vector<std::string> files;
 		for (auto sp : vec)
@@ -165,6 +173,7 @@ namespace DDRFramework
 
 	std::vector<std::string> FileManagerBase::MatchDir(std::string dir, std::string fmt)
 	{
+		std::lock_guard<std::mutex> lock(m_FileMutex);
 		std::string finalfmt = DDRFramework::getStarWildRegex(fmt, false);
 
 
@@ -273,6 +282,7 @@ namespace DDRFramework
 
 	bool FileManagerBase::FileExist(std::string url)
 	{
+		std::lock_guard<std::mutex> lock(m_FileMutex);
 		std::string full = url;
 		if (url.substr(0, 4) == "http")
 		{
