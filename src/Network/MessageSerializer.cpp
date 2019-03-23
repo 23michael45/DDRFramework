@@ -347,7 +347,7 @@ namespace DDRFramework
 			//do not need consume here,cause write function already consume it
 			//int size = spbuf->size();
 			//spbuf->consume(size);
-			spbuf.reset();
+			//spbuf.reset();
 
 		}
 		else
