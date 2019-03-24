@@ -8,6 +8,7 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include "BaseProcessor.h"
 #include "../../proto/BaseCmd.pb.h"
+#include "../../proto/RemoteCmd.pb.h"
 #include "BaseSocketContainer.h"
 
 namespace DDRFramework

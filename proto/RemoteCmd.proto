@@ -1,0 +1,165 @@
+syntax = "proto3";
+package DDRCommProto;
+import "BaseCmd.proto";
+
+
+//-----------------------------------------------------------------------------------------------------------------Remote Server[[[[[
+
+//request get remote serverlist , from client or local server to broadcast server
+message reqRemoteServerList
+{
+	string fromip = 1;
+}
+message rspRemoteServerList
+{
+	message RemoteServer{
+		string name = 1;
+		string ip = 2;
+		int32 port =3;
+	}
+	repeated RemoteServer servers = 1;
+}
+//register a localserver to a  remote server,ls represent a robot entity. from local server to remote server
+message reqRegisteLS
+{
+	string udid = 1;
+	string name = 2;
+}
+message rspRegisteLS
+{
+	string error = 1;
+}
+
+//client login to a remote server , from client in internet to remote server
+message reqRemoteLogin
+{
+	eCltType type = 1;
+	string username = 2; // nickname for clients/monitors, module name for LSM, ignored for RR
+	string userpwd = 3;
+}
+message rspRemoteLogin
+{
+	message LSEntity
+	{
+		string udid = 1;
+		string name = 2;
+	}
+	repeated LSEntity lslist = 1;
+	
+	
+	enum eRemoteLoginRetCode {
+		success = 0;
+		server_busy = 1;
+		server_limit_reached = 2;
+		incorrect_password = 3;
+	}
+	eRemoteLoginRetCode retcode = 2;
+	eCltType yourRole = 3;
+}
+
+
+//remote client select a local server (a robot) to control or watch
+message reqSelectLS
+{
+	string udid = 1;
+}
+message rspSelectLS
+{
+	string error = 1;
+}
+message reqUnselectLS
+{
+	string udid = 1;
+}
+message rspUnselectLS
+{
+	string error = 1;
+}
+
+//-----------------------------------------------------------------------------------------------------------------Remote Server]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+//-----------------------------------RTSP Stream[[[[
+
+message RemoteStreamChannel
+{
+	string url = 1;
+	int32 bandwidth = 2;
+	bytes srcname = 3;
+}
+//local server to remote
+message reqRtspStreamUploadAddr
+{
+	repeated RemoteStreamChannel channels = 1;
+}
+message rspRtspStreamUploadAddr
+{	
+	repeated RemoteStreamChannel channels = 1;
+	string error = 2;
+}
+
+
+
+//-----------------------------------RTSP Stream]]]]]
+
+
+//-----------------------------------FileOperation[[[[
+//route is:     
+//				RemoteClient    	 	--->			 RemoteServer    		--->	 		LocalServer    			--->	 	LocalService
+//								reqRemoteFileAddress					notifyUploadFile							chkFileStatus
+//				RemoteClient    	 	<---			 RemoteServer    		<---	 		LocalServer    			<---	 	LocalService
+//								rspRemoteFileAddress					notifyUploadFileProgress 					ansFileStatus
+//remote client reqfile
+message reqRemoteFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated bytes fileNames = 3;  // allow wildcards (*,?, etc)
+}
+
+message rspRemoteFileAddress
+{
+	eCltType tarServiceType = 1;
+	eFileTypes fileType = 2;
+	repeated bytes fileAddrList = 3; // ignored if fileType!=FileContents
+	string error = 4;
+}
+
+
+
+//remote server notify localserver --> localhttpserver to upload files
+message notifyUploadFile
+{
+	string httpAddr = 1;
+	repeated bytes filefmt = 2; // wildcards fmt
+	repeated bytes existfiles = 3; // relavtive path
+	eCltType tarServiceType = 4;
+	
+}
+//local server notify remote server
+message notifyUploadFileProgress
+{
+	float progress = 1;//0-1 ,1 is upload finish
+	repeated bytes uploadedfiles = 2; // relavtive path
+	
+}
+
+
+//local server to LSM
+message chkFileStatus
+{
+	eFileTypes fileType = 1;
+	repeated bytes filefmt = 2; // wildcards fmt
+	repeated bytes existfiles = 3; // relavtive path
+	eCltType tarServiceType = 4;
+}
+
+//LSM to local server
+message ansFileStatus
+{
+	eFileTypes fileType = 1;
+	repeated bytes fileAddrList = 2; // no wildcards
+}
+
+//-----------------------------------FileOperation]]]]]

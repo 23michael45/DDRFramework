@@ -4,6 +4,8 @@
 #include "XmlLoader.h"
 #include "../Network/TcpClientBase.h"
 #include "../Network/UdpSocketBase.h"
+
+#include "../../proto/RemoteCmd.pb.h"
 namespace DDRFramework
 {
 
