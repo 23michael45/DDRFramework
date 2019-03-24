@@ -208,6 +208,22 @@ namespace DDRFramework
 		return vec;
 	}
 
+	int TcpServerBase::SendToAll(std::shared_ptr<asio::streambuf> spbuf)
+	{
+		int i = 0;
+		std::lock_guard<std::mutex> lock(m_mapMutex);
+		for (auto spPair : m_SessionMap)
+		{
+			auto spSession = spPair.second;
+			if (spSession)
+			{
+				spSession->Send(spbuf);
+				i++;
+			}
+		}
+		return i;
+	}
+
 	std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>>& TcpServerBase::GetTcpSocketContainerMap()
 	{
 

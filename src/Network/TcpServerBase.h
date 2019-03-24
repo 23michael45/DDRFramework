@@ -53,6 +53,7 @@ namespace DDRFramework
 
 		std::shared_ptr<TcpSessionBase> GetTcpSessionBySocket(tcp::socket* pSocket);
 		std::vector<std::shared_ptr<TcpSessionBase>> GetConnectedSessions();
+		int SendToAll(std::shared_ptr<asio::streambuf> spbuf);
 	protected:
 
 		void ThreadEntry();
