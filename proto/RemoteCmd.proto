@@ -65,7 +65,8 @@ message reqSelectLS
 }
 message rspSelectLS
 {
-	string error = 1;
+	string udid = 1;
+	string error = 2;
 }
 message reqUnselectLS
 {
@@ -73,7 +74,8 @@ message reqUnselectLS
 }
 message rspUnselectLS
 {
-	string error = 1;
+	string udid = 1;
+	string error = 2;
 }
 
 //-----------------------------------------------------------------------------------------------------------------Remote Server]]]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -85,8 +87,17 @@ message rspUnselectLS
 message RemoteStreamChannel
 {
 	string url = 1;
-	int32 bandwidth = 2;
-	bytes srcname = 3;
+	int32 uploadbandwidth = 2;
+	int32 downloadbandwidth = 3;
+	bytes srcname = 4;
+	
+	enum StreamType
+	{
+		Video = 0;
+		Audio = 1;
+		VideoAudio = 2;
+	}
+	StreamType type =  5;
 }
 //local server to remote
 message reqRtspStreamUploadAddr

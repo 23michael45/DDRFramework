@@ -7,8 +7,9 @@
 #include <windows.h>      
 #include <intrin.h>       
 #include <iphlpapi.h>     
-
-
+#include <string>
+#include <sstream>>
+#include <iomanip>
 //// we just need this for purposes of unique machine id. So any one or two mac's is       
 //// fine. 
 //short hashMacAddress(PIP_ADAPTER_INFO info)
@@ -56,16 +57,22 @@ short getVolumeHash()
 	return hash;
 }
 
-short getCpuHash()
+
+std::string getCpuHash()
 {
 	int cpuinfo[4] = { 0, 0, 0, 0 };
 	__cpuid(cpuinfo, 0);
-	short hash = 0;
-	short* ptr = (short*)(&cpuinfo[0]);
-	for (int i = 0; i < 8; i++)
-		hash += ptr[i];
+	//short hash = 0;
+	//short* ptr = (short*)(&cpuinfo[0]);
 
-	return hash;
+
+	std::stringstream ss;
+	for (int i = 0; i < 4; i++)
+	{
+		ss << std::setfill('0') << std::setw(sizeof(int) * 2) << std::hex << cpuinfo[i];
+
+	}
+	return ss.str();
 }
 
 const wchar_t* getMachineName()
