@@ -30,9 +30,6 @@ namespace DDRFramework
 		std::shared_ptr<TcpSocketContainer>  GetTcp();
 		std::shared_ptr<UdpSocketBase> GetUdp();
 
-		ESOCKETTYPE m_SocketType;
-		std::shared_ptr<TcpSocketContainer> m_spTcpSocketContainer;
-		std::shared_ptr<UdpSocketBase> m_spUdpSocketBase;
 
 		asio::io_context& GetIOContext();
 
@@ -41,6 +38,12 @@ namespace DDRFramework
 		void SendBack(std::shared_ptr<DDRCommProto::CommonHeader> spheader, std::shared_ptr<google::protobuf::Message> spmsg);
 
 		void PrintRemoteIP(std::string btype);
+
+
+	private:
+		ESOCKETTYPE m_SocketType;
+		std::shared_ptr<TcpSocketContainer> m_spTcpSocketContainer;
+		std::shared_ptr<UdpSocketBase> m_spUdpSocketBase;
 	};
 
 }

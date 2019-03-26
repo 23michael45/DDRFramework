@@ -321,6 +321,7 @@ namespace DDRFramework
 			int size = spbuf->size();
 			if (size > 0)
 			{
+
 				m_spDataStreamSendQueue->push(spbuf);
 
 				if (m_spDataStreamSendQueue->size() > MAX_SEND_QUEUESIZE)
@@ -330,6 +331,7 @@ namespace DDRFramework
 			}
 			else
 			{
+				
 				DebugLog("Push Send Buf 0 Size")
 
 			

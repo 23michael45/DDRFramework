@@ -192,7 +192,17 @@ namespace DDRFramework
 			if (m_spSerializer)
 			{
 				std::lock_guard<std::mutex> lock(m_spSerializer->GetSendLock());
-				m_spSerializer->PushSendBuf(spbuf);
+
+
+				//create a new buf ,cause write will cosume the buf,this old buf maybe used by another session
+				std::shared_ptr<asio::streambuf> spbufnew = std::make_shared<asio::streambuf>();
+
+				std::ostream oshold(spbufnew.get());
+				oshold.write((const char*)spbuf->data().data(), spbuf->size());
+				oshold.flush();
+
+
+				m_spSerializer->PushSendBuf(spbufnew);
 
 			}
 		}

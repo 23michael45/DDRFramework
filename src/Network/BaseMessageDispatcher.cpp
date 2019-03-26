@@ -63,7 +63,7 @@ namespace DDRFramework
 	void BaseMessageDispatcher::Hook(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
 	{
 		auto btype = spHeader->bodytype();
-		if (btype.find("HeartBeat") == std::string::npos)
+		if (btype.find("HeartBeat") == std::string::npos && spParentSocketContainer->GetTcp() != nullptr)
 		{
 			spParentSocketContainer->PrintRemoteIP(btype);
 		}

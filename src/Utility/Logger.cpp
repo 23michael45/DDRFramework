@@ -65,10 +65,7 @@ namespace DDRFramework
 			//log->setTarget(Log::Target::LOG_FILE);
 			log->setTarget(Log::Target::STDOUT);
 
-			cppfs::FilePath path(DDRFramework::getexepath());
-			std::string exename = path.baseName();
-			std::string filename = exename + "-" + GetTimeNowstring() + ".log";
-			log->setFile(filename + ".log");
+			
 
 		}
 		return log;
@@ -213,6 +210,10 @@ namespace DDRFramework
 		auto target = DDRFramework::Log::getInstance()->getTarget();
 		if (m_ToggleLogFile == true)
 		{
+			cppfs::FilePath path(DDRFramework::getexepath());
+			std::string exename = path.baseName();
+			std::string filename = exename + "-" + GetTimeNowstring() + ".log";
+			Log::getInstance()->setFile(filename + ".log");
 
 			printf_s("\nToggleLog Turn Off File");
 			target = target | DDRFramework::Log::Target::LOG_FILE;
