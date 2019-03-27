@@ -62,8 +62,16 @@ namespace DDRFramework
 		//DebugLog("StartWrite %d", spbuf->size());
 		if (m_Socket.is_open())
 		{
+			if (spbuf && spbuf->size() > 0)
+			{
+				m_CurrentWritingBuf = spbuf;
+				asio::async_write(m_Socket, *m_CurrentWritingBuf.get(), std::bind(&TcpSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
+			}
+			else
+			{
+				DebugLog("TcpSessionBase StartWrite Size 0")
+			}
 
-			asio::async_write(m_Socket, *spbuf.get(), std::bind(&TcpSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 
 		}
 

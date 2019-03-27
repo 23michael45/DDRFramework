@@ -250,7 +250,7 @@ namespace DDRFramework
 				if (!ec)
 				{
 					m_spSerializer->PopSendBuf();
-
+					m_CurrentWritingBuf.reset();
 				}
 				else
 				{

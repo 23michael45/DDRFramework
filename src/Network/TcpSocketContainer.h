@@ -127,6 +127,7 @@ namespace DDRFramework
 
 
 		asio::io_context::strand m_ReadWriteStrand;
+		std::shared_ptr<asio::streambuf> m_CurrentWritingBuf;//use to protect buf release,cause consume crash
 
 
 		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionDisconnect;

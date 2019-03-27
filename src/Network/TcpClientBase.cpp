@@ -94,6 +94,7 @@ namespace DDRFramework
 	{
 		if (m_Socket.is_open())
 		{
+			m_CurrentWritingBuf = spbuf;
 			asio::async_write(m_Socket, *spbuf.get(),asio::transfer_all(), std::bind(&TcpClientSessionBase::HandleWrite, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		}
 

@@ -68,10 +68,13 @@ namespace DDRFramework
 
 	void MessageSerializer::Deinit()
 	{
+
+
 		if (m_spDataStreamSendQueue)
 		{
 			m_spDataStreamSendQueue.reset();
 		}
+
 
 		//while (!m_DataStreamSendQueue.empty()) m_DataStreamSendQueue.pop();
 		if (m_spDispatcher)

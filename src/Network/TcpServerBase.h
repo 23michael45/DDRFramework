@@ -75,7 +75,6 @@ namespace DDRFramework
 		
 		asio::detail::thread_group m_WorkerThreads;
 
-	
 	private:
 
 		std::mutex m_mapMutex;
