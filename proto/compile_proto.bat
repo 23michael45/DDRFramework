@@ -19,4 +19,11 @@ protoc RemoteCmd.proto --csharp_out=./
 rem protoc BaseCmd.proto --js_out=./
 protoc RemoteCmd.proto --python_out=./
 
+
+protoc SimulationCmd.proto --cpp_out=./
+protoc SimulationCmd.proto --java_out=./
+protoc SimulationCmd.proto --csharp_out=./
+rem protoc BaseCmd.proto --js_out=./
+protoc SimulationCmd.proto --python_out=./
+
 cd %PrePath%

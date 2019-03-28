@@ -16,11 +16,9 @@ namespace DDRFramework
 		DebugLog("TcpSessionBase Destroy");
 	}
 
-	void TcpSessionBase::Start()
+	void TcpSessionBase::OnStart()
 	{	
 		DebugLog("Connection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str());
-		TcpSocketContainer::Start();
-
 		if (m_bConnected)
 		{
 
@@ -32,6 +30,7 @@ namespace DDRFramework
 			m_IOContext.post(std::bind(&TcpSessionBase::StartRead, shared_from_base()));
 		}
 	}
+
 
 	void TcpSessionBase::StartRead()
 	{

@@ -6,6 +6,7 @@
 #include <memory>
 #include "../../Shared/proto/BaseCmd.pb.h"
 
+#include "../../../Shared/src/Utility/Timer.hpp"
 using asio::ip::tcp;
 namespace DDRFramework
 {
@@ -26,6 +27,7 @@ namespace DDRFramework
 		virtual void StartWrite(std::shared_ptr<asio::streambuf> spbuf) override;
 		virtual void HandleRead(const asio::error_code& ec);
 
+		void ConnectTimeout(std::shared_ptr<TcpSocketContainer> spContainer);
 
 		asio::streambuf& GetRecvBuf()
 		{
@@ -36,6 +38,8 @@ namespace DDRFramework
 		tcp::resolver m_Resolver;
 		asio::streambuf m_ReadStreamBuf;
 
+		DDRFramework::Timer m_Timer;
+		DDRFramework::timer_id m_ConnectTimeoutTimerID;
 
 		SHARED_FROM_BASE(TcpClientSessionBase)
 	};
@@ -77,9 +81,9 @@ namespace DDRFramework
 		bool IsConnected()
 		{
 			std::lock_guard<std::mutex> lock(m_MapMutex);
-			for (auto spSession : m_spClientMap)
+			for (auto spSession : m_spClientSet)
 			{
-				if (spSession.second->IsConnected())
+				if (spSession->IsConnected())
 				{
 					return true;
 				}
@@ -90,11 +94,11 @@ namespace DDRFramework
 		std::shared_ptr<TcpClientSessionBase> GetConnectedSession()
 		{
 			std::lock_guard<std::mutex> lock(m_MapMutex);
-			for (auto spSession : m_spClientMap)
+			for (auto spSession : m_spClientSet)
 			{
-				if (spSession.second->IsConnected())
+				if (spSession->IsConnected())
 				{
-					return spSession.second;
+					return dynamic_pointer_cast<TcpClientSessionBase>(spSession);
 				}
 
 			}
@@ -104,10 +108,13 @@ namespace DDRFramework
 
 		virtual void OnDisconnect(std::shared_ptr<TcpSocketContainer> spContainer);
 		virtual void OnConnected(std::shared_ptr<TcpSocketContainer> spContainer);
+		virtual void OnConnectTimeout(std::shared_ptr<TcpSocketContainer> spContainer);
+		virtual void OnConnectFailed(std::shared_ptr<TcpSocketContainer> spContainer);
+
 		virtual std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher();
 	
 		asio::io_context m_IOContext;
-		std::map< std::shared_ptr<TcpSocketContainer>, std::shared_ptr<TcpClientSessionBase>> m_spClientMap;
+		std::set< std::shared_ptr<TcpSocketContainer>> m_spClientSet;
 		std::mutex m_MapMutex;
 
 

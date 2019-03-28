@@ -1,0 +1,10 @@
+syntax = "proto3";
+package DDRCommProto;
+import "BaseCmd.proto";
+
+
+message notifyDifferentialDrive
+{
+	float leftRPM = 1;
+	float rightRPM = 2;
+}

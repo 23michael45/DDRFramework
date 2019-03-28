@@ -169,7 +169,11 @@ namespace DDRFramework
 			if (events.size() == 0 || events.size() < id) {
 				return false;
 			}
+
 			events[id].valid = false;
+			events[id].handler = nullptr;
+
+
 			auto it = std::find_if(time_events.begin(), time_events.end(),
 				[&](const detail::Time_event &te) { return te.ref == id; });
 			if (it != time_events.end()) {

@@ -317,6 +317,13 @@ namespace DDRFramework
 		{
 			m_fOnSessionDisconnect(shared_from_this());
 		}
+
+
+
+		BindOnConnected(nullptr);
+		BindOnDisconnect(nullptr);
+		BindOnConnectTimeout(nullptr);
+		BindOnConnectFailed(nullptr);
 	}
 
 	void TcpSocketContainer::BindBehavior(std::shared_ptr<BaseBehavior> behavior)

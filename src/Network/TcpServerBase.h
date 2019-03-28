@@ -16,8 +16,7 @@ namespace DDRFramework
 	public:
 		TcpSessionBase(asio::io_context& context);
 		~TcpSessionBase();
-		virtual void Start();
-
+		virtual void OnStart();
 
 
 		asio::streambuf& GetRecvBuf()

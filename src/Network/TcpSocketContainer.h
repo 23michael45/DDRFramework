@@ -42,7 +42,7 @@ namespace DDRFramework
 		~TcpSocketContainer();
 
 
-		virtual void Start();
+		void Start();
 
 		virtual void CheckRead();
 		virtual void CheckWrite();
@@ -82,6 +82,14 @@ namespace DDRFramework
 		void BindOnConnected(std::function<void(std::shared_ptr<TcpSocketContainer>)> f)
 		{
 			m_fOnSessionConnected = f;
+		}	
+		void BindOnConnectFailed(std::function<void(std::shared_ptr<TcpSocketContainer>)> f)
+		{
+			m_fOnSessionConnectFailed = f;
+		}
+		void BindOnConnectTimeout(std::function<void(std::shared_ptr<TcpSocketContainer>)> f)
+		{
+			m_fOnSessionConnectTimeout = f;
 		}
 		void BindOnHookReceive(std::function<void(asio::streambuf&)> f)
 		{
@@ -132,6 +140,8 @@ namespace DDRFramework
 
 		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionDisconnect;
 		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionConnected;
+		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionConnectTimeout;
+		std::function<void(std::shared_ptr<TcpSocketContainer>)> m_fOnSessionConnectFailed;
 
 
 		std::function<void(asio::streambuf&)> m_fOnHookReceiveData;

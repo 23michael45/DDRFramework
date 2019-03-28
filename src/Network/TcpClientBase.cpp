@@ -24,6 +24,10 @@ namespace DDRFramework
 	{
 		if (!ec)
 		{
+
+			auto interval = std::chrono::seconds(5);
+			m_ConnectTimeoutTimerID = m_Timer.add(interval, std::bind(&TcpClientSessionBase::ConnectTimeout, this, shared_from_this()));
+
 			asio::async_connect(m_Socket, i, bind(&TcpClientSessionBase::ConnectHandler, shared_from_base(), std::placeholders::_1, std::placeholders::_2));
 		}
 		else
@@ -31,23 +35,57 @@ namespace DDRFramework
 			DebugLog(ec.message().c_str());
 		}
 	}
+
+
+	void TcpClientSessionBase::ConnectTimeout(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
+	{
+		spContainer->Stop();
+
+		m_Timer.remove(m_ConnectTimeoutTimerID);
+
+
+		if (m_fOnSessionConnectTimeout)
+		{
+			m_fOnSessionConnectTimeout(shared_from_base());
+		}
+
+		DebugLog("Connect Timeout----------------------------------------------------------------")
+	
+
+	}
 	void TcpClientSessionBase::ConnectHandler(const asio::error_code& ec, tcp::resolver::iterator i)
 	{
+
+		m_Timer.reset(m_ConnectTimeoutTimerID);
+		m_Timer.remove(m_ConnectTimeoutTimerID);
 		if (!ec)
 		{
 			m_bConnected = true;
 			TcpSocketContainer::Start();
+
+
 			m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
 
 			if (m_fOnSessionConnected)
 			{
-				m_fOnSessionConnected(shared_from_this());
+				m_fOnSessionConnected(shared_from_base());
 			}
 		}
 		else
 		{
+			
 			DebugLog("Connect Failed No Server");
-			Stop();
+			
+			//do not use stop directly ,use function in stop ,cause m_Connect is false
+			//Stop();
+			OnStop();
+
+			if (m_fOnSessionConnectFailed)
+			{
+				m_fOnSessionConnectFailed(shared_from_base());
+			}
+			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_base()));
+
 		}
 
 	}
@@ -159,7 +197,7 @@ namespace DDRFramework
 	{
 		std::lock_guard<std::mutex> lock(m_MapMutex);
 		DebugLog("TcpClientBase Destroy");
-		m_spClientMap.clear();
+		m_spClientSet.clear();
 	}
 	void TcpClientBase::Start(int threadNum)
 	{
@@ -175,32 +213,42 @@ namespace DDRFramework
 
 		auto spTcpClientSessionBase = BindSerializerDispatcher();
 
-		m_spClientMap.insert(std::make_pair(spTcpClientSessionBase,spTcpClientSessionBase));
+		m_spClientSet.insert(spTcpClientSessionBase);
 
+
+		//donot use shared_from this,it will cause memory leak
 		spTcpClientSessionBase->BindOnConnected(std::bind(&TcpClientBase::OnConnected, shared_from_this(), std::placeholders::_1));
 		spTcpClientSessionBase->BindOnDisconnect(std::bind(&TcpClientBase::OnDisconnect, shared_from_this(), std::placeholders::_1));
+		spTcpClientSessionBase->BindOnConnectTimeout(std::bind(&TcpClientBase::OnConnectTimeout, shared_from_this(), std::placeholders::_1));
+		spTcpClientSessionBase->BindOnConnectFailed(std::bind(&TcpClientBase::OnConnectFailed, shared_from_this(), std::placeholders::_1));
 		spTcpClientSessionBase->Start(m_Address, m_Port);
 
 		return spTcpClientSessionBase;
 	}
 	void TcpClientBase::Disconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
-		if (IsConnected())
-		{
-			spContainer->Stop();
 
-		}
+		auto sp = dynamic_pointer_cast<TcpClientSessionBase>(spContainer);
+		sp->Stop();
+
+
 	}
 
 	void TcpClientBase::Stop()
 	{
+
 		std::lock_guard<std::mutex> lock(m_MapMutex);
 		std::vector<std::shared_ptr<TcpClientSessionBase>> vec;
-		for (auto spSession : m_spClientMap)
+		for (auto spSession : m_spClientSet)
 		{
-			vec.push_back(spSession.second);
+			auto sp = dynamic_pointer_cast<TcpClientSessionBase>(spSession);
+			if (sp)
+			{
+				vec.push_back(sp);
+
+			}
 		}
-		m_spClientMap.clear();
+		m_spClientSet.clear();
 		for (auto spSession : vec)
 		{
 			spSession->Stop();
@@ -262,15 +310,25 @@ namespace DDRFramework
 	{
 		std::lock_guard<std::mutex> lock(m_MapMutex);
 		spContainer->Release();
-		m_spClientMap.erase(spContainer);
-
+		m_spClientSet.erase(spContainer);
+		
 		
 	}
 	void TcpClientBase::OnConnected(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
-
 		DebugLog("OnConnected TcpClientBase");
 
 	}
+	void TcpClientBase::OnConnectTimeout(std::shared_ptr<TcpSocketContainer> spContainer)
+	{
 
+		DebugLog("OnConnectTimerout TcpClientBase");
+
+	}	
+	void TcpClientBase::OnConnectFailed(std::shared_ptr<TcpSocketContainer> spContainer)
+	{
+
+		DebugLog("OnConnectFailed TcpClientBase");
+
+	}
 }
