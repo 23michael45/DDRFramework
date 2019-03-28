@@ -273,8 +273,9 @@ namespace DDRFramework
 	}
 	void TcpSocketContainer::Stop()
 	{
-		if (m_bConnected)
-		{
+		//do not need bConnect,cause some Seesion have not connect but still need relase
+		//if (m_bConnected)  
+		//{
 			m_bConnected = false;
 
 
@@ -284,7 +285,7 @@ namespace DDRFramework
 			m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CallOnDisconnect, shared_from_this()));//cannot stop twice so we judge bConnected first,otherwiese it will call CallOnDisconnect twice,maybe on called this time ,and io_context pause,and the other will be call next time when the io_context resume
 
 
-		}
+		//}
 	}
 
 	std::shared_ptr<MessageSerializer> TcpSocketContainer::GetSerializer()

@@ -153,6 +153,9 @@ namespace DDRFramework
 
 		std::mutex m_AudioBufPlayMutex;
 
+
+		std::mutex m_AudioDeviceMutex;
+
 	};
 
 

@@ -46,8 +46,8 @@ namespace DDRFramework
 		~TcpServerBase();
 
 
-		void Start(int threadNum = 2);
-		void Stop();
+		virtual void Start(int threadNum = 2);
+		virtual void Stop();
 
 
 		std::shared_ptr<TcpSessionBase> GetTcpSessionBySocket(tcp::socket* pSocket);
@@ -69,6 +69,8 @@ namespace DDRFramework
 		asio::io_context m_IOContext;
 		tcp::acceptor m_Acceptor;
 		
+
+		std::set< std::shared_ptr<TcpSessionBase>> m_WaitingAcceptSessionSet;
 		std::map<tcp::socket*, std::shared_ptr<TcpSessionBase>> m_SessionMap;
 		
 		

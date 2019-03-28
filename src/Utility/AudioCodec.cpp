@@ -115,6 +115,7 @@ namespace DDRFramework
 
 	bool AudioCodec::Init()
 	{
+		std::lock_guard<std::mutex> lock(m_AudioDeviceMutex);
 
 		int channelCount = 1;
 		int sampleRate = 16000;
@@ -130,10 +131,11 @@ namespace DDRFramework
 		}
 
 		m_Config = mal_device_config_init(mal_format_s16, channelCount, sampleRate, recv, send);
-		
+		return true;
 	}
 	void AudioCodec::Deinit()
 	{
+		std::lock_guard<std::mutex> lock(m_AudioDeviceMutex);
 		if (m_pContext)
 		{
 			mal_context_uninit(m_pContext); 
@@ -144,6 +146,7 @@ namespace DDRFramework
 	}
 	bool AudioCodec::StartDeviceRecord()
 	{
+		std::lock_guard<std::mutex> lock(m_AudioDeviceMutex);
 		try
 		{
 
@@ -177,6 +180,7 @@ namespace DDRFramework
 	}
 	void AudioCodec::StopDeviceRecord()
 	{
+		std::lock_guard<std::mutex> lock(m_AudioDeviceMutex);
 		if (m_pCaptureDevice)
 		{
 			mal_device_uninit(m_pCaptureDevice);
@@ -234,7 +238,7 @@ namespace DDRFramework
 	{
 		std::lock_guard<std::mutex> lock(m_AudioRecvMutex);
 		std::ostream oshold(&m_AudioRecvBuf);
-		//int size = buf.size();
+		int size = buf.size();
 		//DebugLog("PushAudioRecvBuf %i",size)
 
 		oshold.write((const char*)buf.data().data(),size);

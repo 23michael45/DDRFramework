@@ -103,9 +103,20 @@ namespace DDRFramework
 
 		for (auto spSession : vec)
 		{
-
 			spSession->Stop();
 		}
+
+
+		std::vector<std::shared_ptr<TcpSessionBase>> vecWaitingAccept;
+		for (auto spSession : m_WaitingAcceptSessionSet)
+		{
+			vecWaitingAccept.push_back(spSession);
+		}
+		for (auto spSession : vecWaitingAccept)
+		{
+			spSession->Stop();
+		}
+
 	}
 
 	void TcpServerBase::ThreadEntry()
@@ -125,7 +136,9 @@ namespace DDRFramework
 		auto spSession = BindSerializerDispatcher();
 		spSession->BindOnDisconnect(std::bind(&TcpServerBase::OnSessionDisconnect, shared_from_this(), std::placeholders::_1));
 		m_Acceptor.async_accept(spSession->GetSocket(),
-			std::bind(&TcpServerBase::HandleAccept, this, spSession,std::placeholders::_1));
+			std::bind(&TcpServerBase::HandleAccept, this, spSession, std::placeholders::_1));
+
+		m_WaitingAcceptSessionSet.insert(spSession);
 
 		return spSession;
 
@@ -134,6 +147,11 @@ namespace DDRFramework
 	{
 		if (!error)
 		{ 
+			if (m_WaitingAcceptSessionSet.find(spSession) != m_WaitingAcceptSessionSet.end())
+			{
+				m_WaitingAcceptSessionSet.erase(spSession);
+			}
+
 			if (m_SessionMap.find(&spSession->GetSocket()) == m_SessionMap.end())
 			{
 				m_SessionMap[&spSession->GetSocket()] = spSession;
@@ -179,6 +197,19 @@ namespace DDRFramework
 				sp->Release();
 				sp.reset();
 			}
+
+			auto spServerSession = dynamic_pointer_cast<TcpSessionBase>(spContainer);
+			if (spServerSession)
+			{
+				if (m_WaitingAcceptSessionSet.find(spServerSession) != m_WaitingAcceptSessionSet.end())
+				{
+					m_WaitingAcceptSessionSet.erase(spServerSession);
+					spServerSession->Release();
+					spServerSession.reset();
+				}
+
+			}
+
 		}
 		catch (asio::error_code& e)
 		{

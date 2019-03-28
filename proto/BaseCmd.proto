@@ -563,7 +563,8 @@ message rspStreamServiceInfo
 }
 message notifyStreamServiceInfoChanged
 {
-	repeated AVChannelConfig channels = 1;
+	int32 tcpPort = 1;
+	repeated AVChannelConfig channels = 2;
 }
 message reqStreamRelayAlarm
 {
