@@ -234,8 +234,8 @@ namespace DDRFramework
 	{
 		std::lock_guard<std::mutex> lock(m_AudioRecvMutex);
 		std::ostream oshold(&m_AudioRecvBuf);
-		int size = buf.size();
-		DebugLog("PushAudioRecvBuf %i",size)
+		//int size = buf.size();
+		//DebugLog("PushAudioRecvBuf %i",size)
 
 		oshold.write((const char*)buf.data().data(),size);
 		oshold.flush();
