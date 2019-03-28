@@ -5,7 +5,7 @@
 //#define DebugLog(...) printf(__VA_ARGS__);
 #define DebugLog(...) DDRFramework::Print(__VA_ARGS__);
 #else
-#define DebugLog(...) //DDRFramework::Print(__VA_ARGS__);
+#define DebugLog(...) DDRFramework::Print(__VA_ARGS__);
 #endif
 
 
