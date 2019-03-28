@@ -301,6 +301,26 @@ message rspCmdGetCurrRouteAndPath{
 	repeated RouteData route_data = 2;
 }
 
+message SignPointXY{
+	int32 X = 1;
+	int32 Y = 2;
+}
+
+message SignPoint{
+	repeated SignPointXY point = 1;
+	int32 type = 2;
+}
+
+message reqCmdSignPoint{
+	repeated SignPoint spoint = 1;
+}
+
+message rspCmdSignPoint{
+	eCmdRspType type = 1;
+}
+
+
+
 //-----------------------------------ClientCmd]]]]]
 //-----------------------------------ClientStatus[[[[[
 // BaseStatus
