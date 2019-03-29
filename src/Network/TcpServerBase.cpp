@@ -8,6 +8,10 @@ namespace DDRFramework
 
 	TcpSessionBase::TcpSessionBase(asio::io_context& context):TcpSocketContainer::TcpSocketContainer(context)
 	{
+
+		std::thread::id tid = std::this_thread::get_id();
+		uint64_t* ptr = (uint64_t*)&tid;
+		DebugLog("TcpSessionBase Create On Thread: %d", (*ptr))
 		m_bConnected = true;
 	}
 	TcpSessionBase::~TcpSessionBase()
@@ -18,7 +22,11 @@ namespace DDRFramework
 
 	void TcpSessionBase::OnStart()
 	{	
-		DebugLog("Connection Established! %s" , m_Socket.remote_endpoint().address().to_string().c_str());
+
+		std::thread::id tid = std::this_thread::get_id();
+		uint64_t* ptr = (uint64_t*)&tid;
+
+		DebugLog("Connection Established! %s : On Thread %d" , m_Socket.remote_endpoint().address().to_string().c_str(), (*ptr));
 		if (m_bConnected)
 		{
 
@@ -93,6 +101,7 @@ namespace DDRFramework
 	}
 	void TcpServerBase::Stop()
 	{
+		m_Acceptor.close();
 		std::vector<std::shared_ptr<TcpSessionBase>> vec;
 
 		for (auto spSessionPair : m_SessionMap)
@@ -166,9 +175,15 @@ namespace DDRFramework
 
 
 			}
+
+			//only not error ,to start next accept
+			StartAccept();
+		}
+		else
+		{
+			spSession->Stop();
 		}
 
-		StartAccept();
 	}
 	//void TcpServerBase::WaitUntilPreSessionDestroy(tcp::socket& socket, std::shared_ptr<TcpSessionBase> spSession)
 	//{
