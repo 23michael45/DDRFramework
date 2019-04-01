@@ -314,6 +314,7 @@ message SignPoint{
 
 message reqCmdSignPoint{
 	repeated SignPoint spoint = 1;
+	string route_name = 2;
 }
 
 message rspCmdSignPoint{
