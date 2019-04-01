@@ -309,7 +309,7 @@ message SignPointXY{
 message SignPoint{
 	SignPointXY pointStart = 1;
 	SignPointXY pointEnd = 2；
-	int32 type = 2;
+	int32 type = 3;
 }
 
 message reqCmdSignPoint{
