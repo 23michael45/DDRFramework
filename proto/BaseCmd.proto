@@ -307,7 +307,8 @@ message SignPointXY{
 }
 
 message SignPoint{
-	repeated SignPointXY point = 1;
+	SignPointXY pointStart = 1;
+	SignPointXY pointEnd = 2；
 	int32 type = 2;
 }
 
