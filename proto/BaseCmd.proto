@@ -301,15 +301,12 @@ message rspCmdGetCurrRouteAndPath{
 	repeated RouteData route_data = 2;
 }
 
-message SignPointXY{
-	float X = 1;
-	float Y = 2;
-}
-
 message SignPoint{
-	SignPointXY pointStart = 1;
-	SignPointXY pointEnd = 2;
-	int32 type = 3;
+	float startX = 1;
+	float startY = 2;
+	float endX = 3;
+	float endY = 4;
+	int32 type = 5;
 }
 
 message reqCmdSignPoint{
