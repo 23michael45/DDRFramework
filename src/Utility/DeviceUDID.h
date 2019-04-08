@@ -4,6 +4,7 @@
 
 short getVolumeHash();
 std::string getCpuHash();
+std::string getMacAddr();
 const wchar_t* getMachineName();
     
 #endif // DeviceUDID_h__

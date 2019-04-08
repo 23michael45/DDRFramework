@@ -10,41 +10,41 @@
 #include <string>
 #include <sstream>>
 #include <iomanip>
-//// we just need this for purposes of unique machine id. So any one or two mac's is       
-//// fine. 
-//short hashMacAddress(PIP_ADAPTER_INFO info)
-//{
-//	short hash = 0;
-//	for (int i = 0; i < info->AddressLength; i++)
-//	{
-//		hash += (info->Address[i] << ((i & 1) * 8));
-//	}
-//	return hash;
-//}
-//
-//void getMacHash(short& mac1, short& mac2)
-//{
-//	IP_ADAPTER_INFO AdapterInfo[32];
-//	DWORD dwBufLen = sizeof(AdapterInfo);
-//
-//	DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &dwBufLen);
-//	if (dwStatus != ERROR_SUCCESS)
-//		return; // no adapters.      
-//
-//	PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo;
-//	mac1 = hashMacAddress(pAdapterInfo);
-//	if (pAdapterInfo->Next)
-//		mac2 = hashMacAddress(pAdapterInfo->Next);
-//
-//	// sort the mac addresses. We don't want to invalidate     
-//	// both macs if they just change order.           
-//	if (mac1 > mac2)
-//	{
-//		short tmp = mac2;
-//		mac2 = mac1;
-//		mac1 = tmp;
-//	}
-//}
+// we just need this for purposes of unique machine id. So any one or two mac's is       
+// fine. 
+short hashMacAddress(PIP_ADAPTER_INFO info)
+{
+	short hash = 0;
+	for (int i = 0; i < info->AddressLength; i++)
+	{
+		hash += (info->Address[i] << ((i & 1) * 8));
+	}
+	return hash;
+}
+
+void getMacHash(short& mac1, short& mac2)
+{
+	IP_ADAPTER_INFO AdapterInfo[32];
+	DWORD dwBufLen = sizeof(AdapterInfo);
+
+	DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &dwBufLen);
+	if (dwStatus != ERROR_SUCCESS)
+		return; // no adapters.      
+
+	PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo;
+	mac1 = hashMacAddress(pAdapterInfo);
+	if (pAdapterInfo->Next)
+		mac2 = hashMacAddress(pAdapterInfo->Next);
+
+	// sort the mac addresses. We don't want to invalidate     
+	// both macs if they just change order.           
+	if (mac1 > mac2)
+	{
+		short tmp = mac2;
+		mac2 = mac1;
+		mac1 = tmp;
+	}
+}
 
 short getVolumeHash()
 {
@@ -81,6 +81,23 @@ const wchar_t* getMachineName()
 	DWORD size = 1024;
 	GetComputerName(computerName, &size);
 	return &(computerName[0]);
+}
+
+std::string getMacAddr()
+{
+	IP_ADAPTER_INFO AdapterInfo[16];
+	DWORD dwBufLen = sizeof(AdapterInfo);
+
+	DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &dwBufLen);
+	if (dwStatus != ERROR_SUCCESS)
+		return ""; // no adapters.      
+
+	PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo;
+
+	char buff[64];
+	sprintf_s(buff,"%02x%02x%02x%02x%02x%02x", pAdapterInfo->Address[0], pAdapterInfo->Address[1], pAdapterInfo->Address[2], pAdapterInfo->Address[3], pAdapterInfo->Address[4], pAdapterInfo->Address[5]);
+
+	return std::string(buff);
 }
 
 #else
