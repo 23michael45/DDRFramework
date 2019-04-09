@@ -8,3 +8,32 @@ message notifyDifferentialDrive
 	float leftRPM = 1;
 	float rightRPM = 2;
 }
+
+message PolerPt
+{
+	float angle = 1; // in DEGREE and COUNTER-CLOCKWISE (0 defined as directly forward)
+	float distance = 2; // in CENTIMETERS
+}
+
+message reqDifferentialRPM
+{
+
+	bool bVPC = 1;
+	float PoseX = 2;
+	float PoseY = 3;
+	float PoseTheta = 4;
+	float LineVelocity = 5;
+	float AngleVelocity = 6;
+	float TimeStamp = 7;
+	float PreLL = 8;
+	float PreRR = 9;
+	repeated PolerPt  lidarData = 10;
+	repeated PolerPt  UsirData = 11;
+	bool DynamicOA = 12;
+}
+
+message rspDifferentialRPM
+{
+	float leftRPM = 1;
+	float rightRPM = 2;
+}

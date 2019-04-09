@@ -39,7 +39,8 @@ namespace DDRFramework
 
 	void TcpClientSessionBase::ConnectTimeout(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
 	{
-		spContainer->Stop();
+
+		DebugLog("Connect Timeout----------------------------------------------------------------")
 
 		m_Timer.remove(m_ConnectTimeoutTimerID);
 
@@ -49,7 +50,8 @@ namespace DDRFramework
 			m_fOnSessionConnectTimeout(shared_from_base());
 		}
 
-		DebugLog("Connect Timeout----------------------------------------------------------------")
+		//stop must after timer,stop will cause session destruct,so timer will destruct,timeout function is timer callback,may cause crash
+		spContainer->Stop();
 	
 
 	}
@@ -203,6 +205,7 @@ namespace DDRFramework
 	{
 		m_spWork = std::make_shared< asio::io_context::work>(m_IOContext);
 		m_WorkerThreads.create_threads(std::bind(&TcpClientBase::ThreadEntry, shared_from_this()), threadNum);
+
 	}
 	std::shared_ptr<TcpClientSessionBase> TcpClientBase::Connect(std::string address, std::string port)
 	{
