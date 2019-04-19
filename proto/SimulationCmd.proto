@@ -37,3 +37,41 @@ message rspDifferentialRPM
 	float leftRPM = 1;
 	float rightRPM = 2;
 }
+
+message PathNode
+{
+	float X = 1;
+	float Y = 2;
+	float Sp = 3;
+}
+
+message reqLaunchAMC
+{
+	repeated PathNode PathNodes = 1;
+	
+	float leftRadius = 2;
+	float rightRadius = 3;
+	float wheelBase = 4;
+	float reading2AR_wheel = 5;
+	float reading2AR_gyro = 6;
+	
+	
+	float x = 7;
+	float y = 8;
+	float theta = 9;
+	
+}
+message rspLaunchAMC
+{
+	string error = 1;
+}
+message reqStartFromPose
+{
+	float x = 1;
+	float y = 2;
+	float theta = 3;
+}
+message rspStartFromPose
+{
+	string error = 1;
+}
