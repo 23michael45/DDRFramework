@@ -3,10 +3,11 @@
 #include <memory>
 #include "../../src/FSM/FSM.h"
 #include "asio.hpp"
-#include "../../proto/BaseCmd.pb.h"
+#include "../../src/Utility/DDRMacro.h"
 #include "BaseMessageDispatcher.h"
 #include "BaseSocketContainer.h"
 #include <queue>
+#include "BaseProcessor.h"
 
 #define HeadSignal "pbh\0"
 #define TEMP_BUFFER_SIZE 4096
@@ -73,6 +74,11 @@ namespace DDRFramework
 		{
 			return m_spBaseSocketContainer;
 		}
+
+
+
+		bool RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp);
+		bool UnregisterExternalProcessor(google::protobuf::Message& msg);
 	protected:
 	
 		std::shared_ptr<StateMachine<MessageSerializer>> m_spStateMachine;

@@ -1,5 +1,4 @@
 #include "MessageSerializer.h"
-#include "../Utility/DDRMacro.h"
 
 #include "../Utility/Logger.h"
 #include <google/protobuf/descriptor.h>
@@ -7,7 +6,6 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 
-#include "../../proto/BaseCmd.pb.h"
 #include "../Utility/CommonFunc.h"
 
 #define PROTOBUF_ENCRYPT_LEN 5
@@ -300,6 +298,24 @@ namespace DDRFramework
 		if (m_spHeadRuleRouter)
 		{
 			return m_spHeadRuleRouter->IgnoreBody(m_spBaseSocketContainer, spHeader,buf,bodylen);
+		}
+		return false;
+	}
+
+	bool MessageSerializer::RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp)
+	{
+		if (m_spDispatcher)
+		{
+			return m_spDispatcher->RegisterExternalProcessor(msg, sp);
+		}
+		return false;
+	}
+
+	bool MessageSerializer::UnregisterExternalProcessor(google::protobuf::Message& msg)
+	{
+		if (m_spDispatcher)
+		{
+			return m_spDispatcher->UnregisterExternalProcessor(msg);
 		}
 		return false;
 	}

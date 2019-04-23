@@ -1,6 +1,5 @@
 
 #include "BaseMessageDispatcher.h"
-#include "../Utility/DDRMacro.h"
 #include "../Utility/Logger.h"
 
 
@@ -83,6 +82,32 @@ namespace DDRFramework
 
 				MsgRouterManager::Instance()->SetCltType(pRaw->yourrole());
 			}
+		}
+	}
+
+	bool BaseMessageDispatcher::RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp)
+	{
+		if (m_ProcessorMap.find(msg.GetTypeName()) != m_ProcessorMap.end())
+		{
+			return false;
+		}
+		else
+		{
+			m_ProcessorMap[msg.GetTypeName()] = sp;
+			return true;
+		}
+	}
+
+	bool BaseMessageDispatcher::UnregisterExternalProcessor(google::protobuf::Message& msg)
+	{
+		if (m_ProcessorMap.find(msg.GetTypeName()) != m_ProcessorMap.end())
+		{
+			m_ProcessorMap.erase(msg.GetTypeName());
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

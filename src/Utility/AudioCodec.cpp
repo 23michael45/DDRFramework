@@ -5,7 +5,6 @@
 #include <functional>
 
 #include "../../../Shared/src/Utility/Logger.h"
-#include "../../../Shared/src/Utility/DDRMacro.h"
 
 namespace DDRFramework
 {

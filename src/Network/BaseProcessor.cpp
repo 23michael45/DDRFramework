@@ -6,7 +6,6 @@
 #include "TcpSocketContainer.h"
 #include "UdpSocketBase.h"
 #include "BaseSocketContainer.h"
-#include "../../proto/BaseCmd.pb.h"
 #include "BaseMessageDispatcher.h"
 
 

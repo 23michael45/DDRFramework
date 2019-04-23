@@ -52,6 +52,13 @@
 #include <google/protobuf/stubs/mutex.h>
 #include <google/protobuf/stubs/callback.h>
 
+#if !defined(USE_DDRSDK_DLL) // inside DLL
+#   define DDRCommProto_API   __declspec(dllexport)
+#else // outside DLL
+#   define DDRCommProto_API   __declspec(dllimport)
+#endif 
+
+
 #ifndef PROTOBUF_USE_EXCEPTIONS
 #if defined(_MSC_VER) && defined(_CPPUNWIND)
   #define PROTOBUF_USE_EXCEPTIONS 1

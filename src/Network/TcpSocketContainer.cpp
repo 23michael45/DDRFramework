@@ -1,6 +1,5 @@
 #include "TcpSocketContainer.h"
 #include "MessageSerializer.h"
-#include "../Utility/DDRMacro.h"
 #include "../Utility/Logger.h"
 
 #include "asio.hpp"
@@ -366,6 +365,26 @@ namespace DDRFramework
 			m_iCheckReadSleep = 1;
 			m_iCheckWriteSleep = 1;
 		}
+	}
+
+	bool TcpSocketContainer::RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp)
+	{
+		if (m_spSerializer)
+		{
+			return m_spSerializer->RegisterExternalProcessor(msg, sp);
+		}
+
+		return false;
+	}
+
+	bool TcpSocketContainer::UnregisterExternalProcessor(google::protobuf::Message& msg)
+	{
+		if (m_spSerializer)
+		{
+			return m_spSerializer->UnregisterExternalProcessor(msg);
+		}
+
+		return false;
 	}
 
 }

@@ -1,5 +1,4 @@
 #include "XmlLoader.h"
-#include "DDRMacro.h"
 #include "Logger.h"
 
 #ifdef QT_PRECOMPILED_HEADER

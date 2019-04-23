@@ -4,7 +4,7 @@
 #include "MessageSerializer.h"
 #include "TcpSocketContainer.h"
 #include <memory>
-#include "../../Shared/proto/BaseCmd.pb.h"
+#include "../../Shared/src/Utility/DDRMacro.h"
 
 #include "../../../Shared/src/Utility/Timer.hpp"
 using asio::ip::tcp;

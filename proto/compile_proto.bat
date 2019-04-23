@@ -6,7 +6,9 @@ echo The current directory is %~dp0
 set CurrentPath=%~dp0
 cd %CurrentPath%
 
-protoc BaseCmd.proto --cpp_out=./
+rem protoc BaseCmd.proto --cpp_out=./
+protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ BaseCmd.proto 
+
 protoc BaseCmd.proto --java_out=./
 protoc BaseCmd.proto --csharp_out=./
 rem protoc BaseCmd.proto --js_out=./

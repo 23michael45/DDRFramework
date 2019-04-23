@@ -9,7 +9,7 @@
 #include "TcpSocketContainer.h"
 #include "UdpSocketBase.h"
 #include "BaseSocketContainer.h"
-#include "../../proto/BaseCmd.pb.h"
+#include "../../src/Utility/DDRMacro.h"
 
 using namespace DDRCommProto;
 namespace DDRFramework

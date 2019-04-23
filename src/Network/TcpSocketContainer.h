@@ -2,7 +2,7 @@
 #define TcpSocketContainer_h__
 
 #include <google/protobuf/message.h>
-#include "../../proto/BaseCmd.pb.h"
+#include "../../src/Utility/DDRMacro.h"
 #include "asio.hpp"
 #include <map>
 #include "../Logic/BaseBehavior.h"
@@ -34,6 +34,7 @@ sp##serializer->BindDispatcher(sp##dispatcher,sp##headrulerouter);
 namespace DDRFramework
 {
 	class MessageSerializer;
+	class BaseProcessor;
 
 	class TcpSocketContainer : public std::enable_shared_from_this<TcpSocketContainer>
 	{
@@ -121,6 +122,11 @@ namespace DDRFramework
 		std::string GetIPAddress();
 
 		void SetRealtime(bool b);
+
+
+		bool RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp);
+		bool UnregisterExternalProcessor(google::protobuf::Message& msg);
+
 
 	protected:
 		void PushData(asio::streambuf& buf);

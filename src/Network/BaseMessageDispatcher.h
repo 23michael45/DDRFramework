@@ -7,9 +7,15 @@
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include "BaseProcessor.h"
-#include "../../proto/BaseCmd.pb.h"
+#include "../../src/Utility/DDRMacro.h"
 #include "../../proto/RemoteCmd.pb.h"
 #include "BaseSocketContainer.h"
+
+
+
+#define RegisterProcessor(action,name) action##name action##name;\
+m_ProcessorMap[action##name.GetTypeName()] = std::make_shared<name##Processor>(*this);
+
 
 namespace DDRFramework
 {
@@ -21,10 +27,12 @@ namespace DDRFramework
 		BaseMessageDispatcher();
 		~BaseMessageDispatcher();
 
-
 		virtual void Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer,std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);
 
 		virtual void Hook(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr <google::protobuf::Message> spMsg);
+
+		bool RegisterExternalProcessor(google::protobuf::Message& msg, std::shared_ptr<BaseProcessor> sp);
+		bool UnregisterExternalProcessor(google::protobuf::Message& msg);
 
 		
 		void AsyncThreadEntry(std::shared_ptr<BaseProcessor> spProcessor, std::shared_ptr<BaseSocketContainer> spSockContainer, std::shared_ptr<DDRCommProto::CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg);

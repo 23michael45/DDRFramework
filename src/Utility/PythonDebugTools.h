@@ -3,7 +3,7 @@
 
 #include <Python.h>
 #include <string>
-#include "../../Shared/proto/BaseCmd.pb.h"
+#include "../../Shared/src/Utility/DDRMacro.h"
 #include <google/protobuf/descriptor.h>
 using namespace google::protobuf;
 
