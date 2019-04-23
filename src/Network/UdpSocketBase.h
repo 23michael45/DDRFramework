@@ -2,12 +2,12 @@
 #define UdpSocketBase_h__
 
 
-#include <google/protobuf/message.h>
 #include "asio.hpp"
 #include <map>
 #include <memory>
 #include "MessageSerializer.h"
 #include "BaseMessageDispatcher.h"
+#include "../Utility/DDRMacro.h"
 
 namespace DDRFramework
 {

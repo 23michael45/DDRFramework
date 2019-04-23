@@ -1,7 +1,6 @@
 #ifndef TcpSocketContainer_h__
 #define TcpSocketContainer_h__
 
-#include <google/protobuf/message.h>
 #include "../../src/Utility/DDRMacro.h"
 #include "asio.hpp"
 #include <map>

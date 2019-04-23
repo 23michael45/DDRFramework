@@ -1,10 +1,6 @@
 #include "MessageSerializer.h"
 
 #include "../Utility/Logger.h"
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/message.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
 
 #include "../Utility/CommonFunc.h"
 
