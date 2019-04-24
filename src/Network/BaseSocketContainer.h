@@ -1,8 +1,8 @@
 #ifndef BaseSocketContainer_h__
 #define BaseSocketContainer_h__
-#include "../../thirdparty/asio/include/asio.hpp"
-#include "TcpSocketContainer.h"
-#include "UdpSocketBase.h"
+#include "thirdparty/asio/include/asio.hpp"
+#include "src/Network/TcpSocketContainer.h"
+#include "src/Network/UdpSocketBase.h"
 
 namespace DDRFramework
 {

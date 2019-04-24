@@ -2,7 +2,7 @@
 #define HttpClient_h__
 #include <string>
 #include <fstream>
-#include "../../Shared/thirdparty/curl/include/curl/curl.h"
+#include "thirdparty/curl/include/curl/curl.h"
 #include "../../thirdparty/asio/include/asio.hpp"
 #include <memory>
 #include <string>

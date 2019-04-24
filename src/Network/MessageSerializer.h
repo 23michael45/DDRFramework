@@ -1,13 +1,13 @@
 #ifndef MessageSerializer_h__
 #define MessageSerializer_h__
 #include <memory>
-#include "../../src/FSM/FSM.h"
-#include "asio.hpp"
-#include "../../src/Utility/DDRMacro.h"
-#include "BaseMessageDispatcher.h"
-#include "BaseSocketContainer.h"
+#include "src/FSM/FSM.h"
+#include "thirdparty/asio/include/asio.hpp"
+#include "src/Utility/DDRMacro.h"
+#include "src/Network/BaseMessageDispatcher.h"
+#include "src/Network/BaseSocketContainer.h"
 #include <queue>
-#include "BaseProcessor.h"
+#include "src/Network/BaseProcessor.h"
 
 #define HeadSignal "pbh\0"
 #define TEMP_BUFFER_SIZE 4096

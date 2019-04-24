@@ -21,7 +21,7 @@ namespace DDRFramework
 	protected:
 		CSingleton() {} //防止实例
 		CSingleton(const CSingleton&) {} //防止拷贝构造一个实例
-		CSingleton& operator=(const CSingleton&) {} //防止赋值出另一个实例
+		CSingleton& operator=(const CSingleton& inst) { return *(inst.m_pInstance); } //防止赋值出另一个实例
 
 		virtual ~CSingleton()
 		{

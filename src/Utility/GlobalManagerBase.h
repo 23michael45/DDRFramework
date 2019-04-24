@@ -1,11 +1,11 @@
 #ifndef GlobalManagerBase_h__
 #define GlobalManagerBase_h__
-#include "LocalizationLoader.h"
-#include "XmlLoader.h"
-#include "../Network/TcpClientBase.h"
-#include "../Network/UdpSocketBase.h"
+#include "src/Utility//LocalizationLoader.h"
+#include "src/Utility/XmlLoader.h"
+#include "src/Network/TcpClientBase.h"
+#include "src/Network/UdpSocketBase.h"
 
-#include "../../proto/RemoteCmd.pb.h"
+#include <proto/RemoteCmd.pb.h>
 namespace DDRFramework
 {
 

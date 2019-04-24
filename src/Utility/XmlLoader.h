@@ -6,8 +6,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "DDRMacro.h"
-#include "Logger.h"
+#include "src/Utility/DDRMacro.h"
 
 namespace DDRFramework
 {

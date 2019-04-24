@@ -4,12 +4,12 @@
 #include <stdio.h>
 
 #ifdef MINI_AL_IMPLEMENTATION
-#include "../../Shared/thirdparty/mini-al/mini_al.h"
+#include "thirdparty/mini-al/mini_al.h"
 #endif
 
-#include "../../src/Network/TcpSocketContainer.h"
-#include "../../src/Utility/DDRMacro.h"
-#include "../../src/Utility/Logger.h"
+#include "src/Network/TcpSocketContainer.h"
+#include "src/Utility/DDRMacro.h"
+#include "src/Utility/Logger.h"
 #include <queue>
 #include <stack>
 

@@ -138,7 +138,7 @@ namespace DDRFramework
 
 	BaseUdpMessageDispatcher::~BaseUdpMessageDispatcher()
 	{
-		DebugLog("LocalClientUdpDispatcher Destroy");
+		DebugLog("BaseUdpMessageDispatcher Destroy");
 	}
 
 }

@@ -2,7 +2,7 @@
 #define TcpServerBase_h__
 #include "asio.hpp"
 #include <map>
-#include "../../src/Utility/DDRMacro.h"
+#include "src/Utility/DDRMacro.h"
 #include "TcpSocketContainer.h"
 using asio::ip::tcp;
 using namespace DDRCommProto;

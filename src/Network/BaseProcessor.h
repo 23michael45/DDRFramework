@@ -2,10 +2,9 @@
 #define BaseProcessor_h__
 
 
-#include "TcpSocketContainer.h"
-#include "UdpSocketBase.h"
-#include "BaseSocketContainer.h"
-#include "../../src/Utility/DDRMacro.h"
+#include "src/Utility/DDRMacro.h"
+#include "src/Utility/Singleton.h"
+#include "src/Network/TcpSocketContainer.h"
 
 using namespace DDRCommProto;
 namespace DDRFramework
@@ -31,7 +30,7 @@ namespace DDRFramework
 		bool ReturnPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader, CommonHeader_PassNode& passnode);
 		bool IsLastPassNode(std::shared_ptr<DDRCommProto::CommonHeader> spHeader);
 	private:
-		std::map<string, std::shared_ptr<CommonHeader>> m_RouteMsgHeaderMap;
+		std::map<std::string, std::shared_ptr<CommonHeader>> m_RouteMsgHeaderMap;
 
 		eCltType m_CltType;
 	};

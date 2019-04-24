@@ -4,7 +4,7 @@
 #include "../../thirdparty/asio/include/asio.hpp"
 #include <functional>
 
-#include "../../../Shared/src/Utility/Logger.h"
+#include "src/Utility/Logger.h"
 
 namespace DDRFramework
 {

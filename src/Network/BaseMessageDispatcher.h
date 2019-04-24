@@ -3,7 +3,7 @@
 #include <memory.h>
 
 #include "BaseProcessor.h"
-#include "../../src/Utility/DDRMacro.h"
+#include "src/Utility/DDRMacro.h"
 #include "../../proto/RemoteCmd.pb.h"
 #include "BaseSocketContainer.h"
 

@@ -3,7 +3,7 @@
 
 
 
-#include "../../Shared/thirdparty/cppfs/include/cppfs/FilePath.h"
+#include "thirdparty/cppfs/include/cppfs/FilePath.h"
 
 namespace DDRFramework
 {
@@ -137,11 +137,11 @@ namespace DDRFramework
 
 
 
-		PyRun_SimpleString("sys.path.append('D:/DevelopProj/Dadao/DDRFramework/DDRLocalServer/DDR_LocalClient/Python/')");
+		PyRun_SimpleString("sys.path.append('D:/DevelopProj/Dadao/DDRFramework/DDRLocalServer/DDR_ClientSDK/Python/')");
 		PyRun_SimpleString("import ClientPythonDebugger as db");
 		//PyRun_SimpleString("db.Move()");
 
-		//std::string path = "D:/DevelopProj/Dadao/DDRFramework/DDRLocalServer/DDR_LocalClient/Python";
+		//std::string path = "D:/DevelopProj/Dadao/DDRFramework/DDRLocalServer/DDR_ClientSDK/Python";
 		//std::wstring path = L"D:/DevelopProj/Dadao/DDRFramework/DDRLocalServer/x64/Debug/Python/";
 		//PySys_SetPath(path.c_str());
 

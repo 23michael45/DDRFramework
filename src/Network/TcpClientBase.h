@@ -1,12 +1,11 @@
 #ifndef TcpClientBase_h__
 #define TcpClientBase_h__
-#include "asio.hpp"
-#include "MessageSerializer.h"
-#include "TcpSocketContainer.h"
+#include "thirdparty/asio/include/asio.hpp"
+#include "src/Network/MessageSerializer.h"
+#include "src/Network/TcpSocketContainer.h"
 #include <memory>
-#include "../../Shared/src/Utility/DDRMacro.h"
-
-#include "../../../Shared/src/Utility/Timer.hpp"
+#include "src/Utility/DDRMacro.h"
+#include "src/Utility/Timer.hpp"
 using asio::ip::tcp;
 namespace DDRFramework
 {

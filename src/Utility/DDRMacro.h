@@ -2,14 +2,13 @@
 #define DDRMacro_h__
 
 
+#include <src/Utility/Logger.h>
 
-
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/message.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
-#include "../../../Shared/proto/BaseCmd.pb.h"
-
+#include <thirdparty/protobuf/src/google/protobuf/descriptor.h>
+#include <thirdparty/protobuf/src/google/protobuf/message.h>
+#include <thirdparty/protobuf/src/google/protobuf/io/coded_stream.h>
+#include <thirdparty/protobuf/src/google/protobuf/io/zero_copy_stream_impl.h>
+#include <proto/BaseCmd.pb.h>
 #ifdef _DEBUG
 //#define DebugLog(...) printf(__VA_ARGS__);
 #define DebugLog(...) DDRFramework::Print(__VA_ARGS__);

@@ -2,12 +2,12 @@
 #define UdpSocketBase_h__
 
 
-#include "asio.hpp"
+#include "thirdparty/asio/include/asio.hpp"
 #include <map>
 #include <memory>
-#include "MessageSerializer.h"
-#include "BaseMessageDispatcher.h"
-#include "../Utility/DDRMacro.h"
+#include "src/Network/MessageSerializer.h"
+#include "src/Network/BaseMessageDispatcher.h"
+#include "src/Utility/DDRMacro.h"
 
 namespace DDRFramework
 {

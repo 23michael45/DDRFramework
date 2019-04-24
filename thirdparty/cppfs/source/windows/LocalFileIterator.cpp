@@ -2,7 +2,7 @@
 #include <cppfs/windows/LocalFileIterator.h>
 #include <cppfs/FilePath.h>
 #include <cppfs/windows/LocalFileSystem.h>
-#include "../../Shared/src/Utility/CommonFunc.h"
+#include "src/Utility/CommonFunc.h"
 
 #ifdef _WIN32
 #include <Windows.h>

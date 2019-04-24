@@ -242,7 +242,7 @@ void AddDescriptorsImpl() {
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\032google/protobuf/type.proto\022\017google.pro"
       "tobuf\032\031google/protobuf/any.proto\032$google"
-      "/protobuf/source_context.proto\"\327\001\n\004Type\022"
+      "protobuf/source_context.proto\"\327\001\n\004Type\022"
       "\014\n\004name\030\001 \001(\t\022&\n\006fields\030\002 \003(\0132\026.google.p"
       "rotobuf.Field\022\016\n\006oneofs\030\003 \003(\t\022(\n\007options"
       "\030\004 \003(\0132\027.google.protobuf.Option\0226\n\016sourc"

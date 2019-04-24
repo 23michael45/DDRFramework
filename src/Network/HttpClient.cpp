@@ -1,15 +1,15 @@
 #include <functional>
-#include "../../Shared/src/Utility/Logger.h"
-#include "../../Shared/src/Utility/DDRMacro.h"
+#include "src/Utility/Logger.h"
+#include "src/Utility/DDRMacro.h"
 #include "HttpClient.h"
 #include <curl/curl.h>
-#include "../../Shared/thirdparty/curl/include/curl/easy.h"
+#include "thirdparty/curl/include/curl/easy.h"
 #include <sstream>
 #include <iostream>
-#include "../../../Shared/thirdparty/cppfs/include/cppfs/FilePath.h"
-#include "../../../Shared/thirdparty/cppfs/include/cppfs/FileHandle.h"
-#include "../../../Shared/thirdparty/cppfs/include/cppfs/fs.h"
-#include "../../Shared/src/Utility/CommonFunc.h"
+#include "thirdparty/cppfs/include/cppfs/FilePath.h"
+#include "thirdparty/cppfs/include/cppfs/FileHandle.h"
+#include "thirdparty/cppfs/include/cppfs/fs.h"
+#include "src/Utility/CommonFunc.h"
 
 
 namespace DDRFramework
