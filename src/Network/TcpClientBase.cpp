@@ -230,9 +230,23 @@ namespace DDRFramework
 	}
 	void TcpClientBase::Disconnect(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
+		if (spContainer == nullptr)
+		{
+			auto sp = GetConnectedSession();
+			if (sp)
+			{
+				sp->Stop();
+			}
+		}
+		else
+		{
 
-		auto sp = dynamic_pointer_cast<TcpClientSessionBase>(spContainer);
-		sp->Stop();
+			auto sp = dynamic_pointer_cast<TcpClientSessionBase>(spContainer);
+			if (sp)
+			{
+				sp->Stop();
+			}
+		}
 
 
 	}

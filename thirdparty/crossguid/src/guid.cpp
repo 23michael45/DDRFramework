@@ -23,7 +23,7 @@ THE SOFTWARE.
 */
 
 #include <cstring>
-#include "crossguid/guid.hpp"
+#include "thirdparty/crossguid/include/crossguid/guid.hpp"
 
 #ifdef GUID_LIBUUID
 #include <uuid/uuid.h>

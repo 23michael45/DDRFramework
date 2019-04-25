@@ -67,7 +67,7 @@ namespace DDRFramework
 		~TcpClientBase();
 		void Start(int threadNum = 2);
 		std::shared_ptr<TcpClientSessionBase> Connect(std::string address, std::string port);
-		void Disconnect(std::shared_ptr<TcpSocketContainer> spContainer);
+		void Disconnect(std::shared_ptr<TcpSocketContainer> spContainer = nullptr);
 		void Stop();
 		void ThreadEntry();
 

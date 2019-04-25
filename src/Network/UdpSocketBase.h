@@ -20,8 +20,8 @@ namespace DDRFramework
 
 
 
-		void Start();
-		void Stop();
+		virtual void Start();
+		virtual void Stop();
 		void DelayStop();
 		void ThreadEntry();
 		bool IsWorking();
