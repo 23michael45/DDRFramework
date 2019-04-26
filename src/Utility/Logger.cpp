@@ -63,6 +63,7 @@ namespace DDRFramework
 
 			// Set logger to write to a file
 			//log->setTarget(Log::Target::LOG_FILE);
+			log->setLevel(DDRFramework::Log::DEBUG);
 			log->setTarget(Log::Target::STDOUT);
 
 			
@@ -170,7 +171,15 @@ namespace DDRFramework
 		va_end(args);
 		DDRFramework::Log::getInstance()->write(DDRFramework::Log::Level::INFO, buff);
 	}
-
+	void DDRLog(DDRFramework::Log::Level level,const char* format, ...)
+	{
+		va_list args;
+		char buff[1024];
+		va_start(args, format);
+		_vsnprintf(buff, 1024, format, args);
+		va_end(args);
+		DDRFramework::Log::getInstance()->write(level, buff);
+	}
 	ConsoleDebug::ConsoleDebug()
 	{
 		m_Quit = false;

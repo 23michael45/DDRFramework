@@ -16,6 +16,8 @@
 #define DebugLog(...) DDRFramework::Print(__VA_ARGS__);
 #endif
 
+#define LevelLog(...) DDRFramework::DDRLog(__VA_ARGS__);
+
 template<typename T> void SAFE_DELETE(T*& a) {
 	delete a;
 	a = nullptr;

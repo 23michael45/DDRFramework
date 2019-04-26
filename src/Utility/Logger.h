@@ -163,7 +163,8 @@ namespace DDRFramework {
 	}
 
 	void Print(const char* format, ...);
-	
+
+	void DDRLog(Log::Level level,const char* format, ...);
 	class ConsoleDebug
 	{
 
