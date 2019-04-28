@@ -8,6 +8,7 @@ cd %CurrentPath%
 
 rem protoc BaseCmd.proto --cpp_out=./
 protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ BaseCmd.proto 
+protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
 
 protoc BaseCmd.proto --java_out=./
 protoc BaseCmd.proto --csharp_out=./

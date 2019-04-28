@@ -9,6 +9,7 @@
 #include <thirdparty/protobuf/src/google/protobuf/io/coded_stream.h>
 #include <thirdparty/protobuf/src/google/protobuf/io/zero_copy_stream_impl.h>
 #include <proto/BaseCmd.pb.h>
+#include <proto/DDRModuleCmd.pb.h>
 #ifdef _DEBUG
 //#define DebugLog(...) printf(__VA_ARGS__);
 #define DebugLog(...) DDRFramework::Print(__VA_ARGS__);

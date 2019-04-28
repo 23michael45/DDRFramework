@@ -1,0 +1,259 @@
+syntax = "proto3";
+package DDRModuleCmd;
+
+
+//返回状态
+enum eRspStatus {
+	eSuccess = 0;
+	eFailed = 1;
+	eUnknown = 2;
+}
+
+
+//请求机器人本体信息
+message reqRobotVersionInfo
+{
+	
+}
+//返回机器人本体信息
+message rspRobotVersionInfo
+{
+	string robotID = 1;                	//机器人ID
+	string softwareVersion = 2;			//软件版本
+	string hardwareVersion = 3;			//硬件版本
+	string lidarIP = 4;					//雷达IP
+	string cameraIP = 5;				//相机IP
+	string controllerIP = 6;			//主控机IP
+}
+
+
+//请求紧急停止
+message reqBrakeStop
+{
+	
+}
+//返回紧急停止结果
+message rspBrakeStop
+{
+	eRspStatus ret = 1;
+}
+
+
+//请求暂停
+message reqMotionPause
+{
+	
+}
+//返回暂停结果
+message rspMotionPause
+{
+	eRspStatus ret = 1;
+}
+
+//请求开始充电
+message reqStartCharging
+{
+	
+}
+//返回开始充电结果
+message rspCharging
+{
+	eRspStatus ret = 1;
+}
+
+//请求结束充电
+message reqStopCharging
+{
+	
+}
+//返回结束充电结果
+message rspStopCharging
+{
+	eRspStatus ret = 1;
+}
+
+//请求当前状态
+message reqRobotStatus
+{
+	
+}
+//返回当前状态结果
+message rspRobotStatus
+{
+	int32 mode = 1;						//运行模式
+	int32 sonmode =2;					//子模式
+	float batt = 3;						//电量
+	float temp = 4;						//温度
+	float hum = 5;						//湿度
+	float pm25 = 6;						//PM2.5
+	int32 stopstat = 7;					
+	int64 funcstat = 8;
+	int32 voiceloop = 9;
+	bytes currroute = 10;				//当前路径
+	string currpath = 11;				//当前路径文件名
+	float currspeed = 12;				//速度
+	string currwalkstyle = 13;			
+	float posx = 14;					//坐标X
+	float posy = 15;					//坐标Y
+	float posdirection = 16;			//角度
+	float poslinespeed = 17;			//线速度 
+	float posangulauspeed = 18;			//角速度
+	double longitude = 19;				//经度
+	double latitude = 20;				//纬度
+	double milestone = 21;      		//行驶里程数
+	int64 timestamp = 22;				//时间戳
+}
+
+
+//请求位置校正
+message reqPoseCorrection
+{
+	
+}
+//返回当前状态结果
+message rspPoseCorrection
+{
+	eRspStatus ret = 1;
+}
+
+//请求实体按钮启用/禁用
+message reqEnablePhysicalSwitch
+{
+	bool enable = 1;
+}
+//返回实体按钮启用/禁用结果
+message rspEnablePhysicalSwitch
+{
+	eRspStatus ret = 1;
+	bool enable = 2;
+}
+
+
+//请求参数设置
+message reqSetParameter
+{
+	float poslinespeed = 1;
+	float posangulauspeed = 2;
+}
+//返回参数设置结果
+message rspSetParameter
+{
+	eRspStatus ret = 1;
+}
+
+//请求障碍物信息
+message reqObstacleInfo
+{
+}
+//返回障碍物信息结果
+message rspObstacleInfo
+{
+	message ObstacleInfo
+	{
+		float startAngle = 1;  
+		float endAngle = 2;
+		float dist = 3;
+	}
+	
+	repeated ObstacleInfo infos = 1;
+}
+
+//警告异常类型
+enum eAlarmType
+{
+	eBesieged = 0;   				//被围困
+	eUltrasonicError = 1;			//超声传感器异常
+	eMotorError = 2;				//电机异常
+	eMemeotyInsufficient = 3;		//内存不足
+	eStorageInsufficient = 4;		//磁盘存储不足
+}
+//通知警告
+message notifyAlarm
+{
+	eAlarmType type = 1;
+	string message = 2;
+}
+
+
+//请求导航到指定点
+message reqNavigateToPosition
+{
+	float posX = 1;					//到达X坐标
+	float posY = 2;					//到达Y坐标
+	float ang = 3;					//到达后角度 
+}
+//返回导航结果
+message rspNavigateToPosition
+{
+	eRspStatus ret = 1;
+}
+
+//请求取消导航
+message reqCancelNavigate
+{
+}
+//返回取消导航结果
+message rspCancelNavigate
+{
+	eRspStatus ret = 1;
+}
+//请求重启主机
+message reqRebootController
+{
+}
+//返回重启主机结果
+message rspRebootController
+{
+	eRspStatus ret = 1;
+}
+
+
+//请求地图信息
+message reqUploadMap
+{
+	repeated bytes mapName = 1;  			//地图名(字符串）
+}
+
+
+
+//返回地图结果
+message rspUploadMap
+{
+	eRspStatus ret = 1;
+	bytes mapName = 2;						//地图名(字符串）
+	bytes fileHttpAddress = 3;				//HTTP文件地址
+}
+
+
+
+//请求设置禁区虚拟墙
+message reqVirtualWall
+{
+	message VirtualWallPoint
+	{
+		float x = 1;
+		float y = 2;
+		int32 type = 3;
+	}
+	repeated VirtualWallPoint points = 1;  			//虚拟墙点
+}
+
+
+
+//返回地图结果
+message rspVirtualWall
+{
+	eRspStatus ret = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
