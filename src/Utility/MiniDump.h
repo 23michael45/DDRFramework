@@ -1,4 +1,13 @@
-
+/*!
+ * File: MiniDump.h
+ * Date: 2019/04/29 16:01
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Dump file when crash
+ *
+*/
 #pragma once
 #include <windows.h>
 #include <DbgHelp.h>

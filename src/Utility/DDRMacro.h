@@ -1,3 +1,13 @@
+/*!
+ * File: DDRMacro.h
+ * Date: 2019/04/29 16:00
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Log and proto buf headers
+ *
+*/
 #ifndef DDRMacro_h__
 #define DDRMacro_h__
 

@@ -1,3 +1,13 @@
+/*!
+ * File: BaseSocketContainer.h
+ * Date: 2019/04/29 15:57
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Base Class Contain a Socket class.Tcp or Udp,only one exist at the same time
+ *
+*/
 #ifndef BaseSocketContainer_h__
 #define BaseSocketContainer_h__
 #include "thirdparty/asio/include/asio.hpp"

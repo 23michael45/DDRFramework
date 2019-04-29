@@ -1,4 +1,17 @@
-#pragma once
+/*!
+ * File: BaseMessageDispatcher.h
+ * Date: 2019/04/29 15:59
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Dispatch msg by it type
+ *
+*/
+#ifndef BaseMessageDispatcher_h__
+#define BaseMessageDispatcher_h__
+
+
 #include <map>
 #include <memory.h>
 
@@ -54,3 +67,4 @@ namespace DDRFramework
 		}
 	};
 }
+#endif // BaseMessageDispatcher_h__

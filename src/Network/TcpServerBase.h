@@ -1,3 +1,13 @@
+/*!
+ * File: TcpServerBase.h
+ * Date: 2019/04/29 15:53
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:TcpServer Base Class,Tcp Session Class
+ *
+*/
 #ifndef TcpServerBase_h__
 #define TcpServerBase_h__
 #include "asio.hpp"

@@ -1,3 +1,13 @@
+/*!
+ * File: Logger.h
+ * Date: 2019/04/29 16:00
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:A common log help class
+ *
+*/
 #ifndef Logger_h__
 #define Logger_h__
 

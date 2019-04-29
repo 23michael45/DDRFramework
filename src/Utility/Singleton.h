@@ -1,4 +1,14 @@
-﻿#ifndef Singleton_h__
+﻿/*!
+ * File: Singleton.h
+ * Date: 2019/04/29 15:55
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Singleton Template Class
+ *
+*/
+#ifndef Singleton_h__
 #define Singleton_h__
 namespace DDRFramework
 {

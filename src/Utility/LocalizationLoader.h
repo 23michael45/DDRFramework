@@ -1,3 +1,13 @@
+/*!
+ * File: LocalizationLoader.h
+ * Date: 2019/04/29 16:01
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:xml localization config file loader
+ *
+*/
 #ifndef LocalizationLoader_h__
 #define LocalizationLoader_h__
 

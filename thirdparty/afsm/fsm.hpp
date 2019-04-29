@@ -1,9 +1,13 @@
-/*
- * fsm.hpp
+/*!
+ * File: fsm.hpp
+ * Date: 2019/04/29 15:50
  *
- *  Created on: 25 мая 2016 г.
- *      Author: sergey.fedorov
- */
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description: Finite State Machine
+ *
+*/
 
 #ifndef AFSM_FSM_HPP_
 #define AFSM_FSM_HPP_

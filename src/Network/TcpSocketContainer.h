@@ -1,3 +1,13 @@
+/*!
+ * File: TcpSocketContainer.h
+ * Date: 2019/04/29 15:52
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:TcpSocket Base Class
+ *
+*/
 #ifndef TcpSocketContainer_h__
 #define TcpSocketContainer_h__
 

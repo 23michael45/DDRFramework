@@ -1,3 +1,13 @@
+/*!
+ * File: XmlLoader.h
+ * Date: 2019/04/29 16:02
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Xml Loader Helper
+ *
+*/
 #ifndef XmlLoader_h__
 #define XmlLoader_h__
 

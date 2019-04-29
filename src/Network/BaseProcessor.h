@@ -1,3 +1,13 @@
+/*!
+ * File: BaseProcessor.h
+ * Date: 2019/04/29 15:58
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Base Processor.Processor logic task while proto msg arrived
+ *
+*/
 #ifndef BaseProcessor_h__
 #define BaseProcessor_h__
 

@@ -1,7 +1,13 @@
-//
-//  state_machine.h
-//
-
+/*!
+ * File: FSM.h
+ * Date: 2019/04/29 15:51
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Finite State Machine Template Class
+ *
+*/
 #ifndef state_machine_h
 #define state_machine_h
 

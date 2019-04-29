@@ -1,3 +1,13 @@
+/*!
+ * File: FileManagerBase.h
+ * Date: 2019/04/29 16:01
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:File System Manager Base
+ *
+*/
 #ifndef FileManagerBase_h__
 #define FileManagerBase_h__
 

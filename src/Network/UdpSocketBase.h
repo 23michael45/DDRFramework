@@ -1,4 +1,14 @@
-﻿#ifndef UdpSocketBase_h__
+﻿/*!
+ * File: UdpSocketBase.h
+ * Date: 2019/04/29 15:52
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:UdpSocket Base Class
+ *
+*/
+#ifndef UdpSocketBase_h__
 #define UdpSocketBase_h__
 
 

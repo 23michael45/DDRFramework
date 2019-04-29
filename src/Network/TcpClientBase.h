@@ -1,3 +1,13 @@
+/*!
+ * File: TcpClientBase.h
+ * Date: 2019/04/29 15:53
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Tcp Client Base Class ,Tcp Client Session Base Class
+ *
+*/
 #ifndef TcpClientBase_h__
 #define TcpClientBase_h__
 #include "thirdparty/asio/include/asio.hpp"

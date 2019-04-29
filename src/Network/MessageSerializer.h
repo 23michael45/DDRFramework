@@ -1,3 +1,13 @@
+/*!
+ * File: MessageSerializer.h
+ * Date: 2019/04/29 15:56
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Protobuf Serializer Class.proto pack and parse
+ *
+*/
 #ifndef MessageSerializer_h__
 #define MessageSerializer_h__
 #include <memory>
