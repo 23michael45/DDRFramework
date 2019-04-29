@@ -13,8 +13,8 @@ template <class PT>
 class StateMachine;
 
 #define ADD_STATE(sm,st) std::shared_ptr<st> sp##st = std::make_shared<st>(shared_from_this());\
-	sm->addState<st>(sp##st);\
-	sp##st->SetStateMachine(sm);
+sm->addState<st>(sp##st);\
+sp##st->SetStateMachine(sm);
 
 
 template <class T>

@@ -9,6 +9,13 @@ namespace DDRFramework
 	class TcpSocketContainer;
 	class UdpSocketBase;
 
+
+
+
+	std::vector<std::string> GetLocalIPV4();
+	std::map<std::string, std::string> GetSameSegmentIPV4(std::vector<std::string> left, std::vector<std::string> right);
+
+
 	class BaseSocketContainer
 	{
 	public:

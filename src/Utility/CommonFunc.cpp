@@ -6,7 +6,6 @@
 #include <codecvt>
 #include <regex>
 
-#include <asio.hpp>
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -542,68 +541,6 @@ namespace DDRFramework {
 		return true;
 	}
 
-
-	std::vector<std::string> GetLocalIPV4()
-	{
-
-		std::vector<std::string> vec;
-
-		try
-		{
-			asio::io_service io_service;
-			asio::ip::tcp::resolver resolver(io_service);
-			asio::ip::tcp::resolver::query query(asio::ip::host_name(), "");
-			asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-			asio::ip::tcp::resolver::iterator end; // End marker.
-
-
-			while (iter != end)
-			{
-				asio::ip::tcp::endpoint ep = *iter++;
-
-				if (ep.address().is_v4())
-				{
-					vec.push_back(ep.address().to_string());
-				}
-			}
-		}
-		catch (std::exception& e)
-		{
-
-		}
-		return vec;
-
-	}
-
-
-	std::map<std::string,std::string> GetSameSegmentIPV4(std::vector<std::string> left, std::vector<std::string> right)
-	{
-		std::map<std::string,std::string> rmap;
-		for (auto l : left)
-		{
-			for (auto r : right)
-			{
-				try
-				{
-					auto laddr = asio::ip::address_v4::from_string(l);
-					auto raddr = asio::ip::address_v4::from_string(r);
-					auto mask = asio::ip::address_v4::from_string("255.255.255.0");
-
-					if ((laddr.to_uint() & mask.to_uint()) == (raddr.to_uint() & mask.to_uint()))
-					{
-						rmap.insert(std::make_pair(laddr.to_string(),raddr.to_string()));
-					}
-
-
-				}
-				catch (std::exception& e)
-				{
-				}
-
-			}
-		}
-		return rmap;
-	}
 
 	std::string MBToUTF8String(std::string mbstr)
 	{
