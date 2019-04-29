@@ -1,3 +1,13 @@
+/*!
+ * File: HttpClient.h
+ * Date: 2019/04/29 15:57
+ *
+ * Author: michael
+ * Contact: michael2345@live.cn
+ *
+ * Description:Http Client
+ *
+*/
 #ifndef HttpClient_h__
 #define HttpClient_h__
 #include <string>
