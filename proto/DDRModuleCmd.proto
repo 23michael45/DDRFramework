@@ -1,5 +1,5 @@
 syntax = "proto3";
-package DDRModuleCmd;
+package DDRModuleProto;
 
 
 //返回状态

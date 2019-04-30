@@ -8,8 +8,6 @@ cd %CurrentPath%
 
 rem protoc BaseCmd.proto --cpp_out=./
 protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ BaseCmd.proto 
-protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
-
 protoc BaseCmd.proto --java_out=./
 protoc BaseCmd.proto --csharp_out=./
 rem protoc BaseCmd.proto --js_out=./
@@ -28,5 +26,13 @@ protoc SimulationCmd.proto --java_out=./
 protoc SimulationCmd.proto --csharp_out=./
 rem protoc BaseCmd.proto --js_out=./
 protoc SimulationCmd.proto --python_out=./
+
+
+
+protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
+protoc DDRModuleCmd.proto --java_out=./
+protoc DDRModuleCmd.proto --csharp_out=./
+rem protoc DDRModuleCmd.proto --js_out=./
+protoc DDRModuleCmd.proto --python_out=./
 
 cd %PrePath%
