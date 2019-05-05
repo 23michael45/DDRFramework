@@ -2,7 +2,7 @@ syntax = "proto3";
 package DDRModuleProto;
 
 
-//返回状态
+//回包状态
 enum eRspStatus {
 	eSuccess = 0;
 	eFailed = 1;
@@ -50,27 +50,96 @@ message rspMotionPause
 	eRspStatus ret = 1;
 }
 
-//请求开始充电
-message reqStartCharging
-{
-	
+// 工作模式
+enum eWorkingMode {
+	eIdling = 0; // 待命
+	eCollecting = 1; // 采集建图
+	eAuto = 2; // 自动行走
 }
-//返回开始充电结果
-message rspCharging
+
+// 请求进入待命模式(并清除所有异常)
+message reqEnterIdlingMode
+{
+
+}
+// 返回进入待命模式结果
+message rsqEnterIdlingMode
+{
+	eRspStatus ret = 1;
+}
+// 请求进入采集模式
+message reqEnterCollectionMode
+{
+	string mapName = 1;
+}
+// 返回进入采集模式结果
+message rsqEnterCollectionMode
+{
+	eRspStatus ret = 1;
+}
+// 请求完成采集
+mesage reqFinishCollection
+{
+
+}
+// 返回完成采集结果
+mesage rsqFinishCollection
+{
+	eRspStatus ret = 1;
+}
+// 请求进入自动模式
+message reqEnterAutoMode
+{
+	string mapName = 1;
+	string pathFileName = 2;
+}
+// 返回进入自动模式结果
+message rsqEnterAutoMode
 {
 	eRspStatus ret = 1;
 }
 
-//请求结束充电
-message reqStopCharging
-{
-	
+
+// 次级工作模式
+enum eSubMode {
+	eIDLING_EXCEPTION = 1, // 待命模式异常
+	eCOLLECTION_EXCEPTION = 2, // 采集模式异常
+	eAUTO_EXCEPTION = 3, // 自动模式异常
+	eIDLING_STILL = 4, // 空闲模式-静止
+	eIDLING_MOVING = 5, // 空闲模式-运动
+	eCOLLECTION_COLLECTING = 6, // 采集模式-采集中
+	eCOLLECTION_GENERATING = 7, // 采集模式-地图生成中
+	eCOLLECTION_FINISHED = 8, // 采集模式-建图完成
+	eAUTO_RELOC = 9, // 自动模式-重定位中
+	eAUTO_MOVING = 10, // 自动模式-运动中
+	eAUTO_STOPPED = 11, // 自动模式-停止(由调用者或避障模块要求停止)
+	eAUTO_ENDPOINT_UNREACHABLE = 12, // 自动模式-路径终点无法到达
+	eAUTO_FINISHED = 13 // 自动模式-成功到达终点
 }
-//返回结束充电结果
-message rspStopCharging
-{
-	eRspStatus ret = 1;
+// 各模式下的异常状态分类
+enum eModeException {
+	eNO_EXCEPTION = 0, // 无异常
+	eCOLLECTION_EXISTINGROUTE = 1, // 试图采集的地图名已存在
+	eCOLLECTION_FILEIOERROR = 2, // 采集模式下文件IO错误
+	eAUTO_NONEXISTINGROUTE = 3, // 自动模式选择的地图不存在
+	eAUTO_RELOCFAILED = 4, // 自动模式重定位失败
+	eAUTO_FILEIOERROR = 5, // 自动模式下文件IO错误
+	eAUTO_PP_EXCEPTION = 6, // 自动模式下路径规划模块异常
+	eAUTO_OA_EXCEPTION = 7 // 自动模式下避障模块异常
 }
+// 自动模式下的运动状态
+enum eAUTOMOVINGSTATUS {
+	eNOT_AUTOMATIC = 0, // 不处于自动模式或处于自动模式下的异常状态
+	eSTATIC_NORMAL = 1, // 静态避障-正常行走
+	eSTATIC_SLOWDOWN = 2, // 静态避障-减速避障
+	eSTATIC_STOPPED = 3, // 静态避障-停止
+	eDYNAMIC_NORMAL = 4, // 动态避障-正常行走
+	eDYNAMIC_DETOUR = 5, // 动态避障-绕行
+	eDYNAMIC_NOWAYOUT = 6, // 动态避障-围困
+	eDYNAMIC_VIRTUAL_COLLISION = 7, // 动态避障-遭遇虚拟障碍
+	ePP_TURNING = 8, // 原地旋转
+	ePP_TEMP_SEGMENT = 9 // 执行临时路径(此过程静态避障)
+};
 
 //请求当前状态
 message reqRobotStatus
@@ -80,35 +149,50 @@ message reqRobotStatus
 //返回当前状态结果
 message rspRobotStatus
 {
-	int32 mode = 1;						//运行模式
-	int32 sonmode =2;					//子模式
-	float batt = 3;						//电量
-	float temp = 4;						//温度
-	float hum = 5;						//湿度
-	float pm25 = 6;						//PM2.5
-	int32 stopstat = 7;					
-	int64 funcstat = 8;
-	int32 voiceloop = 9;
-	bytes currroute = 10;				//当前路径
-	string currpath = 11;				//当前路径文件名
-	float currspeed = 12;				//速度
-	string currwalkstyle = 13;			
-	float posx = 14;					//坐标X
-	float posy = 15;					//坐标Y
-	float posdirection = 16;			//角度
-	float poslinespeed = 17;			//线速度 
-	float posangulauspeed = 18;			//角速度
-	double longitude = 19;				//经度
-	double latitude = 20;				//纬度
-	double milestone = 21;      		//行驶里程数
-	int64 timestamp = 22;				//时间戳
+	int64 timestamp = 1;				//时间戳(纪元起至今的毫秒数)
+	
+	eWorkingMode mode = 2;				//运行模式
+	eSubMode subMode = 3;				//子模式
+	eModeException modeExcept = 4;		//工作模式下的异常状态(软件或IO错误,非硬件错误)
+	
+	string collectionMapName = 5;		// 采集模式下的地图名
+	
+	eAUTOMOVINGSTATUS autoModeStat = 6;	//自动模式下的运动状态
+	string autoModeMapPicName = 7;		//自动模式行走的地图图片文件名
+	string autoModePathFileName = 8;	//自动模式行走的路径文件名
+	
+	// 机器人位置和姿态(平面)，仅在自动模式和采集模式的当前地图坐标下有意义
+	float posx = 9;						//坐标X(单位 米)
+	float posy = 10;					//坐标Y(单位 米)
+	float posdirection = 11;			//角度(单位 度)
+	
+	// 物理运动状态
+	float linspeed = 12;				//线速度(单位 米/秒)
+	float angspeed = 13;				//角速度(单位 度/秒)
+	
+	// GNSS定位信息
+	double longitude = 14;				//经度
+	double latitude = 15;				//纬度
+	double altitude = 16;				//海拔
+	
+	// 外设信息
+	float batt = 17;					//电量(百分比)
+	float temp = 18;					//温度(摄氏度)
+	float hum = 19;						//湿度(百分比)
+	float pm25 = 20;					//PM2.5
+	int32 stopstat = 21;					
+	int64 funcstat = 22;
+	int32 voiceloop = 23;
+	double milestone = 24;      		//轮机行驶里程数(单位 米)
 }
 
 
-//请求位置校正
+//请求位置校正(2D)
 message reqPoseCorrection
 {
-	
+	float posx = 1;
+	float posy = 2;
+	float posdirection = 3;
 }
 //返回当前状态结果
 message rspPoseCorrection
@@ -129,11 +213,11 @@ message rspEnablePhysicalSwitch
 }
 
 
-//请求参数设置
+//直接控制机器人运动
 message reqSetParameter
 {
-	float poslinespeed = 1;
-	float posangulauspeed = 2;
+	float linspeed = 1;					//线速度(单位 米/秒)
+	float angspeed = 2;					//角速度(单位 度/秒)
 }
 //返回参数设置结果
 message rspSetParameter
@@ -170,8 +254,9 @@ enum eAlarmType
 //通知警告
 message notifyAlarm
 {
-	eAlarmType type = 1;
-	string message = 2;
+	int64 timestamp = 1;			//时间戳(纪元起至今的毫秒数)
+	eAlarmType type = 2;
+	string message = 3;
 }
 
 
@@ -225,26 +310,6 @@ message rspUploadMap
 }
 
 
-
-//请求设置禁区虚拟墙
-message reqVirtualWall
-{
-	message VirtualWallPoint
-	{
-		float x = 1;
-		float y = 2;
-		int32 type = 3;
-	}
-	repeated VirtualWallPoint points = 1;  			//虚拟墙点
-}
-
-
-
-//返回地图结果
-message rspVirtualWall
-{
-	eRspStatus ret = 1;
-}
 
 
 
