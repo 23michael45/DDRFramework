@@ -125,7 +125,11 @@ namespace DDRFramework
 			//do not use post cause it will block another post StartWrite ,and it's will not do handler function
 			if (m_spSerializer)
 			{
-				spheader->set_flowdirection(0, CommonHeader_eFlowDir_Backward);
+				if(spheader->flowdirection_size() > 0)
+				{
+					spheader->set_flowdirection(0, CommonHeader_eFlowDir_Backward);
+
+				}
 				m_spSerializer->Pack(spheader, spmsg);
 
 			}

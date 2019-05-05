@@ -40,7 +40,7 @@ message CommonHeader
 		ReturnPopQueue = 3;//some sequence msgs to back to the origin use recorded header,like ansFileStatus,rspFileAddr ,mannually use passnode in processor
 	}
 	repeated eFlowDir flowDirection = 5;// repeated here is to indicate its validity (one and only one flowDirection)
-	
+	string guid = 6;//add guid ,make msg unique
 	
 }
 
