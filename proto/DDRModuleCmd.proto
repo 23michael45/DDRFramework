@@ -305,7 +305,7 @@ message reqVirtualWall
     repeated VirtualWallPoint points = 1;              //虚拟墙点
 }
 //返回设置禁区虚拟墙结果
-message rsqVirtualWall
+message rspVirtualWall
 {
 	eRspStatus ret = 1;
 }
