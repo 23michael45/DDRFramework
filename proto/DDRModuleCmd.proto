@@ -293,14 +293,30 @@ message rspRebootController
 	eRspStatus ret = 1;
 }
 
+//请求设置禁区虚拟墙
+message reqVirtualWall
+{
+    message VirtualWallPoint
+    {
+        float x = 1;
+        float y = 2;
+        int32 type = 3;
+    }
+    repeated VirtualWallPoint points = 1;              //虚拟墙点
+}
+//返回设置禁区虚拟墙结果
+message rsqVirtualWall
+{
+	eRspStatus ret = 1;
+}
+
+
 
 //请求地图信息
 message reqUploadMap
 {
 	repeated bytes mapName = 1;  			//地图名(字符串）
 }
-
-
 
 //返回地图结果
 message rspUploadMap
