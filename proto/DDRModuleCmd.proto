@@ -78,12 +78,12 @@ message rsqEnterCollectionMode
 	eRspStatus ret = 1;
 }
 // 请求完成采集
-mesage reqFinishCollection
+message reqFinishCollection
 {
 
 }
 // 返回完成采集结果
-mesage rsqFinishCollection
+message rsqFinishCollection
 {
 	eRspStatus ret = 1;
 }
@@ -102,43 +102,44 @@ message rsqEnterAutoMode
 
 // 次级工作模式
 enum eSubMode {
-	eIDLING_EXCEPTION = 1, // 待命模式异常
-	eCOLLECTION_EXCEPTION = 2, // 采集模式异常
-	eAUTO_EXCEPTION = 3, // 自动模式异常
-	eIDLING_STILL = 4, // 空闲模式-静止
-	eIDLING_MOVING = 5, // 空闲模式-运动
-	eCOLLECTION_COLLECTING = 6, // 采集模式-采集中
-	eCOLLECTION_GENERATING = 7, // 采集模式-地图生成中
-	eCOLLECTION_FINISHED = 8, // 采集模式-建图完成
-	eAUTO_RELOC = 9, // 自动模式-重定位中
-	eAUTO_MOVING = 10, // 自动模式-运动中
-	eAUTO_STOPPED = 11, // 自动模式-停止(由调用者或避障模块要求停止)
-	eAUTO_ENDPOINT_UNREACHABLE = 12, // 自动模式-路径终点无法到达
-	eAUTO_FINISHED = 13 // 自动模式-成功到达终点
+	eUNKNOWN_EXCEPTION = 0; // 未知模式异常
+	eIDLING_EXCEPTION = 1; // 待命模式异常
+	eCOLLECTION_EXCEPTION = 2; // 采集模式异常
+	eAUTO_EXCEPTION = 3; // 自动模式异常
+	eIDLING_STILL = 4; // 空闲模式-静止
+	eIDLING_MOVING = 5; // 空闲模式-运动
+	eCOLLECTION_COLLECTING = 6; // 采集模式-采集中
+	eCOLLECTION_GENERATING = 7; // 采集模式-地图生成中
+	eCOLLECTION_FINISHED = 8; // 采集模式-建图完成
+	eAUTO_RELOC = 9; // 自动模式-重定位中
+	eAUTO_MOVING = 10; // 自动模式-运动中
+	eAUTO_STOPPED = 11; // 自动模式-停止(由调用者或避障模块要求停止)
+	eAUTO_ENDPOINT_UNREACHABLE = 12; // 自动模式-路径终点无法到达
+	eAUTO_FINISHED = 13; // 自动模式-成功到达终点
 }
 // 各模式下的异常状态分类
 enum eModeException {
-	eNO_EXCEPTION = 0, // 无异常
-	eCOLLECTION_EXISTINGROUTE = 1, // 试图采集的地图名已存在
-	eCOLLECTION_FILEIOERROR = 2, // 采集模式下文件IO错误
-	eAUTO_NONEXISTINGROUTE = 3, // 自动模式选择的地图不存在
-	eAUTO_RELOCFAILED = 4, // 自动模式重定位失败
-	eAUTO_FILEIOERROR = 5, // 自动模式下文件IO错误
-	eAUTO_PP_EXCEPTION = 6, // 自动模式下路径规划模块异常
-	eAUTO_OA_EXCEPTION = 7 // 自动模式下避障模块异常
+	eNO_EXCEPTION = 0; // 无异常
+	eCOLLECTION_EXISTINGROUTE = 1; // 试图采集的地图名已存在
+	eCOLLECTION_FILEIOERROR = 2; // 采集模式下文件IO错误
+	eAUTO_NONEXISTINGROUTE = 3; // 自动模式选择的地图不存在
+	eAUTO_RELOCFAILED = 4; // 自动模式重定位失败
+	eAUTO_FILEIOERROR = 5; // 自动模式下文件IO错误
+	eAUTO_PP_EXCEPTION = 6; // 自动模式下路径规划模块异常
+	eAUTO_OA_EXCEPTION = 7; // 自动模式下避障模块异常
 }
 // 自动模式下的运动状态
 enum eAUTOMOVINGSTATUS {
-	eNOT_AUTOMATIC = 0, // 不处于自动模式或处于自动模式下的异常状态
-	eSTATIC_NORMAL = 1, // 静态避障-正常行走
-	eSTATIC_SLOWDOWN = 2, // 静态避障-减速避障
-	eSTATIC_STOPPED = 3, // 静态避障-停止
-	eDYNAMIC_NORMAL = 4, // 动态避障-正常行走
-	eDYNAMIC_DETOUR = 5, // 动态避障-绕行
-	eDYNAMIC_NOWAYOUT = 6, // 动态避障-围困
-	eDYNAMIC_VIRTUAL_COLLISION = 7, // 动态避障-遭遇虚拟障碍
-	ePP_TURNING = 8, // 原地旋转
-	ePP_TEMP_SEGMENT = 9 // 执行临时路径(此过程静态避障)
+	eNOT_AUTOMATIC = 0; // 不处于自动模式或处于自动模式下的异常状态
+	eSTATIC_NORMAL = 1; // 静态避障-正常行走
+	eSTATIC_SLOWDOWN = 2; // 静态避障-减速避障
+	eSTATIC_STOPPED = 3; // 静态避障-停止
+	eDYNAMIC_NORMAL = 4; // 动态避障-正常行走
+	eDYNAMIC_DETOUR = 5; // 动态避障-绕行
+	eDYNAMIC_NOWAYOUT = 6; // 动态避障-围困
+	eDYNAMIC_VIRTUAL_COLLISION = 7; // 动态避障-遭遇虚拟障碍
+	ePP_TURNING = 8; // 原地旋转
+	ePP_TEMP_SEGMENT = 9; // 执行临时路径(此过程静态避障)
 };
 
 //请求当前状态
