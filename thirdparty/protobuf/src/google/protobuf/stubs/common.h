@@ -54,6 +54,9 @@
 
 #if !defined(USE_DDRSDK_DLL) // inside DLL
 #   define DDRCommProto_API   __declspec(dllexport)
+
+#elif defined(USE_PROTO_DLL)
+#   define DDRCommProto_API  
 #else // outside DLL
 #   define DDRCommProto_API   __declspec(dllimport)
 #endif 
