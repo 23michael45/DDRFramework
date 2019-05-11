@@ -1,0 +1,102 @@
+syntax = "proto3";
+package DDRCommProto;
+
+// version 10001, 2019/05/11
+
+enum eRspCode
+{
+	eOkay = 0;
+	eReqVoid = 1; // requests invalid themselves
+	eTooFrequent = 2; // route to upload is too close to other routes from the same robot
+	eIDInvalid = 3; // invalid upload/download ID
+}
+
+enum eZipType
+{
+	eNoZip = 0;
+	eZLib = 1;
+}
+
+message OneRouteInfo
+{
+	int32 version = 1;
+	string robotID = 2;
+	string routeName = 3;
+	string date_time = 4;
+	string comments = 5;
+	string locationKeyword = 6;
+}
+
+message reqCreateRoute
+{
+	OneRouteInfo routeInfo = 1;
+}
+
+message rspCreateRoute
+{
+	eRspCode ret = 1;
+	int64 uploadID = 2;
+}
+
+message reqUploadFiles
+{
+	int64 uploadID = 1;
+	repeated int32 fileSz = 2; // list of file sizes (in number of bytes)
+	eZipType zipType = 3;	
+	bytes fileNames_comp = 4; // after decompression, this is a list of NULL separated strings (UTF-8)
+	bytes content_comp = 5; // contents of files after decompression
+}
+
+message rspUploadFiles
+{
+	eRspCode ret = 1;
+	eZipType zipType = 2;
+	bytes fileNames = 3; // after decompression, this is a list of NULL separated strings of names(UTF-8) of files successfully received
+}
+
+message reqListRoutes
+{
+}
+
+message rspListRoutes
+{
+	eRspCode ret = 1;
+	repeated OneRouteInfo routes = 2;
+	repeated int64 downloadID = 3;
+}
+
+message reqListFiles_uploader
+{
+	int64 uploadID = 1;
+}
+
+message reqListFiles_downloader
+{
+	int64 downloadID = 1;
+}
+
+message rspListFiles
+{
+	eRspCode ret = 1;
+	eZipType nameListCompressionType = 2;
+	bytes fileNameList = 3;
+}
+
+message reqDownloadFiles
+{
+	int64 downloadID = 1;
+	eZipType nameListCompressionType = 2;
+	bytes fileNameList = 3;	// after decompression, this is a list of NULL separated strings (UTF-8) of file names
+	repeated int32 fileSz = 4; // list of file sizes (in number of bytes)
+}
+
+message rspDownloadFiles
+{
+	eRspCode ret = 1;
+	eZipType compressionType = 2;
+	bytes fileNameList = 3;	// after decompression, this is a list of NULL separated strings (UTF-8) of file names
+	bytes fileContents = 4; // contents of files after decompression
+}
+
+
+
