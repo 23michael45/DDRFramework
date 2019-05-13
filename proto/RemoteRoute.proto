@@ -9,6 +9,7 @@ enum eRspCode
 	eReqVoid = 1; // requests invalid themselves
 	eTooFrequent = 2; // route to upload is too close to other routes from the same robot
 	eIDInvalid = 3; // invalid upload/download ID
+	eFileSzIncorrect = 4; // request of incorrect file positions
 }
 
 enum eZipType
@@ -22,7 +23,7 @@ message OneRouteInfo
 	int32 version = 1;
 	string robotID = 2;
 	string routeName = 3;
-	string date_time = 4;
+	string dateTime = 4;
 	string comments = 5;
 	string locationKeyword = 6;
 }
@@ -38,20 +39,24 @@ message rspCreateRoute
 	int64 uploadID = 2;
 }
 
+// requests to upload a single file or multiple files
+// starting and ending positions are optional
 message reqUploadFiles
 {
-	int64 uploadID = 1;
-	repeated int32 fileSz = 2; // list of file sizes (in number of bytes)
-	eZipType zipType = 3;	
-	bytes fileNames_comp = 4; // after decompression, this is a list of NULL separated strings (UTF-8)
-	bytes content_comp = 5; // contents of files after decompression
+	int64 reqGUID = 1;
+	int64 uploadID = 2;
+	repeated int64 fileSz = 3; // list of file sizes (in number of bytes)
+	int64 file1_startPos = 4; // starting position of the first file (0 as default as the beginning of this file)
+	int64 fileN_endPos = 5; // ending position of the last file (-1 default as the end of this file)
+	eZipType zipType = 6;
+	bytes fileNames_comp = 7; // after decompression, this is a list of NULL separated strings (UTF-8)
+	bytes content_comp = 8; // contents of files after decompression
 }
 
 message rspUploadFiles
 {
 	eRspCode ret = 1;
-	eZipType zipType = 2;
-	bytes fileNames = 3; // after decompression, this is a list of NULL separated strings of names(UTF-8) of files successfully received
+	int64 reqGUID = 2;
 }
 
 message reqListRoutes
@@ -78,16 +83,19 @@ message reqListFiles_downloader
 message rspListFiles
 {
 	eRspCode ret = 1;
-	eZipType nameListCompressionType = 2;
-	bytes fileNameList = 3;
+	repeated int64 fileSz = 2;
+	eZipType nameListCompressionType = 3;
+	bytes fileNameList = 4;
 }
 
 message reqDownloadFiles
 {
-	int64 downloadID = 1;
-	eZipType nameListCompressionType = 2;
-	bytes fileNameList = 3;	// after decompression, this is a list of NULL separated strings (UTF-8) of file names
-	repeated int32 fileSz = 4; // list of file sizes (in number of bytes)
+	int64 reqGUID = 1;
+	int64 downloadID = 2;
+	int64 file1_startPos = 3; // starting position of the first file (0 as default as the beginning of this file)
+	int64 fileN_endPos = 4; // ending position of the last file (-1 default as the end of this file)
+	eZipType zipType = 5;
+	bytes fileNames_comp = 6; // after decompression, this is a list of NULL separated strings (UTF-8)
 }
 
 message rspDownloadFiles
