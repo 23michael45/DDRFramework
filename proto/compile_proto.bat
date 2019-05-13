@@ -28,6 +28,12 @@ rem protoc BaseCmd.proto --js_out=./
 protoc SimulationCmd.proto --python_out=./
 
 
+protoc RemoteRoute.proto --cpp_out=./
+protoc RemoteRoute.proto --java_out=./
+protoc RemoteRoute.proto --csharp_out=./
+rem protoc RemoteRoute.proto --js_out=./
+protoc RemoteRoute.proto --python_out=./
+
 
 protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
 protoc DDRModuleCmd.proto --java_out=./
