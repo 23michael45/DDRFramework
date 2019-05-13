@@ -262,6 +262,7 @@ namespace DDRFramework
 		} while (!m_Quit);
 	}
 
+	
 	void ConsoleDebug::AddCommand(std::string cmd, std::function<void()> func)
 	{
 		m_Functionmap.insert(std::make_pair(cmd, func));

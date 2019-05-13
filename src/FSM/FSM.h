@@ -22,6 +22,9 @@ class StateMachine;
 sm->addState<st>(sp##st);\
 sp##st->SetStateMachine(sm);
 
+#define ADD_SUBSTATE(sm,st,spentity) std::shared_ptr<st> sp##st = std::make_shared<st>(spentity,this);\
+sm->addState<st>(sp##st);\
+sp##st->SetStateMachine(sm);
 
 template <class T>
 class State
