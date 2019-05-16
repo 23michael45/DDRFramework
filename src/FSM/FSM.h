@@ -262,7 +262,7 @@ public:
 	 *
 	 *  @param delta delta time
 	 */
-	void updateWithDeltaTime(float delta = 0)
+	void updateWithDeltaTime(double deltaTime = 0)
 	{
 		if (m_spState != nullptr)
 		{
