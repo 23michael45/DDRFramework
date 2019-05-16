@@ -137,7 +137,7 @@ namespace DDRFramework
 		{
 
 		};
-		virtual void updateWithDeltaTime(float delta);
+		virtual void updateWithDeltaTime(double deltaTime);
 	};
 	class ParseLengthState : public MessageSerializerState
 	{
@@ -146,7 +146,7 @@ namespace DDRFramework
 		{
 
 		};
-		virtual void updateWithDeltaTime(float delta);
+		virtual void updateWithDeltaTime(double deltaTime);
 
 	};
 	class ParseHeadState : public MessageSerializerState
@@ -156,7 +156,7 @@ namespace DDRFramework
 		{
 
 		};
-		virtual void updateWithDeltaTime(float delta);
+		virtual void updateWithDeltaTime(double deltaTime);
 
 		void SetLen(size_t totalLen, size_t headLen)
 		{
@@ -175,7 +175,7 @@ namespace DDRFramework
 		{
 
 		};
-		virtual void updateWithDeltaTime(float delta);
+		virtual void updateWithDeltaTime(double deltaTime);
 		void SetLen(std::shared_ptr<DDRCommProto::CommonHeader> spheader, size_t bodyLen)
 		{
 			m_spCommonHeader = spheader;
@@ -195,7 +195,7 @@ namespace DDRFramework
 		{
 
 		};
-		virtual void updateWithDeltaTime(float delta);
+		virtual void updateWithDeltaTime(double deltaTime);
 		void SetPreStateAndNextLen(std::string prestate,int len)
 		{
 			m_NextLen = len;

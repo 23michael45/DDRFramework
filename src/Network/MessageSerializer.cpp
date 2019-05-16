@@ -396,7 +396,7 @@ namespace DDRFramework
 		}
 	}
 
-	void ParsePBHState::updateWithDeltaTime(float delta)
+	void ParsePBHState::updateWithDeltaTime(double deltaTime)
 	{
 		//DebugLog("ParsePBHState");
 
@@ -423,7 +423,7 @@ namespace DDRFramework
 
 		m_spParentStateMachine.lock()->enterState<ParseLengthState>();
 	}
-	void ParseLengthState::updateWithDeltaTime(float delta)
+	void ParseLengthState::updateWithDeltaTime(double deltaTime)
 	{
 		//DebugLog("ParseLengthState");
 
@@ -461,7 +461,7 @@ namespace DDRFramework
 		m_spParentStateMachine.lock()->enterState<ParseHeadState>();
 
 	}
-	void ParseHeadState::updateWithDeltaTime(float delta)
+	void ParseHeadState::updateWithDeltaTime(double deltaTime)
 	{
 
 		asio::streambuf& buf = m_spParentObject.lock()->GetRecBuf();
@@ -525,7 +525,7 @@ namespace DDRFramework
 
 		}
 	}
-	void ParseBodyState::updateWithDeltaTime(float delta)
+	void ParseBodyState::updateWithDeltaTime(double deltaTime)
 	{
 
 		//DebugLog("ParseBodyState");
@@ -632,7 +632,7 @@ namespace DDRFramework
 	}
 
 
-	void WaitNextBuffState::updateWithDeltaTime(float delta)
+	void WaitNextBuffState::updateWithDeltaTime(double deltaTime)
 	{
 
 		//DebugLog("ParseBodyState");

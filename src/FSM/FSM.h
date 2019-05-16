@@ -49,7 +49,7 @@ public:
 	 *
 	 *  @param delta time
 	 */
-	virtual void updateWithDeltaTime(float delta) {};
+	virtual void updateWithDeltaTime(double deltaTime) {};
 	/**
 	 *  Checks if next state is valid for transition
 	 *
@@ -268,7 +268,7 @@ public:
 		{
 			try
 			{
-				m_spState->updateWithDeltaTime(delta);
+				m_spState->updateWithDeltaTime(deltaTime);
 			}
 			catch (std::exception& e)
 			{
