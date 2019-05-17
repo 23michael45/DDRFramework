@@ -282,7 +282,8 @@ public:
 	 */
 	void updateWithDeltaTime(double deltaTime = 0)
 	{
-		m_StateMutex.lock();
+		//do not lock here,enterstate will lock in updateWithDeltaTime
+		//m_StateMutex.lock(); 
 		if (m_spState != nullptr)
 		{
 			try
@@ -295,8 +296,8 @@ public:
 
 			}
 		}
-
-		m_StateMutex.unlock();
+		/*
+		m_StateMutex.unlock()*/;
 	}
 
 	/**
