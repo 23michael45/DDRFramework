@@ -121,6 +121,13 @@ public:
 		return nullptr;
 	}
 
+	template<class T>
+	bool isState()
+	{
+		auto sp = std::dynamic_pointer_cast<T>(m_spState);
+		return sp != nullptr;
+	}
+
 	/**
 	 *  Add new state to state machine
 	 *
@@ -173,6 +180,7 @@ public:
 	template<class T>
 	bool enterState()
 	{
+		m_StateMutex.lock();
 		auto state = findState<T>();
 		if (state)
 		{
@@ -180,6 +188,8 @@ public:
 			{
 				m_spState = state;
 				m_spState->didEnterWithPreviousState(nullptr);
+
+				m_StateMutex.unlock();
 				return true;
 			}
 			else
@@ -189,14 +199,18 @@ public:
 					m_spState->willExitWithNextState(state);
 					state->didEnterWithPreviousState(m_spState);
 					m_spState = state;
+
+					m_StateMutex.unlock();
 					return true;
 				}
 			}
 		}
+		m_StateMutex.unlock();
 		return false;
 	}
 	bool enterState(std::string name)
 	{
+		m_StateMutex.lock();
 		if (m_States.count(name) != 0)
 		{
 			auto state =  m_States[name];
@@ -206,6 +220,8 @@ public:
 				{
 					m_spState = state;
 					m_spState->didEnterWithPreviousState(nullptr);
+
+					m_StateMutex.unlock();
 					return true;
 				}
 				else
@@ -215,13 +231,15 @@ public:
 						m_spState->willExitWithNextState(state);
 						state->didEnterWithPreviousState(m_spState);
 						m_spState = state;
+						m_StateMutex.unlock();
 						return true;
 					}
 				}
 			}
-			return false;
 		}
 
+		m_StateMutex.unlock();
+		return false;
 	}
 
 	/**
@@ -264,6 +282,7 @@ public:
 	 */
 	void updateWithDeltaTime(double deltaTime = 0)
 	{
+		m_StateMutex.lock();
 		if (m_spState != nullptr)
 		{
 			try
@@ -276,6 +295,8 @@ public:
 
 			}
 		}
+
+		m_StateMutex.unlock();
 	}
 
 	/**
@@ -293,6 +314,7 @@ private:
 	std::unordered_map<std::string, std::shared_ptr<State<PT>>> m_States;
 	std::shared_ptr<State<PT>> m_spState;
 
+	std::mutex m_StateMutex;
 };
 
 #endif /* state_machine_h */
