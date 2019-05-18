@@ -194,6 +194,8 @@ public:
 			}
 			else
 			{
+
+				m_spNextState = state;
 				return true;
 			}
 		}
@@ -216,6 +218,7 @@ public:
 				}
 				else
 				{
+					m_spNextState = state;
 					return true;
 				}
 			}
