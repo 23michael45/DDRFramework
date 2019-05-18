@@ -180,65 +180,48 @@ public:
 	template<class T>
 	bool enterState()
 	{
-		m_StateMutex.lock();
 		auto state = findState<T>();
 		if (state)
 		{
-			if (m_spState == nullptr)
-			{
-				m_spState = state;
-				m_spState->didEnterWithPreviousState(nullptr);
 
-				m_StateMutex.unlock();
-				return true;
-			}
-			else
+			if (m_spState)
 			{
 				if (m_spState->isValidNextState(state))
 				{
-					m_spState->willExitWithNextState(state);
-					state->didEnterWithPreviousState(m_spState);
-					m_spState = state;
-
-					m_StateMutex.unlock();
+					m_spNextState = state;
 					return true;
 				}
 			}
+			else
+			{
+				return true;
+			}
 		}
-		m_StateMutex.unlock();
 		return false;
 	}
 	bool enterState(std::string name)
 	{
-		m_StateMutex.lock();
 		if (m_States.count(name) != 0)
 		{
 			auto state =  m_States[name];
 			if (state)
 			{
-				if (m_spState == nullptr)
-				{
-					m_spState = state;
-					m_spState->didEnterWithPreviousState(nullptr);
-
-					m_StateMutex.unlock();
-					return true;
-				}
-				else
+				if (m_spState)
 				{
 					if (m_spState->isValidNextState(state))
 					{
-						m_spState->willExitWithNextState(state);
-						state->didEnterWithPreviousState(m_spState);
-						m_spState = state;
-						m_StateMutex.unlock();
+						m_spNextState = state;
 						return true;
 					}
+				}
+				else
+				{
+					return true;
 				}
 			}
 		}
 
-		m_StateMutex.unlock();
+
 		return false;
 	}
 
@@ -284,20 +267,38 @@ public:
 	{
 		//do not lock here,enterstate will lock in updateWithDeltaTime
 		//m_StateMutex.lock(); 
-		if (m_spState != nullptr)
+
+		try
 		{
-			try
+			if (m_spNextState)
+			{
+				if (m_spState)
+				{
+					m_spState->willExitWithNextState(m_spNextState);
+				}
+
+				m_spNextState->didEnterWithPreviousState(m_spState);
+				m_spState = m_spNextState;
+				m_spNextState = nullptr;
+
+
+			}
+
+			if (m_spState)
 			{
 				m_spState->updateWithDeltaTime(deltaTime);
-			}
-			catch (std::exception& e)
-			{
-				DebugLog("\nupdateWithDeltaTime Error", e.what());
 
 			}
 		}
-		/*
-		m_StateMutex.unlock()*/;
+		catch (std::exception& e)
+		{
+			DebugLog("\nupdateWithDeltaTime Error", e.what());
+
+		}
+
+
+
+
 	}
 
 	/**
@@ -314,8 +315,7 @@ public:
 private:
 	std::unordered_map<std::string, std::shared_ptr<State<PT>>> m_States;
 	std::shared_ptr<State<PT>> m_spState;
-
-	std::mutex m_StateMutex;
+	std::shared_ptr<State<PT>> m_spNextState;
 };
 
 #endif /* state_machine_h */
