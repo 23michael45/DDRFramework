@@ -9,7 +9,9 @@ enum eRspCode
 	eReqVoid = 1; // requests invalid themselves
 	eTooFrequent = 2; // route to upload is too close to other routes from the same robot
 	eIDInvalid = 3; // invalid upload/download ID
-	eFileSzIncorrect = 4; // request of incorrect file positions
+	eDecompFailed = 4; // failed to decompress contents
+	eFileNotExisting = 5;
+	eFilePositionIncorrect = 6; // request of incorrect file positions	
 }
 
 enum eZipType
@@ -23,9 +25,7 @@ message OneRouteInfo
 	int32 version = 1;
 	string robotID = 2;
 	string routeName = 3;
-	string dateTime = 4;
-	string comments = 5;
-	string locationKeyword = 6;
+	int64 dateTime = 4; // route creation time (seconds since EPOCH)
 }
 
 message reqCreateRoute
@@ -40,17 +40,18 @@ message rspCreateRoute
 }
 
 // requests to upload a single file or multiple files
-// starting and ending positions are optional
 message reqUploadFiles
 {
 	int64 reqGUID = 1;
 	int64 uploadID = 2;
-	repeated int64 fileSz = 3; // list of file sizes (in number of bytes)
-	int64 file1_startPos = 4; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 5; // ending position of the last file (-1 default as the end of this file)
-	eZipType zipType = 6;
-	bytes fileNames_comp = 7; // after decompression, this is a list of NULL separated strings (UTF-8)
-	bytes content_comp = 8; // contents of files after decompression
+	repeated string fileNames = 3;
+	repeated int64 fileSz = 4; // list of file sizes (in number of bytes)
+	repeated int64 fileMTimes = 5; // list of file modification times (in seconds since EPOCH)
+	int64 file1_startPos = 6; // starting position of the first file (0 as default as the beginning of this file)
+	int64 fileN_endPos = 7; // ending position of the last file (-1 default as the end of this file)
+	eZipType zipType = 8;
+	int64 content_len = 9; // length of original contents
+	bytes contents = 10; // contents of files after decompression
 }
 
 message rspUploadFiles
@@ -83,28 +84,35 @@ message reqListFiles_downloader
 message rspListFiles
 {
 	eRspCode ret = 1;
-	repeated int64 fileSz = 2;
-	eZipType nameListCompressionType = 3;
-	bytes fileNameList = 4;
+	repeated string fileNames = 2;
+	repeated int64 fileSz = 3;
+	repeated int64 fileCurPos = 4; // may be < fileSz
+	repeated int64 fileMTimes = 5; // list of file modification times (in seconds since EPOCH)
 }
 
 message reqDownloadFiles
 {
 	int64 reqGUID = 1;
 	int64 downloadID = 2;
-	int64 file1_startPos = 3; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 4; // ending position of the last file (-1 default as the end of this file)
-	eZipType zipType = 5;
-	bytes fileNames_comp = 6; // after decompression, this is a list of NULL separated strings (UTF-8)
+	repeated string fileNames = 3;
+	int64 file1_startPos = 4; // starting position of the first file (0 as default as the beginning of this file)
+	int64 fileN_endPos = 5; // ending position of the last file (-1 default as the end of this file)
 }
 
 message rspDownloadFiles
 {
 	eRspCode ret = 1;
-	eZipType compressionType = 2;
-	bytes fileNameList = 3;	// after decompression, this is a list of NULL separated strings (UTF-8) of file names
-	bytes fileContents = 4; // contents of files after decompression
+	int64 reqGUID = 2;
+	repeated string fileNames = 3;
+	repeated int64 fileSz = 4;
+	int64 file1_startPos = 5; // starting position of the first file (0 as default as the beginning of this file)
+	int64 fileN_endPos = 6; // ending position of the last file (-1 default as the end of this file)
+	eZipType zipType = 7;
+	int64 content_len = 8; // length of original contents
+	bytes contents = 9; // contents of files after decompression
 }
 
-
+message hbFrame
+{
+}
 
