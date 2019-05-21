@@ -6,12 +6,18 @@ package DDRCommProto;
 enum eRspCode
 {
 	eOkay = 0;
-	eReqVoid = 1; // requests invalid themselves
-	eTooFrequent = 2; // route to upload is too close to other routes from the same robot
-	eIDInvalid = 3; // invalid upload/download ID
-	eDecompFailed = 4; // failed to decompress contents
-	eFileNotExisting = 5;
-	eFilePositionIncorrect = 6; // request of incorrect file positions	
+	eTooBusy = 1;
+	eReqVoid = 2; // requests invalid themselves
+	eIDInvalid = 4; // invalid upload/download ID
+	eInteralErr = 5;
+	
+	eUp_TooFrequent = 6; // route to upload is too close to other routes from the same robot
+	eUp_TooBig = 7; // too big data to upload
+	eUp_DataError = 8; // upload data error
+	
+	eDown_FileNotExisting = 9; // files of a download request not existing
+	eDown_FilePosError = 10; // file positions of a download request incorrect
+	eDown_TooBig = 11; // too big data requested to be downloaded
 }
 
 enum eZipType
@@ -36,14 +42,14 @@ message reqCreateRoute
 message rspCreateRoute
 {
 	eRspCode ret = 1;
-	int64 uploadID = 2;
+	uint64 uploadID = 2;
 }
 
 // requests to upload a single file or multiple files
 message reqUploadFiles
 {
-	int64 reqGUID = 1;
-	int64 uploadID = 2;
+	uint64 reqGUID = 1;
+	uint64 uploadID = 2;
 	repeated string fileNames = 3;
 	repeated int64 fileSz = 4; // list of file sizes (in number of bytes)
 	repeated int64 fileMTimes = 5; // list of file modification times (in seconds since EPOCH)
@@ -57,7 +63,7 @@ message reqUploadFiles
 message rspUploadFiles
 {
 	eRspCode ret = 1;
-	int64 reqGUID = 2;
+	uint64 reqGUID = 2;
 }
 
 message reqListRoutes
@@ -68,48 +74,49 @@ message rspListRoutes
 {
 	eRspCode ret = 1;
 	repeated OneRouteInfo routes = 2;
-	repeated int64 downloadID = 3;
+	repeated uint64 downloadID = 3;
 }
 
 message reqListFiles_uploader
 {
-	int64 uploadID = 1;
+	uint64 uploadID = 1;
+	uint64 reqGUID = 2;
 }
 
 message reqListFiles_downloader
 {
-	int64 downloadID = 1;
+	uint64 downloadID = 1;
+	uint64 reqGUID = 2;
 }
 
 message rspListFiles
 {
 	eRspCode ret = 1;
-	repeated string fileNames = 2;
-	repeated int64 fileSz = 3;
-	repeated int64 fileCurPos = 4; // may be < fileSz
-	repeated int64 fileMTimes = 5; // list of file modification times (in seconds since EPOCH)
+	uint64 reqGUID = 2;
+	repeated string fileNames = 3;
+	repeated int64 fileSz = 4;
+	repeated int64 fileCurPos = 5; // may be < fileSz
+	repeated int64 fileMTimes = 6; // list of file modification times (in seconds since EPOCH)
 }
 
 message reqDownloadFiles
 {
-	int64 reqGUID = 1;
-	int64 downloadID = 2;
+	uint64 reqGUID = 1;
+	uint64 downloadID = 2;
 	repeated string fileNames = 3;
 	int64 file1_startPos = 4; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 5; // ending position of the last file (-1 default as the end of this file)
+	int64 fileN_endPos = 5; // ending position of the last file)
 }
 
 message rspDownloadFiles
 {
 	eRspCode ret = 1;
-	int64 reqGUID = 2;
+	uint64 reqGUID = 2;
 	repeated string fileNames = 3;
 	repeated int64 fileSz = 4;
-	int64 file1_startPos = 5; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 6; // ending position of the last file (-1 default as the end of this file)
-	eZipType zipType = 7;
-	int64 content_len = 8; // length of original contents
-	bytes contents = 9; // contents of files after decompression
+	eZipType zipType = 5;
+	int64 content_len = 6; // length of original contents
+	bytes contents = 7; // contents of files after decompression
 }
 
 message hbFrame
