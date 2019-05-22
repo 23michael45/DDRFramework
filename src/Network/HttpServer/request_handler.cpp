@@ -62,7 +62,7 @@ namespace http {
 		//std::string full = full_path;
 
 
-		DebugLog("Http Server handle request:%s", full.c_str());
+		LevelLog(DDRFramework::Log::Level::INFO,"Http Server handle request:%s", full.c_str());
 	    std::ifstream is(full.c_str(), std::ios::in | std::ios::binary);//打开文件
 	    if (!is)
 	    {

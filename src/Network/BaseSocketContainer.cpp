@@ -86,7 +86,7 @@ namespace DDRFramework
 		{
 			m_spUdpSocketBase.reset();
 		}
-		DebugLog("BaseSocketContainer Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"BaseSocketContainer Destroy");
 	}
 
 	void BaseSocketContainer::SetTcp(std::shared_ptr<TcpSocketContainer> sp)
@@ -151,24 +151,24 @@ namespace DDRFramework
 		{
 			if (GetTcp())
 			{
-				DebugLog("\nReceive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
+				LevelLog(DDRFramework::Log::Level::INFO,"\nReceive TCP Message %s from:%s", btype.c_str(),GetTcp()->GetSocket().remote_endpoint().address().to_string().c_str());
 
 			}
 			else if (GetUdp())
 			{
 
-				//DebugLog("\nReceive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
-				DebugLog("\nReceive UDP Message %s ", btype.c_str())
+				//LevelLog(DDRFramework::Log::Level::DEBUG,"\nReceive UDP Message %s from:%s", btype.c_str(), GetUdp()->GetRecvSocket()->remote_endpoint().address().to_string().c_str());
+				LevelLog(DDRFramework::Log::Level::INFO,"\nReceive UDP Message %s ", btype.c_str())
 			}
 		}
 		catch (asio::error_code& e)
 		{
 
-			DebugLog("\nPrintRemoteIP ASIO %s", e.message().c_str())
+			LevelLog(DDRFramework::Log::Level::ERR,"\nPrintRemoteIP ASIO %s", e.message().c_str())
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("\nPrintRemoteIP %s", e.what())
+			LevelLog(DDRFramework::Log::Level::ERR,"\nPrintRemoteIP %s", e.what())
 		}
 	}
 }

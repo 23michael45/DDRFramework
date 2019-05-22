@@ -127,7 +127,7 @@ namespace DDRFramework
 			}
 		}
 
-		DebugLog("PassNode Return Error.Type not same");
+		LevelLog(DDRFramework::Log::Level::WARNING,"PassNode Return Error.Type not same");
 		return false;
 	}
 

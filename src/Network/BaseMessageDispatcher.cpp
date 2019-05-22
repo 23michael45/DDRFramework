@@ -21,7 +21,7 @@ namespace DDRFramework
 		{
 			pair.second.reset();
 		}
-		DebugLog("BaseMessageDispatcher Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"BaseMessageDispatcher Destroy");
 	}
 
 	void BaseMessageDispatcher::Dispatch(std::shared_ptr<BaseSocketContainer> spParentSocketContainer, std::shared_ptr<CommonHeader> spHeader, std::shared_ptr<google::protobuf::Message> spMsg)
@@ -47,7 +47,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("Dispatch Error Processor Empty");
+					LevelLog(DDRFramework::Log::Level::ERR,"Dispatch Error Processor Empty");
 				}
 			}
 
@@ -55,7 +55,7 @@ namespace DDRFramework
 		catch (const std::exception& e)
 		{
 
-			DebugLog("Dispatch Exception %s", e.what())
+			LevelLog(DDRFramework::Log::Level::ERR,"Dispatch Exception %s", e.what())
 		}
 	}
 
@@ -138,7 +138,7 @@ namespace DDRFramework
 
 	BaseUdpMessageDispatcher::~BaseUdpMessageDispatcher()
 	{
-		DebugLog("BaseUdpMessageDispatcher Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"BaseUdpMessageDispatcher Destroy");
 	}
 
 }

@@ -9,7 +9,7 @@ namespace DDRFramework
 
 	TcpClientSessionBase::~TcpClientSessionBase()
 	{
-		DebugLog("TcpClientSessionBase Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpClientSessionBase Destroy");
 	}
 
 	void TcpClientSessionBase::Start(std::string ip, std::string port)
@@ -32,7 +32,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog(ec.message().c_str());
+			LevelLog(DDRFramework::Log::Level::ERR,ec.message().c_str());
 		}
 	}
 
@@ -40,7 +40,7 @@ namespace DDRFramework
 	void TcpClientSessionBase::ConnectTimeout(std::shared_ptr<DDRFramework::TcpSocketContainer> spContainer)
 	{
 
-		DebugLog("Connect Timeout----------------------------------------------------------------")
+		LevelLog(DDRFramework::Log::Level::WARNING,"Connect Timeout----------------------------------------------------------------")
 
 		m_Timer.remove(m_ConnectTimeoutTimerID);
 
@@ -76,7 +76,7 @@ namespace DDRFramework
 		else
 		{
 			
-			DebugLog("Connect Failed No Server");
+			LevelLog(DDRFramework::Log::Level::ERR,"Connect Failed No Server");
 			
 			//do not use stop directly ,use function in stop ,cause m_Connect is false
 			//Stop();
@@ -105,7 +105,7 @@ namespace DDRFramework
 			{
 				if (!ec)
 				{
-					//DebugLog("Receive:%i", m_ReadStreamBuf.size());
+
 
 					PushData(m_ReadStreamBuf);
 					m_ReadWriteStrand.post(std::bind(&TcpClientSessionBase::StartRead, shared_from_base()));
@@ -113,19 +113,19 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("TcpClientSessionBase Error on receive:  %s",  ec.message().c_str());
+					LevelLog(DDRFramework::Log::Level::ERR,"TcpClientSessionBase Error on receive:  %s",  ec.message().c_str());
 					Stop();
 				}
 			}
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("Error  :%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"Error  :%s", e.what());
 			
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("Error  :%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"Error  :%s", e.what());
 
 		}
 
@@ -147,7 +147,7 @@ namespace DDRFramework
 	}
 	HookTcpClientSession::~HookTcpClientSession()
 	{
-		DebugLog("HookTcpClientSession Destroy")
+		LevelLog(DDRFramework::Log::Level::INFO,"HookTcpClientSession Destroy")
 	}
 
 	void HookTcpClientSession::StartRead()
@@ -163,7 +163,7 @@ namespace DDRFramework
 			{
 				if (!ec)
 				{
-					//DebugLog("Receive:%i", m_ReadStreamBuf.size());
+
 
 					OnHookReceive(m_ReadStreamBuf);
 
@@ -173,19 +173,19 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("TcpClientSessionBase Error on receive:  %s", ec.message().c_str());
+					LevelLog(DDRFramework::Log::Level::ERR,"TcpClientSessionBase Error on receive:  %s", ec.message().c_str());
 					Stop();
 				}
 			}
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("Error  :%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"Error  :%s", e.what());
 
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("Error  :%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"Error  :%s", e.what());
 
 		}
 	}
@@ -198,7 +198,7 @@ namespace DDRFramework
 	TcpClientBase::~TcpClientBase()
 	{
 		std::lock_guard<std::mutex> lock(m_MapMutex);
-		DebugLog("TcpClientBase Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpClientBase Destroy");
 		m_spClientSet.clear();
 	}
 	void TcpClientBase::Start(int threadNum)
@@ -280,10 +280,10 @@ namespace DDRFramework
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("Error: %s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"Error: %s", e.what());
 
 		}
-		DebugLog("ThreadEntry Finish");
+		LevelLog(DDRFramework::Log::Level::INFO,"ThreadEntry Finish");
 	}
 	std::shared_ptr<TcpClientSessionBase> TcpClientBase::BindSerializerDispatcher()
 	{
@@ -333,19 +333,19 @@ namespace DDRFramework
 	}
 	void TcpClientBase::OnConnected(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
-		DebugLog("OnConnected TcpClientBase");
+		LevelLog(DDRFramework::Log::Level::INFO,"OnConnected TcpClientBase");
 
 	}
 	void TcpClientBase::OnConnectTimeout(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 
-		DebugLog("OnConnectTimerout TcpClientBase");
+		LevelLog(DDRFramework::Log::Level::INFO,"OnConnectTimerout TcpClientBase");
 
 	}	
 	void TcpClientBase::OnConnectFailed(std::shared_ptr<TcpSocketContainer> spContainer)
 	{
 
-		DebugLog("OnConnectFailed TcpClientBase");
+		LevelLog(DDRFramework::Log::Level::INFO,"OnConnectFailed TcpClientBase");
 
 	}
 }

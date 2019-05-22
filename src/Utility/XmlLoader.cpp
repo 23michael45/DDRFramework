@@ -1,7 +1,7 @@
 #include "XmlLoader.h"
 #include "Logger.h"
 #include "tinyxml.h"
-
+#include "DDRMacro.h"
 
 namespace DDRFramework
 {
@@ -15,7 +15,7 @@ namespace DDRFramework
 
 			if (!loadOkay)
 			{
-				DebugLog("Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
+				LevelLog(DDRFramework::Log::Level::ERR,"Could not load test file %s. Error='%s'. Exiting.\n", fileName.c_str(), doc.ErrorDesc());
 				//exit(1);
 			}
 
@@ -98,11 +98,11 @@ namespace DDRFramework
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("XmlLoader Construct Failed : %s -- %s", fileName.c_str(), e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"XmlLoader Construct Failed : %s -- %s", fileName.c_str(), e.what());
 		}
 		catch (...)
 		{
-			DebugLog("XmlLoader Construct Failed : %s", fileName.c_str());
+			LevelLog(DDRFramework::Log::Level::ERR,"XmlLoader Construct Failed : %s", fileName.c_str());
 		}
 	}
 
@@ -121,7 +121,7 @@ namespace DDRFramework
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"%s", e.what());
 		}
 		return "";
 	}
@@ -138,7 +138,7 @@ namespace DDRFramework
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"%s", e.what());
 		}
 		return "";
 	}
@@ -163,7 +163,7 @@ namespace DDRFramework
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"%s", e.what());
 		}
 		return "";
 

@@ -40,7 +40,6 @@ namespace DDRFramework
 				sptreenode.reset();
 			}
 			m_leafmap.clear();
-			//DebugLog("Destroy treenode");
 		}
 
 		T m_value;
@@ -93,7 +92,6 @@ namespace DDRFramework
 		~tree()
 		{
 			clear();
-			//DebugLog("Destroy Tree");
 		}
 		std::shared_ptr<treenode<T>> m_spRoot;
 

@@ -10,13 +10,13 @@ namespace DDRFramework
 
 		std::thread::id tid = std::this_thread::get_id();
 		uint64_t* ptr = (uint64_t*)&tid;
-		DebugLog("TcpSessionBase Create On Thread: %d", (*ptr))
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpSessionBase Create On Thread: %d", (*ptr))
 		m_bConnected = true;
 	}
 	TcpSessionBase::~TcpSessionBase()
 	{
 
-		DebugLog("TcpSessionBase Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpSessionBase Destroy");
 	}
 
 	void TcpSessionBase::OnStart()
@@ -25,7 +25,7 @@ namespace DDRFramework
 		std::thread::id tid = std::this_thread::get_id();
 		uint64_t* ptr = (uint64_t*)&tid;
 
-		DebugLog("Connection Established! %s : On Thread %d" , m_Socket.remote_endpoint().address().to_string().c_str(), (*ptr));
+		LevelLog(DDRFramework::Log::Level::INFO, "Connection Established! %s : On Thread %d", m_Socket.remote_endpoint().address().to_string().c_str(), (*ptr));
 		if (m_bConnected)
 		{
 
@@ -58,14 +58,12 @@ namespace DDRFramework
 		{
 			Stop();
 
-			DebugLog("TcpSessionBase Error on receive: %s", ec.message().c_str());
+			LevelLog(DDRFramework::Log::Level::ERR,"TcpSessionBase Error on receive: %s", ec.message().c_str());
 		}
 
 	}
 	void TcpSessionBase::StartWrite(std::shared_ptr<asio::streambuf> spbuf)
 	{
-
-		//DebugLog("StartWrite %d", spbuf->size());
 		if (m_Socket.is_open())
 		{
 			if (spbuf && spbuf->size() > 0)
@@ -75,7 +73,7 @@ namespace DDRFramework
 			}
 			else
 			{
-				DebugLog("TcpSessionBase StartWrite Size 0")
+				LevelLog(DDRFramework::Log::Level::WARNING,"TcpSessionBase StartWrite Size 0")
 			}
 
 
@@ -85,12 +83,12 @@ namespace DDRFramework
 
 	TcpServerBase::TcpServerBase(int port) :m_Acceptor(m_IOContext, tcp::endpoint(tcp::v4(), port))
 	{
-		DebugLog("TcpServerBase  Create");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpServerBase  Create");
 	}
 
 	TcpServerBase::~TcpServerBase()
 	{
-		DebugLog("TcpServerBase  Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpServerBase  Destroy");
 	}
 
 
@@ -227,16 +225,16 @@ namespace DDRFramework
 		}
 		catch (asio::error_code& e)
 		{
-			DebugLog("Disconnect Error %s", e.message().c_str())
+			LevelLog(DDRFramework::Log::Level::ERR,"Disconnect Error %s", e.message().c_str())
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("Disconnect Error %s", e.what())
+			LevelLog(DDRFramework::Log::Level::ERR,"Disconnect Error %s", e.what())
 		}
 		catch (std::exception& e)
 		{
 
-			DebugLog("Disconnect Error %s", e.what())
+			LevelLog(DDRFramework::Log::Level::ERR,"Disconnect Error %s", e.what())
 		}
 	}
 
@@ -306,7 +304,7 @@ namespace DDRFramework
 	}
 	HookTcpSession::~HookTcpSession()
 	{
-		DebugLog("HookTcpSession Destroy")
+		LevelLog(DDRFramework::Log::Level::INFO,"HookTcpSession Destroy")
 	}
 	void HookTcpSession::StartRead()
 	{
@@ -327,7 +325,7 @@ namespace DDRFramework
 		else
 		{
 			Stop();
-			DebugLog("HookTcpSession Error on receive:  %s",  ec.message().c_str());
+			LevelLog(DDRFramework::Log::Level::ERR,"HookTcpSession Error on receive:  %s",  ec.message().c_str());
 		}
 	}
 
@@ -341,7 +339,7 @@ namespace DDRFramework
 
 	HookTcpServer::~HookTcpServer()
 	{
-		DebugLog("HookTcpServer Destroy")
+		LevelLog(DDRFramework::Log::Level::INFO,"HookTcpServer Destroy")
 	}
 
 

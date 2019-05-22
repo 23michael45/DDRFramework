@@ -40,7 +40,7 @@ namespace DDRFramework
 			}
 			catch (std::exception& e)
 			{
-				DebugLog("%s",e.what())
+				LevelLog(DDRFramework::Log::Level::ERR, "%s", e.what())
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace DDRFramework
 			}
 			catch (std::exception& e)
 			{
-				DebugLog("%s",e.what())
+				LevelLog(DDRFramework::Log::Level::ERR,"%s",e.what())
 			}
 			return 0;
 		}

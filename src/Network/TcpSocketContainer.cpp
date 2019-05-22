@@ -16,7 +16,7 @@ namespace DDRFramework
 	}
 	TcpSocketContainer::~TcpSocketContainer()
 	{
-		DebugLog("TcpSocketContainer Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"TcpSocketContainer Destroy");
 		Release();
 	}
 	void  TcpSocketContainer::Start()
@@ -59,7 +59,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			//DebugLog("\CheckRead Finish");
+			LevelLog(DDRFramework::Log::Level::WARNING,"\CheckRead Not Connected");
 		}
 	}
 	void TcpSocketContainer::CheckWrite()
@@ -136,7 +136,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("Disconnected Send Failed");
+			LevelLog(DDRFramework::Log::Level::WARNING,"Disconnected Send Failed");
 
 		}
 
@@ -156,7 +156,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("Disconnected Send Failed");
+			LevelLog(DDRFramework::Log::Level::WARNING,"Disconnected Send Failed");
 
 		}
 
@@ -181,7 +181,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("Disconnected Send Failed");
+			LevelLog(DDRFramework::Log::Level::WARNING,"Disconnected Send Failed");
 
 		}
 	}
@@ -211,7 +211,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("Disconnected Send Failed");
+			LevelLog(DDRFramework::Log::Level::WARNING,"Disconnected Send Failed");
 
 		}
 	}
@@ -238,7 +238,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			DebugLog("Disconnected Send Failed");
+			LevelLog(DDRFramework::Log::Level::WARNING,"Disconnected Send Failed");
 
 		}
 
@@ -257,7 +257,7 @@ namespace DDRFramework
 				}
 				else
 				{
-					DebugLog("TcpSocketContainer Error on send:  %s" , ec.message().c_str());
+					LevelLog(DDRFramework::Log::Level::ERR,"TcpSocketContainer Error on send:  %s" , ec.message().c_str());
 
 					Stop();
 

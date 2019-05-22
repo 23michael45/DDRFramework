@@ -21,7 +21,7 @@ namespace DDRFramework
 
 	HttpSession::~HttpSession()
 	{
-		DebugLog("HttpSession Destroy")
+		LevelLog(DDRFramework::Log::Level::INFO,"HttpSession Destroy")
 	}
 
 
@@ -94,7 +94,7 @@ namespace DDRFramework
 		m_OutFileStream.close();
 
 		curl_easy_cleanup(m_pCurl);
-		DebugLog("HttpSession Entry Finish")
+		LevelLog(DDRFramework::Log::Level::INFO,"HttpSession Entry Finish")
 
 		
 	}

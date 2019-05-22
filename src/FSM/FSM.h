@@ -87,7 +87,7 @@ public:
 
 	~StateMachine()
 	{
-		DebugLog("StateMachine Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"StateMachine Destroy");
 
 		for (auto iter = m_States.begin(); iter != m_States.end(); ++iter)
 		{
@@ -295,7 +295,7 @@ public:
 		}
 		catch (std::exception& e)
 		{
-			DebugLog("\nupdateWithDeltaTime Error", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"\nupdateWithDeltaTime Error", e.what());
 
 		}
 

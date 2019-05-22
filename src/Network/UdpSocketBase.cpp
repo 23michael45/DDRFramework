@@ -13,7 +13,7 @@ namespace DDRFramework
 
 	UdpSocketBase::~UdpSocketBase()
 	{
-		DebugLog("UdpBroadcaster Destroy");
+		LevelLog(DDRFramework::Log::Level::INFO,"UdpBroadcaster Destroy");
 	}
 
 	void UdpSocketBase::Start()
@@ -125,7 +125,7 @@ namespace DDRFramework
 		}
 		catch (asio::system_error& e)
 		{
-			DebugLog("%s", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"%s", e.what());
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			StopReceive();
 		}
@@ -169,7 +169,7 @@ namespace DDRFramework
 			}
 			else
 			{
-				DebugLog("Udp Write Failed:%s", ec.message());
+				LevelLog(DDRFramework::Log::Level::ERR,"Udp Write Failed:%s", ec.message());
 			}
 		
 	}
@@ -258,7 +258,7 @@ namespace DDRFramework
 			}
 			else
 			{
-				DebugLog("Udp Read Failed:%s", ec.message().c_str());
+				LevelLog(DDRFramework::Log::Level::ERR,"Udp Read Failed:%s", ec.message().c_str());
 			}
 		}
 	}
