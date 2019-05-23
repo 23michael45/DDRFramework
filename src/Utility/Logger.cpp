@@ -6,7 +6,6 @@
 #include "cppfs/FilePath.h"
 
 #ifdef WIN32
-#include <winsock.h>
 #include <Windows.h>
 
 int gettimeofday(struct timeval * tp, struct timezone * tzp)
