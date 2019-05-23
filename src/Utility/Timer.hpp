@@ -20,8 +20,8 @@ namespace DDRFramework
 	// Public types
 	using timer_id = std::size_t;
 	using handler_t = std::function<void(timer_id)>;
-	using clock = std::chrono::steady_clock;
-	using timestamp = std::chrono::time_point<clock>;
+	using timerclock = std::chrono::steady_clock;
+	using timestamp = std::chrono::time_point<timerclock>;
 	using duration = std::chrono::microseconds;
 
 	// Private definitions. Do not rely on this namespace.
@@ -147,7 +147,7 @@ namespace DDRFramework
 		inline timer_id add(const std::chrono::duration<Rep, Period> &when, handler_t &&handler,
 			const duration &period = duration::zero())
 		{
-			return add(clock::now() + std::chrono::duration_cast<std::chrono::microseconds>(when),
+			return add(timerclock::now() + std::chrono::duration_cast<std::chrono::microseconds>(when),
 				std::move(handler),  std::chrono::duration_cast<std::chrono::microseconds>(when), period);
 		}
 
@@ -197,7 +197,7 @@ namespace DDRFramework
 
 			if (it != time_events.end()) {
 				
-			    timestamp when = clock::now() + std::chrono::duration_cast<std::chrono::microseconds>(it->interval);
+			    timestamp when = timerclock::now() + std::chrono::duration_cast<std::chrono::microseconds>(it->interval);
 				auto newevent = detail::Time_event{ when, id ,it->interval };
 
 				time_events.erase(*it);
@@ -224,7 +224,7 @@ namespace DDRFramework
 				}
 				else {
 					detail::Time_event te = *time_events.begin();
-					if (clock::now() >= te.next) {
+					if (timerclock::now() >= te.next) {
 
 						// Remove time event
 						time_events.erase(time_events.begin());
