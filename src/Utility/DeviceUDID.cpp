@@ -8,7 +8,7 @@
 #include <intrin.h>       
 #include <iphlpapi.h>     
 #include <string>
-#include <sstream>>
+#include <sstream>
 #include <iomanip>
 // we just need this for purposes of unique machine id. So any one or two mac's is       
 // fine. 
