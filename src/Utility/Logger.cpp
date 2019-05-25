@@ -6,8 +6,10 @@
 #include "cppfs/FilePath.h"
 
 #ifdef WIN32
-#include <Windows.h>
 
+
+#include <winsock.h>
+#include <Windows.h>
 int gettimeofday(struct timeval * tp, struct timezone * tzp)
 {
 	// Note: some broken versions only have 8 trailing zero's, the correct epoch has 9 trailing zero's
