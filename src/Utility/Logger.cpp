@@ -7,9 +7,9 @@
 
 #ifdef WIN32
 
-
-#include <winsock.h>
+#define  WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include <winsock.h>
 int gettimeofday(struct timeval * tp, struct timezone * tzp)
 {
 	// Note: some broken versions only have 8 trailing zero's, the correct epoch has 9 trailing zero's
