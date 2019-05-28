@@ -34,6 +34,11 @@ protoc RemoteRoute.proto --csharp_out=./
 rem protoc RemoteRoute.proto --js_out=./
 protoc RemoteRoute.proto --python_out=./
 
+protoc ClientCmd.proto --cpp_out=./
+protoc ClientCmd.proto --java_out=./
+protoc ClientCmd.proto --csharp_out=./
+rem protoc ClientCmd.proto --js_out=./
+protoc ClientCmd.proto --python_out=./
 
 protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
 protoc DDRModuleCmd.proto --java_out=./
