@@ -319,6 +319,23 @@ message rspCmdSignPoint{
 	eCmdRspType type = 1;
 }
 
+message PathPoint{
+	float pointX = 1;
+	float pointY = 2;
+	float speed = 3;
+}
+
+message reqCmdSetPathPoint{
+	repeated PathPoint sPath = 1;
+	float endAng = 2;
+	string route_name = 3;
+	string path_name = 4;
+}
+
+message rspCmdSetPathPoint{
+	eCmdRspType type = 1;
+}
+
 
 
 //-----------------------------------ClientCmd]]]]]
