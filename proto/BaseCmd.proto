@@ -367,6 +367,30 @@ message notifyBaseStatus{
 	int32 thermalmaxy = 23;
 	float thermalmaxvalue = 24;
 }
+
+message notifyBaseStatusEx{
+	int32 mode = 1;
+	int32 sonmode =2;
+	int32 stopstat = 3;
+	bytes currroute = 4;
+	string currpath = 5;
+	float posx = 6;
+	float posy = 7;
+	float posdirection = 8;
+	float poslinespeed = 9;
+	float posangulauspeed = 10;
+}
+
+// Environmental sensor info
+message notifyEnvInfo{
+	float batt = 1;
+	float temp = 2;
+	float hum = 3;
+	float pm25 = 4;
+	float co2 = 5;
+	float ch2o = 6;
+}
+
 //ObsStatus
 message OAInfo{
 	float startangle = 1;
