@@ -33,6 +33,11 @@ namespace DDRFramework
 		{
 			return m_ReadStreamBuf;
 		}
+		void SetReadBufSize(size_t size)
+		{
+			m_ReadStreamBuf.prepare(size);
+		}
+
 	protected:
 
 		virtual void StartRead();
