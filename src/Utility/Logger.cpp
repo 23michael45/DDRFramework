@@ -181,7 +181,7 @@ namespace DDRFramework
 		va_end(args);
 		DDRFramework::Log::getInstance()->write(level, buff);
 	}
-	void DDRLog(DDRFramework::Log::Level level, const char* format, va_list args)
+	void DDRLogArgs(DDRFramework::Log::Level level, const char* format, va_list args)
 	{
 		char buff[1024];
 		_vsnprintf(buff, 1024, format, args);
