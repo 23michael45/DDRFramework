@@ -32,7 +32,6 @@ message OneRouteInfo
 	string robotID = 2;
 	string routeName = 3;
 	int64 dateTime = 4; // route creation time (seconds since EPOCH)
-	string description = 5;
 }
 
 message reqCreateRoute
@@ -44,23 +43,6 @@ message rspCreateRoute
 {
 	eRspCode ret = 1;
 	uint64 uploadID = 2;
-}
-
-message reqModifyRouteInfo
-{
-	uint64 reqGUID = 1;
-	uint64 uploadID = 2;
-	repeated int32 version = 3;
-	repeated string robotID = 4;
-	repeated string routeName = 5;
-	repeated int64 dateTime = 6;
-	repeated string description = 7;
-}
-
-message rspModifyRouteInfo
-{
-	eRspCode ret = 1;
-	uint64 reqGUID = 2;
 }
 
 // requests to upload a single file or multiple files
