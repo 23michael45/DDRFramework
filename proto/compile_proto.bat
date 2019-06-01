@@ -13,6 +13,12 @@ protoc BaseCmd.proto --csharp_out=./
 rem protoc BaseCmd.proto --js_out=./
 protoc BaseCmd.proto --python_out=./
 
+protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ DDRModuleCmd.proto 
+protoc DDRModuleCmd.proto --java_out=./
+protoc DDRModuleCmd.proto --csharp_out=./
+rem protoc DDRModuleCmd.proto --js_out=./
+protoc DDRModuleCmd.proto --python_out=./
+
 
 protoc RemoteCmd.proto --cpp_out=./
 protoc RemoteCmd.proto --java_out=./
@@ -34,16 +40,6 @@ protoc RemoteRoute.proto --csharp_out=./
 rem protoc RemoteRoute.proto --js_out=./
 protoc RemoteRoute.proto --python_out=./
 
-protoc ClientCmd.proto --cpp_out=./
-protoc ClientCmd.proto --java_out=./
-protoc ClientCmd.proto --csharp_out=./
-rem protoc ClientCmd.proto --js_out=./
-protoc ClientCmd.proto --python_out=./
 
-protoc --cpp_out=dllexport_decl=DDRCommProto_API:./ ClientCmd.proto 
-protoc ClientCmd.proto --java_out=./
-protoc ClientCmd.proto --csharp_out=./
-rem protoc ClientCmd.proto --js_out=./
-protoc ClientCmd.proto --python_out=./
 
 cd %PrePath%

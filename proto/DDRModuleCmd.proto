@@ -2,12 +2,51 @@ syntax = "proto3";
 package DDRModuleProto;
 
 
-//回包状态
-enum eRspStatus {
+enum eRspType {
 	eSuccess = 0;
-	eFailed = 1;
-	eUnknown = 2;
+	eNotConnected = 1;
+	eInternalError = 2;
+	eDenied = 3;
 }
+
+enum eMODE {
+	eERR_MODE = 0; // 错误
+	eIDLING = 1; // 待命模式
+	eCOLLECTION = 2; // 采集建图模式
+	eAUTO = 3; // 自动行走模式
+}
+
+enum eSUBMODE {
+	eERR_SUBMODE = 0; // 错误
+	eIDLING_EXCEPTION = 1; // 待命模式异常
+	eCOLLECTION_EXCEPTION = 2; // 采集模式异常
+	eAUTO_EXCEPTION = 3; // 自动模式异常
+	eIDLING_STILL = 4; // 空闲模式-静止
+	eIDLING_MOVING = 5; // 空闲模式-运动
+	eCOLLECTION_COLLECTING = 6; // 采集模式-采集中
+	eCOLLECTION_GENERATING = 7; // 采集模式-地图生成中
+	eCOLLECTION_FINISHED = 8; // 采集模式-建图完成
+	eAUTO_RELOC = 9; // 自动模式-重定位中
+	eAUTO_MOVING = 10; // 自动模式-运动中
+	eAUTO_STOPPED = 11; // 自动模式-停止(由调用者或避障模块要求停止)
+	eAUTO_ENDPOINT_UNREACHABLE = 12; // 自动模式-路径终点无法到达
+	eAUTO_FINISHED = 13; // 自动模式-成功到达终点
+}
+
+enum eException {
+	eNO_EXCEPTION = 0;
+	eINTERNAL_MEM_ERROR = 1; // 内存错误
+	eCOLLECTION_EXISTINGROUTE = 2; // 试图采集的地图名已存在
+	eCOLLECTION_FILEIOERROR = 3; // 采集模式下文件IO错误
+	eAUTO_NONEXISTINGROUTE = 4; // 自动模式选择的地图不存在
+	eAUTO_RELOCFAILED = 5; // 自动模式重定位失败
+	eAUTO_FILEIOERROR = 6; // 自动模式下文件IO错误
+	eAUTO_PP_EXCEPTION = 7; // 自动模式下路径规划模块异常
+	eAUTO_OA_EXCEPTION = 8; // 自动模式下避障模块异常
+}
+
+
+
 
 
 //请求机器人本体信息
@@ -35,7 +74,7 @@ message reqBrakeStop
 //返回紧急停止结果
 message rspBrakeStop
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 
@@ -47,7 +86,7 @@ message reqMotionPause
 //返回暂停结果
 message rspMotionPause
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 // 工作模式
@@ -58,14 +97,14 @@ enum eWorkingMode {
 }
 
 // 请求进入待命模式(并清除所有异常)
-message reqEnterIdlingMode
+message reqEnterIdleMode
 {
 
 }
 // 返回进入待命模式结果
-message rsqEnterIdlingMode
+message rsqEnterIdleMode
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 // 请求进入采集模式
 message reqEnterCollectionMode
@@ -75,7 +114,7 @@ message reqEnterCollectionMode
 // 返回进入采集模式结果
 message rsqEnterCollectionMode
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 // 请求完成采集
 message reqFinishCollection
@@ -85,107 +124,20 @@ message reqFinishCollection
 // 返回完成采集结果
 message rsqFinishCollection
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 // 请求进入自动模式
 message reqEnterAutoMode
 {
-	string mapName = 1;
-	string pathFileName = 2;
+	string mapName = 1; // 地图名 ("OneRoute123")
+	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
 }
 // 返回进入自动模式结果
 message rsqEnterAutoMode
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
-
-// 次级工作模式
-enum eSubMode {
-	eUNKNOWN_EXCEPTION = 0; // 未知模式异常
-	eIDLING_EXCEPTION = 1; // 待命模式异常
-	eCOLLECTION_EXCEPTION = 2; // 采集模式异常
-	eAUTO_EXCEPTION = 3; // 自动模式异常
-	eIDLING_STILL = 4; // 空闲模式-静止
-	eIDLING_MOVING = 5; // 空闲模式-运动
-	eCOLLECTION_COLLECTING = 6; // 采集模式-采集中
-	eCOLLECTION_GENERATING = 7; // 采集模式-地图生成中
-	eCOLLECTION_FINISHED = 8; // 采集模式-建图完成
-	eAUTO_RELOC = 9; // 自动模式-重定位中
-	eAUTO_MOVING = 10; // 自动模式-运动中
-	eAUTO_STOPPED = 11; // 自动模式-停止(由调用者或避障模块要求停止)
-	eAUTO_ENDPOINT_UNREACHABLE = 12; // 自动模式-路径终点无法到达
-	eAUTO_FINISHED = 13; // 自动模式-成功到达终点
-}
-// 各模式下的异常状态分类
-enum eModeException {
-	eNO_EXCEPTION = 0; // 无异常
-	eCOLLECTION_EXISTINGROUTE = 1; // 试图采集的地图名已存在
-	eCOLLECTION_FILEIOERROR = 2; // 采集模式下文件IO错误
-	eAUTO_NONEXISTINGROUTE = 3; // 自动模式选择的地图不存在
-	eAUTO_RELOCFAILED = 4; // 自动模式重定位失败
-	eAUTO_FILEIOERROR = 5; // 自动模式下文件IO错误
-	eAUTO_PP_EXCEPTION = 6; // 自动模式下路径规划模块异常
-	eAUTO_OA_EXCEPTION = 7; // 自动模式下避障模块异常
-}
-// 自动模式下的运动状态
-enum eAUTOMOVINGSTATUS {
-	eNOT_AUTOMATIC = 0; // 不处于自动模式或处于自动模式下的异常状态
-	eSTATIC_NORMAL = 1; // 静态避障-正常行走
-	eSTATIC_SLOWDOWN = 2; // 静态避障-减速避障
-	eSTATIC_STOPPED = 3; // 静态避障-停止
-	eDYNAMIC_NORMAL = 4; // 动态避障-正常行走
-	eDYNAMIC_DETOUR = 5; // 动态避障-绕行
-	eDYNAMIC_NOWAYOUT = 6; // 动态避障-围困
-	eDYNAMIC_VIRTUAL_COLLISION = 7; // 动态避障-遭遇虚拟障碍
-	ePP_TURNING = 8; // 原地旋转
-	ePP_TEMP_SEGMENT = 9; // 执行临时路径(此过程静态避障)
-};
-
-//请求当前状态
-message reqRobotStatus
-{
-	
-}
-//返回当前状态结果
-message rspRobotStatus
-{
-	int64 timestamp = 1;				//时间戳(纪元起至今的毫秒数)
-	
-	eWorkingMode mode = 2;				//运行模式
-	eSubMode subMode = 3;				//子模式
-	eModeException modeExcept = 4;		//工作模式下的异常状态(软件或IO错误,非硬件错误)
-	
-	string collectionMapName = 5;		// 采集模式下的地图名
-	
-	eAUTOMOVINGSTATUS autoModeStat = 6;	//自动模式下的运动状态
-	string autoModeMapPicName = 7;		//自动模式行走的地图图片文件名
-	string autoModePathFileName = 8;	//自动模式行走的路径文件名
-	
-	// 机器人位置和姿态(平面)，仅在自动模式和采集模式的当前地图坐标下有意义
-	float posx = 9;						//坐标X(单位 米)
-	float posy = 10;					//坐标Y(单位 米)
-	float posdirection = 11;			//角度(单位 度)
-	
-	// 物理运动状态
-	float linspeed = 12;				//线速度(单位 米/秒)
-	float angspeed = 13;				//角速度(单位 度/秒)
-	
-	// GNSS定位信息
-	double longitude = 14;				//经度
-	double latitude = 15;				//纬度
-	double altitude = 16;				//海拔
-	
-	// 外设信息
-	float batt = 17;					//电量(百分比)
-	float temp = 18;					//温度(摄氏度)
-	float hum = 19;						//湿度(百分比)
-	float pm25 = 20;					//PM2.5
-	int32 stopstat = 21;					
-	int64 funcstat = 22;
-	int32 voiceloop = 23;
-	double milestone = 24;      		//轮机行驶里程数(单位 米)
-}
 
 
 //请求位置校正(2D)
@@ -198,7 +150,7 @@ message reqPoseCorrection
 //返回当前状态结果
 message rspPoseCorrection
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 //请求实体按钮启用/禁用
@@ -209,21 +161,21 @@ message reqEnablePhysicalSwitch
 //返回实体按钮启用/禁用结果
 message rspEnablePhysicalSwitch
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 	bool enable = 2;
 }
 
 
 //直接控制机器人运动
-message reqSetParameter
+message reqControlRobot
 {
 	float linspeed = 1;					//线速度(单位 米/秒)
 	float angspeed = 2;					//角速度(单位 度/秒)
 }
 //返回参数设置结果
-message rspSetParameter
+message rspControlRobot
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 //请求障碍物信息
@@ -271,7 +223,7 @@ message reqNavigateToPosition
 //返回导航结果
 message rspNavigateToPosition
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 //请求取消导航
@@ -281,7 +233,7 @@ message reqCancelNavigate
 //返回取消导航结果
 message rspCancelNavigate
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 //请求重启主机
 message reqRebootController
@@ -290,7 +242,7 @@ message reqRebootController
 //返回重启主机结果
 message rspRebootController
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 //请求设置禁区虚拟墙
@@ -307,24 +259,141 @@ message reqVirtualWall
 //返回设置禁区虚拟墙结果
 message rspVirtualWall
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 }
 
 
 
 //请求地图信息
-message reqUploadMap
+message reqGetMapInfo
 {
 	repeated bytes mapName = 1;  			//地图名(字符串）
 }
 
 //返回地图结果
-message rspUploadMap
+message rspGetMapInfo
 {
-	eRspStatus ret = 1;
+	eRspType ret = 1;
 	bytes mapName = 2;						//地图名(字符串）
 	bytes fileHttpAddress = 3;				//HTTP文件地址
 }
+
+
+
+
+
+// 获取当前工作模式
+message reqGetMode
+{
+}
+
+message rspGetMode
+{
+	eRspType rspRet = 1;
+	eMODE mode = 2;
+}
+
+// 获取当前次级模式
+message reqGetSubMode
+{
+}
+
+message rspGetSubMode
+{
+	eRspType rspRet = 1;
+	eSUBMODE subMode = 2;
+}
+
+// 获取当前异常状态
+message reqGetException
+{
+}
+
+message rspGetException
+{
+	eRspType rspRet = 1;
+	eException exception = 2;
+}
+
+// 获取当前位姿
+message reqGetPose
+{
+}
+
+message rspGetPose
+{
+	eRspType rspRet = 1;
+	float x = 2; // X坐标, 正方向 前, 单位 米
+	float y = 3; // Y坐标, 正方向 左, 单位 米
+	float th = 4; // 航向, 单位 度
+}
+
+// 获取当前运行地图. 待命模式下无内容; 采集模式下mapName有效; 自动模式下mapName和pathName都有效
+message reqGetCurMap
+{
+}
+
+message rspGetCurMap
+{
+	eRspType rspRet = 1;
+	string mapName = 2; // 地图名 ("OneRoute...")
+	string pathName = 3; // 路径名 ("OneRoute_123/Path_auto.txt...")
+}
+
+
+
+
+// 更新地图列表
+message reqRefreshMaps
+{
+}
+
+message rspRefreshMaps
+{
+	eRspType rspRet = 1;
+}
+
+// 获取下一地图名称
+message reqGetNextMapName
+{
+}
+
+message rspGetNextMapName
+{
+	eRspType rspRet = 1;
+	string mapName = 2; // 地图名 ("OneRoute...")
+}
+
+// 获取背景地图和坐标转换信息
+message reqGetBkgPic
+{
+	string mapName = 1;
+}
+
+message rspGetBkgPic
+{
+	eRspType rspRet = 1;
+	string picFileAddr = 2; // 背景地图文件的http地址
+	repeated float conv = 3; // 转换矩阵, 6个浮点数
+}
+
+// 更新路径文件列表
+message reqRefreshPaths
+{
+	string mapName = 1;
+}
+
+message rspRefreshPaths
+{
+	eRspType rspRet = 1;
+	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
+	int32 nPoints = 3; // 路径点数量
+	repeated float X = 4; // X坐标 (nPoints个)
+	repeated float Y = 5; // Y坐标 (nPoints个)
+	repeated float Vel = 6; // 速度 (nPoints个)
+}
+
+
 
 
 
