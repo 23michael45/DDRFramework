@@ -319,10 +319,19 @@ message rspCmdSignPoint{
 	eCmdRspType type = 1;
 }
 
+
+enum ePathPointType{
+	ePointTypeCommon = 0;
+	ePointTypeProjection = 1;
+	ePointTypeGate = 2;
+	ePointTypeElevator = 3;
+}
+
 message PathPoint{
 	float pointX = 1;
 	float pointY = 2;
 	float speed = 3;
+	ePathPointType type = 4;
 }
 
 message reqCmdSetPathPoint{
