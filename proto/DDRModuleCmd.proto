@@ -249,20 +249,6 @@ message rspVirtualWall
 
 
 
-//请求地图信息
-message reqGetMapInfo
-{
-	repeated bytes mapName = 1;  			//地图名(字符串）
-}
-
-//返回地图结果
-message rspGetMapInfo
-{
-	eRspType ret = 1;
-	repeated bytes mapName = 2;						//地图名(字符串）
-	repeated bytes fileHttpAddress = 3;				//HTTP文件地址
-}
-
 
 
 
@@ -339,12 +325,12 @@ message rspGetMapNameList
 }
 
 // 获取背景地图和坐标转换信息
-message reqGetBkgPic
+message reqGetMapInfo
 {
 	string mapName = 1;
 }
 
-message rspGetBkgPic
+message rspGetMapInfo
 {
 	eRspType ret = 1;
 	string picFileAddr = 2; // 背景地图文件的http地址
