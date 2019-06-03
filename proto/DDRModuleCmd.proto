@@ -102,7 +102,7 @@ message reqEnterIdleMode
 
 }
 // 返回进入待命模式结果
-message rsqEnterIdleMode
+message rspEnterIdleMode
 {
 	eRspType ret = 1;
 }
@@ -112,7 +112,7 @@ message reqEnterCollectionMode
 	string mapName = 1;
 }
 // 返回进入采集模式结果
-message rsqEnterCollectionMode
+message rspEnterCollectionMode
 {
 	eRspType ret = 1;
 }
@@ -122,7 +122,7 @@ message reqFinishCollection
 
 }
 // 返回完成采集结果
-message rsqFinishCollection
+message rspFinishCollection
 {
 	eRspType ret = 1;
 }
@@ -133,7 +133,7 @@ message reqEnterAutoMode
 	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
 }
 // 返回进入自动模式结果
-message rsqEnterAutoMode
+message rspEnterAutoMode
 {
 	eRspType ret = 1;
 }
@@ -195,22 +195,7 @@ message rspObstacleInfo
 	repeated ObstacleInfo infos = 1;
 }
 
-//警告异常类型
-enum eAlarmType
-{
-	eBesieged = 0;   				//被围困
-	eUltrasonicError = 1;			//超声传感器异常
-	eMotorError = 2;				//电机异常
-	eMemeotyInsufficient = 3;		//内存不足
-	eStorageInsufficient = 4;		//磁盘存储不足
-}
-//通知警告
-message notifyAlarm
-{
-	int64 timestamp = 1;			//时间戳(纪元起至今的毫秒数)
-	eAlarmType type = 2;
-	string message = 3;
-}
+
 
 
 //请求导航到指定点
@@ -274,8 +259,8 @@ message reqGetMapInfo
 message rspGetMapInfo
 {
 	eRspType ret = 1;
-	bytes mapName = 2;						//地图名(字符串）
-	bytes fileHttpAddress = 3;				//HTTP文件地址
+	repeated bytes mapName = 2;						//地图名(字符串）
+	repeated bytes fileHttpAddress = 3;				//HTTP文件地址
 }
 
 
@@ -289,7 +274,7 @@ message reqGetMode
 
 message rspGetMode
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	eMODE mode = 2;
 }
 
@@ -300,7 +285,7 @@ message reqGetSubMode
 
 message rspGetSubMode
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	eSUBMODE subMode = 2;
 }
 
@@ -311,7 +296,7 @@ message reqGetException
 
 message rspGetException
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	eException exception = 2;
 }
 
@@ -322,7 +307,7 @@ message reqGetPose
 
 message rspGetPose
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	float x = 2; // X坐标, 正方向 前, 单位 米
 	float y = 3; // Y坐标, 正方向 左, 单位 米
 	float th = 4; // 航向, 单位 度
@@ -335,33 +320,22 @@ message reqGetCurMap
 
 message rspGetCurMap
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	string mapName = 2; // 地图名 ("OneRoute...")
 	string pathName = 3; // 路径名 ("OneRoute_123/Path_auto.txt...")
 }
 
 
 
-
-// 更新地图列表
-message reqRefreshMaps
+// 获取地图名称列表
+message reqGetMapNameList
 {
 }
 
-message rspRefreshMaps
+message rspGetMapNameList
 {
-	eRspType rspRet = 1;
-}
-
-// 获取下一地图名称
-message reqGetNextMapName
-{
-}
-
-message rspGetNextMapName
-{
-	eRspType rspRet = 1;
-	string mapName = 2; // 地图名 ("OneRoute...")
+	eRspType ret = 1;
+	repeated string mapNameList = 2; // 地图名 ("OneRoute...")
 }
 
 // 获取背景地图和坐标转换信息
@@ -372,27 +346,66 @@ message reqGetBkgPic
 
 message rspGetBkgPic
 {
-	eRspType rspRet = 1;
+	eRspType ret = 1;
 	string picFileAddr = 2; // 背景地图文件的http地址
 	repeated float conv = 3; // 转换矩阵, 6个浮点数
 }
 
 // 更新路径文件列表
-message reqRefreshPaths
+message reqGetPathList
 {
 	string mapName = 1;
 }
 
-message rspRefreshPaths
+message rspGetPathList
 {
-	eRspType rspRet = 1;
-	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
-	int32 nPoints = 3; // 路径点数量
-	repeated float X = 4; // X坐标 (nPoints个)
-	repeated float Y = 5; // Y坐标 (nPoints个)
-	repeated float Vel = 6; // 速度 (nPoints个)
+	message PathInfo
+	{
+		string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
+		int32 nPoints = 3; // 路径点数量
+		repeated float X = 4; // X坐标 (nPoints个)
+		repeated float Y = 5; // Y坐标 (nPoints个)
+		repeated float Vel = 6; // 速度 (nPoints个)
+	}
+	
+	eRspType ret = 1;
+	repeated PathInfo pathList = 2;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+//警告异常类型
+enum eAlarmType
+{
+	eBesieged = 0;   				//被围困
+	eUltrasonicError = 1;			//超声传感器异常
+	eMotorError = 2;				//电机异常
+	eMemeotyInsufficient = 3;		//内存不足
+	eStorageInsufficient = 4;		//磁盘存储不足
+}
+//通知警告
+message notifyAlarm
+{
+	int64 timestamp = 1;			//时间戳(纪元起至今的毫秒数)
+	eAlarmType type = 2;
+	string message = 3;
+}
+
+message notifyStatus
+{
+	float posx = 1;
+	float posy = 2;
+	float posdirection = 3;
+	float poslinespeed = 4;
+	float posangulauspeed = 5;
+}
+
+message notifyStatusChange
+{
+	int32 premode = 1;
+	int32 tomode = 2;
+	int32 presubmode =3;
+	int32 tosubmode = 4;
+}
 
 
 
