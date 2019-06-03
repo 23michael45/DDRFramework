@@ -32,6 +32,7 @@ message OneRouteInfo
 	string robotID = 2;
 	string routeName = 3;
 	int64 dateTime = 4; // route creation time (seconds since EPOCH)
+	string description = 5; // this can be updated ONLY by uploading __DESCR__.ini
 }
 
 message reqCreateRoute
