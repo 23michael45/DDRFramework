@@ -9,7 +9,7 @@ enum eRspCode
 	eTooBusy = 1;
 	eReqVoid = 2; // requests invalid themselves
 	eIDInvalid = 4; // invalid upload/download ID
-	eInteralErr = 5;
+	eInternalErr = 5;
 	
 	eUp_TooFrequent = 6; // route to upload is too close to other routes from the same robot
 	eUp_TooBig = 7; // too big data to upload
