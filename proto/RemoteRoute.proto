@@ -54,8 +54,8 @@ message reqUploadFiles
 	repeated string fileNames = 3;
 	repeated int64 fileSz = 4; // list of file sizes (in number of bytes)
 	repeated int64 fileMTimes = 5; // list of file modification times (in seconds since EPOCH)
-	int64 file1_startPos = 6; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 7; // ending position of the last file (-1 default as the end of this file)
+	repeated int64 file_pos0 = 6; // starting positions of the files
+	repeated int64 file_pos1 = 7; // ending position of the files
 	eZipType zipType = 8;
 	int64 content_len = 9; // length of original contents
 	bytes contents = 10; // contents of files after decompression
@@ -71,11 +71,18 @@ message reqListRoutes
 {
 }
 
+message MultipleRouteInfo
+{
+	repeated OneRouteInfo routes = 1;
+	repeated uint64 downloadID = 2;
+}
+
 message rspListRoutes
 {
 	eRspCode ret = 1;
-	repeated OneRouteInfo routes = 2;
-	repeated uint64 downloadID = 3;
+	eZipType zipType = 2;
+	int64 routeRecords_sz = 3;
+	bytes routeRecords = 4; // a buffer that can be deserialized to get a MultipleFileInfo
 }
 
 message reqListFiles_uploader
@@ -90,14 +97,25 @@ message reqListFiles_downloader
 	uint64 reqGUID = 2;
 }
 
+message MultipleFileInfo
+{
+	message OneFileInfo
+	{
+		string name = 1;
+		int64 sz = 2;
+		int64 curPos = 3; // may be < sz
+		int64 mtime = 4; // modification times (in seconds since EPOCH)
+	}
+	repeated OneFileInfo records = 1;
+}
+
 message rspListFiles
 {
 	eRspCode ret = 1;
 	uint64 reqGUID = 2;
-	repeated string fileNames = 3;
-	repeated int64 fileSz = 4;
-	repeated int64 fileCurPos = 5; // may be < fileSz
-	repeated int64 fileMTimes = 6; // list of file modification times (in seconds since EPOCH)
+	eZipType zipType = 3;
+	int64 fileRecords_sz = 4;
+	bytes fileRecords = 5; // a buffer that can be deserialized to get a MultipleFileInfo 
 }
 
 message reqDownloadFiles
@@ -105,8 +123,8 @@ message reqDownloadFiles
 	uint64 reqGUID = 1;
 	uint64 downloadID = 2;
 	repeated string fileNames = 3;
-	int64 file1_startPos = 4; // starting position of the first file (0 as default as the beginning of this file)
-	int64 fileN_endPos = 5; // ending position of the last file)
+	repeated int64 file_pos0 = 4; // starting position
+	repeated int64 file_pos1 = 5; // ending position
 }
 
 message rspDownloadFiles
@@ -115,12 +133,11 @@ message rspDownloadFiles
 	uint64 reqGUID = 2;
 	repeated string fileNames = 3;
 	repeated int64 fileSz = 4;
-	eZipType zipType = 5;
-	int64 content_len = 6; // length of original contents
-	bytes contents = 7; // contents of files after decompression
+	repeated int64 file_pos0 = 5;
+	repeated int64 file_pos1 = 6;
+	eZipType zipType = 7;
+	int64 content_len = 8; // length of original contents
+	bytes contents = 9; // contents of files after decompression
 }
 
-message hbFrame
-{
-}
 
