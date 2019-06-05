@@ -1,0 +1,39 @@
+syntax = "proto3";
+package DDRCommProto;
+
+//----------------------------------- Hitachi [[[[
+
+enum equipment_type 
+{
+	en_elevator = 0;
+	en_gate = 1;
+}
+	
+message elevator_action
+{
+	int32 direction = 1; //direction 0 is up; 1 is down
+	int32 original_floor = 2; // destination floor
+	int32 destination_foor = 3; //Starting floor
+}
+
+message gate_action
+{
+	int32 action = 1; // Gate open
+}
+
+message reqRobotReqDevice
+{
+	int32 robot_id = 1;
+	bytes report_time = 2;
+	equipment_type type = 3;
+	bytes equipment_id = 4;
+	elevator_action elevatorAction = 5;
+	gate_action gateAction = 6;
+}
+
+message rspRobotReqDevice
+{	
+	string error = 1;
+}
+
+//----------------------------------- Hitachi ]]]]]

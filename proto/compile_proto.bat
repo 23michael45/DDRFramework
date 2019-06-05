@@ -40,6 +40,11 @@ protoc RemoteRoute.proto --csharp_out=./
 rem protoc RemoteRoute.proto --js_out=./
 protoc RemoteRoute.proto --python_out=./
 
+protoc ThirdpartyCmd.proto --cpp_out=./
+protoc ThirdpartyCmd.proto --java_out=./
+protoc ThirdpartyCmd.proto --csharp_out=./
+rem protoc ThirdpartyCmd.proto --js_out=./
+protoc ThirdpartyCmd.proto --python_out=./
 
 
 cd %PrePath%
