@@ -35,6 +35,9 @@
 #ifndef GOOGLE_PROTOBUF_COMMON_H__
 #define GOOGLE_PROTOBUF_COMMON_H__
 
+#pragma warning( disable: 4251 )
+#pragma warning( disable: 4275 )
+
 #include <algorithm>
 #include <iostream>
 #include <map>
