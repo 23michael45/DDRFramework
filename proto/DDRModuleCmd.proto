@@ -347,11 +347,13 @@ message rspGetPathList
 {
 	message PathInfo
 	{
-		string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
-		int32 nPoints = 3; // 路径点数量
-		repeated float X = 4; // X坐标 (nPoints个)
-		repeated float Y = 5; // Y坐标 (nPoints个)
-		repeated float Vel = 6; // 速度 (nPoints个)
+		string pathFileName = 1; // 路径文件名 ("OneRoute_123/Path_auto.txt")
+		int32 nPoints = 2; // 路径点数量
+		repeated float X = 3; // X坐标 (nPoints个)
+		repeated float Y = 4; // Y坐标 (nPoints个)
+		repeated float Vel = 5; // 速度 (nPoints个)
+		repeated int32 Type = 6; // 类型 (nPoints个)
+		repeated bytes Desc = 7; // 描述 (nPoints个)
 	}
 	
 	eRspType ret = 1;
