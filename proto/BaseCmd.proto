@@ -332,13 +332,14 @@ message PathPoint{
 	float pointY = 2;
 	float speed = 3;
 	ePathPointType type = 4;
+	bytes pointInfo = 5;
 }
 
 message reqCmdSetPathPoint{
 	repeated PathPoint sPath = 1;
 	float endAng = 2;
-	string route_name = 3;
-	string path_name = 4;
+	bytes route_name = 3;
+	bytes path_name = 4;
 }
 
 message rspCmdSetPathPoint{
