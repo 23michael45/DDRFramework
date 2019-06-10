@@ -724,14 +724,10 @@ message rspCmdSetFaceParams{
 //----------------------------------------------------------------------------------------------------------FaceService]]]]]]
 
 //Service to Client External Cmd
-message reqSendExternalCmd
+message notifySendExternalCmd
 {
 	string cmdName = 1; //string cmd name
 	string parameter = 2;//cmd parameter
-}
-message rspSendExternalCmd
-{
-	string error = 1;//if sucess ,error is empty
 }
 
 //Client to Service External Cmd
