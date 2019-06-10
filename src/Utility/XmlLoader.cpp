@@ -113,7 +113,7 @@ namespace DDRFramework
 	std::string XmlLoader::GetValue(std::string sheet, int count, std::string key)
 	{
 		try {
-			if (m_SheetMap.find(sheet) != m_SheetMap.end() && m_SheetMap[sheet]->size() < count && m_SheetMap[sheet]->at(count)->find(key) != m_SheetMap[sheet]->at(count)->end())
+			if (m_SheetMap.find(sheet) != m_SheetMap.end() && m_SheetMap[sheet]->size() > count && m_SheetMap[sheet]->at(count)->find(key) != m_SheetMap[sheet]->at(count)->end())
 			{
 				std::string s = m_SheetMap[sheet]->at(count)->at(key);
 				return s;
