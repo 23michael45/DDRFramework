@@ -727,14 +727,14 @@ message rspCmdSetFaceParams{
 message notifySendExternalCmd
 {
 	string cmdName = 1; //string cmd name
-	string parameter = 2;//cmd parameter
+	repeated string parameter = 2;//cmd parameter
 }
 
 //Client to Service External Cmd
 message reqReceiveExternalCmd
 {
 	string cmdName = 1; //string cmd name
-	string parameter = 2;//cmd parameter
+	repeated string parameter = 2;//cmd parameter
 }
 message rspReceiveExternalCmd
 {
