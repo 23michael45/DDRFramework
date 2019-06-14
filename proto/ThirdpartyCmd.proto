@@ -38,4 +38,11 @@ message rspRobotReqDevice
 	string error = 1;
 }
 
+enum qr_work_type{
+	eelevator_gate = 0;
+	eelevator_inside = 1;
+	eprojection = 2;
+	ewait_for_order = 3;
+}
+
 //----------------------------------- Hitachi ]]]]]
