@@ -37,6 +37,17 @@ message rspRobotReqDevice
 {	
 	string error = 1;
 }
+enum eHitachiActionType
+{
+	eProjectionEnd = 0;
+	eGateEnd = 1;
+	eElevatorEnter = 2;
+	eArrivalElevatorIn_A = 3;
+	eArrivalElevatorIn_B = 4;
+	eArrivalElevatorOut_A = 5;
+	eArrivalElevatorOut_B = 6;
+
+}
 
 enum qr_work_type{
 	eelevator_gate = 0;
