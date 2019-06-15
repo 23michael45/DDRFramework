@@ -46,15 +46,19 @@ enum eHitachiActionType
 	eArrivalElevatorIn_B = 4;
 	eArrivalElevatorOut_A = 5;
 	eArrivalElevatorOut_B = 6;
-
+	eQR_Work_Error = 7;
 }
 
 enum qr_work_type{
-	eelevator_gate = 0;
-	eelevator_inside = 1;
-	eelevator_outside = 2;
-	eprojection = 3;
-	ewait_for_order = 4;
+	eElevator_Gate = 0;
+	eElevator_Gate_A = 1;
+	eElevator_Gate_B = 2;
+	eElevator_Inside_A = 3;
+	eElevator_Inside_B = 4;
+	eElevator_Outside_A = 5;
+	eElevator_Outside_B = 6;
+	eProjection = 7;
+	eWait_for_order = 8;
 }
 
 //----------------------------------- Hitachi ]]]]]
