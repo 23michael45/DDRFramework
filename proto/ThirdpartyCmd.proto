@@ -52,8 +52,9 @@ enum eHitachiActionType
 enum qr_work_type{
 	eelevator_gate = 0;
 	eelevator_inside = 1;
-	eprojection = 2;
-	ewait_for_order = 3;
+	eelevator_outside = 2;
+	eprojection = 3;
+	ewait_for_order = 4;
 }
 
 //----------------------------------- Hitachi ]]]]]
