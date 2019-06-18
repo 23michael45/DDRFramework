@@ -1422,7 +1422,7 @@ std::string wstr_to_str(const std::wstring &ws)
 	const wchar_t* from_next;
 	char* to_next;
 	const converter_type::result result = converter.out(state, ws.data(), ws.data() + ws.length(), from_next, &to[0], &to[0] + to.size(), to_next);
-	if (result == converter_type::ok or result == converter_type::noconv) {
+	if (result == converter_type::ok || result == converter_type::noconv) {
 		return std::string(&to[0], to_next);
 	} else {
 		return std::string();
