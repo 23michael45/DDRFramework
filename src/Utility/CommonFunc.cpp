@@ -1,24 +1,37 @@
 #include "CommonFunc.h"
 
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+#include <locale.h>
+#include <vector>
+#include <cstdlib>
+#include <codecvt>
+#include <locale>
 #include <ctime>
 #include <thread>
 #include <chrono>
 #include <codecvt>
 #include <regex>
-
-
-#ifdef _WIN32
+#include <sys/types.h>
+#include <sys/stat.h>
+#if defined(_WIN32) || defined(_WIN64)
+#include <io.h>
+#include <direct.h>
 #define WIN32_LEAN_AND_MEAN
-#include "Windows.h"
-#endif
-#ifdef __linux__
+#include <windows.h>
+#elif defined(__linux__)
 #include <stdio.h>
-#include <termios.h>
+#include <utime.h>
+#include <sys/time.h>
 #include <unistd.h>
+#include <utime.h>
+#include <glob.h>
 #include <fcntl.h>
+#include <termios.h>
 #include <iconv.h>
 #endif
-
+#include "MsgStruct.h"
 
 namespace DDRFramework {
 
@@ -967,5 +980,468 @@ namespace DDRFramework {
 		return false;
 #endif
 	}
+
+}
+
+namespace DDRSys {
+
+bool createDir(const char *pDirName)
+{
+#if defined(_WIN32) || defined(_WIN64)
+	return (0 == _mkdir(pDirName));
+#endif
+#ifdef __linux__
+	return (0 == mkdir(pDirName, 0));
+#endif
+}
+
+bool isFileExisting(const char *fileName)
+{
+	struct stat info;
+	if (stat(fileName, &info) != 0 || (info.st_mode & S_IFDIR)) {
+		return false;
+	}
+	return true;
+}
+
+bool isDirExisting(const char *dirName)
+{
+	struct stat info;
+	if (stat(dirName, &info) != 0 || !(info.st_mode & S_IFDIR)) {
+		return false;
+	}
+	return true;
+}
+
+int deleteFile(const char *pFileName)
+{
+	return remove(pFileName);
+}
+
+int deleteDir(const char *pDirName)
+{
+	void *pMsgSt = Create_MsgSt();
+	if (!pMsgSt) {
+		return -1;
+	}
+	int slen = (int)strlen(pDirName);
+	char ttt = (char)0x00; // not expanded yet
+	Combine_MsgSt(pMsgSt, &ttt, 1, pDirName, slen);
+	std::vector<char> vec;
+
+	while (GetNumMsg_MsgSt(pMsgSt) > 0) {
+		int nlen = GetNextMsgLen_MsgSt(pMsgSt);
+		if (nlen <= 0) {
+			break;
+		}
+		vec.resize(nlen);
+		PopMsg_MsgSt(pMsgSt, &vec[0], nlen);
+		if ((char)0x01 == vec[0]) { // already expanded
+			vec.emplace_back('\0');
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Deleting folder (EXPANDED) '" << &vec[1] << "'\n";
+#endif
+#if defined(_WIN32) || defined(_WIN64)
+			_rmdir(&vec[1]);
+#endif
+#ifdef __linux__
+			rmdir(&vec[1]);
+#endif
+			continue;
+		}
+		// expanding
+		vec.resize(nlen + 3);
+		memcpy(&vec[nlen], "/*\0", 3);
+#ifdef DEBUGGIN_INFO_DISP
+		std::cout << "Expanding '" << &vec[1] << "'\n";
+#endif
+		bool bAnySubFolder = false;
+#if defined(_WIN32) || defined(_WIN64)
+		struct _finddata_t fileinfo;
+		auto hFile = _findfirst(&vec[1], &fileinfo);
+		vec.resize(nlen + 1);
+		if (-1 != hFile) {
+			do {
+				if (0 == strcmp(fileinfo.name, ".") ||
+					0 == strcmp(fileinfo.name, "..")) {
+					continue;
+				}
+				if (0 == (fileinfo.attrib & _A_SUBDIR)) { // file
+					int pos = (int)vec.size();
+					int fnLen = (int)strlen(fileinfo.name);
+					vec.resize(pos + fnLen + 1);
+					memcpy(&vec[pos], fileinfo.name, fnLen + 1);
+#ifdef DEBUGGIN_INFO_DISP
+					std::cout << "Deleting file '" << &vec[1] << "'\n";
+#endif
+					remove(&vec[1]);
+					vec.resize(pos);
+				} else { // sub folder
+					if (!bAnySubFolder) {
+						// push back current folder as expanded
+						vec[0] = (char)0x01;
+						Add_MsgSt(pMsgSt, &vec[0], nlen);
+						bAnySubFolder = true;
+					}
+					int pos = (int)vec.size();
+					int fnLen = (int)strlen(fileinfo.name);
+					vec.resize(pos + fnLen);
+					memcpy(&vec[pos], fileinfo.name, fnLen);
+					vec[0] = (char)0x00; // not expanded yet
+#ifdef DEBUGGIN_INFO_DISP
+					vec.emplace_back('\0');
+					std::cout << "Adding sub-folder '" << &vec[1] << "'\n";
+					vec.pop_back();
+#endif
+					Add_MsgSt(pMsgSt, &vec[0], (int)vec.size());
+					vec.resize(pos);
+				}
+			} while (0 == _findnext(hFile, &fileinfo));
+		}
+		_findclose(hFile);
+
+#elif defined(__linux__)
+		glob_t globbuf;
+		glob(&vec[1], 0, NULL, &globbuf);
+		vec.resize(nlen + 1);
+		if (globbuf.gl_pathc > 0) {
+			for (int i = 0; i < (int)globbuf.gl_pathc; ++i) {
+				int fuLen = strlen(globbuf.gl_pathv[i]);
+				if (0 == strcmp(".", globbuf.gl_pathv[i]) ||
+					0 == strcmp("..", globbuf.gl_pathv[i]) ||
+					(fuLen > 2 &&
+						0 == strncmp("/.", globbuf.gl_pathv[i] + fuLen - 2, 2)) ||
+						(fuLen > 3 &&
+							0 == strncmp("/..", globbuf.gl_pathv[i] + fuLen - 3, 3))) {
+					continue;
+				}
+				struct stat sb;
+				if (stat(globbuf.gl_pathv[i], &sb) < 0) {
+					continue;
+				}
+				if ((sb.st_mode & S_IFMT) != S_IFDIR) { // regular file
+#ifdef DEBUGGIN_INFO_DISP
+					std::cout << "Deleting file '" << globbuf.gl_pathv[i] << "'\n";
+#endif
+					remove(globbuf.gl_pathv[i]);
+				} else {
+					if (!bAnySubFolder) {
+						// push back current folder as expanded
+						vec[0] = (char)0x01;
+#ifdef DEBUGGIN_INFO_DISP
+						vec.emplace_back('\0');
+						std::cout << "Adding back cur-folder '" << &vec[1] << "'\n";
+						vec.pop_back();
+#endif
+						Add_MsgSt(pMsgSt, &vec[0], nlen);
+						bAnySubFolder = true;
+					}
+#ifdef DEBUGGIN_INFO_DISP
+					std::cout << "Adding sub-folder '" << globbuf.gl_pathv[i] << "'\n";
+#endif
+					ttt = (char)0x00;
+					int xxx = Combine_MsgSt(pMsgSt, &ttt, 1, globbuf.gl_pathv[i], strlen(globbuf.gl_pathv[i]));
+				}
+			}
+		}
+		globfree(&globbuf);
+#endif
+
+		if (!bAnySubFolder) { // current folder is empty
+			vec.back() = '\0';
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Deleting folder (EMPTY) '" << &vec[1] << "'\n";
+#endif
+#if defined(_WIN32) || defined(_WIN64)
+			_rmdir(&vec[1]);
+#elif defined(__linux__)
+			rmdir(&vec[1]);
+#endif
+			continue;
+		}
+	}
+
+	Destroy_MsgSt(pMsgSt);
+#if defined(_WIN32) || defined(_WIN64)
+	return (-1 == _access(pDirName, 0) ? 0 : (-1));
+#elif defined(__linux__)
+	return (-1 == access(pDirName, F_OK) ? 0 : (-1));
+#endif
+}
+
+__int64 getModTime(const char *pFileDirName)
+{
+	struct stat result;
+	if (0 == stat(pFileDirName, &result) && -1 != result.st_mtime) {
+		return (__int64)result.st_mtime;
+	}
+	return -1;
+}
+
+bool setModTime(const char *pFileDirName, __int64 secSincEpoch)
+{
+#if defined(_WIN32) || defined(_WIN64)
+	HANDLE hFile = ::CreateFileA(pFileDirName,
+		                         GENERIC_READ | GENERIC_WRITE,
+		                         FILE_SHARE_READ | FILE_SHARE_DELETE,
+		                         NULL, OPEN_EXISTING,
+		                         FILE_FLAG_BACKUP_SEMANTICS, NULL);
+	if (INVALID_HANDLE_VALUE == hFile) {
+		return false;
+	}
+	FILETIME new_time;
+	secSincEpoch = Int32x32To64(secSincEpoch, 10000000) + 116444736000000000;
+	new_time.dwHighDateTime = (DWORD)(secSincEpoch >> 32);
+	new_time.dwLowDateTime = (DWORD)secSincEpoch;
+	bool bRet = ::SetFileTime(hFile, NULL, &new_time, &new_time);
+	BOOL BBRR = ::CloseHandle(hFile);
+	return bRet;
+#elif defined(__linux__)
+	struct stat foo;
+	if (0 != stat(filename, &foo)) {
+		return false;
+	}
+	struct utimbuf new_times;
+	new_times.actime = foo.st_atime;
+	new_times.modtime = secSincEpoch;
+	return (0 == utime(filename, &new_times));
+#endif
+	return false;
+}
+
+__int64 getCreationTime(const char *pFileDirName)
+{
+	struct stat result;
+	if (0 == stat(pFileDirName, &result)) {
+		return (__int64)result.st_ctime;
+	}
+	return -1;
+}
+
+size_t getFileSize(const char *pFileName)
+{
+	struct stat result;
+	if (0 == stat(pFileName, &result)) {
+		return (size_t)result.st_size;
+	}
+	return 0;
+}
+
+struct _fileListStruct
+{
+	std::string dirName;
+	std::string tmpFN;
+	int sw;
+	bool bSubFolder;
+	std::vector<char> str;
+	void *pMsgQ;
+	bool bFirstLevelExp;
+};
+
+void* findAllFiles_Open(const char *pDir, int switchDirFile,
+	                    bool bSubFolder)
+{
+	if (!pDir) {
+		return nullptr;
+	}
+	_fileListStruct *pStruct = new _fileListStruct;
+	if (!pStruct) {
+		return nullptr;
+	}
+	pStruct->pMsgQ = Create_MsgQ();
+	if (!pStruct->pMsgQ) {
+		delete pStruct;
+		return nullptr;
+	}
+	if (!pDir || !(*pDir)) {
+		pStruct->dirName = "./";
+	} else {
+		pStruct->dirName = pDir;
+	}
+	if (pStruct->dirName.back() != '/' &&
+		pStruct->dirName.back() != '\\') {
+		pStruct->dirName += '/';
+	}
+	pStruct->sw = switchDirFile;
+	pStruct->bSubFolder = bSubFolder;
+	pStruct->bFirstLevelExp = false;
+
+	if (Add_MsgQ(pStruct->pMsgQ, "*", 1) > 0) {
+		return pStruct;
+	} else {
+		Destroy_MsgQ(pStruct->pMsgQ);
+		delete pStruct;
+		return nullptr;
+	}
+}
+
+bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder)
+{
+	if (!pHandle) {
+		return false;
+	}
+	_fileListStruct &hhh = *((_fileListStruct*)pHandle);
+
+	while (1) {
+		int nextLen = GetNextMsgLen_MsgQ(hhh.pMsgQ);
+		if (nextLen <= 0) {
+			return false;
+		}
+		hhh.str.resize(nextLen + 1);
+		if (PopMsg_MsgQ(hhh.pMsgQ, &(hhh.str[0]), (int)hhh.str.size()) <= 0) {
+			return false;
+		}
+		hhh.str.back() = '\0';
+		bool bFullNameReady = true;
+		for (auto &x : hhh.str) {
+			if ('*' == x || '?' == x) {
+				bFullNameReady = false;
+				break;
+			}
+		}
+
+		if (bFullNameReady) { // file name okay to be fetched
+			hhh.tmpFN = &hhh.str[0];
+			hhh.str.insert(hhh.str.begin(), hhh.dirName.c_str(),
+				hhh.dirName.c_str() + hhh.dirName.length());
+			struct stat result;
+			if (0 != stat(&(hhh.str[0]), &result)) {
+				continue;
+			}
+			hhh.str.erase(hhh.str.begin(), hhh.str.begin() + hhh.dirName.length());
+			bool bDir = ((result.st_mode & S_IFDIR) != 0);
+			if ((bDir && (hhh.sw & 0x02)) || (!bDir && (hhh.sw & 0x01))) {
+				if (pRelativeName) {
+					*pRelativeName = hhh.tmpFN.c_str();
+				}
+				if (pbFolder) {
+					*pbFolder = bDir;
+				}
+				return true;
+			} else {
+				continue;
+			}
+		} else { // str contains '*'
+			if (hhh.bFirstLevelExp && !hhh.bSubFolder) {
+				continue;
+			}
+			hhh.str.insert(hhh.str.begin(), hhh.dirName.c_str(),
+				hhh.dirName.c_str() + hhh.dirName.length());
+			struct _finddata_t fileinfo;
+			auto hFile = _findfirst(&(hhh.str[0]), &fileinfo);
+			if (-1 == hFile) {
+				continue;
+			}
+			hhh.str.erase(hhh.str.begin(), hhh.str.begin() + hhh.dirName.length());
+			hhh.str.erase(hhh.str.end() - 2, hhh.str.end());
+			int pos = (int)hhh.str.size();
+			do {
+				if (0 == strcmp(fileinfo.name, ".") ||
+					0 == strcmp(fileinfo.name, "..")) {
+					continue;
+				}
+				if (0 == (fileinfo.attrib & _A_SUBDIR)) { // single file
+					hhh.str.insert(hhh.str.end(), fileinfo.name,
+						fileinfo.name + strlen(fileinfo.name));
+				} else { // sub-folder
+					hhh.str.insert(hhh.str.end(), fileinfo.name,
+						fileinfo.name + strlen(fileinfo.name));
+					if (Add_MsgQ(hhh.pMsgQ, &(hhh.str[0]), (int)hhh.str.size()) <= 0) {
+						return false;
+					}
+					hhh.str.emplace_back('/');
+					hhh.str.emplace_back('*');
+				}
+				if (Add_MsgQ(hhh.pMsgQ, &(hhh.str[0]), (int)hhh.str.size()) <= 0) {
+					return false;
+				}
+				hhh.str.resize(pos);
+			} while (0 == _findnext(hFile, &fileinfo));
+			hhh.bFirstLevelExp = true;
+		}
+	}
+	return false;
+}
+
+void findAllFile_Close(void *pHandle)
+{
+	if (pHandle) {
+		if (((_fileListStruct*)pHandle)->pMsgQ) {
+			Destroy_MsgQ(((_fileListStruct*)pHandle)->pMsgQ);
+		}
+		delete (_fileListStruct*)pHandle;
+	}
+}
+
+class _LocaleSetter {
+public:
+	_LocaleSetter() {
+		setlocale(LC_ALL, "");
+	}
+} __g_ls__;
+
+std::string wstring_to_utf8(const std::wstring& str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> _conv;
+	return _conv.to_bytes(str);
+}
+
+std::wstring utf8_to_wstring(const std::string &str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> _conv;
+	return _conv.from_bytes(str);
+}
+
+std::wstring str_to_wstr(const char *pStr)
+{
+	const std::locale locale("");
+	size_t nStrLen = strlen(pStr);
+	const char* data_from_next = nullptr;
+	std::vector<wchar_t> data_to(nStrLen + 1);
+	wchar_t* data_to_next = nullptr;
+	wmemset(&data_to[0], 0, nStrLen + 1);
+	typedef std::codecvt<wchar_t, char, mbstate_t> convert_facet;
+	mbstate_t in_state = { 0 };
+	auto result = std::use_facet<convert_facet>(locale).in(
+		in_state, pStr, pStr + nStrLen, data_from_next,
+		&data_to[0], &data_to[0] + nStrLen + 1, data_to_next);
+	std::wstring wstr;
+	if (convert_facet::ok == result) {
+		wstr = &data_to[0];
+	}
+	return wstr;
+}
+
+std::string wstr_to_str(const std::wstring &ws)
+{
+	const std::locale locale("");
+	typedef std::codecvt<wchar_t, char, std::mbstate_t> converter_type;
+	const converter_type& converter = std::use_facet<converter_type>(locale);
+	std::vector<char> to(ws.length() * converter.max_length());
+	std::mbstate_t state;
+	const wchar_t* from_next;
+	char* to_next;
+	const converter_type::result result = converter.out(state, ws.data(), ws.data() + ws.length(), from_next, &to[0], &to[0] + to.size(), to_next);
+	if (result == converter_type::ok or result == converter_type::noconv) {
+		return std::string(&to[0], to_next);
+	} else {
+		return std::string();
+	}
+}
+
+std::string sysStr_to_utf8(const char *pSysStr)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> _conv;
+	return _conv.to_bytes(str_to_wstr(pSysStr));
+}
+
+std::string utf8_to_sysStr(const char *pU8Str)
+{
+	// UTF-8 to wstring
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> wconv;
+	std::wstring wstr = wconv.from_bytes(pU8Str);
+	// wstring to (sys-encoded) string
+	return wstr_to_str(wstr);
+}
 
 }

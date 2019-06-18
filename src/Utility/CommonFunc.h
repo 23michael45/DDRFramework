@@ -99,4 +99,38 @@ namespace DDRFramework {
 	bool DDRRemoveDir(const char* szFileDir);
 }
 
+namespace DDRSys {
+
+// file system functions
+bool createDir(const char *pDirName);
+bool isFileExisting(const char *fileName);
+bool isDirExisting(const char *dirName);
+
+/* return 0 for success, -1 for error. */
+int deleteFile(const char *pFileName);
+/* Try to clear a folder specified by pDirName, empty or not. Return 0 for
+success, -1 for error. */
+int deleteDir(const char *pDirName);
+
+// get last modification time of a file (seconds since EPOCH)
+__int64 getModTime(const char *pFileDirName);
+// set last modification time of a file (seconds since EPOCH)
+bool setModTime(const char *pFileDirName, __int64 secSincEpoch);
+// get creation time of a file (seconds since EPOCH)
+__int64 getCreationTime(const char *pFileDirName);
+// get file size (in bytes) of a file
+size_t getFileSize(const char *pFileName);
+
+// switchDirFile: bit 0 - non-folder file; bit 1 - folder
+// bSubFolder: dig up sub directories or not
+void* findAllFiles_Open(const char *pWorkingDir, int switchDirFile,
+		                bool bSubFolder);
+bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder);
+void findAllFile_Close(void *pHandle);
+
+std::string sysStr_to_utf8(const char *pSysStr);
+std::string utf8_to_sysStr(const char *pU8Str);
+
+}
+
 #endif // CommonFunc_h__
