@@ -257,6 +257,7 @@ enum eCmdActionMode{
 	eBlindWaldStatic = 3;
 	eRec = 4;
 	eReCharging = 5;
+	eUWBAuto = 6;
 }
 // Cmd start to autorun or rec
 message reqCmdStartActionMode{
@@ -346,6 +347,21 @@ message rspCmdSetPathPoint{
 	eCmdRspType type = 1;
 }
 
+message reqAddPathPointWhileCollecting
+{
+	PathPoint point = 1;
+}
+message rspAddPathPointWhileCollecting
+{
+	eCmdRspType type = 1;
+}
+message notifyPathPointArrayCollectionFinish
+{
+	repeated PathPoint sPath = 1;	
+	float endAng = 2;
+	bytes route_name = 3;
+	bytes path_name = 4;
+}
 
 
 //-----------------------------------ClientCmd]]]]]
