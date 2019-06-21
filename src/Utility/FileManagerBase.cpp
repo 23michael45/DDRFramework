@@ -191,7 +191,9 @@ namespace DDRFramework
 				{
 					if (std::regex_match(subfile, std::regex(finalfmt)))
 					{
-						vec.push_back(dir + "/" + subfile);
+						auto value = dir + "/" + subfile;
+						value = DDRFramework::MBToUTF8String(value);
+						vec.push_back(value);
 					}
 
 
