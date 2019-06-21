@@ -394,17 +394,68 @@ message notifyBaseStatus{
 	float thermalmaxvalue = 24;
 }
 
+enum  eNavRobotMode 
+{
+	eNavRobotModeReverse = 0;
+	IDLING = 1; // 待命模式
+	COLLECTION = 2; // 标定-采集模式
+	AUTO = 3; // 自动行走模式
+}
+
+// 次级工作模式
+enum  eNavRobotSubMode 
+{
+	eRobotSubModeReverse = 0; // 保留
+	IDLING_EXCEPTION = 1; // 待命模式异常
+	COLLECTION_EXCEPTION = 2; // 采集模式异常
+	AUTO_EXCEPTION = 3; // 自动模式异常
+
+	IDLING_STILL = 4; // 空闲模式-静止
+	IDLING_MOVING = 5; // 空闲模式-运动
+
+	COLLECTION_COLLECTING = 6; // 采集模式-采集中
+	COLLECTION_GENERATING = 7; // 采集模式-地图生成中
+	COLLECTION_FINISHED = 8; // 采集模式-建图完成
+	COLCALIB_PT0 = 9; // 标定采集-0点原地标定
+	COLCALIB_01 = 10; // 标定采集-0-1点采集
+	COLCALIB_PT1 = 11; // 标定采集-1点原地标定
+	COLCALIB_12 = 12;// 标定采集-1-2点采集
+	COLCALIB_PT2 = 13; // 标定采集-2点原地标定
+	COLCALIB_23 = 14; // 标定采集-2-3点采集
+
+	AUTO_RELOC = 15; // 自动模式-重定位中
+	AUTO_MOVING = 16; // 自动模式-运动中
+	AUTO_STOPPED = 17; // 自动模式-停止(由调用者或避障模块要求停止)
+	AUTO_ENDPOINT_UNREACHABLE = 18; // 自动模式-路径终点无法到达
+	AUTO_FINISHED = 19; // 自动模式-成功到达终点
+}
+
+enum eDynamicOAStatus
+{
+	eDynamicOA = 0; // 动态
+	eStaticOA = 1; // 静态
+}
+
+enum eSelfCalibStatus
+{
+	eInSelfCalib = 0; // 正在自标定
+	eNoSelfCalib = 1; // 没在自标定
+}
+
+
 message notifyBaseStatusEx{
-	int32 mode = 1;
-	int32 sonmode =2;
-	int32 stopstat = 3;
-	bytes currroute = 4;
-	string currpath = 5;
-	float posx = 6;
-	float posy = 7;
-	float posdirection = 8;
-	float poslinespeed = 9;
-	float posangulauspeed = 10;
+	eNavRobotMode mode = 1;
+	eNavRobotSubMode sonmode =2;
+	eDynamicOAStatus dynamicoa = 3;
+	eSelfCalibStatus selfcalibstatus = 4;
+	int32 stopstat = 5;
+	bytes currroute = 6;
+	string currpath = 7;
+	float posx = 8;
+	float posy = 9;
+	float posdirection = 10;
+	float poslinespeed = 11;
+	float posangulauspeed = 12;
 }
 
 // Environmental sensor info
