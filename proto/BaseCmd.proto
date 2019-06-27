@@ -361,6 +361,7 @@ message notifyPathPointArrayCollectionFinish
 	float endAng = 2;
 	bytes route_name = 3;
 	bytes path_name = 4;
+	bytes poimark_name = 5;
 }
 
 
