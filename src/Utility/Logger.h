@@ -174,6 +174,7 @@ namespace DDRFramework {
 
 	void Print(const char* format, ...);
 
+	std::string GetTimeNowstring();
 	void DDRLog(Log::Level level,const char* format, ...);
 	void DDRLogArgs(DDRFramework::Log::Level level, const char* format, va_list args);
 	class ConsoleDebug
