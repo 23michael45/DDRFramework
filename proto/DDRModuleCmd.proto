@@ -9,41 +9,6 @@ enum eRspType {
 	eDenied = 3;
 }
 
-enum eMODE {
-	eERR_MODE = 0; // 错误
-	eIDLING = 1; // 待命模式
-	eCOLLECTION = 2; // 采集建图模式
-	eAUTO = 3; // 自动行走模式
-}
-
-enum eSUBMODE {
-	eERR_SUBMODE = 0; // 错误
-	eIDLING_EXCEPTION = 1; // 待命模式异常
-	eCOLLECTION_EXCEPTION = 2; // 采集模式异常
-	eAUTO_EXCEPTION = 3; // 自动模式异常
-	eIDLING_STILL = 4; // 空闲模式-静止
-	eIDLING_MOVING = 5; // 空闲模式-运动
-	eCOLLECTION_COLLECTING = 6; // 采集模式-采集中
-	eCOLLECTION_GENERATING = 7; // 采集模式-地图生成中
-	eCOLLECTION_FINISHED = 8; // 采集模式-建图完成
-	eAUTO_RELOC = 9; // 自动模式-重定位中
-	eAUTO_MOVING = 10; // 自动模式-运动中
-	eAUTO_STOPPED = 11; // 自动模式-停止(由调用者或避障模块要求停止)
-	eAUTO_ENDPOINT_UNREACHABLE = 12; // 自动模式-路径终点无法到达
-	eAUTO_FINISHED = 13; // 自动模式-成功到达终点
-}
-
-enum eException {
-	eNO_EXCEPTION = 0;
-	eINTERNAL_MEM_ERROR = 1; // 内存错误
-	eCOLLECTION_EXISTINGROUTE = 2; // 试图采集的地图名已存在
-	eCOLLECTION_FILEIOERROR = 3; // 采集模式下文件IO错误
-	eAUTO_NONEXISTINGROUTE = 4; // 自动模式选择的地图不存在
-	eAUTO_RELOCFAILED = 5; // 自动模式重定位失败
-	eAUTO_FILEIOERROR = 6; // 自动模式下文件IO错误
-	eAUTO_PP_EXCEPTION = 7; // 自动模式下路径规划模块异常
-	eAUTO_OA_EXCEPTION = 8; // 自动模式下避障模块异常
-}
 
 
 

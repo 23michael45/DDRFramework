@@ -431,6 +431,20 @@ enum  eNavRobotSubMode
 	AUTO_FINISHED = 19; // 自动模式-成功到达终点
 }
 
+
+enum eException {
+	eNO_EXCEPTION = 0;
+	eINTERNAL_MEM_ERROR = 1; // 内存错误
+	eCOLLECTION_EXISTINGROUTE = 2; // 试图采集的地图名已存在
+	eCOLLECTION_FILEIOERROR = 3; // 采集模式下文件IO错误
+	eAUTO_NONEXISTINGROUTE = 4; // 自动模式选择的地图不存在
+	eAUTO_RELOCFAILED = 5; // 自动模式重定位失败
+	eAUTO_FILEIOERROR = 6; // 自动模式下文件IO错误
+	eAUTO_PP_EXCEPTION = 7; // 自动模式下路径规划模块异常
+	eAUTO_OA_EXCEPTION = 8; // 自动模式下避障模块异常
+}
+
+
 enum eDynamicOAStatus
 {
 	eDynamicOA = 0; // 动态
