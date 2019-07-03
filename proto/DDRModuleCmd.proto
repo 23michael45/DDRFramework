@@ -1,6 +1,6 @@
 syntax = "proto3";
 package DDRModuleProto;
-
+import "BaseCmd.proto";
 
 enum eRspType {
 	eSuccess = 0;
@@ -8,10 +8,6 @@ enum eRspType {
 	eInternalError = 2;
 	eDenied = 3;
 }
-
-
-
-
 
 
 //请求机器人本体信息
@@ -226,7 +222,7 @@ message reqGetMode
 message rspGetMode
 {
 	eRspType ret = 1;
-	eMODE mode = 2;
+	DDRCommProto.eNavRobotMode mode = 2;
 }
 
 // 获取当前次级模式
@@ -237,7 +233,7 @@ message reqGetSubMode
 message rspGetSubMode
 {
 	eRspType ret = 1;
-	eSUBMODE subMode = 2;
+	DDRCommProto.eNavRobotSubMode subMode = 2;
 }
 
 // 获取当前异常状态
@@ -248,7 +244,7 @@ message reqGetException
 message rspGetException
 {
 	eRspType ret = 1;
-	eException exception = 2;
+	DDRCommProto.eException exception = 2;
 }
 
 // 获取当前位姿
@@ -350,6 +346,7 @@ message notifyStatus
 	float posdirection = 3;
 	float poslinespeed = 4;
 	float posangulauspeed = 5;
+	float battery = 6;
 }
 
 message notifyStatusChange
