@@ -364,6 +364,14 @@ message notifyPathPointArrayCollectionFinish
 	bytes poimark_name = 5;
 }
 
+message reqCmdSwitchOAMode{
+	int32 mode = 1; // 1 - 动态，否则为静态
+}
+
+message rspCmdSwitchOAMode{
+	eCmdRspType type = 1;
+}
+
 
 //-----------------------------------ClientCmd]]]]]
 //-----------------------------------ClientStatus[[[[[
