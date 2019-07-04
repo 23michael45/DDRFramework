@@ -831,8 +831,18 @@ message rspReceiveExternalCmd
 	string error = 1;//if sucess ,error is empty
 }
 
+message reqCoreDebug
+{
+	int32 type = 1 // type
+	repeated string parameter = 2;//parameter
+	
+}
 
-
+message rspCoreDebug{	
+	int32 type = 1 // type
+	repeated string parameter = 2;//parameter
+	eCmdRspType type = 3;
+}
 
 
 
