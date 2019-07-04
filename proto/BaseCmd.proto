@@ -833,13 +833,13 @@ message rspReceiveExternalCmd
 
 message reqCoreDebug
 {
-	int32 type = 1 // type
+	int32 type = 1; // type
 	repeated string parameter = 2;//parameter
 	
 }
 
 message rspCoreDebug{	
-	int32 type = 1 // type
+	int32 type = 1; // type
 	repeated string parameter = 2;//parameter
 	eCmdRspType type = 3;
 }
