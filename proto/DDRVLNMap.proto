@@ -1,0 +1,103 @@
+syntax = "proto3";
+package DDRVLNMapProto;
+
+// 基础点
+message space_point 
+{
+	float x = 1;
+	float y = 2;
+	float ang = 3;
+}
+	
+// 线段
+message line
+{
+	space_point start = 1;
+	space_point end = 2;
+}
+
+// 多边形
+message polygon
+{
+	repeated space_point point = 1;
+}
+
+// 圆形
+message circle
+{
+	space_point center = 1;
+	float radius = 2;
+}
+
+// 标记点类型
+enum eMarkingItemType
+{
+	eMarkingTypeCommon = 0; // 普通点
+	eMarkingTypeProjection = 1; // 投影点
+	eMarkingTypeGate = 2; // 闸机点
+	eMarkingTypeElevator = 3; // 电梯点
+	eMarkingTypeCharging = 4; // 充电点
+} 
+
+// 标记点
+message marking_point_item
+{
+	space_point point = 1;
+	eMarkingItemType type = 2;
+}
+
+// 路径类型
+enum ePathItemType
+{
+	ePointCommon = 0; // 普通路径
+	ePointSticking = 1; // 贴边行驶路径
+} 
+
+// 路径
+message path_item
+{
+	bytes name = 1;
+	ePathItemType type = 2;
+	float speed = 3; // 速度
+	float endang = 4; // 结束角度
+	repeated space_point point = 5;
+}
+
+// 空间类型
+enum eSpaceItemType
+{
+	eSpacsTypeVirtualWall = 0; // 虚拟墙
+	eSpacsTypeHightlight = 1; // 高亮区
+	eSpacsTypeFog = 2; // 迷雾区，跟高亮相反
+}
+
+// 空间区域
+message space_item
+{
+	eSpaceItemType type = 1;
+	repeated line linedata = 2;
+	repeated polygon polygondata = 3;
+	repeated circle circledata = 4;
+}
+
+// 变换矩阵
+message affine_mat
+{
+	float r11 = 1;
+	float r12 = 2;
+	float tx = 3;
+	float r21 = 4;
+	float r22 = 5;
+	float ty = 6;
+}
+
+// 地图
+message ddr_vln_map
+{	
+	bytes name = 1;
+	bytes description = 2;
+	affine_mat affinedata = 3;
+	repeated path_item pathSet = 4;
+	repeated marking_point_item markingpointSet = 5;
+	repeated space_item spaceSet = 6;
+}

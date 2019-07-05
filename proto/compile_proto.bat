@@ -46,5 +46,12 @@ protoc ThirdpartyCmd.proto --csharp_out=./
 rem protoc ThirdpartyCmd.proto --js_out=./
 protoc ThirdpartyCmd.proto --python_out=./
 
+protoc DDRVLNMap.proto --cpp_out=./
+protoc DDRVLNMap.proto --java_out=./
+protoc DDRVLNMap.proto --csharp_out=./
+rem protoc DDRVLNMap.proto --js_out=./
+protoc DDRVLNMap.proto --python_out=./
+
+
 
 cd %PrePath%
