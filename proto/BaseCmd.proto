@@ -831,17 +831,20 @@ message rspReceiveExternalCmd
 	string error = 1;//if sucess ,error is empty
 }
 
-message reqCoreDebug
-{
-	int32 actionType = 1; // type
-	repeated string parameter = 2;//parameter
-	
+enum eDebugInfoType {
+	eClearDebugInfo = 0;
+	eLidarDebugInfo = 1;
+	eVisualDebugInfo = 2;
 }
 
-message rspCoreDebug{	
-	int32 actionType = 1; // type
-	repeated string parameter = 2;//parameter
-	eCmdRspType type = 3;
+message reqCoreDebug {	
+	eDebugInfoType actionType = 1; // type
+	repeated string parameter = 2;// (optional) parameter
+}
+
+message rspCoreDebug {
+	eCmdRspType type = 1;
+	eDebugInfoType actionType = 2; // type
 }
 
 
