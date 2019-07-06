@@ -59,7 +59,7 @@ namespace DDRFramework
 		}
 		else
 		{
-			LevelLog(DDRFramework::Log::Level::WARNING,"\CheckRead Not Connected");
+			LevelLog(DDRFramework::Log::Level::WARNING,"CheckRead Not Connected");
 		}
 	}
 	void TcpSocketContainer::CheckWrite()
