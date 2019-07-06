@@ -49,7 +49,7 @@ static void _thrFunc(void *ptr, bool *pbQuit)
 			break;
 		}
 		if (pClt->IsUploadingFinished()) {
-			LevelLog(DDRFramework::Log::INFO, "SUCCESSFULLY uploaded the route!\n")
+			LevelLog(DDRFramework::Log::INFO, "SUCCESSFULLY uploaded the route (%s, %s)!\n", pArg->rID, pArg->routeName);
 			break;
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));

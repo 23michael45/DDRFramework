@@ -91,7 +91,11 @@ public:
 		m_IDMapper[m_curThID] = (int)m_threads.size();
 		auto pNewBkgTh = std::make_shared<BkgThread>(pFunc, pArg, &m_cv);
 		m_threads.emplace_back(OneRegisteredBkgThread({ pNewBkgTh, m_curThID }));
-		return (m_curThID++);
+		unsigned int ret = m_curThID;
+		if (++m_curThID == -1) {
+			++m_curThID;
+		}
+		return ret;
 	}
 
 	// true - thread with thID not running; false - timed-out
