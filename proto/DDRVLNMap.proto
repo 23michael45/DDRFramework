@@ -1,5 +1,6 @@
 syntax = "proto3";
-package DDRVLNMapProto;
+package DDRCommProto;
+import "BaseCmd.proto";
 
 // 基础点
 message space_point 
@@ -94,7 +95,7 @@ message affine_mat
 }
 
 // 地图
-message DDRVLNMap
+message reqDDRVLNMap
 {	
 	bytes name = 1;
 	bytes description = 2;
@@ -102,4 +103,9 @@ message DDRVLNMap
 	repeated path_item pathSet = 4;
 	repeated marking_point_item markingpointSet = 5;
 	repeated space_item spaceSet = 6;
+}
+
+message rspDDRVLNMap
+{
+	eCmdRspType type = 1;
 }

@@ -20,6 +20,7 @@
 #include <thirdparty/protobuf/src/google/protobuf/io/zero_copy_stream_impl.h>
 #include <proto/BaseCmd.pb.h>
 #include <proto/ThirdpartyCmd.pb.h>
+#include <proto/DDRVLNMap.pb.h>
 #ifdef USE_MODULE_PROTO
 #include <proto/DDRModuleCmd.pb.h>
 #endif // USE_MODULE_PROTO
