@@ -94,7 +94,7 @@ message affine_mat
 }
 
 // 地图
-message ddr_vln_map
+message DDRVLNMap
 {	
 	bytes name = 1;
 	bytes description = 2;
