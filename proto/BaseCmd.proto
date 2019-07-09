@@ -489,6 +489,7 @@ message notifyEnvInfo{
 	float pm25 = 4;
 	float co2 = 5;
 	float ch2o = 6;
+	int32 tray = 7; // 0-没被遮挡。 1-被遮挡
 }
 
 //ObsStatus
