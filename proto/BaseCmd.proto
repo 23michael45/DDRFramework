@@ -489,7 +489,7 @@ message notifyEnvInfo{
 	float pm25 = 4;
 	float co2 = 5;
 	float ch2o = 6;
-	int32 tray = 7; // 0-没被遮挡。 1-被遮挡
+	int32 tray = 7; // 低8位表示上面那一对，8-15位表示下面一对传感器。 0-被遮挡。 1-没被遮挡
 }
 
 //ObsStatus
