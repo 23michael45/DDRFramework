@@ -19,7 +19,7 @@ public:
 class RUTcpClient : public TcpClientBase
 {
 public:
-	RUTcpClient(const std::string &routeName, const std::string &rID,
+	RUTcpClient(const std::string &rID, const std::string &routeName,
 		        const std::string &serAddr, const std::string &serPort,
 		        bool bForceUpdate);
 	bool IsRSRMWrong() const;

@@ -40,6 +40,7 @@ RobotSideRouteManager::RobotSideRouteManager(const char *pRouteName)
 	if (m_dir.empty()) {
 		return;
 	}
+	m_routeName = m_dir;
 	for (int i = (int)m_dir.length() - 1; i >= 0; --i) {
 		if ('/' == m_dir.c_str()[i] || '\\' == m_dir.c_str()[i]) {
 			if (i + 1 >= (int)m_dir.length() - 1) {
