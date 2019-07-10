@@ -4,6 +4,8 @@
 
 #include "Validator.h"
 
+#include <iostream>
+
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -21,6 +23,19 @@ static const int s_StrRep = 3;
 
 static bool __Decrypt(const void *pSrc, int lenSrc,
 	                  void *pTar, int lenTar);
+
+bool IsUnburnedState()
+{
+	const char* addrs[] = { s_str0, s_str1, s_str2 };
+	for (int i = 0; i < s_StrRep; ++i) {
+		for (int j = 0; j < s_stdStrLen; ++j) {
+			if ((char)('A' + (j % 26)) != addrs[i][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 bool GetEncInfo(std::vector<char> &info)
 {

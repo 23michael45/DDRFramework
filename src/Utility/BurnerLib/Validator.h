@@ -11,6 +11,8 @@ Call this function to extract encrypted info string.
 */
 bool GetEncInfo(std::vector<char> &info);
 
+bool IsUnburnedState();
+
 bool CheckMacMatch(const char *pMacStr);
 
 }
