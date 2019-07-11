@@ -105,6 +105,9 @@ public:
 		if (m_IDMapper.find(thID) == m_IDMapper.end()) {
 			return true;
 		}
+		if (0 == waitTimeMilsec) {
+			return false;
+		}
 		std::condition_variable mycv;
 		m_waitingList.emplace_back(&mycv);
 		m_cv.notify_one();
