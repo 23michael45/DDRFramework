@@ -121,6 +121,7 @@ public:
 			auto tic1 = std::chrono::system_clock::now() + std::chrono::milliseconds(waitTimeMilsec);
 			while (true) {
 				if (std::cv_status::timeout == mycv.wait_until(ul, tic1)) {
+					_removeCVFromList(&mycv);
 					return false;
 				}
 				if (m_IDMapper.find(thID) == m_IDMapper.end()) {
