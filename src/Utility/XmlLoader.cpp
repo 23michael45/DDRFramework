@@ -1,7 +1,7 @@
 #include "XmlLoader.h"
+
 #include "Logger.h"
 #include "tinyxml.h"
-#include "DDRMacro.h"
 
 namespace DDRFramework
 {

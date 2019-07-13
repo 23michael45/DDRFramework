@@ -1,6 +1,6 @@
 #include "TcpClientBase.h"
-#include "../Utility/DDRMacro.h"
-#include "../Utility/Logger.h"
+#include "../Utility/LoggerDef.h"
+
 namespace DDRFramework
 {
 	TcpClientSessionBase::TcpClientSessionBase(asio::io_context& context) :m_Resolver(context),TcpSocketContainer::TcpSocketContainer(context)

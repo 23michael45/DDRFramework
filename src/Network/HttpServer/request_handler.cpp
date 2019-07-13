@@ -6,7 +6,7 @@
 #include "reply.hpp"
 #include "request.hpp"
 #include <iostream>
-#include "../../Utility/DDRMacro.h"
+#include "src/Utility/LoggerDef.h"
 #include "../../Utility/CommonFunc.h"
 
 #include "../../Utility/Logger.h"

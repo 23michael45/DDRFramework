@@ -121,6 +121,9 @@ __int64 getCreationTime(const char *pFileDirName);
 // get file size (in bytes) of a file
 size_t getFileSize(const char *pFileName);
 
+// set current working directory to where this EXE file is
+bool setWorkingDir2CurrentExe();
+
 // switchDirFile: bit 0 - non-folder file; bit 1 - folder
 // bSubFolder: dig up sub directories or not
 void* findAllFiles_Open(const char *pWorkingDir, int switchDirFile,

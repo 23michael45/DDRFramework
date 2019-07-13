@@ -10,9 +10,9 @@
 */
 #ifndef TcpServerBase_h__
 #define TcpServerBase_h__
-#include "asio.hpp"
 #include <map>
-#include "src/Utility/DDRMacro.h"
+#include "asio.hpp"
+#include "src/Utility/LoggerDef.h"
 #include "TcpSocketContainer.h"
 using asio::ip::tcp;
 using namespace DDRCommProto;

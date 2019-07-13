@@ -1,7 +1,7 @@
 #include "RUDispatcher.h"
 
 #include <chrono>
-#include "src/Utility/DDRMacro.h"
+#include "src/Utility/LoggerDef.h"
 
 namespace DDRCloudService {
 

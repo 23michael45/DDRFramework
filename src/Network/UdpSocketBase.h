@@ -17,7 +17,7 @@
 #include <memory>
 #include "src/Network/MessageSerializer.h"
 #include "src/Network/BaseMessageDispatcher.h"
-#include "src/Utility/DDRMacro.h"
+#include "src/Utility/LoggerDef.h"
 
 namespace DDRFramework
 {

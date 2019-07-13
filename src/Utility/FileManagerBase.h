@@ -17,8 +17,7 @@
 #include <string>
 #include "Singleton.h"
 #include <set>
-#include "DDRMacro.h"
-#include "Logger.h"
+#include "LoggerDef.h"
 #include "CommonFunc.h"
 #include <mutex>
 

@@ -1,6 +1,5 @@
 #include "BaseSocketContainer.h"
-#include "../Utility/DDRMacro.h"
-#include "../Utility/Logger.h"
+#include "../Utility/LoggerDef.h"
 
 namespace DDRFramework
 {

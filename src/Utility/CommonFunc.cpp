@@ -1228,6 +1228,43 @@ size_t getFileSize(const char *pFileName)
 	return 0;
 }
 
+bool setWorkingDir2CurrentExe()
+{
+	char fullName[256];
+#if defined(_WIN32) || defined(_WIN64)
+	int bytes = ::GetModuleFileNameA(nullptr, fullName, 255);
+	if (0 == bytes) {
+		return false;
+	}
+#endif
+#ifdef __linux__
+	char szTmp[32];
+	sprintf(szTmp, "/proc/%d/exe", getpid());
+	int bytes = readlink(szTmp, fullName, 255);
+	if (bytes > 254) {
+		bytes = 254;
+	}
+	if (bytes > 0) {
+		fullName[bytes] = '\0';
+	} else {
+		return false;
+	}
+#endif
+	for (int i = bytes; i >= 0; --i) {
+		if ('/' == fullName[i] || '\\' == fullName[i]) {
+			fullName[i] = '\0';
+			break;
+		}
+	}
+#if defined(_WIN32) || defined(_WIN64)
+	return (::SetCurrentDirectoryA(fullName) != 0);
+#endif
+#ifdef __linux__
+	return (0 == chdir(fullName));
+#endif
+}
+
+
 struct _fileListStruct
 {
 	std::string dirName;

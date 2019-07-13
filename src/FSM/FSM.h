@@ -13,7 +13,7 @@
 
 #include <unordered_map>
 #include <memory>
-#include <src/Utility/DDRMacro.h>
+#include "src/Utility/LoggerDef.h"
 
 template <class PT>
 class StateMachine;

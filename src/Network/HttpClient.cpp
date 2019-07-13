@@ -1,6 +1,6 @@
 #include <functional>
 #include "src/Utility/Logger.h"
-#include "src/Utility/DDRMacro.h"
+#include "src/Utility/LoggerDef.h"
 #include "HttpClient.h"
 #include <curl/curl.h>
 #include "thirdparty/curl/include/curl/easy.h"

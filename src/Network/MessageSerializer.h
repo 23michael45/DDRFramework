@@ -13,7 +13,7 @@
 #include <memory>
 #include "src/FSM/FSM.h"
 #include "thirdparty/asio/include/asio.hpp"
-#include "src/Utility/DDRMacro.h"
+#include "src/Utility/LoggerDef.h"
 #include "src/Network/BaseMessageDispatcher.h"
 #include "src/Network/BaseSocketContainer.h"
 #include <queue>
