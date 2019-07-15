@@ -4,12 +4,11 @@
 
 #include "Validator.h"
 
-#include <iostream>
-
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
+#include <winsock2.h>
 #include <iphlpapi.h>
 #pragma comment(lib, "iphlpapi.lib")
 
@@ -26,7 +25,7 @@ static bool __Decrypt(const void *pSrc, int lenSrc,
 
 bool IsUnburnedState()
 {
-	const char* addrs[] = { s_str0, s_str1, s_str2 };
+	const char *addrs[] = { s_str0, s_str1, s_str2 };
 	for (int i = 0; i < s_StrRep; ++i) {
 		for (int j = 0; j < s_stdStrLen; ++j) {
 			if ((char)('A' + (j % 26)) != addrs[i][j]) {
@@ -79,31 +78,51 @@ bool GetEncInfo(std::vector<char> &info)
 
 bool CheckMacMatch(const char *pMacStr)
 {
-	IP_ADAPTER_INFO AdapterInfos[32];
-	ULONG outBufLen = sizeof(AdapterInfos);
-	DWORD dwRetVal = GetAdaptersInfo(AdapterInfos, &outBufLen);
-	if (NO_ERROR != dwRetVal) {
-		return "";
+	ULONG outBufLen = 15000;
+	ULONG flags = GAA_FLAG_INCLUDE_PREFIX;
+	ULONG family = AF_UNSPEC;
+	int nIter = 0;
+	PIP_ADAPTER_ADDRESSES pAddresses = nullptr;
+	do {
+		pAddresses = (IP_ADAPTER_ADDRESSES *)malloc(outBufLen);
+		if (!pAddresses) {
+			return "";
+		}
+		ULONG dwRetVal = ::GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
+		if (dwRetVal == ERROR_SUCCESS) {
+			break;
+		} else {
+			free(pAddresses);
+			pAddresses = nullptr;
+		}
+		++nIter;
+	} while (nIter < 10);
+	if (!pAddresses) {
+		return false;
 	}
 
-	std::string str;
-	for (int i = 0; i < outBufLen / sizeof(IP_ADAPTER_INFO); ++i) {
-		str.resize(AdapterInfos[i].AddressLength * 3 - 1);
+	for (auto pIter = pAddresses; pIter; pIter = pIter->Next) {
+		if (0 == pIter->PhysicalAddressLength) {
+			free(pAddresses);
+			return false;
+		}
+		std::string str(pIter->PhysicalAddressLength * 3 - 1, '\0');
 		int curInd = 0;
-		for (int j = 0; j < (int)AdapterInfos[0].AddressLength; ++j) {
-			if (j < (int)AdapterInfos[0].AddressLength - 1) {
-				sprintf(&str[curInd], "%02x:", (int)AdapterInfos[i].Address[j]);
+		for (int i = 0; i < (int)pIter->PhysicalAddressLength; ++i) {
+			if (i < (int)pIter->PhysicalAddressLength - 1) {
+				sprintf(&str[curInd], "%02x:", (int)pIter->PhysicalAddress[i]);
 				curInd += 3;
 			} else {
-				sprintf(&str[curInd], "%02x", (int)AdapterInfos[i].Address[j]);
+				sprintf(&str[curInd], "%02x", (int)pIter->PhysicalAddress[i]);
 				curInd += 2;
 			}
 		}
 		if (0 == strcmp(str.c_str(), pMacStr)) {
+			free(pAddresses);
 			return true;
 		}
 	}
-	
+	free(pAddresses);
 	return false;
 }
 
