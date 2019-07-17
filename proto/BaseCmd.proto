@@ -834,7 +834,8 @@ message rspReceiveExternalCmd
 }
 
 enum eDebugInfoType {
-	eClearDebugInfo = 0;
+	eClearDebugInfo = -1;
+	eUploadCurRoute = 0;
 	eLidarDebugInfo = 1;
 	eVisualDebugInfo = 2;
 }
