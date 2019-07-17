@@ -11,7 +11,7 @@
 #include <mutex>
 
 #include "thirdparty/eventbus/eventbus/internal/AsyncCallbackVector.h"
-#include "thirdparty/eventbus/eventbus/internal/common.h""
+#include "thirdparty/eventbus/eventbus/internal/common.h"
 
 namespace Dexode
 {
