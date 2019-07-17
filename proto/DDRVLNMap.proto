@@ -2,12 +2,12 @@ syntax = "proto3";
 package DDRCommProto;
 import "BaseCmd.proto";
 
+// 基础元素描述 +++++++++++++++++++++++++++++++++++++++
 // 基础点
 message space_point 
 {
 	float x = 1;
 	float y = 2;
-	float ang = 3;
 }
 	
 // 线段
@@ -29,9 +29,12 @@ message circle
 	space_point center = 1;
 	float radius = 2;
 }
+// 基础元素描述 ---------------------------------------
 
+
+// 标记点 ++++++++++++++++++++++++++++++++++++++++++++
 // 标记点类型
-enum eMarkingItemType
+enum eMarkingItemType  
 {
 	eMarkingTypeCommon = 0; // 普通点
 	eMarkingTypeProjection = 1; // 投影点
@@ -40,33 +43,112 @@ enum eMarkingItemType
 	eMarkingTypeCharging = 4; // 充电点
 } 
 
-// 标记点
-message marking_point_item
+// 标记点/兴趣点
+message marking_point_item  
 {
 	bytes name = 1; 
 	space_point point = 2;
 	eMarkingItemType type = 3;
 }
+// 标记点 -------------------------------------------
 
-// 路径类型
-enum ePathItemType
-{
-	ePointCommon = 0; // 普通路径
-	ePointSticking = 1; // 贴边行驶路径
-} 
 
-// 路径
-message path_item
+// 路径描述 +++++++++++++++++++++++++++++++++++++++++
+/*
+	每个地图可能会有多个路径，每条路径由三种item组成，每种item可能会有多个。
+	1）line:
+	2）point:
+	3）arc:
+*/
+// 路径item模式
+enum ePathItemMode  
 {
-	bytes name = 1; // 同一ddr_vln_map是唯一的
-	ePathItemType type = 2;
-	float speed = 3; // 速度
-	float endang = 4; // 结束角度
-	repeated space_point point = 5;
+	ePathItemModeDynamicOA = 0; // 动态避障
+	ePathItemModeStaticOA = 1; // 静态避障
+	ePathItemModeCowshed = 2; // 贴边行驶路径(牛棚)
+	ePathItemModeQRMode = 3; // QR模式
 }
 
+// 是否一定要到
+enum eFixedEnd  
+{
+	eFixedTrue = 0;
+	eFixedFalse = 1;
+}
+
+// 朝向方式
+enum eAbsoluteOrientatio
+{
+	eAbsoluteOri = 0; // 绝对朝向
+	eRelativelyOri = 1; // 相对朝向
+} 
+
+message path_point_item
+{
+	space_point point = 1;
+	eFixedEnd fixedend = 2;
+	float velocity = 3;
+	ePathItemMode mode = 4;
+	int32 confignum = 5;
+	bytes config = 6;
+	float angle = 7;
+	eAbsoluteOrientatio orientatio = 8; // 朝向方式
+} 
+
+message path_line_item
+{
+	space_point start = 1;
+	space_point end = 2;
+	float velocity = 3; // 速度
+	ePathItemMode mode = 4; // 路径模式
+	int32 confignum = 5; // 配置文件
+	bytes config = 6;
+}
+
+message path_arc_item
+{
+	space_point point1 = 1;
+	space_point point2 = 2;
+	float radius = 3;
+	float velocity = 4;
+	ePathItemMode mode = 5;
+	int32 confignum = 6;
+	bytes config = 7;
+} 
+
+// 路径元素的类型
+enum ePathElementType
+{
+	ePathElementPoint = 0;
+	ePathElementLine = 1;
+	ePathElementArc = 2;
+} 
+
+/*
+	路径单个元素，每个元素可以是line  point  arc 任意一个，且只能是一个。
+	path_item根据elementSet时数组的顺序排序
+*/
+message path_element
+{
+	ePathElementType type = 1;
+	path_line_item line = 2;
+	path_point_item point = 3;
+	path_arc_item arc = 4;
+}
+
+// 路径
+message path_item 
+{
+	bytes name = 1; // 同一reqDDRVLNMap是唯一的
+	repeated path_element elementSet = 2; // 按次序排序
+}
+
+// 路径描述 -----------------------------------------
+
+
+// 空间描述 +++++++++++++++++++++++++++++++++++++++++
 // 空间类型
-enum eSpaceItemType
+enum eSpaceItemType 
 {
 	eSpacsTypeVirtualWall = 0; // 虚拟墙
 	eSpacsTypeHightlight = 1; // 高亮区
@@ -74,7 +156,7 @@ enum eSpaceItemType
 }
 
 // 空间区域
-message space_item
+message space_item 
 {
 	bytes name = 1; 
 	eSpaceItemType type = 2;
@@ -82,6 +164,37 @@ message space_item
 	repeated polygon polygondata = 4;
 	repeated circle circledata = 5;
 }
+// 空间描述 -----------------------------------------
+
+
+// 任务描述 +++++++++++++++++++++++++++++++++++++++++
+
+enum eTaskElementType
+{
+	eTaskElementMarkingPoint = 0;
+	eTaskElementPath = 1;
+}
+
+message TaskELement
+{
+	eTaskElementType type = 1;
+	marking_point_item point = 2;
+	path_item path = 3;
+}
+
+// 客户端配置时发送任务。任务可以是 path_item和marking_point_item的组合。
+message reqRunTask
+{
+	bytes name = 1;
+	repeated TaskELement elementSet = 2;
+}
+
+message rspRunTask
+{
+	eCmdRspType type = 1;
+}
+// 任务描述 -----------------------------------------
+
 
 // 变换矩阵
 message affine_mat
@@ -94,8 +207,12 @@ message affine_mat
 	float ty = 6;
 }
 
-// 地图
-message reqDDRVLNMap
+
+/*
+	地图
+	每个地图有一个名字、一个描述、一个变化矩阵、多个标记点/兴趣点、多个路径、多个空间区域、多个任务
+*/
+message reqDDRVLNMap 
 {	
 	bytes name = 1;
 	bytes description = 2;
@@ -103,6 +220,7 @@ message reqDDRVLNMap
 	repeated path_item pathSet = 4;
 	repeated marking_point_item markingpointSet = 5;
 	repeated space_item spaceSet = 6;
+	repeated reqRunTask taskSet = 7;
 }
 
 message rspDDRVLNMap
