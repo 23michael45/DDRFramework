@@ -334,6 +334,7 @@ message PathPoint{
 	float speed = 3;
 	ePathPointType type = 4;
 	bytes pointInfo = 5;
+	float theta = 6;
 }
 
 message reqCmdSetPathPoint{
