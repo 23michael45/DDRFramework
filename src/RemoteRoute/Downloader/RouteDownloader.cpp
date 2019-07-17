@@ -98,6 +98,7 @@ public:
 protected:
 	bool IsFileNecessary(const char *pFileName) override
 	{
+		return true;
 		return (0 != strncmp(pFileName, "left/", 5) &&
 			    0 != strncmp(pFileName, "right/", 6) &&
 			    0 != strncmp(pFileName, "lidarscans/", 11));
