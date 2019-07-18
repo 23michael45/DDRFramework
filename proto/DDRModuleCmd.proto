@@ -98,7 +98,16 @@ message rspEnterAutoMode
 {
 	eRspType ret = 1;
 }
-
+// 请求设置参数
+message reqSetRobotParameter
+{
+	float autoSpeed = 1; // 自动模式行走线速度 
+}
+// 返回请求设置参数
+message rspSetRobotParameter
+{
+	eRspType ret = 1;
+}
 
 
 //请求位置校正(2D)
