@@ -83,9 +83,10 @@ message path_arc_item
 
 enum path_element_type
 {
-	ePathElementTypeLine = 0;
-	ePathElementTypeActionPoint = 1;
-	ePathElementTypeArc = 2;
+	ePathElementTypeError = 0;
+	ePathElementTypeLine = 1;
+	ePathElementTypeActionPoint = 2;
+	ePathElementTypeArc = 3;
 }
 
 message path_element
@@ -210,7 +211,7 @@ message reqDDRVLNMap
 	DDRMapPathData pathdata = 2; // 存放所有Task里面拼图中的一小块。（具体点的x y name存放在markingpointdata中）
 	DDRMapSpaceData spacedata = 3; // 存放所有空间的信息
 	DDRMapMarkingPointData markingpointdata = 4; // 存放所有标记点的信息（x y name）。
-	repeated task_item pathset = 5; // 存放所有Task的信息，每个task_item对应一个文件。
+	repeated task_item taskSet = 5; // 存放所有Task的信息，每个task_item对应一个文件。
 }
 
 message rspDDRVLNMap
