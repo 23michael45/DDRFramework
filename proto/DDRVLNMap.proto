@@ -6,34 +6,21 @@ import "BaseCmd.proto";
 // 基础点
 message space_point 
 {
-	float x = 1;
-	float y = 2;
-}
-	
-// 线段
-message line
-{
-	space_point start = 1;
-	space_point end = 2;
-}
-
-// 多边形
-message polygon
-{
-	repeated space_point point = 1;
-}
-
-// 圆形
-message circle
-{
-	space_point center = 1;
-	float radius = 2;
+	bytes name = 1; 
+	float x = 2;
+	float y = 3;
 }
 // 基础元素描述 ---------------------------------------
 
 
-// 标记点 ++++++++++++++++++++++++++++++++++++++++++++
-// 标记点类型
+// 任务描述 +++++++++++++++++++++++++++++++++++++++++
+/*
+	每个地图可能会有多个Task，每个Task由三种item组成，每种item可能会有多个。
+	1）line:
+	2）ActionPoint:
+	3）arc:
+*/
+
 enum eMarkingItemType  
 {
 	eMarkingTypeError = 0; // 因为保存成文件时，为0的数据不显示出来。所以所有的枚举都有一个为0的错误值。
@@ -42,42 +29,8 @@ enum eMarkingItemType
 	eMarkingTypeGate = 3; // 闸机点
 	eMarkingTypeElevator = 4; // 电梯点
 	eMarkingTypeCharging = 5; // 充电点
+	eMarkingTypeQR = 6;  // QR模式
 } 
-
-// 标记点/兴趣点
-message marking_point_item  
-{
-	bytes name = 1; 
-	space_point point = 2;
-	eMarkingItemType type = 3;
-}
-// 标记点 -------------------------------------------
-
-
-// 路径描述 +++++++++++++++++++++++++++++++++++++++++
-/*
-	每个地图可能会有多个路径，每条路径由三种item组成，每种item可能会有多个。
-	1）line:
-	2）point:
-	3）arc:
-*/
-// 路径item模式
-enum ePathItemMode  
-{
-	ePathItemModeError = 0;
-	ePathItemModeDynamicOA = 1; // 动态避障
-	ePathItemModeStaticOA = 2; // 静态避障
-	ePathItemModeCowshed = 3; // 贴边行驶路径(牛棚)
-	ePathItemModeQRMode = 4; // QR模式
-}
-
-// 是否一定要到
-enum eFixedEnd  
-{
-	eFixedError = 0;
-	eFixedTrue = 1;
-	eFixedFalse = 2;
-}
 
 // 朝向方式
 enum eAbsoluteOrientatio
@@ -87,71 +40,91 @@ enum eAbsoluteOrientatio
 	eRelativelyOri = 2; // 相对朝向
 } 
 
-message path_point_item
+// actionPoint配置文件定义，先暂放一个string。
+message path_action_point_config
 {
-	space_point point = 1;
-	eFixedEnd fixedend = 2;
-	float velocity = 3;
-	ePathItemMode mode = 4;
-	int32 confignum = 5;
-	bytes config = 6;
-	float angle = 7;
-	eAbsoluteOrientatio orientatio = 8; // 朝向方式
+	bytes config = 1;
+}
+
+message path_action_point_item
+{
+	bytes name = 1;// 同一reqDDRVLNMap是唯一的
+	bytes pointname = 2; // 这里可以是标记点，也可以是自动生成的拐点和POI。
+	eMarkingItemType type = 3; // action 类型。如果pointname是一个MarkingPoint的名字，那么这里的type应该跟该标记点的type一致。
+	path_action_point_config config = 4; // 配置文件
 } 
+
+// 路径item模式
+enum ePathItemMode  
+{
+	ePathItemModeError = 0;
+	ePathItemModeDynamicOA = 1; // 动态避障
+	ePathItemModeStaticOA = 2; // 静态避障
+	ePathItemModeCowshed = 3; // 贴边行驶路径(牛棚)
+}
 
 message path_line_item
 {
-	space_point start = 1;
-	space_point end = 2;
+	bytes name = 1;// 同一reqDDRVLNMap是唯一的
+	repeated bytes pointNameSet = 2;
 	float velocity = 3; // 速度
 	ePathItemMode mode = 4; // 路径模式
-	int32 confignum = 5; // 配置文件
-	bytes config = 6;
 }
 
 message path_arc_item
 {
-	space_point point1 = 1;
-	space_point point2 = 2;
-	float radius = 3;
-	float velocity = 4;
-	ePathItemMode mode = 5;
-	int32 confignum = 6;
-	bytes config = 7;
+	bytes name = 1;// 同一reqDDRVLNMap是唯一的
+	bytes pointname1 = 2;
+	bytes pointname2 = 3;
+	float radius = 4;
+	float velocity = 5;
+	ePathItemMode mode = 6;
 } 
 
-// 路径元素的类型
-enum ePathElementType
+enum path_element_type
 {
-	ePathElementError = 0;
-	ePathElementPoint = 1;
-	ePathElementLine = 2;
-	ePathElementArc = 3;
-} 
+	ePathElementTypeLine = 0;
+	ePathElementTypeActionPoint = 1;
+	ePathElementTypeArc = 2;
+}
 
-/*
-	路径单个元素，每个元素可以是line  point  arc 任意一个，且只能是一个。
-	path_item根据elementSet时数组的顺序排序
-*/
 message path_element
 {
-	ePathElementType type = 1;
-	path_line_item line = 2;
-	path_point_item point = 3;
-	path_arc_item arc = 4;
+	bytes name = 1;
+	path_element_type type = 2;
 }
 
-// 路径
-message path_item 
+// 每个task_item会保存成一个文件
+message task_item 
 {
-	bytes name = 1; // 同一reqDDRVLNMap是唯一的
-	repeated path_element elementSet = 2; // 按次序排序
+	bytes name = 1; // 任务名字，同一reqDDRVLNMap是唯一的
+	repeated path_element pathSet = 2; // path的集合。这里只存名字。根据名字去找对应的path
 }
 
-// 路径描述 -----------------------------------------
+// 任务描述 -----------------------------------------
 
 
 // 空间描述 +++++++++++++++++++++++++++++++++++++++++
+
+// 线段
+message line
+{
+	repeated bytes pointnameset = 1;
+}
+
+// 多边形
+message polygon
+{
+	repeated bytes pointnameset = 1;
+}
+
+// 圆形
+message circle
+{
+	bytes centername = 1;
+	float radius = 2;
+}
+
 // 空间类型
 enum eSpaceItemType 
 {
@@ -173,49 +146,6 @@ message space_item
 // 空间描述 -----------------------------------------
 
 
-// 任务描述 +++++++++++++++++++++++++++++++++++++++++
-
-enum eTaskElementType
-{
-	eTaskElementTypeError = 0;
-	eTaskElementMarkingPoint = 1;
-	eTaskElementPath = 2;
-}
-
-message TaskELement
-{
-	eTaskElementType type = 1;
-	marking_point_item point = 2;
-	path_item path = 3;
-}
-
-// 每次构建一个任务需要指定模式(默认可以是无限循环)，在任务开始时也可以重新修改任务执行模式。DDRMap.ddr会保存最近修改的内容。
-enum eTaskElementMode
-{
-	eTaskElementModeError = 0;
-	eTaskElementInfiniteLoop = 1; // 无限循环
-	eTaskElementFrequencyLoop = 2; // 规定次数循环
-	eTaskElementTimingLoop = 3; // 定时循环
-}
-
-// 客户端配置时发送任务。任务可以是 path_item和marking_point_item的组合。
-message reqRunTask
-{
-	bytes name = 1;
-	repeated TaskELement elementSet = 2;
-	eTaskElementMode mode = 3;
-	int32 frequency = 4; // 假如mode是eTaskElementFrequencyLoop，这个表示循环的次数
-	int32 startTime = 5; // 假如mode是eTaskElementTimingLoop，这个表示任务开始时间。只能是4位数。个位十位表示分钟，百位千位表示时。比如：1530，表示下午15点30分
-	int32 endTime = 6;// 假如mode是eTaskElementTimingLoop，这个表示任务结束时间。定义同上
-}
-
-message rspRunTask
-{
-	eCmdRspType type = 1;
-}
-// 任务描述 -----------------------------------------
-
-
 // 变换矩阵
 message affine_mat
 {
@@ -227,23 +157,147 @@ message affine_mat
 	float ty = 6;
 }
 
+// 客户端获取对应OneRoute下的数据
+message reqGetDDRVLNMap
+{
+	bytes onerouteName = 1;
+}
 
-/*
-	地图
-	每个地图有一个名字、一个描述、一个变化矩阵、多个标记点/兴趣点、多个路径、多个空间区域、多个任务
-*/
-message reqDDRVLNMap 
-{	
+message rspGetDDRVLNMap
+{
+	reqDDRVLNMap data = 1;
+}
+
+// 保存基础信息，主要是采集模式结束时生成的东西。每个OneRoute有一个DDRMapBaseData，每个DDRMapBaseData保存成一个文件
+message DDRMapBaseData
+{
 	bytes name = 1;
 	bytes description = 2;
 	affine_mat affinedata = 3;
-	repeated path_item pathSet = 4;
-	repeated marking_point_item markingpointSet = 5;
-	repeated space_item spaceSet = 6;
-	repeated reqRunTask taskSet = 7;
+	repeated space_point basePointData = 4; 
+}
+
+// 每个OneRoute有一个DDRMapPathData，每个DDRMapPathData保存成一个文件。这里类似于存放的是Task拼图中的所有元素
+// 这里所有点的数据(x y name)从DDRMapMarkingPointData和DDRMapBaseData中读取。
+message DDRMapPathData
+{
+	repeated path_arc_item pathArcData = 1; // path中arc的数据
+	repeated path_line_item pathLineData = 2; // path中Line的数据
+	repeated path_action_point_item pathActionPointData = 3; // path中ActionPoint的数据
+}
+
+// 每个OneRoute有一个DDRMapMarkingPointData，每个DDRMapMarkingPointData保存成一个文件.
+// 所有的Path用到的点都存放在这里和DDRMapBaseData，这里只存放x y name。没有具体的意义。
+message DDRMapMarkingPointData
+{
+	repeated space_point pointData = 1; // 标记点的点数据
+}
+
+// 每个OneRoute有一个DDRMapSpaceData，每个DDRMapSpaceData保存成一个文件
+message DDRMapSpaceData
+{
+	repeated space_item spaceSet = 1;
+	repeated space_point spacePointData = 2; // 空间信息的点。
+}
+
+/*
+	地图
+	每个地图有一个名字、一个描述、一个变化矩阵、多个标记点/兴趣点、多个任务、多个空间区域
+*/
+message reqDDRVLNMap 
+{	
+	DDRMapBaseData basedata = 1; // 存放基础信息，采集模式结束时就有的东西。
+	DDRMapPathData pathdata = 2; // 存放所有Task里面拼图中的一小块。（具体点的x y name存放在markingpointdata中）
+	DDRMapSpaceData spacedata = 3; // 存放所有空间的信息
+	DDRMapMarkingPointData markingpointdata = 4; // 存放所有标记点的信息（x y name）。
+	repeated task_item pathset = 5; // 存放所有Task的信息，每个task_item对应一个文件。
 }
 
 message rspDDRVLNMap
 {
 	eCmdRspType type = 1;
 }
+
+// ++++++++++++++++++++  以下是核心算法需要用到的数据结构，Logic把数据从文件中读出来转成核心算法能直接用的数据结构  ++++++++++++++++++++++
+message DDRTaskComplete_action_point_item
+{
+	bytes name = 1;
+	space_point point = 2;
+	eMarkingItemType type = 4; // action 类型
+	path_action_point_config config = 5; // 配置文件
+} 
+
+message DDRTaskComplete_line_item
+{
+	bytes name = 1;
+	repeated space_point pointNameSet = 2;
+	float velocity = 3; // 速度
+	ePathItemMode mode = 4; // 路径模式
+}
+
+message DDRTaskComplete_arc_item
+{
+	bytes name = 1;
+	space_point point1 = 2;
+	space_point point2 = 3;
+	float radius = 4;
+	float velocity = 5;
+	ePathItemMode mode = 6;
+} 
+
+message DDRTaskComplete_element
+{
+	path_element_type type = 1;
+	DDRTaskComplete_line_item line = 2;
+	DDRTaskComplete_action_point_item actionpoint = 3;
+	DDRTaskComplete_arc_item arc = 4;
+}
+
+// 完整的一个Task的数据结构，这里存放的就是真实的所有信息了。核心算法那边直接使用这个数据结构
+message DDRTaskCompleteData
+{
+	bytes name = 1;
+	repeated DDRTaskComplete_element taskdata = 2;
+}
+// --------------------  以上是核心算法需要用到的数据结构，Logic把数据从文件中读出来转成核心算法能直接用的数据结构  ----------------------
+
+
+// 任务调度管理 +++++++++++++++++++++++++++++++++++++++++
+// 每次构建一个任务需要指定模式(默认可以是无限循环)，在任务开始时也可以重新修改任务执行模式。DDRMap.ddr会保存最近修改的内容。
+enum eTaskElementMode
+{
+	eTaskElementModeError = 0;
+	eTaskElementInfiniteLoop = 1; // 无限循环
+	eTaskElementFrequencyLoop = 2; // 规定次数循环
+	eTaskElementTimingLoop = 3; // 定时循环
+}
+
+message TaskELement
+{
+	bytes onerouteName = 1;
+	bytes taskName = 2;
+	eTaskElementMode mode = 3;
+	int32 frequency = 4; // 假如mode是eTaskElementFrequencyLoop，这个表示循环的次数
+	int32 startTime = 5; // 假如mode是eTaskElementTimingLoop，这个表示任务开始时间。只能是4位数。个位十位表示分钟，百位千位表示时。比如：1530，表示下午15点30分
+	int32 endTime = 6;// 假如mode是eTaskElementTimingLoop，这个表示任务结束时间。定义同上
+}
+
+// 任务之间的连接关系，先指定一个要不要重定位。后续会再调整。
+message TaskRelationship
+{
+	bool relocate = 1;
+}
+
+// 客户端配置时发送任务，可以是多个任务集合。上位机收到后保存成DDRTaskControl.ddr(这个文件类似于之前的CRUISING_SPEC.txt)
+message reqRunControl
+{
+	repeated TaskELement elementSet = 1;
+	repeated TaskRelationship relationship = 2; // 这里的个数应该是 elementSet - 1
+}
+
+message rspRunControl
+{
+	eCmdRspType type = 1;
+}
+// 任务调度管理 ----------------------------------------
+
