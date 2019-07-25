@@ -48,12 +48,14 @@ message ListColPt
 enum eMarkingItemType  
 {
 	eMarkingTypeError = 0; // 因为保存成文件时，为0的数据不显示出来。所以所有的枚举都有一个为0的错误值。
-	eMarkingTypeCommon = 1; // 普通点
+	eMarkingTypeMustArrive = 1; // 必到点，不做什么动作。
 	eMarkingTypeProjection = 2; // 投影点
 	eMarkingTypeGate = 3; // 闸机点
 	eMarkingTypeElevator = 4; // 电梯点
 	eMarkingTypeCharging = 5; // 充电点
 	eMarkingTypeQR = 6;  // QR模式
+	eMarkingTypeRotate = 7; // 旋转特定角度
+	
 } 
 
 // 朝向方式
@@ -68,6 +70,7 @@ enum eAbsoluteOrientatio
 message path_action_point_config
 {
 	bytes config = 1;
+	float rotationangle = 2; // 只有当type为eMarkingTypeRotate时才有用，表示旋转的角度
 }
 
 message path_action_point_item
@@ -310,14 +313,26 @@ enum eTaskElementMode
 	eTaskElementTimingLoop = 3; // 定时循环
 }
 
+message TimingSet
+{
+	message timeItem
+	{
+		int32 startHour = 1; // 开始时间，时
+		int32 startMin = 2; // 开始时间，分
+		int32 endHour = 3; // 结束时间，时
+		int32 endMin = 4; // 结束时间，分
+	}
+	
+	repeated timeItem set = 1;
+}
+
 message TaskELement
 {
 	bytes onerouteName = 1;
 	bytes taskName = 2;
 	eTaskElementMode mode = 3;
 	int32 frequency = 4; // 假如mode是eTaskElementFrequencyLoop，这个表示循环的次数
-	int32 startTime = 5; // 假如mode是eTaskElementTimingLoop，这个表示任务开始时间。只能是4位数。个位十位表示分钟，百位千位表示时。比如：1530，表示下午15点30分
-	int32 endTime = 6;// 假如mode是eTaskElementTimingLoop，这个表示任务结束时间。定义同上
+	TimingSet timeset = 5;
 }
 
 // 任务之间的连接关系，先指定一个要不要重定位。后续会再调整。
