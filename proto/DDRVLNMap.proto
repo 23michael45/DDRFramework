@@ -12,6 +12,30 @@ message space_point
 }
 // 基础元素描述 ---------------------------------------
 
+// 采集完成后保存的重要地图点 --------------------------------------------------
+// 地图点的类型
+enum eColPtType
+{
+	eColPtTypeError = 0; // 让有效值从1开始，便于保存
+	ePathCorner = 1; // 路径拐点
+	eUserPOI = 2; // 用户标注的兴趣点
+}
+
+// 地图点列表, 默认为按照时间戳升序排列
+message ListColPt
+{
+	message OneColPt
+	{
+		eColPtType type = 1;
+		int64 timeStamp = 2;
+		float pose_x = 3;
+		float pose_y = 4;
+		float pose_theta = 5; // 弧度
+		bytes pt_name = 6; // 点的描述, 仅为用户标注点时有意义
+	}
+	repeated OneColPt ColPts = 1;
+}
+// 采集完成后保存的重要地图点 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // 任务描述 +++++++++++++++++++++++++++++++++++++++++
 /*
@@ -158,24 +182,13 @@ message affine_mat
 	float ty = 6;
 }
 
-// 客户端获取对应OneRoute下的数据
-message reqGetDDRVLNMap
-{
-	bytes onerouteName = 1;
-}
-
-message rspGetDDRVLNMap
-{
-	reqDDRVLNMap data = 1;
-}
-
 // 保存基础信息，主要是采集模式结束时生成的东西。每个OneRoute有一个DDRMapBaseData，每个DDRMapBaseData保存成一个文件
 message DDRMapBaseData
 {
 	bytes name = 1;
 	bytes description = 2;
 	affine_mat affinedata = 3;
-	repeated space_point basePointData = 4; 
+	ListColPt colPointData = 4; 
 }
 
 // 每个OneRoute有一个DDRMapPathData，每个DDRMapPathData保存成一个文件。这里类似于存放的是Task拼图中的所有元素
@@ -215,6 +228,30 @@ message reqDDRVLNMap
 }
 
 message rspDDRVLNMap
+{
+	eCmdRspType type = 1;
+}
+
+// 客户端获取对应OneRoute下的数据
+message reqGetDDRVLNMap
+{
+	bytes onerouteName = 1;
+}
+
+message rspGetDDRVLNMap
+{
+	eCmdRspType type = 1;
+	reqDDRVLNMap data = 2;
+}
+
+// 客户端请求根据采集时标记的POI点生成两个任务 Task_POI.ddr 和 Task_POIReturn.ddr
+// 主要是针对恒博ktv项目用的。正常模组不会发送这个。
+message reqCreatePOITask
+{
+	bytes onerouteName = 1;
+}
+
+message rspCreatePOITask
 {
 	eCmdRspType type = 1;
 }
@@ -301,28 +338,4 @@ message rspRunControl
 	eCmdRspType type = 1;
 }
 // 任务调度管理 ----------------------------------------
-
-// 采集完成后保存的重要地图点 --------------------------------------------------
-// 地图点的类型
-enum eColPtType
-{
-	ePathCorner = 0; // 路径拐点
-	eUserPOI = 1; // 用户标注的兴趣点
-}
-
-// 地图点列表, 默认为按照时间戳升序排列
-message ListColPt
-{
-	message OneColPt
-	{
-		eColPtType type = 1;
-		int64 timeStamp = 2;
-		float pose_x = 3;
-		float pose_y = 4;
-		float pose_theta = 5; // 弧度
-		bytes pt_name = 6; // 点的描述, 仅为用户标注点时有意义
-	}
-	repeated OneColPt ColPts = 1;
-}
-// 采集完成后保存的重要地图点 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
