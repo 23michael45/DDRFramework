@@ -313,6 +313,31 @@ enum eTaskElementMode
 	eTaskElementTimingLoop = 3; // 定时循环
 }
 
+message InfiniteTaskELement
+{
+	bytes onerouteName = 1;
+	bytes taskName = 2;
+}
+
+message FrequencyTaskELement
+{
+	message frequencyItem
+	{
+		bytes onerouteName = 1;
+		bytes taskName = 2;
+	}
+	// 任务之间的连接关系，先指定一个要不要重定位。后续会再调整。
+	// 还可以指定等待时间等等
+	message TaskRelationship
+	{
+		bool relocate = 1;
+	}
+	
+	repeated frequencyItem set = 1;
+	repeated TaskRelationship relation = 2; // 这个数量应该是set的数量减一。
+	int32 cycles = 3; // 循环次数。表述set任务集合中的所有任务循环几次。比如可以设置一个Task走5次，set里面就只有一个任务，cycles为5
+}
+
 message TimingSet
 {
 	message timeItem
@@ -322,30 +347,32 @@ message TimingSet
 		int32 endHour = 3; // 结束时间，时
 		int32 endMin = 4; // 结束时间，分
 	}
-	
 	repeated timeItem set = 1;
 }
 
-message TaskELement
+message TimingTaskELement
 {
-	bytes onerouteName = 1;
-	bytes taskName = 2;
-	eTaskElementMode mode = 3;
-	int32 frequency = 4; // 假如mode是eTaskElementFrequencyLoop，这个表示循环的次数
-	TimingSet timeset = 5;
+	message timingItem
+	{
+		bytes onerouteName = 1;
+		bytes taskName = 2;
+		TimingSet timeset = 5;
+	}
+	repeated timingItem itemSet = 1;
 }
 
-// 任务之间的连接关系，先指定一个要不要重定位。后续会再调整。
-message TaskRelationship
-{
-	bool relocate = 1;
-}
-
-// 客户端配置时发送任务，可以是多个任务集合。上位机收到后保存成DDRTaskControl.ddr(这个文件类似于之前的CRUISING_SPEC.txt)
+/*
+	客户端配置时发送任务，可以是多个任务集合。上位机收到后保存成DDRTaskControl.ddr(这个文件类似于之前的CRUISING_SPEC.txt)
+	只能是三种任务模式中选一个。
+	Description: There are three setting modes, 1) infinite loop 2) timing 3) go in a fixed order. And each task schedule can only be one of three modes.
+*/
 message reqRunControl
 {
-	repeated TaskELement elementSet = 1;
-	repeated TaskRelationship relationship = 2; // 这里的个数应该是 elementSet - 1
+	bytes description = 1;
+	eTaskElementMode mode = 2; // 根据模式下面三个成员三选一
+	TimingTaskELement timeingTask = 3;
+	FrequencyTaskELement frequencyTask = 4;
+	InfiniteTaskELement infiniteTask = 5;
 }
 
 message rspRunControl
