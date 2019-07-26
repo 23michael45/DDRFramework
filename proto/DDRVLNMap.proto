@@ -35,6 +35,19 @@ message ListColPt
 	}
 	repeated OneColPt ColPts = 1;
 }
+
+
+//路径地图键值对表，记录路径属于哪一张地图
+message PathKeyValueMap
+{	
+	message PathMapPair
+	{
+		bytes pathName = 1;   //路径名
+		bytes mapName = 2;	  //地图名
+	}
+	
+	repeated PathMapPair items = 1;
+}
 // 采集完成后保存的重要地图点 ++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // 任务描述 +++++++++++++++++++++++++++++++++++++++++
