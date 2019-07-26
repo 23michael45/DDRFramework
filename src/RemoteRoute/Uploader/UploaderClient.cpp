@@ -50,7 +50,7 @@ __int64 RUTcpClient::GetSecondsSinceLastRcv() const
 void RUTcpClient::Try2reconnect()
 {
 	std::lock_guard<std::mutex> lg(m_loc);
-	if (++m_nConnFailCnt <= g_MaxDisRetrials && try2load()) {
+	if (++m_nConnFailCnt <= g_MaxDisRetrials && try2load()) { 
 		Connect(m_serAddr, m_serPort);
 	} else {
 		m_bStopped = true;

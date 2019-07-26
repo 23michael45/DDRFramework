@@ -9,6 +9,7 @@ unsigned int StartUploadingRoute(const char *robotID,
 		                         const char *routeName,
 		                         const char *serverAddr,
 		                         const char *serverPort,
+	                             bool *pbSuccess = nullptr,
 	                             bool bForceUpdate = false);
 
 }
