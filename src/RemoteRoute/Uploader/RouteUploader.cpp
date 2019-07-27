@@ -1,5 +1,6 @@
 #include "RouteUploader.h"
 
+//#include <random>
 #include <fstream>
 #include <chrono>
 
@@ -31,6 +32,16 @@ struct RouteUploaderARG
 
 static void _thrFunc(void *ptr, bool *pbQuit)
 {
+#if 0
+	std::shared_ptr<RouteUploaderARG> pArg_((RouteUploaderARG*)ptr);
+	std::this_thread::sleep_for(std::chrono::seconds(5));
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(0, 1);
+	*(pArg_->pbSuccess) = (dist(mt) > 0);
+	return;
+#endif
+
 	std::shared_ptr<RouteUploaderARG> pArg((RouteUploaderARG*)ptr);
 	auto pClt = std::make_shared<RUTcpClient>(pArg->rID, pArg->routeName,
 		                                      pArg->serAddr, pArg->serPort,
