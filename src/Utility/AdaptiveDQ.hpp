@@ -1,9 +1,10 @@
 #ifndef __DDRGENERAL_ADAPTIVE_DOUBLE_QUEUE_H_INCLUDED__
 #define __DDRGENERAL_ADAPTIVE_DOUBLE_QUEUE_H_INCLUDED__
 
+#include <vector>
+
 namespace DDRGeneral {
 
-;
 // adaptive double queue that can automatically expand, pop/emplace from
 // both ends, be visited iteratively, and remove certain elements in the
 // middle of the queue.
@@ -77,7 +78,8 @@ public:
 		}
 	}
 	const T* GetNextIter() const {
-		if (m_it >= 0 && m_it < (int)size()) {
+		int sz = (int)size();
+		if (m_it >= 0 && m_it < sz) {
 			int it = m_it;
 			if (m_bForwardIt) {
 				++m_it;
@@ -94,9 +96,10 @@ public:
 		} else {
 			++m_it;
 		}
-		if (m_it >= 0 && m_it < (int)size()) {
-			if (m_it + m_it >= size()) { // second half
-				for (int ii = m_it; ii < size() - 1; ++ii) {
+		int sz = (int)size();
+		if (m_it >= 0 && m_it < sz) {
+			if (m_it + m_it >= sz) { // second half
+				for (int ii = m_it; ii < sz - 1; ++ii) {
 					m_data[(m_head + ii) % (m_cap + 1)] = std::move(m_data[(m_head + ii + 1) % (m_cap + 1)]);
 				}
 				m_tail = (m_tail + m_cap) % (m_cap + 1);
@@ -119,10 +122,11 @@ public:
 		} else {
 			++m_it;
 		}
-		if (m_it >= 0 && m_it < (int)size()) {
+		int sz = (int)size();
+		if (m_it >= 0 && m_it < sz) {
 			t = std::move(m_data[(m_head + m_it) % (m_cap + 1)]);
-			if (m_it + m_it >= size()) { // second half
-				for (int ii = m_it; ii < size() - 1; ++ii) {
+			if (m_it + m_it >= sz) { // second half
+				for (int ii = m_it; ii < sz- 1; ++ii) {
 					m_data[(m_head + ii) % (m_cap + 1)] = std::move(m_data[(m_head + ii + 1) % (m_cap + 1)]);
 				}
 				m_tail = (m_tail + m_cap) % (m_cap + 1);
@@ -139,9 +143,10 @@ public:
 		}
 		return false;
 	}
+
 protected:
 	std::vector<T> m_data;
-	int m_cap, m_head, m_tail, m_sz;
+	int m_cap, m_head, m_tail;
 	mutable bool m_bForwardIt;
 	mutable int m_it;
 	void _expand() {
