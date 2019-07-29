@@ -98,9 +98,15 @@ message path_action_point_item
 enum ePathItemMode  
 {
 	ePathItemModeError = 0;
-	ePathItemModeDynamicOA = 1; // 动态避障
-	ePathItemModeStaticOA = 2; // 静态避障
-	ePathItemModeCowshed = 3; // 贴边行驶路径(牛棚)
+	ePathItemModeDynamicOA = 64; // 动态避障
+	ePathItemModeStaticOA = 65; // 静态避障
+	ePathItemModeCowshed = 66; // 贴边行驶路径(牛棚)
+}
+
+ // 配置文件
+message path_line_config
+{
+	bytes config = 1;
 }
 
 message path_line_item
@@ -109,6 +115,7 @@ message path_line_item
 	repeated bytes pointNameSet = 2;
 	float velocity = 3; // 速度
 	ePathItemMode mode = 4; // 路径模式
+	path_line_config config = 5; // 配置文件
 }
 
 message path_arc_item
