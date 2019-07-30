@@ -112,10 +112,11 @@ message path_line_config
 message path_line_item
 {
 	bytes name = 1;// 同一reqDDRVLNMap是唯一的
-	repeated bytes pointNameSet = 2;
-	float velocity = 3; // 速度
-	ePathItemMode mode = 4; // 路径模式
-	path_line_config config = 5; // 配置文件
+	bytes pointStart = 2;
+	bytes pointEnd = 3;
+	float velocity = 4; // 速度
+	ePathItemMode mode = 5; // 路径模式
+	path_line_config config = 6; // 配置文件
 }
 
 message path_arc_item
@@ -291,9 +292,10 @@ message DDRTaskComplete_action_point_item
 message DDRTaskComplete_line_item
 {
 	bytes name = 1;
-	repeated space_point pointNameSet = 2;
-	float velocity = 3; // 速度
-	ePathItemMode mode = 4; // 路径模式
+	space_point pointStart = 2;
+	space_point pointEnd = 3;
+	float velocity = 4; // 速度
+	ePathItemMode mode = 5; // 路径模式
 }
 
 message DDRTaskComplete_arc_item
