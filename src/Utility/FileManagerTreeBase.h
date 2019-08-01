@@ -1,5 +1,5 @@
 /*!
- * File: FileManagerBase.h
+ * File: FileManagerTreeBase.h
  * Date: 2019/04/29 16:01
  *
  * Author: michael
@@ -8,8 +8,8 @@
  * Description:File System Manager Base
  *
 */
-#ifndef FileManagerBase_h__
-#define FileManagerBase_h__
+#ifndef FileManagerTreeBase_h__
+#define FileManagerTreeBase_h__
 
 
 
@@ -121,19 +121,24 @@ namespace DDRFramework
 	};
 
 
-	class FileManagerBase
+	class FileManagerTreeBase
 	{
 	public:
-		FileManagerBase();
-		~FileManagerBase();
+		FileManagerTreeBase();
+		~FileManagerTreeBase();
 
 		void SetRootPath(std::string root);
 		std::string GetRootPath();
+		std::vector<std::string> CheckFiles();
+
+		tree<std::string>& GetTree();
+
+
+		void PrintTreeNode(std::shared_ptr<treenode<std::string>> sptreenode, int level = 0);
 
 		//return utf8 file path
-		std::vector<std::string> Match(std::string fmt,std::string root = "" );
+		std::vector<std::string> Match(std::string fmt);
 		std::vector<std::string> MatchDir(std::string dir, std::string fmt);
-		void SetIgnoreMatchDir(std::set<string> ignoreList);
 
 
 
@@ -145,13 +150,20 @@ namespace DDRFramework
 
 	protected:
 
-		void MatchNode(std::string dir, std::string finalfmt,int level,std::vector<string> &vec);
+		void CheckDir(std::string dir,std::string file, std::vector<std::string>& vec, std::shared_ptr<treenode<std::string>> sptreenode);
+
+
+
+		std::vector<std::shared_ptr<treenode<std::string>>> MatchNode(std::string fmt);
+		void MatchRelativeRoot(std::shared_ptr<treenode<std::string>> spnode, std::string format, std::vector<std::shared_ptr<treenode<std::string>>>& vec);
+		void MatchFullPath(std::shared_ptr<treenode<std::string>> spnode, std::vector<string>& fmtvec, int level, std::vector<std::shared_ptr<treenode<std::string>>>& vec);
 
 		std::string m_RootPath;
+		tree<std::string> m_FileTree;
+
 
 		std::mutex m_FileMutex;
 
-		std::set<string> m_IgnoreList;
 	};
 }
-#endif // FileManagerBase_h__
+#endif // FileManagerTreeBase_h__

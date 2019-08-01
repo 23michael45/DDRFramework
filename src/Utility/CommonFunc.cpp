@@ -832,15 +832,35 @@ namespace DDRFramework {
 	}
 
 #endif
-	std::string getStarWildRegex(const std::string& s,bool bbegin)
+	std::string getStarWildRegex(const std::string& s,bool bbegin,std::string root)
 	{
 		size_t pos = 0;
 		std::vector<size_t> posvec;
 		std::string sformat;
 		if (bbegin)
 		{
-			sformat = "(.*)(" + s;
-			pos = 5;
+			if (!root.empty())
+			{
+				if (s.find('*') == 0)
+				{
+					sformat = "(" + root + ")(" + s;
+
+					pos = root.length() + 3;
+				}
+				else
+				{
+					sformat = "(" + root + "/" + s;
+
+					pos = root.length() + 2;
+				}
+
+			}
+			else
+			{
+				sformat = "(.*)(" + s;
+
+				pos = 5;
+			}
 		}
 		else
 		{

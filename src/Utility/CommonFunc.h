@@ -88,7 +88,7 @@ namespace DDRFramework {
 	std::wstring StringToWString(const std::string& str);
 	std::string WStringToString(const std::wstring& str);
 	std::string getexepath();
-	std::string getStarWildRegex(const std::string& s, bool bbegin);
+	std::string getStarWildRegex(const std::string& s, bool bbegin,std::string root = "");
 	std::string replace_all(std::string& str, std::string sub, std::string replaceto);
 	std::vector<std::string> split(const std::string &text, char sep);
 
