@@ -296,6 +296,7 @@ message DDRTaskComplete_line_item
 	space_point pointEnd = 3;
 	float velocity = 4; // 速度
 	ePathItemMode mode = 5; // 路径模式
+	path_line_config config = 6; // 配置文件
 }
 
 message DDRTaskComplete_arc_item
