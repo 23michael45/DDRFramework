@@ -101,7 +101,10 @@ message rspEnterAutoMode
 // 请求设置参数
 message reqSetRobotParameter
 {
-	float autoSpeed = 1; // 自动模式行走线速度 
+	string paramName = 1; //设置属性名称   AutoSpeed 自动模式行走线速度（float)   AutoChargeBattery 自动充电电量(float)
+	float floatValue = 2; // float值
+	int32 intValue = 3;//int 值
+	string stringValue = 4;//string 值
 }
 // 返回请求设置参数
 message rspSetRobotParameter
