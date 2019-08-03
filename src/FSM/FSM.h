@@ -65,11 +65,6 @@ public:
 	 */
 	virtual void willExitWithNextState(std::shared_ptr<State<T>> nextState) {};
 
-	/**
-	 * some Condition after willExitWithNextState,then true,state exit completely
-	 *
-	 */
-	virtual bool isExitFinish() { return true; };
 
 	void SetStateMachine(std::shared_ptr<StateMachine<T>> sp)
 	{
@@ -189,20 +184,22 @@ public:
 		auto state = findState<T>();
 		if (state)
 		{
-
-			if (m_spState)
+			if (state != m_spState)
 			{
-				if (m_spState->isValidNextState(state))
+				if (m_spState)
 				{
+					if (m_spState->isValidNextState(state))
+					{
+						m_spNextState = state;
+						return true;
+					}
+				}
+				else
+				{
+
 					m_spNextState = state;
 					return true;
 				}
-			}
-			else
-			{
-
-				m_spNextState = state;
-				return true;
 			}
 		}
 		return false;
@@ -281,6 +278,7 @@ public:
 		{
 			if (m_spNextState)
 			{
+
 				//first time run
 				if (m_spState == nullptr && m_spExitingState == nullptr)
 				{
@@ -289,37 +287,45 @@ public:
 					m_spState = m_spNextState;
 					m_spNextState = nullptr;
 				}
-				//prestate exit finish
-				else if(m_spExitingState&&m_spExitingState->isExitFinish())
-				{
-					m_spNextState->didEnterWithPreviousState(m_spState);
-
-					m_spState = m_spNextState;
-					m_spNextState = nullptr;
-					m_spExitingState = nullptr;
-				}
-
-
-				if (m_spState)
+				//pre state exit
+				else if (m_spState)
 				{
 					m_spState->willExitWithNextState(m_spNextState);
 					m_spExitingState = m_spState;
-					m_spState = nullptr;
+					m_spState = m_spNextState;
+					m_spNextState = nullptr;
+				}
+			}
+			else
+			{
+				//prestate exit finish
+				if (m_spExitingState)
+				{
+					m_spExitingState->updateWithDeltaTime(deltaTime);
+					m_spState->didEnterWithPreviousState(m_spState);
+					m_spExitingState = nullptr;
+
+
+				}
+				else
+				{
+
+
+					if (m_spState)
+					{
+						m_spState->updateWithDeltaTime(deltaTime);
+
+					}
+
 				}
 
-				
-			}
-
-			if (m_spState)
-			{
-				m_spState->updateWithDeltaTime(deltaTime);
 
 			}
 
-			if (m_spExitingState)
-			{
-				m_spExitingState->updateWithDeltaTime(deltaTime);
-			}
+
+
+
+			
 		}
 		catch (std::exception& e)
 		{
