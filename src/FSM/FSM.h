@@ -86,7 +86,7 @@ class StateMachine
 {
 public:
 
-	StateMachine()
+	StateMachine():m_spExitingState(nullptr),m_spNextState(nullptr),m_spState(nullptr)
 	{
 
 	}
@@ -281,6 +281,25 @@ public:
 		{
 			if (m_spNextState)
 			{
+				//first time run
+				if (m_spState == nullptr && m_spExitingState == nullptr)
+				{
+					m_spNextState->didEnterWithPreviousState(m_spState);
+
+					m_spState = m_spNextState;
+					m_spNextState = nullptr;
+				}
+				//prestate exit finish
+				else if(m_spExitingState&&m_spExitingState->isExitFinish())
+				{
+					m_spNextState->didEnterWithPreviousState(m_spState);
+
+					m_spState = m_spNextState;
+					m_spNextState = nullptr;
+					m_spExitingState = nullptr;
+				}
+
+
 				if (m_spState)
 				{
 					m_spState->willExitWithNextState(m_spNextState);
@@ -288,15 +307,7 @@ public:
 					m_spState = nullptr;
 				}
 
-				if (m_spExitingState->isExitFinish())
-				{
-					m_spNextState->didEnterWithPreviousState(m_spState);
-
-					m_spState = m_spNextState;
-					m_spNextState = nullptr;				
-					m_spExitingState = nullptr;
-
-				}
+				
 			}
 
 			if (m_spState)
@@ -308,7 +319,6 @@ public:
 			if (m_spExitingState)
 			{
 				m_spExitingState->updateWithDeltaTime(deltaTime);
-
 			}
 		}
 		catch (std::exception& e)
