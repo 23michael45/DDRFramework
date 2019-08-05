@@ -33,7 +33,7 @@ public:
 	调用者应手动进行以上操作
 	*/
 	static std::shared_ptr<T> Allocate() {
-		return getIns()->Allocate();
+		return getIns()->allocate();
 	}
 	/*
 	Clone objects by allocating and ASSIGN resources.
@@ -46,7 +46,7 @@ public:
 		return getIns()->clone(ori);
 	}
 	static std::shared_ptr<T> Clone(T &&ori) {
-		return getIns()->clone(ori);
+		return getIns()->clone(std::move(ori));
 	}
 
 protected:
