@@ -24,46 +24,57 @@ public:
 	设置回收缓冲区大小(对象资源的份数)
 	*/
 	static void SetPoolCap(int nMaxPoolInstances) {
-		GetIns()->m_maxNBuf = (nMaxPoolInstances <= 1) ? 1 : nMaxPoolInstances;
+		getIns()->setCap(nMaxPoolInstances);
 	}
 	/*
-	Single global instance so call GetIns() to proceed
-	单例模式, 调用GetIns()来进行分配和克隆操作
-	*/
-	static ObjectPool* GetIns() {
-		if (g_p) {
-			return g_p;
-		} else {
-			g_p = new ObjectPool<T>();
-			atexit(destroy);
-			return g_p;
-		}
-	}
-	/*
-	Allocate resource. Note that recycles resource will NOT be renewed, and
-	its caller's duty to handle initialization or assignment.
+	Allocate resource. Note that recycles resource will NOT be re-initialized or
+	assigned, so its caller's duty to handle these operations.
 	分配资源. 注意, 使用回收资源时不会对其做任何初始化和赋值操作(资源保持原值), 
 	调用者应手动进行以上操作
 	*/
-	template <class... _Types>
-	std::shared_ptr<T> allocate(_Types &&...args) {
-		std::lock_guard<std::mutex> lg(m_loc);
-		if (!m_poolQ.empty()) {
-			allocCatch(true);
-			T *ptt;
-			m_poolQ.pop_back(ptt);
-			std::shared_ptr<T> tt(ptt, recycle);
-			return tt;
-		} else {
-			allocCatch(false);
-			std::shared_ptr<T> tt(new T(args...), recycle);
-			return tt;
-		}
+	static std::shared_ptr<T> Allocate() {
+		return getIns()->Allocate();
 	}
 	/*
 	Clone objects by allocating and ASSIGN resources.
 	克隆资源. 注意, 分配资源后会进行 赋值 操作
 	*/
+	static std::shared_ptr<T> Clone(const T *pOri) {
+		return getIns()->clone(pOri);
+	}
+	static std::shared_ptr<T> Clone(const T &ori) {
+		return getIns()->clone(ori);
+	}
+	static std::shared_ptr<T> Clone(T &&ori) {
+		return getIns()->clone(ori);
+	}
+
+protected:
+	ObjectPool() : m_maxNBuf(10), m_nAllocReq(0), m_nAllocHit(0), m_bTesting(true) {}
+	virtual ~ObjectPool() {
+		while (!m_poolQ.empty()) {
+			T *ptt;
+			m_poolQ.pop_back(ptt);
+			delete ptt;
+		}
+	}
+	void setCap(int nCap) {
+		std::lock_guard<std::mutex> lg(g_p->m_loc);
+		m_maxNBuf = (nCap <= 1) ? 1 : nCap;
+	}
+	std::shared_ptr<T> allocate() {
+		std::lock_guard<std::mutex> lg(m_loc);
+		if (!m_poolQ.empty()) {
+			allocCatch(true);
+			T *ptt;
+			m_poolQ.pop_back(ptt);
+			return std::shared_ptr<T>(ptt, recycle);
+		} else {
+			allocCatch(false);
+			std::shared_ptr<T> tt(new T, recycle);
+			return tt;
+		}
+	}
 	std::shared_ptr<T> clone(const T *pOri) {
 		auto tt = allocate();
 		*(tt.get()) = *pOri;
@@ -78,35 +89,6 @@ public:
 		auto tt = allocate();
 		*(tt.get()) = ori;
 		return tt;
-	}
-
-protected:
-	ObjectPool() : m_maxNBuf(10), m_nAllocReq(0), m_nAllocHit(0), m_bTesting(true) {}
-	virtual ~ObjectPool() {
-		while (!m_poolQ.empty()) {
-			T *ptt;
-			m_poolQ.pop_back(ptt);
-			delete ptt;
-		}
-	}
-	static void recycle(T *pEle) {
-		if (g_p) {
-			std::lock_guard<std::mutex> lg(g_p->m_loc);
-			while (g_p->m_poolQ.size() >= g_p->m_maxNBuf) {
-				T *ptt;
-				g_p->m_poolQ.pop_back(ptt);
-				delete ptt;
-			}
-			g_p->m_poolQ.emplace_back(pEle);
-		} else {
-			delete pEle;
-		}
-	}
-	static void destroy() {
-		if (g_p) {
-			delete g_p;
-			g_p = nullptr;
-		}
 	}
 	void allocCatch(bool bHit) {
 		if (!m_bTesting) {
@@ -125,6 +107,40 @@ protected:
 		} else if (++m_nAllocReq >= s_queryPeriod) {
 			m_nAllocReq = m_nAllocHit = 0;
 			m_bTesting = false;
+		}
+	}
+	/*
+	Single global instance so call GetIns() to proceed.
+	单例模式, 调用GetIns()来进行分配和克隆操作
+	*/
+	static ObjectPool* getIns() {
+		if (g_p) {
+			return g_p;
+		} else {
+			g_p = new ObjectPool<T>();
+			atexit(destroy);
+			return g_p;
+		}
+	}
+	static void recycle(T *pEle) {
+		if (g_p) {
+			std::lock_guard<std::mutex> lg(g_p->m_loc);
+			if (g_p->m_poolQ.size() < g_p->m_maxNBuf) {
+				g_p->m_poolQ.emplace_back(pEle);
+				return;
+			}
+			while (g_p->m_poolQ.size() > g_p->m_maxNBuf) {
+				T *ptt;
+				g_p->m_poolQ.pop_back(ptt);
+				delete ptt;
+			}
+		}
+		delete pEle;
+	}
+	static void destroy() {
+		if (g_p) {
+			delete g_p;
+			g_p = nullptr;
 		}
 	}
 
