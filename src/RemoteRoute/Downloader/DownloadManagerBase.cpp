@@ -66,9 +66,9 @@ DownloadManagerBase::DownloadManagerBase(const char *pWorkingDir, const routeInf
 			<< g_DownloadedRouteIndicator << "\n" << ri.downloadID << "\n0"
 			<< std::endl; // ver rid typeIndicator did nExistingFiles
 		if (ofs.good()) {
-			m_msg2Snd = std::make_shared<DDRCommProto::reqListFiles_downloader>();
-			((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->set_downloadid(ri.downloadID);
-			((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
+			m_msg2Snd = std::make_shared<RemoteRouteProto::reqListFiles_downloader>();
+			((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->set_downloadid(ri.downloadID);
+			((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
 			m_RI = ri;
 			m_stage = 0;
 			return;
@@ -117,9 +117,9 @@ DownloadManagerBase::DownloadManagerBase(const char *pWorkingDir, const routeInf
 	}
 	std::sort(m_existingFiles.begin(), m_existingFiles.end(),
 		[](const OneExistingFile &oef1, const OneExistingFile &oef2) {return oef1.name.compare(oef2.name) < 0; });
-	m_msg2Snd = std::make_shared<DDRCommProto::reqListFiles_downloader>();
-	((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->set_downloadid(ri.downloadID);
-	((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
+	m_msg2Snd = std::make_shared<RemoteRouteProto::reqListFiles_downloader>();
+	((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->set_downloadid(ri.downloadID);
+	((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
 	m_RI = ri;
 	m_stage = 0;
 }
@@ -150,10 +150,10 @@ std::shared_ptr<google::protobuf::Message> DownloadManagerBase::Feed(std::shared
 		return false;
 	}
 	std::string str = pRcvMsg->GetTypeName();
-	if ("DDRCommProto.rspListFiles" == str) {
-		_rsp_listFiles((DDRCommProto::rspListFiles*)pRcvMsg.get());
-	} else if ("DDRCommProto.rspDownloadFiles" == str) {
-		_rsp_downloadFiles((DDRCommProto::rspDownloadFiles*)pRcvMsg.get());
+	if ("RemoteRouteProto.rspListFiles" == str) {
+		_rsp_listFiles((RemoteRouteProto::rspListFiles*)pRcvMsg.get());
+	} else if ("RemoteRouteProto.rspDownloadFiles" == str) {
+		_rsp_downloadFiles((RemoteRouteProto::rspDownloadFiles*)pRcvMsg.get());
 	} else {
 		m_msg2Snd.reset();
 		m_stage = -1;
@@ -211,29 +211,29 @@ static int _find(const void *pData, int szPerData, int nData,
 	return bb;
 }
 
-void DownloadManagerBase::_rsp_listFiles(const DDRCommProto::rspListFiles *pRsp)
+void DownloadManagerBase::_rsp_listFiles(const RemoteRouteProto::rspListFiles *pRsp)
 {
-	if (0 != m_stage || m_msg2Snd->GetTypeName() != "DDRCommProto.reqListFiles_downloader" ||
-		((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->reqguid() != pRsp->reqguid()) {
+	if (0 != m_stage || m_msg2Snd->GetTypeName() != "RemoteRouteProto.reqListFiles_downloader" ||
+		((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->reqguid() != pRsp->reqguid()) {
 		m_stage = -1;
 		m_except = 3;
 		return;
 	}
 
 	switch (pRsp->ret()) {
-	case DDRCommProto::eOkay:
+	case RemoteRouteProto::eOkay:
 		break;
-	case DDRCommProto::eIDInvalid:
+	case RemoteRouteProto::eIDInvalid:
 		m_stage = -1;
 		m_except = 2;
 		return;
 		break;
-	case DDRCommProto::eTooBusy:
+	case RemoteRouteProto::eTooBusy:
 		if (++m_nFailCnt > g_maxConsecutiveFailCnt) {
 			m_stage = -1;
 			m_except = 9;
 		} else {
-			((DDRCommProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
+			((RemoteRouteProto::reqListFiles_downloader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
 		}
 		return;
 		break;
@@ -246,8 +246,8 @@ void DownloadManagerBase::_rsp_listFiles(const DDRCommProto::rspListFiles *pRsp)
 	
 	m_downloableFiles.resize(0);
 	if (pRsp->filerecords_sz() > 0) {
-		DDRCommProto::MultipleFileInfo mfi;
-		if (DDRCommProto::eNoZip == pRsp->ziptype()) {
+		RemoteRouteProto::MultipleFileInfo mfi;
+		if (RemoteRouteProto::eNoZip == pRsp->ziptype()) {
 			if (pRsp->filerecords_sz() != pRsp->filerecords().length() ||
 				!mfi.ParseFromArray(pRsp->filerecords().c_str(),
 					                (int)pRsp->filerecords().length())) {
@@ -255,7 +255,7 @@ void DownloadManagerBase::_rsp_listFiles(const DDRCommProto::rspListFiles *pRsp)
 				m_except = 3;
 				return;
 			}
-		} else if (DDRCommProto::eZLib == pRsp->ziptype()) {
+		} else if (RemoteRouteProto::eZLib == pRsp->ziptype()) {
 			uLongf oriSz = (uLongf)pRsp->filerecords_sz();
 			std::vector<char> buf(oriSz);
 			if (Z_OK != uncompress((Bytef*)&buf[0], &oriSz,
@@ -307,10 +307,10 @@ void DownloadManagerBase::_rsp_listFiles(const DDRCommProto::rspListFiles *pRsp)
 	}
 }
 
-void DownloadManagerBase::_rsp_downloadFiles(const DDRCommProto::rspDownloadFiles *pRsp)
+void DownloadManagerBase::_rsp_downloadFiles(const RemoteRouteProto::rspDownloadFiles *pRsp)
 {
-	if (1 != m_stage || m_msg2Snd->GetTypeName() != "DDRCommProto.reqDownloadFiles" ||
-		((DDRCommProto::reqDownloadFiles*)m_msg2Snd.get())->reqguid() != pRsp->reqguid() ||
+	if (1 != m_stage || m_msg2Snd->GetTypeName() != "RemoteRouteProto.reqDownloadFiles" ||
+		((RemoteRouteProto::reqDownloadFiles*)m_msg2Snd.get())->reqguid() != pRsp->reqguid() ||
 		m_downloableFiles.empty()) {
 		m_stage = -1;
 		m_except = 3;
@@ -318,21 +318,21 @@ void DownloadManagerBase::_rsp_downloadFiles(const DDRCommProto::rspDownloadFile
 	}
 	
 	switch (pRsp->ret()) {
-	case DDRCommProto::eOkay:
+	case RemoteRouteProto::eOkay:
 		break;
-	case DDRCommProto::eIDInvalid:
+	case RemoteRouteProto::eIDInvalid:
 		m_stage = -1;
 		m_except = 2;
 		m_msg2Snd.reset();
 		return;
 		break;
-	case DDRCommProto::eTooBusy:
+	case RemoteRouteProto::eTooBusy:
 		if (++m_nFailCnt > g_maxConsecutiveFailCnt) {
 			m_stage = -1;
 			m_except = 9;
 			m_msg2Snd.reset();
 		} else {
-			((DDRCommProto::reqDownloadFiles*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
+			((RemoteRouteProto::reqDownloadFiles*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
 		}
 		return;
 		break;
@@ -373,7 +373,7 @@ void DownloadManagerBase::_rsp_downloadFiles(const DDRCommProto::rspDownloadFile
 	const char *pBuf = nullptr;
 	size_t nBufLen = 0;
 	std::vector<char> oriContent;
-	if (DDRCommProto::eZLib == pRsp->ziptype()) {
+	if (RemoteRouteProto::eZLib == pRsp->ziptype()) {
 		uLongf dstLen = (uLongf)pRsp->content_len();
 		oriContent.resize(dstLen);
 		if (Z_OK != uncompress((Bytef*)&oriContent[0], &dstLen,
@@ -386,7 +386,7 @@ void DownloadManagerBase::_rsp_downloadFiles(const DDRCommProto::rspDownloadFile
 		}
 		pBuf = &oriContent[0];
 		nBufLen = (size_t)pRsp->content_len();
-	} else if (DDRCommProto::eNoZip == pRsp->ziptype()) {
+	} else if (RemoteRouteProto::eNoZip == pRsp->ziptype()) {
 		if (pRsp->content_len() != (__int64)pRsp->contents().length()) {
 			m_stage = -1;
 			m_except = 3;
@@ -480,8 +480,8 @@ int DownloadManagerBase::prepareNextDownloadReq()
 		return 1;
 	}
 
-	m_msg2Snd = std::make_shared<DDRCommProto::reqDownloadFiles>();
-	auto pMsg = (DDRCommProto::reqDownloadFiles*)m_msg2Snd.get();
+	m_msg2Snd = std::make_shared<RemoteRouteProto::reqDownloadFiles>();
+	auto pMsg = (RemoteRouteProto::reqDownloadFiles*)m_msg2Snd.get();
 	int nBytes = 0;
 	for (int i = m_fListPtr; i < (int)m_downloableFiles.size(); ++i) {
 		if (m_downloableFiles[i].pos >= m_downloableFiles[i].sz) {

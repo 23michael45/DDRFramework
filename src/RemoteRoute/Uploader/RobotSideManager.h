@@ -93,15 +93,15 @@ protected:
 	std::vector<char> m_oriContent;
 
 	bool listUploadableFiles();
-	bool processRemoteList(const DDRCommProto::rspListFiles *pMsg_RspListFile);
+	bool processRemoteList(const RemoteRouteProto::rspListFiles *pMsg_RspListFile);
 	void adjustUploadableFiles();
 	int prepareNextSliceUpload(); // 0 - success; 1 - finished; -1 - error
 	bool readFile(const char *pRelativeFN, size_t sPos, size_t len,
 		          std::vector<char> &content);
 
-	void _rsp_createRoute(const DDRCommProto::rspCreateRoute *pRsp);
-	void _rsp_uploadFiles(const DDRCommProto::rspUploadFiles *pRsp);
-	void _rsp_listFiles(const DDRCommProto::rspListFiles *pRsp);
+	void _rsp_createRoute(const RemoteRouteProto::rspCreateRoute *pRsp);
+	void _rsp_uploadFiles(const RemoteRouteProto::rspUploadFiles *pRsp);
+	void _rsp_listFiles(const RemoteRouteProto::rspListFiles *pRsp);
 };
 
 }

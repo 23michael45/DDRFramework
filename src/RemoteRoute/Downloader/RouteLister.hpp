@@ -28,8 +28,8 @@ public:
 		          std::shared_ptr<DDRCommProto::CommonHeader> spHeader,
 		          std::shared_ptr<google::protobuf::Message> spMsg) override
 	{
-		if ("DDRCommProto.rspListRoutes" == spMsg->GetTypeName()) {
-			_analyze((DDRCommProto::rspListRoutes*)spMsg.get());
+		if ("RemoteRouteProto.rspListRoutes" == spMsg->GetTypeName()) {
+			_analyze((RemoteRouteProto::rspListRoutes*)spMsg.get());
 		}
 		spParentSocketContainer->GetTcp()->Stop();
 	}
@@ -38,22 +38,22 @@ private:
 	std::vector<routeInfo> *m_pInfoArray;
 	DDRFramework::Timer *m_pTimer;
 	DDRFramework::timer_id m_tid;
-	void _analyze(DDRCommProto::rspListRoutes *pRsp)
+	void _analyze(RemoteRouteProto::rspListRoutes *pRsp)
 	{
-		if (!m_pInfoArray || DDRCommProto::eOkay != pRsp->ret() ||
+		if (!m_pInfoArray || RemoteRouteProto::eOkay != pRsp->ret() ||
 			pRsp->routerecords_sz() <= 0) {
 			return;
 		}
 		m_pInfoArray->resize(0);
 
-		DDRCommProto::MultipleRouteInfo mri;
-		if (DDRCommProto::eNoZip == pRsp->ziptype()) {
+		RemoteRouteProto::MultipleRouteInfo mri;
+		if (RemoteRouteProto::eNoZip == pRsp->ziptype()) {
 			if (pRsp->routerecords_sz() != pRsp->routerecords().length() ||
 				!mri.ParseFromArray(pRsp->routerecords().c_str(),
 					                pRsp->routerecords().length())) {
 				return;
 			}
-		} else if (DDRCommProto::eZLib == pRsp->ziptype()) {
+		} else if (RemoteRouteProto::eZLib == pRsp->ziptype()) {
 			uLongf oriSz = (uLongf)pRsp->routerecords_sz();
 			std::vector<char> buf(oriSz);
 			if (Z_OK != uncompress((Bytef*)&buf[0], &oriSz,
@@ -131,7 +131,7 @@ protected:
 	}
 	void OnConnected(std::shared_ptr<TcpSocketContainer> spContainer) override
 	{
-		std::shared_ptr<google::protobuf::Message> pMsg = std::make_shared<DDRCommProto::reqListRoutes>();
+		std::shared_ptr<google::protobuf::Message> pMsg = std::make_shared<RemoteRouteProto::reqListRoutes>();
 		Send(pMsg);
 	}
 	void OnConnectTimeout(std::shared_ptr<TcpSocketContainer> spContainer) override

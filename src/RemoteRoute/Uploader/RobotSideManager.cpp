@@ -103,17 +103,17 @@ void RobotSideRouteManager::Reset()
 
 	switch (m_stage) {
 	case 0: // req to create a new route
-		m_msg2Snd = std::make_shared<DDRCommProto::reqCreateRoute>();
-		((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_version(m_ver);
-		((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_robotid(DDRSys::sysStr_to_utf8(m_rID.c_str()));
-		((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_routename(DDRSys::sysStr_to_utf8(m_routeName.c_str()));
-		((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_datetime(m_cTime);
+		m_msg2Snd = std::make_shared<RemoteRouteProto::reqCreateRoute>();
+		((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_version(m_ver);
+		((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_robotid(DDRSys::sysStr_to_utf8(m_rID.c_str()));
+		((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_routename(DDRSys::sysStr_to_utf8(m_routeName.c_str()));
+		((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_datetime(m_cTime);
 		break;
 
 	case 1: // req to list server's files (so that we can upload partially)
-		m_msg2Snd = std::make_shared<DDRCommProto::reqListFiles_uploader>();
-		((DDRCommProto::reqListFiles_uploader*)m_msg2Snd.get())->set_uploadid(m_uploadID);
-		((DDRCommProto::reqListFiles_uploader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
+		m_msg2Snd = std::make_shared<RemoteRouteProto::reqListFiles_uploader>();
+		((RemoteRouteProto::reqListFiles_uploader*)m_msg2Snd.get())->set_uploadid(m_uploadID);
+		((RemoteRouteProto::reqListFiles_uploader*)m_msg2Snd.get())->set_reqguid(DDRSys::_rand_u64());
 		break;
 	}
 
@@ -134,15 +134,15 @@ RobotSideRouteManager::~RobotSideRouteManager()
 {
 }
 
-void RobotSideRouteManager::_rsp_createRoute(const DDRCommProto::rspCreateRoute *pRsp)
+void RobotSideRouteManager::_rsp_createRoute(const RemoteRouteProto::rspCreateRoute *pRsp)
 {
-	if (m_msg2Snd->GetTypeName() == "DDRCommProto.reqCreateRoute") {
+	if (m_msg2Snd->GetTypeName() == "RemoteRouteProto.reqCreateRoute") {
 		if (0 != m_stage) {
 			m_stage = -2;
 			m_except = SERVER_RESP_INVALID;
 			return;
 		}
-		if (DDRCommProto::eOkay == pRsp->ret()) {
+		if (RemoteRouteProto::eOkay == pRsp->ret()) {
 			m_uploadID = pRsp->uploadid();
 			m_str = m_dir + g_InfoFileName;
 			std::ofstream ofs(m_str);
@@ -165,8 +165,8 @@ void RobotSideRouteManager::_rsp_createRoute(const DDRCommProto::rspCreateRoute 
 				m_stage = -2;
 				m_except = INTERNAL_ERROR;
 			}
-		} else if (DDRCommProto::eTooBusy == pRsp->ret() ||
-			       DDRCommProto::eInternalErr == pRsp->ret()) {
+		} else if (RemoteRouteProto::eTooBusy == pRsp->ret() ||
+			       RemoteRouteProto::eInternalErr == pRsp->ret()) {
 			if (++m_uploadFailCnt >= g_MaxFailureCnt4SameSlice) {
 				m_stage = -2;
 				m_except = FAILED_TOO_MANY_TIMES;
@@ -174,17 +174,17 @@ void RobotSideRouteManager::_rsp_createRoute(const DDRCommProto::rspCreateRoute 
 		} else {
 			m_stage = -2;
 			switch (pRsp->ret()) {
-			case DDRCommProto::eReqVoid:
+			case RemoteRouteProto::eReqVoid:
 				m_except = DATA_ERROR;
 				break;
-			case DDRCommProto::eIDInvalid:
+			case RemoteRouteProto::eIDInvalid:
 				m_except = ID_INVALID;
 				break;
-			case DDRCommProto::eUp_TooFrequent:
+			case RemoteRouteProto::eUp_TooFrequent:
 				m_except = ROUTE_CREATION_DENIED;
 				break;
-			case DDRCommProto::eUp_TooBig:
-			case DDRCommProto::eUp_DataError:
+			case RemoteRouteProto::eUp_TooBig:
+			case RemoteRouteProto::eUp_DataError:
 				m_except = DATA_ERROR;
 				break;
 			default:
@@ -198,16 +198,16 @@ void RobotSideRouteManager::_rsp_createRoute(const DDRCommProto::rspCreateRoute 
 	}
 }
 
-void RobotSideRouteManager::_rsp_uploadFiles(const DDRCommProto::rspUploadFiles *pRsp)
+void RobotSideRouteManager::_rsp_uploadFiles(const RemoteRouteProto::rspUploadFiles *pRsp)
 {
-	if (m_msg2Snd->GetTypeName() == "DDRCommProto.reqUploadFiles") {
-		DDRCommProto::reqUploadFiles *pReq = (DDRCommProto::reqUploadFiles*)m_msg2Snd.get();
+	if (m_msg2Snd->GetTypeName() == "RemoteRouteProto.reqUploadFiles") {
+		RemoteRouteProto::reqUploadFiles *pReq = (RemoteRouteProto::reqUploadFiles*)m_msg2Snd.get();
 		if (1 != m_stage || pRsp->reqguid() != pReq->reqguid()) {
 			m_stage = -2;
 			m_except = SERVER_RESP_INVALID;
 			return;
 		}
-		if (DDRCommProto::eOkay == pRsp->ret()) {
+		if (RemoteRouteProto::eOkay == pRsp->ret()) {
 			int nRet = prepareNextSliceUpload();
 			if (0 == nRet) {
 				if (0 == m_stage) {
@@ -243,7 +243,7 @@ void RobotSideRouteManager::_rsp_uploadFiles(const DDRCommProto::rspUploadFiles 
 				m_stage = -2;
 				m_except = INTERNAL_ERROR;
 			}
-		} else if (DDRCommProto::eTooBusy == pRsp->ret()) {
+		} else if (RemoteRouteProto::eTooBusy == pRsp->ret()) {
 			if (++m_uploadFailCnt >= g_MaxFailureCnt4SameSlice) {
 				m_stage = -2;
 				m_except = FAILED_TOO_MANY_TIMES;
@@ -251,14 +251,14 @@ void RobotSideRouteManager::_rsp_uploadFiles(const DDRCommProto::rspUploadFiles 
 		} else {
 			m_stage = -2;
 			switch (pRsp->ret()) {
-			case DDRCommProto::eReqVoid:
+			case RemoteRouteProto::eReqVoid:
 				m_except = DATA_ERROR;
 				break;
-			case DDRCommProto::eIDInvalid:
+			case RemoteRouteProto::eIDInvalid:
 				m_except = ID_INVALID; // UID invalid
 				break;
-			case DDRCommProto::eUp_TooBig:
-			case DDRCommProto::eUp_DataError:
+			case RemoteRouteProto::eUp_TooBig:
+			case RemoteRouteProto::eUp_DataError:
 				m_except = DATA_ERROR;
 				break;
 			default:
@@ -272,16 +272,16 @@ void RobotSideRouteManager::_rsp_uploadFiles(const DDRCommProto::rspUploadFiles 
 	}
 }
 
-void RobotSideRouteManager::_rsp_listFiles(const DDRCommProto::rspListFiles *pRsp)
+void RobotSideRouteManager::_rsp_listFiles(const RemoteRouteProto::rspListFiles *pRsp)
 {
-	if (m_msg2Snd->GetTypeName() == "DDRCommProto.reqListFiles_uploader") {
+	if (m_msg2Snd->GetTypeName() == "RemoteRouteProto.reqListFiles_uploader") {
 		if (1 != m_stage) {
 			m_stage = -2;
 			m_except = SERVER_RESP_INVALID;
 			return;
 		}
-		auto *pReq = (DDRCommProto::reqListFiles_uploader*)m_msg2Snd.get();
-		if (DDRCommProto::eOkay == pRsp->ret()) {
+		auto *pReq = (RemoteRouteProto::reqListFiles_uploader*)m_msg2Snd.get();
+		if (RemoteRouteProto::eOkay == pRsp->ret()) {
 			if (processRemoteList(pRsp)) {
 				int nRet = prepareNextSliceUpload();
 				if (0 == nRet) { // next slice prepared
@@ -307,7 +307,7 @@ void RobotSideRouteManager::_rsp_listFiles(const DDRCommProto::rspListFiles *pRs
 				m_stage = -2;
 				m_except = SERVER_RESP_INVALID;
 			}
-		} else if (DDRCommProto::eTooBusy == pRsp->ret()) {
+		} else if (RemoteRouteProto::eTooBusy == pRsp->ret()) {
 			if (++m_uploadFailCnt >= g_MaxFailureCnt4SameSlice) {
 				m_stage = -2;
 				m_except = FAILED_TOO_MANY_TIMES;
@@ -315,17 +315,17 @@ void RobotSideRouteManager::_rsp_listFiles(const DDRCommProto::rspListFiles *pRs
 		} else {
 			m_stage = -2;
 			switch (pRsp->ret()) {
-			case DDRCommProto::eReqVoid:
+			case RemoteRouteProto::eReqVoid:
 				m_except = DATA_ERROR;
 				break;
-			case DDRCommProto::eIDInvalid:
+			case RemoteRouteProto::eIDInvalid:
 				//m_except = ID_INVALID;
 				m_stage = 0;
-				m_msg2Snd = std::make_shared<DDRCommProto::reqCreateRoute>();
-				((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_version(m_ver);
-				((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_robotid(DDRSys::sysStr_to_utf8(m_rID.c_str()));
-				((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_routename(DDRSys::sysStr_to_utf8(m_routeName.c_str()));
-				((DDRCommProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_datetime(m_cTime);
+				m_msg2Snd = std::make_shared<RemoteRouteProto::reqCreateRoute>();
+				((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_version(m_ver);
+				((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_robotid(DDRSys::sysStr_to_utf8(m_rID.c_str()));
+				((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_routename(DDRSys::sysStr_to_utf8(m_routeName.c_str()));
+				((RemoteRouteProto::reqCreateRoute*)m_msg2Snd.get())->mutable_routeinfo()->set_datetime(m_cTime);
 				break;
 			default:
 				m_except = INTERNAL_ERROR;
@@ -349,12 +349,12 @@ std::shared_ptr<google::protobuf::Message> RobotSideRouteManager::Feed(std::shar
 		return false;
 	}
 	std::string str = pRcvMsg->GetTypeName();
-	if ("DDRCommProto.rspCreateRoute" == str) {
-		_rsp_createRoute((DDRCommProto::rspCreateRoute*)pRcvMsg.get());
-	} else if ("DDRCommProto.rspUploadFiles" == str) {
-		_rsp_uploadFiles((DDRCommProto::rspUploadFiles*)pRcvMsg.get());
-	} else if ("DDRCommProto.rspListFiles" == str) {
-		_rsp_listFiles((DDRCommProto::rspListFiles*)pRcvMsg.get());
+	if ("RemoteRouteProto.rspCreateRoute" == str) {
+		_rsp_createRoute((RemoteRouteProto::rspCreateRoute*)pRcvMsg.get());
+	} else if ("RemoteRouteProto.rspUploadFiles" == str) {
+		_rsp_uploadFiles((RemoteRouteProto::rspUploadFiles*)pRcvMsg.get());
+	} else if ("RemoteRouteProto.rspListFiles" == str) {
+		_rsp_listFiles((RemoteRouteProto::rspListFiles*)pRcvMsg.get());
 	} else {
 		m_stage = -2;
 		m_except = SERVER_RESP_INVALID;
@@ -424,17 +424,17 @@ bool RobotSideRouteManager::listUploadableFiles()
 	return true;
 }
 
-bool RobotSideRouteManager::processRemoteList(const DDRCommProto::rspListFiles *pRsp)
+bool RobotSideRouteManager::processRemoteList(const RemoteRouteProto::rspListFiles *pRsp)
 {
 	if (pRsp->filerecords_sz() > 0) {
-		DDRCommProto::MultipleFileInfo mfi;
-		if (DDRCommProto::eNoZip == pRsp->ziptype()) {
+		RemoteRouteProto::MultipleFileInfo mfi;
+		if (RemoteRouteProto::eNoZip == pRsp->ziptype()) {
 			if (pRsp->filerecords_sz() != pRsp->filerecords().length() ||
 				!mfi.ParseFromArray(pRsp->filerecords().c_str(),
 					pRsp->filerecords().length())) {
 				return false;
 			}
-		} else if (DDRCommProto::eZLib == pRsp->ziptype()) {
+		} else if (RemoteRouteProto::eZLib == pRsp->ziptype()) {
 			uLongf oriSz = (uLongf)pRsp->filerecords_sz();
 			std::vector<char> buf(oriSz);
 			if (Z_OK != uncompress((Bytef*)&buf[0], &oriSz,
@@ -538,7 +538,7 @@ int RobotSideRouteManager::prepareNextSliceUpload()
 
 	size_t accSz = 0, compSz = 0, plainSz = 0;
 	m_oriContent.resize(0);
-	auto pMsg = std::make_shared<DDRCommProto::reqUploadFiles>();
+	auto pMsg = std::make_shared<RemoteRouteProto::reqUploadFiles>();
 	pMsg->set_uploadid(m_uploadID);
 	pMsg->set_reqguid(DDRSys::_rand_u64());
 	
@@ -585,13 +585,13 @@ int RobotSideRouteManager::prepareNextSliceUpload()
 		uLongf _afterCompSz = (uLongf)accSz;
 		if (Z_OK == compress((Bytef*)&((*pMsg->mutable_contents())[0]), &_afterCompSz,
 			                 (const Bytef*)&m_oriContent[0], (uLong)accSz)) {
-			pMsg->set_ziptype(DDRCommProto::eZLib);
+			pMsg->set_ziptype(RemoteRouteProto::eZLib);
 			pMsg->mutable_contents()->resize(_afterCompSz);
 			bDataOrg = true;
 		}
 	}
 	if (!bDataOrg) {
-		pMsg->set_ziptype(DDRCommProto::eNoZip);
+		pMsg->set_ziptype(RemoteRouteProto::eNoZip);
 		pMsg->set_contents(&m_oriContent[0], accSz);
 	}
 	pMsg->set_content_len(accSz);

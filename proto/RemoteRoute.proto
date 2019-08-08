@@ -1,5 +1,5 @@
 syntax = "proto3";
-package DDRCommProto;
+package RemoteRouteProto;
 
 // version 10001, 2019/05/11
 

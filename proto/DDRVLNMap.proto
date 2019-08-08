@@ -1,5 +1,5 @@
 syntax = "proto3";
-package DDRCommProto;
+package DDRVLNMapProto;
 import "BaseCmd.proto";
 
 // 基础元素描述 +++++++++++++++++++++++++++++++++++++++
@@ -254,7 +254,7 @@ message reqDDRVLNMap
 
 message rspDDRVLNMap
 {
-	eCmdRspType type = 1;
+	DDRCommProto.eCmdRspType type = 1;
 }
 
 // 客户端获取对应OneRoute下的数据
@@ -265,7 +265,7 @@ message reqGetDDRVLNMap
 
 message rspGetDDRVLNMap
 {
-	eCmdRspType type = 1;
+	DDRCommProto.eCmdRspType type = 1;
 	reqDDRVLNMap data = 2;
 }
 
@@ -278,7 +278,7 @@ message reqCreatePOITask
 
 message rspCreatePOITask
 {
-	eCmdRspType type = 1;
+	DDRCommProto.eCmdRspType type = 1;
 }
 
 // ++++++++++++++++++++  以下是核心算法需要用到的数据结构，Logic把数据从文件中读出来转成核心算法能直接用的数据结构  ++++++++++++++++++++++
@@ -401,7 +401,7 @@ message reqRunControl
 
 message rspRunControl
 {
-	eCmdRspType type = 1;
+	DDRCommProto.eCmdRspType type = 1;
 }
 // 任务调度管理 ----------------------------------------
 

@@ -89,8 +89,8 @@ protected:
 	void adjustFilePtr();
 	int prepareNextDownloadReq(); // 0 - success; 1 - finished; -1 - error
 	void saveRec();
-	void _rsp_listFiles(const DDRCommProto::rspListFiles *pRsp);
-	void _rsp_downloadFiles(const DDRCommProto::rspDownloadFiles *pRsp);
+	void _rsp_listFiles(const RemoteRouteProto::rspListFiles *pRsp);
+	void _rsp_downloadFiles(const RemoteRouteProto::rspDownloadFiles *pRsp);
 };
 
 }
