@@ -65,7 +65,6 @@ public:
 	 */
 	virtual void willExitWithNextState(std::shared_ptr<State<T>> nextState) {};
 
-
 	void SetStateMachine(std::shared_ptr<StateMachine<T>> sp)
 	{
 		m_spParentStateMachine = sp;
@@ -81,7 +80,7 @@ class StateMachine
 {
 public:
 
-	StateMachine():m_spExitingState(nullptr),m_spNextState(nullptr),m_spState(nullptr)
+	StateMachine()
 	{
 
 	}
@@ -184,22 +183,20 @@ public:
 		auto state = findState<T>();
 		if (state)
 		{
-			if (state != m_spState)
-			{
-				if (m_spState)
-				{
-					if (m_spState->isValidNextState(state))
-					{
-						m_spNextState = state;
-						return true;
-					}
-				}
-				else
-				{
 
+			if (m_spState)
+			{
+				if (m_spState->isValidNextState(state))
+				{
 					m_spNextState = state;
 					return true;
 				}
+			}
+			else
+			{
+
+				m_spNextState = state;
+				return true;
 			}
 		}
 		return false;
@@ -278,54 +275,23 @@ public:
 		{
 			if (m_spNextState)
 			{
-
-				//first time run
-				if (m_spState == nullptr && m_spExitingState == nullptr)
-				{
-					m_spNextState->didEnterWithPreviousState(m_spState);
-
-					m_spState = m_spNextState;
-					m_spNextState = nullptr;
-				}
-				//pre state exit
-				else if (m_spState)
+				if (m_spState)
 				{
 					m_spState->willExitWithNextState(m_spNextState);
-					m_spExitingState = m_spState;
-					m_spState = m_spNextState;
-					m_spNextState = nullptr;
 				}
+
+				m_spNextState->didEnterWithPreviousState(m_spState);
+				m_spState = m_spNextState;
+				m_spNextState = nullptr;
+
+
 			}
-			else
+
+			if (m_spState)
 			{
-				//prestate exit finish
-				if (m_spExitingState)
-				{
-					m_spExitingState->updateWithDeltaTime(deltaTime);
-					m_spState->didEnterWithPreviousState(m_spState);
-					m_spExitingState = nullptr;
-
-
-				}
-				else
-				{
-
-
-					if (m_spState)
-					{
-						m_spState->updateWithDeltaTime(deltaTime);
-
-					}
-
-				}
-
+				m_spState->updateWithDeltaTime(deltaTime);
 
 			}
-
-
-
-
-			
 		}
 		catch (std::exception& e)
 		{
@@ -352,7 +318,6 @@ public:
 private:
 	std::unordered_map<std::string, std::shared_ptr<State<PT>>> m_States;
 	std::shared_ptr<State<PT>> m_spState;
-	std::shared_ptr<State<PT>> m_spExitingState;
 	std::shared_ptr<State<PT>> m_spNextState;
 };
 
