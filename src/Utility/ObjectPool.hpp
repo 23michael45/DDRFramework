@@ -11,10 +11,26 @@ otherwise the new expression is called.
 #ifndef __DDRGENERAL_OBJECT_POOL_H_INCLUDED__
 #define __DDRGENERAL_OBJECT_POOL_H_INCLUDED__
 
-#include <mutex>
+#include <atomic>
 #include "AdaptiveDQ.hpp"
 
 namespace DDRGeneral {
+
+class AtomicLock
+{
+public:
+	AtomicLock() : m_flag(false) {}
+	void lock() {
+		while (m_flag.exchange(true, std::memory_order_relaxed));
+		std::atomic_thread_fence(std::memory_order_acquire);
+	}
+	void unlock() {
+		std::atomic_thread_fence(std::memory_order_release);
+		m_flag.store(false, std::memory_order_relaxed);
+	}
+private:
+	std::atomic<bool> m_flag;
+};
 
 template <typename T> class ObjectPool
 {
@@ -59,20 +75,22 @@ protected:
 		}
 	}
 	void setCap(int nCap) {
-		std::lock_guard<std::mutex> lg(g_p->m_loc);
+		m_loc.lock();
 		m_maxNBuf = (nCap <= 1) ? 1 : nCap;
+		m_loc.unlock();
 	}
 	std::shared_ptr<T> allocate() {
-		std::lock_guard<std::mutex> lg(m_loc);
+		m_loc.lock();
 		if (!m_poolQ.empty()) {
 			allocCatch(true);
 			T *ptt;
 			m_poolQ.pop_back(ptt);
+			m_loc.unlock();
 			return std::shared_ptr<T>(ptt, recycle);
 		} else {
 			allocCatch(false);
-			std::shared_ptr<T> tt(new T, recycle);
-			return tt;
+			m_loc.unlock();
+			return std::shared_ptr<T>(new T, recycle);
 		}
 	}
 	std::shared_ptr<T> clone(const T *pOri) {
@@ -124,16 +142,20 @@ protected:
 	}
 	static void recycle(T *pEle) {
 		if (g_p) {
-			std::lock_guard<std::mutex> lg(g_p->m_loc);
+			g_p->m_loc.lock();
 			if (g_p->m_poolQ.size() < g_p->m_maxNBuf) {
 				g_p->m_poolQ.emplace_back(pEle);
+				g_p->m_loc.unlock();
 				return;
 			}
 			while (g_p->m_poolQ.size() > g_p->m_maxNBuf) {
 				T *ptt;
 				g_p->m_poolQ.pop_back(ptt);
+				g_p->m_loc.unlock();
 				delete ptt;
+				g_p->m_loc.lock();
 			}
+			g_p->m_loc.unlock();
 		}
 		delete pEle;
 	}
@@ -147,7 +169,7 @@ protected:
 private:
 	static ObjectPool *g_p;
 	int m_maxNBuf;
-	std::mutex m_loc;
+	AtomicLock m_loc;
 	AdaptiveDequeue<T*> m_poolQ;
 
 	static const int s_queryPeriod = 40;
