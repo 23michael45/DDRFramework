@@ -295,7 +295,7 @@ public:
 		}
 		catch (std::exception& e)
 		{
-			LevelLog(DDRFramework::Log::Level::ERR,"\nupdateWithDeltaTime Error", e.what());
+			LevelLog(DDRFramework::Log::Level::ERR,"\nupdateWithDeltaTime Error %s", e.what());
 
 		}
 
