@@ -47,6 +47,7 @@ enum eHitachiActionType
 	eArrivalElevatorOut_A = 5;
 	eArrivalElevatorOut_B = 6;
 	eQR_Work_Error = 7;
+	eWorking = 8;
 }
 
 enum qr_work_type{
@@ -59,6 +60,7 @@ enum qr_work_type{
 	eElevator_Outside_B = 6;
 	eProjection = 7;
 	eWait_for_order = 8;
+	eQuit_QR = 9;
 }
 
 //----------------------------------- Hitachi ]]]]]

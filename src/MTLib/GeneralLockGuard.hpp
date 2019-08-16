@@ -3,6 +3,7 @@
 
 #include <mutex>
 #include <shared_mutex>
+#include "atomicLock.hpp"
 
 namespace DDRMTLib {
 
@@ -23,6 +24,11 @@ public:
 	_lock_guard(bool bRead, std::shared_timed_mutex &lll, int waitTimeMilSec = -1) : m_type(0)
 	{
 		lock(bRead, lll, waitTimeMilSec);
+	}
+	template <bool bYield>
+	_lock_guard(AtomicLock<bYield> &lll) : m_type()
+	{
+		lock(lll);
 	}
 
 	bool lock(std::mutex &lll)
@@ -80,6 +86,16 @@ public:
 		}
 		return (bool)(*this);
 	}
+	template <bool bYield>
+	bool lock(AtomicLock<bYield> &lll)
+	{
+		unlock();
+		m_p = &lll;
+		lll.lock();
+		m_type = 5;
+		m_bRead = bYield;
+		return (bool)(*this);
+	}
 	operator bool()
 	{
 		return (0 != m_type);
@@ -107,6 +123,12 @@ public:
 				((std::shared_timed_mutex*)m_p)->unlock();
 			}
 			break;
+		case 5:
+			if (m_bRead) {
+				((AtomicLock<true>*)m_p)->unlock();
+			} else {
+				((AtomicLock<false>*)m_p)->unlock();
+			}
 		}
 		m_type = 0;
 	}
@@ -117,7 +139,7 @@ public:
 private:
 	int m_type; // 0 - no lock; 1 - mutex; 2 - timed mutex; 3 - shared mutex; 4 - shared timed mutex
 	void *m_p;
-	bool m_bRead; // read or write mode (shared/exclusive) for shared mutex
+	bool m_bRead; // read or write mode (shared/exclusive) for shared mutex, bYield for atomicSpinLock
 };
 
 }
