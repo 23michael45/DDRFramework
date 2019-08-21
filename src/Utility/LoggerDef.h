@@ -1,7 +1,7 @@
 #ifndef __DDRFRAMEWORK_LOGGER_DEFINITIONS_H_INCLUDED__
 #define __DDRFRAMEWORK_LOGGER_DEFINITIONS_H_INCLUDED__
 
-#include "Src/Utility/Logger.h"
+#include "src/Utility/Logger.h"
 #ifdef _DEBUG
 //#define DebugLog(...) printf(__VA_ARGS__);
 #define DebugLog(...) DDRFramework::Print(__VA_ARGS__);
