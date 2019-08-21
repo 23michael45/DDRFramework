@@ -4,12 +4,12 @@
 
 namespace DDRSys {
 
-__int64 _rand_i64()
+long long _rand_i64()
 {
 	std::random_device rd;
 	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> dist(0, 65535);
-	__int64 ret;
+	long long ret;
 	((unsigned short*)(&ret))[0] = dist(mt);
 	((unsigned short*)(&ret))[1] = dist(mt);
 	((unsigned short*)(&ret))[2] = dist(mt);
@@ -17,12 +17,12 @@ __int64 _rand_i64()
 	return ret;
 }
 
-unsigned __int64 _rand_u64()
+unsigned long long _rand_u64()
 {
 	std::random_device rd;
 	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> dist(0, 65535);
-	unsigned __int64 ret;
+	unsigned long long ret;
 	((unsigned short*)(&ret))[0] = dist(mt);
 	((unsigned short*)(&ret))[1] = dist(mt);
 	((unsigned short*)(&ret))[2] = dist(mt);

@@ -6,7 +6,7 @@
 namespace DDRCloudService {
 
 RDDispatcher::RDDispatcher(std::shared_ptr<DownloadManagerBase> spDMgt,
-	                       std::atomic<__int64> *pLastRcvTic)
+	                       std::atomic<long long> *pLastRcvTic)
 	: m_spDMgt(spDMgt), m_pLastTic(pLastRcvTic)
 {
 }

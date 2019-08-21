@@ -15,7 +15,7 @@
 #endif
 
 #include "src/Utility/CommonFunc.h"
-#include "Src/Utility/LoggerDef.h"
+#include "src/Utility/LoggerDef.h"
 using namespace cppfs;
 
 namespace DDRFramework

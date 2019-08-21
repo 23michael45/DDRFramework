@@ -3,8 +3,8 @@
 
 namespace DDRSys {
 
-__int64 _rand_i64();
-unsigned __int64 _rand_u64();
+long long _rand_i64();
+unsigned long long _rand_u64();
 
 }
 

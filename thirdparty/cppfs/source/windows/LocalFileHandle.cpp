@@ -150,7 +150,7 @@ unsigned int LocalFileHandle::size() const
         // [TODO] Use 64bit numbers
         auto fileSizeH  = ((WIN32_FILE_ATTRIBUTE_DATA *)m_fileInfo)->nFileSizeHigh;
         auto fileSizeL = ((WIN32_FILE_ATTRIBUTE_DATA *)m_fileInfo)->nFileSizeLow;
-        return static_cast<unsigned int>(static_cast<__int64>(fileSizeH) << 32 | fileSizeL);
+        return static_cast<unsigned int>(static_cast<long long>(fileSizeH) << 32 | fileSizeL);
     }
 
     return 0;
@@ -164,7 +164,7 @@ unsigned int LocalFileHandle::accessTime() const
     {
         // [TODO] Use 64bit numbers
         auto time = ((WIN32_FILE_ATTRIBUTE_DATA *)m_fileInfo)->ftLastAccessTime;
-        return static_cast<unsigned int>(static_cast<__int64>(time.dwHighDateTime) << 32 | time.dwLowDateTime);
+        return static_cast<unsigned int>(static_cast<long long>(time.dwHighDateTime) << 32 | time.dwLowDateTime);
     }
 
     return 0;
@@ -178,7 +178,7 @@ unsigned int LocalFileHandle::modificationTime() const
     {
         // [TODO] Use 64bit numbers
         auto time = ((WIN32_FILE_ATTRIBUTE_DATA *)m_fileInfo)->ftLastWriteTime;
-        return static_cast<unsigned int>(static_cast<__int64>(time.dwHighDateTime) << 32 | time.dwLowDateTime);
+        return static_cast<unsigned int>(static_cast<long long>(time.dwHighDateTime) << 32 | time.dwLowDateTime);
     }
 
     return 0;

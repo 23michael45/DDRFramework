@@ -4,8 +4,8 @@
 #include <fstream>
 #include <chrono>
 
-#include "Src/MTLib/BkgThread.h"
-#include "Src/Network/TcpClientBase.h"
+#include "src/MTLib/BkgThread.h"
+#include "src/Network/TcpClientBase.h"
 #include "RobotSideManager.h"
 #include "RUDispatcher.h"
 #include "UploaderClient.h"

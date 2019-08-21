@@ -23,7 +23,7 @@ public:
 	bool IsValid() const;
 	bool IsDownloadingFinished() const;
 	bool IsStopped() const;
-	__int64 GetSecondsSinceLastRcv() const;
+	long long GetSecondsSinceLastRcv() const;
 
 protected:
 	std::shared_ptr<TcpClientSessionBase> BindSerializerDispatcher() override;
@@ -38,7 +38,7 @@ private:
 	bool m_bStopped;
 	std::mutex m_loc;
 	int m_nConnFailCnt;
-	std::atomic<__int64> m_lastRcvTic;
+	std::atomic<long long> m_lastRcvTic;
 };
 
 }

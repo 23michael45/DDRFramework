@@ -6,7 +6,7 @@
 namespace DDRCloudService {
 
 RUDispatcher::RUDispatcher(std::shared_ptr<RobotSideRouteManager> spRouteMgt,
-	                       std::atomic<__int64> *pLastRcvTic)
+	                       std::atomic<long long> *pLastRcvTic)
 	: m_spRouteMgt(spRouteMgt), m_pLastTic(pLastRcvTic)
 {
 }

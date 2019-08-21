@@ -113,11 +113,11 @@ success, -1 for error. */
 int deleteDir(const char *pDirName);
 
 // get last modification time of a file (seconds since EPOCH)
-__int64 getModTime(const char *pFileDirName);
+long long getModTime(const char *pFileDirName);
 // set last modification time of a file (seconds since EPOCH)
-bool setModTime(const char *pFileDirName, __int64 secSincEpoch);
+bool setModTime(const char *pFileDirName, long long secSincEpoch);
 // get creation time of a file (seconds since EPOCH)
-__int64 getCreationTime(const char *pFileDirName);
+long long getCreationTime(const char *pFileDirName);
 // get file size (in bytes) of a file
 size_t getFileSize(const char *pFileName);
 

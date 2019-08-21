@@ -10,14 +10,14 @@ void RefreshLister();
 
 // try to get info of the next route
 bool GetNextRouteInfo(int *pVersion, const char **ppRobotID,
-	                  const char **ppRouteName, __int64 *pCrTime,
-	                  const char **ppDescription, unsigned __int64 *pDownID);
+	                  const char **ppRouteName, long long *pCrTime,
+	                  const char **ppDescription, unsigned long long *pDownID);
 
 // return value is an internal thread ID that can later
 // be used in Wait4BkgThread()
 unsigned int StartDownloadingRoute(const char *pServerIP, const char *pServerPort, const char *pWorkingDir,
-	                               int version, const char *pRobotID, const char *pRouteName, __int64 crTime,
-	                               unsigned __int64 downloadID);
+	                               int version, const char *pRobotID, const char *pRouteName, long long crTime,
+	                               unsigned long long downloadID);
 
 }
 

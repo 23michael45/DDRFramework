@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include "Thirdparty/zlib/zlib.h"
-#include "Src/Utility/CommonFunc.h"
+#include "src/Utility/CommonFunc.h"
 #include "../Common/RandWrapper.h"
 
 namespace DDRCloudService {
@@ -86,7 +86,7 @@ DownloadManagerBase::DownloadManagerBase(const char *pWorkingDir, const routeInf
 	}
 	int _ver, _typeInd, _nFiles;
 	std::string _rid;
-	unsigned __int64 _did;
+	unsigned long long _did;
 	if (!(ifs >> _ver >> _rid >> _typeInd >> _did >> _nFiles)) {
 		m_except = 1;
 		return;
@@ -99,7 +99,7 @@ DownloadManagerBase::DownloadManagerBase(const char *pWorkingDir, const routeInf
 			continue;
 		}
 		size_t _sz, _pos, sz;
-		__int64 _mtime, mtime;
+		long long _mtime, mtime;
 		if (!(ifs >> _sz >> _pos >> _mtime) || _mtime <= 0 || _pos > _sz) {
 			continue;
 		}
@@ -279,8 +279,8 @@ void DownloadManagerBase::_rsp_listFiles(const RemoteRouteProto::rspListFiles *p
 			if (!IsFileNecessary(mfi.records()[i].name().c_str()) ||
 				mfi.records()[i].sz() != mfi.records()[i].curpos()) {
 				const char *pName = mfi.records()[i].name().c_str();
-				__int64 sz__ = mfi.records()[i].sz();
-				__int64 curpos__ = mfi.records()[i].curpos();
+				long long sz__ = mfi.records()[i].sz();
+				long long curpos__ = mfi.records()[i].curpos();
 				continue;
 			}
 			m_downloableFiles[nF].name = mfi.records()[i].name().c_str();
@@ -379,7 +379,7 @@ void DownloadManagerBase::_rsp_downloadFiles(const RemoteRouteProto::rspDownload
 		if (Z_OK != uncompress((Bytef*)&oriContent[0], &dstLen,
 			                   (const Bytef*)pRsp->contents().c_str(),
 			                   (uLong)pRsp->contents().length()) ||
-			(__int64)dstLen != pRsp->content_len()) {
+			(long long)dstLen != pRsp->content_len()) {
 			m_stage = -1;
 			m_except = 4;
 			return;
@@ -387,7 +387,7 @@ void DownloadManagerBase::_rsp_downloadFiles(const RemoteRouteProto::rspDownload
 		pBuf = &oriContent[0];
 		nBufLen = (size_t)pRsp->content_len();
 	} else if (RemoteRouteProto::eNoZip == pRsp->ziptype()) {
-		if (pRsp->content_len() != (__int64)pRsp->contents().length()) {
+		if (pRsp->content_len() != (long long)pRsp->contents().length()) {
 			m_stage = -1;
 			m_except = 3;
 			return;

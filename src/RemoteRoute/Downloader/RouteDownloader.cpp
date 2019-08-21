@@ -38,8 +38,8 @@ public:
 		m_infoPtr = 0;
 	}
 	bool GetNext(int *pVersion, const char **ppRobotID,
-		         const char **ppRouteName, __int64 *pCrTime,
-		         const char **ppDescription, unsigned __int64 *pDownID)
+		         const char **ppRouteName, long long *pCrTime,
+		         const char **ppDescription, unsigned long long *pDownID)
 	{
 		std::lock_guard<std::mutex> lk(m_loc);
 		if (m_infoPtr < (int)m_info.size()) {
@@ -85,8 +85,8 @@ void RefreshLister()
 
 // try to get info of the next route
 bool GetNextRouteInfo(int *pVersion, const char **ppRobotID,
-	                  const char **ppRouteName, __int64 *pCrTime,
-	                  const char **ppDescription, unsigned __int64 *pDownID)
+	                  const char **ppRouteName, long long *pCrTime,
+	                  const char **ppDescription, unsigned long long *pDownID)
 {
 	return g_Lister.GetNext(pVersion, ppRobotID, ppRouteName, pCrTime, ppDescription, pDownID);
 }
@@ -111,8 +111,8 @@ struct _ArgStruct
 	std::string workingDir;
 	int version;
 	std::string rID, routeName;
-	__int64 crTime;
-	unsigned __int64 downloadID;
+	long long crTime;
+	unsigned long long downloadID;
 };
 
 static void _thrFunc(void *ptr, bool *pbQuit)
@@ -149,8 +149,8 @@ static void _thrFunc(void *ptr, bool *pbQuit)
 }
 
 unsigned int StartDownloadingRoute(const char *pServerIP, const char *pServerPort, const char *pWorkingDir,
-	                               int version, const char *pRobotID, const char *pRouteName, __int64 crTime,
-	                               unsigned __int64 downloadID)
+	                               int version, const char *pRobotID, const char *pRouteName, long long crTime,
+	                               unsigned long long downloadID)
 {
 	_ArgStruct *pArgs = new _ArgStruct;
 	pArgs->serIP = pServerIP;

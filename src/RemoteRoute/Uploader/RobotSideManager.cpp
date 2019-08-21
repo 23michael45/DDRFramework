@@ -402,7 +402,7 @@ bool RobotSideRouteManager::listUploadableFiles()
 			continue;
 		}
 		fn = m_dir + fn;
-		__int64 mtime = DDRSys::getModTime(fn.c_str());
+		long long mtime = DDRSys::getModTime(fn.c_str());
 		if (mtime < 0) {
 			continue;
 		}

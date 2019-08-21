@@ -25,7 +25,7 @@ public:
 	bool IsRSRMWrong() const;
 	bool IsUploadingFinished() const;
 	bool IsStopped() const;
-	__int64 GetSecondsSinceLastRcv() const;
+	long long GetSecondsSinceLastRcv() const;
 	void Try2reconnect();
 
 protected:
@@ -43,7 +43,7 @@ private:
 	bool m_bStopped;
 	std::mutex m_loc;
 	int m_nConnFailCnt;
-	std::atomic<__int64> m_lastRcvTic;
+	std::atomic<long long> m_lastRcvTic;
 };
 
 }

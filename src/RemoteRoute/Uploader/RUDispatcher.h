@@ -12,7 +12,7 @@ class RUDispatcher : public DDRFramework::BaseMessageDispatcher
 {
 public:
 	RUDispatcher(std::shared_ptr<RobotSideRouteManager> spRouteMgt,
-		         std::atomic<__int64> *pLastRcvTic // in seconds since EPOCH
+		         std::atomic<long long> *pLastRcvTic // in seconds since EPOCH
 	             );
 	~RUDispatcher();
 
@@ -21,7 +21,7 @@ public:
 		          std::shared_ptr<google::protobuf::Message> spMsg) override;
 private:
 	std::shared_ptr<RobotSideRouteManager> m_spRouteMgt;
-	std::atomic<__int64> *m_pLastTic;
+	std::atomic<long long> *m_pLastTic;
 };
 
 }

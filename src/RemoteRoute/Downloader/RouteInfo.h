@@ -10,9 +10,9 @@ struct routeInfo
 	int version;
 	std::string robotID;
 	std::string routeName;
-	__int64 crTime; // seconds since EPOCH
+	long long crTime; // seconds since EPOCH
 	std::string description;
-	unsigned __int64 downloadID;
+	unsigned long long downloadID;
 };
 
 }

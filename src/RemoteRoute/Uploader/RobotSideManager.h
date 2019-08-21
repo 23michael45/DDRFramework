@@ -69,7 +69,7 @@ protected:
 	std::string m_rID;
 	std::string m_routeName;
 	std::string m_str;
-	__int64 m_cTime;
+	long long m_cTime;
 
 	u64 m_uploadID;
 
@@ -78,7 +78,7 @@ protected:
 	struct OneFileProg {
 		bool bCompressable;
 		std::string name;
-		__int64 mtime;
+		long long mtime;
 		size_t sz, pos;
 		void resetCompressable();
 	};
@@ -86,7 +86,7 @@ protected:
 	int m_fListPtr;
 	struct RemoteFileStat {
 		std::string name;
-		__int64 mtime;
+		long long mtime;
 		size_t sz, pos;
 	};
 	std::vector<RemoteFileStat> m_remoteSavedFiles;

@@ -73,14 +73,14 @@ protected:
 
 	struct OneExistingFile {
 		std::string name;
-		__int64 mtime;
+		long long mtime;
 		size_t sz, pos;
 	};
 	std::vector<OneExistingFile> m_existingFiles;
 	int m_fListPtr;
 	struct RemoteFileStat {
 		std::string name;
-		__int64 mtime;
+		long long mtime;
 		size_t sz, pos;
 	};
 	std::vector<RemoteFileStat> m_downloableFiles;

@@ -1190,16 +1190,16 @@ int deleteDir(const char *pDirName)
 #endif
 }
 
-__int64 getModTime(const char *pFileDirName)
+long long getModTime(const char *pFileDirName)
 {
 	struct stat result;
 	if (0 == stat(pFileDirName, &result) && -1 != result.st_mtime) {
-		return (__int64)result.st_mtime;
+		return (long long)result.st_mtime;
 	}
 	return -1;
 }
 
-bool setModTime(const char *pFileDirName, __int64 secSincEpoch)
+bool setModTime(const char *pFileDirName, long long secSincEpoch)
 {
 #if defined(_WIN32) || defined(_WIN64)
 	HANDLE hFile = ::CreateFileA(pFileDirName,
@@ -1230,11 +1230,11 @@ bool setModTime(const char *pFileDirName, __int64 secSincEpoch)
 	return false;
 }
 
-__int64 getCreationTime(const char *pFileDirName)
+long long getCreationTime(const char *pFileDirName)
 {
 	struct stat result;
 	if (0 == stat(pFileDirName, &result)) {
-		return (__int64)result.st_ctime;
+		return (long long)result.st_ctime;
 	}
 	return -1;
 }

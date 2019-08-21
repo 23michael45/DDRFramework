@@ -40,7 +40,7 @@ bool RUTcpClient::IsStopped() const
 	return m_bStopped;
 }
 
-__int64 RUTcpClient::GetSecondsSinceLastRcv() const
+long long RUTcpClient::GetSecondsSinceLastRcv() const
 {
 	auto cur = std::chrono::duration_cast<std::chrono::seconds>
 		(std::chrono::system_clock::now().time_since_epoch()).count();

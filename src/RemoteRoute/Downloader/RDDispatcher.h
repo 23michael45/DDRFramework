@@ -12,7 +12,7 @@ class RDDispatcher : public DDRFramework::BaseMessageDispatcher
 {
 public:
 	RDDispatcher(std::shared_ptr<DownloadManagerBase> spDMgt,
-		         std::atomic<__int64> *pLastRcvTic // in seconds since EPOCH
+		         std::atomic<long long> *pLastRcvTic // in seconds since EPOCH
 	             );
 	~RDDispatcher();
 
@@ -21,7 +21,7 @@ public:
 		          std::shared_ptr<google::protobuf::Message> spMsg) override;
 private:
 	std::shared_ptr<DownloadManagerBase> m_spDMgt;
-	std::atomic<__int64> *m_pLastTic;
+	std::atomic<long long> *m_pLastTic;
 };
 
 }
