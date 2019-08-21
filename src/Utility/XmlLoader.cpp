@@ -67,8 +67,8 @@ namespace DDRFramework
 				{
 					itemElement = itemNode->ToElement();
 
-					spRowKeyIndexMap->insert(std::make_pair(itemElement->FirstAttribute()->Value(), rownum));
-					spRowIndexKeyMap->insert(std::make_pair(rownum, itemElement->FirstAttribute()->Value()));
+					spRowKeyIndexMap->insert(std::make_pair(itemElement->Attribute("Key"), rownum));
+					spRowIndexKeyMap->insert(std::make_pair(rownum, itemElement->Attribute("Key")));
 
 
 
