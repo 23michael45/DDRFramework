@@ -589,6 +589,7 @@ namespace DDRFramework {
 
 	bool MBToUTF8(std::vector<char>& pu8, const char* pmb, int mLen)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an MBCS string to widechar   
 		int nLen = MultiByteToWideChar(CP_ACP, 0, pmb, mLen, NULL, 0);
 
@@ -624,11 +625,13 @@ namespace DDRFramework {
 			pu8.clear();
 			return false;
 		}
+#endif
 		return true;
 	}
 
 	bool UTF8ToMB(std::vector<char>& pmb, const char* pu8, int utf8Len)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an UTF8 string to widechar   
 		int nLen = MultiByteToWideChar(CP_UTF8, 0, pu8, utf8Len, NULL, 0);
 
@@ -665,11 +668,13 @@ namespace DDRFramework {
 			pmb.clear();
 			return false;
 		}
+#endif
 		return true;
 	}
 
 	bool MBToUnicode(std::vector<wchar_t>& pun, const char* pmb, int mLen)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an MBCS string to widechar   
 		int uLen = MultiByteToWideChar(CP_ACP, 0, pmb, mLen, NULL, 0);
 
@@ -686,11 +691,13 @@ namespace DDRFramework {
 			pun.clear();
 			return false;
 		}
+#endif
 		return true;
 	}
 
 	bool UnicodeToMB(std::vector<char>& pmb, const wchar_t* pun, int uLen)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an widechar string to Multibyte   
 		int MBLen = WideCharToMultiByte(CP_ACP, 0, pun, uLen, NULL, 0, NULL, NULL);
 		if (MBLen <= 0)
@@ -705,11 +712,14 @@ namespace DDRFramework {
 			pmb.clear();
 			return false;
 		}
+
+#endif
 		return true;
 	}
 
 	bool UTF8ToUnicode(std::vector<wchar_t>& pun, const char* pu8, int utf8Len)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an UTF8 string to widechar   
 		int nLen = MultiByteToWideChar(CP_UTF8, 0, pu8, utf8Len, NULL, 0);
 		if (nLen <= 0)
@@ -724,12 +734,13 @@ namespace DDRFramework {
 			pun.clear();
 			return false;
 		}
-
+#endif
 		return true;
 	}
 
 	bool UnicodeToUTF8(std::vector<char>& pu8, const wchar_t* pun, int uLen)
 	{
+#if defined(_WIN32) || defined(_WIN64)
 		// convert an widechar string to utf8  
 		int utf8Len = WideCharToMultiByte(CP_UTF8, 0, pun, uLen, NULL, 0, NULL, NULL);
 		if (utf8Len <= 0)
@@ -744,6 +755,7 @@ namespace DDRFramework {
 			pu8.clear();
 			return false;
 		}
+#endif
 		return true;
 	}
 
@@ -1219,13 +1231,13 @@ bool setModTime(const char *pFileDirName, long long secSincEpoch)
 	return bRet;
 #elif defined(__linux__)
 	struct stat foo;
-	if (0 != stat(filename, &foo)) {
+	if (0 != stat(pFileDirName, &foo)) {
 		return false;
 	}
 	struct utimbuf new_times;
 	new_times.actime = foo.st_atime;
 	new_times.modtime = secSincEpoch;
-	return (0 == utime(filename, &new_times));
+	return (0 == utime(pFileDirName, &new_times));
 #endif
 	return false;
 }
@@ -1299,6 +1311,8 @@ struct _fileListStruct
 void* findAllFiles_Open(const char *pDir, int switchDirFile,
 	                    bool bSubFolder)
 {
+
+#if defined(_WIN32) || defined(_WIN64)
 	if (!pDir) {
 		return nullptr;
 	}
@@ -1331,10 +1345,12 @@ void* findAllFiles_Open(const char *pDir, int switchDirFile,
 		delete pStruct;
 		return nullptr;
 	}
+#endif
 }
 
 bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder)
 {
+#if defined(_WIN32) || defined(_WIN64)
 	if (!pHandle) {
 		return false;
 	}
@@ -1418,17 +1434,21 @@ bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder
 			hhh.bFirstLevelExp = true;
 		}
 	}
+#endif
 	return false;
 }
 
 void findAllFile_Close(void *pHandle)
 {
+
+#if defined(_WIN32) || defined(_WIN64)
 	if (pHandle) {
 		if (((_fileListStruct*)pHandle)->pMsgQ) {
 			Destroy_MsgQ(((_fileListStruct*)pHandle)->pMsgQ);
 		}
 		delete (_fileListStruct*)pHandle;
 	}
+#endif
 }
 
 class _LocaleSetter {
