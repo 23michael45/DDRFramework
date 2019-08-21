@@ -14,7 +14,7 @@ namespace DDRFramework
 	sp##cmd->set_toclttype(totype);\
 	sp##cmd->set_fromclttype(m_CltType);\
 	sp##cmd->add_flowdirection(dir);\
-	m_RouteMsgHeaderMap.insert(make_pair(##cmd.GetTypeName(), sp##cmd));
+	m_RouteMsgHeaderMap.insert(make_pair( cmd.GetTypeName(), sp##cmd));
 
 
 	MsgRouterManager::MsgRouterManager()
