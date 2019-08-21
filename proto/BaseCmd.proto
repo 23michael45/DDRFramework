@@ -263,6 +263,7 @@ enum eCmdActionMode{
 message reqCmdStartActionMode{
 	eCmdActionMode mode = 1;
 	bytes route_name = 2;
+	float rec_speed = 3;
 }
 message rspCmdStartActionMode{
 	eCmdActionMode mode = 1;
@@ -271,6 +272,7 @@ message rspCmdStartActionMode{
 // Cmd stop autorun or out rec
 message reqCmdEndActionMode{
 	string error = 1;
+	bool cancel_rec = 2; // 为true时表示采集模式中放弃当前的地图，不生成地图。
 }
 message rspCmdEndActionMode{
 	eCmdActionMode actionmode = 1;
@@ -850,12 +852,64 @@ message rspCoreDebug {
 	eDebugInfoType actionType = 2; // type
 }
 
+// delete map
+message reqDeleteMap{
+	bytes map_name = 1;	
+}
 
+message rspDeleteMap{
+	eCmdRspType type = 1;
+}
 
+// Rename map
+message reqRenameMap{
+	bytes old_name = 1;	
+	bytes new_name = 2;	
+}
 
+message rspRenameMap{
+	eCmdRspType type = 1;
+}
 
+// 以下为配置文件相关
 
+enum eConfigItemType
+{
+	eConfigTypeError = 0; // 让有效值从1开始，便于保存
+	eConfigTypeCore = 1;
+	eConfigTypeLogic = 2; 
+}
 
+// 配置文件
+message configItem{
+	bytes key = 1;
+	bytes value = 2;
+	bytes defaule_value = 3;
+	bytes writable = 4;
+	bytes alias = 5;
+}
 
+message configData{
+	eConfigItemType type = 1;
+	repeated configItem data = 2;
+}
+
+// 客户端获取所有的配置文件
+message reqGetAllConfig{
+	eConfigItemType type = 1; // 为eConfigTypeError时，表示将两种类型的配置文件都发送
+}
+
+message rspGetAllConfig{
+	repeated configData data = 1;
+}
+
+// 客户端发送配置文件，也就是修改配置文件。
+message reqSetConfig{
+	repeated configData data = 1;
+}
+
+message rspSetConfig{
+	eCmdRspType type = 1;
+}
 
 // +++++++++++++++++++ Common message bodies +++++++++++++++++++ //
