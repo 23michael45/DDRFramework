@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <fstream>
-#include "Thirdparty/zlib/zlib.h"
+#include "thirdparty/zlib/zlib.h"
 #include "src/Utility/LoggerDef.h"
 #include "src/Utility/CommonFunc.h"
 #include "../Common/RandWrapper.h"

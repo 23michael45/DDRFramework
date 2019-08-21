@@ -6,7 +6,7 @@
 #include <memory>
 #include <atomic>
 #include <iostream>
-#include "Thirdparty/zlib/zlib.h"
+#include "thirdparty/zlib/zlib.h"
 #include "src/Network/BaseMessageDispatcher.h"
 #include "src/Network/TcpClientBase.h"
 #include "src/Utility/Timer.hpp"
