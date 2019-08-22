@@ -126,6 +126,11 @@ namespace DDRFramework
 		return "";
 	}
 
+	std::string XmlLoader::GetDefaultSheetName()
+	{
+		return m_DefaultSheetName;
+	}
+
 
 	std::string XmlLoader::GetValue(int count, std::string key)
 	{

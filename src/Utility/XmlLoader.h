@@ -117,6 +117,8 @@ namespace DDRFramework
 		void DoSave(std::string filename); 
 		void DoSave();
 
+		std::string GetDefaultSheetName();
+
 
 		typedef std::map<std::string, std::string> KVMap;
 		typedef std::vector<std::shared_ptr<KVMap>> KVMapVector;
