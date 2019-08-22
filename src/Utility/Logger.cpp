@@ -5,6 +5,13 @@
 #include "cppfs/cppfs.h"
 #include "cppfs/FilePath.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+#define VSNPRINTF _vsnprintf
+#else 
+#define VSNPRINTF vsnprintf
+#endif
+
+
 #ifdef WIN32
 
 #define  WIN32_LEAN_AND_MEAN
@@ -32,6 +39,9 @@ int gettimeofday(struct timeval * tp, struct timezone * tzp)
 }
 #else
 #include <sys/time.h>
+#include <tgmath.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 #endif // WIN32
 
@@ -168,7 +178,7 @@ namespace DDRFramework
 		va_list args;
 		char buff[1024];
 		va_start(args, format);
-		_vsnprintf(buff, 1024, format, args);
+		VSNPRINTF(buff, 1024, format, args);
 		va_end(args);
 		DDRFramework::Log::getInstance()->write(DDRFramework::Log::Level::INFO, buff);
 	}
@@ -177,14 +187,14 @@ namespace DDRFramework
 		va_list args;
 		char buff[1024];
 		va_start(args, format);
-		_vsnprintf(buff, 1024, format, args);
+		VSNPRINTF(buff, 1024, format, args);
 		va_end(args);
 		DDRFramework::Log::getInstance()->write(level, buff);
 	}
 	void DDRLogArgs(DDRFramework::Log::Level level, const char* format, va_list args)
 	{
 		char buff[1024];
-		_vsnprintf(buff, 1024, format, args);
+		VSNPRINTF(buff, 1024, format, args);
 		DDRFramework::Log::getInstance()->write(level, buff);
 	}
 	ConsoleDebug::ConsoleDebug()
