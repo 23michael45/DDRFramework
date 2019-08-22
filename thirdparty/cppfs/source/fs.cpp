@@ -24,7 +24,7 @@
 #include <cppfs/AbstractFileSystem.h>
 #include <cppfs/FileIterator.h>
 
-#ifdef SYSTEM_WINDOWS
+#ifdef _WINDOWS
     #include <cppfs/windows/LocalFileSystem.h>
 #else
     #include <cppfs/posix/LocalFileSystem.h>
