@@ -38,14 +38,14 @@ int AsyncEventBus::consume(int max)
 
 bool AsyncEventBus::wait()
 {
-	using namespace std::chrono_literals;
+	using namespace std::literals::chrono_literals;
 	std::unique_lock<std::mutex> lock(_waitMutex);
 	_eventWaiting.wait(lock);
 	return not _eventQueue.empty();
 }
 bool AsyncEventBus::waitFor(std::chrono::milliseconds timeout)
 {
-	using namespace std::chrono_literals;
+	using namespace std::literals::chrono_literals;
 	std::unique_lock<std::mutex> lock(_waitMutex);
 	_eventWaiting.wait_for(lock, timeout);
 

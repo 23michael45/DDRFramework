@@ -4,6 +4,7 @@
 #include <atomic>
 #include <mutex>
 #include <shared_mutex>
+#include <thread>
 
 namespace DDRMTLib {
 
@@ -20,7 +21,7 @@ public:
 private:
 	std::atomic_flag m_flag = ATOMIC_FLAG_INIT;
 };
-
+template <>
 inline void AtomicLock<true>::lock()
 {
 	while (m_flag.test_and_set(std::memory_order_acquire)) {
@@ -28,6 +29,7 @@ inline void AtomicLock<true>::lock()
 	}
 }
 
+template <>
 inline void AtomicLock<false>::lock()
 {
 	while (m_flag.test_and_set(std::memory_order_acquire));

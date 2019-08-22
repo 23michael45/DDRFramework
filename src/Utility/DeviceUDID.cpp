@@ -119,7 +119,7 @@ std::string getMacAddr()
 #include <netinet/ip.h>      
 #include <netinet/ip_icmp.h> 
 #include <assert.h>
-
+#include <net/if.h>
 #ifdef DARWIN                    
 #include <net/if_dl.h>       
 #include <ifaddrs.h>         

@@ -12,9 +12,16 @@
 #define DeviceUDID_h__
 #include <string>
 
+
+std::string getMacAddr();
+
+#ifdef _WINDOWS
+const wchar_t* getMachineName();
 short getVolumeHash();
 std::string getCpuHash();
-std::string getMacAddr();
-const wchar_t* getMachineName();
-    
+#else
+const char* getMachineName();
+unsigned short getVolumeHash();
+unsigned short getCpuHash();
+#endif
 #endif // DeviceUDID_h__

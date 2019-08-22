@@ -3,10 +3,10 @@ ObjectPool by Dadao Inc.
 1. resources in disposed shared pointers will be stored in the free pool
 2. new allocations may be direct fetch from the free pool if available.
 otherwise the new expression is called.
-¶ÔÏó³Ø, ÊµÏÖ×ÊÔ´µÄ»ØÊÕÀûÓÃ
-1. ¼´½«Ïú»ÙµÄ¹²ÏíÖ¸ÕëÖĞµÄ×ÊÔ´½«±»»ØÊÕ
-2. ·ÖÅäÆ÷½«³¢ÊÔ´Ó»ØÊÕÕ¾ÖĞÖ±½Ó·ÖÅä×ÊÔ´¡£Èç¹û³É¹¦ÔòÊÔÍ¼µ÷ÓÃ¸ÃÀàĞÍµÄReset()º¯ÊıÖØ
-ÖÃ×ÊÔ´(Reset()²»´æÔÚÔòÎŞ²Ù×÷); ·ñÔòÍ¨¹ınew½¨Á¢ĞÂ×ÊÔ´
+ï¿½ï¿½ï¿½ï¿½ï¿½, Êµï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÙµÄ¹ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ó»ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Íµï¿½Reset()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½Ô´(Reset()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş²ï¿½ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½newï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 */
 
 #ifndef __DDRGENERAL_OBJECT_POOL_H_INCLUDED__
@@ -16,6 +16,7 @@ otherwise the new expression is called.
 #include "../MTLib/AtomicLock.hpp"
 #include "DDR_Traits.hpp"
 #include "AdaptiveDQ.hpp"
+#include <type_traits>
 
 namespace DDRGeneral {
 ;
@@ -23,13 +24,12 @@ template <typename T> class ObjectPool
 {
 public:
 	/*
-	Èç¹ûTÀàĞÍ¾ßÓĞReset()³ÉÔ±º¯Êı, Ôò´Ó»ØÊÕÕ¾·ÖÅä×ÊÔ´Ê±»áÏÈÖ´ĞĞReset()½øĞĞ×ÊÔ´ÖØÖÃ
+	ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½Í¾ï¿½ï¿½ï¿½Reset()ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ó»ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ê±ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Reset()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
 	*/
-	CREATE_MEMBER_CHECK(Reset);
-
+	CREATE_MEMBER_CHECK(Reset)
 	/*
 	Set buffer size of the recycling pool (in number of object copies)
-	ÉèÖÃ»ØÊÕ»º³åÇø´óĞ¡(¶ÔÏó×ÊÔ´µÄ·İÊı)
+	ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ä·ï¿½ï¿½ï¿½)
 	*/
 	static void SetPoolCap(int nMaxPoolInstances)
 	{
@@ -37,7 +37,7 @@ public:
 	}
 	/*
 	Allocate resource. Recycled resource will call Reset() if available
-	·ÖÅä×ÊÔ´. Ê¹ÓÃ»ØÊÕ×ÊÔ´Ê±»áÊÔÍ¼µ÷ÓÃT::Reset()ÖØÖÃ×ÊÔ´
+	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´. Ê¹ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ê±ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½T::Reset()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 	*/
 	static std::shared_ptr<T> Allocate()
 	{
@@ -45,7 +45,7 @@ public:
 	}
 	/*
 	Clone objects by allocating and ASSIGN resources.
-	¿ËÂ¡×ÊÔ´. ×¢Òâ, ·ÖÅä×ÊÔ´ºó»á½øĞĞ ¸³Öµ ²Ù×÷
+	ï¿½ï¿½Â¡ï¿½ï¿½Ô´. ×¢ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½
 	*/
 	static std::shared_ptr<T> Clone(const T *pOri)
 	{
@@ -132,7 +132,7 @@ protected:
 	}
 	/*
 	Single global instance so call GetIns() to proceed.
-	µ¥ÀıÄ£Ê½, µ÷ÓÃGetIns()À´½øĞĞ·ÖÅäºÍ¿ËÂ¡²Ù×÷
+	ï¿½ï¿½ï¿½ï¿½Ä£Ê½, ï¿½ï¿½ï¿½ï¿½GetIns()ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½Í¿ï¿½Â¡ï¿½ï¿½ï¿½ï¿½
 	*/
 	static ObjectPool* getIns()
 	{
@@ -171,13 +171,13 @@ protected:
 			g_p = nullptr;
 		}
 	}
-	template <typename T> static
-	typename std::enable_if_t<HAS_MEMBER(T, Reset), void> Reset(T *pObj)
+	template <typename TT> static
+	typename std::enable_if_t<HAS_MEMBER(TT, Reset), void> Reset(TT *pObj)
 	{
 		pObj->Reset();
 	}
-	template <typename T> static
-	typename std::enable_if_t<!HAS_MEMBER(T, Reset)> Reset(T *pObj) {}
+	template <typename TT> static
+	typename std::enable_if_t<!HAS_MEMBER(TT, Reset)> Reset(TT *pObj) {}
 
 private:
 	static ObjectPool *g_p;

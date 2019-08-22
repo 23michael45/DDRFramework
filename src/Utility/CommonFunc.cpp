@@ -791,7 +791,7 @@ namespace DDRFramework {
 		size_t w = mbstowcs(tp, p, sz);
 		if (w != len) {
 			delete[] tp;
-			throw std::exception("StringToWString Err");
+			// throw std::exception("StringToWString Err");
 		}
 		std::wstring ret(tp);
 		delete[] tp;
@@ -817,7 +817,7 @@ namespace DDRFramework {
 		if (w != sz) {
 			delete[] tp;
 
-			throw std::exception("WStringToString Err");
+			// throw std::exception("WStringToString Err");
 		}
 		std::string ret(tp);
 		delete[] tp;
