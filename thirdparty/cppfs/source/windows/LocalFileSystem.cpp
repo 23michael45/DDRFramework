@@ -1,5 +1,9 @@
+
+
+#ifdef _WINDOWS
 #include <cppfs/windows/LocalFileSystem.h>
 #include <cppfs/windows/LocalFileHandle.h>
+#endif
 #include <cppfs/FileHandle.h>
 
 namespace cppfs

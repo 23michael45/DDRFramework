@@ -1,11 +1,11 @@
 
-#include <cppfs/windows/LocalFileIterator.h>
 #include <cppfs/FilePath.h>
-#include <cppfs/windows/LocalFileSystem.h>
 #include "src/Utility/CommonFunc.h"
 
 #ifdef _WIN32
 #include <Windows.h>
+#include <cppfs/windows/LocalFileSystem.h>
+#include <cppfs/windows/LocalFileIterator.h>
 #endif // _WIN32
 
 namespace cppfs
