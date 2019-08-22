@@ -215,7 +215,7 @@ namespace DDRFramework
 		if (m_ToggleLogConsole == true)
 		{
 
-			printf_s("\nToggleLog Turn On Console");
+			printf("\nToggleLog Turn On Console");
 
 			target = target | DDRFramework::Log::Target::STDOUT;
 
@@ -223,7 +223,7 @@ namespace DDRFramework
 		else
 		{
 
-			printf_s("\nToggleLog Turn Off Console");
+			printf("\nToggleLog Turn Off Console");
 			target = (DDRFramework::Log::Target)(target & ~DDRFramework::Log::Target::STDOUT);
 		}
 
@@ -241,14 +241,14 @@ namespace DDRFramework
 			std::string filename = exename + "-" + GetTimeNowstring() + ".log";
 			Log::getInstance()->setFile(filename + ".log");
 
-			printf_s("\nToggleLog Turn On File");
+			printf("\nToggleLog Turn On File");
 			target = target | DDRFramework::Log::Target::LOG_FILE;
 
 		}
 		else
 		{
 
-			printf_s("\nToggleLog Turn Off File");
+			printf("\nToggleLog Turn Off File");
 			target = (DDRFramework::Log::Target)(target & ~DDRFramework::Log::Target::LOG_FILE);
 		}
 		DDRFramework::Log::getInstance()->setTarget(target);
