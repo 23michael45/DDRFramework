@@ -1,12 +1,9 @@
-#include "stdafx.h"
-
 #include "EventLib.h"
 
 #include <thread>
 #include <mutex>
 #include <atomic>
 #include <condition_variable>
-//#include <iostream>
 
 namespace DDRMTLib {
 

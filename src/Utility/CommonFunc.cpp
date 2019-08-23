@@ -773,7 +773,7 @@ namespace DDRFramework {
 
 	std::wstring StringToWString(const std::string& str)
 	{
-#if defined(WIN32)
+#if defined(_WIN32) || defined(_WIN64)
 		size_t sz = str.length();
 		int nd = MultiByteToWideChar(CP_ACP, 0, &str[0], sz, NULL, 0);
 		std::wstring ret(nd, 0);
@@ -802,7 +802,7 @@ namespace DDRFramework {
 	std::string WStringToString(const std::wstring& str)
 	{
 		size_t sz = str.length();
-#if defined(WIN32)
+#if defined(_WIN32) || defined(_WIN64)
 		int nd = WideCharToMultiByte(CP_ACP, 0, &str[0], sz, NULL, 0, NULL, NULL);
 		std::string ret(nd, 0);
 		int w = WideCharToMultiByte(CP_ACP, 0, &str[0], sz, &ret[0], nd, NULL, NULL);
@@ -824,7 +824,7 @@ namespace DDRFramework {
 		return ret;
 #endif
 	}
-#ifdef _WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
 	std::string getexepath()
 	{
 		wchar_t result[MAX_PATH];
@@ -949,7 +949,7 @@ namespace DDRFramework {
 
 	void DisableMouseSelectConsole()
 	{
-#ifdef _WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
 		//SetConsoleOutputCP(CP_UTF8);
 		//FreeConsole();
 		HWND hwnd = GetConsoleWindow();
@@ -964,7 +964,7 @@ namespace DDRFramework {
 
 	bool DDRDeleteFile(const char* szFile)
 	{
-#ifdef _WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
 		if (!::DeleteFileA(szFile))
 		{
 			return false;
@@ -978,7 +978,7 @@ namespace DDRFramework {
 
 	bool DDRRemoveDir(const char* szFileDir)
 	{
-#ifdef _WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
 		std::string strDir = szFileDir;
 		if (strDir.at(strDir.length() - 1) != '\\')
 		{
