@@ -32,7 +32,7 @@ public:
 				}
 				nextTask.first(nextTask.second);
 				{
-					std::lock_guard<std::mutex> lg(m_taskIDLoc);
+					std::lock_guard<std::mutex> lg(m_qLoc);
 					++m_tHead;
 				}
 				m_taskFinNotif.notify_all();
@@ -49,8 +49,6 @@ public:
 		if (m_bToQuit) {
 			return false;
 		}
-		std::lock_guard<std::mutex> lg0(m_assignLoc);
-		std::lock_guard<std::mutex> lg1(m_taskIDLoc);
 		std::lock_guard<std::mutex> lg2(m_qLoc);
 		if (pTaskID) {
 			*pTaskID = m_tTail;
@@ -63,7 +61,7 @@ public:
 
 	bool HasFinishedTask(unsigned int taskID)
 	{
-		std::lock_guard<std::mutex> lg(m_taskIDLoc);
+		std::lock_guard<std::mutex> lg(m_qLoc);
 		return ((m_tTail == m_tHead) ||
 			    (m_tTail > m_tHead && (taskID < m_tHead || taskID >= m_tTail)) ||
 			    (m_tTail < m_tHead && (taskID < m_tHead && taskID >= m_tTail)));
@@ -71,13 +69,13 @@ public:
 
 	bool HasFinishedAllTasks()
 	{
-		std::lock_guard<std::mutex> lg(m_taskIDLoc);
+		std::lock_guard<std::mutex> lg(m_qLoc);
 		return (m_tTail == m_tHead);
 	}
 
 	void WaitForTask(unsigned int taskID)
 	{
-		std::unique_lock<std::mutex> ul(m_taskIDLoc);
+		std::unique_lock<std::mutex> ul(m_qLoc);
 		m_taskFinNotif.wait(ul, [this, taskID] { return ((m_tTail == m_tHead) ||
 			                                             (m_tTail > m_tHead && (taskID < m_tHead || taskID >= m_tTail)) ||
 			                                             (m_tTail < m_tHead && (taskID < m_tHead && taskID >= m_tTail))); });
@@ -85,7 +83,7 @@ public:
 
 	void WaitForAllTasks()
 	{
-		std::unique_lock<std::mutex> ul(m_taskIDLoc);
+		std::unique_lock<std::mutex> ul(m_qLoc);
 		m_taskFinNotif.wait(ul, [this] { return (m_tTail == m_tHead); });
 	}
 
@@ -95,7 +93,6 @@ public:
 		if (!m_bToQuit.compare_exchange_strong(bFALSE, true)) {
 			return;
 		}
-		std::lock_guard<std::mutex> lg(m_assignLoc);
 		if (bWait4InQueueTasks) {
 			WaitForAllTasks();
 		}
@@ -114,12 +111,9 @@ private:
 	std::mutex m_qLoc;
 	std::queue<std::pair<_MY_FUNC_, void*>> m_tasks;
 	std::condition_variable m_newTaskNotif;
-	std::mutex m_taskIDLoc;
+	std::condition_variable m_taskFinNotif;
 	unsigned int m_tHead;
 	unsigned int m_tTail;
-
-	std::mutex m_assignLoc;
-	std::condition_variable m_taskFinNotif;
 };
 
 }
