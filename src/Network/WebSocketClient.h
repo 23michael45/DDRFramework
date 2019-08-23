@@ -33,7 +33,10 @@ namespace DDRFramework
 
 		void on_close(client * c, websocketpp::connection_hdl hdl);
 
+		void on_interrupt(client * c, websocketpp::connection_hdl hdl);
+
 		void on_message(websocketpp::connection_hdl, client::message_ptr msg);
+
 
 		websocketpp::connection_hdl get_hdl() const {
 			return m_hdl;
@@ -71,8 +74,16 @@ namespace DDRFramework
 		connection_metadata::ptr get_metadata(int id) const;
 
 		void onmessage(std::string msg);
+		void onconnect();
+		void onfailed();
+		void oninterrupt();
+		void onclose();
 
 		void bindonmessage(std::function<void(std::string)> func);
+		void bindonconnect(std::function<void()> func);
+		void bindonclose(std::function<void()> func);
+		void bindonfailed(std::function<void()> func);
+		void bindoninterrupt(std::function<void()> func);
 	private:
 		typedef std::map<int, connection_metadata::ptr> con_list;
 
@@ -83,6 +94,10 @@ namespace DDRFramework
 		int m_next_id;
 
 		std::function<void(std::string)> m_onmsg;
+		std::function<void()> m_onconnect;
+		std::function<void()> m_onclose;
+		std::function<void()> m_onfailed;
+		std::function<void()> m_oninterrupt;
 	};
 
 
