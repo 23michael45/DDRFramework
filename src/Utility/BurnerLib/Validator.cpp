@@ -4,12 +4,14 @@
 
 #include "Validator.h"
 
+#if _WINDOWS
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
 #include <winsock2.h>
 #include <iphlpapi.h>
+#endif
 #pragma comment(lib, "iphlpapi.lib")
 
 namespace DDRGadgets {
@@ -78,9 +80,10 @@ bool GetEncInfo(std::vector<char> &info)
 
 bool CheckMacMatch(const char *pMacStr)
 {
-	ULONG outBufLen = 15000;
-	ULONG flags = GAA_FLAG_INCLUDE_PREFIX;
-	ULONG family = AF_UNSPEC;
+	#if _WINDOWS
+	unsigned long outBufLen = 15000;
+	unsigned long flags = GAA_FLAG_INCLUDE_PREFIX;
+	unsigned long family = AF_UNSPEC;
 	int nIter = 0;
 	PIP_ADAPTER_ADDRESSES pAddresses = nullptr;
 	do {
@@ -88,7 +91,7 @@ bool CheckMacMatch(const char *pMacStr)
 		if (!pAddresses) {
 			return "";
 		}
-		ULONG dwRetVal = ::GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
+		unsigned long dwRetVal = ::GetAdaptersAddresses(family, flags, NULL, pAddresses, &outBufLen);
 		if (dwRetVal == ERROR_SUCCESS) {
 			break;
 		} else {
@@ -123,6 +126,7 @@ bool CheckMacMatch(const char *pMacStr)
 		}
 	}
 	free(pAddresses);
+	#endif
 	return false;
 }
 
