@@ -21,6 +21,11 @@ void DDRFramework::connection_metadata::on_open(client * c, websocketpp::connect
 
 	client::connection_ptr con = c->get_con_from_hdl(hdl);
 	m_server = con->get_response_header("Server");
+
+	if (m_pendpoint)
+	{
+		m_pendpoint->onconnect();
+	}
 }
 
 void DDRFramework::connection_metadata::on_fail(client * c, websocketpp::connection_hdl hdl)
@@ -30,6 +35,11 @@ void DDRFramework::connection_metadata::on_fail(client * c, websocketpp::connect
 	client::connection_ptr con = c->get_con_from_hdl(hdl);
 	m_server = con->get_response_header("Server");
 	m_error_reason = con->get_ec().message();
+
+	if (m_pendpoint)
+	{
+		m_pendpoint->onfailed();
+	}
 }
 
 void DDRFramework::connection_metadata::on_close(client * c, websocketpp::connection_hdl hdl)
@@ -41,6 +51,26 @@ void DDRFramework::connection_metadata::on_close(client * c, websocketpp::connec
 		<< websocketpp::close::status::get_string(con->get_remote_close_code())
 		<< "), close reason: " << con->get_remote_close_reason();
 	m_error_reason = s.str();
+
+	if (m_pendpoint)
+	{
+		m_pendpoint->onclose();
+	}
+}
+
+void DDRFramework::connection_metadata::on_interrupt(client * c, websocketpp::connection_hdl hdl)
+{
+	m_status = "Interrupt";
+	client::connection_ptr con = c->get_con_from_hdl(hdl);
+	std::stringstream s;
+	s << "close code: " << con->get_remote_close_code() << " ("
+		<< websocketpp::close::status::get_string(con->get_remote_close_code())
+		<< "), close reason: " << con->get_remote_close_reason();
+	m_error_reason = s.str();
+	if (m_pendpoint)
+	{
+		m_pendpoint->oninterrupt();
+	}
 }
 
 void DDRFramework::connection_metadata::on_message(websocketpp::connection_hdl, client::message_ptr msg)
@@ -200,8 +230,53 @@ void DDRFramework::websocket_endpoint::onmessage(std::string msg)
 		m_onmsg(msg);
 	}
 }
+void DDRFramework::websocket_endpoint::onconnect()
+{
+	if (m_onconnect)
+	{
+		m_onconnect();
+	}
+}
+void DDRFramework::websocket_endpoint::onclose()
+{
+	if (m_onclose)
+	{
+		m_onclose();
+	}
+}
+void DDRFramework::websocket_endpoint::onfailed()
+{
+	if (m_onfailed)
+	{
+		m_onfailed();
+	}
+}
+void DDRFramework::websocket_endpoint::oninterrupt()
+{
+	if (m_oninterrupt)
+	{
+		m_oninterrupt();
+	}
+}
+
 
 void DDRFramework::websocket_endpoint::bindonmessage(std::function<void(std::string)> func)
 {
 	m_onmsg = func;
+}
+void DDRFramework::websocket_endpoint::bindonconnect(std::function<void()> func)
+{
+	m_onconnect = func;
+}
+void DDRFramework::websocket_endpoint::bindonclose(std::function<void()> func)
+{
+	m_onclose= func;
+}
+void DDRFramework::websocket_endpoint::bindonfailed(std::function<void()> func)
+{
+	m_onfailed = func;
+}
+void DDRFramework::websocket_endpoint::bindoninterrupt(std::function<void()> func)
+{
+	m_oninterrupt = func;
 }
