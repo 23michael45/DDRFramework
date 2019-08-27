@@ -9,7 +9,7 @@ message space_point
 	bytes name = 1; 
 	float x = 2;
 	float y = 3;
-	int32 label_value = 4;
+	repeated int32 label_value = 4;
 }
 
 // 标签
@@ -48,7 +48,7 @@ message ListColPt
 		float pose_y = 4;
 		float pose_theta = 5; // 弧度
 		bytes pt_name = 6; // 点的描述, 仅为用户标注点时有意义
-		int32 label_value = 7;
+		repeated int32 label_value = 7;
 	}
 	repeated OneColPt ColPts = 1;
 }
@@ -109,7 +109,7 @@ message path_action_point_item
 	bytes pointname = 2; // 这里可以是标记点，也可以是自动生成的拐点和POI。
 	eMarkingItemType type = 3; // action 类型。如果pointname是一个MarkingPoint的名字，那么这里的type应该跟该标记点的type一致。
 	path_action_point_config config = 4; // 配置文件
-	int32 label_value = 5;
+	repeated int32 label_value = 5;
 } 
 
 // 路径item模式
@@ -134,7 +134,7 @@ message path_line_item
 	float velocity = 3; // 速度
 	ePathItemMode mode = 4; // 路径模式
 	path_line_config config = 5; // 配置文件
-	int32 label_value = 6;
+	repeated int32 label_value = 6;
 }
 
 message path_arc_item
@@ -145,7 +145,7 @@ message path_arc_item
 	float radius = 4;
 	float velocity = 5;
 	ePathItemMode mode = 6;
-	int32 label_value = 7;
+	repeated int32 label_value = 7;
 } 
 
 enum path_element_type
@@ -167,7 +167,7 @@ message task_item
 {
 	bytes name = 1; // 任务名字，同一reqDDRVLNMap是唯一的
 	repeated path_element pathSet = 2; // path的集合。这里只存名字。根据名字去找对应的path
-	int32 label_value = 3;
+	repeated int32 label_value = 3;
 }
 
 // 任务描述 -----------------------------------------
@@ -211,7 +211,7 @@ message space_item
 	repeated line linedata = 3;
 	repeated polygon polygondata = 4;
 	repeated circle circledata = 5;
-	int32 label_value = 6;
+	repeated int32 label_value = 6;
 }
 // 空间描述 -----------------------------------------
 
