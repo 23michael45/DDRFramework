@@ -9,7 +9,22 @@ message space_point
 	bytes name = 1; 
 	float x = 2;
 	float y = 3;
+	int32 label_value = 4;
 }
+
+// 标签
+message labelItem
+{
+	int32 value = 1; // 1-auto 2-corner 3-POI  其他的可以自定义。
+	bytes detail = 2;
+}
+
+message labelData
+{
+	repeated labelItem labelSet = 1;
+}
+
+
 // 基础元素描述 ---------------------------------------
 
 // 采集完成后保存的重要地图点 --------------------------------------------------
@@ -33,6 +48,7 @@ message ListColPt
 		float pose_y = 4;
 		float pose_theta = 5; // 弧度
 		bytes pt_name = 6; // 点的描述, 仅为用户标注点时有意义
+		int32 label_value = 7;
 	}
 	repeated OneColPt ColPts = 1;
 }
@@ -93,6 +109,7 @@ message path_action_point_item
 	bytes pointname = 2; // 这里可以是标记点，也可以是自动生成的拐点和POI。
 	eMarkingItemType type = 3; // action 类型。如果pointname是一个MarkingPoint的名字，那么这里的type应该跟该标记点的type一致。
 	path_action_point_config config = 4; // 配置文件
+	int32 label_value = 5;
 } 
 
 // 路径item模式
@@ -113,11 +130,11 @@ message path_line_config
 message path_line_item
 {
 	bytes name = 1;// 同一reqDDRVLNMap是唯一的
-	bytes pointStart = 2;
-	bytes pointEnd = 3;
-	float velocity = 4; // 速度
-	ePathItemMode mode = 5; // 路径模式
-	path_line_config config = 6; // 配置文件
+	repeated bytes pointSet = 2;
+	float velocity = 3; // 速度
+	ePathItemMode mode = 4; // 路径模式
+	path_line_config config = 5; // 配置文件
+	int32 label_value = 6;
 }
 
 message path_arc_item
@@ -128,6 +145,7 @@ message path_arc_item
 	float radius = 4;
 	float velocity = 5;
 	ePathItemMode mode = 6;
+	int32 label_value = 7;
 } 
 
 enum path_element_type
@@ -149,6 +167,7 @@ message task_item
 {
 	bytes name = 1; // 任务名字，同一reqDDRVLNMap是唯一的
 	repeated path_element pathSet = 2; // path的集合。这里只存名字。根据名字去找对应的path
+	int32 label_value = 3;
 }
 
 // 任务描述 -----------------------------------------
@@ -192,6 +211,7 @@ message space_item
 	repeated line linedata = 3;
 	repeated polygon polygondata = 4;
 	repeated circle circledata = 5;
+	int32 label_value = 6;
 }
 // 空间描述 -----------------------------------------
 
@@ -214,6 +234,8 @@ message DDRMapBaseData
 	bytes description = 2;
 	affine_mat affinedata = 3;
 	ListColPt colPointData = 4; 
+	int64 rec_time = 5;  // 采集时的时间戳，单位为ms
+	bytes rec_user_name = 6; //  采集用户名，默认会是admin
 }
 
 // 每个OneRoute有一个DDRMapPathData，每个DDRMapPathData保存成一个文件。这里类似于存放的是Task拼图中的所有元素
@@ -250,6 +272,7 @@ message reqDDRVLNMap
 	DDRMapSpaceData spacedata = 3; // 存放所有空间的信息
 	DDRMapMarkingPointData markingpointdata = 4; // 存放所有标记点的信息（x y name）。
 	repeated task_item taskSet = 5; // 存放所有Task的信息，每个task_item对应一个文件。
+	labelData label = 6; // 每个地图有一个标签集合
 }
 
 message rspDDRVLNMap
@@ -404,4 +427,29 @@ message rspRunControl
 	DDRCommProto.eCmdRspType type = 1;
 }
 // 任务调度管理 ----------------------------------------
+
+// 地图操作管理 +++++++++++++++
+enum eMapOperationalType
+{
+	eMapOperationalError = 0;
+	eMapOperationalDelete = 1; // 删除地图
+	eMapOperationalDefault = 2; // 恢复成默认
+	eMapOperationalRename = 3; // 重命名地图
+}
+
+message reqMapOperational
+{
+	eMapOperationalType type = 1; // 操作类型
+	bytes source_name = 2; // 要操作的地图名称
+	bytes target_name = 3; // 目标名称，只有当type是eMapOperationalRename会用到。
+}
+
+message rspMapOperational
+{
+	DDRCommProto.eCmdRspType type = 1;
+}
+// 地图操作管理 ---------------
+
+
+
 
