@@ -17,10 +17,12 @@ public:
 	{
 		lock(lll);
 	}
+#if ((defined(__GNUC__) || defined(__GNUG__)) && __cplusplus >= 201703L) || (defined(_MSC_VER) && __cplusplus >= 199711L)
 	_lock_guard(bool bRead, std::shared_mutex &lll) : m_type(0)
 	{
 		lock(bRead, lll);
 	}
+#endif
 	_lock_guard(bool bRead, std::shared_timed_mutex &lll, int waitTimeMilSec = -1) : m_type(0)
 	{
 		lock(bRead, lll, waitTimeMilSec);
@@ -51,6 +53,7 @@ public:
 		}
 		return (bool)(*this);
 	}
+#if ((defined(__GNUC__) || defined(__GNUG__)) && __cplusplus >= 201703L) || (defined(_MSC_VER) && __cplusplus >= 199711L)
 	bool lock(bool bRead, std::shared_mutex &lll)
 	{
 		unlock();
@@ -64,6 +67,7 @@ public:
 		m_type = 3;
 		return (bool)(*this);
 	}
+#endif
 	bool lock(bool bRead, std::shared_timed_mutex &lll, int waitTimeMilSec)
 	{
 		unlock();
@@ -109,6 +113,7 @@ public:
 		case 2:
 			((std::timed_mutex*)m_p)->unlock();
 			break;
+#if ((defined(__GNUC__) || defined(__GNUG__)) && __cplusplus >= 201703L) || (defined(_MSC_VER) && __cplusplus >= 199711L)
 		case 3:
 			if (m_bRead) {
 				((std::shared_mutex*)m_p)->unlock_shared();
@@ -116,6 +121,7 @@ public:
 				((std::shared_mutex*)m_p)->unlock();
 			}
 			break;
+#endif
 		case 4:
 			if (m_bRead) {
 				((std::shared_timed_mutex*)m_p)->unlock_shared();
@@ -129,6 +135,9 @@ public:
 			} else {
 				((AtomicLock<false>*)m_p)->unlock();
 			}
+			break;
+		default:
+			break;
 		}
 		m_type = 0;
 	}
