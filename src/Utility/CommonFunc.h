@@ -1,4 +1,4 @@
-#ifndef CommonFunc_h__
+ï»¿#ifndef CommonFunc_h__
 #define CommonFunc_h__
 
 
@@ -63,24 +63,24 @@ namespace DDRFramework {
 
 
 
-	// ¶à×Ö½Ú±àÂë×ªÎªUTF8±àÂë  
+	// å¤šå­—èŠ‚ç¼–ç è½¬ä¸ºUTF8ç¼–ç   
 	bool MBToUTF8(std::vector<char>& pu8, const char* pmb, int mLen);
 
-	// UTF8±àÂë×ªÎª¶à×Ö½Ú±àÂë  
+	// UTF8ç¼–ç è½¬ä¸ºå¤šå­—èŠ‚ç¼–ç   
 	bool UTF8ToMB(std::vector<char>& pmb, const char* pu8, int utf8Len);
 
-	// ¶à×Ö½Ú±àÂë×ªÎªUnicode±àÂë  
+	// å¤šå­—èŠ‚ç¼–ç è½¬ä¸ºUnicodeç¼–ç   
 	bool MBToUnicode(std::vector<wchar_t>& pun, const char* pmb, int mLen);
 	std::string MBToUTF8String(std::string mbstr);
 
-	//Unicode±àÂë×ªÎª¶à×Ö½Ú±àÂë  
+	//Unicodeç¼–ç è½¬ä¸ºå¤šå­—èŠ‚ç¼–ç   
 	bool UnicodeToMB(std::vector<char>& pmb, const wchar_t* pun, int uLen);
 	std::string UTF8ToMBString(std::string utf8str);
 
-	// UTF8±àÂë×ªÎªUnicode  
+	// UTF8ç¼–ç è½¬ä¸ºUnicode  
 	bool UTF8ToUnicode(std::vector<wchar_t>& pun, const char* pu8, int utf8Len);
 
-	// Unicode±àÂë×ªÎªUTF8  
+	// Unicodeç¼–ç è½¬ä¸ºUTF8  
 	bool UnicodeToUTF8(std::vector<char>& pu8, const wchar_t* pun, int uLen);
 
 	std::wstring s2w(const std::string& utf8string);

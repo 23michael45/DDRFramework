@@ -1,4 +1,4 @@
-#ifndef __REQUEST_HANDLER_HPP__
+﻿#ifndef __REQUEST_HANDLER_HPP__
 #define __REQUEST_HANDLER_HPP__
 
 #include <string>

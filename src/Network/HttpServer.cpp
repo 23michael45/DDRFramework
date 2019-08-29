@@ -1,4 +1,4 @@
-#include "HttpServer.h"
+ï»¿#include "HttpServer.h"
 #include <fstream>
 #include <exception>
 
@@ -131,7 +131,7 @@ namespace DDRFramework
 	}
 
 
-	void HttpServer::do_accept()//Òì²½½ÓÊÕÁ¬½Ó
+	void HttpServer::do_accept()//å¼‚æ­¥æ¥æ”¶è¿æ¥
 	{
 		if (m_bWorking)
 		{

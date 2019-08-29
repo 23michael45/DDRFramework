@@ -1,4 +1,4 @@
-/* GSSAPI/krb5 support for FTP - loosely based on old krb4.c
+ï»¿/* GSSAPI/krb5 support for FTP - loosely based on old krb4.c
  *
  * Copyright (c) 1995, 1996, 1997, 1998, 1999 Kungliga Tekniska Högskolan
  * (Royal Institute of Technology, Stockholm, Sweden).

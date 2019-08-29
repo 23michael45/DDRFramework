@@ -1,4 +1,4 @@
-#ifndef __DDR_SOFT_VALIDATOR_H_INCLUDED__
+ï»¿#ifndef __DDR_SOFT_VALIDATOR_H_INCLUDED__
 #define __DDR_SOFT_VALIDATOR_H_INCLUDED__
 
 #include <vector>
@@ -7,7 +7,7 @@ namespace DDRGadgets {
 
 /*
 Call this function to extract encrypted info string.
-»ñÈ¡¼ÓÃÜµÄĞÅÏ¢×Ö·û´®, ³É¹¦·µ»ØÊ±½«Ìî³äÖÁinfoÖĞ
+è·å–åŠ å¯†çš„ä¿¡æ¯å­—ç¬¦ä¸², æˆåŠŸè¿”å›æ—¶å°†å¡«å……è‡³infoä¸­
 */
 bool GetEncInfo(std::vector<char> &info);
 

@@ -1,4 +1,4 @@
-#include <functional>
+ï»¿#include <functional>
 #include "src/Utility/Logger.h"
 #include "src/Utility/LoggerDef.h"
 #include "HttpClient.h"
@@ -143,17 +143,17 @@ namespace DDRFramework
 		CURL* hCurl = curl_easy_init();
 		if (hCurl != NULL)
 		{
-			//Ò²ĞíÓĞExpect: 100-continue£¬È¥µôËü
+			//ä¹Ÿè®¸æœ‰Expect: 100-continueï¼Œå»æ‰å®ƒ
 			curl_slist* pOptionList = NULL;
 			pOptionList = curl_slist_append(pOptionList, "Expect:");
 			curl_easy_setopt(hCurl, CURLOPT_HTTPHEADER, pOptionList);
 
 			curl_httppost* pFormPost = NULL;
 			curl_httppost* pLastElem = NULL;
-			//ÉÏ´«ÎÄ¼ş£¬Ö¸¶¨±¾µØÎÄ¼şÍêÕûÂ·¾¶
+			//ä¸Šä¼ æ–‡ä»¶ï¼ŒæŒ‡å®šæœ¬åœ°æ–‡ä»¶å®Œæ•´è·¯å¾„
 			//curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, "file", CURLFORM_FILE, fullpath.c_str(), CURLFORM_CONTENTTYPE, "application/octet-stream", CURLFORM_END);
 
-			//ÉÏ´«×Ô¶¨ÒåÎÄ¼şÄÚÈİµÄÎÄ¼ş£¬CURLFORM_BUFFERÖ¸¶¨·şÎñ¶ËÎÄ¼şÃû
+			//ä¸Šä¼ è‡ªå®šä¹‰æ–‡ä»¶å†…å®¹çš„æ–‡ä»¶ï¼ŒCURLFORM_BUFFERæŒ‡å®šæœåŠ¡ç«¯æ–‡ä»¶å
 			//http://curl.haxx.se/libcurl/c/curl_formadd.html
 			const char* file_info = inputfile.c_str();
 
@@ -164,7 +164,7 @@ namespace DDRFramework
 				CURLFORM_BUFFERLENGTH, length,
 				CURLFORM_END);
 
-			//²»¼ÓÒ»¸ö½áÊøµÄhfs·şÎñ¶ËÎŞ·¨Ğ´ÈëÎÄ¼ş£¬Ò»°ã²»´æÔÚÕâÖÖÎÊÌâ£¬ÕâÀï¼ÓÈëÖ»ÊÇÎªÁË²âÊÔ.
+			//ä¸åŠ ä¸€ä¸ªç»“æŸçš„hfsæœåŠ¡ç«¯æ— æ³•å†™å…¥æ–‡ä»¶ï¼Œä¸€èˆ¬ä¸å­˜åœ¨è¿™ç§é—®é¢˜ï¼Œè¿™é‡ŒåŠ å…¥åªæ˜¯ä¸ºäº†æµ‹è¯•.
 			//curl_formadd(&pFormPost, &pLastElem, CURLFORM_COPYNAME, "end", CURLFORM_COPYCONTENTS, "end", CURLFORM_END);
 			curl_easy_setopt(hCurl, CURLOPT_HTTPPOST, pFormPost);
 			curl_easy_setopt(hCurl, CURLOPT_URL, url.c_str());

@@ -1,4 +1,4 @@
-/* This source code was modified by Martin Hedenfalk <mhe@stacken.kth.se> for
+﻿/* This source code was modified by Martin Hedenfalk <mhe@stacken.kth.se> for
  * use in Curl. His latest changes were done 2000-09-18.
  *
  * It has since been patched and modified a lot by Daniel Stenberg

@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
  * File: HttpServer.h
  * Date: 2019/04/29 15:56
  *
@@ -61,23 +61,23 @@ namespace DDRFramework
 		bool m_bWorking;
 
 		/// Perform an asynchronous accept operation.
-		void do_accept();//Òì²½½ÓÊÕĞÂÁ¬½Ó
+		void do_accept();//å¼‚æ­¥æ¥æ”¶æ–°è¿æ¥
 
 		/// Wait for a request to stop the server.
-		void do_await_stop();//Òì²½µÈ´ıĞÅºÅ
+		void do_await_stop();//å¼‚æ­¥ç­‰å¾…ä¿¡å·
 
 
 		/// The signal_set is used to register for process termination notifications.
-		asio::signal_set m_Signals;//×¢²áÖĞÖ¹ÏûÏ¢
+		asio::signal_set m_Signals;//æ³¨å†Œä¸­æ­¢æ¶ˆæ¯
 
 		/// Acceptor used to listen for incoming connections.
-		asio::ip::tcp::acceptor m_Acceptor;//¼àÌıÌ×½Ó×Ö
+		asio::ip::tcp::acceptor m_Acceptor;//ç›‘å¬å¥—æ¥å­—
 
 		/// The connection manager which owns all live connections.
 		connection_manager m_ConnectionManager;
 
 		/// The next socket to be accepted.
-		asio::ip::tcp::socket m_Socket;//ÒÑÁ¬½ÓÌ×½Ó×Ö
+		asio::ip::tcp::socket m_Socket;//å·²è¿æ¥å¥—æ¥å­—
 
 		/// The handler for all incoming requests.
 		std::shared_ptr<request_handler> m_spRequestHandler;
