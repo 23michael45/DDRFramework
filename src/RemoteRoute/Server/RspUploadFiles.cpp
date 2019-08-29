@@ -16,9 +16,9 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspUploadFil
 	if (pMsg->GetTypeName() != "DDRCommProto.reqUploadFiles") {
 		return std::shared_ptr<google::protobuf::Message>();
 	}
-	auto ret = std::make_shared<DDRCommProto::rspUploadFiles>();
-	ret->set_ret(DDRCommProto::eReqVoid);
-	auto pReq = (DDRCommProto::reqUploadFiles*)pMsg;
+	auto ret = std::make_shared<RemoteRouteProto::rspUploadFiles>();
+	ret->set_ret(RemoteRouteProto::eReqVoid);
+	auto pReq = (RemoteRouteProto::reqUploadFiles*)pMsg;
 	ret->set_reqguid(pReq->reqguid());
 
 	if (pReq->filenames_size() <= 0 ||
@@ -30,7 +30,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspUploadFil
 		return ret;
 	}
 	if ((size_t)pReq->content_len() > g_MaxDataSliceBytes) {
-		ret->set_ret(DDRCommProto::eUp_TooBig);
+		ret->set_ret(RemoteRouteProto::eUp_TooBig);
 		return ret;
 	}
 	__int64 accSz = 0;
@@ -50,38 +50,38 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspUploadFil
 		     pReq->uploadid(), pReq->filenames_size(), pReq->content_len());
 	DDRMTLib::_lock_guard lg(true, m_gLoc, 50);
 	if (!lg) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 	auto pInd = m_UIDMapper.find(pReq->uploadid());
 	if (m_UIDMapper.end() == pInd) {
-		ret->set_ret(DDRCommProto::eIDInvalid);
+		ret->set_ret(RemoteRouteProto::eIDInvalid);
 		return ret;
 	}
 	auto ele = m_routes[pInd->second];
 
 	if (!lg.lock(false, ele->loc, 500)) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 	const char *pBuf = nullptr;
 	size_t nBufLen = 0;
 	std::vector<char> oriContent;
-	if (DDRCommProto::eZLib == pReq->ziptype()) {
+	if (RemoteRouteProto::eZLib == pReq->ziptype()) {
 		oriContent.resize(pReq->content_len());
 		uLongf dstLen = (uLongf)pReq->content_len();
 		if (Z_OK != uncompress((Bytef*)&oriContent[0], &dstLen,
 			                   (const Bytef*)pReq->contents().c_str(),
 			                   (uLong)pReq->contents().length()) ||
 			                   (__int64)dstLen != pReq->content_len()) {
-			ret->set_ret(DDRCommProto::eUp_DataError);
+			ret->set_ret(RemoteRouteProto::eUp_DataError);
 			return ret;
 		}
 		pBuf = &oriContent[0];
 		nBufLen = (size_t)pReq->content_len();
-	} else if (DDRCommProto::eNoZip == pReq->ziptype()) {
+	} else if (RemoteRouteProto::eNoZip == pReq->ziptype()) {
 		if (pReq->content_len() != (__int64)pReq->contents().length()) {
-			ret->set_ret(DDRCommProto::eUp_DataError);
+			ret->set_ret(RemoteRouteProto::eUp_DataError);
 			return ret;
 		}
 		pBuf = pReq->contents().c_str();
@@ -121,7 +121,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspUploadFil
 	}
 	ele->save();
 
-	ret->set_ret(DDRCommProto::eOkay);
+	ret->set_ret(RemoteRouteProto::eOkay);
 	return ret;
 }
 

@@ -11,14 +11,14 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListRoute
 	if (pMsg->GetTypeName() != "DDRCommProto.reqListRoutes") {
 		return std::shared_ptr<google::protobuf::Message>();
 	}
-	auto ret = std::make_shared<DDRCommProto::rspListRoutes>();
+	auto ret = std::make_shared<RemoteRouteProto::rspListRoutes>();
 
 	DDRMTLib::_lock_guard lg(true, m_gLoc, 10);
 	if (!lg) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
-	DDRCommProto::MultipleRouteInfo mri;
+	RemoteRouteProto::MultipleRouteInfo mri;
 	for (auto &x : m_routes) {
 		auto pRoute = mri.add_routes();
 		pRoute->set_version(x->ver);
@@ -32,7 +32,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListRoute
 
 	std::string mri_ = mri.SerializeAsString();
 	if (mri_.empty()) {
-		ret->set_ret(DDRCommProto::eInternalErr);
+		ret->set_ret(RemoteRouteProto::eInternalErr);
 		return ret;
 	}
 	ret->set_routerecords_sz(mri_.length());
@@ -43,14 +43,14 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListRoute
 	if (Z_OK == compress((Bytef*)&((*ret->mutable_routerecords())[0]), &_afterCompSz,
 		                 (const Bytef*)mri_.c_str(), (uLong)mri_.length())) {
 		ret->mutable_routerecords()->resize(_afterCompSz);
-		ret->set_ziptype(DDRCommProto::eZLib);
+		ret->set_ziptype(RemoteRouteProto::eZLib);
 		bDataOrg = true;
 	}
 	if (!bDataOrg) {
 		ret->set_routerecords(mri_.c_str(), mri_.length());
-		ret->set_ziptype(DDRCommProto::eNoZip);
+		ret->set_ziptype(RemoteRouteProto::eNoZip);
 	}
-	ret->set_ret(DDRCommProto::eOkay);
+	ret->set_ret(RemoteRouteProto::eOkay);
 	return ret;
 }
 

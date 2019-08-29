@@ -18,11 +18,11 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspCreateRou
 	if (pMsg->GetTypeName() != "DDRCommProto.reqCreateRoute") {
 		return std::shared_ptr<google::protobuf::Message>();
 	}
-	auto ret = std::make_shared<DDRCommProto::rspCreateRoute>();
-	ret->set_ret(DDRCommProto::eReqVoid);
+	auto ret = std::make_shared<RemoteRouteProto::rspCreateRoute>();
+	ret->set_ret(RemoteRouteProto::eReqVoid);
 	ret->set_uploadid(0);
 
-	auto pp = (DDRCommProto::reqCreateRoute*)pMsg;
+	auto pp = (RemoteRouteProto::reqCreateRoute*)pMsg;
 	auto &info = pp->routeinfo();
 	if (info.version() < 10000 || info.version() > g_version ||
 		info.robotid().empty() || info.routename().empty()) {
@@ -37,7 +37,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspCreateRou
 
 	DDRMTLib::_lock_guard lg(true, m_gLoc, 50);
 	if (!lg) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 	bool bTooClose = false;
@@ -51,7 +51,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspCreateRou
 		}
 	}
 	if (bTooClose) {
-		ret->set_ret(DDRCommProto::eUp_TooFrequent);
+		ret->set_ret(RemoteRouteProto::eUp_TooFrequent);
 		return ret;
 	}
 	u64 uid, did;
@@ -65,27 +65,27 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspCreateRou
 			break;
 		}
 		if (i >= 15) {
-			ret->set_ret(DDRCommProto::eTooBusy);
+			ret->set_ret(RemoteRouteProto::eTooBusy);
 			return ret;
 		}
 	}
 
 	// create a new route
 	if (!lg.lock(true, m_gLoc, 50)) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 
 	std::string fn = "Data/";
 	fn += _fromU64(did);
 	if (!DDRSys::createDir(fn.c_str())) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 	fn += g_InfoFileName;
 	std::ofstream ofs(fn);
 	if (!ofs.is_open()) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 	ofs << info.version() << "\n"
@@ -106,7 +106,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspCreateRou
 	m_DIDMapper[pNewRoute->downloadID] = (int)m_routes.size();
 	m_RIDMapper[pNewRoute->rID].emplace_back(m_routes.size());
 	m_routes.emplace_back(pNewRoute);
-	ret->set_ret(DDRCommProto::eOkay);
+	ret->set_ret(RemoteRouteProto::eOkay);
 	ret->set_uploadid(uid);
 	return ret;
 }

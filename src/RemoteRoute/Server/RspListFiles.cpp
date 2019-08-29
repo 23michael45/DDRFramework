@@ -12,56 +12,56 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListFiles
 		pMsg->GetTypeName() != "DDRCommProto.reqListFiles_downloader") {
 		return std::shared_ptr<google::protobuf::Message>();
 	}
-	auto ret = std::make_shared<DDRCommProto::rspListFiles>();
-	ret->set_ret(DDRCommProto::eReqVoid);
+	auto ret = std::make_shared<RemoteRouteProto::rspListFiles>();
+	ret->set_ret(RemoteRouteProto::eReqVoid);
 	u64 reqID;
 	if (pMsg->GetTypeName() == "DDRCommProto.reqListFiles_uploader") {
-		reqID = ((DDRCommProto::reqListFiles_uploader*)pMsg)->reqguid();
+		reqID = ((RemoteRouteProto::reqListFiles_uploader*)pMsg)->reqguid();
 	} else {
-		reqID = ((DDRCommProto::reqListFiles_downloader*)pMsg)->reqguid();
+		reqID = ((RemoteRouteProto::reqListFiles_downloader*)pMsg)->reqguid();
 	}
 	ret->set_reqguid(reqID);
 
 	DDRMTLib::_lock_guard lg(true, m_gLoc, 50);
 	if (!lg) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 
 	int ind = -1;
 	if (pMsg->GetTypeName() == "DDRCommProto.reqListFiles_uploader") {
-		auto pp = m_UIDMapper.find(((DDRCommProto::reqListFiles_uploader*)pMsg)->uploadid());
+		auto pp = m_UIDMapper.find(((RemoteRouteProto::reqListFiles_uploader*)pMsg)->uploadid());
 		if (m_UIDMapper.end() != pp) {
 			ind = (int)pp->second;
 			LevelLog(DDRFramework::Log::Level::INFO, "reqListFiles(uid=%llu)",
-				     ((DDRCommProto::reqListFiles_uploader*)pMsg)->uploadid());
+				     ((RemoteRouteProto::reqListFiles_uploader*)pMsg)->uploadid());
 		}
 	} else {
-		auto pp = m_DIDMapper.find(((DDRCommProto::reqListFiles_downloader*)pMsg)->downloadid());
+		auto pp = m_DIDMapper.find(((RemoteRouteProto::reqListFiles_downloader*)pMsg)->downloadid());
 		if (m_DIDMapper.end() != pp) {
 			ind = (int)pp->second;
 			LevelLog(DDRFramework::Log::Level::INFO, "reqListFiles(did=%llu)",
-				     ((DDRCommProto::reqListFiles_downloader*)pMsg)->downloadid());
+				     ((RemoteRouteProto::reqListFiles_downloader*)pMsg)->downloadid());
 		}
 	}
 	if (-1 == ind) {
-		ret->set_ret(DDRCommProto::eIDInvalid);
+		ret->set_ret(RemoteRouteProto::eIDInvalid);
 		return ret;
 	}
 
 	auto &ele = m_routes[ind];
 	if (!lg.lock(true, ele->loc, 500)) {
-		ret->set_ret(DDRCommProto::eTooBusy);
+		ret->set_ret(RemoteRouteProto::eTooBusy);
 		return ret;
 	}
 
 	if (ele->files.empty()) {
 		ret->set_filerecords_sz(0);
-		ret->set_ret(DDRCommProto::eOkay);
+		ret->set_ret(RemoteRouteProto::eOkay);
 		return ret;
 	}
 
-	DDRCommProto::MultipleFileInfo mfi;
+	RemoteRouteProto::MultipleFileInfo mfi;
 	for (auto &x : ele->files) {
 		auto pNewFile = mfi.add_records();
 		pNewFile->set_name(x.fn);
@@ -71,7 +71,7 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListFiles
 	}
 	std::vector<char> tmpBuf(mfi.ByteSize());
 	if (!mfi.SerializeToArray(&tmpBuf[0], (int)tmpBuf.size())) {
-		ret->set_ret(DDRCommProto::eInternalErr);
+		ret->set_ret(RemoteRouteProto::eInternalErr);
 		return ret;
 	}
 	ret->set_filerecords_sz(tmpBuf.size());
@@ -82,14 +82,14 @@ std::shared_ptr<google::protobuf::Message> ServerSideRouteManager::_rspListFiles
 	if (Z_OK == compress((Bytef*)&((*ret->mutable_filerecords())[0]), &_afterCompSz,
 			             (const Bytef*)&tmpBuf[0], (uLong)tmpBuf.size())) {
 		ret->mutable_filerecords()->resize(_afterCompSz);
-		ret->set_ziptype(DDRCommProto::eZLib);
+		ret->set_ziptype(RemoteRouteProto::eZLib);
 		bDataOrg = true;
 	}
 	if (!bDataOrg) {
 		ret->set_filerecords(&tmpBuf[0], tmpBuf.size());
-		ret->set_ziptype(DDRCommProto::eNoZip);
+		ret->set_ziptype(RemoteRouteProto::eNoZip);
 	}
-	ret->set_ret(DDRCommProto::eOkay);
+	ret->set_ret(RemoteRouteProto::eOkay);
 	return ret;
 }
 
