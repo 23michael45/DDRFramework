@@ -3,7 +3,7 @@
 
 #include <mutex>
 #include <shared_mutex>
-#include "atomicLock.hpp"
+#include "AtomicLock.hpp"
 
 namespace DDRMTLib {
 
