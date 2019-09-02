@@ -18,6 +18,10 @@ public:
 	{
 		m_flag.clear(std::memory_order_release);
 	}
+	bool try2lock()
+	{
+		return !m_flag.test_and_set(std::memory_order_acquire);
+	}
 private:
 	std::atomic_flag m_flag = ATOMIC_FLAG_INIT;
 };

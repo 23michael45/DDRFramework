@@ -28,9 +28,9 @@ public:
 		lock(bRead, lll, waitTimeMilSec);
 	}
 	template <bool bYield>
-	_lock_guard(AtomicLock<bYield> &lll) : m_type()
+	_lock_guard(AtomicLock<bYield> &lll, bool bTryOnlyOnce = false) : m_type()
 	{
-		lock(lll);
+		lock(lll, bTryOnlyOnce);
 	}
 
 	bool lock(std::mutex &lll)
@@ -91,13 +91,20 @@ public:
 		return (bool)(*this);
 	}
 	template <bool bYield>
-	bool lock(AtomicLock<bYield> &lll)
+	bool lock(AtomicLock<bYield> &lll, bool bTryOnlyOnce)
 	{
 		unlock();
-		m_p = &lll;
-		lll.lock();
-		m_type = 5;
-		m_bRead = bYield;
+		bool bSucc = true;
+		if (!bTryOnlyOnce) {
+			lll.lock();
+		} else if (!lll.try2lock()) {
+			bSucc = false;
+		}
+		if (bSucc) {
+			m_p = &lll;
+			m_type = 5;
+			m_bRead = bYield;
+		}
 		return (bool)(*this);
 	}
 	operator bool()
