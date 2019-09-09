@@ -482,6 +482,7 @@ message notifyBaseStatusEx{
 	float posdirection = 10;
 	float poslinespeed = 11;
 	float posangulauspeed = 12;
+	bytes robotid = 13;
 }
 
 // Environmental sensor info
