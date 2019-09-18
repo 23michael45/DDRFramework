@@ -171,13 +171,13 @@ protected:
 			g_p = nullptr;
 		}
 	}
-	template <typename T> static
-	typename std::enable_if_t<HAS_MEMBER(T, Reset), void> Reset(T *pObj)
+	template <typename TT> static
+	typename std::enable_if_t<HAS_MEMBER(TT, Reset), void> Reset(TT *pObj)
 	{
 		pObj->Reset();
 	}
-	template <typename T> static
-	typename std::enable_if_t<!HAS_MEMBER(T, Reset)> Reset(T *pObj) {}
+	template <typename TT> static
+	typename std::enable_if_t<!HAS_MEMBER(TT, Reset), void> Reset(TT *pObj) {}
 
 private:
 	static ObjectPool *g_p;
