@@ -1,0 +1,25 @@
+syntax = "proto3";
+package DDRAIServiceProto;
+
+enum eRspType {
+	eSuccess = 0;
+	eNotConnected = 1;
+	eInternalError = 2;
+	eDenied = 3;
+}
+
+//客户端到服务端，请求播放TTS
+message reqPlayTTS
+{
+	bytes content = 1;//播放文字内容
+}
+//服务端返回客户端
+message rspPlayTTS
+{
+	eRspType ret = 1;
+}
+
+
+
+
+

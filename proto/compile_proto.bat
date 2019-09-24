@@ -53,5 +53,11 @@ rem protoc DDRVLNMap.proto --js_out=./
 protoc DDRVLNMap.proto --python_out=./
 
 
+protoc DDRAIServiceCmd.proto --cpp_out=./
+protoc DDRAIServiceCmd.proto --java_out=./
+protoc DDRAIServiceCmd.proto --csharp_out=./
+rem protoc DDRAIServiceCmd.proto --js_out=./
+protoc DDRAIServiceCmd.proto --python_out=./
+
 
 cd %PrePath%
