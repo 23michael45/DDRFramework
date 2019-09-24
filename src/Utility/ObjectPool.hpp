@@ -1,12 +1,12 @@
-/*
+﻿/*
 ObjectPool by Dadao Inc.
 1. resources in disposed shared pointers will be stored in the free pool
 2. new allocations may be direct fetch from the free pool if available.
 otherwise the new expression is called.
-�����, ʵ����Դ�Ļ�������
-1. �������ٵĹ���ָ���е���Դ��������
-2. �����������Դӻ���վ��ֱ�ӷ�����Դ������ɹ�����ͼ���ø����͵�Reset()������
-����Դ(Reset()���������޲���); ����ͨ��new��������Դ
+对象池, 实现资源的回收利用
+1. 即将销毁的共享指针中的资源将被回收
+2. 分配器将尝试从回收站中直接分配资源。如果成功则试图调用该类型的Reset()函数重
+置资源(Reset()不存在则无操作); 否则通过new建立新资源
 */
 
 #ifndef __DDRGENERAL_OBJECT_POOL_H_INCLUDED__
@@ -16,7 +16,6 @@ otherwise the new expression is called.
 #include "../MTLib/AtomicLock.hpp"
 #include "DDR_Traits.hpp"
 #include "AdaptiveDQ.hpp"
-#include <type_traits>
 
 namespace DDRGeneral {
 ;
@@ -24,12 +23,13 @@ template <typename T> class ObjectPool
 {
 public:
 	/*
-	���T���;���Reset()��Ա����, ��ӻ���վ������Դʱ����ִ��Reset()������Դ����
+	如果T类型具有Reset()成员函数, 则从回收站分配资源时会先执行Reset()进行资源重置
 	*/
-	CREATE_MEMBER_CHECK(Reset)
+	CREATE_MEMBER_CHECK(Reset);
+
 	/*
 	Set buffer size of the recycling pool (in number of object copies)
-	���û��ջ�������С(������Դ�ķ���)
+	设置回收缓冲区大小(对象资源的份数)
 	*/
 	static void SetPoolCap(int nMaxPoolInstances)
 	{
@@ -37,7 +37,7 @@ public:
 	}
 	/*
 	Allocate resource. Recycled resource will call Reset() if available
-	������Դ. ʹ�û�����Դʱ����ͼ����T::Reset()������Դ
+	分配资源. 使用回收资源时会试图调用T::Reset()重置资源
 	*/
 	static std::shared_ptr<T> Allocate()
 	{
@@ -45,7 +45,7 @@ public:
 	}
 	/*
 	Clone objects by allocating and ASSIGN resources.
-	��¡��Դ. ע��, ������Դ������ ��ֵ ����
+	克隆资源. 注意, 分配资源后会进行 赋值 操作
 	*/
 	static std::shared_ptr<T> Clone(const T *pOri)
 	{
@@ -132,7 +132,7 @@ protected:
 	}
 	/*
 	Single global instance so call GetIns() to proceed.
-	����ģʽ, ����GetIns()�����з���Ϳ�¡����
+	单例模式, 调用GetIns()来进行分配和克隆操作
 	*/
 	static ObjectPool* getIns()
 	{
@@ -177,7 +177,7 @@ protected:
 		pObj->Reset();
 	}
 	template <typename TT> static
-	typename std::enable_if_t<!HAS_MEMBER(TT, Reset)> Reset(TT *pObj) {}
+	typename std::enable_if_t<!HAS_MEMBER(TT, Reset), void> Reset(TT *pObj) {}
 
 private:
 	static ObjectPool *g_p;
