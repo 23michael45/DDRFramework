@@ -1,12 +1,8 @@
 ﻿#ifndef CommonFunc_h__
 #define CommonFunc_h__
 
-
-#include <new>
-#include <map>
 #include <vector>
 #include <string>
-
 
 #ifndef BYTE
 typedef unsigned char BYTE;
@@ -57,12 +53,6 @@ namespace DDRFramework {
 	int StrConv_u2g(char *inbuf, int inlen, char *outbuf, int outlen);
 #endif
 
-
-
-
-
-
-
 	// 多字节编码转为UTF8编码  
 	bool MBToUTF8(std::vector<char>& pu8, const char* pmb, int mLen);
 
@@ -108,9 +98,18 @@ bool isDirExisting(const char *dirName);
 
 /* return 0 for success, -1 for error. */
 int deleteFile(const char *pFileName);
-/* Try to clear a folder specified by pDirName, empty or not. Return 0 for
+/* Try to remove a directory specified by pDirName, empty or not. Return 0 for
 success, -1 for error. */
 int deleteDir(const char *pDirName);
+/* Try to clear sub folders and files under a directory specified by pDirName.
+Return 0 for success, -1 for error. */
+int clearSubFiles(const char *pDirName);
+/* Try to copy a file from pSrcFileName to pDstFileName. Return 0 for success,
+-1 for error. */
+int copyFile(const char *pSrcFileName, const char *pDstFileName, bool bOverWrite);
+/* Try to copy a file from pSrcFileName to pDstFileName. Return 0 for success,
+-1 for error. */
+int moveFile(const char *pSrcFileName, const char *pDstFileName, bool bOverWrite);
 
 // get last modification time of a file (seconds since EPOCH)
 long long getModTime(const char *pFileDirName);
@@ -129,10 +128,26 @@ bool setWorkingDir2CurrentExe();
 void* findAllFiles_Open(const char *pWorkingDir, int switchDirFile,
 		                bool bSubFolder);
 bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder);
-void findAllFile_Close(void *pHandle);
+void findAllFiles_Close(void *pHandle);
 
 std::string sysStr_to_utf8(const char *pSysStr);
 std::string utf8_to_sysStr(const char *pU8Str);
+
+// get current time stamp in format like "2019/09/21-10:58:00.251"
+std::string GetCurTimeStamp_MilSec();
+// get current time stamp in format like "20190921_1058"
+std::string GetCurTimeStamp_Minute();
+
+struct _fineTimeStamp {
+	int year; // 2019
+	int mon; // 09
+	int day; // 24
+	int hour; // 09
+	int min; // 39
+	int sec; // 57
+	int milSec; // 729
+};
+_fineTimeStamp GetCurTimeStamp();
 
 }
 

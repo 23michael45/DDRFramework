@@ -4,17 +4,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 #endif
-#include <locale.h>
-#include <vector>
-#include <cstdlib>
+#include <string.h>
+#include <fstream>
+#ifdef DEBUGGIN_INFO_DISP
+#include <iostream>
+#endif
 #include <codecvt>
 #include <locale>
-#include <ctime>
 #include <thread>
 #include <chrono>
-#include <codecvt>
-#include <regex>
-#include <sys/types.h>
 #include <sys/stat.h>
 #if defined(_WIN32) || defined(_WIN64)
 #include <io.h>
@@ -22,11 +20,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #elif defined(__linux__)
-#include <stdio.h>
 #include <utime.h>
-#include <sys/time.h>
 #include <unistd.h>
-#include <utime.h>
 #include <glob.h>
 #include <fcntl.h>
 #include <termios.h>
@@ -58,7 +53,8 @@ namespace DDRFramework {
 #endif
 
 	bool Txt_Encrypt(const void *pSrc, int lenSrc,
-		const void *pTar, int lenTar) {
+		             const void *pTar, int lenTar)
+	{
 		if (!pSrc || lenSrc <= 0 || !pTar) { return 0; }
 		if (lenTar < lenSrc + 4 || lenSrc <= 0) {
 			// one char index, two chars check
@@ -80,8 +76,7 @@ namespace DDRFramework {
 				cc = aa;
 				bb = aa;
 				break;
-			}
-			else if (ms == Primes[bb]) {
+			} else if (ms == Primes[bb]) {
 				cc = bb;
 				aa = bb;
 				break;
@@ -90,19 +85,16 @@ namespace DDRFramework {
 			if (ms == Primes[cc]) {
 				aa = bb = cc;
 				break;
-			}
-			else if (ms > Primes[cc]) {
+			} else if (ms > Primes[cc]) {
 				aa = cc;
-			}
-			else {
+			} else {
 				bb = cc;
 			}
 		}
 		if (aa != bb) {
 			if (ms - Primes[aa] > Primes[bb] - ms) {
 				cc = bb;
-			}
-			else {
+			} else {
 				cc = aa;
 			}
 		}
@@ -130,8 +122,9 @@ namespace DDRFramework {
 	}
 
 	bool Txt_Encrypt2(const void *pSrc1, int len1,
-		const void *pSrc2, int len2,
-		void *pTar, int lenTar) {
+		              const void *pSrc2, int len2,
+		              void *pTar, int lenTar)
+	{
 		if (!pSrc1 || len1 <= 0 || !pSrc2 || len2 <= 0) { return 0; }
 		if (!pTar || lenTar < len1 + len2 + 4) {
 			// one char index, two chars check
@@ -155,8 +148,7 @@ namespace DDRFramework {
 				cc = aa;
 				bb = aa;
 				break;
-			}
-			else if (ms == Primes[bb]) {
+			} else if (ms == Primes[bb]) {
 				cc = bb;
 				aa = bb;
 				break;
@@ -165,19 +157,16 @@ namespace DDRFramework {
 			if (ms == Primes[cc]) {
 				aa = bb = cc;
 				break;
-			}
-			else if (ms > Primes[cc]) {
+			} else if (ms > Primes[cc]) {
 				aa = cc;
-			}
-			else {
+			} else {
 				bb = cc;
 			}
 		}
 		if (aa != bb) {
 			if (ms - Primes[aa] > Primes[bb] - ms) {
 				cc = bb;
-			}
-			else {
+			} else {
 				cc = aa;
 			}
 		}
@@ -209,7 +198,8 @@ namespace DDRFramework {
 	}
 
 	bool Txt_Decrypt(const void *pSrc, int lenSrc,
-		void *pTar, int lenTar) {
+		             void *pTar, int lenTar)
+	{
 		int x, aa, bb, cc, c_;
 		const unsigned char *p1;
 		unsigned char val;
@@ -227,8 +217,7 @@ namespace DDRFramework {
 				cc = aa;
 				bb = aa;
 				break;
-			}
-			else if (x == Primes[bb]) {
+			} else if (x == Primes[bb]) {
 				cc = bb;
 				aa = bb;
 				break;
@@ -237,19 +226,16 @@ namespace DDRFramework {
 			if (x == Primes[cc]) {
 				aa = bb = cc;
 				break;
-			}
-			else if (x > Primes[cc]) {
+			} else if (x > Primes[cc]) {
 				aa = cc;
-			}
-			else {
+			} else {
 				bb = cc;
 			}
 		}
 		if (aa != bb) {
 			if (x - Primes[aa] > Primes[bb] - x) {
 				cc = bb;
-			}
-			else {
+			} else {
 				cc = aa;
 			}
 		}
@@ -290,25 +276,27 @@ namespace DDRFramework {
 		return true;
 	}
 
-	I64 EncryptDataLen_64(unsigned int len) {
+	I64 EncryptDataLen_64(unsigned int len)
+	{
 		I64 x = (I64)(~len);
 		x <<= 32;
 		x |= len;
 		return x;
 	}
 
-	bool VerifyDataLen_64(const void *pDataHead, unsigned int *plen) {
+	bool VerifyDataLen_64(const void *pDataHead, unsigned int *plen)
+	{
 		*plen = *((unsigned int*)pDataHead);
 		return (*((unsigned int*)pDataHead + 1) == ~(*plen));
 	}
 
-	int EncryptDataLen_32(int len) {
+	int EncryptDataLen_32(int len)
+	{
 		if (len > 0xFFFFFF || len < 0) { return -1; }
 		int ret = (len >> 16) ^ (len >> 8) ^ (len & 0xFF);
 		if (len & 0xFF0000) {
 			ret = len | ((~ret) << 24);
-		}
-		else {
+		} else {
 			ret = len | (ret << 24);
 		}
 		return ret;
@@ -324,8 +312,7 @@ namespace DDRFramework {
 		}
 		if (pC[3] == vv) {
 			return true;
-		}
-		else {
+		} else {
 			*plen = -1;
 			return false;
 		}
@@ -356,7 +343,7 @@ namespace DDRFramework {
 	}
 
 	bool ConvertStr2UIP_IPv4(const char *pStr, U32 *ip,
-		char cDelimiter, int *pEndingPos)
+		                     char cDelimiter, int *pEndingPos)
 	{
 		*ip = 0;
 		const char *pStrHead = pStr;
@@ -365,18 +352,19 @@ namespace DDRFramework {
 		for (; *pStr != cDelimiter && *pStr != '\0'; ++pStr) {
 			if (*pStr >= '0' && *pStr <= '9') {
 				segVal = segVal * 10 + (*pStr - '0');
-			}
-			else if (*pStr == '.') {
-				if (segVal > 255) { return false; }
-				else {
+			} else if (*pStr == '.') {
+				if (segVal > 255) {
+					return false;
+				} else {
 					seg[segPos] = (BYTE)segVal;
 					segVal = 0;
 				}
 				if (++segPos > 3) {
 					return false;
 				}
+			} else {
+				return false;
 			}
-			else { return false; }
 		}
 		seg[segPos] = (BYTE)segVal;
 		if (pEndingPos) {
@@ -386,7 +374,8 @@ namespace DDRFramework {
 	}
 
 	bool ConvertStr2Int(const char *pStr, int *x,
-		char cDelimiter, int *pEndingPos) {
+		                char cDelimiter, int *pEndingPos)
+	{
 		const char *pStrHead = pStr;
 		for ((*x) = 0; *pStr != '\0' && *pStr != cDelimiter; ++pStr) {
 			if (*pStr < '0' || *pStr > '9') {
@@ -400,7 +389,8 @@ namespace DDRFramework {
 		return true;
 	}
 
-	void ConvertInt2Str(int x, char *pStr, int *pEndingPos) {
+	void ConvertInt2Str(int x, char *pStr, int *pEndingPos)
+	{
 		bool bNeg = false;
 		if (x < 0) {
 			bNeg = true;
@@ -420,8 +410,7 @@ namespace DDRFramework {
 				pStr[b] = t;
 			}
 			pStr[pos] = '\0';
-		}
-		else {
+		} else {
 			pStr[0] = '0';
 			pStr[1] = '\0';
 			pos = 1;
@@ -431,7 +420,8 @@ namespace DDRFramework {
 		}
 	}
 
-	U16 ConvertHTONS(U16 u16val) {
+	U16 ConvertHTONS(U16 u16val)
+	{
 		return (((u16val & 0xFF) << 8) | ((u16val >> 8) & 0xFF));
 	}
 
@@ -468,12 +458,10 @@ namespace DDRFramework {
 		if (EOF != c) {
 			if (c >= 'a' && c <= 'z') {
 				return (c - 'a' + 'A');
-			}
-			else {
+			} else {
 				return c;
 			}
-		}
-		else {
+		} else {
 			return 0;
 		}
 #endif
@@ -515,7 +503,8 @@ namespace DDRFramework {
 	}
 #endif
 
-	bool GetUTCTimeStr(char *pBuf, int nBufCap, int *pLen) {
+	bool GetUTCTimeStr(char *pBuf, int nBufCap, int *pLen)
+	{
 		if (nBufCap < 24) {
 			return false;
 		}
@@ -535,7 +524,8 @@ namespace DDRFramework {
 		return true;
 	}
 
-	bool GetLocalTimeStr(char *pBuf, int nBufCap, int *pLen) {
+	bool GetLocalTimeStr(char *pBuf, int nBufCap, int *pLen)
+	{
 		if (nBufCap < 24) {
 			return false;
 		}
@@ -1022,8 +1012,7 @@ bool createDir(const char *pDirName)
 {
 #if defined(_WIN32) || defined(_WIN64)
 	return (0 == _mkdir(pDirName));
-#endif
-#ifdef __linux__
+#elif defined(__linux__)
 	return (0 == mkdir(pDirName, 0));
 #endif
 }
@@ -1048,10 +1037,10 @@ bool isDirExisting(const char *dirName)
 
 int deleteFile(const char *pFileName)
 {
-	return remove(pFileName);
+	return ::remove(pFileName);
 }
 
-int deleteDir(const char *pDirName)
+static int _deleteDir(const char *pDirName, bool bRemoveTopDir)
 {
 	void *pMsgSt = Create_MsgSt();
 	if (!pMsgSt) {
@@ -1062,6 +1051,7 @@ int deleteDir(const char *pDirName)
 	Combine_MsgSt(pMsgSt, &ttt, 1, pDirName, slen);
 	std::vector<char> vec;
 
+	int nRet = 0;
 	while (GetNumMsg_MsgSt(pMsgSt) > 0) {
 		int nlen = GetNextMsgLen_MsgSt(pMsgSt);
 		if (nlen <= 0) {
@@ -1104,10 +1094,16 @@ int deleteDir(const char *pDirName)
 					int fnLen = (int)strlen(fileinfo.name);
 					vec.resize(pos + fnLen + 1);
 					memcpy(&vec[pos], fileinfo.name, fnLen + 1);
+					if (0 == remove(&vec[1])) {
 #ifdef DEBUGGIN_INFO_DISP
-					std::cout << "Deleting file '" << &vec[1] << "'\n";
+						std::cout << "Deleting file '" << &vec[1] << "' successful...\n";
 #endif
-					remove(&vec[1]);
+					} else {
+#ifdef DEBUGGIN_INFO_DISP
+						std::cout << "Deleting file '" << &vec[1] << "' UNSUCCESSFUL!\n";
+#endif
+						nRet = -1;
+					}
 					vec.resize(pos);
 				} else { // sub folder
 					if (!bAnySubFolder) {
@@ -1156,7 +1152,16 @@ int deleteDir(const char *pDirName)
 #ifdef DEBUGGIN_INFO_DISP
 					std::cout << "Deleting file '" << globbuf.gl_pathv[i] << "'\n";
 #endif
-					remove(globbuf.gl_pathv[i]);
+					if (0 == remove(globbuf.gl_pathv[i])) {
+#ifdef DEBUGGIN_INFO_DISP
+						std::cout << "Deleting file '" << globbuf.gl_pathv[i] << "' successful...\n";
+#endif
+					} else {
+						nRet = -1;
+#ifdef DEBUGGIN_INFO_DISP
+						std::cout << "Deleting file '" << globbuf.gl_pathv[i] << "' UNSUCCESSFUL!\n";
+#endif
+					}
 				} else {
 					if (!bAnySubFolder) {
 						// push back current folder as expanded
@@ -1173,33 +1178,202 @@ int deleteDir(const char *pDirName)
 					std::cout << "Adding sub-folder '" << globbuf.gl_pathv[i] << "'\n";
 #endif
 					ttt = (char)0x00;
-					int xxx = Combine_MsgSt(pMsgSt, &ttt, 1, globbuf.gl_pathv[i], strlen(globbuf.gl_pathv[i]));
+					Combine_MsgSt(pMsgSt, &ttt, 1, globbuf.gl_pathv[i], strlen(globbuf.gl_pathv[i]));
 				}
 			}
 		}
 		globfree(&globbuf);
 #endif
 
-		if (!bAnySubFolder) { // current folder is empty
+		if (!bAnySubFolder && (GetNumMsg_MsgSt(pMsgSt) > 0 || bRemoveTopDir)) { // current folder is okay to remove
 			vec.back() = '\0';
 #ifdef DEBUGGIN_INFO_DISP
 			std::cout << "Deleting folder (EMPTY) '" << &vec[1] << "'\n";
 #endif
 #if defined(_WIN32) || defined(_WIN64)
-			_rmdir(&vec[1]);
+			if (0 == _rmdir(&vec[1])) {
 #elif defined(__linux__)
-			rmdir(&vec[1]);
+			if (0 == rmdir(&vec[1])) {
 #endif
-			continue;
+#ifdef DEBUGGIN_INFO_DISP
+				std::cout << "Deleting folder '" << &vec[1] << "' successful...\n";
+#endif
+			} else {
+#ifdef DEBUGGIN_INFO_DISP
+				std::cout << "Deleting folder '" << &vec[1] << "' UNSUCCESSFUL!\n";
+#endif
+				nRet = -1;
+			}
 		}
 	}
 
 	Destroy_MsgSt(pMsgSt);
-#if defined(_WIN32) || defined(_WIN64)
-	return (-1 == _access(pDirName, 0) ? 0 : (-1));
-#elif defined(__linux__)
-	return (-1 == access(pDirName, F_OK) ? 0 : (-1));
+	return nRet;
+}
+
+int deleteDir(const char *pDirName)
+{
+	return _deleteDir(pDirName, true);
+}
+
+int clearSubFiles(const char *pDirName)
+{
+	return _deleteDir(pDirName, false);
+}
+
+int copyFile(const char *pSrcFileName, const char *pDstFileName, bool bOverWrite)
+{
+	if (!pSrcFileName || !pDstFileName) {
+		return -1;
+	}
+	if (!isFileExisting(pSrcFileName)) {
+#ifdef DEBUGGIN_INFO_DISP
+		std::cout << "Copying failed for file " << pSrcFileName << " does not exist!\n";
 #endif
+		return -1;
+	}
+	struct stat info;
+	if (0 == stat(pDstFileName, &info)) {
+		if (info.st_mode & S_IFDIR) { // a directory
+			int nameInd = strlen(pSrcFileName) - 1;
+			for (; nameInd >= 0 && pSrcFileName[nameInd] != '/'; --nameInd);
+			std::string str = pDstFileName;
+			if (str.back() != '/') {
+				str += '/';
+			}
+			str += pSrcFileName + nameInd + 1;
+			if (!isFileExisting(str.c_str()) || bOverWrite) {
+#if defined(_WIN32) || defined(_WIN64)
+				return (::CopyFileA(pSrcFileName, str.c_str(), !bOverWrite) != 0) ? 0 : (-1);
+#elif defined(__linux__)
+				std::ifstream src(pSrcFileName, std::ios::binary);
+				std::ofstream dst(str, std::ios::binary | std::ios::trunc);
+				if (src.rdbuf()->in_avail() > 0) {
+					dst << src.rdbuf();
+					dst.flush();
+				}
+				return (dst.good() ? 0 : (-1));
+#endif
+			}
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Copying " << pSrcFileName << " to directory " << pDstFileName << " denied for overwriting not allowed!\n";
+#endif
+		} else { // a regular file
+			if (bOverWrite) {
+#if defined(_WIN32) || defined(_WIN64)
+				return (::CopyFileA(pSrcFileName, pDstFileName, !bOverWrite) != 0) ? 0 : (-1);
+#elif defined(__linux__)
+				std::ifstream src(pSrcFileName, std::ios::binary);
+				if (!src.is_open()) {
+					return -1;
+				}
+				std::ofstream dst(pDstFileName, std::ios::binary | std::ios::trunc);
+				if (src.rdbuf()->in_avail() > 0) {
+					dst << src.rdbuf();
+					dst.flush();
+				}
+				return (dst.good() ? 0 : (-1));
+#endif
+			}
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Copying " << pSrcFileName << " to file " << pDstFileName << " denied for overwriting not allowed!\n";
+#endif
+		}
+	}
+	else { // new file
+#if defined(_WIN32) || defined(_WIN64)
+		return (::CopyFileA(pSrcFileName, pDstFileName, !bOverWrite) != 0) ? 0 : (-1);
+#elif defined(__linux__)
+		std::ofstream dst(pDstFileName, std::ios::binary | std::ios::trunc);
+		if (dst.is_open()) {
+			std::ifstream src(pSrcFileName, std::ios::binary);
+			if (src.is_open()) {
+				if (src.rdbuf()->in_avail() > 0) {
+					dst << src.rdbuf();
+					dst.flush();
+				}
+				return (dst.good() ? 0 : (-1));
+			}
+		}
+#endif
+	}
+#ifdef DEBUGGIN_INFO_DISP
+	std::cout << "Copying failed for path " << pDstFileName << " does not exist!\n";
+#endif
+	return -1;
+}
+
+int moveFile(const char *pSrcFileName, const char *pDstFileName, bool bOverWrite)
+{
+	if (!pSrcFileName || !pDstFileName) {
+		return -1;
+	}
+	if (!isFileExisting(pSrcFileName)) {
+#ifdef DEBUGGIN_INFO_DISP
+		std::cout << "Moving failed for file " << pSrcFileName << " does not exist!\n";
+#endif
+		return -1;
+	}
+	struct stat info;
+	if (0 == stat(pDstFileName, &info)) {
+		if (info.st_mode & S_IFDIR) { // a directory
+			int nameInd = strlen(pSrcFileName) - 1;
+			for (; nameInd >= 0 && pSrcFileName[nameInd] != '/'; --nameInd);
+			std::string str = pDstFileName;
+			if (str.back() != '/') {
+				str += '/';
+			}
+			str += pSrcFileName + nameInd + 1;
+			bool bExist = isFileExisting(str.c_str());
+			if (!bExist) {
+				return ::rename(pSrcFileName, str.c_str());
+			} else if (bOverWrite) {
+#if defined(_WIN32) || defined(_WIN64)
+				return (::MoveFileExA(pSrcFileName, str.c_str(), 
+						MOVEFILE_COPY_ALLOWED | MOVEFILE_REPLACE_EXISTING) != 0) ? 0 : (-1);
+#elif defined(__linux__)
+				std::ifstream src(pSrcFileName, std::ios::binary);
+				std::ofstream dst(str, std::ios::binary | std::ios::trunc);
+				if (src.rdbuf()->in_avail() > 0) {
+					dst << src.rdbuf();
+				}
+				if (!dst.good()) {
+					return -1;
+				}
+				return ::remove(pSrcFileName);
+#endif
+			}
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Moving " << pSrcFileName << " to directory " << pDstFileName << " denied for overwriting not allowed!\n";
+#endif
+		} else { // a file
+			if (bOverWrite) {
+#if defined(_WIN32) || defined(_WIN64)
+				return (::MoveFileExA(pSrcFileName, pDstFileName,
+					    MOVEFILE_COPY_ALLOWED | MOVEFILE_REPLACE_EXISTING) != 0) ? 0 : (-1);
+#elif defined(__linux__)
+				std::ifstream src(pSrcFileName, std::ios::binary);
+				if (!src.is_open()) {
+					return -1;
+				}
+				std::ofstream dst(pDstFileName, std::ios::binary | std::ios::trunc);
+				if (src.rdbuf()->in_avail() > 0) {
+					dst << src.rdbuf();
+				}
+				if (!dst.good()) {
+					return -1;
+				}
+				return ::remove(pSrcFileName);
+#endif
+			}
+#ifdef DEBUGGIN_INFO_DISP
+			std::cout << "Moving " << pSrcFileName << " to file " << pDstFileName << " denied for overwriting not allowed!\n";
+#endif
+		}
+	} else { // new file
+		return ::rename(pSrcFileName, pDstFileName);
+	}
+	return -1;
 }
 
 long long getModTime(const char *pFileDirName)
@@ -1296,7 +1470,6 @@ bool setWorkingDir2CurrentExe()
 #endif
 }
 
-
 struct _fileListStruct
 {
 	std::string dirName;
@@ -1311,8 +1484,6 @@ struct _fileListStruct
 void* findAllFiles_Open(const char *pDir, int switchDirFile,
 	                    bool bSubFolder)
 {
-
-#if defined(_WIN32) || defined(_WIN64)
 	if (!pDir) {
 		return nullptr;
 	}
@@ -1345,12 +1516,10 @@ void* findAllFiles_Open(const char *pDir, int switchDirFile,
 		delete pStruct;
 		return nullptr;
 	}
-#endif
 }
 
 bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder)
 {
-#if defined(_WIN32) || defined(_WIN64)
 	if (!pHandle) {
 		return false;
 	}
@@ -1375,9 +1544,9 @@ bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder
 		}
 
 		if (bFullNameReady) { // file name okay to be fetched
-			hhh.tmpFN = &hhh.str[0];
+			hhh.tmpFN = std::string(&hhh.str[0]);
 			hhh.str.insert(hhh.str.begin(), hhh.dirName.c_str(),
-				hhh.dirName.c_str() + hhh.dirName.length());
+				           hhh.dirName.c_str() + hhh.dirName.length());
 			struct stat result;
 			if (0 != stat(&(hhh.str[0]), &result)) {
 				continue;
@@ -1395,12 +1564,14 @@ bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder
 			} else {
 				continue;
 			}
-		} else { // str contains '*'
+		} else { // str contains '*' or '?'
 			if (hhh.bFirstLevelExp && !hhh.bSubFolder) {
 				continue;
 			}
+			
+#if defined(_WIN32) || defined(_WIN64)
 			hhh.str.insert(hhh.str.begin(), hhh.dirName.c_str(),
-				hhh.dirName.c_str() + hhh.dirName.length());
+				           hhh.dirName.c_str() + hhh.dirName.length());
 			struct _finddata_t fileinfo;
 			auto hFile = _findfirst(&(hhh.str[0]), &fileinfo);
 			if (-1 == hFile) {
@@ -1414,41 +1585,72 @@ bool findAllFiles_Next(void *pHandle, const char **pRelativeName, bool *pbFolder
 					0 == strcmp(fileinfo.name, "..")) {
 					continue;
 				}
-				if (0 == (fileinfo.attrib & _A_SUBDIR)) { // single file
-					hhh.str.insert(hhh.str.end(), fileinfo.name,
-						fileinfo.name + strlen(fileinfo.name));
-				} else { // sub-folder
-					hhh.str.insert(hhh.str.end(), fileinfo.name,
-						fileinfo.name + strlen(fileinfo.name));
+				hhh.str.insert(hhh.str.end(), fileinfo.name,
+					           fileinfo.name + strlen(fileinfo.name));
+				if (0 != (fileinfo.attrib & _A_SUBDIR)) { // sub-folder
 					if (Add_MsgQ(hhh.pMsgQ, &(hhh.str[0]), (int)hhh.str.size()) <= 0) {
+						_findclose(hFile);
 						return false;
 					}
 					hhh.str.emplace_back('/');
 					hhh.str.emplace_back('*');
 				}
 				if (Add_MsgQ(hhh.pMsgQ, &(hhh.str[0]), (int)hhh.str.size()) <= 0) {
+					_findclose(hFile);
 					return false;
 				}
 				hhh.str.resize(pos);
 			} while (0 == _findnext(hFile, &fileinfo));
+			_findclose(hFile);
+
+#elif defined(__linux__)
+			if (!hhh.bFirstLevelExp) {
+				hhh.str.insert(hhh.str.begin(), hhh.dirName.c_str(),
+				           	   hhh.dirName.c_str() + hhh.dirName.length());
+			}
+			glob_t globbuf;
+			glob(&(hhh.str[0]), 0, nullptr, &globbuf);
+			for (size_t i = 0; i < globbuf.gl_pathc; ++i) {
+				if (0 == strcmp(".", globbuf.gl_pathv[i]) ||
+					0 == strcmp("..", globbuf.gl_pathv[i])) {
+					continue;
+				}
+				struct stat sb;
+				if (stat(globbuf.gl_pathv[i], &sb) < 0) {
+					continue;
+				}
+				if (Add_MsgQ(hhh.pMsgQ, globbuf.gl_pathv[i], strlen(globbuf.gl_pathv[i])) <= 0) {
+					globfree(&globbuf);
+					return false;
+				}
+				if ((sb.st_mode & S_IFMT) == S_IFDIR) { // directory
+					if (hhh.bFirstLevelExp && !hhh.bSubFolder) {
+						continue;
+					}
+					if (Combine_MsgQ(hhh.pMsgQ, globbuf.gl_pathv[i], (int)strlen(globbuf.gl_pathv[i]),
+					                 "/*", 2) <= 0) {
+						globfree(&globbuf);
+						return false;
+					}
+				}
+			}
+			globfree(&globbuf);
+#endif
+
 			hhh.bFirstLevelExp = true;
 		}
 	}
-#endif
 	return false;
 }
 
-void findAllFile_Close(void *pHandle)
+void findAllFiles_Close(void *pHandle)
 {
-
-#if defined(_WIN32) || defined(_WIN64)
 	if (pHandle) {
 		if (((_fileListStruct*)pHandle)->pMsgQ) {
 			Destroy_MsgQ(((_fileListStruct*)pHandle)->pMsgQ);
 		}
 		delete (_fileListStruct*)pHandle;
 	}
-#endif
 }
 
 class _LocaleSetter {
@@ -1520,6 +1722,43 @@ std::string utf8_to_sysStr(const char *pU8Str)
 	std::wstring wstr = wconv.from_bytes(pU8Str);
 	// wstring to (sys-encoded) string
 	return wstr_to_str(wstr);
+}
+
+std::string GetCurTimeStamp_MilSec()
+{
+	_fineTimeStamp ts = GetCurTimeStamp();
+	char tstrbuf[25] = { '\0' };
+#if defined(_WIN32) || defined(_WIN64)
+	sprintf_s(tstrbuf, "%04d/%02d/%02d-%02d:%02d:%02d.%03d", ts.year, ts.mon,
+		      ts.day, ts.hour, ts.min, ts.sec, ts.milSec);
+#else
+	sprintf(tstrbuf, "%04d/%02d/%02d-%02d:%02d:%02d.%03d", ts.year, ts.mon,
+		    ts.day, ts.hour, ts.min, ts.sec, ts.milSec);
+#endif
+	return tstrbuf;
+}
+
+std::string GetCurTimeStamp_Minute()
+{
+	_fineTimeStamp ts = GetCurTimeStamp();
+	char tstrbuf[20] = { '\0' };
+#if defined(_WIN32) || defined(_WIN64)
+	sprintf_s(tstrbuf, "%04d%02d%02d_%02d%02d",
+		      ts.year, ts.mon, ts.day, ts.hour, ts.min);
+#else
+	sprintf(tstrbuf, "%04d%02d%02d_%02d%02d",
+		    ts.year, ts.mon, ts.day, ts.hour, ts.min);
+#endif
+	return tstrbuf;
+}
+
+_fineTimeStamp GetCurTimeStamp()
+{
+	auto _utic = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	int ms = (int)(_utic % 1000);
+	auto _usecs = _utic / 1000;
+	auto bt = *std::localtime(&_usecs);
+	return _fineTimeStamp({ bt.tm_year + 1900, bt.tm_mon + 1, bt.tm_mday, bt.tm_hour, bt.tm_min, bt.tm_sec, ms });
 }
 
 }
