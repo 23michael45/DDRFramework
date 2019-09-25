@@ -147,7 +147,7 @@ struct _fineTimeStamp {
 	int sec; // 57
 	int milSec; // 729
 };
-_fineTimeStamp GetCurTimeStamp();
+_fineTimeStamp GetCurTimeStamp(bool bLocal = true);
 
 }
 

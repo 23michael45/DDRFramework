@@ -1,6 +1,6 @@
 #include "CommonFunc.h"
 
-#ifndef _CRT_SECURE_NO_WARNINGS
+#if (defined(_WIN32) || defined(_WIN64)) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 #endif
@@ -338,7 +338,7 @@ namespace DDRFramework {
 		}
 		*pStr = '\0';
 		if (pEndingPos) {
-			*pEndingPos = pStr - pStrHead;
+			*pEndingPos = (int)(pStr - pStrHead);
 		}
 	}
 
@@ -368,7 +368,7 @@ namespace DDRFramework {
 		}
 		seg[segPos] = (BYTE)segVal;
 		if (pEndingPos) {
-			*pEndingPos = pStr - pStrHead;
+			*pEndingPos = (int)(pStr - pStrHead);
 		}
 		return true;
 	}
@@ -384,7 +384,7 @@ namespace DDRFramework {
 			(*x) = (*x) * 10 + (*pStr - '0');
 		}
 		if (pEndingPos) {
-			*pEndingPos = pStr - pStrHead;
+			*pEndingPos = (int)(pStr - pStrHead);
 		}
 		return true;
 	}
@@ -508,15 +508,9 @@ namespace DDRFramework {
 		if (nBufCap < 24) {
 			return false;
 		}
-		int pos = 0;
-		std::time_t t = std::time(0);
-		std::tm *now = std::gmtime(&t);
-		int ms = (int)(std::chrono::duration_cast<std::chrono::milliseconds>
-			(std::chrono::system_clock::now().time_since_epoch()).count() % 1000);
-		pos += snprintf(pBuf, nBufCap - pos, "%04d/%02d/%02d-%02d:%02d:%02d.%03d",
-			now->tm_year + 1900, now->tm_mon + 1,
-			now->tm_mday, now->tm_hour,
-			now->tm_min, now->tm_sec, ms);
+		auto fs = DDRSys::GetCurTimeStamp(false);
+		int pos = snprintf(pBuf, nBufCap, "%04d/%02d/%02d-%02d:%02d:%02d.%03d",
+			               fs.year, fs.mon, fs.day, fs.hour, fs.min, fs.sec, fs.milSec);
 		pBuf[pos] = '\0';
 		if (pLen) {
 			*pLen = pos;
@@ -529,15 +523,9 @@ namespace DDRFramework {
 		if (nBufCap < 24) {
 			return false;
 		}
-		int pos = 0;
-		std::time_t t = std::time(0);
-		std::tm *now = std::localtime(&t);
-		int ms = (int)(std::chrono::duration_cast<std::chrono::milliseconds>
-			(std::chrono::system_clock::now().time_since_epoch()).count() % 1000);
-		pos += snprintf(pBuf, nBufCap - pos, "%04d/%02d/%02d-%02d:%02d:%02d.%03d",
-			now->tm_year + 1900, now->tm_mon + 1,
-			now->tm_mday, now->tm_hour,
-			now->tm_min, now->tm_sec, ms);
+		auto fs = DDRSys::GetCurTimeStamp(true);
+		int pos = snprintf(pBuf, nBufCap, "%04d/%02d/%02d-%02d:%02d:%02d.%03d",
+			               fs.year, fs.mon, fs.day, fs.hour, fs.min, fs.sec, fs.milSec);
 		pBuf[pos] = '\0';
 		if (pLen) {
 			*pLen = pos;
@@ -545,12 +533,11 @@ namespace DDRFramework {
 		return true;
 	}
 
-
 	std::string MBToUTF8String(std::string mbstr)
 	{
 
 		std::vector<char> utf8;
-		bool b = DDRFramework::MBToUTF8(utf8, mbstr.c_str(), mbstr.length());
+		bool b = DDRFramework::MBToUTF8(utf8, mbstr.c_str(), (int)mbstr.length());
 		if (b == false)
 		{
 			return mbstr;
@@ -565,7 +552,7 @@ namespace DDRFramework {
 	{
 
 		std::vector<char> mb;
-		bool b = DDRFramework::UTF8ToMB(mb, utf8str.c_str(), utf8str.length());
+		bool b = DDRFramework::UTF8ToMB(mb, utf8str.c_str(), (int)utf8str.length());
 		if (b == false)
 		{
 			return utf8str;
@@ -954,16 +941,7 @@ namespace DDRFramework {
 
 	bool DDRDeleteFile(const char* szFile)
 	{
-#if defined(_WIN32) || defined(_WIN64)
-		if (!::DeleteFileA(szFile))
-		{
-			return false;
-		}
-		return true;
-#else
-		// this is linux system
-		return false;
-#endif
+		return (0 == DDRSys::deleteFile(szFile));
 	}
 
 	bool DDRRemoveDir(const char* szFileDir)
@@ -1752,12 +1730,17 @@ std::string GetCurTimeStamp_Minute()
 	return tstrbuf;
 }
 
-_fineTimeStamp GetCurTimeStamp()
+_fineTimeStamp GetCurTimeStamp(bool bLocal)
 {
 	auto _utic = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	int ms = (int)(_utic % 1000);
 	auto _usecs = _utic / 1000;
-	auto bt = *std::localtime(&_usecs);
+	tm bt;
+	if (bLocal) {
+		bt = *std::localtime(&_usecs);
+	} else {
+		bt = *std::gmtime(&_usecs);
+	}
 	return _fineTimeStamp({ bt.tm_year + 1900, bt.tm_mon + 1, bt.tm_mday, bt.tm_hour, bt.tm_min, bt.tm_sec, ms });
 }
 

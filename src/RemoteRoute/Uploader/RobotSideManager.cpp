@@ -416,7 +416,7 @@ bool RobotSideRouteManager::listUploadableFiles()
 		m_uploadableFiles.emplace_back(OneFileProg{ true, fn, mtime, sz, 0 });
 		m_uploadableFiles.back().resetCompressable();
 	}
-	DDRSys::findAllFile_Close(pHandle);
+	DDRSys::findAllFiles_Close(pHandle);
 	std::sort(m_uploadableFiles.begin(), m_uploadableFiles.end(),
 		[](const OneFileProg &ofp1, const OneFileProg &ofp2) {return ofp1.name.compare(ofp2.name) < 0; });
 

@@ -10,7 +10,7 @@ namespace DDRGeneral {
 // middle of the queue.
 template <typename T> class AdaptiveDequeue {
 public:
-	AdaptiveDequeue(int cap = 16) : m_head(0), m_tail(0), m_it(0), m_cap(cap <= 1 ? 1 : cap), m_bForwardIt(true) {
+	AdaptiveDequeue(int cap = 16) : m_head(0), m_tail(0), m_cap(cap <= 1 ? 1 : cap), m_it(0), m_bForwardIt(true) {
 		m_data.resize(m_cap + 1);
 	}
 	void clear(bool bReleaseMem = false) {
@@ -146,9 +146,9 @@ public:
 
 protected:
 	std::vector<T> m_data;
-	int m_cap, m_head, m_tail;
-	mutable bool m_bForwardIt;
+	int m_head, m_tail, m_cap;
 	mutable int m_it;
+	mutable bool m_bForwardIt;
 	void _expand() {
 		if ((m_tail + m_cap + 1 - m_head) % (m_cap + 1) == m_cap) {
 			int newCap = (m_cap + 1) << 1;
