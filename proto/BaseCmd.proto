@@ -61,6 +61,7 @@ message bcLSAddr
 		RemoteServer = 1;		//Remote Server
 		RTSPStreamServer = 2; //RTSP Stream Server
 		TalkBackServer = 3;		//Talk Back Server
+		AIServer = 4;
 	}
 	
 	message ServerInfo {

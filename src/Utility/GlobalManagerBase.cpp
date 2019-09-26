@@ -88,8 +88,13 @@ namespace DDRFramework
 
 	std::shared_ptr<TcpClientBase> GlobalManagerClientBase::GetTcpClient()
 	{
-		return m_spTcpClient;
-	}
+        return m_spTcpClient;
+    }
+
+    std::shared_ptr<TcpClientBase> GlobalManagerClientBase::GetAITcpClient()
+    {
+        return m_aiTcpClient;
+    }
 	std::shared_ptr<UdpSocketBase> GlobalManagerClientBase::GetUdpClient()
 	{
 		return m_spUdpClient;
