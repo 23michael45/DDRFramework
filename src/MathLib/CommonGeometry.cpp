@@ -406,7 +406,9 @@ bool MovePC(float x0, float y0, float th0,
 	        float *pAngles, int nAngInterval_bytes, float angVal2Rad,
 	        float *pDist, int nDistInterval_bytes, float distVal2Meter)
 {
-	if (nPts <= 0 || !pAngles || !pDist || nAngInterval_bytes < sizeof(float) || nDistInterval_bytes < sizeof(float)) {
+	if (nPts <= 0 || !pAngles || !pDist ||
+		nAngInterval_bytes < (int)sizeof(float) ||
+		nDistInterval_bytes < (int)sizeof(float)) {
 		return false;
 	}
 	x0 -= x1;
