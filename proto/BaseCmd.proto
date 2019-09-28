@@ -485,6 +485,7 @@ message notifyBaseStatusEx{
 	float poslinespeed = 11;
 	float posangulauspeed = 12;
 	bytes robotid = 13;
+	bool chargingStatus = 14; // true - 充电中
 }
 
 // Environmental sensor info
@@ -914,5 +915,61 @@ message reqSetConfig{
 message rspSetConfig{
 	eCmdRspType type = 1;
 }
+
+// 获取地图数据
+message reqGetMapInfo{
+	bytes param = 1;
+}
+
+message rspGetMapInfo{
+	message MapInfoItem
+	{
+		bytes name = 1; // 地图名
+		int64 timeStamp = 2; // 时间戳
+		bytes bkPicAddr = 3; // 地图http地址
+		float width = 4; // 宽度
+		float hitght  = 5; // 高度
+		bytes author = 6;  // 采集人
+	}
+	repeated MapInfoItem mapData = 1;
+}
+
+// 获取上位机版本信息
+message reqGetSysVersion{
+	bytes param = 1;
+}
+
+message rspGetSysVersion{
+	// 各组件类型
+	enum ComponentType{
+		en_ComponentTypeHostComputer = 0;  // 上位机
+		en_ComponentTypeHost2DLidar = 1; // 2D雷达模块
+		en_ComponentTypeHostVision = 2; // 视觉模块
+		en_ComponentTypeHostPPOAC = 3; // 路径规划与避障模块
+		en_ComponentTypeHostDeviceManager = 4; // 设备管理模块
+		en_ComponentTypeHostEmbedded = 5; // 嵌入式
+	}
+	
+	message ComponentVerItem
+	{
+		bytes version = 1; // 版本号 eg: 1.1.1_Beta  1.1.1_Release 200001
+		bytes date = 2; // 时间 eg: 2019-09-28 14:30:20
+		ComponentType type = 3; // 类型
+	}
+	repeated ComponentVerItem sysInfo = 1;
+}
+
+// 请求雷达重定位。需要指定左上角和右下角的坐标 都是世界坐标
+message req2DLiderReset{
+	float TopLeftX = 1;
+	float TopLeftY = 2;
+	float BottomRightX = 3;
+	float BottomRightY = 4;
+}
+
+message rsp2DLiderReset{
+	eCmdRspType type = 1;
+}
+
 
 // +++++++++++++++++++ Common message bodies +++++++++++++++++++ //
