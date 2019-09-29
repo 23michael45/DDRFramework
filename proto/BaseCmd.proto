@@ -917,11 +917,11 @@ message rspSetConfig{
 }
 
 // 获取地图数据
-message reqGetMapInfo{
+message reqClientGetMapInfo{
 	bytes param = 1;
 }
 
-message rspGetMapInfo{
+message rspClientGetMapInfo{
 	message MapInfoItem
 	{
 		bytes name = 1; // 地图名
@@ -969,6 +969,20 @@ message req2DLiderReset{
 
 message rsp2DLiderReset{
 	eCmdRspType type = 1;
+}
+
+// 上位机上报的点云数据
+message notifyLidarPts{
+	message Position
+	{
+		float pt_x = 1;
+		float pt_y = 2;
+		float pt_z = 3;
+	}
+	repeated Position ptsData = 1;
+	float posx = 2;  // 机器人位置x
+	float posy = 3;  // 机器人位置y
+	float posdirection = 4; // 机器人朝向
 }
 
 
