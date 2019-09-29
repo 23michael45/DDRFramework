@@ -478,7 +478,7 @@ message notifyBaseStatusEx{
 	eSelfCalibStatus selfcalibstatus = 4;
 	int32 stopstat = 5;
 	bytes currroute = 6;
-	string currpath = 7;
+	bytes currpath = 7;
 	float posx = 8;
 	float posy = 9;
 	float posdirection = 10;
@@ -960,14 +960,14 @@ message rspGetSysVersion{
 }
 
 // 请求雷达重定位。需要指定左上角和右下角的坐标 都是世界坐标
-message req2DLiderReset{
+message reqUse2DLiderReset{
 	float TopLeftX = 1;
 	float TopLeftY = 2;
 	float BottomRightX = 3;
 	float BottomRightY = 4;
 }
 
-message rsp2DLiderReset{
+message rspUse2DLiderReset{
 	eCmdRspType type = 1;
 }
 
