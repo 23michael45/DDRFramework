@@ -38,8 +38,7 @@ namespace DDRFramework
 		virtual bool StartUdp();
 		virtual void StopUdp();
 
-        std::shared_ptr<TcpClientBase> GetTcpClient();
-        std::shared_ptr<TcpClientBase> GetAITcpClient();
+                std::shared_ptr<TcpClientBase> GetTcpClient();
 		std::shared_ptr<UdpSocketBase> GetUdpClient();
 
 		virtual void TcpConnect(std::string ip, std::string port);
@@ -48,7 +47,7 @@ namespace DDRFramework
 
 	protected:
 
-        std::shared_ptr<TcpClientBase> m_spTcpClient,m_aiTcpClient;
+                std::shared_ptr<TcpClientBase> m_spTcpClient;
 		std::shared_ptr<UdpSocketBase> m_spUdpClient;
 	};
 }

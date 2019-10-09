@@ -19,7 +19,16 @@ message rspPlayTTS
 	eRspType ret = 1;
 }
 
-
+message notifyThermal
+{
+	int32 nFirePosX = 1;
+	int32 nFirePosY = 2;
+	int32 nFireWidth = 3;
+	int32 nFireHeight = 4;
+	float fFireMaxTem = 5;
+	float fFireAvgTem = 6;
+	int32 nFireAlarmPointCount = 7;
+}
 
 
 
