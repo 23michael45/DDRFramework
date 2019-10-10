@@ -478,7 +478,7 @@ struct MIMCServer::_IMPL
 	std::vector<unsigned long> ips;
 	std::vector<unsigned short> ports;
 	unsigned long tarIP;
-	unsigned long tarPort;
+	unsigned short tarPort;
 	_IMPL() {
 		_refresh();
 		_updateAddr();
@@ -503,8 +503,8 @@ struct MIMCServer::_IMPL
 		}
 	}
 	void _updateAddr() {
+		ips.resize(0);
 		ports.resize(0);
-		socs.resize(0);
 		sockaddr_in myAddr;
 		int lll;
 		for (int i = (int)socs.size() - 1; i >= 0; --i) {
@@ -593,7 +593,7 @@ bool MIMCServer::SetBuffer(int sndBufSz, int rcvBufSz)
 
 bool MIMCServer::SetMCTarget(unsigned long tarMCIP_BE, unsigned short tarMCPort_BE)
 {
-	if (!m_pImpl) {
+	if (m_pImpl) {
 		m_pImpl->tarIP = tarMCIP_BE;
 		m_pImpl->tarPort = tarMCPort_BE;
 		return true;

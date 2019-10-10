@@ -278,7 +278,7 @@ namespace DDRFramework {
 
 	I64 EncryptDataLen_64(unsigned int len)
 	{
-		I64 x = (I64)(~len);
+		I64 x = (I64)(~(unsigned long long)len);
 		x <<= 32;
 		x |= len;
 		return x;
