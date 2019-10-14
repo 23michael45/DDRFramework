@@ -30,5 +30,41 @@ message notifyThermal
 	int32 nFireAlarmPointCount = 7;
 }
 
+message FaceInfo
+{
+	message Rect
+	{
+		int32 top = 1;
+		int32 bottom = 2;
+		int32 left = 3;
+		int32 right = 4;
+	}
+	int32 nID = 1;//人脸ID
+	int32 nName = 2;//人脸名称
+	bytes ImageData = 3;//人脸图像数据 jpg
+	Rect rect = 4;//人脸区域
+}
+message notifyFaceDetection
+{
+	repeated FaceInfo faces = 1; //人脸数据列表
+}
+message reqAddFace
+{
+	FaceInfo face = 1;
+}
+message rspAddFace
+{
+	eRspType ret = 1;
+}
+
+message reqDetectFace
+{
+	int32 maxFaceCount =  1;//获取最大人脸数，为1则取最大范围的人脸
+}
+message rspDetectFace
+{
+	repeated FaceInfo faces = 1; //人脸数据列表
+}
+
 
 
