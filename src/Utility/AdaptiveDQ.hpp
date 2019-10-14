@@ -58,6 +58,17 @@ public:
 		m_head = (m_head + m_cap) % (m_cap + 1);
 		m_data[m_head] = t;
 	}
+	bool pop_front() {
+		if (m_head != m_tail) {
+			m_data[m_head].~T();
+			m_head = (m_head + 1) % (m_cap + 1);
+			if (m_head == m_tail) {
+				m_head = m_tail = 0;
+			}
+			return true;
+		}
+		return false;
+	}
 	bool pop_front(T &t) {
 		if (m_head != m_tail) {
 			t = std::move(m_data[m_head]);
@@ -69,7 +80,7 @@ public:
 		}
 		return false;
 	}
-	void ResetIter(bool bForward = true) const {
+	void resetIter(bool bForward = true) {
 		m_bForwardIt = bForward;
 		if (bForward) {
 			m_it = 0;
@@ -77,7 +88,7 @@ public:
 			m_it = (int)size() - 1;
 		}
 	}
-	const T* GetNextIter() const {
+	T* getNextIter() {
 		int sz = (int)size();
 		if (m_it >= 0 && m_it < sz) {
 			int it = m_it;
@@ -90,7 +101,7 @@ public:
 		}
 		return nullptr;
 	}
-	bool RemoveCurIter() {
+	bool removeCurIter() {
 		if (m_bForwardIt) {
 			--m_it;
 		} else {
@@ -116,7 +127,7 @@ public:
 		}
 		return false;
 	}
-	bool RemoveCurIter(T &t) {
+	bool removeCurIter(T &t) {
 		if (m_bForwardIt) {
 			--m_it;
 		} else {
@@ -147,8 +158,8 @@ public:
 protected:
 	std::vector<T> m_data;
 	int m_head, m_tail, m_cap;
-	mutable int m_it;
-	mutable bool m_bForwardIt;
+	int m_it;
+	bool m_bForwardIt;
 	void _expand() {
 		if ((m_tail + m_cap + 1 - m_head) % (m_cap + 1) == m_cap) {
 			int newCap = (m_cap + 1) << 1;
