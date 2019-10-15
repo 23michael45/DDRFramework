@@ -2,7 +2,6 @@
 
 #include <thread>
 #include <mutex>
-#include <atomic>
 #include <condition_variable>
 
 namespace DDRMTLib {
@@ -37,20 +36,19 @@ struct Event::_impl
 	{
 		std::unique_lock<std::mutex> lk(_muTex);
 		if (_bSignaled) {
+			if (!_bManualReset && 0 == _cntThreadsWaiting) {
+				_bSignaled = false;
+			}
 			return true;
 		}
 		++_cntThreadsWaiting;
-		bool bSucc = true;
 		if (nMilliseconds >= 0) {
 			auto _tp = std::chrono::system_clock::now() +
 				       std::chrono::milliseconds(nMilliseconds);
 			while (1) {
-				if (std::cv_status::timeout ==
-					_condVar.wait_until(lk, _tp)) {
-					bSucc = false;
-					break;
+				if (std::cv_status::timeout == _condVar.wait_until(lk, _tp)) {
+					return false;
 				} else if (_bSignaled) {
-					bSucc = true;
 					break;
 				}
 			}
@@ -62,41 +60,32 @@ struct Event::_impl
 				}
 			}
 		}
-		if (bSucc) {
-			if (--_cntThreadsWaiting == 0 && !_bManualReset) {
-				_bSignaled = false;
-			}
-			return true;
-		} else {
-			return false;
+		if (--_cntThreadsWaiting == 0 && !_bManualReset) {
+			_bSignaled = false;
 		}
+		return true;
 	}
 	bool _WaitUntil(const std::chrono::system_clock::time_point &tp)
 	{
 		std::unique_lock<std::mutex> lk(_muTex);
 		if (_bSignaled) {
-			return true;
-		}
-		++_cntThreadsWaiting;
-		bool bSucc = true;
-		while (1) {
-			if (std::cv_status::timeout ==
-				_condVar.wait_until(lk, tp)) {
-				bSucc = false;
-				break;
-			} else if (_bSignaled) {
-				bSucc = true;
-				break;
-			}
-		}
-		if (bSucc) {
-			if (--_cntThreadsWaiting == 0 && !_bManualReset) {
+			if (!_bManualReset && 0 == _cntThreadsWaiting) {
 				_bSignaled = false;
 			}
 			return true;
-		} else {
-			return false;
 		}
+		++_cntThreadsWaiting;
+		while (1) {
+			if (std::cv_status::timeout == _condVar.wait_until(lk, tp)) {
+				return false;
+			} else if (_bSignaled) {
+				break;
+			}
+		}
+		if (--_cntThreadsWaiting == 0 && !_bManualReset) {
+			_bSignaled = false;
+		}
+		return true;
 	}
 };
 
