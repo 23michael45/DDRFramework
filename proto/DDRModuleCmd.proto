@@ -91,7 +91,9 @@ message rspFinishCollection
 message reqEnterAutoMode
 {
 	string mapName = 1; // 地图名 ("OneRoute123")
-	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")
+	string pathFileName = 2; // 路径文件名 ("OneRoute_123/Path_auto.txt")  DDRTask_xxx.task
+	bool IsDynamic = 3;
+	float speed = 4;
 }
 // 返回进入自动模式结果
 message rspEnterAutoMode
@@ -196,6 +198,7 @@ message rspCancelNavigate
 //请求重启主机
 message reqRebootController
 {
+	int nControl = 1; // 1 - 关机  2 - 重启
 }
 //返回重启主机结果
 message rspRebootController
