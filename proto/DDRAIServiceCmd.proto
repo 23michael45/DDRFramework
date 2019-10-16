@@ -12,6 +12,7 @@ enum eRspType {
 message reqPlayTTS
 {
 	bytes content = 1;//播放文字内容
+	int32 level = 2;
 }
 //服务端返回客户端
 message rspPlayTTS
@@ -39,11 +40,20 @@ message FaceInfo
 		int32 left = 3;
 		int32 right = 4;
 	}
+	enum eFaceType
+	{
+		eWriteList = 0;
+		eBreakList = 1;
+	}
 	int32 nID = 1;//人脸ID
-	int32 nName = 2;//人脸名称
-	bytes ImageData = 3;//人脸图像数据 jpg
-	Rect rect = 4;//人脸区域
+	bytes nName = 2;//人脸名称
+	bytes facelabel = 3;//人脸标签
+	eFaceType type = 4;//人脸状态（黑名单，白名单）
+	bytes ImageData = 5;//人脸图像数据 jpg
+	Rect rect = 6;//人脸区域
+	int64 time = 7;	//std::time_t 	localtime(time) 时间戳
 }
+
 message notifyFaceDetection
 {
 	repeated FaceInfo faces = 1; //人脸数据列表
