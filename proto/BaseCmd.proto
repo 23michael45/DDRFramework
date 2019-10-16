@@ -486,6 +486,7 @@ message notifyBaseStatusEx{
 	float posangulauspeed = 12;
 	bytes robotid = 13;
 	bool chargingStatus = 14; // true - 充电中
+	int32 chargingSubStatus = 15; // 充电子状态
 }
 
 // Environmental sensor info
