@@ -58,15 +58,6 @@ message notifyFaceDetection
 {
 	repeated FaceInfo faces = 1; //人脸数据列表
 }
-message reqCaptureFace
-{
-	bool Error = 1;
-}
-message rspCaptureFace
-{
-	FaceInfo face = 1;
-	eRspType ret = 2;
-}
 
 message reqAddFace
 {
