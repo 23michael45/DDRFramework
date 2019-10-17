@@ -198,7 +198,7 @@ message rspCancelNavigate
 //请求重启主机
 message reqRebootController
 {
-	int nControl = 1; // 1 - 关机  2 - 重启
+	int32 nControl = 1; // 1 - 关机  2 - 重启
 }
 //返回重启主机结果
 message rspRebootController

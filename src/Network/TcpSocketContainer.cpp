@@ -21,13 +21,24 @@ namespace DDRFramework
 	}
 	void  TcpSocketContainer::Start()
 	{
+		LevelLog(DDRFramework::Log::Level::NOTICE, "TcpSocketContainer OnStart() +++");
 		OnStart();
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckRead, shared_from_this()));
 		m_ReadWriteStrand.post(std::bind(&TcpSocketContainer::CheckWrite, shared_from_this()));
 
 
-		auto ip = GetSocket().remote_endpoint().address().to_string();
-		m_fromIP = ip;
+		try
+		{
+			auto ip = GetSocket().remote_endpoint().address().to_string();
+			m_fromIP = ip;
+		}
+
+		catch (const std::exception& e)
+		{
+			LevelLog(DDRFramework::Log::Level::ERR, "TcpSocketContainer::Start()  exception:%s", e.what());
+		}
+		LevelLog(DDRFramework::Log::Level::NOTICE, "TcpSocketContainer OnStart() ---");
+
 	}
 	void TcpSocketContainer::CheckBehavior()
 	{
