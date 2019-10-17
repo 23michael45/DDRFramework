@@ -58,6 +58,7 @@ message notifyFaceDetection
 {
 	repeated FaceInfo faces = 1; //人脸数据列表
 }
+
 message reqAddFace
 {
 	FaceInfo face = 1;
