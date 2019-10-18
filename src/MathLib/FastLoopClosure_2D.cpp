@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <vector>
+//#include <iostream>
 #include "CommonGeometry.h"
 
 namespace DDRGeometry {
@@ -55,6 +56,16 @@ static void _fuseTwoPoses(const float *pPose0, const float *pCov0,
 	                      const float *pPose1, const float *pCov1,
 	                      float *pNewPose)
 {
+#if 0
+	std::cout << "Pose0 = [" << pPose0[0] << ", " << pPose0[1] << ", " << pPose0[2] << "]\n";
+	std::cout << "Cov0 = [" << pCov0[0] << ", " << pCov0[1] << ", " << pCov0[2] << "\n\t"
+		<< pCov0[3] << ", " << pCov0[4] << ", " << pCov0[5] << "\n\t"
+		<< pCov0[6] << ", " << pCov0[7] << ", " << pCov0[8] << "]\n";
+	std::cout << "Pose1 = [" << pPose1[0] << ", " << pPose1[1] << ", " << pPose1[2] << "]\n";
+	std::cout << "Cov1 = [" << pCov1[0] << ", " << pCov1[1] << ", " << pCov1[2] << "\n\t"
+		<< pCov1[3] << ", " << pCov1[4] << ", " << pCov1[5] << "\n\t"
+		<< pCov1[6] << ", " << pCov1[7] << ", " << pCov1[8] << "]\n";
+#endif
 	float aa = pCov0[0] + pCov1[0];
 	float bb = pCov0[1] + pCov1[1];
 	float cc = pCov0[4] + pCov1[4];
@@ -86,7 +97,7 @@ bool FastLoopClosure_2D(int NPoses,
 		return false;
 	}
 	float *pV0 = pCov, *pVX0, *pVY0, *pVTh0;
-	for (int i = 0; i < NPoses; ++i) {
+	for (int i = 0; i < NPoses - 1; ++i) {
 		if (pV0[0] <= 0.0f || pV0[0] * pV0[4] - pV0[1] * pV0[1] <= 0.0f ||
 			_DetSym3x3(pV0) <= 0.0f) {
 			return false;
@@ -125,7 +136,7 @@ bool FastLoopClosure_2D(int NPoses,
 	for (int i = 0; i < 9; ++i) {
 		tmpCov[i] = 0.0f;
 	}
-	pV0 = (float*)((char*)pCov + lInd1 * CovOff_Byte);
+	pV0 = (float*)((char*)pCov + (lInd1 - 1) * CovOff_Byte);
 	pVX0 = (float*)((char*)pX + lInd1 * XOff_Byte);
 	pVY0 = (float*)((char*)pY + lInd1 * YOff_Byte);
 	pVTh0 = (float*)((char*)pTh + lInd1 * ThOff_Byte);
@@ -145,7 +156,10 @@ bool FastLoopClosure_2D(int NPoses,
 				                           pose_backward[3 * (i - lInd0) - 3],
 				                           pose_backward[3 * (i - lInd0) - 2],
 				                           pose_backward[3 * (i - lInd0) - 1]);
-			_calcNextCov_inc(&accCov_backward[9 * (i - lInd0)], pV0, *pVX0, *pVY0, *pVTh0,
+			_calcNextCov_inc(&accCov_backward[9 * (i - lInd0)], pV0,
+				             pose_backward[3 * (i - lInd0)],
+				             pose_backward[3 * (i - lInd0) + 1],
+				             pose_backward[3 * (i - lInd0) + 2],
 				             dpose, &accCov_backward[9 * (i - lInd0 - 1)]);
 			pV0 = pNextCov;
 			pVX0 = pNextX;
