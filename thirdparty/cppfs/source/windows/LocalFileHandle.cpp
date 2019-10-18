@@ -218,7 +218,7 @@ bool LocalFileHandle::createDirectoryRecursively(std::string path)
 		int pos = 0;
 		do
 		{
-			pos = path.find_first_of("\\/", pos + 1);
+			pos = path.find_first_of("/", pos + 1);
 			CreateDirectoryA(path.substr(0, pos).c_str(), NULL);
 		} while (pos != std::string::npos);
 
