@@ -92,6 +92,7 @@ enum eCltType {
 	eLocalServer = 0x10000;
 	eRemoteServer = 0x20000;
 	eAIServer = 0x30000;
+	eLocalAIClient = 0x30001;
 	eAllServer = 0xff0000;
 }
 // flowDirection = UNKNOWN2RS or UNKNOWN2LS
@@ -486,6 +487,7 @@ message notifyBaseStatusEx{
 	float posangulauspeed = 12;
 	bytes robotid = 13;
 	bool chargingStatus = 14; // true - 充电中
+	int32 chargingSubStatus = 15; // 充电子状态
 }
 
 // Environmental sensor info

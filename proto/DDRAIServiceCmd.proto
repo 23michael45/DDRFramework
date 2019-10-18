@@ -58,6 +58,7 @@ message notifyFaceDetection
 {
 	repeated FaceInfo faces = 1; //人脸数据列表
 }
+
 message reqAddFace
 {
 	FaceInfo face = 1;
@@ -76,5 +77,11 @@ message rspDetectFace
 	repeated FaceInfo faces = 1; //人脸数据列表
 }
 
+message reqVideoAddress{
+	int32 maxVideoAddressCount = 1;
+}
 
-
+message rspVideoAddress
+{
+	repeated bytes address = 1;
+}
