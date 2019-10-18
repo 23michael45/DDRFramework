@@ -78,10 +78,46 @@ message rspDetectFace
 }
 
 message reqVideoAddress{
-	int32 maxVideoAddressCount = 1;
+	enum VideoType{
+		eLocalServer = 0;
+		eRemoteServer = 1;
+	}
+	VideoType type = 1;
 }
 
 message rspVideoAddress
+{	
+	message VideoInfo{
+		bytes address = 1;
+		bytes name = 2;
+	}
+	repeated VideoInfo info = 1;
+}
+
+message reqAudioTalk
 {
-	repeated bytes address = 1;
+	enum eOpMode {
+		eStart = 0;
+		eStop = 1;
+	}
+	enum eNetType
+	{
+		eLocal = 0;
+		eRemote = 1;
+	}
+	eOpMode opType = 1;
+	eNetType netType = 2;
+}
+enum eTalkStatus
+{
+	ETS_START_OK = 0;    //成功对讲（服务端可接收）
+	ETS_USE_BY_OTHER = 1;//被其它客户端占用
+	ETS_STOP_OK = 2;//成功停止
+	ETS_NO_USER_CONNECTED_WITH_IP = 3;//流服务没有被相应IP的客户端连接
+	ETS_UNKNOWN_ERROR = 4;//末知错误
+}
+message rspAudioTalk
+{
+	eTalkStatus status = 1;
+	string error = 2;
 }
