@@ -92,6 +92,7 @@ enum eCltType {
 	eLocalServer = 0x10000;
 	eRemoteServer = 0x20000;
 	eAIServer = 0x30000;
+	eLocalAIClient = 0x30001;
 	eAllServer = 0xff0000;
 }
 // flowDirection = UNKNOWN2RS or UNKNOWN2LS
