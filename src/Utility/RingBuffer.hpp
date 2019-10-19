@@ -116,30 +116,28 @@ public:
 		int sz = size();
 		if (0 == sz) {
 			return 0;
-		} else if (nLen2move > sz || nLen2move < 0) {
+		} else if (nLen2move >= sz || nLen2move < 0) {
 			nLen2move = sz;
 			if (m_cap == pDstRF->m_cap && pDstRF->size() == 0)	{ // swapping two buffers
 				char *pttt = m_pBuf;
 				m_pBuf = pDstRF->m_pBuf;
 				pDstRF->m_pBuf = pttt;
+				pDstRF->m_head = m_head;
+				pDstRF->m_tail = m_tail;
 				m_head = m_tail = 0;
-				pDstRF->m_head = 0;
-				pDstRF->m_tail = sz;
 				return sz;
 			}
 		}
 		int rem = m_cap - m_head;
 		if (rem >= nLen2move) {
 			pDstRF->Append((const char*)m_pBuf + m_head, nLen2move);
-			m_head += nLen2move;
-			return nLen2move;
 		} else {
 			pDstRF->Append((const char*)m_pBuf + m_head, rem);
 			pDstRF->Append((const char*)m_pBuf, nLen2move - rem);
-			m_head = (m_head + nLen2move + m_cap) & m_mod;
-			if (m_head == m_tail) {
-				m_head = m_tail = 0;
-			}
+		}
+		m_head = (m_head + nLen2move + m_cap) & m_mod;
+		if (m_head == m_tail) {
+			m_head = m_tail = 0;
 		}
 		return nLen2move;
 	}
