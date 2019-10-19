@@ -114,7 +114,7 @@ enum eTalkStatus
 	ETS_NO_USER_CONNECTED_WITH_IP = 3;//流服务没有被相应IP的客户端连接
 	ETS_UNKNOWN_ERROR = 4;//末知错误
 }
-message rspAudioTalk
+message rspAudioAiTalk
 {
 	eTalkStatus status = 1;
 	string error = 2;
