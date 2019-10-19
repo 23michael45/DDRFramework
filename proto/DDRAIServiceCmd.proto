@@ -77,12 +77,13 @@ message rspDetectFace
 	repeated FaceInfo faces = 1; //人脸数据列表
 }
 
+enum eNetType
+{
+	eLocal = 0;
+	eRemote = 1;
+}
 message reqVideoAddress{
-	enum VideoType{
-		eLocalServer = 0;
-		eRemoteServer = 1;
-	}
-	VideoType type = 1;
+	eNetType type = 1;
 }
 
 message rspVideoAddress
@@ -92,6 +93,8 @@ message rspVideoAddress
 		bytes name = 2;
 	}
 	repeated VideoInfo info = 1;
+	eNetType type = 2;
+	bytes AudioAddress = 3;
 }
 
 message reqAudioTalk
@@ -99,11 +102,6 @@ message reqAudioTalk
 	enum eOpMode {
 		eStart = 0;
 		eStop = 1;
-	}
-	enum eNetType
-	{
-		eLocal = 0;
-		eRemote = 1;
 	}
 	eOpMode opType = 1;
 	eNetType netType = 2;
