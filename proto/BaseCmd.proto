@@ -499,6 +499,8 @@ message notifyEnvInfo{
 	float co2 = 5;
 	float ch2o = 6;
 	int32 tray = 7; // 低8位表示上面那一对，8-15位表示下面一对传感器。 0-被遮挡。 1-没被遮挡
+	float nuclear = 8; // 核辐射
+	float dangerousgas = 9; // 危险气体
 }
 
 //ObsStatus
