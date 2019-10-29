@@ -10,6 +10,7 @@
 */
 #ifndef Singleton_h__
 #define Singleton_h__
+#include <stdlib.h>
 namespace DDRFramework
 {
 	template<class T>
