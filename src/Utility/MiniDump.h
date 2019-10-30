@@ -9,19 +9,26 @@
  *
 */
 #pragma once
+
+#if _WINDOWS
 #include <windows.h>
 #include <DbgHelp.h>
+#endif
 #include <stdlib.h>
 #include "CommonFunc.h"
 #include "cppfs/cppfs.h"
 #include "cppfs/FilePath.h"
+
+#if _WINDOWS
 #pragma comment(lib, "dbghelp.lib")
+#endif
 
 //#ifndef _M_IX86
 //#error "The following code only works for x86!"
 //#endif
 namespace DDRFramework
 {
+#if _WINDOWS
 	std::wstring GetTimeNowString();
 
 	inline BOOL IsDataSectionNeeded(const WCHAR* pModuleName)
@@ -122,13 +129,15 @@ namespace DDRFramework
 			VirtualProtect(addr, size, dwOldFlag, &dwTempFlag);
 		}
 	}
-
+#endif
 	void InitMinDump()
 	{
+#if _WINDOWS
 		//注册异常处理函数
 		SetUnhandledExceptionFilter(MyUnhandledExceptionFilter);
 
 		//使SetUnhandledExceptionFilter
 		DisableSetUnhandledExceptionFilter();
+#endif
 	}
 }
